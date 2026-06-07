@@ -1,0 +1,140 @@
+# qa_agent 配置
+# 对应 benchforge/agents/qa_agent/ 的 Mode-Staged Generation Agent
+
+# ── 运行标识 ──────────────────────────────────────────────────────────────────
+run:
+  task_id: "task_001"
+  run_id: "auto"                   # auto = 运行时自动生成 run_{YYYYMMDD}_{HHMMSS}_{4hex}
+  language: "en"
+
+# ── 模型 ──────────────────────────────────────────────────────────────────────
+model:
+  api_key: "${MODEL_API_KEY}"
+  base_url: "${MODEL_BASE_URL:https://api.openai.com/v1}"
+  model_name: "${MODEL_NAME:gpt-4o-mini}"
+  temperature: 0.7
+  max_tokens: 2000
+  max_retries: 3
+
+# ── Wikipedia 检索 ────────────────────────────────────────────────────────────
+retrieval:
+  request_timeout: 10
+  # Saliency 重排：按 Wikimedia 访问量保留最显著的页面（参考 AutoBencher saliency_rerank）
+  # saliency_top_k 同时作为最终页面数；开启时内部自动搜索 top_k×2 个候选再筛选
+  saliency_rerank: true
+  saliency_top_k: 3
+  saliency_start_date: "2022010100"
+  saliency_end_date: "2025010100"
+  # 内容提取：段落最小词数（短段落被过滤，同 wiki.py min_token）
+  min_paragraph_tokens: 20
+
+# ── 分块（题目生成用） ─────────────────────────────────────────────────────────
+chunking:
+  chunk_size: 2048
+  overlap: 300
+  encoding: "cl100k_base"
+
+# ── 分块（文档总结用） ─────────────────────────────────────────────────────────
+summarization_chunking:
+  chunk_size: 8192              # 大块减少 LLM 调用次数
+  overlap: 512
+  encoding: "cl100k_base"
+
+# ── 蓝图：主题与模式目标 ───────────────────────────────────────────────────────
+blueprint:
+  topics:
+    - "Artificial Intelligence"
+    - "Renewable Energy"
+    - "Human Evolution"
+
+  modes:
+    qa:
+      count: 20                 # 最终期望题目数；候选池目标 = count × target_multiplier
+      max_rounds: 5
+      difficulty_distribution:
+        easy: 0.3
+        medium: 0.4
+        hard: 0.3
+
+    multiple_choice:
+      count: 10
+      max_rounds: 5
+      difficulty_distribution:
+        easy: 0.3
+        medium: 0.4
+        hard: 0.3
+
+# ── 候选池 ────────────────────────────────────────────────────────────────────
+candidate_pool:
+  target_multiplier: 2.5       # 候选池目标 = count × 2.5（过生成供下游筛选）
+
+# ── 初始广度轮 ────────────────────────────────────────────────────────────────
+initial_breadth:
+  enabled: true
+  max_topics_per_round: 10     # 单轮最多覆盖的主题数
+  difficulty: "medium"         # 初始广度轮固定使用 medium 难度
+
+# ── 自适应补题规划 ────────────────────────────────────────────────────────────
+planner:
+  topics_per_round: 3          # 自适应轮每轮选几个主题
+
+# ── Chunk 混合比例（按难度） ───────────────────────────────────────────────────
+# single_ratio + multi_ratio = 1.0
+# mode_adjustment.single_delta 在基础比例上叠加偏移
+chunk_mix:
+  by_difficulty:
+    easy:
+      single_ratio: 0.7        # easy 题以单 chunk 为主
+      multi_ratio: 0.3
+    medium:
+      single_ratio: 0.5
+      multi_ratio: 0.5
+    hard:
+      single_ratio: 0.1      # hard 题以多 chunk 为主（需要跨段推理）
+      multi_ratio: 0.9
+
+  mode_adjustment:
+    qa:
+      single_delta: 0.1        # QA 偏向单 chunk（答案定位明确）
+    multiple_choice:
+      single_delta: -0.1       # MCQ 偏向多 chunk（干扰项需要对比）
+
+# ── 每 chunk 平均生成题目数（用于反推 single_k / multi_k） ─────────────────────
+generation_yield:
+  qa:
+    single_chunk_avg_questions: 2.0
+    multi_chunk_avg_questions: 3.0
+  multiple_choice:
+    single_chunk_avg_questions: 1.5
+    multi_chunk_avg_questions: 2.0
+
+# ── single_k / multi_k 上下界（防止单轮采样过多或过少） ───────────────────────
+chunk_limits:
+  qa:
+    single_k:
+      min: 1
+      max: 4
+    multi_k:
+      min: 0
+      max: 3
+  multiple_choice:
+    single_k:
+      min: 0
+      max: 3
+    multi_k:
+      min: 1
+      max: 4
+
+# ── 运行时安全阈值 ────────────────────────────────────────────────────────────
+runtime:
+  max_consecutive_empty_rounds_per_mode: 3   # 连续空轮超过此值停止当前 mode
+  max_failures_per_mode: 3                   # 单 mode 累计失败次数上限
+  max_used_chunk_combinations: 10000         # 全局 chunk 组合去重池上限
+  llm_timeout_seconds: 60
+  retrieval_timeout_seconds: 30
+
+# ── 日志 ──────────────────────────────────────────────────────────────────────
+logging:
+  level: "INFO"
+  # log_file 未被 config_loader 读取，run_id 在运行时动态生成，此处仅供参考
+  # log_file: "./logs/run_{YYYYMMDD}_{HHMMSS}_{4hex}.log"

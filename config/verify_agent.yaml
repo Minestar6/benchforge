@@ -1,0 +1,26 @@
+citation_validation:
+  enabled: true
+  min_citation_score: 0.65
+  alpha: 0.7
+  beta: 0.3
+  citation_match_threshold: 0.8
+
+llm_validation:
+  enabled: false
+  model: "gpt-4o-mini"
+  temperature: 0.0
+  max_tokens: 800
+  min_overall_score: 0.75
+  max_concurrency: 8
+  max_retries: 2
+  prompt_system: "benchforge/prompts/verify_agent/quality_system_prompt.md"
+  prompt_user: "benchforge/prompts/verify_agent/quality_user_prompt.md"
+  hard_floor:
+    clarity: 0.6
+    answerability: 0.7
+    faithfulness: 0.7
+    mode_alignment: 0.7
+
+selection:
+  enabled: true
+  embedding_model: "all-MiniLM-L6-v2"

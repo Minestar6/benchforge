@@ -1,0 +1,68 @@
+# QuestionGeneratorAgent 统一配置
+# 所有参数集中管理，便于调整和版本控制
+
+# 运行时基础配置
+run:
+  task_id: "task_001"            # 用户需求ID
+  run_id: "run_001"              # 运行ID
+  output_path: "./runs/${task_id}/${run_id}"
+  language: "en"
+  domain: null  # 可选：economics, science, history 等
+
+# 统一的模型配置列表
+model_list:
+  - model_name: "gpt-4o"
+    provider: "openai"
+    base_url: "${OPENAI_BASE_URL:https://api.openai.com/v1}"
+    api_key: "${OPENAI_API_KEY}"
+    temperature: 0.7
+    max_tokens: 2000
+    max_concurrent_requests: 4
+
+  - model_name: "llama3-70b"
+    provider: "ollama"
+    base_url: "http://localhost:11434"
+    temperature: 0.8
+    max_tokens: 2000
+    max_concurrent_requests: 2
+
+# 模型角色（为不同步骤分配不同模型）
+model_roles:
+  question_generation: ["gpt-4o", "llama3-70b"]  # 题目生成用多个模型并行
+
+# Wikipedia 检索配置
+retrieval:
+  max_pages: 5                    # 每次搜索最大页面数
+  max_results_per_query: 10       # 每次查询最大结果数
+  summary_length: 500             # 摘要最大长度
+  request_timeout: 10             # 请求超时（秒）
+  rate_limit_delay: 0.5           # 请求间隔（秒）
+
+# 文档分块配置（参考 YourBench MMLU 复现参数）
+chunking:
+  # 题目生成分段
+  chunk_size: 2048                # 每块 token 数（MMLU 风格：信息密集型）
+  overlap: 300                    # 块间重叠 token 数（保证上下文连贯）
+  encoding: "cl100k_base"         # tiktoken 编码
+
+# 文档总结分段配置（参考 YourBench）
+summarization_chunking:
+  chunk_size: 8192                # 总结阶段块大小（更大块减少 LLM 调用次数）
+  overlap: 512                    # 总结阶段块重叠
+  encoding: "cl100k_base"         # tiktoken 编码
+
+# 问题生成配置
+generation:
+  questions_per_chunk: 2          # 每块生成问题数
+  question_mode: "open-ended"      # open-ended, multi-choice
+  prompt_template_id: "question_generation_v1"
+
+# 输出配置
+output:
+  save_source_documents: true     # 保存源文档
+  output_format: "jsonl"          # jsonl, json
+
+# 日志配置
+logging:
+  level: "INFO"                   # DEBUG, INFO, WARNING, ERROR
+  log_file: "./logs/${run_id}.log"

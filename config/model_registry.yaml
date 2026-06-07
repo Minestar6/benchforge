@@ -1,0 +1,18 @@
+models:
+  qwen2.5-7b:
+    provider: "vllm"
+    model_name: "Qwen/Qwen2.5-7B-Instruct"
+    base_url: "http://localhost:8000/v1"
+    api_key: ""
+
+  llama3.1-8b:
+    provider: "vllm"
+    model_name: "meta-llama/Llama-3.1-8B-Instruct"
+    base_url: "http://localhost:8001/v1"
+    api_key: ""
+
+  gpt-4o-mini-judge:
+    provider: "openai"
+    model_name: "gpt-4o-mini"
+    base_url: "${OPENAI_BASE_URL:https://api.openai.com/v1}"
+    api_key: "${OPENAI_API_KEY}"

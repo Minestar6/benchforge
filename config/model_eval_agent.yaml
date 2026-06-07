@@ -1,0 +1,80 @@
+run:
+  shared_state_path: ""   # 流水线模式：填写 shared_state.json 路径
+  # 以下字段仅在独立运行（无 shared_state）时填写
+  task_id: ""
+  run_id: ""
+  input_paths: []
+
+dataset_evaluation:
+  enabled: true
+  metrics:
+    - name: "citation_score"
+      threshold: 0.85
+    - name: "diversity_score"
+      threshold: null
+
+models:
+  candidate_model_names:
+    - "qwen2.5-7b"
+    - "llama3.1-8b"
+
+  judge_model_name: "gpt-4o-mini-judge"
+
+  generation_defaults:
+    temperature: 0.0
+    top_p: 1.0
+    max_tokens: 1024
+
+  judge_defaults:
+    temperature: 0.0
+    top_p: 1.0
+    max_tokens: 1200
+
+metrics:
+  multiple_choice:
+    automatic_metrics:
+      - name: "accuracy"
+        threshold: 1.0
+      - name: "invalid_rate"
+        threshold: null
+    llm_judge_metrics: []
+
+  qa:
+    automatic_metrics:
+      - name: "accuracy"
+        threshold: 1.0
+      - name: "exact_match"
+        threshold: 1.0
+      - name: "f1"
+        threshold: 0.7
+      - name: "precision"
+        threshold: null
+      - name: "recall"
+        threshold: null
+      - name: "rouge_l"
+        threshold: 0.35
+      - name: "bleu"
+        threshold: 0.2
+      - name: "bertscore"
+        threshold: 0.85
+      - name: "semantic_similarity"
+        threshold: 0.85
+
+    llm_judge_metrics:
+      - name: "correctness"
+        description: "判断模型回答是否正确回答了问题，是否与参考答案表达的核心事实一致。"
+        direction: "higher_is_better"
+      - name: "completeness"
+        description: "判断模型回答是否覆盖了参考答案中的关键信息，是否遗漏必要事实。"
+        direction: "higher_is_better"
+      - name: "faithfulness"
+        description: "判断模型回答是否被给定证据支持，是否没有引入未被支持的事实。"
+        direction: "higher_is_better"
+      - name: "hallucination"
+        description: "判断模型回答是否包含与参考答案或证据矛盾、无法由证据支持的内容。"
+        direction: "lower_is_better"
+
+judge:
+  enabled: true
+  prompt_system: "benchforge/prompts/model_eval_agent/judge_system_prompt.md"
+  prompt_user: "benchforge/prompts/model_eval_agent/judge_user_prompt.md"
