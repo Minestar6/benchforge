@@ -1,9 +1,5 @@
-run:
-  shared_state_path: ""   # 流水线模式：填写 shared_state.json 路径
-  # 以下字段仅在独立运行（无 shared_state）时填写
-  task_id: ""
-  run_id: ""
-  input_paths: []
+# 流水线模式：task_id / run_id / input_paths 从 shared_state.json 解析
+# 独立运行：通过 run_model_eval_agent(config_path, task_id=..., run_id=..., input_paths=...) 传入
 
 dataset_evaluation:
   enabled: true
@@ -15,10 +11,11 @@ dataset_evaluation:
 
 models:
   candidate_model_names:
-    - "qwen2.5-7b"
-    - "llama3.1-8b"
+    - "kimi-k2"
+    - "glm-4.7"
 
-  judge_model_name: "gpt-4o-mini-judge"
+
+  judge_model_name: "deepseek-v3"
 
   generation_defaults:
     temperature: 0.0

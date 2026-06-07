@@ -1,0 +1,25 @@
+# 源码文件统一 LF，避免跨平台换行符混乱
+*.py text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+*.sh text eol=lf
+*.toml text eol=lf
+*.cfg text eol=lf
+*.ini text eol=lf
+
+# 二进制文件不做转换
+*.pdf binary
+*.png binary
+*.jpg binary
+*.svg binary
+*.pkl binary
+*.bin binary
+*.safetensors binary
+*.pth binary
+*.ckpt binary
+*.gguf binary
+*.onnx binary

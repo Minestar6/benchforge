@@ -6,6 +6,11 @@ from typing import Any
 
 @dataclass
 class RunConfig:
+    """运行上下文。
+
+    流水线模式：shared_state_path 指向 shared_state.json，其余从其中解析。
+    独立模式：task_id / run_id / input_paths 由调用方直接传入（不经过 YAML）。
+    """
     shared_state_path: str = ""
     task_id: str = ""
     run_id: str = ""

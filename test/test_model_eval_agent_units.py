@@ -199,7 +199,7 @@ async def test__run_passes_judge_defaults_and_composite_dimension_keys(tmp_path,
     monkeypatch.setattr(
         agent_module,
         "resolve_model_config",
-        lambda name, registry, defaults: SimpleNamespace(model_name=name),
+        lambda name, registry: SimpleNamespace(model_name=name),
     )
 
     judge_client = RecordingJudgeClient()

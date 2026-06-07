@@ -1,18 +1,103 @@
+# 模型注册表（所有智能体的唯一模型身份来源）
+#
+# key = 系统内逻辑名，agent YAML 中通过此名称引用
+# model_name = 实际 API 调用时传递的模型标识
+# provider  = 加载渠道，决定使用哪个客户端类和连接方式
+#
+# 支持的 provider:
+#   openai       → OpenAI 兼容 API（api_key + base_url）
+#   ollama       → Ollama 本地推理（base_url）
+#   vllm         → vLLM 本地推理，兼容 OpenAI API（base_url）
+#   transformers → HuggingFace Transformers 本地加载（无需 url）
+#   fake         → 测试用假客户端
+
 models:
-  qwen2.5-7b:
-    provider: "vllm"
-    model_name: "Qwen/Qwen2.5-7B-Instruct"
-    base_url: "http://localhost:8000/v1"
-    api_key: ""
+  # ── API 导入 ────────────────────────────────────────────────────────────
+  # gpt-4o:
+  #   provider: "openai"
+  #   model_name: "gpt-4o"
+  #   base_url: "${OPENAI_BASE_URL:https://api.openai.com/v1}"
+  #   api_key: "${OPENAI_API_KEY}"
 
-  llama3.1-8b:
-    provider: "vllm"
-    model_name: "meta-llama/Llama-3.1-8B-Instruct"
-    base_url: "http://localhost:8001/v1"
-    api_key: ""
+  # gpt-4o-mini:
+  #   provider: "openai"
+  #   model_name: "gpt-4o-mini"
+  #   base_url: "${OPENAI_BASE_URL:https://api.openai.com/v1}"
+  #   api_key: "${OPENAI_API_KEY}"
 
-  gpt-4o-mini-judge:
+  # # 逻辑名 ≠ API model_name 的示例：judge 复用 gpt-4o-mini 但语义不同
+  # gpt-4o-mini-judge:
+  #   provider: "openai"
+  #   model_name: "gpt-4o-mini"
+  #   base_url: "${OPENAI_BASE_URL:https://api.openai.com/v1}"
+  #   api_key: "${OPENAI_API_KEY}"
+
+  # 第三方 OpenAI 兼容 API（如 DeepSeek、火山引擎等）
+  deepseek-v3:
     provider: "openai"
-    model_name: "gpt-4o-mini"
-    base_url: "${OPENAI_BASE_URL:https://api.openai.com/v1}"
-    api_key: "${OPENAI_API_KEY}"
+    model_name: "deepseek-v3-2-251201"
+    base_url: "${CUSTOM_API_BASE_URL}"
+    api_key: "${CUSTOM_API_KEY}"
+
+  glm-4.7:
+    provider: "openai"
+    model_name: "glm-4-7-251222"
+    base_url: "${CUSTOM_API_BASE_URL}"
+    api_key: "${CUSTOM_API_KEY}"
+  
+  kimi-k2:
+    provider: "openai"
+    model_name: "kimi-k2-thinking-251104"
+    base_url: "${CUSTOM_API_BASE_URL}"
+    api_key: "${CUSTOM_API_KEY}"
+  
+
+
+  # ── 本地 vLLM 部署 ──────────────────────────────────────────────────────
+  # qwen2.5-7b:
+  #   provider: "vllm"
+  #   model_name: "Qwen/Qwen2.5-7B-Instruct"
+  #   base_url: "http://localhost:8000/v1"
+
+  # llama3.1-8b:
+  #   provider: "vllm"
+  #   model_name: "meta-llama/Llama-3.1-8B-Instruct"
+  #   base_url: "http://localhost:8001/v1"
+
+  # # ── 本地 Ollama ─────────────────────────────────────────────────────────
+  # llama3-70b-ollama:
+  #   provider: "ollama"
+  #   model_name: "llama3-70b"
+  #   base_url: "http://localhost:11434"
+
+  # # ── 本地 HuggingFace Transformers ───────────────────────────────────────
+  # # model_name 可以是 HuggingFace Hub ID（自动下载）或本地路径
+  # qwen2.5-7b-hf:
+  #   provider: "transformers"
+  #   model_name: "Qwen/Qwen2.5-7B-Instruct"    # HF Hub: 自动下载
+  #   extra_parameters:
+  #     device: "auto"
+  #     load_in_8bit: false
+
+  # qwen2.5-7b-local:
+  #   provider: "transformers"
+  #   model_name: "/data/models/Qwen2.5-7B-Instruct"  # 本地文件系统路径
+  #   extra_parameters:
+  #     device: "cuda"
+  #     load_in_8bit: false
+
+  # ── 测试用假模型 ────────────────────────────────────────────────────────
+  fake:
+    provider: "fake"
+    model_name: "fake-model"
+    extra_parameters:
+      delay: 0.1
+
+# ── 嵌入模型（sentence-transformers，用于验证阶段的语义去重和聚类） ──────────
+# embedding_model 字段可直接填 HuggingFace Hub ID 或本地路径，
+# 也可填此处的逻辑名（优先从 registry 解析）
+embeddings:
+  all-MiniLM-L6-v2:
+    path: "all-MiniLM-L6-v2"            # HF Hub: 自动下载
+  all-MiniLM-L6-v2-local:
+    path: "D:/models/all-MiniLM-L6-v2"  # 本地路径

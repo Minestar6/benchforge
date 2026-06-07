@@ -1,17 +1,13 @@
 # qa_agent 配置
 # 对应 benchforge/agents/qa_agent/ 的 Mode-Staged Generation Agent
 
-# ── 运行标识 ──────────────────────────────────────────────────────────────────
-run:
-  task_id: "task_001"
-  run_id: "auto"                   # auto = 运行时自动生成 run_{YYYYMMDD}_{HHMMSS}_{4hex}
-  language: "en"
+# task_id / run_id 由调用方（CLI 或编排器）传入，不在 YAML 中配置
+# 下游 agent 从 shared_state.json 获取全部运行上下文
 
-# ── 模型 ──────────────────────────────────────────────────────────────────────
+# ── 模型（引用 model_registry.yaml 中的逻辑名） ────────────────────────────────
 model:
-  api_key: "${MODEL_API_KEY}"
-  base_url: "${MODEL_BASE_URL:https://api.openai.com/v1}"
-  model_name: "${MODEL_NAME:gpt-4o-mini}"
+  name: "deepseek-v3"            # model_registry.yaml 中的 key
+  # 调用参数在 agent 级别指定，不在 registry 中
   temperature: 0.7
   max_tokens: 2000
   max_retries: 3
@@ -40,29 +36,8 @@ summarization_chunking:
   overlap: 512
   encoding: "cl100k_base"
 
-# ── 蓝图：主题与模式目标 ───────────────────────────────────────────────────────
-blueprint:
-  topics:
-    - "Artificial Intelligence"
-    - "Renewable Energy"
-    - "Human Evolution"
-
-  modes:
-    qa:
-      count: 20                 # 最终期望题目数；候选池目标 = count × target_multiplier
-      max_rounds: 5
-      difficulty_distribution:
-        easy: 0.3
-        medium: 0.4
-        hard: 0.3
-
-    multiple_choice:
-      count: 10
-      max_rounds: 5
-      difficulty_distribution:
-        easy: 0.3
-        medium: 0.4
-        hard: 0.3
+# blueprint（topics/modes/language）在 config/blueprint.yaml 中定义
+# 这是任务级配置，所有智能体共享，qa_agent 加载后写入 shared_state.json
 
 # ── 候选池 ────────────────────────────────────────────────────────────────────
 candidate_pool:

@@ -1,11 +1,17 @@
-"""Load qa_agent.yaml into Blueprint and AgentConfig dataclasses."""
+"""Load qa_agent.yaml into AgentConfig and related dataclasses.
 
+Blueprint 不在此加载——由调用方（编排器/规划智能体/run script）
+程序化构造后传入 run_generation_agent(blueprint=...)。
+"""
+
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import yaml
 
 from benchforge.agents.qa_agent.schema import (
-    Blueprint, ModeCfg, AgentConfig,
+    AgentConfig,
     CandidatePoolConfig, InitialBreadthConfig, PlannerConfig,
     ChunkMixConfig, ChunkMixDifficulty, ModeAdjustment,
     GenerationYield, ChunkLimitsForMode, ChunkKLimit, RuntimeConfig,
@@ -16,35 +22,29 @@ from benchforge.config.config import (
 )
 
 
+@dataclass
+class ModelRef:
+    """模型引用：逻辑名（指向 model_registry.yaml）+ 调用参数。"""
+    name: str                        # model_registry.yaml 中的 key
+    temperature: float = 0.7
+    max_tokens: int = 2000
+    max_retries: int = 3
+
+
 def load_qa_agent_config(
     path: str | Path,
-) -> tuple[Blueprint, AgentConfig, dict, RetrievalConfig, ChunkingConfig, SummarizationChunkingConfig]:
-    """Returns (blueprint, agent_config, model_cfg, retrieval_cfg, chunking_cfg, summarization_chunking_cfg)."""
+) -> tuple[AgentConfig, ModelRef, RetrievalConfig, ChunkingConfig, SummarizationChunkingConfig]:
+    """加载 qa_agent.yaml，返回纯 agent 行为配置。
+
+    不包含 Blueprint——Blueprint 由调用方程序化构造，
+    传入 run_generation_agent(blueprint=blueprint, ...)。
+    """
     from benchforge.utils.paths import get_project_root
     path = Path(path)
     load_dotenv(get_project_root() / ".env")
 
     with open(path, encoding="utf-8") as f:
         raw = expand_env_recursive(yaml.safe_load(f))
-
-    run = raw["run"]
-    bp_raw = raw["blueprint"]
-
-    # run_id 的 "auto"/空值由 RunContext 统一处理
-    blueprint = Blueprint(
-        task_id=run["task_id"],
-        run_id=run.get("run_id", ""),
-        language=run["language"],
-        topics=bp_raw["topics"],
-        modes={
-            mode: ModeCfg(
-                count=cfg["count"],
-                max_rounds=cfg["max_rounds"],
-                difficulty_distribution=cfg["difficulty_distribution"],
-            )
-            for mode, cfg in bp_raw["modes"].items()
-        },
-    )
 
     cm = raw["chunk_mix"]
     agent_config = AgentConfig(
@@ -75,10 +75,16 @@ def load_qa_agent_config(
         runtime=RuntimeConfig(**raw["runtime"]),
     )
 
-    model_cfg = {k: str(v) for k, v in raw.get("model", {}).items()}
+    model_raw = raw.get("model", {})
+    model_ref = ModelRef(
+        name=model_raw.get("name", "gpt-4o-mini"),
+        temperature=float(model_raw.get("temperature", 0.7)),
+        max_tokens=int(model_raw.get("max_tokens", 2000)),
+        max_retries=int(model_raw.get("max_retries", 3)),
+    )
 
     retrieval_cfg = RetrievalConfig(**raw["retrieval"]) if "retrieval" in raw else RetrievalConfig()
     chunking_cfg = ChunkingConfig(**raw["chunking"]) if "chunking" in raw else ChunkingConfig()
     sum_chunking_cfg = SummarizationChunkingConfig(**raw["summarization_chunking"]) if "summarization_chunking" in raw else SummarizationChunkingConfig()
 
-    return blueprint, agent_config, model_cfg, retrieval_cfg, chunking_cfg, sum_chunking_cfg
+    return agent_config, model_ref, retrieval_cfg, chunking_cfg, sum_chunking_cfg

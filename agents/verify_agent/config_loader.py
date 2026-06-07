@@ -20,8 +20,8 @@ class CitationCfg:
 @dataclass
 class LLMValidationCfg:
     enabled: bool = True
-    model: str = "gpt-4o-mini"
-    temperature: float = 0.0
+    model: str = "gpt-4o-mini"      # model_registry.yaml 中的逻辑名
+    temperature: float = 0.0          # 调用参数（不在 registry 中）
     max_tokens: int = 800
     min_overall_score: float = 0.75
     max_concurrency: int = 8
@@ -40,29 +40,37 @@ class LLMValidationCfg:
 class SelectionCfg:
     enabled: bool = True
     embedding_model: str = "all-MiniLM-L6-v2"
+    """sentence-transformers 模型。支持三种形式：
+    - model_registry.yaml embeddings 段中的逻辑名（优先解析）
+    - HuggingFace Hub ID（如 "all-MiniLM-L6-v2"，自动下载）
+    - 本地文件系统路径（如 "D:/models/all-MiniLM-L6-v2"）
+    """
 
 
 @dataclass
 class VerifyAgentConfig:
-    task_id: str = ""
-    run_id: str = ""
-    input_paths: list[str] = field(default_factory=list)
-    chunk_index_path: str = ""
+    """verify_agent 行为配置。
+
+    task_id / run_id / input_paths 由流水线 shared_state.json 提供，
+    不在此配置中。仅在独立运行时由调用方通过 run_verify_agent() 函数参数传入。
+    """
     citation: CitationCfg = field(default_factory=CitationCfg)
     llm_validation: LLMValidationCfg = field(default_factory=LLMValidationCfg)
     selection: SelectionCfg = field(default_factory=SelectionCfg)
 
 
 def load_verify_agent_config(path: str | Path) -> VerifyAgentConfig:
-    """加载 verify_agent.yaml，返回 VerifyAgentConfig。"""
+    """加载 verify_agent.yaml，返回 VerifyAgentConfig。
+
+    llm_validation.model 是 model_registry.yaml 中的逻辑名，
+    由调用方通过 ModelRegistryLoader + ModelLoader 解析为客户端。
+    """
     from benchforge.utils.paths import get_project_root
     path = Path(path)
     load_dotenv(get_project_root() / ".env")
 
     with open(path, encoding="utf-8") as f:
         raw = expand_env_recursive(yaml.safe_load(f))
-
-    run = raw.get("run", {})
 
     citation_raw = raw.get("citation_validation", {})
     llm_raw = raw.get("llm_validation", {})
@@ -96,10 +104,6 @@ def load_verify_agent_config(path: str | Path) -> VerifyAgentConfig:
     )
 
     return VerifyAgentConfig(
-        task_id=run.get("task_id", ""),
-        run_id=run.get("run_id", ""),
-        input_paths=run.get("input_paths", []),
-        chunk_index_path=run.get("chunk_index_path", ""),
         citation=citation_cfg,
         llm_validation=llm_cfg,
         selection=selection_cfg,

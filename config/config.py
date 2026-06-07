@@ -97,24 +97,48 @@ def load_prompt(path: str | Path) -> str:
 class ModelConfig(BaseModel):
     """模型配置（统一格式，所有模块共用）。
 
+    仅描述模型身份和连接信息。调用参数（temperature、max_tokens 等）
+    在各自 agent 的 YAML 中指定，不在本配置中。
+
     支持从环境变量自动获取默认值：
     - provider=openai → OPENAI_API_KEY / OPENAI_BASE_URL
     - provider=ollama → http://localhost:11434
-    - provider=vllm  → http://localhost:8000
+    - provider=vllm  → http://localhost:8000/v1
+    - provider=transformers → 本地 HuggingFace 模型
     """
+
+    # ── 身份字段 ──
     model_name: str = "gpt-4o-mini"
-    provider: str = "openai"  # openai, ollama, vllm
+    """实际调用的模型标识。
+    - openai/ollama/vllm: API 请求中的 model 参数
+    - transformers: HuggingFace hub ID 或本地路径，如 "Qwen/Qwen2.5-7B-Instruct" 或 "/data/models/qwen"
+    """
+
+    provider: str = "openai"
+    """加载渠道: openai | ollama | vllm | transformers | fake"""
+
+    # ── 连接字段（仅 API 类 provider 使用） ──
     base_url: str | None = None
+    """API 端点。openai/ollama/vllm 使用，transformers/fake 忽略。"""
+
     api_key: str | None = None
+    """API 密钥。openai/vllm 使用，其余忽略。"""
+
     max_concurrent_requests: int = 4
-    temperature: float = 0.7
-    max_tokens: int = 2000
+    """HTTP 连接池最大并发数（仅 API 类 provider）。"""
+
     max_retries: int = 3
-    extra_parameters: dict[str, Any] = Field(default_factory=dict)
+    """HTTP 传输层重试次数（仅 openai/vllm，传给 AsyncOpenAI）。"""
+
+    # ── 扩展 ──
+    extra_parameters: dict[str, Any] = Field(
+        default_factory=dict,
+        description="provider 特定扩展，如 transformers: device, load_in_8bit",
+    )
 
     @model_validator(mode="after")
     def apply_env_defaults(self):
-        """从环境变量填充 provider 特定的默认值。"""
+        """从环境变量填充 provider 特定的默认值（仅连接信息）。"""
         if self.provider == "openai":
             if self.api_key is None:
                 self.api_key = os.getenv("OPENAI_API_KEY", "")
@@ -125,7 +149,8 @@ class ModelConfig(BaseModel):
                 self.base_url = "http://localhost:11434"
         elif self.provider == "vllm":
             if self.base_url is None:
-                self.base_url = "http://localhost:8000"
+                self.base_url = "http://localhost:8000/v1"
+        # transformers 和 fake 不需要 base_url/api_key，不设默认值
         return self
 
 

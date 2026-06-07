@@ -49,6 +49,23 @@ def _clean_str(text: str) -> str:
         return text
 
 
+def get_document_source(url: str) -> str:
+    """从 URL 推断文档来源类型。
+
+    Args:
+        url: 文档 URL
+
+    Returns:
+        "wikipedia" 如果是 Wikipedia 页面，否则 "web"
+    """
+    if not url:
+        return "unknown"
+    url_lower = url.lower()
+    if "wikipedia.org" in url_lower or "wikimedia.org" in url_lower:
+        return "wikipedia"
+    return "web"
+
+
 def get_pageviews(
     page_title: str,
     start_date: str = "2022010100",

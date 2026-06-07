@@ -29,9 +29,33 @@ _embedding_model = None
 _embedding_model_name: str | None = None
 
 
+def _resolve_embedding_path(name_or_path: str) -> str:
+    """解析嵌入模型路径。
+
+    优先从 model_registry.yaml 的 embeddings 段查找逻辑名，
+    找不到则直接返回原值（可能是 HF Hub ID 或本地路径）。
+    """
+    try:
+        import yaml
+        from pathlib import Path as _Path
+        registry_path = _Path("config/model_registry.yaml")
+        if registry_path.exists():
+            with open(registry_path, encoding="utf-8") as f:
+                registry = yaml.safe_load(f)
+            embeddings = registry.get("embeddings", {})
+            if name_or_path in embeddings:
+                resolved = embeddings[name_or_path].get("path", name_or_path)
+                logger.info(f"Resolved embedding '{name_or_path}' -> '{resolved}'")
+                return resolved
+    except Exception:
+        pass
+    return name_or_path
+
+
 def _get_embedding_model(model_name: str):
     global _embedding_model, _embedding_model_name
-    if _embedding_model is None or _embedding_model_name != model_name:
+    resolved = _resolve_embedding_path(model_name)
+    if _embedding_model is None or _embedding_model_name != resolved:
         try:
             from sentence_transformers import SentenceTransformer
         except ImportError:
@@ -39,9 +63,9 @@ def _get_embedding_model(model_name: str):
                 "sentence-transformers not installed. "
                 "Run: pip install sentence-transformers"
             )
-        logger.info(f"Loading embedding model: {model_name}")
-        _embedding_model = SentenceTransformer(model_name)
-        _embedding_model_name = model_name
+        logger.info(f"Loading embedding model: {resolved}")
+        _embedding_model = SentenceTransformer(resolved)
+        _embedding_model_name = resolved
     return _embedding_model
 
 

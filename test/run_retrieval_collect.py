@@ -95,7 +95,7 @@ async def retrieve_topic(
 
 async def main() -> None:
     config_path = project_root / "benchforge/config/qa_agent.yaml"
-    _, _, _, retrieval_cfg, _, _ = load_qa_agent_config(config_path)
+    _, _, retrieval_cfg, _, _ = load_qa_agent_config(config_path)
 
     # 强制 top-k=4
     retrieval_cfg.saliency_top_k = 4

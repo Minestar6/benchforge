@@ -268,14 +268,21 @@ async def run_verify_agent(
     input_paths: list[str],
     blueprint: ValidationBlueprintView,
     config: VerifyAgentConfig,
+    task_id: str = "",
+    run_id: str = "",
+    chunk_index_path: str = "",
     model_client: BaseModelClient | None = None,
 ) -> ValidationTaskResult:
-    """顶层便捷入口：加载 + 归一化 + 运行 VerifyAgent。"""
+    """独立模式入口：加载 + 归一化 + 运行 VerifyAgent。
+
+    task_id / run_id / chunk_index_path 仅在独立运行时需要；
+    流水线模式下使用 run_verify_agent_from_shared_state()。
+    """
     candidates = load_and_normalize(
         input_paths=input_paths,
-        task_id=config.task_id,
-        run_id=config.run_id,
-        chunk_index_path=config.chunk_index_path,
+        task_id=task_id,
+        run_id=run_id,
+        chunk_index_path=chunk_index_path,
     )
 
     if not candidates:
@@ -283,8 +290,8 @@ async def run_verify_agent(
 
     agent = VerifyAgent(config=config, model_client=model_client)
     return await agent.run(
-        task_id=config.task_id,
-        run_id=config.run_id,
+        task_id=task_id,
+        run_id=run_id,
         blueprint=blueprint,
         candidates=candidates,
     )
@@ -295,7 +302,11 @@ async def run_verify_agent_from_shared_state(
     config: VerifyAgentConfig,
     model_client: BaseModelClient | None = None,
 ) -> ValidationTaskResult:
-    """顶层入口：从 shared_state.json 恢复 verify_agent 所需运行态，完成后回写。"""
+    """流水线模式入口：从 shared_state.json 恢复全部运行上下文，完成后回写。
+
+    task_id / run_id / blueprint / input_paths 均从 shared_state 解析，
+    不需要在 VerifyAgentConfig 中配置。
+    """
     state = load_shared_state(shared_state_path)
     task_id = state.task_id
     run_id = state.run_id
@@ -304,18 +315,13 @@ async def run_verify_agent_from_shared_state(
     input_paths = _input_paths_from_shared_state(state, run_dir)
     chunk_index_path = _chunk_index_path_from_shared_state(state, run_dir)
 
-    effective_config = replace(
-        config,
-        task_id=task_id,
-        run_id=run_id,
-        input_paths=input_paths,
-        chunk_index_path=chunk_index_path,
-    )
-
     result = await run_verify_agent(
         input_paths=input_paths,
         blueprint=blueprint,
-        config=effective_config,
+        config=config,
+        task_id=task_id,
+        run_id=run_id,
+        chunk_index_path=chunk_index_path,
         model_client=model_client,
     )
 

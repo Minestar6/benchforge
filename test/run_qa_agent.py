@@ -1,4 +1,8 @@
-"""Run the qa_agent pipeline end-to-end using qa_agent.yaml."""
+"""Run the qa_agent pipeline end-to-end using qa_agent.yaml.
+
+Blueprint 由调用方程序化构造（未来由规划智能体产生）。
+task_id / run_id 也在此指定，不在 YAML 中。
+"""
 
 import asyncio
 import sys
@@ -9,17 +13,49 @@ sys.path.insert(0, str(project_root))
 
 from loguru import logger
 from benchforge.config import QuestionGeneratorConfig
-from benchforge.models import OpenAIClient
-from benchforge.agents.question_generator.modules.evidence_manager import EvidenceManager
-from benchforge.agents.question_generator.modules.generator import Generator
+from benchforge.models.loader import ModelLoader
+from benchforge.agents.model_eval_agent.model_registry_loader import load_model_registry
+from benchforge.agents.qa_agent.evidence_manager import EvidenceManager
+from benchforge.agents.qa_agent.generator import Generator
 from benchforge.agents.qa_agent import run_generation_agent
 from benchforge.agents.qa_agent.config_loader import load_qa_agent_config
+from benchforge.agents.qa_agent.schema import Blueprint, ModeCfg
+
+TASK_ID = "task_001"
+RUN_ID = "run_001"
+
+
+def build_blueprint() -> Blueprint:
+    """由编排器/规划智能体程序化构造。"""
+    return Blueprint(
+        task_id=TASK_ID,
+        run_id=RUN_ID,
+        language="en",
+        topics=[
+            "Artificial Intelligence",
+            "Renewable Energy",
+            "Human Evolution",
+        ],
+        modes={
+            "qa": ModeCfg(
+                count=20,
+                max_rounds=5,
+                difficulty_distribution={"easy": 0.3, "medium": 0.4, "hard": 0.3},
+            ),
+            "multiple_choice": ModeCfg(
+                count=10,
+                max_rounds=5,
+                difficulty_distribution={"easy": 0.3, "medium": 0.4, "hard": 0.3},
+            ),
+        },
+    )
 
 
 async def main():
-    blueprint, agent_config, model_cfg, retrieval_cfg, chunking_cfg, sum_chunking_cfg = load_qa_agent_config(
+    agent_config, model_ref, retrieval_cfg, chunking_cfg, sum_chunking_cfg = load_qa_agent_config(
         project_root / "benchforge/config/qa_agent.yaml"
     )
+    blueprint = build_blueprint()
 
     # 日志落盘
     log_path = Path("runs") / blueprint.task_id / blueprint.run_id / "run.log"
@@ -31,19 +67,14 @@ async def main():
         task_id=blueprint.task_id,
         run_id=blueprint.run_id,
     )
-    # qa_agent.yaml 的 retrieval/chunking 覆盖 question_generator_config 的默认值
     sys_config.retrieval = retrieval_cfg
     sys_config.chunking = chunking_cfg
     sys_config.summarization_chunking = sum_chunking_cfg
 
-    client = OpenAIClient(
-        api_key=model_cfg["api_key"],
-        model_name=model_cfg["model_name"],
-        base_url=model_cfg["base_url"],
-        temperature=float(model_cfg.get("temperature", 0.7)),
-        max_tokens=int(model_cfg.get("max_tokens", 2000)),
-        max_retries=int(model_cfg.get("max_retries", 3)),
-    )
+    # 从 model_registry.yaml 解析模型身份 → 创建客户端
+    registry = load_model_registry(project_root / "benchforge/config/model_registry.yaml")
+    model_cfg = registry[model_ref.name]
+    client = ModelLoader.load_model(model_cfg)
 
     report = await run_generation_agent(
         blueprint=blueprint,

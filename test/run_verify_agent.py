@@ -28,9 +28,6 @@ blueprint = ValidationBlueprintView(
 )
 
 config = VerifyAgentConfig(
-    task_id=TASK_ID,
-    run_id=RUN_ID,
-    input_paths=[f"runs/{TASK_ID}/{RUN_ID}/qa/candidate_pool.json"],
     citation=CitationCfg(
         enabled=True,
         min_citation_score=0.65,
@@ -49,9 +46,11 @@ config = VerifyAgentConfig(
 async def main():
     logger.add(f"runs/{TASK_ID}/{RUN_ID}/verify.log", level="DEBUG", encoding="utf-8")
     result = await run_verify_agent(
-        input_paths=config.input_paths,
+        input_paths=[f"runs/{TASK_ID}/{RUN_ID}/qa/candidate_pool.json"],
         blueprint=blueprint,
         config=config,
+        task_id=TASK_ID,
+        run_id=RUN_ID,
         model_client=None,
     )
     logger.info(f"selected={len(result.selected_question_ids)}")

@@ -74,9 +74,6 @@ def _make_candidate_pool(tmp_dir: Path, n: int = 5) -> Path:
 
 def _make_config(tmp_dir: Path, pool_file: Path) -> VerifyAgentConfig:
     return VerifyAgentConfig(
-        task_id="task_e2e",
-        run_id="run_e2e",
-        input_paths=[str(pool_file)],
         citation=CitationCfg(
             enabled=True,
             min_citation_score=0.3,  # 宽松阈值，确保测试数据通过
@@ -126,9 +123,11 @@ class TestE2EHappyPath:
             os.chdir(tmp_path)
             result = asyncio.run(
                 run_verify_agent(
-                    input_paths=config.input_paths,
+                    input_paths=[str(pool_file)],
                     blueprint=blueprint,
                     config=config,
+                    task_id="task_e2e",
+                    run_id="run_e2e",
                     model_client=client,
                 )
             )
@@ -168,7 +167,7 @@ class TestE2EHappyPath:
         try:
             os.chdir(tmp_path)
             asyncio.run(
-                run_verify_agent(config.input_paths, blueprint, config, ValidatorFakeClient())
+                run_verify_agent([str(pool_file)], blueprint, config, task_id="task_e2e", run_id="run_e2e", model_client=ValidatorFakeClient())
             )
         finally:
             os.chdir(original_cwd)
@@ -196,7 +195,7 @@ class TestE2EHappyPath:
         try:
             os.chdir(tmp_path)
             result = asyncio.run(
-                run_verify_agent(config.input_paths, blueprint, config, model_client=None)
+                run_verify_agent([str(pool_file)], blueprint, config, task_id="task_e2e", run_id="run_e2e", model_client=None)
             )
         finally:
             os.chdir(original_cwd)
@@ -248,7 +247,7 @@ class TestE2EHappyPath:
         try:
             os.chdir(tmp_path)
             result = asyncio.run(
-                run_verify_agent(config.input_paths, blueprint, config, ValidatorFakeClient())
+                run_verify_agent([str(pool_file)], blueprint, config, task_id="task_e2e", run_id="run_e2e", model_client=ValidatorFakeClient())
             )
         finally:
             os.chdir(original_cwd)
@@ -283,9 +282,6 @@ class TestE2EHappyPath:
         (run_dir / "shared_state.json").write_text(json.dumps(shared_state), encoding="utf-8")
 
         config = VerifyAgentConfig(
-            task_id="placeholder_task",
-            run_id="placeholder_run",
-            input_paths=[],
             citation=CitationCfg(
                 enabled=True,
                 min_citation_score=0.3,

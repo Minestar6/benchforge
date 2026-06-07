@@ -296,14 +296,12 @@ def test_build_adaptive_plan_after_breadth():
 
 def test_load_qa_agent_config():
     from benchforge.agents.qa_agent.config_loader import load_qa_agent_config
-    blueprint, agent_config, model_cfg, *_ = load_qa_agent_config(
+    agent_config, model_ref, _, _, _ = load_qa_agent_config(
         project_root / "benchforge/config/qa_agent.yaml"
     )
-    assert blueprint.task_id
-    assert blueprint.topics
-    assert "qa" in blueprint.modes
     assert agent_config.candidate_pool.target_multiplier > 0
-    assert "api_key" in model_cfg
+    assert model_ref.name
+    assert model_ref.temperature > 0
     print("PASS test_load_qa_agent_config")
 
 

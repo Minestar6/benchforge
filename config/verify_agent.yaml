@@ -6,9 +6,9 @@ citation_validation:
   citation_match_threshold: 0.8
 
 llm_validation:
-  enabled: false
-  model: "gpt-4o-mini"
-  temperature: 0.0
+  enabled: true
+  model: "deepseek-v3"           # model_registry.yaml 中的 key（逻辑名）
+  temperature: 0.0                # 调用参数（不在 registry 中）
   max_tokens: 800
   min_overall_score: 0.75
   max_concurrency: 8

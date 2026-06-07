@@ -117,23 +117,23 @@ async def _run(
     if registry_path:
         registry = load_model_registry(registry_path)
 
-    # 候选模型
+    # 候选模型（调用参数来自 config.models.generation_defaults）
     candidate_clients: list[tuple[str, BaseModelClient]] = []
     for name in config.models.candidate_model_names:
         if name in registry:
-            cfg = resolve_model_config(name, registry, config.models.generation_defaults)
+            cfg = resolve_model_config(name, registry)
             client = ModelLoader.load_model(cfg)
         else:
             logger.warning(f"[ModelEvalAgent] model '{name}' not in registry, skipping")
             continue
         candidate_clients.append((name, client))
 
-    # Judge 模型
+    # Judge 模型（调用参数来自 config.models.judge_defaults）
     judge_client: BaseModelClient | None = None
     judge_model_name = config.models.judge_model_name or ""
     if config.judge.enabled and judge_model_name:
         if judge_model_name in registry:
-            cfg = resolve_model_config(judge_model_name, registry, config.models.judge_defaults)
+            cfg = resolve_model_config(judge_model_name, registry)
             judge_client = ModelLoader.load_model(cfg)
         else:
             logger.warning(f"[ModelEvalAgent] judge model '{judge_model_name}' not in registry, judge disabled")
