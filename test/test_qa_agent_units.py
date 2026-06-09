@@ -207,6 +207,17 @@ def test_stop_max_rounds():
     print("PASS test_stop_max_rounds")
 
 
+def test_not_stop_exactly_at_max_rounds():
+    bp = _blueprint()
+    cfg = _config()
+    ms = ModeState(mode="qa")
+    ms.round_in_mode = 5  # exactly max_rounds=5, current round is still allowed
+    stop, reason = mode_should_stop(bp.modes["qa"], ms, GlobalState(), bp, cfg)
+    assert not stop
+    assert reason is None
+    print("PASS test_not_stop_exactly_at_max_rounds")
+
+
 def test_stop_consecutive_empty():
     bp = _blueprint()
     cfg = _config()
@@ -476,6 +487,82 @@ async def test_execute_mode_round_plan_records_generation_diagnostics_for_accept
     assert result["filter_rejected"] is False
     assert result["llm_call_id"] == "call_accepted"
     assert result["filter_failures"] == []
+
+
+@pytest.mark.asyncio
+async def test_execute_mode_round_plan_avoids_duplicate_chunk_combinations_within_round():
+    bp = _blueprint(topics=["Topic A", "Topic B"], qa_count=2)
+    cfg = _config()
+    gs = GlobalState()
+    ms = ModeState(mode="qa")
+    round_plan = ModeRoundPlan(
+        mode="qa",
+        round_in_mode=1,
+        strategy="initial_breadth",
+        difficulty="medium",
+        topics=("Topic A", "Topic B"),
+        single_k=1,
+        multi_k=0,
+        target_candidates_per_topic=1,
+        reason="test",
+    )
+    shared_unit = SimpleNamespace(
+        chunk_id="shared::chunk_0",
+        document_id="shared",
+        text="source text for citations",
+    )
+    evidence_pool = SimpleNamespace(single_chunks=[shared_unit], multi_chunks=[])
+
+    class SharedPoolEvidenceManager:
+        def __init__(self):
+            self.evidence_pools = {
+                "Topic A": evidence_pool,
+                "Topic B": evidence_pool,
+            }
+            self.model_client = object()
+
+        def sample(self, **kwargs):
+            return SimpleNamespace(single_chunk_ids=["shared::chunk_0"], multi_chunk_ids=[])
+
+        def get_document_summary(self, batch, evidence_pool):
+            return "summary"
+
+    class CountingGenerator:
+        def __init__(self):
+            self.calls = 0
+
+        async def generate(self, **kwargs):
+            self.calls += 1
+            return (
+                [
+                    {
+                        "question": "What is happening here?",
+                        "answer": "A valid answer.",
+                        "question_mode": "qa",
+                        "citations": ["source text for citations"],
+                    }
+                ],
+                1,
+                f"call_{self.calls}",
+            )
+
+    evidence_manager = SharedPoolEvidenceManager()
+    generator = CountingGenerator()
+
+    round_results = await execute_mode_round_plan(
+        round_plan=round_plan,
+        blueprint=bp,
+        config=cfg,
+        global_state=gs,
+        mode_state=ms,
+        evidence_manager=evidence_manager,
+        generator=generator,
+        mode_cfg=bp.modes["qa"],
+    )
+
+    assert generator.calls == 1
+    assert sum(result["generated_count"] for result in round_results) == 1
+    assert any(result["duplicate_combination"] for result in round_results)
 
 
 # ── runner ────────────────────────────────────────────────────────────────────

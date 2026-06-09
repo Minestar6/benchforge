@@ -373,6 +373,50 @@ async def test__run_uses_run_root_llm_trace_path(tmp_path, monkeypatch):
 
 
 @pytest.mark.asyncio
+async def test__run_raises_when_no_candidate_models_resolve(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
+    input_path = tmp_path / "accepted_questions.jsonl"
+    input_path.write_text(
+        json.dumps(
+            {
+                "question_id": "q1",
+                "question_mode": "qa",
+                "question": "What is AI?",
+                "answer": "Artificial intelligence",
+                "topic": "AI",
+                "estimated_difficulty": "easy",
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(agent_module, "load_model_registry", lambda _: {})
+    monkeypatch.setattr(agent_module, "run_dataset_metrics", lambda *args, **kwargs: [])
+
+    config = ModelEvalAgentConfig(
+        run=RunConfig(
+            task_id="task_x",
+            run_id="run_y",
+            input_paths=[str(input_path)],
+        ),
+        dataset_evaluation=DatasetEvaluationConfig(enabled=False, metrics=[]),
+        models=ModelsConfig(
+            candidate_model_names=["missing-model"],
+            judge_model_name=None,
+            generation_defaults={},
+            judge_defaults={},
+        ),
+        metrics={"qa": QuestionModeMetricPlan(automatic_metrics=[], llm_judge_metrics=[])},
+        judge=JudgeConfig(enabled=False),
+    )
+
+    with pytest.raises(ValueError, match="No candidate models could be loaded"):
+        await agent_module._run(config, registry_path="dummy_registry.yaml")
+
+
+@pytest.mark.asyncio
 async def test_run_model_eval_agent_from_shared_state_updates_llm_calls_artifact(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
 

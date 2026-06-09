@@ -5,6 +5,8 @@ import sys
 from pathlib import Path
 from types import SimpleNamespace
 
+import pytest
+
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
@@ -14,6 +16,11 @@ from benchforge.agents.planner_agent.feedback import (
     build_validator_feedback,
 )
 from benchforge.agents.planner_agent.orchestrator import _load_verify_model_client
+from benchforge.agents.planner_agent.planner import (
+    _build_next_round_spec,
+    _propose_topics_with_llm,
+    _update_planner_state,
+)
 from benchforge.agents.planner_agent.schema import (
     GlobalBlueprint,
     FinalTargets,
@@ -22,6 +29,16 @@ from benchforge.agents.planner_agent.schema import (
     EvaluationRequirements,
     StopConditions,
     RoundSpec,
+    PlannerState,
+    TopicBacklog,
+    ModelPool,
+    GeneratorFeedback,
+    GeneratorFeedbackArtifacts,
+    GeneratorFeedbackSummary,
+    ModeGeneratorFeedback,
+    ValidatorFeedback,
+    ValidatorFeedbackSummary,
+    ValidatorQualitySignals,
 )
 from benchforge.agents.verify_agent.config_loader import VerifyAgentConfig, LLMValidationCfg
 from benchforge.schemas import SharedState, AgentStatus
@@ -55,6 +72,11 @@ def _make_round_spec() -> RoundSpec:
                     "count": 2,
                     "max_rounds": 3,
                     "difficulty_distribution": {"easy": 0.3, "medium": 0.5, "hard": 0.2},
+                },
+                "multiple_choice": {
+                    "count": 1,
+                    "max_rounds": 3,
+                    "difficulty_distribution": {"easy": 0.4, "medium": 0.4, "hard": 0.2},
                 }
             },
         },
@@ -205,3 +227,133 @@ def test_load_verify_model_client_uses_verify_config_model(monkeypatch):
     client = _load_verify_model_client(registry, verify_config)
     assert client == "verify-client"
     assert loaded["model_name"] == "verify-model"
+
+
+def _make_global_blueprint() -> GlobalBlueprint:
+    return GlobalBlueprint(
+        task_id="task_x",
+        blueprint_id="bp_x",
+        user_goal="build benchmark",
+        language="zh",
+        seed_topics=["AI", "ML", "Systems"],
+        final_targets=FinalTargets(qa=10, multiple_choice=8),
+        default_modes={
+            "qa": QuestionModeDefaults(
+                max_rounds=3,
+                difficulty_distribution={"easy": 0.3, "medium": 0.5, "hard": 0.2},
+            ),
+            "multiple_choice": QuestionModeDefaults(
+                max_rounds=3,
+                difficulty_distribution={"easy": 0.4, "medium": 0.4, "hard": 0.2},
+            ),
+        },
+        evaluator_defaults=EvaluatorDefaults(candidate_model_names=["model-a"], judge_model_name="judge"),
+        evaluation_requirements=EvaluationRequirements(),
+        stop_conditions=StopConditions(max_rounds=4, min_selected_per_round=3, max_total_tokens=10000),
+    )
+
+
+def test_build_next_round_spec_clamps_targets_to_remaining_demand():
+    blueprint = _make_global_blueprint()
+    state = PlannerState(
+        task_id="task_x",
+        blueprint_id="bp_x",
+        current_round=2,
+        completed_targets={"qa": 9, "multiple_choice": 7},
+        topic_backlog=TopicBacklog(active=["AI", "ML"], deferred=[]),
+        model_pool=ModelPool(active=["model-a"], removed=[]),
+    )
+
+    round_spec = _build_next_round_spec(
+        state=state,
+        blueprint=blueprint,
+        proposed_topics=["AI"],
+        run_id="run_002",
+    )
+
+    assert round_spec.blueprint["modes"]["qa"]["count"] == 1
+    assert round_spec.blueprint["modes"]["multiple_choice"]["count"] == 1
+
+
+@pytest.mark.asyncio
+async def test_propose_topics_rehydrates_deferred_backlog():
+    blueprint = _make_global_blueprint()
+    state = PlannerState(
+        task_id="task_x",
+        blueprint_id="bp_x",
+        current_round=1,
+        topic_backlog=TopicBacklog(active=[], deferred=["AI", "ML"]),
+        model_pool=ModelPool(active=["model-a"], removed=[]),
+    )
+
+    topics = await _propose_topics_with_llm(
+        state=state,
+        blueprint=blueprint,
+        model_client=SimpleNamespace(),
+    )
+
+    assert topics
+    assert set(topics).issubset({"AI", "ML"})
+    assert state.topic_backlog.active
+
+
+def test_update_planner_state_consumes_active_topics_into_deferred():
+    state = PlannerState(
+        task_id="task_x",
+        blueprint_id="bp_x",
+        current_round=1,
+        topic_backlog=TopicBacklog(active=["AI", "ML", "Systems"], deferred=[]),
+        model_pool=ModelPool(active=["model-a"], removed=[]),
+    )
+    round_spec = _make_round_spec()
+    round_spec.blueprint["topics"] = ["AI", "ML"]
+
+    gen_fb = GeneratorFeedback(
+        task_id="task_x",
+        run_id="run_y",
+        round_id=3,
+        status="success",
+        artifacts=GeneratorFeedbackArtifacts(
+            shared_state_path="shared_state.json",
+            generation_report="generation_report.json",
+        ),
+        summary=GeneratorFeedbackSummary(
+            total_candidates=4,
+            global_used_chunk_combinations=2,
+            global_failures=0,
+            llm_input_tokens=10,
+            llm_output_tokens=5,
+        ),
+        by_mode={
+            "qa": ModeGeneratorFeedback(
+                candidate_count=4,
+                target_candidate_count=6,
+                fulfillment_rate=0.66,
+            )
+        },
+    )
+    val_fb = ValidatorFeedback(
+        task_id="task_x",
+        run_id="run_y",
+        round_id=3,
+        status="success",
+        summary=ValidatorFeedbackSummary(
+            total_candidates=4,
+            citation_passed=3,
+            llm_passed=2,
+            final_selected=1,
+            citation_pass_rate=0.75,
+            llm_pass_rate_after_citation=0.66,
+            final_selection_rate=0.25,
+            llm_calls=2,
+            llm_input_tokens=8,
+            llm_output_tokens=4,
+        ),
+        quality_signals=ValidatorQualitySignals(),
+        by_mode={"qa": {"selected": 1}},
+    )
+
+    _update_planner_state(state, round_spec, gen_fb, val_fb, eval_fb=None)
+
+    assert state.topic_backlog.active == ["Systems"]
+    assert state.topic_backlog.deferred == ["AI", "ML"]

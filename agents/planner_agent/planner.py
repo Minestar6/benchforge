@@ -149,6 +149,10 @@ async def _propose_topics_with_llm(
     生产版本应调用 model_client.generate() 生成提案。
     """
     # 简化规则：取 backlog 的前 2-3 个 topics
+    if not state.topic_backlog.active and state.topic_backlog.deferred:
+        state.topic_backlog.active = list(state.topic_backlog.deferred)
+        state.topic_backlog.deferred = []
+
     active_topics = state.topic_backlog.active
     if not active_topics:
         # 无可用 topic，返回空
@@ -239,8 +243,8 @@ def _build_next_round_spec(
     if latest_val_fb and latest_val_fb.quality_signals.duplicate_rate > 0.2:
         target_multiplier = max(1.5, target_multiplier - 0.5)
 
-    qa_target = int(base_qa * target_multiplier)
-    mc_target = int(base_mc * target_multiplier)
+    qa_target = max(0, min(remaining_qa, int(base_qa * target_multiplier)))
+    mc_target = max(0, min(remaining_mc, int(base_mc * target_multiplier)))
 
     # 难度分布：根据上一轮质量信号调整
     difficulty_distribution = dict(blueprint.default_modes["qa"].difficulty_distribution)
@@ -323,6 +327,13 @@ def _update_planner_state(
     eval_fb,
 ) -> None:
     """更新 PlannerState：累加 completed_targets, resource_usage, run_history。"""
+    used_topics = list(round_spec.blueprint.get("topics", []))
+    if used_topics:
+        remaining_active = [topic for topic in state.topic_backlog.active if topic not in used_topics]
+        deferred = [topic for topic in state.topic_backlog.deferred if topic not in used_topics]
+        state.topic_backlog.active = remaining_active
+        state.topic_backlog.deferred = deferred + used_topics
+
     # completed_targets
     if val_fb:
         # 从 by_mode 统计 selected 数量

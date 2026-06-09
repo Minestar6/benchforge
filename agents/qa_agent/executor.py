@@ -112,22 +112,58 @@ async def _generate_for_topic(
     mode_state: ModeState,
     evidence_manager: Any,
     generator: Any,
+    reservation_lock: asyncio.Lock | None = None,
+    reserved_combinations: set[tuple[str, ...]] | None = None,
     tracer: LLMTracer | None = None,
 ) -> dict:
     """Run one topic's LLM generation; returns raw result without state mutation."""
     llm_call_id = None
+    reserved_combo: tuple[str, ...] | None = None
     try:
-        chunks, duplicate_combination = sample_chunks(
-            evidence_manager=evidence_manager,
-            topic=topic,
-            mode=round_plan.mode,
-            difficulty=round_plan.difficulty,
-            single_k=round_plan.single_k,
-            multi_k=round_plan.multi_k,
-            global_used_combinations=global_state.used_chunk_combinations,
-            global_chunk_usage_counts=global_state.chunk_usage_counts,
-            round_num=mode_state.round_in_mode,
-        )
+        if reservation_lock is not None and reserved_combinations is not None:
+            async with reservation_lock:
+                blocked_combinations = global_state.used_chunk_combinations | reserved_combinations
+                chunks, duplicate_combination = sample_chunks(
+                    evidence_manager=evidence_manager,
+                    topic=topic,
+                    mode=round_plan.mode,
+                    difficulty=round_plan.difficulty,
+                    single_k=round_plan.single_k,
+                    multi_k=round_plan.multi_k,
+                    global_used_combinations=global_state.used_chunk_combinations,
+                    global_chunk_usage_counts=global_state.chunk_usage_counts,
+                    blocked_combinations=blocked_combinations,
+                    round_num=mode_state.round_in_mode,
+                )
+                if not duplicate_combination:
+                    reserved_combo = tuple(raw_chunk_ids(chunks))
+                    reserved_combinations.add(reserved_combo)
+        else:
+            chunks, duplicate_combination = sample_chunks(
+                evidence_manager=evidence_manager,
+                topic=topic,
+                mode=round_plan.mode,
+                difficulty=round_plan.difficulty,
+                single_k=round_plan.single_k,
+                multi_k=round_plan.multi_k,
+                global_used_combinations=global_state.used_chunk_combinations,
+                global_chunk_usage_counts=global_state.chunk_usage_counts,
+                round_num=mode_state.round_in_mode,
+            )
+
+        if duplicate_combination:
+            return {
+                "topic": topic,
+                "success": True,
+                "parsed_questions": [],
+                "raw_count": 0,
+                "filtered_count": 0,
+                "filter_failures": [],
+                "llm_call_id": None,
+                "chunks": chunks,
+                "duplicate_combination": True,
+                "error": None,
+            }
 
         evidence_pool = evidence_manager.evidence_pools.get(topic)
         batch = _make_batch(topic, round_plan, chunks, evidence_pool)
@@ -208,6 +244,8 @@ async def _generate_for_topic(
         }
 
     except Exception as exc:
+        if reserved_combo is not None and reserved_combinations is not None:
+            reserved_combinations.discard(reserved_combo)
         logger.warning(f"Topic {topic} failed in round {round_plan.round_in_mode}: {exc}")
         return {
             "topic": topic,
@@ -233,6 +271,8 @@ async def execute_mode_round_plan(
     tracer: LLMTracer | None = None,
 ) -> list[dict]:
     # All topics run concurrently; state mutations happen serially after gather.
+    reservation_lock = asyncio.Lock()
+    reserved_combinations: set[tuple[str, ...]] = set()
     topic_results = await asyncio.gather(*[
         _generate_for_topic(
             topic=topic,
@@ -242,6 +282,8 @@ async def execute_mode_round_plan(
             mode_state=mode_state,
             evidence_manager=evidence_manager,
             generator=generator,
+            reservation_lock=reservation_lock,
+            reserved_combinations=reserved_combinations,
             tracer=tracer,
         )
         for topic in round_plan.topics

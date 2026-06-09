@@ -51,6 +51,7 @@ def sample_chunks(
     multi_k: int,
     global_used_combinations: set[tuple[str, ...]],
     global_chunk_usage_counts: dict[str, int],
+    blocked_combinations: set[tuple[str, ...]] | None = None,
     round_num: int = 1,
 ) -> tuple[list[Any], bool]:
     evidence_pool = evidence_manager.evidence_pools.get(topic)
@@ -75,7 +76,8 @@ def sample_chunks(
         chunks = single_units + multi_units
 
         combo = tuple(raw_chunk_ids(chunks))
-        if combo not in global_used_combinations:
+        blocked = blocked_combinations if blocked_combinations is not None else global_used_combinations
+        if combo not in blocked:
             return chunks, False
 
         last_chunks = chunks

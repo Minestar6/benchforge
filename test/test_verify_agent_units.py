@@ -38,6 +38,7 @@ from benchforge.agents.verify_agent.selector import (
     _normalize_difficulty,
     run_weighted_selection,
 )
+from benchforge.agents.verify_agent.agent import VerifyAgent
 from benchforge.models.fake import FakeModelClient
 
 
@@ -272,6 +273,24 @@ async def test_run_verify_agent_from_shared_state_updates_artifacts(tmp_path, mo
     assert updated.artifact("validation_report") == str(Path("runs") / "task_x" / "run_y" / "validation" / "validation_report.json")
     assert updated.artifact("validated_questions") == str(Path("runs") / "task_x" / "run_y" / "validation" / "validated_questions.jsonl")
     assert updated.artifact("weighted_selection") == str(Path("runs") / "task_x" / "run_y" / "validation" / "weighted_selection.json")
+
+
+@pytest.mark.asyncio
+async def test_verify_agent_raises_when_llm_validation_enabled_without_model_client(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
+    agent = VerifyAgent(
+        config=load_verify_agent_config(project_root / "benchforge/config/verify_agent.yaml"),
+        model_client=None,
+    )
+
+    with pytest.raises(RuntimeError, match="LLM validation enabled but no model_client provided"):
+        await agent.run(
+            task_id="task_test",
+            run_id="run_test",
+            blueprint=make_blueprint(),
+            candidates=[make_candidate()],
+        )
 
 
 # ─── citation_validator tests ─────────────────────────────────────────────────

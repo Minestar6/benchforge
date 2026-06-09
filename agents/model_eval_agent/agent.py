@@ -128,6 +128,12 @@ async def _run(
             continue
         candidate_clients.append((name, client))
 
+    if config.models.candidate_model_names and not candidate_clients:
+        raise ValueError(
+            "No candidate models could be loaded from registry for "
+            f"{config.models.candidate_model_names}"
+        )
+
     # Judge 模型（调用参数来自 config.models.judge_defaults）
     judge_client: BaseModelClient | None = None
     judge_model_name = config.models.judge_model_name or ""
