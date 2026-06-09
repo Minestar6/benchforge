@@ -36,6 +36,8 @@ def build_shared_state(
     run_id: str,
     blueprint: Any,
     base_dir: str | Path | None = None,
+    round_id: int | None = None,
+    round_spec_ref: str | None = None,
 ) -> SharedState:
     """从 qa_agent blueprint 构建初始 SharedState。
 
@@ -65,7 +67,10 @@ def build_shared_state(
     return SharedState(
         task_id=task_id,
         run_id=run_id,
+        round_id=round_id,
+        round_spec_ref=round_spec_ref,
         blueprint=asdict(blueprint),
+        blueprint_cache=asdict(blueprint),
         artifacts=artifacts,
         agent_status={
             "generation": AgentStatus.COMPLETED,

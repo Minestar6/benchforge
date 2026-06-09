@@ -330,7 +330,9 @@ async def run_verify_agent_from_shared_state(
         shared_state_path,
         agent="verification",
         artifacts={
+            "validation_report": str(run_dir / "validation" / "validation_report.json"),
             "validated_questions": str(run_dir / "validation" / "validated_questions.jsonl"),
+            "weighted_selection": str(run_dir / "validation" / "weighted_selection.json"),
         },
     )
 

@@ -2,10 +2,14 @@
 
 import asyncio
 import json
+import sys
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
 
 from benchforge.agents.model_eval_agent import agent as agent_module
 from benchforge.agents.model_eval_agent.aggregator import build_model_by_dimension
@@ -23,6 +27,8 @@ from benchforge.agents.model_eval_agent.schema import (
     QuestionModeMetricPlan,
     RunConfig,
 )
+from benchforge.schemas import SharedState, AgentStatus
+from benchforge.utils.shared_state import save_shared_state
 from benchforge.models.base import BaseModelClient
 
 
@@ -166,6 +172,7 @@ async def test_judge_single_trace_records_llm_call_id():
         user_template="",
         judge_defaults={"temperature": 0.0, "max_tokens": 123},
         llm_trace_path="",
+        tracer=None,
         semaphore=asyncio.Semaphore(1),
     )
 
@@ -199,7 +206,7 @@ async def test__run_passes_judge_defaults_and_composite_dimension_keys(tmp_path,
     monkeypatch.setattr(
         agent_module,
         "resolve_model_config",
-        lambda name, registry: SimpleNamespace(model_name=name),
+        lambda *args, **kwargs: SimpleNamespace(model_name=args[0]),
     )
 
     judge_client = RecordingJudgeClient()
@@ -274,3 +281,134 @@ async def test__run_passes_judge_defaults_and_composite_dimension_keys(tmp_path,
         "question_mode_and_difficulty",
         "topic_and_question_mode",
     ]
+
+
+@pytest.mark.asyncio
+async def test__run_uses_run_root_llm_trace_path(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
+    input_path = tmp_path / "accepted_questions.jsonl"
+    input_path.write_text(
+        json.dumps(
+            {
+                "question_id": "q1",
+                "question_mode": "qa",
+                "question": "What is AI?",
+                "answer": "Artificial intelligence",
+                "topic": "AI",
+                "estimated_difficulty": "easy",
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    recorded = {"candidate_trace": None, "judge_trace": None}
+
+    monkeypatch.setattr(agent_module, "load_model_registry", lambda _: {"candidate": object(), "judge": object()})
+    monkeypatch.setattr(
+        agent_module,
+        "resolve_model_config",
+        lambda *args, **kwargs: SimpleNamespace(model_name=args[0]),
+    )
+    monkeypatch.setattr(
+        agent_module.ModelLoader,
+        "load_model",
+        staticmethod(lambda cfg: RecordingJudgeClient(response_text="candidate answer")),
+    )
+    monkeypatch.setattr(agent_module, "run_dataset_metrics", lambda *args, **kwargs: [])
+
+    async def fake_run_candidate_models(*args, **kwargs):
+        recorded["candidate_trace"] = kwargs.get("llm_trace_path")
+        return [
+            {
+                "question_id": "q1",
+                "question_mode": "qa",
+                "model_name": "candidate",
+                "prediction": "Artificial intelligence",
+                "error": None,
+            }
+        ]
+
+    async def fake_run_llm_judge(*args, **kwargs):
+        recorded["judge_trace"] = kwargs.get("llm_trace_path")
+        return []
+
+    monkeypatch.setattr(agent_module, "run_candidate_models", fake_run_candidate_models)
+    monkeypatch.setattr(agent_module, "run_automatic_metrics", lambda *args, **kwargs: [])
+    monkeypatch.setattr(agent_module, "run_llm_judge", fake_run_llm_judge)
+    monkeypatch.setattr(agent_module, "build_dataset_quality_summary", lambda *args, **kwargs: {})
+    monkeypatch.setattr(agent_module, "build_dataset_quality_by_group", lambda *args, **kwargs: [])
+    monkeypatch.setattr(agent_module, "build_model_overall_report", lambda *args, **kwargs: [])
+    monkeypatch.setattr(agent_module, "build_model_by_dimension", lambda *args, **kwargs: [])
+    monkeypatch.setattr(agent_module, "write_reports", lambda *args, **kwargs: None)
+
+    config = ModelEvalAgentConfig(
+        run=RunConfig(
+            task_id="task_x",
+            run_id="run_y",
+            input_paths=[str(input_path)],
+        ),
+        dataset_evaluation=DatasetEvaluationConfig(enabled=False, metrics=[]),
+        models=ModelsConfig(
+            candidate_model_names=["candidate"],
+            judge_model_name="judge",
+            generation_defaults={},
+            judge_defaults={},
+        ),
+        metrics={
+            "qa": QuestionModeMetricPlan(
+                automatic_metrics=[],
+                llm_judge_metrics=[JudgeMetricSpec(name="correctness", description="desc")],
+            )
+        },
+        judge=JudgeConfig(enabled=True),
+    )
+
+    await agent_module._run(config, registry_path="dummy_registry.yaml")
+
+    expected = str(Path("runs") / "task_x" / "run_y" / "llm_calls.jsonl")
+    assert recorded["candidate_trace"] == expected
+    assert recorded["judge_trace"] == expected
+
+
+@pytest.mark.asyncio
+async def test_run_model_eval_agent_from_shared_state_updates_llm_calls_artifact(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
+    run_dir = tmp_path / "runs" / "task_x" / "run_y"
+    run_dir.mkdir(parents=True)
+    validated_path = run_dir / "validation" / "validated_questions.jsonl"
+    validated_path.parent.mkdir(parents=True)
+    validated_path.write_text("", encoding="utf-8")
+
+    state = SharedState(
+        task_id="task_x",
+        run_id="run_y",
+        blueprint={},
+        artifacts={"validated_questions": str(Path("runs") / "task_x" / "run_y" / "validation" / "validated_questions.jsonl")},
+        agent_status={"generation": AgentStatus.COMPLETED, "verification": AgentStatus.COMPLETED},
+    )
+    shared_state_path = save_shared_state(state, run_dir)
+
+    async def fake_run(config, registry_path=None):
+        evaluation_dir = Path("runs") / "task_x" / "run_y" / "evaluation"
+        evaluation_dir.mkdir(parents=True, exist_ok=True)
+        (evaluation_dir / "evaluation_report.json").write_text("{}", encoding="utf-8")
+        return {"ok": True}
+
+    monkeypatch.setattr(agent_module, "_run", fake_run)
+
+    config = ModelEvalAgentConfig(
+        run=RunConfig(shared_state_path=str(shared_state_path)),
+        dataset_evaluation=DatasetEvaluationConfig(enabled=False, metrics=[]),
+        models=ModelsConfig(candidate_model_names=[]),
+        metrics={},
+        judge=JudgeConfig(enabled=False),
+    )
+
+    await agent_module.run_model_eval_agent_from_shared_state(shared_state_path, config)
+
+    updated = SharedState.model_validate_json(shared_state_path.read_text(encoding="utf-8"))
+    assert updated.artifact("llm_calls") == str(Path("runs") / "task_x" / "run_y" / "llm_calls.jsonl")
+    assert updated.artifact("evaluation_report") == str(Path("runs") / "task_x" / "run_y" / "evaluation" / "evaluation_report.json")

@@ -319,7 +319,10 @@ class SharedState(BaseModel):
 
     task_id: str
     run_id: str
+    round_id: int | None = None
+    round_spec_ref: str | None = None
     blueprint: dict[str, Any] = Field(default_factory=dict)
+    blueprint_cache: dict[str, Any] | None = None
     artifacts: dict[str, str] = Field(
         default_factory=dict,
         description="产物名 → 文件路径，如 {'qa_candidate_pool': 'runs/.../candidate_pool.json'}",

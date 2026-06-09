@@ -97,11 +97,11 @@ async def _run(
     run_id = run.run_id
     input_paths = run.input_paths
     output_root = Path("runs") / task_id / run_id / "evaluation"
-    llm_trace_path = str(output_root / "llm_calls.jsonl")
 
     # 创建 tracer（用于模型推理和 LLM Judge 调用的自动记录）
     from benchforge.utils.run_context import RunContext
     run_ctx = RunContext(task_id=task_id, run_id=run_id)
+    llm_trace_path = run_ctx.llm_trace_path
     inference_tracer = run_ctx.create_tracer(agent="model_eval_agent", stage="inference")
     judge_tracer = run_ctx.create_tracer(agent="model_eval_agent", stage="judge")
 
@@ -247,7 +247,14 @@ async def run_model_eval_agent_from_shared_state(
         shared_state_path,
         agent="evaluation",
         artifacts={
+            "llm_calls": str(run_dir / "llm_calls.jsonl"),
             "evaluation_report": str(run_dir / "evaluation" / "evaluation_report.json"),
+            "dataset_quality_summary": str(run_dir / "evaluation" / "dataset_report" / "dataset_quality_summary.json"),
+            "model_overall_report": str(run_dir / "evaluation" / "model_report" / "model_overall_report.csv"),
+            "model_aggregate_report": str(run_dir / "evaluation" / "model_report" / "model_aggregate_report.json"),
+            "model_by_topic": str(run_dir / "evaluation" / "model_report" / "model_by_topic.csv"),
+            "model_by_difficulty": str(run_dir / "evaluation" / "model_report" / "model_by_difficulty.csv"),
+            "model_by_question_mode": str(run_dir / "evaluation" / "model_report" / "model_by_question_mode.csv"),
         },
     )
 

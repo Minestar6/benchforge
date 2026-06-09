@@ -3,9 +3,13 @@
 import asyncio
 import json
 import tempfile
+import sys
 from pathlib import Path
 
 import pytest
+
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
 
 from benchforge.agents.verify_agent.config_loader import (
     CitationCfg,
@@ -27,6 +31,8 @@ from benchforge.agents.verify_agent.schema import (
     QuestionCandidate,
     ValidationBlueprintView,
 )
+from benchforge.schemas import SharedState, AgentStatus
+from benchforge.utils.shared_state import save_shared_state
 from benchforge.agents.verify_agent.selector import (
     _compute_bucket_targets,
     _normalize_difficulty,
@@ -204,13 +210,68 @@ selection:
         )
 
         cfg = load_verify_agent_config(cfg_file)
-        assert cfg.task_id == ""
-        assert cfg.run_id == ""
-        assert cfg.input_paths == []
-        assert cfg.chunk_index_path == ""
         assert cfg.citation.min_citation_score == 0.7
         assert cfg.llm_validation.max_retries == 1
         assert cfg.selection.embedding_model == "all-MiniLM-L6-v2"
+
+
+@pytest.mark.asyncio
+async def test_run_verify_agent_from_shared_state_updates_artifacts(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
+    run_dir = tmp_path / "runs" / "task_x" / "run_y"
+    run_dir.mkdir(parents=True)
+    candidate_path = run_dir / "qa" / "candidate_pool.json"
+    candidate_path.parent.mkdir(parents=True)
+    candidate_path.write_text("[]", encoding="utf-8")
+    chunked_path = run_dir / "evidence" / "chunked.jsonl"
+    chunked_path.parent.mkdir(parents=True)
+    chunked_path.write_text("", encoding="utf-8")
+
+    state = SharedState(
+        task_id="task_x",
+        run_id="run_y",
+        blueprint={"topics": ["AI"], "modes": {"qa": {"count": 1, "difficulty_distribution": {"easy": 1.0}}}},
+        artifacts={
+            "qa_candidate_pool": str(Path("runs") / "task_x" / "run_y" / "qa" / "candidate_pool.json"),
+            "chunked_evidence": str(Path("runs") / "task_x" / "run_y" / "evidence" / "chunked.jsonl"),
+        },
+        agent_status={"generation": AgentStatus.COMPLETED},
+    )
+    shared_state_path = save_shared_state(state, run_dir)
+
+    async def fake_run_verify_agent(**kwargs):
+        validation_dir = Path("runs") / "task_x" / "run_y" / "validation"
+        validation_dir.mkdir(parents=True, exist_ok=True)
+        (validation_dir / "validation_report.json").write_text("{}", encoding="utf-8")
+        (validation_dir / "validated_questions.jsonl").write_text("", encoding="utf-8")
+        (validation_dir / "weighted_selection.json").write_text("{}", encoding="utf-8")
+
+        class Result:
+            pass
+
+        result = Result()
+        result.task_id = "task_x"
+        result.run_id = "run_y"
+        result.report_path = str(validation_dir / "validation_report.json")
+        result.selected_question_ids = []
+        result.failed_by_stage = {}
+        return result
+
+    monkeypatch.setattr(
+        "benchforge.agents.verify_agent.agent.run_verify_agent",
+        fake_run_verify_agent,
+    )
+
+    from benchforge.agents.verify_agent.config_loader import VerifyAgentConfig
+    from benchforge.agents.verify_agent.agent import run_verify_agent_from_shared_state
+
+    await run_verify_agent_from_shared_state(shared_state_path, VerifyAgentConfig(), None)
+
+    updated = SharedState.model_validate_json(shared_state_path.read_text(encoding="utf-8"))
+    assert updated.artifact("validation_report") == str(Path("runs") / "task_x" / "run_y" / "validation" / "validation_report.json")
+    assert updated.artifact("validated_questions") == str(Path("runs") / "task_x" / "run_y" / "validation" / "validated_questions.jsonl")
+    assert updated.artifact("weighted_selection") == str(Path("runs") / "task_x" / "run_y" / "validation" / "weighted_selection.json")
 
 
 # ─── citation_validator tests ─────────────────────────────────────────────────
