@@ -1,0 +1,77 @@
+"""BenchForge CLI."""
+
+from __future__ import annotations
+
+import argparse
+import asyncio
+from pathlib import Path
+
+from benchforge.agents.planner_agent.schema import UserIntent
+from benchforge.app import run_benchforge
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Run BenchForge from user intent.")
+    parser.add_argument("goal", nargs="?", help="Natural-language benchmark goal.")
+    parser.add_argument("--user-goal", help="Natural-language benchmark goal.")
+    parser.add_argument("--task-id", help="Optional stable task id.")
+    parser.add_argument("--language", default="zh", help="Benchmark language.")
+    parser.add_argument("--seed-topic", action="append", default=[], help="Optional seed topic. Repeatable.")
+    parser.add_argument("--qa-target", type=int, default=20, help="Target number of QA questions.")
+    parser.add_argument("--mc-target", type=int, default=10, help="Target number of multiple-choice questions.")
+    parser.add_argument("--candidate-model", action="append", default=[], help="Candidate model registry key. Repeatable.")
+    parser.add_argument("--judge-model", help="Judge model registry key.")
+    parser.add_argument("--planner-model", help="Planner synthesis model registry key.")
+    parser.add_argument("--max-rounds", type=int, default=3, help="Maximum planner rounds.")
+    parser.add_argument("--min-selected-per-round", type=int, default=5, help="Minimum selected questions per round.")
+    parser.add_argument("--max-total-tokens", type=int, help="Global token budget.")
+    parser.add_argument("--config-dir", default="config", help="Base config directory.")
+    parser.add_argument("--registry-path", default="config/model_registry.yaml", help="Model registry path.")
+    parser.add_argument("--planner-state-dir", help="Planner state output directory.")
+    return parser
+
+
+def build_user_intent(args: argparse.Namespace) -> UserIntent:
+    user_goal = args.user_goal or args.goal
+    if not user_goal:
+        raise ValueError("user goal is required")
+    return UserIntent(
+        user_goal=user_goal,
+        task_id=args.task_id,
+        language=args.language,
+        seed_topics=list(args.seed_topic),
+        qa_target=args.qa_target,
+        multiple_choice_target=args.mc_target,
+        candidate_model_names=list(args.candidate_model),
+        judge_model_name=args.judge_model,
+        planner_model_name=args.planner_model,
+        max_rounds=args.max_rounds,
+        min_selected_per_round=args.min_selected_per_round,
+        max_total_tokens=args.max_total_tokens,
+    )
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    try:
+        intent = build_user_intent(args)
+    except ValueError as exc:
+        parser.error(str(exc))
+    result = asyncio.run(
+        run_benchforge(
+            intent=intent,
+            base_config_dir=Path(args.config_dir),
+            registry_path=Path(args.registry_path),
+            planner_state_dir=Path(args.planner_state_dir) if args.planner_state_dir else None,
+            planner_model_name=args.planner_model,
+        )
+    )
+    print(f"GlobalBlueprint: {result['global_blueprint_path']}")
+    print(f"Planner state dir: {result['state_dir']}")
+    print(f"Final rounds: {result['planner_state'].current_round}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

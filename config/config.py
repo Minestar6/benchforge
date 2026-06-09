@@ -87,8 +87,22 @@ def load_prompt(path: str | Path) -> str:
         文件内容；文件不存在时返回空字符串
     """
     p = Path(path)
-    if p.exists():
-        return p.read_text(encoding="utf-8")
+    candidates: list[Path] = [p]
+
+    try:
+        from benchforge.utils.paths import get_project_root
+
+        project_root = get_project_root()
+        candidates.append(project_root / p)
+        if p.parts and p.parts[0] == "benchforge":
+            candidates.append(project_root / Path(*p.parts[1:]))
+    except Exception:
+        pass
+
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate.read_text(encoding="utf-8")
+
     import sys
     print(f"Warning: Prompt file not found: {p}", file=sys.stderr)
     return ""

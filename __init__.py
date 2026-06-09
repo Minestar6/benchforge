@@ -11,6 +11,8 @@ from benchforge.schemas import (
 from benchforge.utils import search_wikipedia, fetch_wikipedia_page
 from benchforge.utils.artifact_store import ArtifactStore
 from benchforge.agents import run_generation_agent, VerifyAgent
+from benchforge.agents.planner_agent import UserIntent, synthesize_global_blueprint, run_planner
+from benchforge.app import run_benchforge
 from benchforge.models import (
     BaseModelClient,
     OpenAIClient,
@@ -37,6 +39,10 @@ __all__ = [
     # Agents
     "run_generation_agent",
     "VerifyAgent",
+    "UserIntent",
+    "synthesize_global_blueprint",
+    "run_planner",
+    "run_benchforge",
     # Models
     "BaseModelClient",
     "OpenAIClient",

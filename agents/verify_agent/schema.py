@@ -11,6 +11,7 @@ class FinalStatus(str, Enum):
     rejected_llm = "rejected_llm"
     validator_error = "validator_error"
     duplicate = "duplicate"
+    overquota = "overquota"
     selected = "selected"
     reserve = "reserve"
 

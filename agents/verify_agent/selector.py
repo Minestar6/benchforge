@@ -296,6 +296,7 @@ def run_weighted_selection(
 
     # ── 构建最终记录 ──────────────────────────────────────────────────────────
     selected_set = set(selected_ids)
+    overquota_set = set(dropped_as_overquota)
 
     all_records: list[ValidatedQuestionRecord] = []
     for q in questions:
@@ -303,6 +304,9 @@ def run_weighted_selection(
         if qid in all_duplicate_of:
             status = FinalStatus.duplicate.value
             dup_of = all_duplicate_of[qid]
+        elif qid in overquota_set:
+            status = FinalStatus.overquota.value
+            dup_of = None
         else:
             status = (
                 FinalStatus.selected.value if qid in selected_set

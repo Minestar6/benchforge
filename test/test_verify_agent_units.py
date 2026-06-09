@@ -27,6 +27,8 @@ from benchforge.agents.verify_agent.normalizer import (
     load_and_normalize,
 )
 from benchforge.agents.verify_agent.schema import (
+    CitationValidationResult,
+    LLMValidationResult,
     ModeCfg,
     QuestionCandidate,
     ValidationBlueprintView,
@@ -291,6 +293,63 @@ async def test_verify_agent_raises_when_llm_validation_enabled_without_model_cli
             blueprint=make_blueprint(),
             candidates=[make_candidate()],
         )
+
+
+def test_run_weighted_selection_marks_overquota_in_validated_records(monkeypatch):
+    blueprint = ValidationBlueprintView(
+        topics=["AI"],
+        modes={
+            "qa": ModeCfg(count=1, difficulty_distribution={"easy": 1}),
+        },
+    )
+    questions = [
+        make_candidate(question_id="q1", question="Q1", estimated_difficulty="easy"),
+        make_candidate(question_id="q2", question="Q2", estimated_difficulty="easy"),
+    ]
+    citation_results = {
+        q.question_id: CitationValidationResult(
+            question_id=q.question_id,
+            passed=True,
+            answer_citation_score=0.9 if q.question_id == "q1" else 0.8,
+            chunk_citation_score=0.9 if q.question_id == "q1" else 0.8,
+            citation_score=0.9 if q.question_id == "q1" else 0.8,
+            citation_count=1,
+            matched_citation_count=1,
+            failed_reasons=[],
+        )
+        for q in questions
+    }
+    llm_results = {
+        q.question_id: LLMValidationResult(
+            question_id=q.question_id,
+            passed=True,
+            overall_score=0.9 if q.question_id == "q1" else 0.8,
+            dimensions={},
+            failed_reasons=[],
+            judge_summary="ok",
+        )
+        for q in questions
+    }
+
+    cfg = SelectionCfg(embedding_model="unused-model")
+
+    monkeypatch.setitem(
+        run_weighted_selection.__globals__,
+        "_compute_embeddings",
+        lambda texts, model_name: __import__("numpy").array([[1.0], [0.0]]),
+    )
+    result, records = run_weighted_selection(
+        questions=questions,
+        blueprint=blueprint,
+        citation_results=citation_results,
+        llm_results=llm_results,
+        cfg=cfg,
+    )
+
+    status_by_id = {record.question_id: record.final_status for record in records}
+    assert len(result.selected_question_ids) == 1
+    assert len(result.dropped_as_overquota) == 1
+    assert status_by_id[result.dropped_as_overquota[0]] == "overquota"
 
 
 # ─── citation_validator tests ─────────────────────────────────────────────────

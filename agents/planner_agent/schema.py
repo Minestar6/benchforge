@@ -1,7 +1,36 @@
 """PlannerAgent 核心数据结构（基于 docs/plan-runtime-aligned.md §4）。"""
 
+import re
 from typing import Any
 from pydantic import BaseModel, Field
+
+
+# ═══════════════════════════════════════════════════════════════
+# § 4.0 UserIntent
+# ═══════════════════════════════════════════════════════════════
+
+_TASK_ID_PATTERN = re.compile(r"[^a-z0-9]+")
+
+
+class UserIntent(BaseModel):
+    user_goal: str
+    task_id: str | None = None
+    language: str = "zh"
+    seed_topics: list[str] = Field(default_factory=list)
+    qa_target: int = 20
+    multiple_choice_target: int = 10
+    candidate_model_names: list[str] = Field(default_factory=list)
+    judge_model_name: str | None = None
+    planner_model_name: str | None = None
+    max_rounds: int = 3
+    min_selected_per_round: int = 5
+    max_total_tokens: int | None = None
+
+    def resolved_task_id(self) -> str:
+        if self.task_id:
+            return self.task_id
+        slug = _TASK_ID_PATTERN.sub("-", self.user_goal.strip().lower()).strip("-")
+        return slug[:48] or "benchforge-task"
 
 
 # ═══════════════════════════════════════════════════════════════

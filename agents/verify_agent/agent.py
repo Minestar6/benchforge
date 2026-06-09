@@ -220,6 +220,7 @@ class VerifyAgent:
             "llm": sum(1 for r in llm_rejected_records if r.final_status == FinalStatus.rejected_llm.value),
             "validator_error": sum(1 for r in llm_rejected_records if r.final_status == FinalStatus.validator_error.value),
             "duplicate": len(selection_result.dropped_as_duplicate),
+            "overquota": len(selection_result.dropped_as_overquota),
         }
         state.failed_by_stage = failed_by_stage
 
