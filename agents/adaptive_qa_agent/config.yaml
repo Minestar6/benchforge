@@ -1,0 +1,22 @@
+decision:
+  answer_not_grounded_ratio: 0.4
+  evidence_insufficient_ratio: 0.3
+  hard_gap_threshold: 0.2
+  not_multihop_ratio: 0.5
+  too_easy_ratio: 0.4
+  topic_gap_ratio: 0.3
+  evolution_fail_cap: 0.7
+  max_consecutive_same_action: 3
+
+execution:
+  concurrency: 5
+  feedback_window: 5
+
+generation:
+  model: null
+  temperature: 0.7
+  max_tokens: 4096
+
+stop:
+  max_empty_rounds: 3
+  max_failures: 10
