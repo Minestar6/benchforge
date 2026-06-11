@@ -1,6 +1,7 @@
 """adaptive_qa_agent 集成测试（使用 FakeModelClient 端到端跑通）。"""
 
 import asyncio
+import json
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -332,6 +333,81 @@ class TestAdaptiveAgentIntegration:
             )
 
         assert True  # 不挂死即通过
+
+    @pytest.mark.asyncio
+    async def test_run_persists_intermediate_artifacts(self, tmp_path, monkeypatch):
+        monkeypatch.chdir(tmp_path)
+
+        blueprint = _blueprint()
+        config = _config()
+        adaptive_config = _load_adaptive_config()
+        adaptive_config.stop.max_empty_rounds = 1
+        adaptive_config.stop.max_failures = 2
+        adaptive_config.execution.concurrency = 1
+
+        evidence_manager = _fake_evidence_manager(blueprint.topics)
+        model_client = FakeModelClient(delay=0.0)
+
+        from agents.verify_agent.config_loader import VerifyAgentConfig
+        verify_config = VerifyAgentConfig()
+
+        validation_dir = Path("runs") / blueprint.task_id / blueprint.run_id / "validation"
+
+        async def _fake_verify_run(**kwargs):
+            validation_dir.mkdir(parents=True, exist_ok=True)
+            qid = kwargs["candidates"][0].question_id
+            record = {
+                "question_id": qid,
+                "final_status": "selected",
+                "candidate": kwargs["candidates"][0].model_dump(),
+            }
+            with open(validation_dir / "validated_questions.jsonl", "a", encoding="utf-8") as f:
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+            return ValidationTaskResult(
+                task_id=blueprint.task_id,
+                run_id=blueprint.run_id,
+                report_path="",
+                selected_question_ids=[qid],
+                failed_by_stage={},
+            )
+
+        with patch("agents.adaptive_qa_agent.agent.VerifyAgent") as MockVerify:
+            mock_verify_instance = AsyncMock()
+            mock_verify_instance.run = AsyncMock(side_effect=_fake_verify_run)
+            MockVerify.return_value = mock_verify_instance
+
+            await run_adaptive_generation_agent(
+                blueprint=blueprint,
+                config=config,
+                adaptive_config=adaptive_config,
+                evidence_manager=evidence_manager,
+                model_client=model_client,
+                verify_config=verify_config,
+            )
+
+        run_dir = Path("runs") / blueprint.task_id / blueprint.run_id
+        adaptive_dir = run_dir / "adaptive"
+        mode_dir = adaptive_dir / "qa"
+
+        assert (mode_dir / "candidate_pool.json").exists()
+        assert (mode_dir / "round_trace.jsonl").exists()
+        assert (mode_dir / "failures.json").exists()
+        assert (mode_dir / "mode_state.json").exists()
+        assert (mode_dir / "metrics.json").exists()
+        assert (adaptive_dir / "generation_report.json").exists()
+        assert (adaptive_dir / "global_state.json").exists()
+        assert (run_dir / "shared_state.json").exists()
+        assert (run_dir / "llm_calls.jsonl").exists()
+        assert (validation_dir / "validated_questions.jsonl").exists()
+
+        trace_lines = (mode_dir / "round_trace.jsonl").read_text(encoding="utf-8").strip().splitlines()
+        assert trace_lines
+        trace_record = json.loads(trace_lines[0])
+        assert trace_record["action"]["action_type"] == "generate"
+
+        shared_state = json.loads((run_dir / "shared_state.json").read_text(encoding="utf-8"))
+        assert shared_state["artifacts"]["qa_candidate_pool"].endswith("/adaptive/qa/candidate_pool.json")
+        assert shared_state["artifacts"]["generation_report"].endswith("/adaptive/generation_report.json")
 
 
 if __name__ == "__main__":

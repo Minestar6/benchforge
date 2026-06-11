@@ -13,6 +13,12 @@ class MappedResult:
     difficulty: str
     accepted: bool
     reject_reason: str | None = None
+    question: str = ""
+    answer: str = ""
+    chunk_ids: list[str] | None = None
+    source_round: int | None = None
+    source_action_type: str = ""
+    llm_call_id: str | None = None
 
 
 def map_from_task_result(
@@ -40,6 +46,12 @@ def map_from_task_result(
             difficulty=str(cand.estimated_difficulty or "medium"),
             accepted=accepted,
             reject_reason=reject_reason,
+            question=cand.question,
+            answer=cand.answer,
+            chunk_ids=list(cand.chunk_ids),
+            source_round=cand.generation_metadata.get("round_in_mode"),
+            source_action_type=str(cand.generation_metadata.get("action_type", "")),
+            llm_call_id=cand.generation_metadata.get("llm_call_id"),
         ))
     return results
 

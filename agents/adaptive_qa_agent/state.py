@@ -9,6 +9,12 @@ class CandidateRef:
     difficulty: str
     status: str  # accepted | rejected
     reject_reason: str | None = None
+    question: str = ""
+    answer: str = ""
+    chunk_ids: list[str] = field(default_factory=list)
+    source_round: int | None = None
+    source_action_type: str = ""
+    llm_call_id: str | None = None
 
 
 @dataclass
@@ -27,6 +33,9 @@ class ModeState:
     used_chunk_combinations: set[frozenset[str]] = field(default_factory=set)
     last_action_type: str = ""
     consecutive_same_action: int = 0
+    trace: list[dict] = field(default_factory=list)
+    failure_records: list[dict] = field(default_factory=list)
+    stopped_reason: str | None = None
 
     @property
     def accepted_count(self) -> int:
@@ -66,6 +75,12 @@ class ModeState:
                 difficulty=item.difficulty,
                 status="accepted" if item.accepted else "rejected",
                 reject_reason=item.reject_reason,
+                question=item.question,
+                answer=item.answer,
+                chunk_ids=list(item.chunk_ids or []),
+                source_round=item.source_round,
+                source_action_type=item.source_action_type,
+                llm_call_id=item.llm_call_id,
             )
             self.candidates.append(ref)
             if item.accepted:
@@ -95,6 +110,7 @@ class ModeState:
             "mode_consecutive_same_action": self.consecutive_same_action,
             "mode_difficulty_counts": dict(self.difficulty_counts),
             "mode_topic_counts": dict(self.topic_counts),
+            "mode_stopped_reason": self.stopped_reason,
         }
 
 
