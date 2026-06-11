@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from typing import Callable
 
 
 @dataclass
@@ -10,41 +11,71 @@ class Action:
     reason: str = ""
 
 
-def decide(state, feedback, adaptive_config) -> Action:
-    cfg = adaptive_config.decision
-    max_repeat = cfg.max_consecutive_same_action
+class DecisionEngine:
+    def __init__(self, adaptive_config):
+        self.cfg = adaptive_config.decision
+        self.rules: list[Callable] = [
+            self._rule_grounding_failure,
+            self._rule_evidence_insufficient,
+            self._rule_hard_multihop_gap,
+            self._rule_hard_gap,
+            self._rule_topic_gap,
+            self._rule_evolve_easy,
+        ]
 
-    def _should_suppress(action_type: str) -> bool:
+    def decide(self, state, feedback) -> Action:
+        for rule in self.rules:
+            action = rule(state, feedback)
+            if action is not None:
+                return action
+        return Action("generate", reason="default")
+
+    def _should_suppress(self, state, action_type: str) -> bool:
         if action_type == "generate":
             return False
         return (state.last_action_type == action_type
-                and state.consecutive_same_action >= max_repeat)
+                and state.consecutive_same_action >= self.cfg.max_consecutive_same_action)
 
-    if (feedback.ratio("answer_not_grounded") > cfg.answer_not_grounded_ratio
-            and not _should_suppress("retrieve_more")):
-        return Action("retrieve_more", topics=state.missing_topics,
-                      evidence_strategy="new_document", reason="grounding failure high")
+    def _rule_grounding_failure(self, state, feedback) -> Action | None:
+        if (feedback.ratio("answer_not_grounded") > self.cfg.answer_not_grounded_ratio
+                and not self._should_suppress(state, "retrieve_more")):
+            return Action("retrieve_more", topics=state.missing_topics,
+                          evidence_strategy="new_document", reason="grounding failure high")
+        return None
 
-    if (feedback.ratio("evidence_insufficient") > cfg.evidence_insufficient_ratio
-            and not _should_suppress("expand_evidence")):
-        return Action("expand_evidence", topics=state.missing_topics,
-                      evidence_strategy="neighbor", reason="evidence insufficient")
+    def _rule_evidence_insufficient(self, state, feedback) -> Action | None:
+        if (feedback.ratio("evidence_insufficient") > self.cfg.evidence_insufficient_ratio
+                and not self._should_suppress(state, "expand_evidence")):
+            return Action("expand_evidence", topics=state.missing_topics,
+                          evidence_strategy="neighbor", reason="evidence insufficient")
+        return None
 
-    if state.hard_gap > cfg.hard_gap_threshold and feedback.ratio("not_multihop") > cfg.not_multihop_ratio:
-        return Action("generate", difficulty="hard",
-                      evidence_strategy="multi_group", reason="hard+multihop gap")
+    def _rule_hard_multihop_gap(self, state, feedback) -> Action | None:
+        if (state.hard_gap > self.cfg.hard_gap_threshold
+                and feedback.ratio("not_multihop") > self.cfg.not_multihop_ratio):
+            return Action("generate", difficulty="hard",
+                          evidence_strategy="multi_group", reason="hard+multihop gap")
+        return None
 
-    if state.hard_gap > cfg.hard_gap_threshold:
-        return Action("generate", difficulty="hard",
-                      evidence_strategy="high_hard_score", reason="hard gap")
+    def _rule_hard_gap(self, state, feedback) -> Action | None:
+        if state.hard_gap > self.cfg.hard_gap_threshold:
+            return Action("generate", difficulty="hard",
+                          evidence_strategy="high_hard_score", reason="hard gap")
+        return None
 
-    topic_gap_ratio = len(state.missing_topics) / max(1, len(state.all_topics))
-    if topic_gap_ratio > cfg.topic_gap_ratio:
-        return Action("generate", topics=state.missing_topics, reason="topic gap")
+    def _rule_topic_gap(self, state, feedback) -> Action | None:
+        topic_gap_ratio = len(state.missing_topics) / max(1, len(state.all_topics))
+        if topic_gap_ratio > self.cfg.topic_gap_ratio:
+            return Action("generate", topics=state.missing_topics, reason="topic gap")
+        return None
 
-    if (feedback.ratio("too_easy") > cfg.too_easy_ratio
-            and feedback.ratio("evolution_failed") < cfg.evolution_fail_cap
-            and not _should_suppress("evolve")):
-        return Action("evolve", reason="too many easy, evolve up")
+    def _rule_evolve_easy(self, state, feedback) -> Action | None:
+        if (feedback.ratio("too_easy") > self.cfg.too_easy_ratio
+                and feedback.ratio("evolution_failed") < self.cfg.evolution_fail_cap
+                and not self._should_suppress(state, "evolve")):
+            return Action("evolve", reason="too many easy, evolve up")
+        return None
 
-    return Action("generate", reason="default")
+
+def decide(state, feedback, adaptive_config) -> Action:
+    return DecisionEngine(adaptive_config).decide(state, feedback)

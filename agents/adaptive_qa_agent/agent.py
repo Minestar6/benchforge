@@ -9,7 +9,8 @@ from agents.verify_agent.agent import VerifyAgent
 from agents.verify_agent.schema import ValidationBlueprintView, ModeCfg
 
 from .state import ModeState, FeedbackState
-from .decision import decide
+from .decision import DecisionEngine
+from .stop_policy import StopPolicy
 from .executor import Executor
 from .feedback_mapper import map_from_task_result
 from .prompts import PromptBuilder
@@ -73,22 +74,16 @@ async def run_adaptive_generation_agent(
             adaptive_config=adaptive_config,
             prompts=prompts,
         )
+        decision_engine = DecisionEngine(adaptive_config)
+        stop_policy = StopPolicy(adaptive_config)
 
         while True:
-            if state.round_in_mode >= state.max_rounds:
-                logger.info(f"[AdaptiveQAAgent] mode={mode} stopped: max_rounds")
-                break
-            if state.accepted_count >= state.target_candidates:
-                logger.info(f"[AdaptiveQAAgent] mode={mode} stopped: target reached")
-                break
-            if state.consecutive_empty >= adaptive_config.stop.max_empty_rounds:
-                logger.info(f"[AdaptiveQAAgent] mode={mode} stopped: max_empty_rounds")
-                break
-            if state.failures >= adaptive_config.stop.max_failures:
-                logger.info(f"[AdaptiveQAAgent] mode={mode} stopped: max_failures")
+            stop = stop_policy.check(state)
+            if stop.should_stop:
+                logger.info(f"[AdaptiveQAAgent] mode={mode} stopped: {stop.reason}")
                 break
 
-            action = decide(state, feedback, adaptive_config)
+            action = decision_engine.decide(state, feedback)
             state.record_action(action.action_type)
             logger.debug(f"[AdaptiveQAAgent] round={state.round_in_mode} action={action.action_type} reason={action.reason}")
 

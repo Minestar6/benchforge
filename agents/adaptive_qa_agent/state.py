@@ -78,6 +78,25 @@ class ModeState:
     def is_chunk_combination_used(self, chunk_ids: list[str]) -> bool:
         return frozenset(chunk_ids) in self.used_chunk_combinations
 
+    def export_metrics(self) -> dict:
+        accepted = self.accepted_count
+        return {
+            "mode_name": self.mode,
+            "mode_round_in_progress": self.round_in_mode,
+            "mode_target_candidates": self.target_candidates,
+            "mode_accepted_count": accepted,
+            "mode_accept_progress": accepted / max(1, self.target_candidates),
+            "mode_hard_gap": self.hard_gap,
+            "mode_missing_topic_count": len(self.missing_topics),
+            "mode_missing_topic_ratio": len(self.missing_topics) / max(1, len(self.all_topics)),
+            "mode_consecutive_empty": self.consecutive_empty,
+            "mode_failures": self.failures,
+            "mode_last_action_type": self.last_action_type,
+            "mode_consecutive_same_action": self.consecutive_same_action,
+            "mode_difficulty_counts": dict(self.difficulty_counts),
+            "mode_topic_counts": dict(self.topic_counts),
+        }
+
 
 class FeedbackState:
     def __init__(self, window_size: int = 5):
@@ -96,3 +115,23 @@ class FeedbackState:
         total = sum(r["total"] for r in self._window)
         bad = sum(r.get(key, 0) for r in self._window)
         return bad / max(1, total)
+
+    def export_metrics(self) -> dict:
+        return {
+            "lifetime_total_generated": self.total_generated,
+            "lifetime_total_accepted": self.total_accepted,
+            "lifetime_accept_rate": self.total_accepted / max(1, self.total_generated),
+            "recent_answer_not_grounded_ratio": self.ratio("answer_not_grounded"),
+            "recent_evidence_insufficient_ratio": self.ratio("evidence_insufficient"),
+            "recent_not_multihop_ratio": self.ratio("not_multihop"),
+            "recent_too_easy_ratio": self.ratio("too_easy"),
+            "recent_evolution_failed_ratio": self.ratio("evolution_failed"),
+        }
+
+
+def export_adaptive_metrics(state: ModeState, feedback: FeedbackState) -> dict:
+    mode_metrics = state.export_metrics()
+    feedback_metrics = feedback.export_metrics()
+    conflict_keys = mode_metrics.keys() & feedback_metrics.keys()
+    assert not conflict_keys, f"metrics key conflict: {sorted(conflict_keys)}"
+    return {**mode_metrics, **feedback_metrics}
