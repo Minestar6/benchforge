@@ -13,22 +13,34 @@ from agents.verify_agent.schema import ValidationTaskResult
 from benchforge.models.fake import FakeModelClient
 
 
-def make_blueprint(count: int = 5, max_rounds: int = 10, run_id: str = "exp_run"):
+def make_blueprint(
+    count: int = 5,
+    max_rounds: int = 10,
+    run_id: str = "exp_run",
+    task_id: str = "exp_task",
+    topics: list[str] | None = None,
+    language: str = "en",
+    difficulty_distribution: dict[str, float] | None = None,
+):
+    if topics is None:
+        topics = ["topic_a", "topic_b"]
+    if difficulty_distribution is None:
+        difficulty_distribution = {"easy": 0.2, "medium": 0.5, "hard": 0.3}
     ns = SimpleNamespace()
-    ns.task_id = "exp_task"
+    ns.task_id = task_id
     ns.run_id = run_id
-    ns.language = "en"
-    ns.topics = ["topic_a", "topic_b"]
+    ns.language = language
+    ns.topics = topics
     ns.modes = {
         "qa": SimpleNamespace(
             count=count,
             max_rounds=max_rounds,
-            difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
+            difficulty_distribution=difficulty_distribution,
         ),
         "mcq": SimpleNamespace(
             count=count,
             max_rounds=max_rounds,
-            difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
+            difficulty_distribution=difficulty_distribution,
         ),
     }
     return ns
@@ -38,7 +50,12 @@ def make_config():
     return SimpleNamespace(candidate_pool=SimpleNamespace(target_multiplier=2.0))
 
 
-def make_evidence_manager(topics=("topic_a", "topic_b")):
+def make_evidence_manager(topics=None):
+    if topics is None:
+        topics = ("topic_a", "topic_b")
+    elif isinstance(topics, list):
+        topics = tuple(topics)
+
     def _pool(topic):
         chunk = SimpleNamespace(
             chunk_id=f"{topic}_c1",
@@ -100,7 +117,6 @@ def make_adaptive_config(hard_gap_threshold=0.2, too_easy_ratio=0.4, max_rounds_
     cfg.stop.max_empty_rounds = 3
     cfg.stop.max_failures = 10
     cfg.execution.concurrency = 2
-    cfg.generation.max_tokens = 512
     cfg.decision.hard_gap_threshold = hard_gap_threshold
     cfg.decision.too_easy_ratio = too_easy_ratio
     return cfg

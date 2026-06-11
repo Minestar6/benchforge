@@ -9,13 +9,13 @@ decision:
   max_consecutive_same_action: 3
 
 execution:
-  concurrency: 5
+  concurrency: 3
   feedback_window: 5
 
 generation:
   model: null
   temperature: 0.7
-  max_tokens: 4096
+  max_tokens: 2048
 
 stop:
   max_empty_rounds: 3

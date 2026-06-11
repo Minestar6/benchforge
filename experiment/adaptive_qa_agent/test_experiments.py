@@ -27,11 +27,11 @@ def _blueprint(count=5, max_rounds=10, run_id="exp_run"):
     ns.modes = {
         "qa": SimpleNamespace(
             count=count, max_rounds=max_rounds,
-            difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
+            difficulty_distribution={"easy": 0.2, "medium": 0.3, "hard": 0.5},
         ),
         "mcq": SimpleNamespace(
             count=count, max_rounds=max_rounds,
-            difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
+            difficulty_distribution={"easy": 0.2, "medium": 0.3, "hard": 0.5},
         ),
     }
     return ns
