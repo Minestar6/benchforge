@@ -1,0 +1,44 @@
+{
+  "candidate-llama": {
+    "qa": {
+      "num_questions": 1,
+      "accuracy": null,
+      "accuracy_pass_rate": null,
+      "invalid_rate": null,
+      "exact_match": 1.0,
+      "f1": 1.0,
+      "f1_pass_rate": 1.0,
+      "precision": null,
+      "recall": null,
+      "rouge_l": null,
+      "bleu": null,
+      "bertscore": null,
+      "semantic_similarity": null,
+      "judge_correctness": 0.85,
+      "judge_completeness": 0.8,
+      "judge_faithfulness": 0.9,
+      "judge_hallucination": 0.1
+    }
+  },
+  "candidate-qwen": {
+    "qa": {
+      "num_questions": 1,
+      "accuracy": null,
+      "accuracy_pass_rate": null,
+      "invalid_rate": null,
+      "exact_match": 1.0,
+      "f1": 1.0,
+      "f1_pass_rate": 1.0,
+      "precision": null,
+      "recall": null,
+      "rouge_l": null,
+      "bleu": null,
+      "bertscore": null,
+      "semantic_similarity": null,
+      "judge_correctness": 0.85,
+      "judge_completeness": 0.8,
+      "judge_faithfulness": 0.9,
+      "judge_hallucination": 0.1
+    }
+  }
+}

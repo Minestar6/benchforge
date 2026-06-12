@@ -1,0 +1,64 @@
+[
+  {
+    "round_in_mode": 0,
+    "action_type": "generate",
+    "reason": "no_candidates_generated",
+    "execution": {
+      "action_type": "generate",
+      "topics": [
+        "Python",
+        "Machine Learning"
+      ],
+      "steps": [
+        {
+          "step": "generate",
+          "items": [
+            {
+              "topic": "Python",
+              "status": "missing_evidence_pool",
+              "candidate_count": 0
+            },
+            {
+              "topic": "Machine Learning",
+              "status": "missing_evidence_pool",
+              "candidate_count": 0
+            }
+          ]
+        }
+      ],
+      "candidate_ids": [],
+      "candidate_count": 0
+    }
+  },
+  {
+    "round_in_mode": 1,
+    "action_type": "generate",
+    "reason": "no_candidates_generated",
+    "execution": {
+      "action_type": "generate",
+      "topics": [
+        "Python",
+        "Machine Learning"
+      ],
+      "steps": [
+        {
+          "step": "generate",
+          "items": [
+            {
+              "topic": "Python",
+              "status": "missing_evidence_pool",
+              "candidate_count": 0
+            },
+            {
+              "topic": "Machine Learning",
+              "status": "missing_evidence_pool",
+              "candidate_count": 0
+            }
+          ]
+        }
+      ],
+      "candidate_ids": [],
+      "candidate_count": 0
+    }
+  }
+]

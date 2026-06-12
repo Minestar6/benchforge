@@ -9,13 +9,12 @@ from loguru import logger
 from benchforge.utils.artifact_store import ArtifactStore
 from benchforge.utils.llm_tracer import LLMTracer
 from .state import GlobalState, ModeState
-from .planner import build_mode_round_plan
-from .executor import (
-    execute_mode_round_plan,
-    mode_should_stop,
-    update_mode_trace,
+from .planner import build_mode_round_plan, mode_candidate_target, RoundStrategy
+from .executor import execute_mode_round_plan, mode_should_stop, update_mode_trace
+from .storage import (
+    save_mode_outputs, save_global_outputs, save_generation_report, save_shared_state,
+    append_round_plan, append_round_feedback, save_mode_metrics,
 )
-from .storage import save_mode_outputs, save_global_outputs, save_generation_report, save_shared_state
 
 
 async def run_mode_generation(
@@ -29,13 +28,12 @@ async def run_mode_generation(
     generator: Any,
     tracer: LLMTracer | None = None,
 ) -> None:
+    last_feedback = None
+
     while True:
         should_stop, reason = mode_should_stop(
-            mode_cfg=mode_cfg,
-            mode_state=mode_state,
-            global_state=global_state,
-            blueprint=blueprint,
-            config=config,
+            mode_cfg=mode_cfg, mode_state=mode_state,
+            global_state=global_state, blueprint=blueprint, config=config,
         )
         if should_stop:
             mode_state.stopped_reason = reason
@@ -43,33 +41,31 @@ async def run_mode_generation(
             break
 
         round_plan = build_mode_round_plan(
-            mode=mode,
-            mode_cfg=mode_cfg,
-            blueprint=blueprint,
-            config=config,
-            mode_state=mode_state,
+            mode=mode, mode_cfg=mode_cfg, blueprint=blueprint,
+            config=config, mode_state=mode_state, feedback=last_feedback,
         )
+
+        append_round_plan(blueprint.task_id, blueprint.run_id, mode, round_plan)
 
         if not round_plan.topics:
             mode_state.consecutive_empty_rounds += 1
             mode_state.round_in_mode += 1
             continue
 
-        round_results = await execute_mode_round_plan(
-            round_plan=round_plan,
-            blueprint=blueprint,
-            config=config,
-            global_state=global_state,
-            mode_state=mode_state,
-            evidence_manager=evidence_manager,
-            generator=generator,
-            mode_cfg=mode_cfg,
-            tracer=tracer,
+        round_results, feedback = await execute_mode_round_plan(
+            round_plan=round_plan, blueprint=blueprint, config=config,
+            global_state=global_state, mode_state=mode_state,
+            evidence_manager=evidence_manager, generator=generator,
+            mode_cfg=mode_cfg, tracer=tracer,
         )
+        last_feedback = feedback
+        append_round_feedback(blueprint.task_id, blueprint.run_id, mode, feedback)
 
-        total_generated = sum(r.get("generated_count", 0) for r in round_results)
-        if total_generated == 0:
-            mode_state.consecutive_empty_rounds += 1
+        if feedback.empty_round:
+            if round_plan.strategy == RoundStrategy.EXPAND_EVIDENCE:
+                mode_state.consecutive_empty_rounds = 0  # expand 后给下一轮机会
+            else:
+                mode_state.consecutive_empty_rounds += 1
         else:
             mode_state.consecutive_empty_rounds = 0
 
@@ -78,8 +74,9 @@ async def run_mode_generation(
 
         logger.info(
             f"Mode={mode} round={round_plan.round_in_mode} "
-            f"strategy={round_plan.strategy} generated={total_generated} "
-            f"total_candidates={len(mode_state.candidate_questions)}"
+            f"strategy={round_plan.strategy.value} "
+            f"generated={feedback.generated_count} accepted={feedback.accepted_count} "
+            f"total_accepted={mode_state.accepted_count}"
         )
 
 
@@ -177,24 +174,20 @@ async def run_generation_agent(
 
     for mode, mode_cfg in blueprint.modes.items():
         logger.info(f"Starting mode: {mode}")
-        mode_state = ModeState(mode=mode)
+        target = mode_candidate_target(mode_cfg, config)
+        mode_state = ModeState(mode=mode, target_count=target)
         mode_states[mode] = mode_state
 
         await run_mode_generation(
-            mode=mode,
-            mode_cfg=mode_cfg,
-            blueprint=blueprint,
-            config=config,
-            global_state=global_state,
-            mode_state=mode_state,
-            evidence_manager=evidence_manager,
-            generator=generator,
-            tracer=tracer,
+            mode=mode, mode_cfg=mode_cfg, blueprint=blueprint, config=config,
+            global_state=global_state, mode_state=mode_state,
+            evidence_manager=evidence_manager, generator=generator, tracer=tracer,
         )
 
         save_mode_outputs(blueprint.task_id, blueprint.run_id, mode, mode_state)
+        save_mode_metrics(blueprint.task_id, blueprint.run_id, mode, mode_state, target, mode_cfg)
         logger.info(
-            f"Mode {mode} complete: {len(mode_state.candidate_questions)} candidates, "
+            f"Mode {mode} complete: {mode_state.accepted_count} accepted, "
             f"stopped_reason={mode_state.stopped_reason}"
         )
 

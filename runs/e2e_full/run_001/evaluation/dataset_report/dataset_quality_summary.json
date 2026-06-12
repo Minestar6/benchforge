@@ -1,0 +1,10 @@
+{
+  "num_questions": 1,
+  "citation_score": {
+    "mean": 0.9069999999999999,
+    "threshold": 0.85,
+    "pass_rate": 1.0,
+    "num_scored": 1,
+    "num_missing": 0
+  }
+}

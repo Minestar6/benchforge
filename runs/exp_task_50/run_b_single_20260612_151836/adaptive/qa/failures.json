@@ -1,0 +1,43 @@
+[
+  {
+    "round_in_mode": 0,
+    "action_type": "generate",
+    "reason": "no_candidates_generated",
+    "execution": {
+      "action_type": "generate",
+      "topics": [
+        "Climate Change",
+        "Artificial Intelligence"
+      ],
+      "steps": [
+        {
+          "step": "generate",
+          "items": [
+            {
+              "topic": "Climate Change",
+              "status": "generated",
+              "chunk_ids": [
+                "Climate Change_c1"
+              ],
+              "difficulty": "hard",
+              "evidence_strategy": "high_hard_score",
+              "candidate_ids": [],
+              "candidate_count": 0,
+              "llm_call_id": "llm_335b26128d78478c9eab454b98e72df4"
+            },
+            {
+              "topic": "Artificial Intelligence",
+              "status": "duplicate_chunk_combination",
+              "chunk_ids": [
+                "Climate Change_c1"
+              ],
+              "candidate_count": 0
+            }
+          ]
+        }
+      ],
+      "candidate_ids": [],
+      "candidate_count": 0
+    }
+  }
+]

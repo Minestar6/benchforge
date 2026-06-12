@@ -81,6 +81,13 @@ class Blueprint:
 
 
 @dataclass
+class DecisionConfig:
+    hard_gap_threshold: float = 0.2
+    too_easy_ratio: float = 0.4
+    accept_rate_threshold: float = 0.3
+
+
+@dataclass
 class AgentConfig:
     candidate_pool: CandidatePoolConfig
     initial_breadth: InitialBreadthConfig
@@ -89,3 +96,4 @@ class AgentConfig:
     generation_yield: dict[str, GenerationYield]
     chunk_limits: dict[str, ChunkLimitsForMode]
     runtime: RuntimeConfig
+    decision: DecisionConfig = field(default_factory=DecisionConfig)

@@ -1,0 +1,11 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "topic": "Artificial Intelligence",
+    "difficulty": "easy",
+    "error": "2 validation errors for GenerationBatch\nrequested_min_questions\n  Field required [type=missing, input_value={'topic': 'Artificial Int...id': 'qa_generation_v1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nrequested_target_questions\n  Field required [type=missing, input_value={'topic': 'Artificial Int...id': 'qa_generation_v1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing",
+    "error_type": "ValidationError",
+    "llm_call_id": null
+  }
+]

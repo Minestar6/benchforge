@@ -1,0 +1,15 @@
+{
+  "selected_question_ids": [
+    "38854a2a16d5"
+  ],
+  "dropped_as_duplicate": [],
+  "dropped_as_overquota": [],
+  "group_assignments": {
+    "38854a2a16d5": "qa::easy",
+    "51097da6d439": "qa::hard"
+  },
+  "sampling_weights": {
+    "38854a2a16d5": 0.89215,
+    "51097da6d439": 0.91105
+  }
+}

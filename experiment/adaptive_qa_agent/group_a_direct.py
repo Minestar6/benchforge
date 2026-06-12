@@ -12,6 +12,7 @@
 """
 import asyncio
 import json
+import math
 import re
 import sys
 import time
@@ -31,6 +32,9 @@ CHUNK_SIZE = 1000
 
 _QA_SYSTEM = """\
 You are a question generator. Generate question-answer pairs from the provided text.
+Each generated question must include two additional fields: `difficulty` and `citations`.
+`difficulty` must be one of: `easy`, `medium`, or `hard`.
+`citations` must be a list of exact quotes copied from the source text that directly support the answer. Each quote should be sufficient to verify the answer and should not be paraphrased.
 Generate questions in the following JSON format:
 
 ```json
@@ -38,16 +42,20 @@ Generate questions in the following JSON format:
   {
     "question": "The question text",
     "answer": "The correct answer",
-    "difficulty": "medium",
-    "citations": ["Exact quote 1 from source text", "Exact quote 2 from source text"]
+    "difficulty": "easy | medium | hard",
+    "citations": ["Exact quote 1 from source text"]
   }
 ]
 ```
 
+Target distribution: {easy} easy, {medium} medium, {hard} hard questions.
 Return ONLY the JSON array. No markdown, no explanation."""
 
 _MCQ_SYSTEM = """\
 You are a question generator. Generate multiple-choice questions from the provided text.
+Each generated question must include two additional fields: `difficulty` and `citations`.
+`difficulty` must be one of: `easy`, `medium`, or `hard`.
+`citations` must be a list of exact quotes copied from the source text that directly support the answer. Each quote should be sufficient to verify the answer and should not be paraphrased.
 Generate questions in the following JSON format:
 
 ```json
@@ -56,12 +64,13 @@ Generate questions in the following JSON format:
     "question": "The question text",
     "choices": ["Option A text", "Option B text", "Option C text", "Option D text"],
     "answer": "Option A text",
-    "difficulty": "medium",
-    "citations": ["Exact quote 1 from source text", "Exact quote 2 from source text"]
+    "difficulty": "easy | medium | hard",
+    "citations": ["Exact quote 1 from source text"]
   }
 ]
 ```
 
+Target distribution: {easy} easy, {medium} medium, {hard} hard questions.
 Return ONLY the JSON array. No markdown, no explanation."""
 
 _USER_TEMPLATE = """\
@@ -83,6 +92,25 @@ def _chunk_text(text: str, size: int) -> list[str]:
 def _write_json(path: Path, data) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
+
+
+def _difficulty_targets(qa_count: int, dist: dict) -> dict[str, int]:
+    """按比例分配各难度目标数量，确保总和 = qa_count。"""
+    total = sum(dist.values())
+    targets = {d: max(1, math.floor(qa_count * v / total)) for d, v in dist.items()}
+    # 补足舍入误差
+    diff = qa_count - sum(targets.values())
+    if diff > 0:
+        for d in sorted(dist, key=lambda k: dist[k], reverse=True):
+            targets[d] += 1
+            diff -= 1
+            if diff == 0:
+                break
+    return targets
+
+
+def _all_targets_met(counts: dict[str, int], targets: dict[str, int]) -> bool:
+    return all(counts.get(d, 0) >= t for d, t in targets.items())
 
 
 class TokenTracker:
@@ -173,17 +201,22 @@ async def run(
     task_id: str = "exp_task",
     language: str = "en",
     qa_count: int = 10,
+    difficulty_distribution: dict | None = None,
     **kwargs,
 ):
     """直接生成基线。
 
-    终止条件：每种题型生成 ≥ qa_count 道候选后停止该题型的 chunk 处理。
+    终止条件：每种题型在每个难度档（easy/medium/hard）均达到按比例分配的目标数量后停止。
     """
     if model_client is None:
         model_client = FakeModelClient(delay=0.0)
         model_name = "fake"
     if topics is None:
         topics = ["topic_a", "topic_b"]
+    if difficulty_distribution is None:
+        difficulty_distribution = {"easy": 0.2, "medium": 0.2, "hard": 0.6}
+
+    diff_targets = _difficulty_targets(qa_count, difficulty_distribution)
 
     run_id = f"run_a_direct_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
     run_ctx = RunContext(task_id=task_id, run_id=run_id)
@@ -196,16 +229,33 @@ async def run(
     all_mcq: list[dict] = []
     stopped_modes: set[str] = set()
     mode_candidates: dict[str, list[dict]] = {"qa": all_qa, "mcq": all_mcq}
+    # 各模式下各难度的已收集数量
+    diff_counts: dict[str, dict[str, int]] = {
+        "qa": {d: 0 for d in diff_targets},
+        "mcq": {d: 0 for d in diff_targets},
+    }
 
-    # 安全上限：每种题型最多处理 max_chunks 个 chunk（防止 LLM 持续返回无法解析的 JSON 导致无限运行）
-    max_chunks_per_mode = qa_count  # 每个 chunk 平均应产出 2-3 题，3x 是充裕的缓冲
+    max_chunks_per_mode = qa_count
     chunks_processed: dict[str, int] = {"qa": 0, "mcq": 0}
 
-    print(f"[Group A] target={qa_count} per mode, max_chunks={max_chunks_per_mode} per mode, topics={topics}")
+    # 按难度目标构造每个 chunk 的 prompt 参数（目标数量提示）
+    per_chunk_target = max(1, qa_count // max(1, max_chunks_per_mode))
+    prompt_easy = max(1, math.floor(per_chunk_target * difficulty_distribution.get("easy", 0.2) / sum(difficulty_distribution.values())))
+    prompt_medium = max(1, math.floor(per_chunk_target * difficulty_distribution.get("medium", 0.2) / sum(difficulty_distribution.values())))
+    prompt_hard = max(1, math.ceil(per_chunk_target * difficulty_distribution.get("hard", 0.6) / sum(difficulty_distribution.values())))
+
+    # 格式化 system prompt（填入难度分布数量）
+    fmt = {"easy": prompt_easy, "medium": prompt_medium, "hard": prompt_hard}
+    mode_config_rendered = [
+        ("qa", _QA_SYSTEM.format(**fmt), "qa"),
+        ("mcq", _MCQ_SYSTEM.format(**fmt), "mcq"),
+    ]
+
+    print(f"[Group A] target={qa_count} per mode, diff_targets={diff_targets}, "
+          f"max_chunks={max_chunks_per_mode}, topics={topics}")
 
     for topic in topics:
-        # 两种题型都达到目标或达到上限则提前退出
-        if len(stopped_modes) == len(MODE_CONFIG):
+        if len(stopped_modes) == len(mode_config_rendered):
             print(f"[Group A] both modes reached target, stopping topic loop.")
             break
 
@@ -217,18 +267,16 @@ async def run(
             doc_id = result.page_id if hasattr(result, "page_id") else topic
             doc_title = getattr(doc, "title", topic)
 
-            # 保存 chunks
             _write_json(base / "chunks" / f"{doc_id}.json",
                         {"doc_id": doc_id, "topic": topic, "chunks": chunks, "chunk_count": len(chunks)})
 
-            for mode_key, system_prompt, question_mode in MODE_CONFIG:
+            for mode_key, system_prompt, question_mode in mode_config_rendered:
                 if mode_key in stopped_modes:
                     print(f"  [{mode_key}] already at target, skipped.")
                     continue
 
                 candidates: list[dict] = []
                 for idx, chunk in enumerate(chunks):
-                    # 安全上限检查
                     if chunks_processed[mode_key] >= max_chunks_per_mode:
                         print(f"  [{mode_key}] max_chunks ({max_chunks_per_mode}) reached, forcing stop.")
                         stopped_modes.add(mode_key)
@@ -245,26 +293,26 @@ async def run(
                     for item in items:
                         item["topic"] = topic
                         item["document_id"] = doc_id
+                        d = item.get("difficulty", "medium")
+                        if d in diff_counts[mode_key]:
+                            diff_counts[mode_key][d] += 1
                     candidates.extend(items)
                     t = trackers[mode_key]
                     print(f"  [{mode_key}] chunk {idx + 1}/{len(chunks)} → {len(items)} items"
-                          f" | total={len(candidates)}/{qa_count}"
+                          f" | counts={diff_counts[mode_key]} / targets={diff_targets}"
                           f" | chunks_used={chunks_processed[mode_key]}/{max_chunks_per_mode}"
                           f" | tokens in={t.input_tokens} out={t.output_tokens}")
 
-                    # 终止检查：达到目标数量
-                    if len(candidates) >= qa_count:
-                        print(f"  [{mode_key}] reached target ({qa_count}), stopping chunks.")
+                    # 终止检查：所有难度档均达到目标
+                    if _all_targets_met(diff_counts[mode_key], diff_targets):
+                        print(f"  [{mode_key}] all difficulty targets met, stopping chunks.")
                         stopped_modes.add(mode_key)
                         break
 
                 mode_candidates[mode_key].extend(candidates)
-
-                # 保存 per-mode per-doc 中间结果
                 _write_json(base / mode_key / "per_doc" / f"{doc_id}.json", candidates)
 
-            # 两种都达标则不再处理下一个 Wikipedia 结果
-            if len(stopped_modes) == len(MODE_CONFIG):
+            if len(stopped_modes) == len(mode_config_rendered):
                 break
 
     # ── 保存汇总 candidate_pool ──
@@ -284,13 +332,15 @@ async def run(
         "group": "A - Direct Generation",
         "topics": topics,
         "target_per_mode": qa_count,
+        "difficulty_targets": diff_targets,
         "max_chunks_per_mode": max_chunks_per_mode,
         "chunks_processed": chunks_processed,
         "stopped_modes": list(stopped_modes),
         "modes": {
             mode_key: {
                 "candidate_count": len(candidates),
-                "target_reached": len(candidates) >= qa_count,
+                "difficulty_counts": diff_counts[mode_key],
+                "target_reached": _all_targets_met(diff_counts[mode_key], diff_targets),
                 "token_stats": trackers[mode_key].summary(),
             }
             for mode_key, candidates in mode_candidates.items()

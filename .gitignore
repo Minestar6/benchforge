@@ -33,14 +33,12 @@ models/
 *.gguf
 
 # ── 运行时产物 ───────────────────────────────────────────────────────────
-runs/
 logs/
 *.log
 llm_calls.jsonl
 shared_state.json
 
 # ── 测试产物 ─────────────────────────────────────────────────────────────
-test/e2e_workdir/
 .pytest_cache/
 .coverage
 htmlcov/
@@ -69,4 +67,3 @@ uv.lock
 *.tmp
 *.temp
 *.bak
-test/_check*.py

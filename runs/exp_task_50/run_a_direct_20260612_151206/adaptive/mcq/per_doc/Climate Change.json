@@ -1,0 +1,1009 @@
+[
+  {
+    "question": "What is the main driver of the modern-day rise in global temperatures according to the text?",
+    "choices": [
+      "Natural climate cycles",
+      "Human activities, especially fossil fuel burning",
+      "Solar radiation variations",
+      "Volcanic eruptions"
+    ],
+    "answer": "Human activities, especially fossil fuel burning",
+    "difficulty": "easy",
+    "citations": [
+      "The modern-day rise in global temperatures is driven by human activities, especially fossil fuel (coal, oil and natural gas) burning since the Industrial Revolution."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Which of the following is NOT mentioned as a source of greenhouse gases in the text?",
+    "choices": [
+      "Fossil fuel use",
+      "Deforestation",
+      "Agricultural practices",
+      "Ocean currents"
+    ],
+    "answer": "Ocean currents",
+    "difficulty": "medium",
+    "citations": [
+      "Fossil fuel use, deforestation, and some agricultural and industrial practices release greenhouse gases."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "How much more carbon dioxide does Earth's atmosphere now have compared to the end of the pre-industrial era?",
+    "choices": [
+      "About 25% more",
+      "About 50% more",
+      "About 75% more",
+      "About 100% more"
+    ],
+    "answer": "About 50% more",
+    "difficulty": "medium",
+    "citations": [
+      "Earth's atmosphere now has roughly 50% more carbon dioxide, the main gas driving global warming, than it did at the end of the pre-industrial era, reaching levels not seen for millions of years."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What broader definition of climate change is mentioned in the text?",
+    "choices": [
+      "Only recent temperature increases",
+      "Previous long-term changes to Earth's climate",
+      "Exclusively human-caused warming",
+      "Seasonal weather variations"
+    ],
+    "answer": "Previous long-term changes to Earth's climate",
+    "difficulty": "easy",
+    "citations": [
+      "Climate change in a broader sense also includes previous long-term changes to Earth's climate."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Which environmental impact of climate change is specifically mentioned as becoming more common?",
+    "choices": [
+      "Floods and hurricanes",
+      "Heat waves and wildfires",
+      "Droughts and famines",
+      "Glacial melting only"
+    ],
+    "answer": "Heat waves and wildfires",
+    "difficulty": "easy",
+    "citations": [
+      "Heat waves and wildfires are becoming more common."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What are some long-term effects of climate change that will continue for centuries even if future warming is minimized?",
+    "choices": [
+      "Ocean heating, ocean acidification, and sea level rise",
+      "Increased flooding, extreme heat, and food scarcity",
+      "Thawing permafrost, glacier retreat, and sea ice decline",
+      "More intense storms, droughts, and weather extremes"
+    ],
+    "answer": "Ocean heating, ocean acidification, and sea level rise",
+    "difficulty": "medium",
+    "citations": [
+      "Even if efforts to minimize future warming are successful, some effects will continue for centuries. These include ocean heating, ocean acidification and sea level rise."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "According to the text, what does the World Health Organization call climate change?",
+    "choices": [
+      "One of the biggest threats to global health in the 21st century",
+      "A primary cause of human migration and conflict",
+      "The main driver of species extinction",
+      "The leading cause of economic loss worldwide"
+    ],
+    "answer": "One of the biggest threats to global health in the 21st century",
+    "difficulty": "easy",
+    "citations": [
+      "The World Health Organization calls climate change one of the biggest threats to global health in the 21st century."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What are examples of how societies can adapt to climate change to partially reduce risks?",
+    "choices": [
+      "Flood control measures and drought-resistant crops",
+      "Relocating species and reducing greenhouse gases",
+      "Limiting warming and controlling migration",
+      "Increasing food production and preventing disease"
+    ],
+    "answer": "Flood control measures and drought-resistant crops",
+    "difficulty": "medium",
+    "citations": [
+      "Adapting to climate change through efforts like flood control measures or drought-resistant crops partially reduces climate change risks, alth"
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What rapid environmental changes are forcing many species to relocate or become extinct?",
+    "choices": [
+      "Changes in mountains, coral reefs, and the Arctic",
+      "Changes in oceans, forests, and deserts",
+      "Changes in urban areas, farmlands, and wetlands",
+      "Changes in rivers, lakes, and coastal regions"
+    ],
+    "answer": "Changes in mountains, coral reefs, and the Arctic",
+    "difficulty": "medium",
+    "citations": [
+      "Rapid environmental change in mountains, coral reefs, and the Arctic is forcing many species to relocate or become extinct."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What are some direct threats to people from climate change mentioned in the text?",
+    "choices": [
+      "Increased flooding, extreme heat, and food and water scarcity",
+      "Ocean acidification, glacier retreat, and sea ice decline",
+      "More intense storms, droughts, and weather extremes",
+      "Thawing permafrost, economic loss, and disease"
+    ],
+    "answer": "Increased flooding, extreme heat, and food and water scarcity",
+    "difficulty": "easy",
+    "citations": [
+      "Climate change threatens people with increased flooding, extreme heat, increased food and water scarcity, more disease, and economic loss."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "According to the text, which group is most vulnerable to climate change despite contributing minimally to global emissions?",
+    "choices": [
+      "Poorer communities",
+      "Industrialized nations",
+      "Fossil fuel companies",
+      "Urban populations"
+    ],
+    "answer": "Poorer communities",
+    "difficulty": "easy",
+    "citations": [
+      "Poorer communities are responsible for a small share of global emissions, yet have the least ability to adapt and are most vulnerable to climate change."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What was the global temperature anomaly in 2024 compared to the pre-industrial baseline, as stated in the text?",
+    "choices": [
+      "+1.60 °C (2.88 °F)",
+      "+2.8 °C (5.0 °F)",
+      "Well under 2 °C",
+      "Since regular tracking began in 1850"
+    ],
+    "answer": "+1.60 °C (2.88 °F)",
+    "difficulty": "easy",
+    "citations": [
+      "with 2024 the warmest on record at +1.60 °C (2.88 °F) since regular tracking began in 1850."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Based on current pledges under the Paris Agreement, what is the projected global warming by the end of the century?",
+    "choices": [
+      "Well under 2 °C",
+      "About 2.8 °C (5.0 °F)",
+      "+1.60 °C (2.88 °F)",
+      "Melting all of the Greenland ice sheet"
+    ],
+    "answer": "About 2.8 °C (5.0 °F)",
+    "difficulty": "medium",
+    "citations": [
+      "However, with pledges made under the Agreement, global warming would still reach about 2.8 °C (5.0 °F) by the end of the century."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What is one example of a potential tipping point mentioned in the text that could result from additional warming?",
+    "choices": [
+      "Stopping emissions of carbon dioxide",
+      "Melting all of the Greenland ice sheet",
+      "Phasing out fossil fuel subsidies",
+      "Conserving energy globally"
+    ],
+    "answer": "Melting all of the Greenland ice sheet",
+    "difficulty": "medium",
+    "citations": [
+      "Additional warming will increase these impacts and can trigger tipping points, such as melting all of the Greenland ice sheet."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Which of the following is NOT listed in the text as a method to phase out fossil fuels?",
+    "choices": [
+      "Stopping subsidising them",
+      "Conserving energy",
+      "Switching to non-emitting energy sources",
+      "Implementing carbon taxes"
+    ],
+    "answer": "Implementing carbon taxes",
+    "difficulty": "hard",
+    "citations": [
+      "Fossil fuels can be phased out by stopping subsidising them, conserving energy and switching to energy sources that do not produce significa"
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What are examples of clean energy sources that can reduce carbon pollution?",
+    "choices": [
+      "Wind, solar, hydro, and nuclear power",
+      "Coal, oil, natural gas, and biomass",
+      "Geothermal, tidal, diesel, and propane",
+      "Petroleum, gasoline, charcoal, and peat"
+    ],
+    "answer": "Wind, solar, hydro, and nuclear power",
+    "difficulty": "easy",
+    "citations": [
+      "These energy sources include wind, solar, hydro, and nuclear power."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What term did scientists use before the 1980s to refer to human impacts on the climate?",
+    "choices": [
+      "Inadvertent climate modification",
+      "Global warming",
+      "Climate change",
+      "Atmospheric alteration"
+    ],
+    "answer": "Inadvertent climate modification",
+    "difficulty": "medium",
+    "citations": [
+      "Scientists used the term inadvertent climate modification to refer to human impacts on the climate at this time."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "How does the text define 'global warming' scientifically?",
+    "choices": [
+      "Only increased global average surface temperature",
+      "Both warming and its effects on Earth's climate system",
+      "Changes in precipitation patterns only",
+      "The cooling effect of airborne particulates"
+    ],
+    "answer": "Only increased global average surface temperature",
+    "difficulty": "medium",
+    "citations": [
+      "Scientifically, global warming refers only to increased global average surface temperature, while climate change describes both global warming and its effects on Earth's climate system, such as precipitation change"
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What can cleanly generated electricity replace, according to the text?",
+    "choices": [
+      "Fossil fuels for powering transportation, heating buildings, and running industrial processes",
+      "Only gasoline for cars",
+      "Only coal for electricity generation",
+      "Only natural gas for heating"
+    ],
+    "answer": "Fossil fuels for powering transportation, heating buildings, and running industrial processes",
+    "difficulty": "easy",
+    "citations": [
+      "Cleanly generated electricity can replace fossil fuels for powering transportation, heating buildings, and running industrial processes."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What was unclear before the 1980s regarding climate effects?",
+    "choices": [
+      "Whether the warming effect of greenhouse gases was stronger than the cooling effect of airborne particulates",
+      "Whether solar power could replace fossil fuels",
+      "Whether climate change was caused by humans",
+      "Whether forests could store carbon"
+    ],
+    "answer": "Whether the warming effect of greenhouse gases was stronger than the cooling effect of airborne particulates",
+    "difficulty": "hard",
+    "citations": [
+      "Before the 1980s, it was unclear whether the warming effect of increased greenhouse gases was stronger than the cooling effect of airborne particulates in air pollution."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What term became more popular after NASA climate scientist James Hansen's 1988 U.S. Senate testimony?",
+    "choices": [
+      "Climate change",
+      "Global warming",
+      "Climate crisis",
+      "Global heating"
+    ],
+    "answer": "Global warming",
+    "difficulty": "easy",
+    "citations": [
+      "Global warming—used as early as 1975—became the more popular term after NASA climate scientist James Hansen used it in his 1988 testimony in the U.S. Senate."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Which term is sometimes used to specifically describe climate change resulting from human activities?",
+    "choices": [
+      "Natural climate change",
+      "Anthropogenic climate change",
+      "Global warming",
+      "Climate emergency"
+    ],
+    "answer": "Anthropogenic climate change",
+    "difficulty": "medium",
+    "citations": [
+      "The term anthropogenic climate change is sometimes used to describe climate change resulting from human activities."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What was the approximate temperature difference during the Last Interglacial period compared to before it?",
+    "choices": [
+      "0.1–0.5 °C warmer",
+      "0.5–1.5 °C warmer",
+      "1.5–2.5 °C warmer",
+      "2.5–3.5 °C warmer"
+    ],
+    "answer": "0.5–1.5 °C warmer",
+    "difficulty": "medium",
+    "citations": [
+      "One of the hotter periods was the Last Interglacial, around 125,000 years ago, where temperatures were between 0.5 °C and 1.5 °C warmer than before the"
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "According to the text, what characterized the period 5 to 10 million years ago?",
+    "choices": [
+      "Sea levels were 5 to 10 metres higher than today",
+      "It was 5–7 °C colder than today",
+      "It was the start of the current interglacial period",
+      "It was the most recent glacial maximum"
+    ],
+    "answer": "Sea levels were 5 to 10 metres higher than today",
+    "difficulty": "easy",
+    "citations": [
+      "This period saw sea levels 5 to 10 metres higher than today."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "When did the current interglacial period begin, according to the text?",
+    "choices": [
+      "5 to 10 million years ago",
+      "20,000 years ago",
+      "11,700 years ago",
+      "Around 1850"
+    ],
+    "answer": "11,700 years ago",
+    "difficulty": "easy",
+    "citations": [
+      "Temperatures stabilized in the current interglacial period beginning 11,700 years ago."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What does the text state about the Medieval Warm Period and the Little Ice Age?",
+    "choices": [
+      "They occurred simultaneously across all regions",
+      "They did not occur at the same time across different regions",
+      "They are the primary cause of current warming",
+      "They are documented by thermometer records"
+    ],
+    "answer": "They did not occur at the same time across different regions",
+    "difficulty": "medium",
+    "citations": [
+      "Historical patterns of warming and cooling, like the Medieval Warm Period and the Little Ice Age, did not occur at the same time across different regions."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What source of climate information is mentioned for periods before thermometer records?",
+    "choices": [
+      "Thermometer records",
+      "Satellite data",
+      "Climate proxies, such as trees and ice cores",
+      "Historical documents only"
+    ],
+    "answer": "Climate proxies, such as trees and ice cores",
+    "difficulty": "medium",
+    "citations": [
+      "Climate information for that period comes from climate proxies, such as trees and ice cores."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "According to the text, why was there little net warming between the 18th century and 1970?",
+    "choices": [
+      "Because greenhouse gas emissions were negligible",
+      "Because warming was offset by cooling from sulfur dioxide emissions",
+      "Because it was a glacial period",
+      "Because thermometer records were inaccurate"
+    ],
+    "answer": "Because warming was offset by cooling from sulfur dioxide emissions",
+    "difficulty": "hard",
+    "citations": [
+      "Between the 18th century and 1970 there was little net warming, as the warming impact of greenhouse gas emissions was offset by cooling from sulfur dioxide em"
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What is the primary effect of sulfate aerosols produced by sulfur dioxide in the atmosphere?",
+    "choices": [
+      "They reflect sunlight and cause global dimming.",
+      "They increase greenhouse gas accumulation.",
+      "They directly cause acid rain.",
+      "They accelerate surface temperature increases."
+    ],
+    "answer": "They reflect sunlight and cause global dimming.",
+    "difficulty": "medium",
+    "citations": [
+      "Sulfur dioxide causes acid rain, but it also produces sulfate aerosols in the atmosphere, which reflect sunlight and cause global dimming."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What was the average global temperature increase for the 2014–2023 decade compared to the pre-industrial baseline?",
+    "choices": [
+      "0.2°C",
+      "1.19°C",
+      "1.06°C",
+      "1.30°C"
+    ],
+    "answer": "1.19°C",
+    "difficulty": "easy",
+    "citations": [
+      "The 2014–2023 decade warmed to an average 1.19°C [1.06–1.30°C] compared to the pre-industrial baseline (1850–1900)."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What caused the 'global warming hiatus' from 1998 to 2013?",
+    "choices": [
+      "Increased sulfur pollution controls",
+      "Negative phases of the Pacific Decadal Oscillation and Atlantic Multidecadal Oscillation",
+      "A reduction in greenhouse gas emissions",
+      "A decrease in solar radiation reaching Earth"
+    ],
+    "answer": "Negative phases of the Pacific Decadal Oscillation and Atlantic Multidecadal Oscillation",
+    "difficulty": "hard",
+    "citations": [
+      "From 1998 to 2013, negative phases of two such processes, Pacific Decadal Oscillation (PDO) and Atlantic Multidecadal Oscillation (AMO) caused a short slower period of warming called the 'global warming hiatus'."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What is the approximate rate of worldwide surface temperature increase per decade according to multiple datasets?",
+    "choices": [
+      "0.1°C",
+      "0.2°C",
+      "0.5°C",
+      "1.0°C"
+    ],
+    "answer": "0.2°C",
+    "difficulty": "easy",
+    "citations": [
+      "Multiple datasets all show worldwide increases in surface temperature, at a rate of around 0.2°C per decade."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Why might a single year's temperature deviate from the long-term warming trend?",
+    "choices": [
+      "Due to changes in solar activity",
+      "Because of internal climate variability processes",
+      "As a result of volcanic eruptions",
+      "Due to variations in Earth's orbit"
+    ],
+    "answer": "Because of internal climate variability processes",
+    "difficulty": "medium",
+    "citations": [
+      "Not every single year was warmer than the last: internal climate variability processes can make any year 0.2°C warmer or colder than the average."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Why is the temperature change defined in terms of a 20-year average?",
+    "choices": [
+      "To reduce the noise of hot and cold years and decadal climate patterns",
+      "To measure the immediate impact of greenhouse gases",
+      "To compare temperatures across different regions",
+      "To account for seasonal variations only"
+    ],
+    "answer": "To reduce the noise of hot and cold years and decadal climate patterns",
+    "difficulty": "medium",
+    "citations": [
+      "This is why the temperature change is defined in terms of a 20-year average, which reduces the noise of hot and cold years and decadal climate patterns, and detects the long-term signal."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What effect does warming have on snow cover and glaciers?",
+    "choices": [
+      "It increases average snow cover and expands glaciers",
+      "It reduces average snow cover and forces the retreat of glaciers",
+      "It has no significant effect on snow cover or glaciers",
+      "It causes glaciers to advance in some regions"
+    ],
+    "answer": "It reduces average snow cover and forces the retreat of glaciers",
+    "difficulty": "easy",
+    "citations": [
+      "Warming reduces average snow cover and forces the retreat of glaciers."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "How does warming affect atmospheric humidity and precipitation?",
+    "choices": [
+      "It decreases humidity and leads to less precipitation",
+      "It increases humidity and leads to more and heavier precipitation",
+      "It has no effect on humidity or precipitation",
+      "It causes humidity to decrease but precipitation to increase"
+    ],
+    "answer": "It increases humidity and leads to more and heavier precipitation",
+    "difficulty": "medium",
+    "citations": [
+      "Warming also causes greater evaporation from the oceans, leading to more atmospheric humidity, and more and heavier precipitation."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Why is the upper atmosphere cooling according to the text?",
+    "choices": [
+      "Because greenhouse gases trap heat near the Earth's surface, reducing heat radiating into space",
+      "Because solar radiation has decreased",
+      "Because of increased cloud cover reflecting sunlight",
+      "Because of natural climate cycles"
+    ],
+    "answer": "Because greenhouse gases trap heat near the Earth's surface, reducing heat radiating into space",
+    "difficulty": "medium",
+    "citations": [
+      "The upper atmosphere is cooling, because greenhouse gases are trapping heat near the Earth's surface, and so less heat is radiating into space."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What is one observed biological impact of climate change mentioned in the text?",
+    "choices": [
+      "Animals are migrating to warmer areas",
+      "Plants are flowering earlier in spring",
+      "Coral reefs are expanding",
+      "Desert areas are shrinking"
+    ],
+    "answer": "Plants are flowering earlier in spring",
+    "difficulty": "easy",
+    "citations": [
+      "Plants are flowering earlier in spring, and thousands of animal species have been permanently moving to cooler areas."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Why has the average surface temperature over land regions increased almost twice as fast as the global average during the industrial period?",
+    "choices": [
+      "Because oceans lose more heat by evaporation and can store a lot of heat",
+      "Because land regions have more greenhouse gas emissions",
+      "Because atmospheric circulation patterns have changed",
+      "Because solar radiation is stronger over continents"
+    ],
+    "answer": "Because oceans lose more heat by evaporation and can store a lot of heat",
+    "difficulty": "medium",
+    "citations": [
+      "This is because oceans lose more heat by evaporation and oceans can store a lot of heat."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Where has over 90% of the extra thermal energy added to the global climate system since at least 1970 been stored?",
+    "choices": [
+      "In the atmosphere",
+      "In the ocean",
+      "In melted ice",
+      "In the warmed continents"
+    ],
+    "answer": "In the ocean",
+    "difficulty": "easy",
+    "citations": [
+      "over 90% of this extra energy has been stored in the ocean."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Which hemisphere has warmed much faster than the other according to the text?",
+    "choices": [
+      "The Southern Hemisphere has warmed faster",
+      "The Northern Hemisphere has warmed faster",
+      "Both hemispheres have warmed at the same rate",
+      "The Eastern Hemisphere has warmed faster"
+    ],
+    "answer": "The Northern Hemisphere has warmed faster",
+    "difficulty": "easy",
+    "citations": [
+      "The Northern Hemisphere and the North Pole have warmed much faster than the South Pole and Southern Hemisphere."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What is one reason given for the accelerated warming in the Arctic?",
+    "choices": [
+      "Increased volcanic activity",
+      "Local black carbon deposits on snow and ice",
+      "A decrease in cloud cover",
+      "Changes in Earth's orbit"
+    ],
+    "answer": "Local black carbon deposits on snow and ice",
+    "difficulty": "medium",
+    "citations": [
+      "Local black carbon deposits on snow and ice also contribute to Arctic warming."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "How much faster are Arctic surface temperatures increasing compared to the rest of the world?",
+    "choices": [
+      "About twice as fast",
+      "Between three and four times faster",
+      "About the same rate",
+      "Five times faster"
+    ],
+    "answer": "Between three and four times faster",
+    "difficulty": "medium",
+    "citations": [
+      "Arctic surface temperatures are increasing between three and four times faster than in the rest of the world"
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "How does the melting of ice sheets near the poles affect thermohaline circulation?",
+    "choices": [
+      "It weakens both the Atlantic and Antarctic limbs",
+      "It strengthens both the Atlantic and Antarctic limbs",
+      "It only affects the Atlantic limb",
+      "It has no impact on thermohaline circulation"
+    ],
+    "answer": "It weakens both the Atlantic and Antarctic limbs",
+    "difficulty": "medium",
+    "citations": [
+      "Melting of ice sheets near the poles weakens both the Atlantic and the Antarctic limb of thermohaline circulation, which further changes the distribution of heat and precipitation around the globe."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "According to the World Meteorological Organization, what is the probability of the five-year average global temperature exceeding +1.5°C between 2024 and 2028?",
+    "choices": [
+      "Almost 50%",
+      "Almost 75%",
+      "Almost 25%",
+      "Almost 100%"
+    ],
+    "answer": "Almost 50%",
+    "difficulty": "easy",
+    "citations": [
+      "The World Meteorological Organization estimates there is almost a 50% chance of the five-year average global temperature exceeding +1.5°C between 2024 and 2028."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "When does the IPCC expect the 20-year average global temperature to exceed +1.5°C?",
+    "choices": [
+      "In the early 2030s",
+      "In the early 2020s",
+      "In the early 2040s",
+      "In the early 2050s"
+    ],
+    "answer": "In the early 2030s",
+    "difficulty": "medium",
+    "citations": [
+      "The IPCC expects the 20-year average to exceed +1.5°C in the early 2030s."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Under a very high emissions scenario, what range of global warming is projected by 2100 according to the IPCC Sixth Assessment Report?",
+    "choices": [
+      "3.3–5.7°C",
+      "1.0–1.8°C",
+      "2.1–3.5°C",
+      "4.0–6.0°C"
+    ],
+    "answer": "3.3–5.7°C",
+    "difficulty": "hard",
+    "citations": [
+      "The IPCC Sixth Assessment Report (2021) included projections that by 2100 global warming is very likely to reach 1.0–1.8°C under a scenario with very low emissions of greenhouse gases, 2.1–3.5°C under an intermediate emissions scenario,\nor 3.3–5.7°C under a very high emissions scenario."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "In which emission scenarios is warming expected to continue past 2100?",
+    "choices": [
+      "Intermediate and high emission scenarios",
+      "Only very low emission scenarios",
+      "All emission scenarios",
+      "Only high emission scenarios"
+    ],
+    "answer": "Intermediate and high emission scenarios",
+    "difficulty": "medium",
+    "citations": [
+      "The warming will continue past 2100 in the intermediate and high emission scenarios, with future projections of global surface temperatures by year 2300 being similar to millions of years ago."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "According to UNEP, what is the condition for keeping global warming below 2.0°C with a 50% chance?",
+    "choices": [
+      "Emissions after 2023 must not exceed 900 gigatonnes of CO2",
+      "Emissions after 2023 must be reduced by 50%",
+      "Emissions after 2023 must be eliminated entirely",
+      "Emissions after 2023 must not exceed 16 gigatonnes of CO2 per year"
+    ],
+    "answer": "Emissions after 2023 must not exceed 900 gigatonnes of CO2",
+    "difficulty": "medium",
+    "citations": [
+      "According to UNEP, global warming can be kept below 2.0 °C with a 50% chance if emissions after 2023 do not exceed 900 gigatonnes of CO2."
+    ],
+    "chunk_idx": 10,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What is the approximate duration of current emissions that corresponds to the 900 gigatonne CO2 carbon budget?",
+    "choices": [
+      "Around 5 years",
+      "Around 10 years",
+      "Around 16 years",
+      "Around 20 years"
+    ],
+    "answer": "Around 16 years",
+    "difficulty": "easy",
+    "citations": [
+      "This carbon budget corresponds to around 16 years of current emissions."
+    ],
+    "chunk_idx": 10,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "Which natural climate phenomenon causes short-term spikes in surface temperature?",
+    "choices": [
+      "La Niña",
+      "El Niño",
+      "Solar luminosity variations",
+      "Volcanic eruptions"
+    ],
+    "answer": "El Niño",
+    "difficulty": "easy",
+    "citations": [
+      "For example, El Niño events cause short-term spikes in surface temperature while La Niña events cause short term cooling."
+    ],
+    "chunk_idx": 10,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What is an example of an external forcing that can cause changes in the climate system?",
+    "choices": [
+      "El Niño events",
+      "La Niña events",
+      "Changes in greenhouse gas concentrations",
+      "Decadal climate cycles"
+    ],
+    "answer": "Changes in greenhouse gas concentrations",
+    "difficulty": "medium",
+    "citations": [
+      "Examples of these include changes in the concentrations of greenhouse gases, solar luminosity, volcanic eruptions, and variations in the Earth's orbit around the Sun."
+    ],
+    "chunk_idx": 10,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  },
+  {
+    "question": "What is the primary method used to determine the threshold for temperature increases in climate change?",
+    "choices": [
+      "Direct temperature measurements",
+      "Modelling the carbon cycle and climate sensitivity to greenhouse gases",
+      "Analyzing historical climate data",
+      "Monitoring solar luminosity changes"
+    ],
+    "answer": "Modelling the carbon cycle and climate sensitivity to greenhouse gases",
+    "difficulty": "hard",
+    "citations": [
+      "g beneath certain temperature increases is determined by modelling the carbon cycle and climate sensitivity to greenhouse gases."
+    ],
+    "chunk_idx": 10,
+    "source": "direct",
+    "question_mode": "mcq",
+    "topic": "Climate Change",
+    "document_id": "Climate Change"
+  }
+]

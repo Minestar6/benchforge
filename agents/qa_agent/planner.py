@@ -1,10 +1,47 @@
 """Planning logic: round plan construction and difficulty/topic selection."""
 
+from __future__ import annotations
+
 import math
 import random
+from dataclasses import dataclass, field
+from enum import Enum
 from typing import Any
 
-from .state import ModeState, ModeRoundPlan
+from .state import ModeState, CandidateStatus
+
+
+class RoundStrategy(str, Enum):
+    INITIAL_BREADTH = "initial_breadth"
+    NORMAL_GENERATE = "normal_generate"
+    FOCUS_TOPIC = "focus_topic"
+    FOCUS_DIFFICULTY = "focus_difficulty"
+    EXPAND_EVIDENCE = "expand_evidence"
+    EVOLVE_TO_HARDER = "evolve_to_harder"
+
+
+class EvidenceStrategy(str, Enum):
+    DEFAULT = "default"
+    HIGH_HARD_SCORE = "high_hard_score"
+    MULTI_GROUP = "multi_group"
+
+
+@dataclass(frozen=True)
+class ModeRoundPlan:
+    mode: str
+    round_in_mode: int
+    strategy: RoundStrategy
+    difficulty: str
+    topics: tuple[str, ...]
+    single_k: int
+    multi_k: int
+    target_candidates_per_topic: int
+    reason: str
+    evidence_strategy: EvidenceStrategy = EvidenceStrategy.DEFAULT
+    expand_docs: int = 0
+    expand_topics: tuple[str, ...] = ()
+    evolve_source_count: int = 0
+
 
 
 def mode_initial_breadth_not_done(mode_state: ModeState, blueprint: Any) -> bool:
@@ -37,7 +74,7 @@ def compute_dynamic_chunk_k(
     config: Any,
 ) -> tuple[int, int, int]:
     target = mode_candidate_target(mode_cfg, config)
-    current = len(mode_state.candidate_questions)
+    current = mode_state.accepted_count
     gap = max(0, target - current)
 
     rounds_left = remaining_mode_rounds(mode_cfg, mode_state)
@@ -62,108 +99,189 @@ def compute_dynamic_chunk_k(
 
 
 def choose_difficulty_for_mode(mode_cfg: Any, mode_state: ModeState) -> str:
-    total = max(1, len(mode_state.candidate_questions))
-    current_ratio = {
-        d: mode_state.difficulty_counts.get(d, 0) / total
-        for d in mode_cfg.difficulty_distribution
-    }
+    total = max(1, mode_state.accepted_count)
+    diff_counts = mode_state.get_difficulty_counts(CandidateStatus.ACCEPTED)
+    current_ratio = {d: diff_counts.get(d, 0) / total for d in mode_cfg.difficulty_distribution}
     gaps = {d: mode_cfg.difficulty_distribution[d] - current_ratio.get(d, 0.0)
             for d in mode_cfg.difficulty_distribution}
     max_gap = max(gaps.values())
-    # break ties randomly to avoid always picking the same difficulty
     candidates = [d for d, g in gaps.items() if abs(g - max_gap) < 1e-9]
     return random.choice(candidates)
 
 
-def choose_low_coverage_topics_for_mode(blueprint: Any, mode_state: ModeState, k: int) -> list[str]:
-    expected = len(mode_state.candidate_questions) / max(1, len(blueprint.topics))
+def choose_low_coverage_topics(blueprint: Any, mode_state: ModeState, k: int) -> list[str]:
+    expected = mode_state.accepted_count / max(1, len(blueprint.topics))
+    topic_counts = mode_state.get_topic_counts(CandidateStatus.ACCEPTED)
     scored = sorted(
         blueprint.topics,
-        key=lambda t: expected - mode_state.topic_counts.get(t, 0),
+        key=lambda t: expected - topic_counts.get(t, 0),
         reverse=True,
     )
     return scored[:k]
 
 
-def build_initial_breadth_plan(
-    mode: str,
+def _missing_topics(blueprint: Any, mode_state: ModeState, min_per_topic: int = 1) -> list[str]:
+    topic_counts = mode_state.get_topic_counts(CandidateStatus.ACCEPTED)
+    return [t for t in blueprint.topics if topic_counts.get(t, 0) < min_per_topic]
+
+
+# ── Rule-based strategy selection ──────────────────────────────────────────────
+
+def select_strategy(
     mode_cfg: Any,
-    blueprint: Any,
-    config: Any,
     mode_state: ModeState,
+    blueprint: Any,
+    feedback: Any | None,
+    config: Any,
+) -> tuple[RoundStrategy, str]:
+    hard_ratio = mode_cfg.difficulty_distribution.get("hard", 0.3)
+    hard_gap_val = mode_state.hard_gap(hard_ratio)
+    too_easy = mode_state.too_easy_ratio()
+    acc_rate = mode_state.accept_rate()
+    missing = _missing_topics(blueprint, mode_state)
+
+    decision_cfg = getattr(config, "decision", None)
+    hard_gap_threshold = getattr(decision_cfg, "hard_gap_threshold", 0.2)
+    too_easy_threshold = getattr(decision_cfg, "too_easy_ratio", 0.4)
+    accept_rate_threshold = getattr(decision_cfg, "accept_rate_threshold", 0.3)
+    runtime_cfg = getattr(config, "runtime", None)
+    empty_rounds_threshold = getattr(runtime_cfg, "max_consecutive_empty_rounds_per_mode", 3) - 1
+
+    dup_ratio = feedback.duplicate_chunk_ratio if feedback else 0.0
+
+    if mode_state.consecutive_empty_rounds >= empty_rounds_threshold and dup_ratio > 0.5:
+        return RoundStrategy.EXPAND_EVIDENCE, (
+            f"consecutive_empty={mode_state.consecutive_empty_rounds}, dup_ratio={dup_ratio:.2f}"
+        )
+
+    if hard_gap_val > hard_gap_threshold:
+        return RoundStrategy.FOCUS_DIFFICULTY, f"hard_gap={hard_gap_val:.2f}"
+
+    med_ratio = mode_cfg.difficulty_distribution.get("medium", 0.3)
+    if (hard_gap_val > 0 and too_easy > too_easy_threshold
+            and mode_state.evolvable_surplus("medium", med_ratio) > 0):
+        surplus = mode_state.evolvable_surplus("medium", med_ratio)
+        return RoundStrategy.EVOLVE_TO_HARDER, f"too_easy={too_easy:.2f}, surplus={surplus}"
+
+    if acc_rate < accept_rate_threshold and len(mode_state.candidate_questions) > 0:
+        if missing:
+            return RoundStrategy.FOCUS_TOPIC, (
+                f"low_accept_rate={acc_rate:.2f}, missing_topics={len(missing)}"
+            )
+        return RoundStrategy.FOCUS_DIFFICULTY, f"low_accept_rate={acc_rate:.2f}"
+
+    if missing:
+        return RoundStrategy.FOCUS_TOPIC, f"missing_topics={missing}"
+
+    acc_diff = mode_state.get_difficulty_counts(CandidateStatus.ACCEPTED)
+    acc_total = mode_state.accepted_count
+    if acc_total > 0:
+        diff_gaps = {
+            d: mode_cfg.difficulty_distribution.get(d, 0) - acc_diff.get(d, 0) / acc_total
+            for d in mode_cfg.difficulty_distribution
+        }
+        if max(diff_gaps.values()) > 0.1:
+            return RoundStrategy.FOCUS_DIFFICULTY, f"difficulty_gap={diff_gaps}"
+
+    return RoundStrategy.NORMAL_GENERATE, "normal"
+
+
+# ── Plan builders ───────────────────────────────────────────────────────────────
+
+def build_initial_breadth_plan(
+    mode: str, mode_cfg: Any, blueprint: Any, config: Any, mode_state: ModeState,
 ) -> ModeRoundPlan:
     topics = tuple(
         t for t in blueprint.topics if t not in mode_state.initial_coverage
     )[: config.initial_breadth.max_topics_per_round]
-
     difficulty = config.initial_breadth.difficulty
-    single_k, multi_k, target_candidates_per_topic = compute_dynamic_chunk_k(
-        mode=mode,
-        mode_cfg=mode_cfg,
-        difficulty=difficulty,
+    single_k, multi_k, tgt = compute_dynamic_chunk_k(
+        mode=mode, mode_cfg=mode_cfg, difficulty=difficulty,
         selected_topic_count=max(1, len(topics)),
-        mode_state=mode_state,
-        blueprint=blueprint,
-        config=config,
+        mode_state=mode_state, blueprint=blueprint, config=config,
     )
-
     return ModeRoundPlan(
-        mode=mode,
-        round_in_mode=mode_state.round_in_mode,
-        strategy="initial_breadth",
-        difficulty=difficulty,
-        topics=topics,
-        single_k=single_k,
-        multi_k=multi_k,
-        target_candidates_per_topic=target_candidates_per_topic,
+        mode=mode, round_in_mode=mode_state.round_in_mode,
+        strategy=RoundStrategy.INITIAL_BREADTH, difficulty=difficulty,
+        topics=topics, single_k=single_k, multi_k=multi_k,
+        target_candidates_per_topic=tgt,
         reason=f"Initial breadth for mode={mode}.",
     )
 
 
 def build_adaptive_plan(
-    mode: str,
-    mode_cfg: Any,
-    blueprint: Any,
-    config: Any,
-    mode_state: ModeState,
+    mode: str, mode_cfg: Any, blueprint: Any, config: Any,
+    mode_state: ModeState, feedback: Any | None,
 ) -> ModeRoundPlan:
-    difficulty = choose_difficulty_for_mode(mode_cfg, mode_state)
-    topics = tuple(choose_low_coverage_topics_for_mode(
-        blueprint=blueprint,
-        mode_state=mode_state,
-        k=config.planner.topics_per_round,
-    ))
+    strategy, reason = select_strategy(mode_cfg, mode_state, blueprint, feedback, config)
 
-    single_k, multi_k, target_candidates_per_topic = compute_dynamic_chunk_k(
-        mode=mode,
-        mode_cfg=mode_cfg,
-        difficulty=difficulty,
-        selected_topic_count=max(1, len(topics)),
-        mode_state=mode_state,
-        blueprint=blueprint,
-        config=config,
+    if strategy == RoundStrategy.EVOLVE_TO_HARDER:
+        med_ratio = mode_cfg.difficulty_distribution.get("medium", 0.3)
+        surplus = mode_state.evolvable_surplus("medium", med_ratio)
+        return ModeRoundPlan(
+            mode=mode, round_in_mode=mode_state.round_in_mode,
+            strategy=strategy, difficulty="hard",
+            topics=tuple(blueprint.topics[:config.planner.topics_per_round]),
+            single_k=0, multi_k=0,
+            target_candidates_per_topic=min(surplus, 3),
+            evolve_source_count=min(surplus, 3),
+            reason=reason,
+        )
+
+    if strategy == RoundStrategy.EXPAND_EVIDENCE:
+        missing = _missing_topics(blueprint, mode_state)
+        expand_topics = tuple(missing[:3]) if missing else tuple(blueprint.topics[:1])
+        return ModeRoundPlan(
+            mode=mode, round_in_mode=mode_state.round_in_mode,
+            strategy=strategy, difficulty="medium",
+            topics=expand_topics, single_k=0, multi_k=0,
+            target_candidates_per_topic=0,
+            expand_docs=2, expand_topics=expand_topics,
+            reason=reason,
+        )
+
+    difficulty = (
+        "hard" if strategy == RoundStrategy.FOCUS_DIFFICULTY
+        else choose_difficulty_for_mode(mode_cfg, mode_state)
     )
+    evidence_strategy = (
+        EvidenceStrategy.HIGH_HARD_SCORE if difficulty == "hard"
+        else EvidenceStrategy.DEFAULT
+    )
+    topics = (
+        tuple(_missing_topics(blueprint, mode_state)[:config.planner.topics_per_round])
+        if strategy == RoundStrategy.FOCUS_TOPIC
+        else tuple(choose_low_coverage_topics(blueprint, mode_state, config.planner.topics_per_round))
+    )
+    if not topics:
+        topics = tuple(choose_low_coverage_topics(blueprint, mode_state, config.planner.topics_per_round))
+
+    single_k, multi_k, tgt = compute_dynamic_chunk_k(
+        mode=mode, mode_cfg=mode_cfg, difficulty=difficulty,
+        selected_topic_count=max(1, len(topics)),
+        mode_state=mode_state, blueprint=blueprint, config=config,
+    )
+    if difficulty == "hard":
+        multi_k = max(multi_k, single_k)
 
     return ModeRoundPlan(
-        mode=mode,
-        round_in_mode=mode_state.round_in_mode,
-        strategy="adaptive",
-        difficulty=difficulty,
-        topics=topics,
-        single_k=single_k,
-        multi_k=multi_k,
-        target_candidates_per_topic=target_candidates_per_topic,
-        reason=f"Adaptive supplement for mode={mode}, difficulty={difficulty}.",
+        mode=mode, round_in_mode=mode_state.round_in_mode,
+        strategy=strategy, difficulty=difficulty,
+        topics=topics, single_k=single_k, multi_k=multi_k,
+        target_candidates_per_topic=tgt,
+        evidence_strategy=evidence_strategy,
+        reason=reason,
     )
 
 
 def build_mode_round_plan(
-    mode: str,
-    mode_cfg: Any,
-    blueprint: Any,
-    config: Any,
-    mode_state: ModeState,
+    mode: str, mode_cfg: Any, blueprint: Any, config: Any,
+    mode_state: ModeState, feedback: Any | None = None,
 ) -> ModeRoundPlan:
     if config.initial_breadth.enabled and mode_initial_breadth_not_done(mode_state, blueprint):
         return build_initial_breadth_plan(mode, mode_cfg, blueprint, config, mode_state)
-    return build_adaptive_plan(mode, mode_cfg, blueprint, config, mode_state)
+    return build_adaptive_plan(mode, mode_cfg, blueprint, config, mode_state, feedback)
+
+
+# Keep old name for backward compat
+choose_low_coverage_topics_for_mode = choose_low_coverage_topics

@@ -1,0 +1,22 @@
+{
+  "mode": "qa",
+  "metrics": {
+    "mode_name": "qa",
+    "mode_round_in_progress": 3,
+    "mode_target_candidates": 100,
+    "mode_accepted_count": 0,
+    "mode_accept_progress": 0.0,
+    "mode_hard_gap": 0.6,
+    "mode_missing_topic_count": 2,
+    "mode_missing_topic_ratio": 1.0,
+    "mode_consecutive_empty": 3,
+    "mode_failures": 3,
+    "mode_last_action_type": "generate",
+    "mode_consecutive_same_action": 3,
+    "mode_difficulty_counts": {},
+    "mode_topic_counts": {},
+    "mode_stopped_reason": "max_empty_rounds"
+  },
+  "stopped_reason": "max_empty_rounds",
+  "candidate_count": 0
+}

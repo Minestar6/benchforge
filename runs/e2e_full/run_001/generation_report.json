@@ -1,0 +1,14 @@
+{
+  "task_id": "e2e_full",
+  "run_id": "run_001",
+  "modes": {
+    "qa": {
+      "candidate_count": 2,
+      "target_candidate_count": 10,
+      "stopped_reason": "max_rounds_reached"
+    }
+  },
+  "total_candidates": 2,
+  "global_used_chunk_combinations": 1,
+  "global_failures": 1
+}

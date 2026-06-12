@@ -1,13 +1,15 @@
 """Execution logic: round execution, state update, stop conditions."""
 
 import asyncio
+import uuid
 from pathlib import Path
 from typing import Any
 
 from loguru import logger
 
-from .state import GlobalState, ModeState, ModeRoundPlan
-from .planner import mode_candidate_target, mode_initial_breadth_not_done
+from .state import GlobalState, ModeState, CandidateRecord, CandidateStatus
+from .planner import ModeRoundPlan, RoundStrategy, mode_candidate_target, mode_initial_breadth_not_done
+from .feedback import build_round_feedback, RoundFeedback
 from .sampling import sample_chunks, raw_chunk_ids, record_global_chunk_usage
 from benchforge.utils.filter import LightweightFilter
 from benchforge.utils.llm_tracer import LLMTracer
@@ -50,14 +52,44 @@ def update_mode_state(
     topic: str,
     round_plan: ModeRoundPlan,
     parsed_questions: list[dict],
-) -> None:
+    filter_failures: list[dict] | None = None,
+    parent_question_id: str | None = None,
+) -> list[CandidateRecord]:
+    """Append new CandidateRecords; return the list of newly added records."""
+    new_records: list[CandidateRecord] = []
     for q in parsed_questions:
-        mode_state.candidate_questions.append(q)
-        # Track requested difficulty so planner gap is based on what was asked, not LLM self-rating
-        mode_state.difficulty_counts[round_plan.difficulty] = (
-            mode_state.difficulty_counts.get(round_plan.difficulty, 0) + 1
+        difficulty = normalize_difficulty(q.get("difficulty", round_plan.difficulty))
+        record = CandidateRecord(
+            question_id=q.get("question_id") or str(uuid.uuid4()),
+            question=q.get("question", ""),
+            answer=q.get("answer", ""),
+            topic=topic,
+            difficulty=difficulty,
+            status=CandidateStatus.ACCEPTED,
+            source_round=round_plan.round_in_mode,
+            source_strategy=round_plan.strategy.value,
+            chunk_ids=q.get("chunk_ids", []),
+            parent_question_id=parent_question_id,
         )
-        mode_state.topic_counts[topic] = mode_state.topic_counts.get(topic, 0) + 1
+        mode_state.candidate_questions.append(record)
+        new_records.append(record)
+    for item in (filter_failures or []):
+        record = CandidateRecord(
+            question_id=str(uuid.uuid4()),
+            question=item.get("question", ""),
+            answer="",
+            topic=topic,
+            difficulty=round_plan.difficulty,
+            status=CandidateStatus.REJECTED,
+            source_round=round_plan.round_in_mode,
+            source_strategy=round_plan.strategy.value,
+            chunk_ids=[],
+            reject_reason=item.get("reason", "filter_rejected"),
+            parent_question_id=None,  # REJECTED 记录不继承父题
+        )
+        mode_state.candidate_questions.append(record)
+        new_records.append(record)
+    return new_records
 
 
 def update_mode_trace(
@@ -89,7 +121,7 @@ def mode_should_stop(
     initial_done = not mode_initial_breadth_not_done(mode_state, blueprint)
     target = mode_candidate_target(mode_cfg, config)
 
-    if initial_done and len(mode_state.candidate_questions) >= target:
+    if initial_done and mode_state.accepted_count >= target:
         return True, "candidate_pool_sufficient"
 
     if mode_state.round_in_mode > mode_cfg.max_rounds:
@@ -269,8 +301,39 @@ async def execute_mode_round_plan(
     generator: Any,
     mode_cfg: Any = None,
     tracer: LLMTracer | None = None,
-) -> list[dict]:
-    # All topics run concurrently; state mutations happen serially after gather.
+) -> tuple[list[dict], RoundFeedback]:
+    # EVOLVE_TO_HARDER: re-generate from accepted easy/medium as seed context
+    if round_plan.strategy == RoundStrategy.EVOLVE_TO_HARDER:
+        return await _execute_evolve_round(
+            round_plan=round_plan, blueprint=blueprint, config=config,
+            global_state=global_state, mode_state=mode_state,
+            evidence_manager=evidence_manager, generator=generator,
+            mode_cfg=mode_cfg, tracer=tracer,
+        )
+
+    # EXPAND_EVIDENCE: just mark topics as needing more evidence (no LLM call)
+    if round_plan.strategy == RoundStrategy.EXPAND_EVIDENCE:
+        for topic in round_plan.expand_topics:
+            try:
+                evidence_pool = evidence_manager.evidence_pools.get(topic)
+                await evidence_manager.expand_retrieval(
+                    topic=topic,
+                    queries=[topic],
+                    language=blueprint.language,
+                    run_id=blueprint.run_id,
+                    evidence_pool=evidence_pool,
+                )
+            except Exception as exc:
+                logger.warning(f"expand_retrieval failed for {topic}: {exc}")
+        empty_results = [{"topic": t, "success": True, "generated_count": 0,
+                          "chunks": [], "duplicate_combination": False, "error": None}
+                         for t in round_plan.expand_topics]
+        feedback = build_round_feedback(
+            mode=round_plan.mode, round_id=round_plan.round_in_mode,
+            strategy=round_plan.strategy.value, round_results=empty_results, new_records=[],
+        )
+        return empty_results, feedback
+
     reservation_lock = asyncio.Lock()
     reserved_combinations: set[tuple[str, ...]] = set()
     topic_results = await asyncio.gather(*[
@@ -290,6 +353,8 @@ async def execute_mode_round_plan(
     ])
 
     round_results = []
+    all_new_records: list[CandidateRecord] = []
+
     for res in topic_results:
         topic = res["topic"]
         if res["success"]:
@@ -298,18 +363,20 @@ async def execute_mode_round_plan(
 
             if mode_cfg is not None:
                 target = mode_candidate_target(mode_cfg, config)
-                remaining_quota = target - len(mode_state.candidate_questions)
+                remaining_quota = target - mode_state.accepted_count
                 if remaining_quota <= 0:
                     parsed_questions = []
                 elif len(parsed_questions) > remaining_quota:
                     parsed_questions = parsed_questions[:remaining_quota]
 
-            update_mode_state(
+            new_records = update_mode_state(
                 mode_state=mode_state,
                 topic=topic,
                 round_plan=round_plan,
                 parsed_questions=parsed_questions,
+                filter_failures=res.get("filter_failures", []),
             )
+            all_new_records.extend(new_records)
             record_global_chunk_usage(
                 global_state=global_state,
                 chunks=chunks,
@@ -354,10 +421,147 @@ async def execute_mode_round_plan(
                 "llm_call_id": res.get("llm_call_id"),
             })
 
-        if round_plan.strategy == "initial_breadth":
+        if round_plan.strategy == RoundStrategy.INITIAL_BREADTH:
             mode_state.initial_coverage.add(topic)
 
-    return round_results
+    feedback = build_round_feedback(
+        mode=round_plan.mode,
+        round_id=round_plan.round_in_mode,
+        strategy=round_plan.strategy.value,
+        round_results=round_results,
+        new_records=all_new_records,
+    )
+    return round_results, feedback
+
+
+async def _execute_evolve_round(
+    round_plan: ModeRoundPlan,
+    blueprint: Any,
+    config: Any,
+    global_state: GlobalState,
+    mode_state: ModeState,
+    evidence_manager: Any,
+    generator: Any,
+    mode_cfg: Any,
+    tracer: LLMTracer | None,
+) -> tuple[list[dict], "RoundFeedback"]:
+    """Re-generate harder questions from accepted easy/medium seed questions."""
+    from .state import CandidateStatus as CS
+
+    seeds = [
+        q for q in mode_state.candidate_questions
+        if q.status == CS.ACCEPTED and q.difficulty == "medium"
+    ][: min(round_plan.evolve_source_count, mode_state.evolvable_surplus(
+        "medium", mode_cfg.difficulty_distribution.get("medium", 0.3) if mode_cfg else 0.3
+    ))]
+
+    round_results = []
+    all_new_records: list[CandidateRecord] = []
+
+    for seed in seeds:
+        topic = seed.topic
+        evidence_pool = evidence_manager.evidence_pools.get(topic)
+        if evidence_pool is None:
+            continue
+        try:
+            chunks, duplicate_combination = sample_chunks(
+                evidence_manager=evidence_manager,
+                topic=topic,
+                mode=round_plan.mode,
+                difficulty="hard",
+                single_k=max(1, round_plan.single_k),
+                multi_k=max(1, round_plan.multi_k),
+                global_used_combinations=global_state.used_chunk_combinations,
+                global_chunk_usage_counts=global_state.chunk_usage_counts,
+                blocked_combinations=global_state.used_chunk_combinations,
+                round_num=mode_state.round_in_mode,
+            )
+            if duplicate_combination:
+                round_results.append({
+                    "topic": topic, "success": True, "generated_count": 0,
+                    "chunks": [], "duplicate_combination": True, "error": None,
+                })
+                continue
+            batch = _make_batch(topic, round_plan, chunks, evidence_pool)
+            document_summary = (
+                evidence_manager.get_document_summary(batch, evidence_pool)
+                if evidence_pool else ""
+            )
+            model_client = evidence_manager.model_client
+            model_name = getattr(model_client, "model_name", "unknown")
+            llm_trace_path = str(Path("runs") / blueprint.task_id / blueprint.run_id / "llm_calls.jsonl")
+            if tracer is not None:
+                span = tracer.span(
+                    model=model_name,
+                    provider=getattr(model_client, "provider", ""),
+                    tags={"topic": topic, "mode": round_plan.mode, "round": round_plan.round_in_mode,
+                          "difficulty": "hard", "strategy": "evolve_to_harder"},
+                )
+                async with span:
+                    raw_items, _, llm_call_id = await generator.generate(
+                        batch=batch, model_client=model_client, evidence_pool=evidence_pool,
+                        document_summary=document_summary, language=blueprint.language,
+                        llm_trace_path=llm_trace_path,
+                    )
+            else:
+                raw_items, _, llm_call_id = await generator.generate(
+                    batch=batch, model_client=model_client, evidence_pool=evidence_pool,
+                    document_summary=document_summary, language=blueprint.language,
+                    llm_trace_path=llm_trace_path,
+                )
+            raw_questions = parse_questions(raw_items)
+            accepted_questions, rejected_questions = _question_filter.filter_questions(raw_questions)
+            filter_failures = [{"question": item.get("question", ""), "reason": r}
+                               for item, r in rejected_questions]
+            chunk_id_list = raw_chunk_ids(chunks)
+            for q in accepted_questions:
+                q["chunk_ids"] = chunk_id_list
+                q["topic"] = topic
+                q["llm_call_id"] = llm_call_id
+                q["generation_round"] = round_plan.round_in_mode
+
+            new_records = update_mode_state(
+                mode_state=mode_state,
+                topic=topic,
+                round_plan=round_plan,
+                parsed_questions=accepted_questions,
+                filter_failures=filter_failures,
+                parent_question_id=seed.question_id,
+            )
+            if any(r.status == CS.ACCEPTED and r.difficulty == "hard" for r in new_records):
+                seed.status = CS.EVOLVED
+            all_new_records.extend(new_records)
+            record_global_chunk_usage(
+                global_state=global_state, chunks=chunks,
+                max_size=config.runtime.max_used_chunk_combinations,
+            )
+            round_results.append({
+                "topic": topic, "success": True,
+                "generated_count": len(accepted_questions),
+                "raw_count": len(raw_questions),
+                "filtered_count": len(accepted_questions),
+                "filter_failures": filter_failures,
+                "llm_call_id": llm_call_id,
+                "chunks": chunk_id_list,
+                "duplicate_combination": False, "error": None,
+            })
+        except Exception as exc:
+            mode_state.failures_count += 1
+            global_state.global_failures += 1
+            logger.warning(f"Evolve failed for seed {seed.question_id}: {exc}")
+            round_results.append({
+                "topic": topic, "success": False, "generated_count": 0,
+                "chunks": [], "duplicate_combination": False, "error": str(exc),
+            })
+
+    evolved_seed_count = sum(1 for s in seeds if s.status == CS.EVOLVED)
+    feedback = build_round_feedback(
+        mode=round_plan.mode, round_id=round_plan.round_in_mode,
+        strategy=round_plan.strategy.value, round_results=round_results,
+        new_records=all_new_records,
+        evolved_seed_count=evolved_seed_count,
+    )
+    return round_results, feedback
 
 
 def _make_batch(topic: str, round_plan: ModeRoundPlan, chunks: list, evidence_pool: Any) -> Any:

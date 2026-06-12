@@ -1,0 +1,55 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "medium",
+    "topics": [
+      "Artificial Intelligence"
+    ],
+    "single_k": 2,
+    "multi_k": 1,
+    "target_candidates_per_topic": 5,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 2,
+        "raw_count": 2,
+        "filtered_count": 2,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "e2e_fake_0001",
+        "chunks": [
+          "doc_e2e_ai_001::chunk_0000"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "strategy": "adaptive",
+    "difficulty": "easy",
+    "topics": [
+      "Artificial Intelligence"
+    ],
+    "single_k": 4,
+    "multi_k": 1,
+    "target_candidates_per_topic": 8,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": false,
+        "generated_count": 0,
+        "chunks": [],
+        "duplicate_combination": false,
+        "error": "2 validation errors for GenerationBatch\nrequested_min_questions\n  Field required [type=missing, input_value={'topic': 'Artificial Int...id': 'qa_generation_v1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nrequested_target_questions\n  Field required [type=missing, input_value={'topic': 'Artificial Int...id': 'qa_generation_v1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing",
+        "error_type": "ValidationError",
+        "llm_call_id": null
+      }
+    ]
+  }
+]

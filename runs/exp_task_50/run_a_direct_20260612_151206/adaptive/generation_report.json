@@ -1,0 +1,54 @@
+{
+  "task_id": "exp_task_50",
+  "run_id": "run_a_direct_20260612_151206",
+  "group": "A - Direct Generation",
+  "topics": [
+    "Climate Change",
+    "Artificial Intelligence"
+  ],
+  "target_per_mode": 50,
+  "max_chunks_per_mode": 50,
+  "chunks_processed": {
+    "qa": 10,
+    "mcq": 11
+  },
+  "stopped_modes": [
+    "qa",
+    "mcq"
+  ],
+  "modes": {
+    "qa": {
+      "candidate_count": 53,
+      "target_reached": true,
+      "token_stats": {
+        "calls": 10,
+        "errors": 0,
+        "input_tokens": 3184,
+        "output_tokens": 4494,
+        "total_tokens": 7678,
+        "avg_latency_ms": 16242,
+        "total_latency_ms": 162420
+      }
+    },
+    "mcq": {
+      "candidate_count": 53,
+      "target_reached": true,
+      "token_stats": {
+        "calls": 11,
+        "errors": 0,
+        "input_tokens": 3746,
+        "output_tokens": 6495,
+        "total_tokens": 10241,
+        "avg_latency_ms": 20334,
+        "total_latency_ms": 223677
+      }
+    }
+  },
+  "token_total": {
+    "calls": 21,
+    "errors": 0,
+    "input_tokens": 6930,
+    "output_tokens": 10989,
+    "total_tokens": 17919
+  }
+}

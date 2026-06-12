@@ -56,11 +56,36 @@ def make_evidence_manager(topics=None):
     elif isinstance(topics, list):
         topics = tuple(topics)
 
+    _TOPIC_TEXTS = {
+        "Climate Change": (
+            "Climate change refers to long-term shifts in global temperatures and weather patterns. "
+            "Since the Industrial Revolution, human activities—primarily burning fossil fuels—have been "
+            "the main driver of climate change. Rising CO2 levels trap heat in the atmosphere, causing "
+            "global warming. Consequences include melting ice caps, rising sea levels, more frequent "
+            "extreme weather events, and disruption to ecosystems and agriculture. The Paris Agreement "
+            "aims to limit warming to 1.5°C above pre-industrial levels."
+        ),
+        "Artificial Intelligence": (
+            "Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to natural "
+            "intelligence displayed by animals including humans. AI research has been defined as the field "
+            "of study of intelligent agents, which refers to any system that perceives its environment and "
+            "takes actions that maximize its chance of achieving its goals. Modern AI includes machine "
+            "learning, deep learning, and large language models. Applications span healthcare diagnostics, "
+            "autonomous vehicles, natural language processing, and scientific research."
+        ),
+    }
+    _DEFAULT_TEXT = (
+        "This topic covers a broad range of concepts. Key aspects include historical development, "
+        "current applications, major challenges, and future directions. Researchers have identified "
+        "multiple sub-domains, each requiring specialized knowledge and methodologies."
+    )
+
     def _pool(topic):
+        text = _TOPIC_TEXTS.get(topic, _DEFAULT_TEXT)
         chunk = SimpleNamespace(
             chunk_id=f"{topic}_c1",
             document_id=f"{topic}_doc1",
-            text="Sample evidence text.",
+            text=text,
             usage_count=0,
             qa_score=0.8,
             mcq_score=0.7,
@@ -68,17 +93,24 @@ def make_evidence_manager(topics=None):
         return SimpleNamespace(topic=topic, single_chunks=[chunk], multi_chunks=[])
 
     pools = {t: _pool(t) for t in topics}
-    batch = SimpleNamespace(
-        single_chunk_ids=[f"{topics[0]}_c1"],
-        multi_chunk_ids=[],
-        requested_min_questions=1,
-        requested_target_questions=2,
-    )
+
+    def _sample(topic, **kwargs):
+        return SimpleNamespace(
+            single_chunk_ids=[f"{topic}_c1"],
+            multi_chunk_ids=[],
+            requested_min_questions=1,
+            requested_target_questions=2,
+        )
+
+    def _get_evidence_text(chunk_id, **kwargs):
+        topic = chunk_id.rsplit("_c", 1)[0]
+        return _TOPIC_TEXTS.get(topic, _DEFAULT_TEXT)
+
     em = MagicMock()
     em.evidence_pools = pools
-    em.sample = MagicMock(return_value=batch)
-    em.get_evidence_text = MagicMock(return_value="Sample evidence text.")
-    em.get_document_summary = MagicMock(return_value="Document summary.")
+    em.sample = MagicMock(side_effect=_sample)
+    em.get_evidence_text = MagicMock(side_effect=_get_evidence_text)
+    em.get_document_summary = MagicMock(side_effect=lambda topic, **kw: f"Summary of {topic}.")
     em.expand_retrieval = AsyncMock(return_value=None)
     return em
 

@@ -1,0 +1,92 @@
+[
+  {
+    "question": "What is the main topic of the provided text?",
+    "answer": "The text discusses various aspects of the subject matter.",
+    "question_type": "factual",
+    "required_capability": "Understanding the main concept",
+    "estimated_difficulty": "easy",
+    "citations": [
+      {
+        "chunk_id": "fake_2",
+        "text": "A sample citation from the source text."
+      }
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "question_mode": "qa",
+    "topic": "topic_a",
+    "document_id": "topic_a"
+  },
+  {
+    "question": "What is the main topic of the provided text?",
+    "answer": "The text discusses various aspects of the subject matter.",
+    "question_type": "factual",
+    "required_capability": "Understanding the main concept",
+    "estimated_difficulty": "easy",
+    "citations": [
+      {
+        "chunk_id": "fake_3",
+        "text": "A sample citation from the source text."
+      }
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "question_mode": "qa",
+    "topic": "topic_a",
+    "document_id": "topic_a"
+  },
+  {
+    "question": "What is the main topic of the provided text?",
+    "answer": "The text discusses various aspects of the subject matter.",
+    "question_type": "factual",
+    "required_capability": "Understanding the main concept",
+    "estimated_difficulty": "easy",
+    "citations": [
+      {
+        "chunk_id": "fake_4",
+        "text": "A sample citation from the source text."
+      }
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "question_mode": "qa",
+    "topic": "topic_a",
+    "document_id": "topic_a"
+  },
+  {
+    "question": "What is the main topic of the provided text?",
+    "answer": "The text discusses various aspects of the subject matter.",
+    "question_type": "factual",
+    "required_capability": "Understanding the main concept",
+    "estimated_difficulty": "easy",
+    "citations": [
+      {
+        "chunk_id": "fake_5",
+        "text": "A sample citation from the source text."
+      }
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "question_mode": "qa",
+    "topic": "topic_a",
+    "document_id": "topic_a"
+  },
+  {
+    "question": "What is the main topic of the provided text?",
+    "answer": "The text discusses various aspects of the subject matter.",
+    "question_type": "factual",
+    "required_capability": "Understanding the main concept",
+    "estimated_difficulty": "easy",
+    "citations": [
+      {
+        "chunk_id": "fake_6",
+        "text": "A sample citation from the source text."
+      }
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "question_mode": "qa",
+    "topic": "topic_a",
+    "document_id": "topic_a"
+  }
+]

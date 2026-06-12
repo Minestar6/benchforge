@@ -14,7 +14,7 @@ from benchforge.agents.qa_agent.schema import (
     AgentConfig,
     CandidatePoolConfig, InitialBreadthConfig, PlannerConfig,
     ChunkMixConfig, ChunkMixDifficulty, ModeAdjustment,
-    GenerationYield, ChunkLimitsForMode, ChunkKLimit, RuntimeConfig,
+    GenerationYield, ChunkLimitsForMode, ChunkKLimit, RuntimeConfig, DecisionConfig,
 )
 from benchforge.config.config import (
     RetrievalConfig, ChunkingConfig, SummarizationChunkingConfig,
@@ -73,6 +73,7 @@ def load_qa_agent_config(
             for m, v in raw["chunk_limits"].items()
         },
         runtime=RuntimeConfig(**raw["runtime"]),
+        decision=DecisionConfig(**raw["decision"]) if "decision" in raw else DecisionConfig(),
     )
 
     model_raw = raw.get("model", {})
