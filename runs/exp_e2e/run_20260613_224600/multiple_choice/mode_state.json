@@ -1,0 +1,17 @@
+{
+  "mode": "multiple_choice",
+  "candidate_count": 32,
+  "total_record_count": 32,
+  "accepted_count": 32,
+  "rejected_count": 0,
+  "evolved_count": 0,
+  "difficulty_counts": {
+    "medium": 26,
+    "easy": 6
+  },
+  "topic_counts": {
+    "Python (programming language)": 28,
+    "Machine learning": 4
+  },
+  "stopped_reason": "candidate_pool_sufficient"
+}

@@ -1,12 +1,10 @@
-"""State models for Mode-Staged Generation Agent."""
+﻿"""State models for Mode-Staged Generation Agent."""
 
 from __future__ import annotations
-
 import math
 from collections import deque
 from dataclasses import dataclass, field
 from enum import Enum
-
 
 class CandidateStatus(str, Enum):
     CANDIDATE = "candidate"
@@ -28,6 +26,7 @@ class CandidateRecord:
     chunk_ids: list[str]
     reject_reason: str | None = None
     parent_question_id: str | None = None
+    choices: list[str] | None = None  # MCQ 选项列表，QA 模式为 None
 
 
 @dataclass
@@ -53,7 +52,7 @@ class ModeState:
     stopped_reason: str | None = None
     trace: list[dict] = field(default_factory=list)
 
-    # ── Derived statistics ──────────────────────────────────────────
+    # 鈹€鈹€ Derived statistics 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
     def _by_status(self, status: CandidateStatus) -> list[CandidateRecord]:
         return [q for q in self.candidate_questions if q.status == status]

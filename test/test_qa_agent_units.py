@@ -1,4 +1,4 @@
-"""Unit tests for qa_agent modules."""
+﻿"""Unit tests for qa_agent modules."""
 
 import sys
 import json
@@ -26,11 +26,11 @@ from benchforge.agents.qa_agent.planner import (
 from benchforge.agents.qa_agent.executor import (
     normalize_difficulty, parse_questions, mode_should_stop, execute_mode_round_plan,
 )
-from benchforge.agents.qa_agent.state import ModeRoundPlan
+from benchforge.agents.qa_agent.planner import ModeRoundPlan
 from benchforge.agents.qa_agent.sampling import raw_chunk_ids, record_global_chunk_usage
 
 
-# ── Fixtures ──────────────────────────────────────────────────────────────────
+# 鈹€鈹€ Fixtures 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def _blueprint(topics=None, qa_count=10, mcq_count=8):
     return Blueprint(
@@ -77,7 +77,7 @@ def _config():
     )
 
 
-# ── normalize_difficulty ───────────────────────────────────────────────────────
+# 鈹€鈹€ normalize_difficulty 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_normalize_difficulty():
     assert normalize_difficulty("easy") == "easy"
@@ -90,7 +90,7 @@ def test_normalize_difficulty():
     print("PASS test_normalize_difficulty")
 
 
-# ── parse_questions ────────────────────────────────────────────────────────────
+# 鈹€鈹€ parse_questions 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_parse_questions_list():
     items = [{"question": "Q1", "answer": "A1"}]
@@ -104,7 +104,7 @@ def test_parse_questions_empty():
     print("PASS test_parse_questions_empty")
 
 
-# ── resolve_chunk_mix ──────────────────────────────────────────────────────────
+# 鈹€鈹€ resolve_chunk_mix 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_resolve_chunk_mix_sums_to_one():
     cfg = _config()
@@ -130,7 +130,7 @@ def test_resolve_chunk_mix_clamped():
     print("PASS test_resolve_chunk_mix_clamped")
 
 
-# ── mode_candidate_target ──────────────────────────────────────────────────────
+# 鈹€鈹€ mode_candidate_target 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_mode_candidate_target():
     bp = _blueprint(qa_count=10)
@@ -140,7 +140,7 @@ def test_mode_candidate_target():
     print("PASS test_mode_candidate_target")
 
 
-# ── mode_initial_breadth_not_done ─────────────────────────────────────────────
+# 鈹€鈹€ mode_initial_breadth_not_done 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_initial_breadth_not_done():
     bp = _blueprint()
@@ -151,13 +151,13 @@ def test_initial_breadth_not_done():
     print("PASS test_initial_breadth_not_done")
 
 
-# ── choose_difficulty_for_mode ────────────────────────────────────────────────
+# 鈹€鈹€ choose_difficulty_for_mode 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_choose_difficulty_targets_deficit():
     bp = _blueprint()
     cfg = _config()
     ms = ModeState(mode="qa")
-    # No questions yet — should pick the difficulty with highest target ratio
+    # No questions yet 鈥?should pick the difficulty with highest target ratio
     diff = choose_difficulty_for_mode(bp.modes["qa"], ms)
     assert diff in ("easy", "medium", "hard")
     # Fill up easy and medium, hard should be chosen
@@ -168,7 +168,7 @@ def test_choose_difficulty_targets_deficit():
     print("PASS test_choose_difficulty_targets_deficit")
 
 
-# ── compute_dynamic_chunk_k ───────────────────────────────────────────────────
+# 鈹€鈹€ compute_dynamic_chunk_k 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_compute_dynamic_chunk_k_respects_limits():
     bp = _blueprint(qa_count=10)
@@ -184,7 +184,7 @@ def test_compute_dynamic_chunk_k_respects_limits():
     print("PASS test_compute_dynamic_chunk_k_respects_limits")
 
 
-# ── mode_should_stop ──────────────────────────────────────────────────────────
+# 鈹€鈹€ mode_should_stop 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_stop_candidate_pool_sufficient():
     bp = _blueprint(qa_count=5)
@@ -239,7 +239,7 @@ def test_no_stop_initial_breadth_incomplete():
     print("PASS test_no_stop_initial_breadth_incomplete")
 
 
-# ── raw_chunk_ids ─────────────────────────────────────────────────────────────
+# 鈹€鈹€ raw_chunk_ids 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_raw_chunk_ids_single():
     from types import SimpleNamespace
@@ -267,7 +267,7 @@ def test_raw_chunk_ids_mixed():
     print("PASS test_raw_chunk_ids_mixed")
 
 
-# ── record_global_chunk_usage ─────────────────────────────────────────────────
+# 鈹€鈹€ record_global_chunk_usage 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_record_global_chunk_usage_eviction():
     from types import SimpleNamespace
@@ -279,7 +279,7 @@ def test_record_global_chunk_usage_eviction():
     print("PASS test_record_global_chunk_usage_eviction")
 
 
-# ── build_mode_round_plan ─────────────────────────────────────────────────────
+# 鈹€鈹€ build_mode_round_plan 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_build_initial_breadth_plan():
     bp = _blueprint()
@@ -303,7 +303,7 @@ def test_build_adaptive_plan_after_breadth():
     print("PASS test_build_adaptive_plan_after_breadth")
 
 
-# ── config_loader ─────────────────────────────────────────────────────────────
+# 鈹€鈹€ config_loader 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def test_load_qa_agent_config():
     from benchforge.agents.qa_agent.config_loader import load_qa_agent_config
@@ -421,7 +421,7 @@ async def test_execute_mode_round_plan_records_generation_diagnostics_for_filter
     assert result["filtered_count"] == 0
     assert result["filter_rejected"] is True
     assert result["llm_call_id"] == "call_filtered"
-    assert result["filter_failures"][0]["reason"] == "引用为空"
+    assert result["filter_failures"][0]["reason"] == "寮曠敤涓虹┖"
 
 
 @pytest.mark.asyncio
@@ -565,7 +565,7 @@ async def test_execute_mode_round_plan_avoids_duplicate_chunk_combinations_withi
     assert any(result["duplicate_combination"] for result in round_results)
 
 
-# ── runner ────────────────────────────────────────────────────────────────────
+# 鈹€鈹€ runner 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 if __name__ == "__main__":
     tests = [

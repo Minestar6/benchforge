@@ -154,8 +154,6 @@ def select_strategy(
             f"consecutive_empty={mode_state.consecutive_empty_rounds}, dup_ratio={dup_ratio:.2f}"
         )
 
-    if hard_gap_val > hard_gap_threshold:
-        return RoundStrategy.FOCUS_DIFFICULTY, f"hard_gap={hard_gap_val:.2f}"
 
     med_ratio = mode_cfg.difficulty_distribution.get("medium", 0.3)
     if (hard_gap_val > 0 and too_easy > too_easy_threshold
@@ -241,8 +239,7 @@ def build_adaptive_plan(
         )
 
     difficulty = (
-        "hard" if strategy == RoundStrategy.FOCUS_DIFFICULTY
-        else choose_difficulty_for_mode(mode_cfg, mode_state)
+        choose_difficulty_for_mode(mode_cfg, mode_state)
     )
     evidence_strategy = (
         EvidenceStrategy.HIGH_HARD_SCORE if difficulty == "hard"

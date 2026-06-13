@@ -112,6 +112,7 @@ class Generator:
                 messages=messages,
                 temperature=getattr(model_client, "temperature", 0.7),
                 max_tokens=getattr(model_client, "max_tokens", 2000),
+                llm_trace_path=llm_trace_path,
             )
             raw_text = response.get("text", "")
             llm_call_id = response.get("llm_call_id", "")

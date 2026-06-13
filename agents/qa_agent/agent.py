@@ -1,4 +1,4 @@
-"""Mode-Staged Generation Agent — main entry point."""
+﻿"""Mode-Staged Generation Agent — main entry point."""
 
 import asyncio
 from pathlib import Path
@@ -17,92 +17,103 @@ from .storage import (
 )
 
 
-async def run_mode_generation(
-    mode: str,
-    mode_cfg: Any,
-    blueprint: Any,
-    config: Any,
-    global_state: GlobalState,
-    mode_state: ModeState,
-    evidence_manager: Any,
-    generator: Any,
-    tracer: LLMTracer | None = None,
-) -> None:
-    last_feedback = None
+# ============================================================================
+# Model resolution — pluggable for testing
+# ============================================================================
 
-    while True:
-        should_stop, reason = mode_should_stop(
-            mode_cfg=mode_cfg, mode_state=mode_state,
-            global_state=global_state, blueprint=blueprint, config=config,
-        )
-        if should_stop:
-            mode_state.stopped_reason = reason
-            logger.info(f"Mode {mode} stopped: {reason}")
-            break
+def _resolve_model_client(model_name: str, registry_path: str | Path) -> Any:
+    """Resolve model client from registry by name."""
+    from benchforge.models.loader import ModelLoader
+    from benchforge.agents.model_eval_agent.model_registry_loader import load_model_registry
+    registry = load_model_registry(registry_path)
+    model_cfg = registry[model_name]
+    return ModelLoader.load_model(model_cfg)
 
-        round_plan = build_mode_round_plan(
-            mode=mode, mode_cfg=mode_cfg, blueprint=blueprint,
-            config=config, mode_state=mode_state, feedback=last_feedback,
-        )
 
-        append_round_plan(blueprint.task_id, blueprint.run_id, mode, round_plan)
+# Module-level hook: tests import agent.py and replace this with a lambda.
+_resolve_model_client_fn = _resolve_model_client
 
-        if not round_plan.topics:
-            mode_state.consecutive_empty_rounds += 1
-            mode_state.round_in_mode += 1
-            continue
 
-        round_results, feedback = await execute_mode_round_plan(
-            round_plan=round_plan, blueprint=blueprint, config=config,
-            global_state=global_state, mode_state=mode_state,
-            evidence_manager=evidence_manager, generator=generator,
-            mode_cfg=mode_cfg, tracer=tracer,
-        )
-        last_feedback = feedback
-        append_round_feedback(blueprint.task_id, blueprint.run_id, mode, feedback)
-
-        if feedback.empty_round:
-            if round_plan.strategy == RoundStrategy.EXPAND_EVIDENCE:
-                mode_state.consecutive_empty_rounds = 0  # expand 后给下一轮机会
-            else:
-                mode_state.consecutive_empty_rounds += 1
-        else:
-            mode_state.consecutive_empty_rounds = 0
-
-        update_mode_trace(mode_state, round_plan, round_results)
-        mode_state.round_in_mode += 1
-
-        logger.info(
-            f"Mode={mode} round={round_plan.round_in_mode} "
-            f"strategy={round_plan.strategy.value} "
-            f"generated={feedback.generated_count} accepted={feedback.accepted_count} "
-            f"total_accepted={mode_state.accepted_count}"
-        )
-
+# ============================================================================
+# Public API
+# ============================================================================
 
 async def run_generation_agent(
+    blueprint: Any,
+    config_path: str | Path,
+    *,
+    registry_path: str | Path | None = None,
+    tracer: LLMTracer | None = None,
+) -> dict:
+    """End-to-end entry point for the mode-staged generation agent.
+
+    EvidenceManager, Generator, LLMTracer, and model resolution are handled
+    automatically from qa_agent.yaml.  The only required inputs are a Blueprint
+    and the path to qa_agent.yaml.
+
+    Args:
+        blueprint: Blueprint with task_id, run_id, topics, modes, language.
+        config_path: Path to qa_agent.yaml.
+        registry_path: Path to model_registry.yaml.
+            Defaults to <project>/benchforge/config/model_registry.yaml.
+        tracer: Optional LLMTracer.  Created automatically when None.
+
+    Returns:
+        generation_report dict.
+    """
+    from .config_loader import load_qa_agent_config
+    from .evidence_manager import EvidenceManager
+    from .generator import Generator
+
+    config_path = Path(config_path)
+    agent_config, model_ref, retrieval_cfg, chunking_cfg, sum_chunking_cfg = (
+        load_qa_agent_config(config_path)
+    )
+
+    if registry_path is None:
+        from benchforge.utils.paths import get_project_root
+        registry_path = get_project_root() / "config" / "model_registry.yaml"
+
+    model_client = _resolve_model_client_fn(model_ref.name, registry_path)
+
+    # Thin config wrapper matching the interface EvidenceManager expects
+    class _EvidenceConfig:
+        __slots__ = ("retrieval", "chunking", "summarization_chunking")
+        def __init__(self, retrieval, chunking, summarization_chunking):
+            self.retrieval = retrieval
+            self.chunking = chunking
+            self.summarization_chunking = summarization_chunking
+        def get_resolved_output_path(self) -> Path:
+            return Path("runs") / blueprint.task_id / blueprint.run_id
+
+    evidence_config = _EvidenceConfig(retrieval_cfg, chunking_cfg, sum_chunking_cfg)
+
+    return await _run_generation_agent_impl(
+        blueprint=blueprint,
+        config=agent_config,
+        evidence_manager=EvidenceManager(evidence_config, model_client),
+        generator=Generator(),
+        tracer=tracer,
+    )
+
+
+# ============================================================================
+# Internal implementation
+# ============================================================================
+
+async def _run_generation_agent_impl(
     blueprint: Any,
     config: Any,
     evidence_manager: Any,
     generator: Any,
     tracer: LLMTracer | None = None,
 ) -> dict:
-    """Main entry point for the mode-staged generation agent.
-
-    Args:
-        blueprint: Blueprint object with task_id, run_id, topics, modes, language.
-        config: Config object matching the blueprint YAML schema.
-        evidence_manager: EvidenceManager instance (must have evidence_pools populated).
-        generator: Generator instance.
-        tracer: Optional LLMTracer for automatic call recording.
-
-    Returns:
-        generation_report dict.
+    """Internal implementation used by both the public API and advanced callers
+    (e.g. planner orchestrator with custom components).
     """
     global_state = GlobalState()
     mode_states: dict[str, ModeState] = {}
 
-    # 若未传入 tracer，创建默认 tracer（向后兼容）
     if tracer is None:
         from benchforge.utils.run_context import RunContext
         run_ctx = RunContext(task_id=blueprint.task_id, run_id=blueprint.run_id)
@@ -204,3 +215,70 @@ async def run_generation_agent(
 
     logger.info(f"Generation complete. Output: runs/{blueprint.task_id}/{blueprint.run_id}/")
     return report
+
+
+# ============================================================================
+# Per-mode generation loop
+# ============================================================================
+
+async def run_mode_generation(
+    mode: str,
+    mode_cfg: Any,
+    blueprint: Any,
+    config: Any,
+    global_state: GlobalState,
+    mode_state: ModeState,
+    evidence_manager: Any,
+    generator: Any,
+    tracer: LLMTracer | None = None,
+) -> None:
+    last_feedback = None
+
+    while True:
+        should_stop, reason = mode_should_stop(
+            mode_cfg=mode_cfg, mode_state=mode_state,
+            global_state=global_state, blueprint=blueprint, config=config,
+        )
+        if should_stop:
+            mode_state.stopped_reason = reason
+            logger.info(f"Mode {mode} stopped: {reason}")
+            break
+
+        round_plan = build_mode_round_plan(
+            mode=mode, mode_cfg=mode_cfg, blueprint=blueprint,
+            config=config, mode_state=mode_state, feedback=last_feedback,
+        )
+
+        append_round_plan(blueprint.task_id, blueprint.run_id, mode, round_plan)
+
+        if not round_plan.topics:
+            mode_state.consecutive_empty_rounds += 1
+            mode_state.round_in_mode += 1
+            continue
+
+        round_results, feedback = await execute_mode_round_plan(
+            round_plan=round_plan, blueprint=blueprint, config=config,
+            global_state=global_state, mode_state=mode_state,
+            evidence_manager=evidence_manager, generator=generator,
+            mode_cfg=mode_cfg, tracer=tracer,
+        )
+        last_feedback = feedback
+        append_round_feedback(blueprint.task_id, blueprint.run_id, mode, feedback)
+
+        if feedback.empty_round:
+            if round_plan.strategy == RoundStrategy.EXPAND_EVIDENCE:
+                mode_state.consecutive_empty_rounds = 0
+            else:
+                mode_state.consecutive_empty_rounds += 1
+        else:
+            mode_state.consecutive_empty_rounds = 0
+
+        update_mode_trace(mode_state, round_plan, round_results)
+        mode_state.round_in_mode += 1
+
+        logger.info(
+            f"Mode={mode} round={round_plan.round_in_mode} "
+            f"strategy={round_plan.strategy.value} "
+            f"generated={feedback.generated_count} accepted={feedback.accepted_count} "
+            f"total_accepted={mode_state.accepted_count}"
+        )

@@ -7,10 +7,6 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from benchforge.config import QuestionGeneratorConfig
-from benchforge.models import OpenAIClient
-from benchforge.agents.qa_agent.evidence_manager import EvidenceManager
-from benchforge.agents.qa_agent.generator import Generator
 from benchforge.agents.qa_agent import run_generation_agent
 from benchforge.agents.qa_agent.schema import (
     Blueprint, ModeCfg, AgentConfig,
@@ -55,12 +51,7 @@ def build_default_config() -> AgentConfig:
 
 
 async def run():
-    from benchforge.agents.qa_agent.config_loader import load_qa_agent_config
     from benchforge.agents.qa_agent.schema import Blueprint, ModeCfg
-
-    agent_config, model_ref, retrieval_cfg, chunking_cfg, sum_chunking_cfg = load_qa_agent_config(
-        "benchforge/config/qa_agent.yaml"
-    )
 
     blueprint = Blueprint(
         task_id="task_001",
@@ -73,30 +64,10 @@ async def run():
         },
     )
 
-    sys_config = QuestionGeneratorConfig.from_yaml(
-        "benchforge/config/question_generator_config.yaml",
-        task_id=blueprint.task_id,
-        run_id=blueprint.run_id,
-    )
-    sys_config.retrieval = retrieval_cfg
-    sys_config.chunking = chunking_cfg
-    sys_config.summarization_chunking = sum_chunking_cfg
-
-    from benchforge.models.loader import ModelLoader
-    from benchforge.agents.model_eval_agent.model_registry_loader import load_model_registry
-    registry = load_model_registry("benchforge/config/model_registry.yaml")
-    model_cfg = registry[model_ref.name]
-    client = ModelLoader.load_model(model_cfg)
-
-    evidence_manager = EvidenceManager(sys_config, client)
-
-    generator = Generator()
-
+    # 端到端调用：只需 blueprint + config_path
     report = await run_generation_agent(
         blueprint=blueprint,
-        config=agent_config,
-        evidence_manager=evidence_manager,
-        generator=generator,
+        config_path="benchforge/config/qa_agent.yaml",
     )
 
     print(f"\n=== Generation Report ===")

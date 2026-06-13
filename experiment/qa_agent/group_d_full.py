@@ -1,6 +1,5 @@
-"""Group D：Full qa_agent — 启用全部自适应机制，默认配置。"""
-import asyncio
-import sys
+﻿"""Group D：Full qa_agent — 启用全部自适应机制，默认配置。"""
+import asyncio, sys
 from datetime import datetime
 from pathlib import Path
 
@@ -10,8 +9,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from loguru import logger
 from benchforge.models.fake import FakeModelClient
 from agents.qa_agent.agent import run_generation_agent
-from agents.qa_agent.generator import Generator
-from fixtures import make_blueprint, make_config, make_evidence_manager
+import agents.qa_agent.agent as agent_mod
+from fixtures import make_blueprint, CONFIG_PATH
 
 
 async def run(
@@ -37,13 +36,12 @@ async def run(
         task_id=task_id, topics=topics, language=language,
         difficulty_distribution=difficulty_distribution,
     )
-    config = make_config(hard_gap_threshold=0.2, too_easy_ratio=0.4)
+
+    agent_mod._resolve_model_client_fn = lambda name, path: model_client
 
     report = await run_generation_agent(
         blueprint=blueprint,
-        config=config,
-        evidence_manager=make_evidence_manager(model_client),
-        generator=Generator(),
+        config_path=CONFIG_PATH,
     )
     logger.info(f"Group D completed. run_id={run_id}")
     return report

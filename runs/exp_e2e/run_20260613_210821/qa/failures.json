@@ -1,0 +1,38 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "error": "Connection error.",
+    "error_type": "APIConnectionError",
+    "llm_call_id": null
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "topic": "Machine learning",
+    "difficulty": "medium",
+    "error": "Connection error.",
+    "error_type": "APIConnectionError",
+    "llm_call_id": null
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "topic": "Python (programming language)",
+    "difficulty": "hard",
+    "error": "Connection error.",
+    "error_type": "APIConnectionError",
+    "llm_call_id": null
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "topic": "Machine learning",
+    "difficulty": "hard",
+    "error": "Connection error.",
+    "error_type": "APIConnectionError",
+    "llm_call_id": null
+  }
+]

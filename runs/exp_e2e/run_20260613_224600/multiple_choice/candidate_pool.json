@@ -1,0 +1,795 @@
+[
+  {
+    "question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "question": "A developer is creating a dictionary to map coordinate pairs to values. Which of the following data types can be directly used as a dictionary key in Python, and what is the fundamental reason this is allowed?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004",
+      "doc_8028cecc537d::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) A list, because it is an ordered collection of items.",
+      "(B) A tuple containing only integers, because tuples are hashable due to their immutability.",
+      "(C) A set, because it provides fast membership testing.",
+      "(D) A custom class object, because all objects in Python can be used as keys by default."
+    ]
+  },
+  {
+    "question_id": "0b8e8056-337a-4f4b-a7e4-ac7335465af7",
+    "question": "The Python design philosophy includes the principle: 'There should be one-- and preferably only one --obvious way to do it.' This principle is often contrasted with the motto of which other programming language?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004",
+      "doc_8028cecc537d::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) C++, which emphasizes 'you don't pay for what you don't use'.",
+      "(B) Perl, which embraces 'there is more than one way to do it'.",
+      "(C) Java, which prioritizes 'write once, run anywhere'.",
+      "(D) Haskell, which focuses on 'pure functional programming'."
+    ]
+  },
+  {
+    "question_id": "cd86eff9-140c-4d74-88e0-998c91bdddeb",
+    "question": "Which Python operator, introduced in version 3.8, allows assignment of a value to a variable as part of a larger expression?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "easy",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004",
+      "doc_8028cecc537d::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) The `@` operator, used for matrix multiplication.",
+      "(B) The `:=` operator, known as the 'walrus operator'.",
+      "(C) The `**=` operator, an in-place exponentiation assignment.",
+      "(D) The `~=` operator, used for pattern matching."
+    ]
+  },
+  {
+    "question_id": "fe2c2c50-db28-41e1-bb1e-242a3becfe84",
+    "question": "A team is building a weather sensor using a low-power microcontroller. Which Python implementation would be most appropriate for this embedded environment?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004",
+      "doc_8028cecc537d::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) CPython, the standard implementation, for its full compatibility with all libraries.",
+      "(B) PyPy, for its just-in-time compiler and potential speed improvements on small devices.",
+      "(C) MicroPython, as it is a variant optimized for microcontrollers.",
+      "(D) Cython, as it compiles Python to C for better performance on resource-constrained systems."
+    ]
+  },
+  {
+    "question_id": "889de84f-328e-452f-aead-f82f369f2bc8",
+    "question": "What is the primary distinction between a Tensor Processing Unit (TPU) and a general-purpose GPU in the context of machine learning?",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_18ac17e18c48::chunk_0000",
+      "doc_18ac17e18c48::chunk_0001",
+      "doc_18ac17e18c48::chunk_0002",
+      "doc_18ac17e18c48::chunk_0003",
+      "doc_18ac17e18c48::chunk_0004",
+      "doc_a42014b996c0::chunk_0003",
+      "doc_ce155af0fb1c::chunk_0006"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) TPUs are designed for general scientific computing, while GPUs are specialized for graphics rendering.",
+      "(B) TPUs are optimized specifically for tensor computations common in deep learning, whereas GPUs are more general-purpose accelerators.",
+      "(C) TPUs are software libraries, while GPUs are physical hardware components.",
+      "(D) TPUs are used exclusively for inference, while GPUs are used exclusively for training neural networks."
+    ]
+  },
+  {
+    "question_id": "f18c21e7-7c5c-4a87-b90e-423b90b40acf",
+    "question": "A researcher aims to deploy a machine learning model on a low-power wearable device to process health sensor data without sending it to the cloud. Which sub-field of ML is most relevant to this challenge?",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "easy",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_18ac17e18c48::chunk_0000",
+      "doc_18ac17e18c48::chunk_0001",
+      "doc_18ac17e18c48::chunk_0002",
+      "doc_18ac17e18c48::chunk_0003",
+      "doc_18ac17e18c48::chunk_0004",
+      "doc_a42014b996c0::chunk_0003",
+      "doc_ce155af0fb1c::chunk_0006"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Neuromorphic computing",
+      "(B) Embedded machine learning",
+      "(C) Generative adversarial networks",
+      "(D) Deep backward stochastic differential equations"
+    ]
+  },
+  {
+    "question_id": "4e5813b2-4778-429e-b65c-67aa87acefb3",
+    "question": "The 2012 breakthrough in image recognition, where a deep convolutional network significantly outperformed shallow methods on the ImageNet competition, is most associated with which system?",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "easy",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_18ac17e18c48::chunk_0000",
+      "doc_18ac17e18c48::chunk_0001",
+      "doc_18ac17e18c48::chunk_0002",
+      "doc_18ac17e18c48::chunk_0003",
+      "doc_18ac17e18c48::chunk_0004",
+      "doc_a42014b996c0::chunk_0003",
+      "doc_ce155af0fb1c::chunk_0006"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) LeNet-5",
+      "(B) AlexNet",
+      "(C) AlphaFold",
+      "(D) GNoME"
+    ]
+  },
+  {
+    "question_id": "547c6e5c-b60d-4dd5-b9de-3efe822287b4",
+    "question": "According to the document, what is a key advantage of deep learning models over traditional machine learning approaches that relied on hand-crafted feature engineering?",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_18ac17e18c48::chunk_0000",
+      "doc_18ac17e18c48::chunk_0001",
+      "doc_18ac17e18c48::chunk_0002",
+      "doc_18ac17e18c48::chunk_0003",
+      "doc_18ac17e18c48::chunk_0004",
+      "doc_a42014b996c0::chunk_0003",
+      "doc_ce155af0fb1c::chunk_0006"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Deep learning models are inherently less computationally expensive.",
+      "(B) Deep learning models automatically discover useful feature representations from the data.",
+      "(C) Deep learning models do not require any labeled data for training.",
+      "(D) Deep learning models are guaranteed to never overfit the training data."
+    ]
+  },
+  {
+    "question_id": "0d07face-7a36-462a-ac46-1a8ab05b4447",
+    "question": "A developer is writing a Python script that needs to process a large dataset as quickly as possible by leveraging multiple CPU cores. Which Python standard library module is specifically designed to help overcome the limitations of the Global Interpreter Lock (GIL) for such CPU-bound tasks?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 2,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0000",
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "choices": [
+      "(A) `threading`",
+      "(B) `asyncio`",
+      "(C) `multiprocessing`",
+      "(D) `concurrent`"
+    ]
+  },
+  {
+    "question_id": "d3e63ee8-4aff-409c-9c93-11c01c234a7c",
+    "question": "What was the primary motivation behind the development of Python 3.0, which necessitated a break in backward compatibility?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 2,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0000",
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "choices": [
+      "(A) To completely rewrite the interpreter in a new language for speed",
+      "(B) To reduce feature duplication and remove old ways of doing things",
+      "(C) To add mandatory static typing to the language",
+      "(D) To change the licensing model to be more restrictive"
+    ]
+  },
+  {
+    "question_id": "3564043b-6e75-4c15-abf1-10955efa0a44",
+    "question": "In the transition from Python 2 to Python 3, what was the fate of the `reduce` function?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "easy",
+    "status": "accepted",
+    "source_round": 2,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0000",
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "choices": [
+      "(A) It was removed from the language entirely.",
+      "(B) It was moved from the `functools` module into the built-in namespace.",
+      "(C) It was moved out of the built-in namespace and into the `functools` module.",
+      "(D) Its behavior was changed to work on strings as well as sequences."
+    ]
+  },
+  {
+    "question_id": "b08d06bc-6cee-4f8c-9071-0d14d0cd25dd",
+    "question": "Which organization was responsible for the Python 1.6 release and introduced a license that initially caused compatibility concerns with the GPL?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 2,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0000",
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "choices": [
+      "(A) The Python Software Foundation (PSF)",
+      "(B) BeOpen.com",
+      "(C) The Corporation for National Research Initiatives (CNRI)",
+      "(D) The Free Software Foundation (FSF)"
+    ]
+  },
+  {
+    "question_id": "e48ef67e-97bb-46ff-a794-071cdcd82fd7",
+    "question": "What is the primary reason Python's development was moved from a 'Benevolent Dictator for Life' model to a Steering Council?",
+    "answer": "A",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "choices": [
+      "(A) Guido van Rossum's retirement from active development of the language",
+      "(B) A community vote to adopt a more democratic governance structure",
+      "(C) The increasing complexity of the language required a larger decision-making body",
+      "(D) A conflict arising from the proposal of a specific new language feature"
+    ]
+  },
+  {
+    "question_id": "176d64c0-c858-4e6e-85e0-7383f3fe19c6",
+    "question": "According to its design philosophy, Python prioritizes which of the following over raw execution speed in the CPython reference implementation?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "choices": [
+      "(A) Backward compatibility",
+      "(B) Memory efficiency",
+      "(C) Code readability and clarity",
+      "(D) Support for static typing"
+    ]
+  },
+  {
+    "question_id": "5650c04a-79ed-4b49-8e09-e4c8f0236200",
+    "question": "Which Python implementation is specifically designed as a faster alternative to CPython by using a just-in-time (JIT) compiler, but may not support all C extension libraries?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "choices": [
+      "(A) Cython",
+      "(B) MicroPython",
+      "(C) PyPy",
+      "(D) Jython"
+    ]
+  },
+  {
+    "question_id": "497df594-37c3-4053-92a4-ce9fdc121018",
+    "question": "In Python, what is the key semantic property that allows a tuple to be used as a dictionary key, while a list cannot?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "choices": [
+      "(A) Tuples are hashable, while lists are not.",
+      "(B) Tuples have a fixed length, while lists are dynamic.",
+      "(C) Tuples are immutable, while lists are mutable.",
+      "(D) Tuples can only contain immutable elements, while lists can contain anything."
+    ]
+  },
+  {
+    "question_id": "e66b4c6f-42c4-49f4-a8ce-0a89c4bdefe6",
+    "question": "A developer needs to create a standalone executable for a data analysis script that uses popular scientific libraries like NumPy and SciPy. They want the smallest possible binary size and are willing to accept some restrictions on Python language features. Which tool would be the most appropriate choice for this scenario?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004",
+      "doc_8028cecc537d::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "0b8e8056-337a-4f4b-a7e4-ac7335465af7",
+    "choices": [
+      "(A) PyPy, because its just-in-time compiler produces highly optimized, compact machine code.",
+      "(B) Codon, as it compiles a statically  typed Python-like language to machine code via LLVM and supports native multithreading.",
+      "(C) Nuitka, which compiles Python into C and can create standalone executables, though binary sizes can be large for small programs.",
+      "(D) MicroPython, as it is optimized to produce minimal footprint code for resource1 constrained environments."
+    ]
+  },
+  {
+    "question_id": "01a753d3-1731-43d6-b874-9b1f6669ac0a",
+    "question": "Which of the following best describes a key architectural difference between CPython and PyPy that leads to PyPy's typical performance advantage?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004",
+      "doc_8028cecc537d::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "0b8e8056-337a-4f4b-a7e4-ac7335465af7",
+    "choices": [
+      "(A) PyPy uses a more efficient garbage collector than CPython's reference counting.",
+      "(B) PyPy compiles Python source code directly to optimized machine code, bypassing bytecode entirely.",
+      "(C) PyPy's just-in-time compiler can optimize bytecode during program execution based on runtime types.",
+      "(D) PyPy is written in C++, while CPython is written in C, allowing for better low-level optimizations."
+    ]
+  },
+  {
+    "question_id": "a3c54e14-fd54-46d8-a8f6-2c481e8a5732",
+    "question": "According to the document, what is a significant compatibility trade-off often encountered when using alternative Python implementations or transpilers to achieve better performance?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004",
+      "doc_8028cecc537d::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "0b8e8056-337a-4f4b-a7e4-ac7335465af7",
+    "choices": [
+      "(A) They frequently change the syntax of core language constructs like loops and conditionals.",
+      "(B) They may not support the full CPython API or all standard library modules, especially those written in C.",
+      "(C) They are only available for Linux and macOS, dropping support for Windows platforms.",
+      "(D) They enforce a strict, static type system that breaks most existing dynamically-typed Python code."
+    ]
+  },
+  {
+    "question_id": "37316dbd-438b-42d8-8977-c84af2ba1f3e",
+    "question": "A developer is reviewing a Python 2.7 codebase that makes extensive use of integer division with the `/` operator. They want to ensure the code produces the same numerical results when run under Python 3.x without changing every division operation. What is the most straightforward single change they could make to the imports of each module to achieve this?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0000",
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0003"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "fe2c2c50-db28-41e1-bb1e-242a3becfe84",
+    "choices": [
+      "(A) import future_division",
+      "(B) from __past__ import integer_division",
+      "(C) from __future__ import division",
+      "(D) from math import floor_div"
+    ]
+  },
+  {
+    "question_id": "57aee76c-57ab-42f1-8e1d-b1caec1028da",
+    "question": "According to the text, which of the following best describes a fundamental constraint imposed by Python's rigid distinction between expressions and statements?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0000",
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0003"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "fe2c2c50-db28-41e1-bb1e-242a3becfe84",
+    "choices": [
+      "(A) It prevents the use of functional programming paradigms like `map` and `filter`.",
+      "(B) It means assignment statements cannot be used within the conditional expression of an `if` statement.",
+      "(C) It forces all variables to be explicitly declared with a type before use.",
+      "(D) It requires that all string literals be defined using triple quotes for multi-line strings."
+    ]
+  },
+  {
+    "question_id": "e4644edc-610f-4be6-9546-7da05274be04",
+    "question": "A programmer reads that Python uses 'duck typing' and is 'strongly typed.' Based on the descriptions in the text, which scenario best illustrates both of these properties?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0000",
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0003"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "fe2c2c50-db28-41e1-bb1e-242a3becfe84",
+    "choices": [
+      "(A) A variable `x` is assigned an integer, then later reassigned a string without error.",
+      "(B) An object with a `.quack()` method is passed to a function expecting a `Duck` class, and it works.",
+      "(C) The operation `5 + \"hello\"` raises a `TypeError` at runtime.",
+      "(D) A function definition includes a type hint `def foo(bar: int) -> str:`, but a string argument is accepted without a warning from the interpreter."
+    ]
+  },
+  {
+    "question_id": "2870b273-942a-4d0a-b036-28ad1f57403c",
+    "question": "Which Python implementation is specifically described as being 'optimized for microcontrollers' and is a variant of Python 3?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "easy",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0000",
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0003"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "fe2c2c50-db28-41e1-bb1e-242a3becfe84",
+    "choices": [
+      "(A) Jython",
+      "(B) IronPython",
+      "(C) MicroPython",
+      "(D) Stackless Python"
+    ]
+  },
+  {
+    "question_id": "32c27072-707c-4daf-8693-a69f0a497bbe",
+    "question": "A developer is writing a Python script that must integrate a high-performance numerical library written in C and also handle resource management for file operations cleanly. Which combination of Python's core characteristics makes it particularly well-suited for this task?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 4,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "choices": [
+      "(A) Its mandatory static typing and built-in do-while loops",
+      "(B) Its use of the off-side rule and lack of support for functional programming",
+      "(C) Its dynamic typing, 'glue language' design for integration, and the `with` statement for context management",
+      "(D) Its compilation to standalone machine code and rejection of third-party modules"
+    ]
+  },
+  {
+    "question_id": "024186df-05e5-417a-ae11-c587938efc62",
+    "question": "According to the document, what is a key philosophical and practical distinction between Python's list and tuple data types?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "easy",
+    "status": "accepted",
+    "source_round": 4,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "choices": [
+      "(A) Lists are immutable and can be dictionary keys, while tuples are mutable and cannot.",
+      "(B) Lists are created with parentheses, while tuples are created with square brackets.",
+      "(C) Lists are mutable and cannot be dictionary keys, while tuples are immutable and can be dictionary keys if all their elements are immutable.",
+      "(D) The `+` operator modifies a tuple in-place but creates a new list when used with lists."
+    ]
+  },
+  {
+    "question_id": "dd527998-6528-4dfd-bd05-de8353ab57c5",
+    "question": "The text states that 'Python's developers typically prioritize readability over performance.' If a developer needs to optimize a speed-critical section of a Python program, which of the following approaches is most aligned with the language's supported optimization pathways as described?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 4,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0000",
+      "doc_393bf2f42fbf::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "3a422a3c-2dd6-4bb8-94a8-919d24bc56e0",
+    "choices": [
+      "(A) Rewriting the entire application in C to avoid Python's interpreter overhead.",
+      "(B) Using a just-in-time compiler like PyPy or moving the critical functions to an extension module written in C.",
+      "(C) Petitioning the CPython core developers to accept patches that optimize the interpreter, even if they reduce code clarity.",
+      "(D) Using the `do .. while` loop construct, which is known to be more efficient than `while` loops."
+    ]
+  },
+  {
+    "question_id": "295e5735-cfb8-4f5a-bc45-8fa7649ad09d",
+    "question": "In Python 3, what is the result of the expression `-7 // 3`?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 4,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "0b8e8056-337a-4f4b-a7e4-ac7335465af7",
+    "choices": [
+      "(A) -2",
+      "(B) -3",
+      "(C) -2.333...",
+      "(D) 2"
+    ]
+  },
+  {
+    "question_id": "aa1505ec-c297-4ef7-85b7-a7c349dddee0",
+    "question": "A developer wants to use external tools to catch type-related errors in their Python code before runtime. Which combination of language feature and tool is most appropriate for this goal?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 4,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "0b8e8056-337a-4f4b-a7e4-ac7335465af7",
+    "choices": [
+      "(A) Using duck typing and the `typing` module",
+      "(B) Using optional type annotations and the `mypy` tool",
+      "(C) Using the `eval()` function for dynamic type checking",
+      "(D) Relying on Python's strong dynamic typing to raise `TypeError` exceptions"
+    ]
+  },
+  {
+    "question_id": "808d68bd-9a4d-4cba-b477-38615bea41d8",
+    "question": "Which of the following is a key difference between the CPython reference implementation and the PyPy implementation?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 4,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0003",
+      "doc_393bf2f42fbf::chunk_0004"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "0b8e8056-337a-4f4b-a7e4-ac7335465af7",
+    "choices": [
+      "(A) CPython uses a just-in-time (JIT) compiler for speed, while PyPy does not.",
+      "(B) PyPy may not support some libraries written in C, whereas CPython does.",
+      "(C) CPython compiles Python to Java bytecode, while PyPy compiles to machine code.",
+      "(D) PyPy is the official reference implementation defined by the Python Software Foundation."
+    ]
+  },
+  {
+    "question_id": "ac23e002-9fbf-456a-978f-60d0962e86bc",
+    "question": "In Python, what is the key behavioral difference between the `/` and `//` operators when used with integers?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 4,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0004",
+      "doc_8028cecc537d::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "fe2c2c50-db28-41e1-bb1e-242a3becfe84",
+    "choices": [
+      "(A) `/` performs integer division (truncating the result), while `//` performs floating-point division",
+      "(B) `/` always performs floating-point division, while `//` performs floor division (rounding down)",
+      "(C) Both operators perform the same division, but `//` is the newer syntax introduced in Python 3",
+      "(D) `/` is used for division with remainder, while `//` returns only the quotient without remainder"
+    ]
+  },
+  {
+    "question_id": "c3bc4cf2-6325-42db-a7a0-1a536ebccd35",
+    "question": "A programmer wants to execute a string containing the Python statement `x = 5 + 3`. Which built-in function should they use?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 4,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0004",
+      "doc_8028cecc537d::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "fe2c2c50-db28-41e1-bb1e-242a3becfe84",
+    "choices": [
+      "(A) `eval()`, because it evaluates expressions",
+      "(B) `exec()`, because it executes statements",
+      "(C) `run()`, as it is designed for executing code strings",
+      "(D) Either `eval()` or `exec()` would work equally well for this task"
+    ]
+  },
+  {
+    "question_id": "ac43d79c-a7b4-4987-b19c-d4a244e24612",
+    "question": "What does it mean that Python uses 'duck typing'?",
+    "answer": "C",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 4,
+    "source_strategy": "evolve_to_harder",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0001",
+      "doc_393bf2f42fbf::chunk_0002",
+      "doc_393bf2f42fbf::chunk_0004",
+      "doc_8028cecc537d::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": "fe2c2c50-db28-41e1-bb1e-242a3becfe84",
+    "choices": [
+      "(A) Variable names must be declared with a specific type before they can be used",
+      "(B) The interpreter checks the type of all objects at compile time to prevent runtime errors",
+      "(C) An object's suitability for an operation is determined by the presence of required methods/properties, not its explicit type",
+      "(D) Python automatically converts (coerces) data between types, such as adding a string to a number by converting the number to a string"
+    ]
+  }
+]

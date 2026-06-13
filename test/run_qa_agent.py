@@ -12,13 +12,7 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 from loguru import logger
-from benchforge.config import QuestionGeneratorConfig
-from benchforge.models.loader import ModelLoader
-from benchforge.agents.model_eval_agent.model_registry_loader import load_model_registry
-from benchforge.agents.qa_agent.evidence_manager import EvidenceManager
-from benchforge.agents.qa_agent.generator import Generator
 from benchforge.agents.qa_agent import run_generation_agent
-from benchforge.agents.qa_agent.config_loader import load_qa_agent_config
 from benchforge.agents.qa_agent.schema import Blueprint, ModeCfg
 
 TASK_ID = "task_001"
@@ -52,9 +46,6 @@ def build_blueprint() -> Blueprint:
 
 
 async def main():
-    agent_config, model_ref, retrieval_cfg, chunking_cfg, sum_chunking_cfg = load_qa_agent_config(
-        project_root / "benchforge/config/qa_agent.yaml"
-    )
     blueprint = build_blueprint()
 
     # 日志落盘
@@ -62,25 +53,10 @@ async def main():
     log_path.parent.mkdir(parents=True, exist_ok=True)
     logger.add(str(log_path), level="DEBUG", encoding="utf-8")
 
-    sys_config = QuestionGeneratorConfig.from_yaml(
-        project_root / "benchforge/config/question_generator_config.yaml",
-        task_id=blueprint.task_id,
-        run_id=blueprint.run_id,
-    )
-    sys_config.retrieval = retrieval_cfg
-    sys_config.chunking = chunking_cfg
-    sys_config.summarization_chunking = sum_chunking_cfg
-
-    # 从 model_registry.yaml 解析模型身份 → 创建客户端
-    registry = load_model_registry(project_root / "benchforge/config/model_registry.yaml")
-    model_cfg = registry[model_ref.name]
-    client = ModelLoader.load_model(model_cfg)
-
+    # 端到端调用：只需 blueprint + config_path
     report = await run_generation_agent(
         blueprint=blueprint,
-        config=agent_config,
-        evidence_manager=EvidenceManager(sys_config, client),
-        generator=Generator(),
+        config_path=project_root / "benchforge/config/qa_agent.yaml",
     )
 
     print(f"\n=== Generation Report ===")

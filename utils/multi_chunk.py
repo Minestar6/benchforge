@@ -61,7 +61,7 @@ class MultiChunkBuilder:
         document_summaries: dict[str, str],
         target_count: int = 10,
         h_min: int = 2,
-        h_max: int = 5,
+        h_max: int = 4,
         combinations_per_doc_factor: int = 2,
     ) -> list[MultiChunkUnit]:
         """YourBench 风格：基于文档哈希的确定性随机采样，支持非相邻 chunk 组合。

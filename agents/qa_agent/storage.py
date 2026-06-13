@@ -77,7 +77,8 @@ def save_mode_outputs(task_id: str, run_id: str, mode: str, mode_state: ModeStat
             "chunk_ids": r.chunk_ids,
             "reject_reason": r.reject_reason,
             "parent_question_id": r.parent_question_id,
-        }
+            "choices": r.choices,
+       }
 
     accepted = [r for r in mode_state.candidate_questions if r.status == CandidateStatus.ACCEPTED]
     _write_json(base / "candidate_pool.json", [_serialize(r) for r in accepted])

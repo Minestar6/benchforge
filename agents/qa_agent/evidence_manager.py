@@ -56,7 +56,6 @@ class EvidenceManager:
         self.multi_chunk_builder = MultiChunkBuilder()
         self.document_summaries: dict[str, str] = {}
         self.documents: dict[str, Any] = {}  # document_id -> SourceDocument
-        self.used_chunk_combinations: set[frozenset[str]] = set()
         self.retrieved_urls: set[str] = set()
         self.evidence_pools: dict[str, Any] = {}
 
@@ -86,7 +85,6 @@ class EvidenceManager:
             (chunk 列表, 证据池)
         """
         # 新主题，重置组合历史和 URL 记录
-        self.used_chunk_combinations.clear()
         self.retrieved_urls.clear()
 
         # 检索文档（可选 saliency 重排：按 Wikimedia 访问量筛选最显著页面）
@@ -397,34 +395,14 @@ Provide a concise overview in <final_summary> tags."""
         # 计算请求数量（冗余策略）
         num_evidence = self._calculate_num_evidence(remaining)
 
-        # 重试采样直到获得唯一组合
-        max_retries = 5
-        batch = None
-
-        for attempt in range(max_retries):
-            batch = sampler.sample(
-                pool=evidence_pool,
-                target_mode=target_mode,
-                target_difficulty=target_difficulty,
-                num_evidence=num_evidence,
-                prefer_multi_chunk=prefer_multi_chunk,
-            )
-
-            # 检查组合是否唯一
-            combo_key = frozenset(batch.single_chunk_ids + batch.multi_chunk_ids)
-
-            if combo_key not in self.used_chunk_combinations:
-                # 组合唯一，记录并返回
-                self.used_chunk_combinations.add(combo_key)
-                break
-
-            logger.debug(f"Duplicate chunk combination detected, retry {attempt + 1}")
-        else:
-            # 重试用尽，强制采样未使用的组合
-            batch = self._force_unique_sample(
-                evidence_pool, target_mode, target_difficulty, num_evidence
-            )
-
+        # ???????? sample_chunks + GlobalState ?????
+        batch = sampler.sample(
+            pool=evidence_pool,
+            target_mode=target_mode,
+            target_difficulty=target_difficulty,
+            num_evidence=num_evidence,
+            prefer_multi_chunk=prefer_multi_chunk,
+        )
         # 设置请求数量
         min_questions, target_questions = self._calculate_batch_request_counts(remaining)
         batch.requested_min_questions = min_questions
@@ -452,91 +430,6 @@ Provide a concise overview in <final_summary> tags."""
         """
         # 最多 5 个证据单元
         return min(5, remaining_count + 2)
-
-    def _force_unique_sample(
-        self,
-        evidence_pool: Any,
-        target_mode: str,
-        target_difficulty: str,
-        num_evidence: int,
-    ) -> Any:
-        """强制采样未使用过的 chunk 组合。
-
-        当重试次数用尽时调用，从未使用的单元中选择分数最高的组合。
-
-        Args:
-            evidence_pool: 证据池
-            target_mode: 目标模式
-            target_difficulty: 目标难度
-            num_evidence: 需要的证据单元数量
-
-        Returns:
-            生成批次
-        """
-        from benchforge.schemas import GenerationBatch
-
-        # 获取所有已使用的 chunk ID
-        used_ids = set()
-        for combo in self.used_chunk_combinations:
-            used_ids.update(combo)
-
-        # 过滤未使用的单元
-        unused_single = [
-            u for u in evidence_pool.single_chunks if u.chunk_id not in used_ids
-        ]
-        unused_multi = [
-            u for u in evidence_pool.multi_chunks if u.unit_id not in used_ids
-        ]
-
-        # 根据目标模式选择分数
-        score_key = "mcq_score" if target_mode == "multiple_choice" else "qa_score"
-
-        # 选择分数最高的未使用单元
-        selected_single = sorted(
-            unused_single,
-            key=lambda u: getattr(u, score_key),
-            reverse=True
-        )[:num_evidence]
-
-        # 硬题优先使用 multi chunk
-        if target_difficulty == "hard" and unused_multi:
-            target_multi_count = max(1, num_evidence // 2)
-            selected_multi = sorted(
-                unused_multi,
-                key=lambda u: getattr(u, score_key),
-                reverse=True
-            )[:target_multi_count]
-        else:
-            selected_multi = []
-
-        # 如果没有足够的未使用单元，降低选择数量
-        if not selected_single and not selected_multi:
-            logger.warning("No unused chunks available, returning empty batch")
-            return GenerationBatch(
-                topic=evidence_pool.topic,
-                target_mode=target_mode,
-                target_difficulty=target_difficulty,
-                remaining_count=num_evidence,
-                single_chunk_ids=[],
-                multi_chunk_ids=[],
-                prompt_template_id="mcq_generation_v1" if target_mode == "multiple_choice" else "qa_generation_v1",
-            )
-
-        # 记录新组合
-        combo_key = frozenset(
-            [u.chunk_id for u in selected_single] + [u.unit_id for u in selected_multi]
-        )
-        self.used_chunk_combinations.add(combo_key)
-
-        return GenerationBatch(
-            topic=evidence_pool.topic,
-            target_mode=target_mode,
-            target_difficulty=target_difficulty,
-            remaining_count=num_evidence,
-            single_chunk_ids=[u.chunk_id for u in selected_single],
-            multi_chunk_ids=[u.unit_id for u in selected_multi],
-            prompt_template_id="mcq_generation_v1" if target_mode == "multiple_choice" else "qa_generation_v1",
-        )
 
     def _calculate_batch_request_counts(
         self,

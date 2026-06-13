@@ -10,7 +10,7 @@ from loguru import logger
 from .state import GlobalState, ModeState, CandidateRecord, CandidateStatus
 from .planner import ModeRoundPlan, RoundStrategy, mode_candidate_target, mode_initial_breadth_not_done
 from .feedback import build_round_feedback, RoundFeedback
-from .sampling import sample_chunks, raw_chunk_ids, record_global_chunk_usage
+from .sampling import sample_chunks, raw_chunk_ids, _unit_combos, record_global_chunk_usage
 from benchforge.utils.filter import LightweightFilter
 from benchforge.utils.llm_tracer import LLMTracer
 
@@ -58,7 +58,7 @@ def update_mode_state(
     """Append new CandidateRecords; return the list of newly added records."""
     new_records: list[CandidateRecord] = []
     for q in parsed_questions:
-        difficulty = normalize_difficulty(q.get("difficulty", round_plan.difficulty))
+        difficulty = normalize_difficulty(q.get("estimated_difficulty") or q.get("difficulty") or round_plan.difficulty)
         record = CandidateRecord(
             question_id=q.get("question_id") or str(uuid.uuid4()),
             question=q.get("question", ""),
@@ -70,7 +70,8 @@ def update_mode_state(
             source_strategy=round_plan.strategy.value,
             chunk_ids=q.get("chunk_ids", []),
             parent_question_id=parent_question_id,
-        )
+            choices=q.get("choices") if q.get("question_mode") == "multiple_choice" else None,
+       )
         mode_state.candidate_questions.append(record)
         new_records.append(record)
     for item in (filter_failures or []):
@@ -150,7 +151,7 @@ async def _generate_for_topic(
 ) -> dict:
     """Run one topic's LLM generation; returns raw result without state mutation."""
     llm_call_id = None
-    reserved_combo: tuple[str, ...] | None = None
+    reserved_unit_combos: list[tuple[str, ...]] | None = None
     try:
         if reservation_lock is not None and reserved_combinations is not None:
             async with reservation_lock:
@@ -168,8 +169,9 @@ async def _generate_for_topic(
                     round_num=mode_state.round_in_mode,
                 )
                 if not duplicate_combination:
-                    reserved_combo = tuple(raw_chunk_ids(chunks))
-                    reserved_combinations.add(reserved_combo)
+                    reserved_unit_combos = _unit_combos(chunks)
+                    for combo in reserved_unit_combos:
+                        reserved_combinations.add(combo)
         else:
             chunks, duplicate_combination = sample_chunks(
                 evidence_manager=evidence_manager,
@@ -276,8 +278,9 @@ async def _generate_for_topic(
         }
 
     except Exception as exc:
-        if reserved_combo is not None and reserved_combinations is not None:
-            reserved_combinations.discard(reserved_combo)
+        if reserved_unit_combos is not None and reserved_combinations is not None:
+            for combo in reserved_unit_combos:
+                reserved_combinations.discard(combo)
         logger.warning(f"Topic {topic} failed in round {round_plan.round_in_mode}: {exc}")
         return {
             "topic": topic,

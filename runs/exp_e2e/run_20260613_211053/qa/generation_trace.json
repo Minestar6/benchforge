@@ -1,0 +1,77 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "medium",
+    "topics": [
+      "Python (programming language)",
+      "Machine learning"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 3,
+    "results": [
+      {
+        "topic": "Python (programming language)",
+        "success": true,
+        "generated_count": 2,
+        "raw_count": 2,
+        "filtered_count": 2,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "fake_0001",
+        "chunks": [
+          "doc_fake_001::chunk_0000"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Machine learning",
+        "success": false,
+        "generated_count": 0,
+        "chunks": [],
+        "duplicate_combination": false,
+        "error": "2 validation errors for GenerationBatch\nrequested_min_questions\n  Field required [type=missing, input_value={'topic': 'Machine learni...id': 'qa_generation_v1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nrequested_target_questions\n  Field required [type=missing, input_value={'topic': 'Machine learni...id': 'qa_generation_v1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing",
+        "error_type": "ValidationError",
+        "llm_call_id": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "strategy": "focus_difficulty",
+    "difficulty": "hard",
+    "topics": [
+      "Machine learning",
+      "Python (programming language)"
+    ],
+    "single_k": 1,
+    "multi_k": 2,
+    "target_candidates_per_topic": 4,
+    "results": [
+      {
+        "topic": "Machine learning",
+        "success": false,
+        "generated_count": 0,
+        "chunks": [],
+        "duplicate_combination": false,
+        "error": "2 validation errors for GenerationBatch\nrequested_min_questions\n  Field required [type=missing, input_value={'topic': 'Machine learni...id': 'qa_generation_v1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nrequested_target_questions\n  Field required [type=missing, input_value={'topic': 'Machine learni...id': 'qa_generation_v1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing",
+        "error_type": "ValidationError",
+        "llm_call_id": null
+      },
+      {
+        "topic": "Python (programming language)",
+        "success": false,
+        "generated_count": 0,
+        "chunks": [],
+        "duplicate_combination": false,
+        "error": "2 validation errors for GenerationBatch\nrequested_min_questions\n  Field required [type=missing, input_value={'topic': 'Python (progra...id': 'qa_generation_v1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nrequested_target_questions\n  Field required [type=missing, input_value={'topic': 'Python (progra...id': 'qa_generation_v1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing",
+        "error_type": "ValidationError",
+        "llm_call_id": null
+      }
+    ]
+  }
+]

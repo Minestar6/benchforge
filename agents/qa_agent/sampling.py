@@ -22,20 +22,36 @@ def raw_chunk_ids(chunks: list[Any]) -> list[str]:
     return sorted(set(ids))
 
 
+def _unit_combos(chunks: list[Any]) -> list[tuple[str, ...]]:
+    """Decompose a list of units into per-unit combos.
+
+    Each SingleChunkUnit becomes a single-element combo (chunk_id,).
+    Each MultiChunkUnit becomes a combo of its sorted chunk_ids.
+    Single and multi units are NEVER merged; they stay separate combos.
+    """
+    combos = []
+    for unit in chunks:
+        if hasattr(unit, "chunk_ids") and isinstance(unit.chunk_ids, list):
+            if unit.chunk_ids:
+                combos.append(tuple(sorted(unit.chunk_ids)))
+        elif hasattr(unit, "chunk_id"):
+            combos.append((unit.chunk_id,))
+    return combos
+
+
 def record_global_chunk_usage(
     global_state: GlobalState,
     chunks: list[Any],
     max_size: int,
 ) -> None:
-    chunk_ids = raw_chunk_ids(chunks)
-    combo = tuple(chunk_ids)
+    unit_combos = _unit_combos(chunks)
+    for combo in unit_combos:
+        if combo not in global_state.used_chunk_combinations:
+            global_state.used_chunk_combinations.add(combo)
+            global_state.used_chunk_combination_order.append(combo)
 
-    if combo not in global_state.used_chunk_combinations:
-        global_state.used_chunk_combinations.add(combo)
-        global_state.used_chunk_combination_order.append(combo)
-
-    for cid in chunk_ids:
-        global_state.chunk_usage_counts[cid] = global_state.chunk_usage_counts.get(cid, 0) + 1
+        for cid in combo:
+            global_state.chunk_usage_counts[cid] = global_state.chunk_usage_counts.get(cid, 0) + 1
 
     while len(global_state.used_chunk_combinations) > max_size:
         oldest = global_state.used_chunk_combination_order.popleft()
@@ -75,9 +91,11 @@ def sample_chunks(
         multi_units = [u for u in evidence_pool.multi_chunks if u.unit_id in batch.multi_chunk_ids]
         chunks = single_units + multi_units
 
-        combo = tuple(raw_chunk_ids(chunks))
+        unit_combos_retry = _unit_combos(chunks)
+        if not unit_combos_retry:
+            continue
         blocked = blocked_combinations if blocked_combinations is not None else global_used_combinations
-        if combo not in blocked:
+        if all(c not in blocked for c in unit_combos_retry):
             return chunks, False
 
         last_chunks = chunks

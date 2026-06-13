@@ -1,4 +1,8 @@
-"""共用 fixtures：blueprint、config 构造。"""
+"""共用 fixtures：blueprint、config 构造。
+
+EvidenceManager 和 Generator 已由 run_generation_agent 内部自动创建，
+fixtures 中不再需要 make_evidence_manager()。
+"""
 import sys
 from pathlib import Path
 
@@ -60,18 +64,3 @@ def make_config(hard_gap_threshold: float = 0.2, too_easy_ratio: float = 0.4) ->
         runtime=RuntimeConfig(max_consecutive_empty_rounds_per_mode=3, max_failures_per_mode=8),
         decision=DecisionConfig(hard_gap_threshold=hard_gap_threshold, too_easy_ratio=too_easy_ratio),
     )
-
-
-def make_evidence_manager(model_client):
-    """构造真实 EvidenceManager，使用 qa_agent.yaml 中的检索/分块配置。"""
-    from agents.qa_agent.evidence_manager import EvidenceManager
-    from agents.qa_agent.config_loader import load_qa_agent_config
-
-    _, _, retrieval_cfg, chunking_cfg, sum_chunking_cfg = load_qa_agent_config(CONFIG_PATH)
-
-    class _Cfg:
-        retrieval = retrieval_cfg
-        chunking = chunking_cfg
-        summarization_chunking = sum_chunking_cfg
-
-    return EvidenceManager(config=_Cfg(), model_client=model_client)

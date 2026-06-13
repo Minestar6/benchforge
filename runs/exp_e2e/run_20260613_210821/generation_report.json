@@ -1,0 +1,23 @@
+{
+  "task_id": "exp_e2e",
+  "run_id": "run_20260613_210821",
+  "modes": {
+    "qa": {
+      "candidate_count": 0,
+      "accepted_count": 0,
+      "target_candidate_count": 50,
+      "difficulty_counts": {},
+      "stopped_reason": "mode_failure_limit_reached"
+    },
+    "multiple_choice": {
+      "candidate_count": 0,
+      "accepted_count": 0,
+      "target_candidate_count": 25,
+      "difficulty_counts": {},
+      "stopped_reason": "mode_failure_limit_reached"
+    }
+  },
+  "total_candidates": 0,
+  "global_used_chunk_combinations": 0,
+  "global_failures": 8
+}

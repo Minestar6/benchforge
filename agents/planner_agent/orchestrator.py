@@ -2,7 +2,7 @@
 
 职责：
 1. 合并 base YAML + patch，落盘 effective config
-2. 初始化 EvidenceManager + Generator，调用 run_generation_agent
+2. 调用 run_generation_agent
 3. 更新 shared_state，调用 verify_agent / model_eval_agent
 4. 返回三份 feedback
 """
@@ -12,13 +12,9 @@ import yaml
 from pathlib import Path
 from loguru import logger
 
-from benchforge.config import QuestionGeneratorConfig
 from benchforge.models.loader import ModelLoader
 from benchforge.agents.model_eval_agent.model_registry_loader import load_model_registry
-from benchforge.agents.qa_agent.config_loader import load_qa_agent_config
 from benchforge.agents.qa_agent.schema import Blueprint, ModeCfg
-from benchforge.agents.qa_agent.evidence_manager import EvidenceManager
-from benchforge.agents.qa_agent.generator import Generator
 from benchforge.agents.qa_agent import run_generation_agent
 from benchforge.agents.verify_agent.config_loader import load_verify_agent_config
 from benchforge.agents.verify_agent.agent import run_verify_agent_from_shared_state
@@ -116,9 +112,7 @@ async def execute_round(
     with open(effective_eval_path, "w", encoding="utf-8") as f:
         yaml.dump(effective_eval, f, allow_unicode=True)
 
-    # 3. 加载 qa_agent config + 构造 Blueprint
-    agent_config, model_ref, retrieval_cfg, chunking_cfg, sum_chunking_cfg = load_qa_agent_config(effective_qa_path)
-
+    # 3. 构造 Blueprint
     blueprint = Blueprint(
         task_id=round_spec.blueprint["task_id"],
         run_id=round_spec.blueprint["run_id"],
@@ -134,32 +128,15 @@ async def execute_round(
         },
     )
 
-    # 4. 构建 sys_config（EvidenceManager 需要）
-    sys_config = QuestionGeneratorConfig.from_yaml(
-        base_config_dir.parent / "question_generator_config.yaml"
-        if (base_config_dir.parent / "question_generator_config.yaml").exists()
-        else base_config_dir / "question_generator_config.yaml",
-        task_id=blueprint.task_id,
-        run_id=blueprint.run_id,
-    )
-    sys_config.retrieval = retrieval_cfg
-    sys_config.chunking = chunking_cfg
-    sys_config.summarization_chunking = sum_chunking_cfg
-
-    # 5. 加载模型客户端
-    registry = load_model_registry(registry_path)
-    model_client = _load_model_client_from_registry(registry, model_ref.name)
-
-    # 6. 运行 qa_agent
+    # 4. 运行 qa_agent（EvidenceManager / Generator / model 由 agent 内部自动创建）
     logger.info(f"[Orchestrator] Running qa_agent: {len(blueprint.topics)} topics")
     await run_generation_agent(
         blueprint=blueprint,
-        config=agent_config,
-        evidence_manager=EvidenceManager(sys_config, model_client),
-        generator=Generator(),
+        config_path=effective_qa_path,
+        registry_path=registry_path,
     )
 
-    # 7. 更新 shared_state（兼容 verify_agent 读 state.blueprint）
+    # 5. 更新 shared_state（兼容 verify_agent 读 state.blueprint）
     shared_state_path = run_dir / "shared_state.json"
     state = build_shared_state(
         blueprint.task_id,
@@ -184,21 +161,22 @@ async def execute_round(
         logger.warning("[Orchestrator] No candidates generated, skipping verify/eval")
         return gen_feedback, None, None
 
-    # 8. 运行 verify_agent
+    # 6. 运行 verify_agent
     logger.info("[Orchestrator] Running verify_agent")
     verify_config = load_verify_agent_config(effective_verify_path)
+    registry = load_model_registry(registry_path)
     verify_model_client = _load_verify_model_client(registry, verify_config)
-    await run_verify_agent_from_shared_state(shared_state_path, verify_config, verify_model_client)
+    await run_verify_agent_from_shared_state(str(shared_state_path), verify_config, verify_model_client)
 
     val_feedback = build_validator_feedback(shared_state_path, round_spec.round_id)
     if not val_feedback or val_feedback.summary.final_selected == 0:
         logger.warning("[Orchestrator] No selected questions, skipping eval")
         return gen_feedback, val_feedback, None
 
-    # 9. 运行 model_eval_agent
+    # 7. 运行 model_eval_agent
     logger.info("[Orchestrator] Running model_eval_agent")
     eval_config = load_model_eval_config(effective_eval_path)
-    await run_model_eval_agent_from_shared_state(shared_state_path, eval_config, str(registry_path))
+    await run_model_eval_agent_from_shared_state(str(shared_state_path), eval_config, str(registry_path))
 
     eval_feedback = build_evaluator_feedback(shared_state_path, round_spec.round_id)
 

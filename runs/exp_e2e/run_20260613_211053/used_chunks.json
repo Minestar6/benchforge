@@ -1,0 +1,10 @@
+{
+  "used_chunk_combinations": [
+    [
+      "doc_fake_001::chunk_0000"
+    ]
+  ],
+  "chunk_usage_counts": {
+    "doc_fake_001::chunk_0000": 1
+  }
+}
