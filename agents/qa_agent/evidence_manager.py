@@ -1,5 +1,6 @@
 """EvidenceManager 模块：检索、分块、证据池、采样。"""
 
+import json
 from pathlib import Path
 import re
 from typing import Any
@@ -63,6 +64,62 @@ class EvidenceManager:
         if hasattr(self.config, "get_resolved_output_path"):
             return str(self.config.get_resolved_output_path() / "llm_calls.jsonl")
         return None
+
+    def _multi_chunk_cfg(self) -> Any:
+        return getattr(self.config, "multi_chunk", None)
+
+    def _resolve_multi_target_count(
+        self,
+        single_units: list[Any],
+        *,
+        expansion: bool = False,
+    ) -> int:
+        mcfg = self._multi_chunk_cfg()
+
+        h_min = getattr(mcfg, "h_min", 2)
+        h_max = getattr(mcfg, "h_max", 5)
+        num_multihops_factor = getattr(mcfg, "num_multihops_factor", 1)
+
+        max_units = getattr(
+            mcfg,
+            "max_units_per_expansion" if expansion else "max_units_per_topic",
+            40 if expansion else 80,
+        )
+
+        return self.multi_chunk_builder.calculate_yourbench_target_count(
+            single_chunks=single_units,
+            h_min=h_min,
+            h_max=h_max,
+            num_multihops_factor=num_multihops_factor,
+            max_units=max_units,
+        )
+
+    def _build_multi_units(
+        self,
+        single_units: list[Any],
+        doc_summaries: dict[str, str],
+        *,
+        expansion: bool = False,
+    ) -> list[Any]:
+        mcfg = self._multi_chunk_cfg()
+
+        h_min = getattr(mcfg, "h_min", 2)
+        h_max = getattr(mcfg, "h_max", 5)
+        combinations_per_doc_factor = getattr(mcfg, "combinations_per_doc_factor", 1)
+
+        target_count = self._resolve_multi_target_count(
+            single_units,
+            expansion=expansion,
+        )
+
+        return self.multi_chunk_builder.build_multi_chunk_units_smart(
+            single_units,
+            doc_summaries,
+            target_count=target_count,
+            h_min=h_min,
+            h_max=h_max,
+            combinations_per_doc_factor=combinations_per_doc_factor,
+        )
 
     async def prepare_evidence(
         self,
@@ -343,10 +400,10 @@ Provide a concise overview in <final_summary> tags."""
             for doc_id in chunks_by_doc.keys()
         }
 
-        multi_units = self.multi_chunk_builder.build_multi_chunk_units_smart(
+        multi_units = self._build_multi_units(
             single_units,
             doc_summaries,
-            target_count=min(10, len(single_units) // 2),
+            expansion=False,
         )
 
         # 创建证据池
@@ -505,6 +562,8 @@ Provide a concise overview in <final_summary> tags."""
                 if document.status.value == "failed":
                     continue
 
+                self.documents[document.document_id] = document
+
                 # Wikipedia 且导言段非空：直接用，否则 LLM 生成
                 if get_document_source(document.url) == "wikipedia" and document.summary:
                     self.document_summaries[document.document_id] = document.summary
@@ -538,10 +597,10 @@ Provide a concise overview in <final_summary> tags."""
             for chunk in all_chunks
         }
 
-        multi_units = self.multi_chunk_builder.build_multi_chunk_units_smart(
+        multi_units = self._build_multi_units(
             single_units,
             doc_summaries,
-            target_count=min(5, len(single_units) // 2),
+            expansion=True,
         )
 
         # 扩展到现有证据池
@@ -549,11 +608,125 @@ Provide a concise overview in <final_summary> tags."""
             evidence_pool.single_chunks.extend(single_units)
             evidence_pool.multi_chunks.extend(multi_units)
 
+        self._append_expanded_evidence_to_disk(
+            topic=topic,
+            chunks=all_chunks,
+            single_units=single_units,
+            multi_units=multi_units,
+        )
+
         return ExpandResult(
             new_chunks=len(all_chunks),
             new_single_units=len(single_units),
             new_multi_units=len(multi_units),
         )
+
+    def _append_expanded_evidence_to_disk(
+        self,
+        topic: str,
+        chunks: list[Any],
+        single_units: list[Any],
+        multi_units: list[Any],
+    ) -> None:
+        """将 EXPAND_EVIDENCE 新增证据持久化到 runs/{task_id}/{run_id}/evidence。"""
+        if not hasattr(self.config, "get_resolved_output_path"):
+            return
+
+        evidence_dir = Path(self.config.get_resolved_output_path()) / "evidence"
+        evidence_dir.mkdir(parents=True, exist_ok=True)
+
+        # 1. append chunked.jsonl
+        chunks_by_doc: dict[str, list[Any]] = {}
+        for chunk in chunks:
+            chunks_by_doc.setdefault(chunk.document_id, []).append(chunk)
+
+        chunked_rows: list[dict[str, Any]] = []
+
+        for doc_id, doc_chunks in chunks_by_doc.items():
+            doc_chunks_sorted = sorted(
+                doc_chunks,
+                key=lambda c: getattr(c, "chunk_index", 0),
+            )
+            source_doc = self.documents.get(doc_id)
+
+            chunked_rows.append(
+                {
+                    "document_id": doc_id,
+                    "topic": topic,
+                    "document_title": source_doc.title if source_doc else "",
+                    "document_url": source_doc.url if source_doc else "",
+                    "document_text": source_doc.content if source_doc else "",
+                    "document_summary": self.document_summaries.get(doc_id, ""),
+                    "chunks": [
+                        {
+                            "chunk_id": c.chunk_id,
+                            "chunk_text": c.text,
+                        }
+                        for c in doc_chunks_sorted
+                    ],
+                    "source": "expand_retrieval",
+                }
+            )
+
+        if chunked_rows:
+            with open(evidence_dir / "chunked.jsonl", "a", encoding="utf-8") as f:
+                for row in chunked_rows:
+                    f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+        # 2. merge single_units.json
+        single_path = evidence_dir / "single_units.json"
+        if single_path.exists():
+            with open(single_path, "r", encoding="utf-8") as f:
+                single_data = json.load(f)
+        else:
+            single_data = {}
+
+        single_data.setdefault(topic, [])
+        single_data[topic].extend(
+            [
+                {
+                    "chunk_id": u.chunk_id,
+                    "document_id": u.document_id,
+                    "text": getattr(u, "text", ""),
+                    "qa_score": u.qa_score,
+                    "mcq_score": u.mcq_score,
+                    "hard_score": u.hard_score,
+                    "source": "expand_retrieval",
+                }
+                for u in single_units
+            ]
+        )
+
+        with open(single_path, "w", encoding="utf-8") as f:
+            json.dump(single_data, f, ensure_ascii=False, indent=2)
+
+        # 3. merge multi_units.json
+        multi_path = evidence_dir / "multi_units.json"
+        if multi_path.exists():
+            with open(multi_path, "r", encoding="utf-8") as f:
+                multi_data = json.load(f)
+        else:
+            multi_data = {}
+
+        multi_data.setdefault(topic, [])
+        multi_data[topic].extend(
+            [
+                {
+                    "unit_id": u.unit_id,
+                    "document_id": u.document_id,
+                    "chunk_ids": list(u.chunk_ids),
+                    "texts": list(getattr(u, "texts", [])),
+                    "qa_score": u.qa_score,
+                    "mcq_score": u.mcq_score,
+                    "hard_score": u.hard_score,
+                    "source": "expand_retrieval",
+                }
+                for u in multi_units
+            ]
+        )
+
+        with open(multi_path, "w", encoding="utf-8") as f:
+            json.dump(multi_data, f, ensure_ascii=False, indent=2)
 
     def get_evidence_text(
         self,

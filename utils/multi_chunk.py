@@ -179,6 +179,51 @@ class MultiChunkBuilder:
         except (ValueError, AttributeError):
             return 0
 
+    def calculate_yourbench_target_count(
+        self,
+        single_chunks: list[SingleChunkUnit],
+        h_min: int = 2,
+        h_max: int = 5,
+        num_multihops_factor: int = 1,
+        max_units: int | None = None,
+    ) -> int:
+        """按 YourBench 风格计算 multi-chunk 目标数量。
+
+        设计原则：
+        - 不枚举所有组合，按每篇文档的 chunk 数生成受控数量
+        - 最终使用 max_units 控制全局上限
+        """
+        if not single_chunks:
+            return 0
+
+        chunks_by_doc: dict[str, list[SingleChunkUnit]] = {}
+        for chunk in single_chunks:
+            chunks_by_doc.setdefault(chunk.document_id, []).append(chunk)
+
+        total = 0
+        factor = max(1, int(num_multihops_factor))
+
+        for _doc_id, doc_chunks in chunks_by_doc.items():
+            n = len(doc_chunks)
+            if n < h_min:
+                continue
+
+            effective_h_max = min(h_max, n)
+
+            # YourBench 风格基础数量：按文档 chunk 数缩放
+            doc_target = max(1, n // factor)
+
+            # 防止每组过大时生成过多无效组合
+            if doc_target * effective_h_max > n:
+                doc_target = max(1, n // effective_h_max)
+
+            total += doc_target
+
+        if max_units is not None:
+            total = min(total, int(max_units))
+
+        return max(0, total)
+
 
 def build_evidence_pool_from_chunks(
     chunks: list[SourceChunk],

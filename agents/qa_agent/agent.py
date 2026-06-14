@@ -66,7 +66,8 @@ async def run_generation_agent(
     from .generator import Generator
 
     config_path = Path(config_path)
-    agent_config, model_ref, retrieval_cfg, chunking_cfg, sum_chunking_cfg = (
+    # multi_chunk_cfg 由 config_loader 返回，用于 YourBench 风格 multi_units 生成
+    agent_config, model_ref, retrieval_cfg, chunking_cfg, sum_chunking_cfg, multi_chunk_cfg = (
         load_qa_agent_config(config_path)
     )
 
@@ -78,15 +79,16 @@ async def run_generation_agent(
 
     # Thin config wrapper matching the interface EvidenceManager expects
     class _EvidenceConfig:
-        __slots__ = ("retrieval", "chunking", "summarization_chunking")
-        def __init__(self, retrieval, chunking, summarization_chunking):
+        __slots__ = ("retrieval", "chunking", "summarization_chunking", "multi_chunk")
+        def __init__(self, retrieval, chunking, summarization_chunking, multi_chunk):
             self.retrieval = retrieval
             self.chunking = chunking
             self.summarization_chunking = summarization_chunking
+            self.multi_chunk = multi_chunk
         def get_resolved_output_path(self) -> Path:
             return Path("runs") / blueprint.task_id / blueprint.run_id
 
-    evidence_config = _EvidenceConfig(retrieval_cfg, chunking_cfg, sum_chunking_cfg)
+    evidence_config = _EvidenceConfig(retrieval_cfg, chunking_cfg, sum_chunking_cfg, multi_chunk_cfg)
 
     return await _run_generation_agent_impl(
         blueprint=blueprint,

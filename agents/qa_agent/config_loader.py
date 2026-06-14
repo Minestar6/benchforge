@@ -15,6 +15,7 @@ from benchforge.agents.qa_agent.schema import (
     CandidatePoolConfig, InitialBreadthConfig, PlannerConfig,
     ChunkMixConfig, ChunkMixDifficulty, ModeAdjustment,
     GenerationYield, ChunkLimitsForMode, ChunkKLimit, RuntimeConfig, DecisionConfig,
+    MultiChunkConfig,
 )
 from benchforge.config.config import (
     RetrievalConfig, ChunkingConfig, SummarizationChunkingConfig,
@@ -33,7 +34,14 @@ class ModelRef:
 
 def load_qa_agent_config(
     path: str | Path,
-) -> tuple[AgentConfig, ModelRef, RetrievalConfig, ChunkingConfig, SummarizationChunkingConfig]:
+) -> tuple[
+    AgentConfig,
+    ModelRef,
+    RetrievalConfig,
+    ChunkingConfig,
+    SummarizationChunkingConfig,
+    MultiChunkConfig,
+]:
     """加载 qa_agent.yaml，返回纯 agent 行为配置。
 
     不包含 Blueprint——Blueprint 由调用方程序化构造，
@@ -88,4 +96,13 @@ def load_qa_agent_config(
     chunking_cfg = ChunkingConfig(**raw["chunking"]) if "chunking" in raw else ChunkingConfig()
     sum_chunking_cfg = SummarizationChunkingConfig(**raw["summarization_chunking"]) if "summarization_chunking" in raw else SummarizationChunkingConfig()
 
-    return agent_config, model_ref, retrieval_cfg, chunking_cfg, sum_chunking_cfg
+    multi_chunk_cfg = MultiChunkConfig(**raw.get("multi_chunk", {}))
+
+    return (
+        agent_config,
+        model_ref,
+        retrieval_cfg,
+        chunking_cfg,
+        sum_chunking_cfg,
+        multi_chunk_cfg,
+    )

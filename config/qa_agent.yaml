@@ -26,22 +26,31 @@ retrieval:
 
 # ── 分块（题目生成用） ─────────────────────────────────────────────────────────
 chunking:
-  chunk_size: 2048
-  overlap: 300
+  chunk_size: 1024
+  overlap: 50
   encoding: "cl100k_base"
 
 # ── 分块（文档总结用） ─────────────────────────────────────────────────────────
 summarization_chunking:
-  chunk_size: 8192              # 大块减少 LLM 调用次数
-  overlap: 512
+  chunk_size: 4096              # 大块减少 LLM 调用次数
+  overlap: 125
   encoding: "cl100k_base"
 
 # blueprint（topics/modes/language）在 config/blueprint.yaml 中定义
 # 这是任务级配置，所有智能体共享，qa_agent 加载后写入 shared_state.json
 
+# ── Multi-Chunk 组合生成 ─────────────────────────────────────────────────────
+multi_chunk:
+  h_min: 2
+  h_max: 5
+  num_multihops_factor: 1
+  max_units_per_topic: 80
+  max_units_per_expansion: 40
+  combinations_per_doc_factor: 1
+
 # ── 候选池 ────────────────────────────────────────────────────────────────────
 candidate_pool:
-  target_multiplier: 2.5       # 候选池目标 = count × 2.5（过生成供下游筛选）
+  target_multiplier: 1       # 候选池目标 = count × 2.5（过生成供下游筛选）
 
 # ── 初始广度轮 ────────────────────────────────────────────────────────────────
 initial_breadth:
