@@ -124,6 +124,18 @@ def select_strategy(
     feedback: Any | None,
     config: Any,
 ) -> tuple[RoundStrategy, str]:
+    exp_cfg = getattr(config, "experiment", None)
+
+    # ── B 组：无反馈，直接返回固定策略 ──
+    if exp_cfg and not exp_cfg.enable_feedback:
+        fixed = getattr(exp_cfg, "fixed_strategy", None)
+        if fixed:
+            try:
+                return RoundStrategy(fixed), "experiment_fixed_strategy_no_feedback"
+            except ValueError:
+                return RoundStrategy.NORMAL_GENERATE, f"invalid_fixed_strategy={fixed}; fallback_normal"
+        return RoundStrategy.NORMAL_GENERATE, "experiment_no_feedback_normal"
+
     hard_ratio = mode_cfg.difficulty_distribution.get("hard", 0.3)
     hard_gap_val = mode_state.hard_gap(hard_ratio)
     too_easy = mode_state.too_easy_ratio()
@@ -137,6 +149,12 @@ def select_strategy(
     runtime_cfg = getattr(config, "runtime", None)
     empty_rounds_threshold = getattr(runtime_cfg, "max_consecutive_empty_rounds_per_mode", 3) - 1
 
+    # ── 实验开关：HARD_GENERATE / 难度进化 ──
+    hard_enabled = getattr(exp_cfg, "enable_hard_generate", True) if exp_cfg else True
+    difficulty_adaptation_enabled = (
+        getattr(exp_cfg, "enable_difficulty_adaptation", True) if exp_cfg else True
+    )
+
     dup_ratio = feedback.duplicate_chunk_ratio if feedback else 0.0
 
     if mode_state.consecutive_empty_rounds >= empty_rounds_threshold and dup_ratio > 0.5:
@@ -144,9 +162,7 @@ def select_strategy(
             f"consecutive_empty={mode_state.consecutive_empty_rounds}, dup_ratio={dup_ratio:.2f}"
         )
 
-
-    med_ratio = mode_cfg.difficulty_distribution.get("medium", 0.3)
-    if hard_gap_val > hard_gap_threshold or too_easy > too_easy_threshold:
+    if hard_enabled and (hard_gap_val > hard_gap_threshold or too_easy > too_easy_threshold):
         return RoundStrategy.HARD_GENERATE, (
             f"hard_gap={hard_gap_val:.2f}, too_easy={too_easy:.2f}; "
             "use direct hard generation"
@@ -157,14 +173,18 @@ def select_strategy(
             return RoundStrategy.FOCUS_TOPIC, (
                 f"low_accept_rate={acc_rate:.2f}, missing_topics={len(missing)}"
             )
-        return RoundStrategy.FOCUS_DIFFICULTY, f"low_accept_rate={acc_rate:.2f}"
+        if difficulty_adaptation_enabled:
+            return RoundStrategy.FOCUS_DIFFICULTY, f"low_accept_rate={acc_rate:.2f}"
+        return RoundStrategy.NORMAL_GENERATE, (
+            f"low_accept_rate={acc_rate:.2f}, difficulty_adaptation_disabled"
+        )
 
     if missing:
         return RoundStrategy.FOCUS_TOPIC, f"missing_topics={missing}"
 
     acc_diff = mode_state.get_difficulty_counts(CandidateStatus.ACCEPTED)
     acc_total = mode_state.accepted_count
-    if acc_total > 0:
+    if difficulty_adaptation_enabled and acc_total > 0:
         diff_gaps = {
             d: mode_cfg.difficulty_distribution.get(d, 0) - acc_diff.get(d, 0) / acc_total
             for d in mode_cfg.difficulty_distribution
@@ -236,9 +256,10 @@ def build_adaptive_plan(
             reason=reason,
         )
 
-    difficulty = (
-        choose_difficulty_for_mode(mode_cfg, mode_state)
-    )
+    exp_cfg = getattr(config, "experiment", None)
+    fixed_difficulty = getattr(exp_cfg, "fixed_difficulty", None) if exp_cfg else None
+
+    difficulty = fixed_difficulty or choose_difficulty_for_mode(mode_cfg, mode_state)
     topics = (
         tuple(_missing_topics(blueprint, mode_state)[:config.planner.topics_per_round])
         if strategy == RoundStrategy.FOCUS_TOPIC
@@ -268,7 +289,18 @@ def build_mode_round_plan(
     mode: str, mode_cfg: Any, blueprint: Any, config: Any,
     mode_state: ModeState, feedback: Any | None = None,
 ) -> ModeRoundPlan:
-    if config.initial_breadth.enabled and mode_initial_breadth_not_done(mode_state, blueprint):
+    exp_cfg = getattr(config, "experiment", None)
+    disable_initial_breadth = (
+        getattr(exp_cfg, "disable_initial_breadth", False)
+        if exp_cfg is not None
+        else False
+    )
+
+    if (
+        not disable_initial_breadth
+        and config.initial_breadth.enabled
+        and mode_initial_breadth_not_done(mode_state, blueprint)
+    ):
         return build_initial_breadth_plan(mode, mode_cfg, blueprint, config, mode_state)
     return build_adaptive_plan(mode, mode_cfg, blueprint, config, mode_state, feedback)
 

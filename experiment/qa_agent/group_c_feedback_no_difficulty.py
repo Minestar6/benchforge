@@ -1,4 +1,4 @@
-"""Group D：Full Method — 启用全部自适应机制。"""
+"""Group C：Feedback No Difficulty Evolution — 有反馈但无难度进化。"""
 
 import asyncio
 import sys
@@ -12,9 +12,9 @@ from loguru import logger
 from benchforge.agents.qa_agent.agent import run_generation_agent
 from common import build_blueprint, save_metadata
 
-GROUP_ID = "D"
-METHOD = "full"
-CONFIG_PATH = str(Path(__file__).parent / "configs" / "qa_agent_d_full.yaml")
+GROUP_ID = "C"
+METHOD = "feedback_no_diff"
+CONFIG_PATH = str(Path(__file__).parent / "configs" / "qa_agent_c_feedback_no_difficulty.yaml")
 
 
 async def run(
@@ -54,18 +54,18 @@ async def run(
         model_name=model_name,
         extra={
             "enable_feedback": True,
-            "enable_hard_generate": True,
-            "enable_difficulty_adaptation": True,
+            "enable_hard_generate": False,
+            "enable_difficulty_adaptation": False,
             "disable_initial_breadth": False,
         },
     )
 
-    logger.info(f"=== Group D: Full Method === run_id={blueprint.run_id}")
+    logger.info(f"=== Group C: Feedback No Difficulty Evolution === run_id={blueprint.run_id}")
     await run_generation_agent(
         blueprint=blueprint,
         config_path=CONFIG_PATH,
     )
-    logger.info(f"Group D completed. run_id={blueprint.run_id}")
+    logger.info(f"Group C completed. run_id={blueprint.run_id}")
 
 
 if __name__ == "__main__":

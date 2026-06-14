@@ -88,6 +88,30 @@ class DecisionConfig:
 
 
 @dataclass
+class ExperimentConfig:
+    """消融实验控制开关。"""
+    name: str = "full"
+
+    # 是否允许根据上一轮反馈改变策略
+    enable_feedback: bool = True
+
+    # 是否允许 HARD_GENERATE 策略
+    enable_hard_generate: bool = True
+
+    # 是否允许根据难度缺口主动调节 difficulty
+    enable_difficulty_adaptation: bool = True
+
+    # 用于 B 组固定策略
+    fixed_strategy: str | None = None
+
+    # 用于 B 组固定难度
+    fixed_difficulty: str | None = None
+
+    # 是否禁用 initial breadth
+    disable_initial_breadth: bool = False
+
+
+@dataclass
 class AgentConfig:
     candidate_pool: CandidatePoolConfig
     initial_breadth: InitialBreadthConfig
@@ -97,6 +121,7 @@ class AgentConfig:
     chunk_limits: dict[str, ChunkLimitsForMode]
     runtime: RuntimeConfig
     decision: DecisionConfig = field(default_factory=DecisionConfig)
+    experiment: ExperimentConfig = field(default_factory=ExperimentConfig)
 
 
 @dataclass

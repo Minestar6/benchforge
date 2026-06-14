@@ -1,4 +1,4 @@
-"""Group D：Full Method — 启用全部自适应机制。"""
+"""Group B：Multi-round No Feedback — 多轮、固定策略/难度、无反馈。"""
 
 import asyncio
 import sys
@@ -12,9 +12,9 @@ from loguru import logger
 from benchforge.agents.qa_agent.agent import run_generation_agent
 from common import build_blueprint, save_metadata
 
-GROUP_ID = "D"
-METHOD = "full"
-CONFIG_PATH = str(Path(__file__).parent / "configs" / "qa_agent_d_full.yaml")
+GROUP_ID = "B"
+METHOD = "no_feedback"
+CONFIG_PATH = str(Path(__file__).parent / "configs" / "qa_agent_b_no_feedback.yaml")
 
 
 async def run(
@@ -53,19 +53,21 @@ async def run(
         config_path=CONFIG_PATH,
         model_name=model_name,
         extra={
-            "enable_feedback": True,
-            "enable_hard_generate": True,
-            "enable_difficulty_adaptation": True,
-            "disable_initial_breadth": False,
+            "enable_feedback": False,
+            "enable_hard_generate": False,
+            "enable_difficulty_adaptation": False,
+            "fixed_strategy": "normal_generate",
+            "fixed_difficulty": "medium",
+            "disable_initial_breadth": True,
         },
     )
 
-    logger.info(f"=== Group D: Full Method === run_id={blueprint.run_id}")
+    logger.info(f"=== Group B: Multi-round No Feedback === run_id={blueprint.run_id}")
     await run_generation_agent(
         blueprint=blueprint,
         config_path=CONFIG_PATH,
     )
-    logger.info(f"Group D completed. run_id={blueprint.run_id}")
+    logger.info(f"Group B completed. run_id={blueprint.run_id}")
 
 
 if __name__ == "__main__":
