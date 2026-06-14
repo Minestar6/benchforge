@@ -278,7 +278,6 @@ def _print_report(report: dict):
 async def main():
     # use_real = "real" in sys.argv[1:]
     use_real = True
-
     if use_real:
         report = await run_real()
     else:

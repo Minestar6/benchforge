@@ -1,0 +1,15 @@
+{
+  "mode": "qa",
+  "candidate_count": 2,
+  "total_record_count": 2,
+  "accepted_count": 2,
+  "rejected_count": 0,
+  "difficulty_counts": {
+    "easy": 1,
+    "medium": 1
+  },
+  "topic_counts": {
+    "Python (programming language)": 2
+  },
+  "stopped_reason": "max_rounds_reached"
+}

@@ -78,7 +78,9 @@ async def run_generation_agent(
     model_client = _resolve_model_client_fn(model_ref.name, registry_path)
 
     # 将 model_ref 参数注入 model_client，确保后续调用（generator / evidence_manager）一致读取
-    setattr(model_client, "model_name", model_ref.name)
+    # 注意：model_name 由 ModelLoader 从 model_registry 设置（API 实际模型名），
+    # 不要用 model_ref.name（逻辑名）覆盖，否则会导致 API 404
+    setattr(model_client, "model_registry_name", model_ref.name)  # 逻辑名（仅用于日志/追踪）
     setattr(model_client, "temperature", model_ref.temperature)
     setattr(model_client, "max_tokens", max(model_ref.max_tokens, 1))  # 确保 > 0
     setattr(model_client, "max_retries", model_ref.max_retries)

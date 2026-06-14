@@ -1,0 +1,16 @@
+{
+  "candidate_count": 1,
+  "accepted_count": 1,
+  "rejected_count": 0,
+  "accept_rate": 1.0,
+  "topic_distribution": {
+    "Machine learning": 1
+  },
+  "difficulty_distribution": {
+    "medium": 1
+  },
+  "hard_gap": 0.3,
+  "stopped_reason": "max_rounds_reached",
+  "target": 12,
+  "target_reached": false
+}

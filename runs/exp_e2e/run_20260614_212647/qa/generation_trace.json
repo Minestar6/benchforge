@@ -1,0 +1,96 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "medium",
+    "topics": [
+      "Python (programming language)",
+      "Machine learning"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "Python (programming language)",
+        "success": true,
+        "generated_count": 2,
+        "raw_count": 2,
+        "filtered_count": 2,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "fake_0001",
+        "trace_call_id": "llm_b107635c99464ef09e1376006c20db03",
+        "chunks": [
+          "doc_fake_001::chunk_0000"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Machine learning",
+        "success": true,
+        "generated_count": 0,
+        "raw_count": 0,
+        "filtered_count": 0,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": null,
+        "trace_call_id": null,
+        "chunks": [
+          "doc_fake_001::chunk_0000"
+        ],
+        "duplicate_combination": true,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "strategy": "hard_generate",
+    "difficulty": "hard",
+    "topics": [
+      "Machine learning",
+      "Python (programming language)"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "Machine learning",
+        "success": true,
+        "generated_count": 0,
+        "raw_count": 0,
+        "filtered_count": 0,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": null,
+        "trace_call_id": null,
+        "chunks": [
+          "doc_fake_001::chunk_0000"
+        ],
+        "duplicate_combination": true,
+        "error": null
+      },
+      {
+        "topic": "Python (programming language)",
+        "success": true,
+        "generated_count": 0,
+        "raw_count": 0,
+        "filtered_count": 0,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": null,
+        "trace_call_id": null,
+        "chunks": [
+          "doc_fake_001::chunk_0000"
+        ],
+        "duplicate_combination": true,
+        "error": null
+      }
+    ]
+  }
+]

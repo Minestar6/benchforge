@@ -1,0 +1,14 @@
+{
+  "mode": "multiple_choice",
+  "candidate_count": 1,
+  "total_record_count": 1,
+  "accepted_count": 1,
+  "rejected_count": 0,
+  "difficulty_counts": {
+    "medium": 1
+  },
+  "topic_counts": {
+    "Machine learning": 1
+  },
+  "stopped_reason": "max_rounds_reached"
+}

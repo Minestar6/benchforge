@@ -1,0 +1,108 @@
+[
+  {
+    "question_id": "8742d644-00fd-4cfb-8f10-d539de258c32",
+    "question": "What is the primary focus of this topic according to the evidence?",
+    "answer": "It focuses on the application of core principles.",
+    "topic": "Python (programming language)",
+    "difficulty": "easy",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_fake_001::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": null,
+    "question_mode": "qa",
+    "question_type": "factual",
+    "required_capability": "understanding core principles",
+    "estimated_difficulty": 2,
+    "citations": [
+      "The text discusses the application of core principles."
+    ],
+    "thought_process": "Tests basic comprehension of the topic.",
+    "llm_call_id": "fake_0001",
+    "trace_call_id": "llm_b107635c99464ef09e1376006c20db03",
+    "chunks": [
+      "Python is a high-level programming language. It emphasizes code readability with significant whitespace. Machine learning is a subset of artificial intelligence. It enables systems to learn from data without explicit programming. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. "
+    ],
+    "generation_round": 1,
+    "raw_item": {
+      "question": "What is the primary focus of this topic according to the evidence?",
+      "answer": "It focuses on the application of core principles.",
+      "question_mode": "qa",
+      "thought_process": "Tests basic comprehension of the topic.",
+      "question_type": "factual",
+      "required_capability": "understanding core principles",
+      "estimated_difficulty": 2,
+      "citations": [
+        "The text discusses the application of core principles."
+      ],
+      "chunk_ids": [
+        "doc_fake_001::chunk_0000"
+      ],
+      "chunks": [
+        "Python is a high-level programming language. It emphasizes code readability with significant whitespace. Machine learning is a subset of artificial intelligence. It enables systems to learn from data without explicit programming. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. "
+      ],
+      "topic": "Python (programming language)",
+      "llm_call_id": "fake_0001",
+      "trace_call_id": "llm_b107635c99464ef09e1376006c20db03",
+      "generation_round": 1
+    }
+  },
+  {
+    "question_id": "50b7a7fd-42a7-4f07-81a5-693a5251dedf",
+    "question": "How does the methodology relate to practical outcomes?",
+    "answer": "The methodology enables practical applications by establishing foundational principles.",
+    "topic": "Python (programming language)",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_fake_001::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": null,
+    "question_mode": "qa",
+    "question_type": "analytical",
+    "required_capability": "analyzing methodology",
+    "estimated_difficulty": 6,
+    "citations": [
+      "The methodology enables practical applications.",
+      "Foundational principles are established first."
+    ],
+    "thought_process": "Tests understanding of methodology-outcome relationships.",
+    "llm_call_id": "fake_0001",
+    "trace_call_id": "llm_b107635c99464ef09e1376006c20db03",
+    "chunks": [
+      "Python is a high-level programming language. It emphasizes code readability with significant whitespace. Machine learning is a subset of artificial intelligence. It enables systems to learn from data without explicit programming. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. "
+    ],
+    "generation_round": 1,
+    "raw_item": {
+      "question": "How does the methodology relate to practical outcomes?",
+      "answer": "The methodology enables practical applications by establishing foundational principles.",
+      "question_mode": "qa",
+      "thought_process": "Tests understanding of methodology-outcome relationships.",
+      "question_type": "analytical",
+      "required_capability": "analyzing methodology",
+      "estimated_difficulty": 6,
+      "citations": [
+        "The methodology enables practical applications.",
+        "Foundational principles are established first."
+      ],
+      "chunk_ids": [
+        "doc_fake_001::chunk_0000"
+      ],
+      "chunks": [
+        "Python is a high-level programming language. It emphasizes code readability with significant whitespace. Machine learning is a subset of artificial intelligence. It enables systems to learn from data without explicit programming. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. Additional context for chunking. "
+      ],
+      "topic": "Python (programming language)",
+      "llm_call_id": "fake_0001",
+      "trace_call_id": "llm_b107635c99464ef09e1376006c20db03",
+      "generation_round": 1
+    }
+  }
+]
