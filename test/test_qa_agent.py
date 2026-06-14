@@ -1,4 +1,4 @@
-"""Test script for Mode-Staged Generation Agent (qa_agent)."""
+﻿"""Test script for Mode-Staged Generation Agent (qa_agent)."""
 
 import asyncio
 import sys
@@ -18,14 +18,14 @@ from benchforge.agents.qa_agent.schema import (
 
 def build_default_config() -> AgentConfig:
     return AgentConfig(
-        candidate_pool=CandidatePoolConfig(target_multiplier=2.5),
-        initial_breadth=InitialBreadthConfig(enabled=True, max_topics_per_round=10, difficulty="medium"),
+        candidate_pool=CandidatePoolConfig(target_multiplier=1.5),
+        initial_breadth=InitialBreadthConfig(enabled=True, max_topics_per_round=5, difficulty="medium"),
         planner=PlannerConfig(topics_per_round=3),
         chunk_mix=ChunkMixConfig(
             by_difficulty={
                 "easy":   ChunkMixDifficulty(single_ratio=0.8, multi_ratio=0.2),
                 "medium": ChunkMixDifficulty(single_ratio=0.5, multi_ratio=0.5),
-                "hard":   ChunkMixDifficulty(single_ratio=0.2, multi_ratio=0.8),
+                "hard":   ChunkMixDifficulty(single_ratio=0.0, multi_ratio=1.0),
             },
             mode_adjustment={
                 "qa":              ModeAdjustment(single_delta=0.1),
@@ -59,15 +59,15 @@ async def run():
         language="en",
         topics=["Artificial Intelligence", "Renewable Energy", "Human Evolution"],
         modes={
-            "qa": ModeCfg(count=20, max_rounds=5, difficulty_distribution={"easy": 0.3, "medium": 0.4, "hard": 0.3}),
+            "qa": ModeCfg(count=10, max_rounds=5, difficulty_distribution={"easy": 0.3, "medium": 0.4, "hard": 0.3}),
             "multiple_choice": ModeCfg(count=10, max_rounds=5, difficulty_distribution={"easy": 0.3, "medium": 0.4, "hard": 0.3}),
         },
     )
 
-    # 端到端调用：只需 blueprint + config_path
+    # 绔埌绔皟鐢細鍙渶 blueprint + config_path
     report = await run_generation_agent(
         blueprint=blueprint,
-        config_path="benchforge/config/qa_agent.yaml",
+        config_path="config/qa_agent.yaml",
     )
 
     print(f"\n=== Generation Report ===")

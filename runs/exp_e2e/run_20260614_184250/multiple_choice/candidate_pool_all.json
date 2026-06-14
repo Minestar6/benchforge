@@ -1,0 +1,343 @@
+[
+  {
+    "question_id": "5ec49344-48d0-4ae3-ba0d-f19d097712b1",
+    "question": "In operant conditioning, a parent puts a child in 'time out' for misbehaving. According to the definitions provided, what type of consequence is this?",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_01f228da3e1b::chunk_0001",
+      "doc_18ac17e18c48::chunk_0000",
+      "doc_18ac17e18c48::chunk_0003",
+      "doc_18ac17e18c48::chunk_0004",
+      "doc_a42014b996c0::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0000",
+      "doc_ce155af0fb1c::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0007",
+      "doc_ce155af0fb1c::chunk_0009"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Positive punishment",
+      "(B) Negative punishment",
+      "(C) Positive reinforcement",
+      "(D) Negative reinforcement"
+    ]
+  },
+  {
+    "question_id": "3ef1343a-d3c7-4da0-b662-9e30f7ea4997",
+    "question": "What is the fundamental distinction between classical conditioning and operant conditioning as described in the text?",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_01f228da3e1b::chunk_0001",
+      "doc_18ac17e18c48::chunk_0000",
+      "doc_18ac17e18c48::chunk_0003",
+      "doc_18ac17e18c48::chunk_0004",
+      "doc_a42014b996c0::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0000",
+      "doc_ce155af0fb1c::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0007",
+      "doc_ce155af0fb1c::chunk_0009"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Classical conditioning uses rewards, while operant conditioning uses punishments.",
+      "(B) Classical conditioning shapes reflexive responses to stimuli, while operant conditioning shapes conscious behaviors through consequences.",
+      "(C) Classical conditioning works on animals, while operant conditioning works on humans.",
+      "(D) Classical conditioning requires a neutral stimulus, while operant conditioning does not."
+    ]
+  },
+  {
+    "question_id": "232eba97-273e-45c4-a026-509cb7a16e14",
+    "question": "In the context of deep learning, what does the 'depth' in 'deep neural network' primarily refer to?",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "easy",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_01f228da3e1b::chunk_0001",
+      "doc_18ac17e18c48::chunk_0000",
+      "doc_18ac17e18c48::chunk_0003",
+      "doc_18ac17e18c48::chunk_0004",
+      "doc_a42014b996c0::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0000",
+      "doc_ce155af0fb1c::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0007",
+      "doc_ce155af0fb1c::chunk_0009"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) The total number of neurons in the network.",
+      "(B) The number of layers through which data is transformed, known as the Credit Assignment Path (CAP) depth.",
+      "(C) The complexity of mathematical operations within each neuron.",
+      "(D) The amount of training data required for the network to converge."
+    ]
+  },
+  {
+    "question_id": "c9d380af-4675-45b5-aed7-16cb94352b1e",
+    "question": "A researcher is training a model to play a video game where it must discover successful strategies through trial and error, receiving a score after each action. Which machine learning paradigm does this scenario best exemplify?",
+    "answer": "C",
+    "topic": "Machine learning",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_01f228da3e1b::chunk_0001",
+      "doc_18ac17e18c48::chunk_0000",
+      "doc_18ac17e18c48::chunk_0003",
+      "doc_18ac17e18c48::chunk_0004",
+      "doc_a42014b996c0::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0000",
+      "doc_ce155af0fb1c::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0007",
+      "doc_ce155af0fb1c::chunk_0009"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Supervised Learning",
+      "(B) Unsupervised Learning",
+      "(C) Reinforcement Learning",
+      "(D) Rule-based Learning"
+    ]
+  },
+  {
+    "question_id": "21194dd1-0a6d-44b1-851b-a46668c4d7a2",
+    "question": "According to the text, what was a key historical factor that enabled the 'deep learning revolution' in the early 2010s?",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_01f228da3e1b::chunk_0001",
+      "doc_18ac17e18c48::chunk_0000",
+      "doc_18ac17e18c48::chunk_0003",
+      "doc_18ac17e18c48::chunk_0004",
+      "doc_a42014b996c0::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0000",
+      "doc_ce155af0fb1c::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0007",
+      "doc_ce155af0fb1c::chunk_0009"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) The invention of backpropagation.",
+      "(B) The development of more powerful and accessible GPU hardware.",
+      "(C) The publication of the universal approximation theorem.",
+      "(D) A shift in focus from statistical to symbolic AI methods."
+    ]
+  },
+  {
+    "question_id": "ae623bbb-54d6-4cd2-a00c-c46490790d6c",
+    "question": "A developer argues that a particular Python 3.13 feature—making UTF-8 mode the default for opening files—violates the Zen of Python principle 'Explicit is better than implicit.' Which counterargument, consistent with the text's description of Python's design evolution, would most effectively refute this claim?",
+    "answer": "A",
+    "topic": "Python (programming language)",
+    "difficulty": "hard",
+    "status": "accepted",
+    "source_round": 2,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0000",
+      "doc_03692024712c::chunk_0002",
+      "doc_2642d2770d71::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) The principle is overridden by 'Practicality beats purity,' and UTF-8 is already the de facto standard on Windows, making the change practical for cross-platform consistency.",
+      "(B) The change was necessary to fix security vulnerabilities related to remote code execution and web-cache poisoning discovered in 2023-2024.",
+      "(C) Python has always prioritized implicit behaviors, as seen in the original exception model borrowed from Modula-3, so the principle does not apply.",
+      "(D) The 'one obvious way' principle takes precedence, and since UTF-8 is the obvious encoding for modern text, making it default reduces ambiguity."
+    ]
+  },
+  {
+    "question_id": "41ddac20-d435-4106-a4cb-fb4583f77fd2",
+    "question": "The text describes a licensing conflict that arose around Python 1.6. Which sequence of events, based solely on the text, correctly explains the cause and resolution of this conflict?",
+    "answer": "B",
+    "topic": "Python (programming language)",
+    "difficulty": "hard",
+    "status": "accepted",
+    "source_round": 2,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_03692024712c::chunk_0000",
+      "doc_03692024712c::chunk_0002",
+      "doc_2642d2770d71::chunk_0000"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) The CWI license used for early releases was found incompatible with the GPL. The FSF negotiated with BeOpen to create a new PSF license for Python 2.1, resolving the issue.",
+      "(B) CNRI released Python 1.6 under a new, longer license with a Virginia choice-of-law clause. The FSF argued this was GPL-incompatible. Negotiations led to a GPL-compatible license for Python 1.6.1.",
+      "(C) When the core team moved to BeOpen.com, they released Python 2.0 under a BeOpen license. The FSF objected, prompting the creation of the CNRI license for Python 1.6 as a compromise.",
+      "(D) Python 1.6's license, governed by Dutch law from Van Rossum's time at CWI, conflicted with the GPL's international terms. The issue was resolved when the PSF, formed in 2001, took over licensing for Python 2.2."
+    ]
+  },
+  {
+    "question_id": "ae108a01-3ddd-4a68-baf5-a34b70367d4c",
+    "question": "A researcher is comparing two neural network models for a new protein structure prediction task. Model A is a standard Deep Neural Network (DNN) as described in the text. Model B is a Recurrent Neural Network (RNN). Based solely on the architectural principles and typical applications described, which characteristic would be the most definitive reason to initially suspect Model B might be less suitable than Model A for this task?",
+    "answer": "A",
+    "topic": "Machine learning",
+    "difficulty": "hard",
+    "status": "accepted",
+    "source_round": 2,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_01f228da3e1b::chunk_0004",
+      "doc_18ac17e18c48::chunk_0005",
+      "doc_18ac17e18c48::chunk_0007"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Model B's recurrent connections might introduce loops ill-suited for processing the fixed, spatial-hierarchical features of a protein sequence.",
+      "(B) Model B likely has fewer layers than Model DNN, reducing its ability to model the complex non-linear relationships in the protein data.",
+      "(C) Model B is more prone to overfitting than a DNN because it lacks the regularization methods like dropout described for DNNs.",
+      "(D) Model B cannot be trained using the efficient batching techniques on GPUs that are crucial for large-scale DNN training."
+    ]
+  },
+  {
+    "question_id": "ca308795-c06b-494f-96cf-2dae540cf581",
+    "question": "The text describes overfitting in DNNs as a consequence of 'the added layers of abstraction, which allow them to model rare dependencies in the training data.' Which proposed solution to overfitting most directly addresses this specific, stated cause by explicitly preventing the network from relying on such rare dependencies during training?",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "hard",
+    "status": "accepted",
+    "source_round": 2,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_01f228da3e1b::chunk_0004",
+      "doc_18ac17e18c48::chunk_0005",
+      "doc_18ac17e18c48::chunk_0007"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Using weight decay (ℓ²-regularization) to penalize large weight values.",
+      "(B) Applying dropout regularization to randomly omit units from hidden layers during training.",
+      "(C) Increasing the size of the training set through data augmentation methods like cropping and rotating.",
+      "(D) Utilizing hardware like GPUs to sweep through more of the parameter space for optimal weights."
+    ]
+  },
+  {
+    "question_id": "35ad0376-fa39-46e2-ae5c-0c9cb91d6cf4",
+    "question": "An attacker aims to compromise a facial recognition system used for smartphone unlocking. They cannot access the system's training pipeline or data, but they can present slightly altered physical appearances (e.g., specialized glasses, makeup) to the camera during the unlock attempt to be misclassified as an authorized user. This attack is best categorized as an evasion attack rather than a poisoning attack primarily because:",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 3,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_18ac17e18c48::chunk_0002",
+      "doc_18ac17e18c48::chunk_0004",
+      "doc_18ac17e18c48::chunk_0006",
+      "doc_ce155af0fb1c::chunk_0001",
+      "doc_ce155af0fb1c::chunk_0007",
+      "doc_ce155af0fb1c::chunk_0009",
+      "doc_e1c379c19fd1::chunk_0002"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) It involves contaminating the training dataset with malicious samples.",
+      "(B) It exploits the imperfection of an already-trained model without influencing its training data.",
+      "(C) It is a targeted attack aimed at a specific intrusion, not general mayhem.",
+      "(D) It relies on the attacker having extensive knowledge of the model's internal parameters."
+    ]
+  },
+  {
+    "question_id": "1e496b2d-6ed6-4141-b835-2591f07937ce",
+    "question": "The text notes that 'robust gradient aggregation rules' are a leading solution for Byzantine-resilient federated learning but 'do not always work especially when the data across participants has a non-iid distribution.' This limitation is most directly connected to which fundamental assumption about machine learning that is 'often violated in practical high-stake applications'?",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "hard",
+    "status": "rejected",
+    "source_round": 3,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_18ac17e18c48::chunk_0002",
+      "doc_18ac17e18c48::chunk_0004",
+      "doc_18ac17e18c48::chunk_0006",
+      "doc_ce155af0fb1c::chunk_0001",
+      "doc_ce155af0fb1c::chunk_0007",
+      "doc_ce155af0fb1c::chunk_0009",
+      "doc_e1c379c19fd1::chunk_0002"
+    ],
+    "reject_reason": "非法问题类型: inference-based",
+    "parent_question_id": null,
+    "choices": [
+      "(A) The assumption that models are trained using gradient descent.",
+      "(B) The assumption that training and test data are generated from the same statistical distribution (IID).",
+      "(C) The assumption that all participants in a federated system are honest.",
+      "(D) The assumption that data can be compressed without loss of predictive information."
+    ]
+  },
+  {
+    "question_id": "18fef8ff-379e-4a03-9431-d3e663f121ee",
+    "question": "According to the text's description of the historical relationship between AI and machine learning, what was the primary cause of the rift that led to machine learning being pursued outside of mainstream AI in the 1980s?",
+    "answer": "B",
+    "topic": "Machine learning",
+    "difficulty": "hard",
+    "status": "accepted",
+    "source_round": 4,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_01f228da3e1b::chunk_0006",
+      "doc_ce155af0fb1c::chunk_0000",
+      "doc_ce155af0fb1c::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0008",
+      "doc_ce155af0fb1c::chunk_0011"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) The failure of early neural networks to solve practical problems like medical diagnosis.",
+      "(B) A shift in AI research focus towards logical, knowledge-based expert systems, which marginalized statistical and probabilistic approaches.",
+      "(C) The invention of backpropagation, which was considered a separate breakthrough not relevant to AI's core goals.",
+      "(D) The realization that machine learning's goal of achieving artificial intelligence was fundamentally impossible."
+    ]
+  },
+  {
+    "question_id": "580492a5-4141-4b38-a3a5-8fc0113f5a6f",
+    "question": "Tom M. Mitchell's formal definition states a program learns if its performance at tasks in T, measured by P, improves with experience E. The text notes this definition is 'fundamentally operational rather than defining the field in cognitive terms.' Based on this and the reference to Alan Turing, which of the following best captures what this operational definition deliberately avoids?",
+    "answer": "C",
+    "topic": "Machine learning",
+    "difficulty": "hard",
+    "status": "accepted",
+    "source_round": 4,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_01f228da3e1b::chunk_0006",
+      "doc_ce155af0fb1c::chunk_0000",
+      "doc_ce155af0fb1c::chunk_0005",
+      "doc_ce155af0fb1c::chunk_0008",
+      "doc_ce155af0fb1c::chunk_0011"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Specifying the internal algorithms or data structures the program must use.",
+      "(B) Requiring that the learning process be based on neural networks or other brain-inspired models.",
+      "(C) Making claims about the machine's internal mental states or capacity for understanding.",
+      "(D) Applying to tasks that are inherently subjective or lack clear performance metrics."
+    ]
+  }
+]

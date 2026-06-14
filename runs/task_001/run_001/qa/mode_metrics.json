@@ -1,0 +1,20 @@
+{
+  "candidate_count": 12,
+  "accepted_count": 12,
+  "rejected_count": 0,
+  "accept_rate": 1.0,
+  "topic_distribution": {
+    "Artificial Intelligence": 5,
+    "Renewable Energy": 4,
+    "Human Evolution": 3
+  },
+  "difficulty_distribution": {
+    "medium": 9,
+    "easy": 2,
+    "hard": 1
+  },
+  "hard_gap": 0.2167,
+  "stopped_reason": "candidate_pool_sufficient",
+  "target": 12,
+  "target_reached": true
+}

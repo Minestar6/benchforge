@@ -237,7 +237,7 @@ async def run_real():
     logger.info("qa_agent E2E — Real Model (deepseek-v3)")
     logger.info("=" * 60)
 
-    blueprint = build_blueprint(qa_count=20, mcq_count=10)
+    blueprint = build_blueprint(qa_count=10, mcq_count=10)
 
     config_path = project_root / "config" / "qa_agent.yaml"
     report = await run_generation_agent(

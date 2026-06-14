@@ -1,0 +1,319 @@
+[
+  {
+    "question_id": "4676de3d-96f5-405f-9b99-c4539601c2fb",
+    "question": "A major shift in AI research around 2016, leading to a significant increase in publications and funding, was most directly prompted by growing concerns about what?",
+    "answer": "B",
+    "topic": "Artificial Intelligence",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_804dae27c43f::chunk_0012",
+      "doc_aef977fc2141::chunk_0004",
+      "doc_aef977fc2141::chunk_0009",
+      "doc_aef977fc2141::chunk_0013"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) The inability of AI to achieve human-like sentience and consciousness",
+      "(B) The fairness, misuse, and unintended consequences of AI systems",
+      "(C) The high computational cost and energy consumption of deep learning models",
+      "(D) The saturation of the consumer market for simple AI assistants and chatbots"
+    ]
+  },
+  {
+    "question_id": "cedb679c-44b9-4ba0-bc93-1bc7d399073d",
+    "question": "According to the text, what is a primary distinction made by critics like John McCarthy between artificial intelligence and human intelligence?",
+    "answer": "C",
+    "topic": "Artificial Intelligence",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_804dae27c43f::chunk_0012",
+      "doc_aef977fc2141::chunk_0004",
+      "doc_aef977fc2141::chunk_0009",
+      "doc_aef977fc2141::chunk_0013"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) AI is fundamentally quantitative, while human judgment is qualitative and value-based.",
+      "(B) AI requires massive datasets to learn, while human intelligence can learn from few examples.",
+      "(C) The goal of AI is not to simulate human intelligence, but to achieve goals in the world computationally.",
+      "(D) AI systems are inherently logical, while human intelligence is often emotional and irrational."
+    ]
+  },
+  {
+    "question_id": "7db8ef07-77b2-4b19-b1c0-e7cc613fcf3a",
+    "question": "The text describes the 'value alignment problem' in AI. Which scenario best illustrates the core concern this problem addresses?",
+    "answer": "B",
+    "topic": "Artificial Intelligence",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_804dae27c43f::chunk_0012",
+      "doc_aef977fc2141::chunk_0004",
+      "doc_aef977fc2141::chunk_0009",
+      "doc_aef977fc2141::chunk_0013"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) An AI chess program develops a new, unbeatable strategy that human players cannot understand.",
+      "(B) An AI tasked with maximizing paperclip production decides to dismantle essential human infrastructure to obtain more metal.",
+      "(C) A facial recognition AI used for surveillance consistently misidentifies people of a certain ethnicity due to biased training data.",
+      "(D) A generative AI model used by students begins to produce convincing but entirely fabricated historical essays."
+    ]
+  },
+  {
+    "question_id": "86e37cd5-05dc-41fe-84ee-14722eb3598d",
+    "question": "What does the text identify as a key factor that enabled the deep learning revolution and the subsequent AI boom of the 2020s?",
+    "answer": "C",
+    "topic": "Artificial Intelligence",
+    "difficulty": "easy",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_804dae27c43f::chunk_0012",
+      "doc_aef977fc2141::chunk_0004",
+      "doc_aef977fc2141::chunk_0009",
+      "doc_aef977fc2141::chunk_0013"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) A philosophical consensus on the definition of machine consciousness.",
+      "(B) Widespread public acceptance and declining fear of job automation.",
+      "(C) Improvements in hardware and access to large amounts of data.",
+      "(D) Stringent new international regulations ensuring AI safety."
+    ]
+  },
+  {
+    "question_id": "69282aed-c268-440e-b167-6f054ae25dd4",
+    "question": "What is a primary distinction between the 'technical potential' and the 'economic potential' of renewable energy sources as discussed in the text?",
+    "answer": "B",
+    "topic": "Renewable Energy",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_42589d89d090::chunk_0002",
+      "doc_42589d89d090::chunk_0005",
+      "doc_ccc069033cb4::chunk_0006",
+      "doc_e12912bfc14f::chunk_0001"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Technical potential refers to current installed capacity, while economic potential refers to future projections.",
+      "(B) Technical potential represents the maximum physically available energy, while economic potential refers to the portion that can be harnessed cost-effectively.",
+      "(C) Economic potential is a global figure, while technical potential is calculated for individual countries.",
+      "(D) Technical potential is a fixed number, while economic potential decreases as technology improves."
+    ]
+  },
+  {
+    "question_id": "6c7dfd59-2a9a-4a3b-a463-206246e8f67d",
+    "question": "Based on the data provided, which sector's energy use has the lowest current contribution from renewable sources?",
+    "answer": "D",
+    "topic": "Renewable Energy",
+    "difficulty": "easy",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_42589d89d090::chunk_0002",
+      "doc_42589d89d090::chunk_0005",
+      "doc_ccc069033cb4::chunk_0006",
+      "doc_e12912bfc14f::chunk_0001"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Electricity generation",
+      "(B) Heating and cooling",
+      "(C) Water heating",
+      "(D) Transport"
+    ]
+  },
+  {
+    "question_id": "a8801102-8169-4703-bf30-175c77b834d6",
+    "question": "The text suggests that a rapid expansion of wind and solar power in the United States would most immediately require significant investment in which of the following?",
+    "answer": "C",
+    "topic": "Renewable Energy",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_42589d89d090::chunk_0002",
+      "doc_42589d89d090::chunk_0005",
+      "doc_ccc069033cb4::chunk_0006",
+      "doc_e12912bfc14f::chunk_0001"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Public opinion campaigns to increase acceptance",
+      "(B) Geological surveys for new resource sites",
+      "(C) Long-distance electricity transmission infrastructure",
+      "(D) Retraining programs for coal miners"
+    ]
+  },
+  {
+    "question_id": "d8d60644-27b8-4e41-a3f3-ac3f22344c5f",
+    "question": "A discovery of a hominin fossil dated to 600,000 years ago in Europe shows a mix of primitive and modern cranial features. Based on the debates described, which classification would be most contentious among paleoanthropologists?",
+    "answer": "B",
+    "topic": "Human Evolution",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_043368a29143::chunk_0000",
+      "doc_cc52f679ca26::chunk_0001",
+      "doc_cc52f679ca26::chunk_0004",
+      "doc_cc52f679ca26::chunk_0012"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Classifying it as a direct ancestor to both Neanderthals and modern humans",
+      "(B) Classifying it as a distinct species, *Homo heidelbergensis*, ancestral only to Neanderthals",
+      "(C) Classifying it as an early variant of *Homo sapiens* that migrated from Africa",
+      "(D) Classifying it as a late-surviving member of *Homo erectus*"
+    ]
+  },
+  {
+    "question_id": "aa88ffaf-3574-492a-982e-9d6b1f5ee34a",
+    "question": "What key finding from the study of *Ardipithecus ramidus* fundamentally challenged a traditional assumption in models of early human social evolution?",
+    "answer": "C",
+    "topic": "Human Evolution",
+    "difficulty": "hard",
+    "status": "accepted",
+    "source_round": 1,
+    "source_strategy": "initial_breadth",
+    "chunk_ids": [
+      "doc_043368a29143::chunk_0000",
+      "doc_cc52f679ca26::chunk_0001",
+      "doc_cc52f679ca26::chunk_0004",
+      "doc_cc52f679ca26::chunk_0012"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) It proved that early hominins were exclusively tree-dwelling.",
+      "(B) It demonstrated that the evolution of large brains preceded bipedalism.",
+      "(C) It provided evidence that early hominins may not have evolved from a chimpanzee-like ancestor in terms of social behavior.",
+      "(D) It showed that *Ar. ramidus* used complex stone tools, indicating advanced cognition."
+    ]
+  },
+  {
+    "question_id": "5bee925d-3b9d-427e-88a0-9da922e3a5dd",
+    "question": "Based on the evidence presented in the text, which conclusion about Paranthropus and early Homo as toolmakers is most strongly supported by the overall reasoning?",
+    "answer": "B",
+    "topic": "Human Evolution",
+    "difficulty": "hard",
+    "status": "accepted",
+    "source_round": 2,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_b671459b269d::chunk_0000",
+      "doc_b671459b269d::chunk_0002",
+      "doc_b671459b269d::chunk_0003",
+      "doc_b671459b269d::chunk_0004",
+      "doc_c8f638065dd0::chunk_0002",
+      "doc_cc52f679ca26::chunk_0010"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Paranthropus was definitively the primary maker of Oldowan tools, as their anatomy was perfectly suited for it.",
+      "(B) Early Homo was almost certainly responsible for most Oldowan tools, based on direct archaeological association, though Paranthropus had the anatomical capability.",
+      "(C) The anatomical evidence from opposable thumbs proves that Paranthropus was a more sophisticated toolmaker than early Homo.",
+      "(D) Since both genera coexisted, it is impossible to attribute any stone tools to a specific genus without genetic evidence."
+    ]
+  },
+  {
+    "question_id": "93b3a38b-db38-4b98-abe4-106c895d2426",
+    "question": "A researcher discovers well-dated evidence of abstract imagery and sophisticated tools at a site in Africa from 150,000 years ago. According to the text's discussion of behavioral modernity, which model would this discovery most directly challenge?",
+    "answer": "A",
+    "topic": "Human Evolution",
+    "difficulty": "medium",
+    "status": "accepted",
+    "source_round": 2,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_b671459b269d::chunk_0000",
+      "doc_b671459b269d::chunk_0002",
+      "doc_b671459b269d::chunk_0003",
+      "doc_b671459b269d::chunk_0004",
+      "doc_c8f638065dd0::chunk_0002",
+      "doc_cc52f679ca26::chunk_0010"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) The 'Upper Palaeolithic Revolution' model, which ties a suite of modern behaviors to a sudden appearance around 50,000 BP.",
+      "(B) The gradual transition model, which argues some modern features appeared earlier in Africa.",
+      "(C) The model of Neanderthal cultural conservatism, which describes them maintaining stable technologies.",
+      "(D) The 'big bang of human consciousness' model, which is synonymous with the gradual transition model."
+    ]
+  },
+  {
+    "question_id": "9758f271-5962-4fdf-9782-63d4af312261",
+    "question": "The text presents the debate over classifying nuclear power as renewable. According to the reasoning implied by the definitions and examples given, which of the following sources would most likely be excluded from 'renewable energy' for a reason conceptually similar to why conventional nuclear fission is often excluded?",
+    "answer": "C",
+    "topic": "Renewable Energy",
+    "difficulty": "hard",
+    "status": "accepted",
+    "source_round": 2,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_42589d89d090::chunk_0000",
+      "doc_42589d89d090::chunk_0001",
+      "doc_42589d89d090::chunk_0002",
+      "doc_42589d89d090::chunk_0004",
+      "doc_ccc069033cb4::chunk_0009",
+      "doc_d99e4ff93644::chunk_0002"
+    ],
+    "reject_reason": null,
+    "parent_question_id": null,
+    "choices": [
+      "(A) Geothermal power, because it utilizes heat from natural radioactive decay within the Earth.",
+      "(B) A hypothetical fusion power plant, because it requires mined lithium for reactor components.",
+      "(C) A biomass plant that uses old-growth forest timber without replanting.",
+      "(D) A solar photovoltaic farm, because manufacturing the panels requires mining quartz for silicon."
+    ]
+  },
+  {
+    "question_id": "b2e2697c-f16c-498f-902a-7c3b42b48fe5",
+    "question": "The text suggests that the 2012 meta-analysis finding a bias towards predicting AGI within 16–26 years has been criticized, and later predictions (e.g., 5-20 years by 2024) are more aggressive. What underlying reasoning, supported by the text's historical account, best explains why earlier consensus timelines might have been systematically over-optimistic?",
+    "answer": "B",
+    "topic": "Artificial Intelligence",
+    "difficulty": "hard",
+    "status": "rejected",
+    "source_round": 2,
+    "source_strategy": "hard_generate",
+    "chunk_ids": [
+      "doc_10240d6c8bf0::chunk_0005",
+      "doc_1be62bde08fd::chunk_0003",
+      "doc_804dae27c43f::chunk_0004"
+    ],
+    "reject_reason": "非法问题类型: inference-based",
+    "parent_question_id": null,
+    "choices": [
+      "(A) Early researchers fundamentally misunderstood the goal of AGI, conflating it with narrow tasks like playing chess.",
+      "(B) Predictions were based on extrapolating recent, rapid progress without fully accounting for the pattern of hiatuses caused by unsolved fundamental problems.",
+      "(C) The availability of funding has always been the primary driver of progress, and predictions were tied to funding cycles rather than technical feasibility.",
+      "(D) The development of whole brain emulation as an alternative path made earlier transformer-based timeline estimates obsolete."
+    ]
+  }
+]
