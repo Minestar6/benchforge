@@ -81,12 +81,14 @@ class OpenAIClient(BaseModelClient):
         latency = time.time() - start_time
         text = response.choices[0].message.content or ""
         raw = response.model_dump()
+        finish_reason = response.choices[0].finish_reason or ""
 
         result = {
             "text": text,
             "input_tokens": raw.get("usage", {}).get("prompt_tokens", 0),
             "output_tokens": raw.get("usage", {}).get("completion_tokens", 0),
             "latency": latency,
+            "finish_reason": finish_reason,
             "raw": raw,
             "llm_call_id": llm_call_id,
         }

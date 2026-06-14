@@ -157,8 +157,9 @@ async def _run_generation_agent_impl(
                 "document_url": source_doc.url if source_doc else "",
                 "document_text": source_doc.content if source_doc else "",
                 "document_summary": evidence_manager.document_summaries.get(doc_id, ""),
+                "source": "initial_retrieval",
                 "chunks": [
-                    {"chunk_id": c.chunk_id, "chunk_text": c.text}
+                    {"chunk_id": c.chunk_id, "chunk_index": c.chunk_index, "chunk_text": c.text}
                     for c in doc_chunks_sorted
                 ],
             })

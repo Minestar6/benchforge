@@ -41,6 +41,7 @@ def build_round_feedback(
     round_results: list[dict],
     new_records: list,
     mode_state_before: ModeState | None = None,
+    target_candidate_count: int = 0,
 ) -> RoundFeedback:
     """Aggregate one round's execution results into a RoundFeedback.
 
@@ -89,10 +90,14 @@ def build_round_feedback(
     easy_med = acc_diff.get("easy", 0) + acc_diff.get("medium", 0)
     too_easy = easy_med / acc_count if acc_count > 0 else 0.0
 
+    over_target = max(0, acc_count - target_candidate_count) if target_candidate_count > 0 else 0
+
     return RoundFeedback(
         mode=mode,
         round_id=round_id,
         strategy=strategy,
+        target_candidate_count=target_candidate_count,
+        over_target_count=over_target,
         generated_count=generated_count,
         raw_candidate_count=raw_candidate_count,
         accepted_count=acc_count,
