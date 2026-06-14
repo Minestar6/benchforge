@@ -63,16 +63,22 @@ def sample_chunks(
     topic: str,
     mode: str,
     difficulty: str,
-    single_k: int,
-    multi_k: int,
+    unit_type: str,
     global_used_combinations: set[tuple[str, ...]],
     global_chunk_usage_counts: dict[str, int],
     blocked_combinations: set[tuple[str, ...]] | None = None,
     round_num: int = 1,
 ) -> tuple[list[Any], bool]:
+    """采样恰好 1 个 evidence unit（single 或 multi）。
+
+    Args:
+        unit_type: "single" 只取单 chunk，"multi" 只取多 chunk
+    """
     evidence_pool = evidence_manager.evidence_pools.get(topic)
     if not evidence_pool:
         return [], False
+
+    force = "single" if unit_type == "single" else "multi"
 
     last_chunks: list[Any] = []
 
@@ -82,9 +88,10 @@ def sample_chunks(
             topic=topic,
             target_mode=mode,
             target_difficulty=difficulty,
-            prefer_multi_chunk=(multi_k > single_k),
+            prefer_multi_chunk=(unit_type == "multi"),
             round_num=round_num,
-            remaining=max(single_k + multi_k, 1),
+            remaining=1,
+            force_unit_type=force,
         )
 
         single_units = [u for u in evidence_pool.single_chunks if u.chunk_id in batch.single_chunk_ids]
@@ -101,3 +108,63 @@ def sample_chunks(
         last_chunks = chunks
 
     return last_chunks, True
+
+
+def pre_sample_all_units(
+    evidence_manager: Any,
+    topic: str,
+    mode: str,
+    difficulty: str,
+    single_k: int,
+    multi_k: int,
+    global_used_combinations: set[tuple[str, ...]],
+    global_chunk_usage_counts: dict[str, int],
+    blocked_combinations: set[tuple[str, ...]] | None = None,
+    round_num: int = 1,
+) -> list[tuple[list[Any], str, bool]]:
+    """预采样一个 topic 本轮所有 evidence units，一次性去重。
+
+    先采样 single_k 个 single unit，再采样 multi_k 个 multi unit。
+    每次采样后立即将 chunk 组合加入已用集，保证跨批次不重复。
+
+    Returns:
+        [(chunks, unit_type, duplicate_combination), ...]  — 长度 = single_k + multi_k
+    """
+    blocked = set(blocked_combinations) if blocked_combinations is not None else set(global_used_combinations)
+    results: list[tuple[list[Any], str, bool]] = []
+
+    for _ in range(single_k):
+        chunks, dup = sample_chunks(
+            evidence_manager=evidence_manager,
+            topic=topic,
+            mode=mode,
+            difficulty=difficulty,
+            unit_type="single",
+            global_used_combinations=global_used_combinations,
+            global_chunk_usage_counts=global_chunk_usage_counts,
+            blocked_combinations=blocked,
+            round_num=round_num,
+        )
+        results.append((chunks, "single", dup))
+        if not dup:
+            for combo in _unit_combos(chunks):
+                blocked.add(combo)
+
+    for _ in range(multi_k):
+        chunks, dup = sample_chunks(
+            evidence_manager=evidence_manager,
+            topic=topic,
+            mode=mode,
+            difficulty=difficulty,
+            unit_type="multi",
+            global_used_combinations=global_used_combinations,
+            global_chunk_usage_counts=global_chunk_usage_counts,
+            blocked_combinations=blocked,
+            round_num=round_num,
+        )
+        results.append((chunks, "multi", dup))
+        if not dup:
+            for combo in _unit_combos(chunks):
+                blocked.add(combo)
+
+    return results

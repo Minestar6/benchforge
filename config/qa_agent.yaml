@@ -9,7 +9,7 @@ model:
   name: "deepseek-v3"            # model_registry.yaml 中的 key
   # 调用参数在 agent 级别指定，不在 registry 中
   temperature: 0.7
-  max_tokens: 1024
+  max_tokens: 4096
   max_retries: 3
 
 # ── Wikipedia 检索 ────────────────────────────────────────────────────────────
@@ -43,10 +43,9 @@ summarization_chunking:
 multi_chunk:
   h_min: 2
   h_max: 4
-  num_multihops_factor: 2
+  multi_ratio: 1.0              # multi_units 目标数量 = ceil(single_units × 此值)
   max_units_per_topic: 300
   max_units_per_expansion: 300
-  combinations_per_doc_factor: 2
 
 # ── 候选池 ────────────────────────────────────────────────────────────────────
 candidate_pool:

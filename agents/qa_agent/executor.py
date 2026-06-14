@@ -1,6 +1,7 @@
-﻿"""Execution logic: round execution, state update, stop conditions."""
+"""Execution logic: round execution, state update, stop conditions."""
 
 import asyncio
+import math
 import uuid
 from pathlib import Path
 from typing import Any
@@ -10,7 +11,7 @@ from loguru import logger
 from .state import GlobalState, ModeState, CandidateRecord, CandidateStatus
 from .planner import ModeRoundPlan, RoundStrategy, mode_candidate_target, mode_initial_breadth_not_done
 from .feedback import build_round_feedback, RoundFeedback
-from .sampling import sample_chunks, raw_chunk_ids, _unit_combos, record_global_chunk_usage
+from .sampling import sample_chunks, raw_chunk_ids, _unit_combos, record_global_chunk_usage, pre_sample_all_units
 from benchforge.utils.filter import LightweightFilter
 from benchforge.utils.llm_tracer import LLMTracer
 
@@ -211,6 +212,24 @@ def update_mode_trace(
     })
 
 
+def _per_difficulty_targets(mode_cfg: Any, config: Any) -> dict[str, int]:
+    """计算每个难度级别的候选池目标数量。"""
+    total = mode_candidate_target(mode_cfg, config)
+    targets: dict[str, int] = {}
+    for diff, ratio in (mode_cfg.difficulty_distribution or {}).items():
+        targets[diff] = math.ceil(total * ratio)
+    return targets
+
+
+def _check_per_difficulty_sufficient(mode_state: ModeState, targets: dict[str, int]) -> bool:
+    """检查每个难度级别的已接受数量是否达标。"""
+    accepted_by_diff = mode_state.get_difficulty_counts(CandidateStatus.ACCEPTED)
+    for diff, target in targets.items():
+        if accepted_by_diff.get(diff, 0) < target:
+            return False
+    return True
+
+
 def mode_should_stop(
     mode_cfg: Any,
     mode_state: ModeState,
@@ -223,7 +242,9 @@ def mode_should_stop(
     target = mode_candidate_target(mode_cfg, config)
 
     if initial_done and mode_state.accepted_count >= target:
-        return True, "candidate_pool_sufficient"
+        diff_targets = _per_difficulty_targets(mode_cfg, config)
+        if _check_per_difficulty_sufficient(mode_state, diff_targets):
+            return True, "candidate_pool_sufficient"
 
     if mode_state.round_in_mode > mode_cfg.max_rounds:
         return True, "max_rounds_reached"
@@ -237,7 +258,7 @@ def mode_should_stop(
     return False, None
 
 
-async def _generate_for_topic(
+async def _generate_one_batch(
     topic: str,
     round_plan: ModeRoundPlan,
     blueprint: Any,
@@ -245,41 +266,28 @@ async def _generate_for_topic(
     mode_state: ModeState,
     evidence_manager: Any,
     generator: Any,
-    reservation_lock: asyncio.Lock | None = None,
-    reserved_combinations: set[tuple[str, ...]] | None = None,
+    unit_type: str,
+    pre_sampled_chunks: list[Any] | None = None,
     tracer: LLMTracer | None = None,
 ) -> dict:
-    """Run one topic's LLM generation; returns raw result without state mutation."""
+    """Generate questions from exactly 1 evidence unit.
+
+    Args:
+        pre_sampled_chunks: 预采样好的 evidence unit 列表（跳过采样）。
+                            None 时内部自行采样。
+    """
     llm_call_id = None
-    reserved_unit_combos: list[tuple[str, ...]] | None = None
     try:
-        if reservation_lock is not None and reserved_combinations is not None:
-            async with reservation_lock:
-                blocked_combinations = global_state.used_chunk_combinations | reserved_combinations
-                chunks, duplicate_combination = sample_chunks(
-                    evidence_manager=evidence_manager,
-                    topic=topic,
-                    mode=round_plan.mode,
-                    difficulty=round_plan.difficulty,
-                    single_k=round_plan.single_k,
-                    multi_k=round_plan.multi_k,
-                    global_used_combinations=global_state.used_chunk_combinations,
-                    global_chunk_usage_counts=global_state.chunk_usage_counts,
-                    blocked_combinations=blocked_combinations,
-                    round_num=mode_state.round_in_mode,
-                )
-                if not duplicate_combination:
-                    reserved_unit_combos = _unit_combos(chunks)
-                    for combo in reserved_unit_combos:
-                        reserved_combinations.add(combo)
+        if pre_sampled_chunks is not None:
+            chunks = pre_sampled_chunks
+            duplicate_combination = False
         else:
             chunks, duplicate_combination = sample_chunks(
                 evidence_manager=evidence_manager,
                 topic=topic,
                 mode=round_plan.mode,
                 difficulty=round_plan.difficulty,
-                single_k=round_plan.single_k,
-                multi_k=round_plan.multi_k,
+                unit_type=unit_type,
                 global_used_combinations=global_state.used_chunk_combinations,
                 global_chunk_usage_counts=global_state.chunk_usage_counts,
                 round_num=mode_state.round_in_mode,
@@ -287,7 +295,6 @@ async def _generate_for_topic(
 
         if duplicate_combination:
             return {
-                "topic": topic,
                 "success": True,
                 "parsed_questions": [],
                 "raw_count": 0,
@@ -307,7 +314,6 @@ async def _generate_for_topic(
         model_client = evidence_manager.model_client
         model_name = getattr(model_client, "model_name", "unknown")
 
-        # 使用 Span 自动记录（优先），向后兼容 llm_trace_path
         if tracer is not None:
             span = tracer.span(
                 model=model_name,
@@ -379,7 +385,6 @@ async def _generate_for_topic(
             q["generation_round"] = round_plan.round_in_mode
 
         return {
-            "topic": topic,
             "success": True,
             "parsed_questions": accepted_questions,
             "raw_count": len(raw_questions),
@@ -393,12 +398,8 @@ async def _generate_for_topic(
         }
 
     except Exception as exc:
-        if reserved_unit_combos is not None and reserved_combinations is not None:
-            for combo in reserved_unit_combos:
-                reserved_combinations.discard(combo)
-        logger.warning(f"Topic {topic} failed in round {round_plan.round_in_mode}: {exc}")
+        logger.warning(f"Topic {topic} [{unit_type}] failed in round {round_plan.round_in_mode}: {exc}")
         return {
-            "topic": topic,
             "success": False,
             "parsed_questions": [],
             "chunks": [],
@@ -408,6 +409,124 @@ async def _generate_for_topic(
             "llm_call_id": llm_call_id,
             "trace_call_id": None,
         }
+
+
+async def _generate_for_topic(
+    topic: str,
+    round_plan: ModeRoundPlan,
+    blueprint: Any,
+    global_state: GlobalState,
+    mode_state: ModeState,
+    evidence_manager: Any,
+    generator: Any,
+    reservation_lock: asyncio.Lock | None = None,
+    reserved_combinations: set[tuple[str, ...]] | None = None,
+    tracer: LLMTracer | None = None,
+) -> dict:
+    """Run one topic's generation: pre-sample all units, then make one LLM call per unit."""
+    # ── Phase 1: pre-sample all evidence units under lock ──
+    if reservation_lock is not None and reserved_combinations is not None:
+        async with reservation_lock:
+            blocked = global_state.used_chunk_combinations | reserved_combinations
+            pre_sampled = pre_sample_all_units(
+                evidence_manager=evidence_manager,
+                topic=topic,
+                mode=round_plan.mode,
+                difficulty=round_plan.difficulty,
+                single_k=round_plan.single_k,
+                multi_k=round_plan.multi_k,
+                global_used_combinations=global_state.used_chunk_combinations,
+                global_chunk_usage_counts=global_state.chunk_usage_counts,
+                blocked_combinations=blocked,
+                round_num=mode_state.round_in_mode,
+            )
+            # Reserve all valid combos
+            for chunks, _ut, dup in pre_sampled:
+                if not dup:
+                    for combo in _unit_combos(chunks):
+                        reserved_combinations.add(combo)
+    else:
+        pre_sampled = pre_sample_all_units(
+            evidence_manager=evidence_manager,
+            topic=topic,
+            mode=round_plan.mode,
+            difficulty=round_plan.difficulty,
+            single_k=round_plan.single_k,
+            multi_k=round_plan.multi_k,
+            global_used_combinations=global_state.used_chunk_combinations,
+            global_chunk_usage_counts=global_state.chunk_usage_counts,
+            round_num=mode_state.round_in_mode,
+        )
+
+    # ── Phase 2: one LLM call per pre-sampled unit ──
+    all_parsed: list[dict] = []
+    all_failures: list[dict] = []
+    all_chunks: list[Any] = []
+    total_raw = 0
+    total_filtered = 0
+    any_dup = False
+    last_llm_id = None
+    last_trace_id = None
+
+    for chunks, _unit_type, dup in pre_sampled:
+        if dup or not chunks:
+            any_dup = True
+            continue
+
+        result = await _generate_one_batch(
+            topic=topic,
+            round_plan=round_plan,
+            blueprint=blueprint,
+            global_state=global_state,
+            mode_state=mode_state,
+            evidence_manager=evidence_manager,
+            generator=generator,
+            unit_type=_unit_type,
+            pre_sampled_chunks=chunks,
+            tracer=tracer,
+        )
+
+        if not result["success"]:
+            return {
+                "topic": topic,
+                "success": False,
+                "parsed_questions": all_parsed,
+                "raw_count": total_raw,
+                "filtered_count": total_filtered,
+                "filter_failures": all_failures,
+                "llm_call_id": result.get("llm_call_id") or last_llm_id,
+                "trace_call_id": result.get("trace_call_id") or last_trace_id,
+                "chunks": all_chunks,
+                "duplicate_combination": any_dup,
+                "error": result.get("error"),
+                "error_type": result.get("error_type"),
+            }
+
+        all_parsed.extend(result.get("parsed_questions", []))
+        all_failures.extend(result.get("filter_failures", []))
+        all_chunks.extend(result.get("chunks", []))
+        total_raw += result.get("raw_count", 0)
+        total_filtered += result.get("filtered_count", 0)
+        if result.get("duplicate_combination"):
+            any_dup = True
+        if result.get("llm_call_id"):
+            last_llm_id = result["llm_call_id"]
+        if result.get("trace_call_id"):
+            last_trace_id = result["trace_call_id"]
+
+    return {
+        "topic": topic,
+        "success": True,
+        "parsed_questions": all_parsed,
+        "raw_count": total_raw,
+        "filtered_count": total_filtered,
+        "filter_failures": all_failures,
+        "llm_call_id": last_llm_id,
+        "trace_call_id": last_trace_id,
+        "chunks": all_chunks,
+        "duplicate_combination": any_dup,
+        "error": None,
+    }
 
 
 async def execute_mode_round_plan(

@@ -103,7 +103,6 @@ class AgentConfig:
 class MultiChunkConfig:
     h_min: int = 2
     h_max: int = 5
-    num_multihops_factor: int = 1
+    multi_ratio: float = 1.0          # multi_units 目标数量 = ceil(single_units × 此值)
     max_units_per_topic: int = 80
     max_units_per_expansion: int = 40
-    combinations_per_doc_factor: int = 1

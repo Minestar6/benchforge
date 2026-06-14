@@ -1,0 +1,31 @@
+{
+  "task_id": "exp_e2e",
+  "run_id": "run_20260614_221616",
+  "modes": {
+    "qa": {
+      "candidate_count": 20,
+      "accepted_count": 20,
+      "target_candidate_count": 12,
+      "difficulty_counts": {
+        "easy": 7,
+        "medium": 12,
+        "hard": 1
+      },
+      "stopped_reason": "candidate_pool_sufficient"
+    },
+    "multiple_choice": {
+      "candidate_count": 15,
+      "accepted_count": 15,
+      "target_candidate_count": 12,
+      "difficulty_counts": {
+        "medium": 12,
+        "easy": 2,
+        "hard": 1
+      },
+      "stopped_reason": "candidate_pool_sufficient"
+    }
+  },
+  "total_candidates": 35,
+  "global_used_chunk_combinations": 16,
+  "global_failures": 0
+}

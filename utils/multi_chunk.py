@@ -1,6 +1,7 @@
 ﻿"""多证据单元构建模块。"""
 
 import hashlib
+import math
 from typing import Any
 
 import numpy as np
@@ -62,9 +63,11 @@ class MultiChunkBuilder:
         target_count: int = 10,
         h_min: int = 2,
         h_max: int = 4,
-        combinations_per_doc_factor: int = 2,
     ) -> list[MultiChunkUnit]:
         """YourBench 风格：基于文档哈希的确定性随机采样，支持非相邻 chunk 组合。
+
+        候选池大小由 single_chunks 数量自动推导（每文档 n × 3），
+        确保有足够的候选供评分筛选后截断至 target_count。
 
         Args:
             single_chunks: 单证据单元列表
@@ -72,7 +75,6 @@ class MultiChunkBuilder:
             target_count: 最终保留的 multi-chunk 单元数量上限
             h_min: 每个组合最少 chunk 数（含）
             h_max: 每个组合最多 chunk 数（含）
-            combinations_per_doc_factor: 每篇文档生成的候选组合数 = n_chunks // factor
         """
         if not single_chunks:
             return []
@@ -94,11 +96,12 @@ class MultiChunkBuilder:
             seed = int(hashlib.md5(doc_id.encode()).hexdigest(), 16) % (2 ** 31)
             rng = np.random.default_rng(seed)
 
-            n_combinations = max(1, int(n * combinations_per_doc_factor))
+            # 候选池大小 = n × 3，保证有足够余量供评分筛选
+            n_combinations = n * 3
             max_attempts = n_combinations * 3  # 允许一定的随机碰撞重试
             seen: set[tuple[int, ...]] = set()
 
-            for _ in range(max_attempts):  # ??????
+            for _ in range(max_attempts):
                 if len(seen) >= n_combinations:
                     break
                 h = int(rng.integers(h_min, min(h_max, n) + 1))
@@ -180,20 +183,32 @@ class MultiChunkBuilder:
         except (ValueError, AttributeError):
             return 0
 
+    @staticmethod
+    def _count_max_combinations(n: int, h_min: int, h_max: int) -> int:
+        """计算 n 个 chunk 能产生的最大不重复组合数 C(n, h_min) + ... + C(n, h_max)。"""
+        total = 0
+        for k in range(h_min, min(h_max, n) + 1):
+            total += math.comb(n, k)
+        return total
+
     def calculate_yourbench_target_count(
         self,
         single_chunks: list[SingleChunkUnit],
         h_min: int = 2,
         h_max: int = 5,
-        num_multihops_factor: int = 1,
+        multi_ratio: float = 1.0,
         max_units: int | None = None,
     ) -> int:
-        """按 YourBench 风格计算 multi-chunk 目标数量。
+        """按 single_units 总数缩放计算 multi-chunk 目标数量。
 
-        设计原则：
-        - 不枚举所有组合，按每篇文档的 chunk 数生成受控数量
-        - 最终使用 max_units 控制全局上限
-        - 不再使用 n // h_max 过激压缩，改为 h_min 软上限
+        公式: target = ceil(n × multi_ratio)，受组合数理论上限约束。
+
+        Args:
+            single_chunks: 单证据单元列表
+            h_min: 每个组合最少 chunk 数
+            h_max: 每个组合最多 chunk 数
+            multi_ratio: multi_units 相对 single_units 的目标比例
+            max_units: 全局上限（None 则不限）
         """
         if not single_chunks:
             return 0
@@ -203,19 +218,17 @@ class MultiChunkBuilder:
             chunks_by_doc.setdefault(chunk.document_id, []).append(chunk)
 
         total = 0
-        factor = max(1, int(num_multihops_factor))
-
         for _doc_id, doc_chunks in chunks_by_doc.items():
             n = len(doc_chunks)
             if n < h_min:
                 continue
 
-            # 基础数量：按文档 chunk 数缩放
-            doc_target = max(h_min, n // factor)
+            # 目标数量 = ceil(n × multi_ratio)，至少 h_min 个
+            doc_target = max(h_min, math.ceil(n * multi_ratio))
 
-            # 软上限：每个组合至少 h_min 个 chunk，且不超过 chunk 总数
-            max_by_min = n // h_min
-            doc_target = min(doc_target, max_by_min)
+            # 不超过该文档的组合数理论上限
+            max_combos = self._count_max_combinations(n, h_min, h_max)
+            doc_target = min(doc_target, max_combos)
 
             total += doc_target
 

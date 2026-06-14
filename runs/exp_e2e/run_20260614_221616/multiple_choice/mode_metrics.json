@@ -1,0 +1,19 @@
+{
+  "candidate_count": 15,
+  "accepted_count": 15,
+  "rejected_count": 0,
+  "accept_rate": 1.0,
+  "topic_distribution": {
+    "Python (programming language)": 5,
+    "Machine learning": 10
+  },
+  "difficulty_distribution": {
+    "medium": 12,
+    "easy": 2,
+    "hard": 1
+  },
+  "hard_gap": 0.2333,
+  "stopped_reason": "candidate_pool_sufficient",
+  "target": 12,
+  "target_reached": true
+}

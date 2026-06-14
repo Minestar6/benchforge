@@ -78,7 +78,7 @@ class EvidenceManager:
 
         h_min = getattr(mcfg, "h_min", 2)
         h_max = getattr(mcfg, "h_max", 5)
-        num_multihops_factor = getattr(mcfg, "num_multihops_factor", 1)
+        multi_ratio = getattr(mcfg, "multi_ratio", 1.0)
 
         max_units = getattr(
             mcfg,
@@ -90,7 +90,7 @@ class EvidenceManager:
             single_chunks=single_units,
             h_min=h_min,
             h_max=h_max,
-            num_multihops_factor=num_multihops_factor,
+            multi_ratio=multi_ratio,
             max_units=max_units,
         )
 
@@ -105,7 +105,6 @@ class EvidenceManager:
 
         h_min = getattr(mcfg, "h_min", 2)
         h_max = getattr(mcfg, "h_max", 5)
-        combinations_per_doc_factor = getattr(mcfg, "combinations_per_doc_factor", 1)
 
         target_count = self._resolve_multi_target_count(
             single_units,
@@ -118,7 +117,6 @@ class EvidenceManager:
             target_count=target_count,
             h_min=h_min,
             h_max=h_max,
-            combinations_per_doc_factor=combinations_per_doc_factor,
         )
 
     async def prepare_evidence(
@@ -426,24 +424,16 @@ Provide a concise overview in <final_summary> tags."""
         prefer_multi_chunk: bool = False,
         round_num: int = 1,
         remaining: int = 1,
+        force_unit_type: str | None = None,
     ) -> Any:
-        """采样证据，确保 chunk 组合唯一。
-
-        使用采样策略：
-        - 第 1 轮：BroadExplorationSampling（广度探索）
-        - 其他轮：GapDrivenSampling（缺口驱动）
+        """采样证据——每次返回恰好 1 个 evidence unit。
 
         Args:
-            evidence_pool: 证据池
-            topic: 主题名称
-            target_mode: 目标模式
-            target_difficulty: 目标难度
-            prefer_multi_chunk: 是否偏好多 chunk
-            round_num: 轮次（用于选择采样策略）
-            remaining: 剩余缺口数量
+            force_unit_type: 强制采样类型。"single" 只取单 chunk，"multi" 只取多 chunk，
+                             None 自动混合。
 
         Returns:
-            生成批次
+            生成批次（single_chunk_ids + multi_chunk_ids 合计恰好 1 个 unit）
         """
         # 选择采样策略
         if round_num == 1:
@@ -461,6 +451,7 @@ Provide a concise overview in <final_summary> tags."""
             target_difficulty=target_difficulty,
             num_evidence=num_evidence,
             prefer_multi_chunk=prefer_multi_chunk,
+            force_unit_type=force_unit_type,
         )
         # 更新使用计数
         for unit in evidence_pool.single_chunks:
@@ -474,16 +465,8 @@ Provide a concise overview in <final_summary> tags."""
         return batch
 
     def _calculate_num_evidence(self, remaining_count: int) -> int:
-        """计算需要采样的证据数量。
-
-        Args:
-            remaining_count: 剩余目标数量
-
-        Returns:
-            证据数量
-        """
-        # 最多 5 个证据单元
-        return min(5, remaining_count + 2)
+        """计算需要采样的证据数量——每个 LLM 调用只用一个单元。"""
+        return 1
 
     def _calculate_batch_request_counts(
         self,

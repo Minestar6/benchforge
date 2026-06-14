@@ -1,0 +1,190 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "medium",
+    "topics": [
+      "Python (programming language)",
+      "Machine learning"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "Python (programming language)",
+        "success": true,
+        "generated_count": 22,
+        "raw_count": 22,
+        "filtered_count": 22,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_4379866f621d4c90962ef86e89e6dac6",
+        "trace_call_id": "llm_716e3bd79f98496d856d412ae4f6bd5a",
+        "chunks": [
+          "doc_8028cecc537d::chunk_0000",
+          "doc_8028cecc537d::chunk_0001",
+          "doc_b28420f93560::chunk_0000"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Machine learning",
+        "success": true,
+        "generated_count": 15,
+        "raw_count": 18,
+        "filtered_count": 15,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "Using the example of translating 'I love you' to French ('je t' aime'), describe how the attention weights in the decoder change across three decoding steps and what this reveals about the mechanism.",
+            "reason": "非法问题类型: interpretation",
+            "raw_item": {
+              "question": "Using the example of translating 'I love you' to French ('je t' aime'), describe how the attention weights in the decoder change across three decoding steps and what this reveals about the mechanism.",
+              "answer": "On the first decoder step, 94% of the attention weight is on the source word 'I', leading to the output 'je'. On the second step, 88% of the weight shifts to the source word 'you', leading to the output 't''. On the third step, 95% of the weight is on the source word 'love', leading to the output 'aime'. This reveals that the attention mechanism acts as a dynamic alignment system. It does not process words in strict source order but learns to flexibly align each target word with the most relevant source word at each step, which is crucial for handling differences in word order between languages.",
+              "question_mode": "qa",
+              "thought_process": "This question tests the ability to interpret the practical function of attention through a concrete example. It requires mapping the described numerical weights to a linguistic process (alignment) and drawing a conclusion about the mechanism's flexibility compared to a naive, order-preserving approach.",
+              "question_type": "interpretation",
+              "required_capability": "Interpreting the sequence of attention weight distributions in a machine translation example to explain the concept of soft alignment.",
+              "estimated_difficulty": 5,
+              "citations": [
+                "On the first pass through the decoder, 94% of the attention weight is on the first English word I, so the network offers the word je. On the second pass of the decoder, 88% of the attention weight is on the third English word you, so it offers t'. On the last pass, 95% of the attention weight is on the second English word love, so it offers aime.",
+                "In translating between languages, alignment is the process of matching words from the source sentence to words of the translated sentence."
+              ]
+            },
+            "topic": "Machine learning",
+            "chunk_ids": [
+              "doc_87513bde3fb6::chunk_0000"
+            ],
+            "chunks": [
+              "#Subheading: History\nAttentional Neural Networks introduced a learned feature selection mechanism using top-down cognitive modulation, showing how attention weights can highlight relevant inputs.\nTransformers were adopted across scientific domains, including AlphaFold for protein folding, CLIP for vision-language pretraining, and attention-based dense segmentation models like CCNet and DANet.\nThe major breakthrough came with self-attention, where each element in the input sequence attends to all others, enabling the model to capture global dependencies. This idea was central to the Transformer architecture, which replaced recurrence with attention mechanisms. As a result, Transformers became the foundation for models like BERT, T5 and generative pre-trained transformers (GPT).\n#Subheading: Overview\nThe modern era of machine attention was revitalized by grafting an attention mechanism (Fig 1.  orange) to an Encoder-Decoder.[citation needed].\nThis example focuses on the attention of a single word \"that\".  In practice, the attention of each word is calculated in parallel to speed up calculations.  Simply changing the lowercase \"x\" vector to the uppercase \"X\" matrix will yield the formula for this.\nSoftmax scaling qWkT / √100 prevents a high variance in qWkT that would allow a single word to excessively dominate the softmax resulting in attention to only one word, as a discrete hard max would do.\nNotation: the commonly written row-wise softmax formula above assumes that vectors are rows, which runs contrary to the standard math notation of column vectors. More correctly, we should take the transpose of the context vector and use the column-wise softmax, resulting in the more correct form.\n##Subheading: Interpreting attention weights\nIn translating between languages, alignment is the process of matching words from the source sentence to words of the translated sentence. Networks that perform verbatim translation without regard to word order would show the highest scores along the (dominant) diagonal of the matrix. The off-diagonal dominance shows that the attention mechanism is more nuanced.\nConsider an example of translating I love you to French. On the first pass through the decoder, 94% of the attention weight is on the first English word I, so the network offers the word je. On the second pass of the decoder, 88% of the attention weight is on the third English word you, so it offers t'. On the last pass, 95% of the attention weight is on the second English word love, so it offers aime.\nIn the I love you example, the second word love is aligned with the third word aime. Stacking soft row vectors together for je, t', and aime yields an alignment matrix:.\nSometimes, alignment can be multiple-to-multiple. For example, the English phrase look it up corresponds to cherchez-le. Thus, \"soft\" attention weights work better than \"hard\" attention weights (setting one attention weight to 1, and the others to 0), as we would like the model to make a context vector consisting of a weighted sum of the hidden vectors, rather than \"the best one\", as there may not be a best hidden vector.\n#Subheading: Variants\nfast weight programmers, or fast weight controllers (1992). A \"slow\" neural network outputs the \"fast\" weights of another neural network through outer products. The slow network learns by gradient descent. It was later renamed as \"linearized self-attention\".\nBahdanau-style attention, also referred to as additive attention,\nLuong-style attention, which is known as multiplicative attention,\nEarly attention mechanisms similar to modern self-attention were proposed using recurrent neural networks. However, the highly parallelizable self-attention was introduced in 2017 and successfully used in the Transformer model,\npositional attention and factorized positional attention.\nFor convolutional neural networks, attention mechanisms can be distinguished by the dimension on which they operate, namely: spatial attention, channel attention, or combinations.\nThese variants recombine the encoder-side inputs to redistribute those effects to each target output. Often, a correlation-style matrix of dot products provides the re-weighting coefficients.  In the figures below, W is the matrix of context attention weights, similar to the formula in Overview section above.\n#Subheading: Optimizations\n##Subheading: Flash attention\nThe size of the attention matrix is proportional to the square of the number of input tokens. Therefore, when the input is long, calculating the attention matrix requires a lot of GPU memory. Flash attention is an implementation that reduces the memory needs and increases efficiency without sacrificing accuracy. It achieves this by partitioning the attention computation into smaller blocks that fit into the GPU's faster on-chip memory, reducing the need to store large intermediate matrices and thus lowering memory usage while increasing computational efficiency.\n##Subheading: FlexAttention\nFlexAttention is an attention kernel developed by Meta that allows users to modify attention scores prior to softmax and dynamically chooses the optimal attention algorithm.\n#Subheading: Applications\nAttention is widely used in natural language processing, computer vision, and speech recognition. In NLP, it"
+            ],
+            "llm_call_id": "llm_2c0700736ca048cfa523da364eb3e248",
+            "trace_call_id": "llm_2c2e34f24b434894a7f91e3a2090fee9",
+            "generation_round": 1
+          },
+          {
+            "question": "What does an alignment matrix where the highest scores are predominantly along the diagonal suggest about a translation model's behavior? What would off-diagonal dominance suggest instead?",
+            "reason": "非法问题类型: interpretation",
+            "raw_item": {
+              "question": "What does an alignment matrix where the highest scores are predominantly along the diagonal suggest about a translation model's behavior? What would off-diagonal dominance suggest instead?",
+              "answer": "Predominantly diagonal scores suggest the model is performing a largely verbatim, word-by-word translation that closely follows the source sentence's word order. Off-diagonal dominance suggests a more nuanced translation process where the model is learning non-sequential alignments, effectively reordering words or phrases to match the target language's grammar and syntax, which is a more sophisticated and accurate behavior for machine translation.",
+              "question_mode": "qa",
+              "thought_process": "This is an interpretation question that tests the ability to 'read' a technical visualization (an alignment matrix) and infer model behavior. It connects a mathematical output pattern to high-level linguistic competence, demonstrating a deeper understanding of what attention is actually learning to do.",
+              "question_type": "interpretation",
+              "required_capability": "Interpreting the patterns in an attention alignment matrix to infer the translation strategy (verbatim vs. nuanced reordering) of a model.",
+              "estimated_difficulty": 6,
+              "citations": [
+                "In translating between languages, alignment is the process of matching words from the source sentence to words of the translated sentence. Networks that perform verbatim translation without regard to word order would show the highest scores along the (dominant) diagonal of the matrix. The off-diagonal dominance shows that the attention mechanism is more nuanced."
+              ]
+            },
+            "topic": "Machine learning",
+            "chunk_ids": [
+              "doc_87513bde3fb6::chunk_0000"
+            ],
+            "chunks": [
+              "#Subheading: History\nAttentional Neural Networks introduced a learned feature selection mechanism using top-down cognitive modulation, showing how attention weights can highlight relevant inputs.\nTransformers were adopted across scientific domains, including AlphaFold for protein folding, CLIP for vision-language pretraining, and attention-based dense segmentation models like CCNet and DANet.\nThe major breakthrough came with self-attention, where each element in the input sequence attends to all others, enabling the model to capture global dependencies. This idea was central to the Transformer architecture, which replaced recurrence with attention mechanisms. As a result, Transformers became the foundation for models like BERT, T5 and generative pre-trained transformers (GPT).\n#Subheading: Overview\nThe modern era of machine attention was revitalized by grafting an attention mechanism (Fig 1.  orange) to an Encoder-Decoder.[citation needed].\nThis example focuses on the attention of a single word \"that\".  In practice, the attention of each word is calculated in parallel to speed up calculations.  Simply changing the lowercase \"x\" vector to the uppercase \"X\" matrix will yield the formula for this.\nSoftmax scaling qWkT / √100 prevents a high variance in qWkT that would allow a single word to excessively dominate the softmax resulting in attention to only one word, as a discrete hard max would do.\nNotation: the commonly written row-wise softmax formula above assumes that vectors are rows, which runs contrary to the standard math notation of column vectors. More correctly, we should take the transpose of the context vector and use the column-wise softmax, resulting in the more correct form.\n##Subheading: Interpreting attention weights\nIn translating between languages, alignment is the process of matching words from the source sentence to words of the translated sentence. Networks that perform verbatim translation without regard to word order would show the highest scores along the (dominant) diagonal of the matrix. The off-diagonal dominance shows that the attention mechanism is more nuanced.\nConsider an example of translating I love you to French. On the first pass through the decoder, 94% of the attention weight is on the first English word I, so the network offers the word je. On the second pass of the decoder, 88% of the attention weight is on the third English word you, so it offers t'. On the last pass, 95% of the attention weight is on the second English word love, so it offers aime.\nIn the I love you example, the second word love is aligned with the third word aime. Stacking soft row vectors together for je, t', and aime yields an alignment matrix:.\nSometimes, alignment can be multiple-to-multiple. For example, the English phrase look it up corresponds to cherchez-le. Thus, \"soft\" attention weights work better than \"hard\" attention weights (setting one attention weight to 1, and the others to 0), as we would like the model to make a context vector consisting of a weighted sum of the hidden vectors, rather than \"the best one\", as there may not be a best hidden vector.\n#Subheading: Variants\nfast weight programmers, or fast weight controllers (1992). A \"slow\" neural network outputs the \"fast\" weights of another neural network through outer products. The slow network learns by gradient descent. It was later renamed as \"linearized self-attention\".\nBahdanau-style attention, also referred to as additive attention,\nLuong-style attention, which is known as multiplicative attention,\nEarly attention mechanisms similar to modern self-attention were proposed using recurrent neural networks. However, the highly parallelizable self-attention was introduced in 2017 and successfully used in the Transformer model,\npositional attention and factorized positional attention.\nFor convolutional neural networks, attention mechanisms can be distinguished by the dimension on which they operate, namely: spatial attention, channel attention, or combinations.\nThese variants recombine the encoder-side inputs to redistribute those effects to each target output. Often, a correlation-style matrix of dot products provides the re-weighting coefficients.  In the figures below, W is the matrix of context attention weights, similar to the formula in Overview section above.\n#Subheading: Optimizations\n##Subheading: Flash attention\nThe size of the attention matrix is proportional to the square of the number of input tokens. Therefore, when the input is long, calculating the attention matrix requires a lot of GPU memory. Flash attention is an implementation that reduces the memory needs and increases efficiency without sacrificing accuracy. It achieves this by partitioning the attention computation into smaller blocks that fit into the GPU's faster on-chip memory, reducing the need to store large intermediate matrices and thus lowering memory usage while increasing computational efficiency.\n##Subheading: FlexAttention\nFlexAttention is an attention kernel developed by Meta that allows users to modify attention scores prior to softmax and dynamically chooses the optimal attention algorithm.\n#Subheading: Applications\nAttention is widely used in natural language processing, computer vision, and speech recognition. In NLP, it"
+            ],
+            "llm_call_id": "llm_2c0700736ca048cfa523da364eb3e248",
+            "trace_call_id": "llm_2c2e34f24b434894a7f91e3a2090fee9",
+            "generation_round": 1
+          },
+          {
+            "question": "According to the text, what are the three key indicators that determine the end of a successful neural network training process?",
+            "reason": "非法问题类型: synthesis",
+            "raw_item": {
+              "question": "According to the text, what are the three key indicators that determine the end of a successful neural network training process?",
+              "answer": "First, the value of the loss function (cost) must be low, indicating small differences between predictions and correct answers. Second, the cost must approach, but typically not reach, zero. Third, additional training observations no longer usefully reduce the cost.",
+              "question_mode": "qa",
+              "thought_process": "This question synthesizes information scattered across several sentences about training completion. It tests whether the reader can pull together distinct criteria related to cost value, its asymptotic behavior, and the point of diminishing returns.",
+              "question_type": "synthesis",
+              "required_capability": "Synthesizing multiple criteria from the text to define the stopping conditions for neural network training",
+              "estimated_difficulty": 5,
+              "citations": [
+                "As long as the value of the loss function (its cost) continues to decline, the network is continuing to improve.",
+                "When the cost is low, the difference between the output (e.g. almost certainly a cat) and the correct answer (a cat) is small.",
+                "The cost typically approaches, but does not reach, 0.",
+                "Learning typically ends when additional observations do not usefully reduce the cost."
+              ]
+            },
+            "topic": "Machine learning",
+            "chunk_ids": [
+              "doc_a42014b996c0::chunk_0003",
+              "doc_a42014b996c0::chunk_0009"
+            ],
+            "chunks": [
+              " is quadratic in the size of the context window. Schmidhuber's fast weight controller (1992) scales linearly and was later shown to be equivalent to the unnormalized linear transformer. Transformers have increasingly become the model of choice for natural language processing. Many modern large language models such as GPT, Gemini, Grok, DeepSeek, and Qwen use this architecture.\n#Subheading: Elements\nNNs began as an attempt to replicate the architecture of the brain in the digital realm. NNs immediately showed promise for handling non-linear relationships, but encountered obstacles. Models soon reoriented to applying mathematical insights to improve empirical results, at the expense of biological fidelity.\n##Subheading: Neuron\nNNs are composed of digital neurons, conceptually derived from biological neurons. Each neuron has one or more numerical inputs and produces a single numerical output. An input (e.g., an image) is typically parceled across the set of input neurons (each getting a piece of the image). Each neuron's inputs, weighted by the weights of the connections from each of those inputs are summed. A bias term is added to this sum.) The result is then passed through a nonlinear activation function to produce the neuron's output. Small enough outputs may be zeroed out (ignored).\n##Subheading: Network\nNNs connect neurons to each other, using the output of some neurons as the input of others, akin to biological axon-synapse-dendrite connections. The network forms a directed, weighted graph. The weights apply to both the graph's the nodes and edges.\nNodes are arranged in layers, with the bottom layers directly addressing raw data, while the top layers reveal the final results. Intermediate layers gradually increase the level of abstraction, so what began as for example, pixels in an image, gradually resolves into things such as object boundaries, and then into real-world objects such as letters and faces. Single layer and unlayered networks are also used.[citation needed].\nMultiple connection patterns have been used. Traditionally, they are fully connected, with every neuron in one layer connecting to every neuron in the next layer. However, in convolutional neural networks, some layers are convolutional, meaning each neuron in one layer is connected to a subset of neurons in the previous layer, such as those representing one section of an image.[clarification needed].\nIn most neural networks,[citation needed] the outputs of the neurons in one layer are connected only to neurons in the immediately  following layer (directed acyclic graph), meaning information only flows forward from one layer to the next. These are known as feedforward networks. In contrast, networks that allow connections between neurons in the same or previous layers are known as recurrent networks.\n#Subheading: Learning\nTraining/learning involves adjusting the weights of the network to improve the accuracy of the result. NNs typically require vast numbers of sample inputs (far more than biological brains) to achieve a given level of function. This is done by minimizing the observed errors among sample observations. Training takes place before a network is deployed, and (unlike brains) does not continue thereafter. Instead, the network may be retrained from scratch as more sample data becomes available.\nEmpirical risk minimization adjusts node and link weights to minimize the difference (empirical risk), between the predicted output and the known values in the training samples. A defined loss function measures the degree of error. Backpropagation spreads the error (adjusts the weights) from the output nodes across the network to the input nodes. The intent is to allow the network to process data that is not included in the training samples.\nAs long as the value of the loss function (its cost) continues to decline, the network is continuing to improve. The function typically produces a statistic whose value is only approximate. When the cost is low, the difference between the output (e.g. almost certainly a cat) and the correct answer (a cat) is small. Most learning models can be viewed as a straightforward application of optimization theory and statistical estimation.\nLearning typically ends when additional observations do not usefully reduce the cost. The cost typically approaches, but does not reach, 0. If no feasible amount of sample data yields a low cost, training is labeled a failure.\n##Subheading: Loss function\nWhile it is possible to assess a loss function ad hoc, typically it must exhibit desirable properties such as convexity, differentiability, and robustness. In a probabilistic model, the model's posterior probability can be used as an inverse cost (higher values are better).[citation needed].\n##Subheading: Backpropagation\nBackpropagation is a method used to adjust the connection weights to compensate for errors found during learning. The error amount is essentially divided among the connections. Technically, backpropagation calculates the gradient (the derivative) of the loss function associated with a given state with respect to the weights. The weight updates can be done via stochastic gradient descent or other methods, such as extreme learning machines, \"no-prop\" networks, training without backtracking, \"weight",
+              "_{i}w_{iq})-b_{q}\right).}\n\n\n\n\n\nA two-layer feedforward neural network\n\n\n\nAn neural network\n\n\n\nAn NN dependency graph\n\n\n\nA single-layer feedforward neural network with 4 inputs, 6 hidden nodes and 2 outputs. Given position state and direction, it outputs wheel based control values.\n\n\n\nA two-layer feedforward neural network with 8 inputs, 2x8 hidden nodes and 2 outputs. Given position state, direction and other environment values, it outputs thruster based control values.\n\n\n\nParallel pipeline structure of CMAC neural network. This learning algorithm can converge in one step."
+            ],
+            "llm_call_id": "llm_c7fa3c4827404c19b13987c90c46b15d",
+            "trace_call_id": "llm_08778313380b4b7c8559999b0d349a72",
+            "generation_round": 1
+          }
+        ],
+        "llm_call_id": "llm_c7fa3c4827404c19b13987c90c46b15d",
+        "trace_call_id": "llm_08778313380b4b7c8559999b0d349a72",
+        "chunks": [
+          "doc_87513bde3fb6::chunk_0000",
+          "doc_a42014b996c0::chunk_0003",
+          "doc_a42014b996c0::chunk_0009"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "strategy": "hard_generate",
+    "difficulty": "hard",
+    "topics": [
+      "Machine learning",
+      "Python (programming language)"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "Machine learning",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 9,
+        "filtered_count": 9,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_db3d63f1dc6d4805823f16a668a5d982",
+        "trace_call_id": "llm_79497dfcb92e48979fa0308f8ae3b173",
+        "chunks": [
+          "doc_a42014b996c0::chunk_0003",
+          "doc_ce155af0fb1c::chunk_0002",
+          "doc_ce155af0fb1c::chunk_0004",
+          "doc_ce155af0fb1c::chunk_0008"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Python (programming language)",
+        "success": true,
+        "generated_count": 8,
+        "raw_count": 8,
+        "filtered_count": 8,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_7e04bd0fd62b4490bdcca3b2e531de32",
+        "trace_call_id": "llm_251a7cc11d8e4b51b410622e9b589d01",
+        "chunks": [
+          "doc_03692024712c::chunk_0002",
+          "doc_2f3b3631cc73::chunk_0000",
+          "doc_2f3b3631cc73::chunk_0001"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

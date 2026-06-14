@@ -1,0 +1,17 @@
+{
+  "mode": "qa",
+  "candidate_count": 54,
+  "total_record_count": 57,
+  "accepted_count": 54,
+  "rejected_count": 3,
+  "difficulty_counts": {
+    "easy": 16,
+    "medium": 24,
+    "hard": 14
+  },
+  "topic_counts": {
+    "Python (programming language)": 30,
+    "Machine learning": 24
+  },
+  "stopped_reason": "candidate_pool_sufficient"
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "medium",
+    "topics": [
+      "Python (programming language)",
+      "Machine learning"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "Python (programming language)",
+        "success": true,
+        "generated_count": 5,
+        "raw_count": 5,
+        "filtered_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_342bc15b781549158eba8ae4f93acba7",
+        "trace_call_id": "llm_13ead0d5e7be4617b5069969295277c2",
+        "chunks": [
+          "doc_03692024712c::chunk_0002",
+          "doc_393bf2f42fbf::chunk_0000",
+          "doc_393bf2f42fbf::chunk_0001",
+          "doc_393bf2f42fbf::chunk_0004",
+          "doc_393bf2f42fbf::chunk_0005",
+          "doc_393bf2f42fbf::chunk_0007"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Machine learning",
+        "success": true,
+        "generated_count": 10,
+        "raw_count": 10,
+        "filtered_count": 10,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_c74b2485c3af4f2581c201f5143e3121",
+        "trace_call_id": "llm_8b2d46b849b143bab2cc01ef6cacc6d8",
+        "chunks": [
+          "doc_01f228da3e1b::chunk_0002",
+          "doc_01f228da3e1b::chunk_0008",
+          "doc_ce155af0fb1c::chunk_0000",
+          "doc_ce155af0fb1c::chunk_0002",
+          "doc_ce155af0fb1c::chunk_0003",
+          "doc_ce155af0fb1c::chunk_0005",
+          "doc_ce155af0fb1c::chunk_0007",
+          "doc_ce155af0fb1c::chunk_0008",
+          "doc_ce155af0fb1c::chunk_0009"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

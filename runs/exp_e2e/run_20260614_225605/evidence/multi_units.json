@@ -1,0 +1,567 @@
+{
+  "Python (programming language)": [
+    {
+      "unit_id": "multi_cce1cc458f5e",
+      "chunk_ids": [
+        "doc_8028cecc537d::chunk_0000",
+        "doc_8028cecc537d::chunk_0001"
+      ],
+      "qa_score": 0.602,
+      "mcq_score": 0.625,
+      "hard_score": 0.621
+    },
+    {
+      "unit_id": "multi_07d2ccc61583",
+      "chunk_ids": [
+        "doc_2f3b3631cc73::chunk_0000",
+        "doc_2f3b3631cc73::chunk_0001"
+      ],
+      "qa_score": 0.633,
+      "mcq_score": 0.659,
+      "hard_score": 0.618
+    },
+    {
+      "unit_id": "multi_35473b8907d6",
+      "chunk_ids": [
+        "doc_03692024712c::chunk_0000",
+        "doc_03692024712c::chunk_0001",
+        "doc_03692024712c::chunk_0002"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_fc2b312205d5",
+      "chunk_ids": [
+        "doc_03692024712c::chunk_0000",
+        "doc_03692024712c::chunk_0002"
+      ],
+      "qa_score": 0.535,
+      "mcq_score": 0.551,
+      "hard_score": 0.629
+    },
+    {
+      "unit_id": "multi_ed8d804faa1d",
+      "chunk_ids": [
+        "doc_03692024712c::chunk_0001",
+        "doc_03692024712c::chunk_0002"
+      ],
+      "qa_score": 0.535,
+      "mcq_score": 0.551,
+      "hard_score": 0.629
+    }
+  ],
+  "Machine learning": [
+    {
+      "unit_id": "multi_0f037d8c2d72",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0002",
+        "doc_ce155af0fb1c::chunk_0004",
+        "doc_ce155af0fb1c::chunk_0005",
+        "doc_ce155af0fb1c::chunk_0008"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_d34960705fcb",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0002",
+        "doc_ce155af0fb1c::chunk_0004",
+        "doc_ce155af0fb1c::chunk_0008"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_d69e52100d40",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0001",
+        "doc_ce155af0fb1c::chunk_0002",
+        "doc_ce155af0fb1c::chunk_0005",
+        "doc_ce155af0fb1c::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_518cee8624d4",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0004",
+        "doc_18ac17e18c48::chunk_0005",
+        "doc_18ac17e18c48::chunk_0007",
+        "doc_18ac17e18c48::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_3db7ce7a5236",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0000",
+        "doc_ce155af0fb1c::chunk_0002",
+        "doc_ce155af0fb1c::chunk_0010",
+        "doc_ce155af0fb1c::chunk_0011"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_2af2aebc3281",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0002",
+        "doc_ce155af0fb1c::chunk_0005",
+        "doc_ce155af0fb1c::chunk_0007",
+        "doc_ce155af0fb1c::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_24a7361edd52",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0000",
+        "doc_ce155af0fb1c::chunk_0004",
+        "doc_ce155af0fb1c::chunk_0008"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_53c9f5e8f97d",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0000",
+        "doc_ce155af0fb1c::chunk_0002",
+        "doc_ce155af0fb1c::chunk_0011"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_4315ad7f9b16",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0002",
+        "doc_ce155af0fb1c::chunk_0003",
+        "doc_ce155af0fb1c::chunk_0011"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_b88028951690",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0001",
+        "doc_18ac17e18c48::chunk_0002",
+        "doc_18ac17e18c48::chunk_0004",
+        "doc_18ac17e18c48::chunk_0007"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_bde5df39c0c8",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0000",
+        "doc_ce155af0fb1c::chunk_0005",
+        "doc_ce155af0fb1c::chunk_0008",
+        "doc_ce155af0fb1c::chunk_0010"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_c0b44704da2b",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0000",
+        "doc_ce155af0fb1c::chunk_0001",
+        "doc_ce155af0fb1c::chunk_0009",
+        "doc_ce155af0fb1c::chunk_0011"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_ea35c28711cc",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0003",
+        "doc_ce155af0fb1c::chunk_0007",
+        "doc_ce155af0fb1c::chunk_0008",
+        "doc_ce155af0fb1c::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_e0d211d62e7d",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0002",
+        "doc_ce155af0fb1c::chunk_0006",
+        "doc_ce155af0fb1c::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_12a1b19f31b2",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0006",
+        "doc_ce155af0fb1c::chunk_0007",
+        "doc_ce155af0fb1c::chunk_0008",
+        "doc_ce155af0fb1c::chunk_0011"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_1c8fb2d29150",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0004",
+        "doc_ce155af0fb1c::chunk_0007",
+        "doc_ce155af0fb1c::chunk_0009",
+        "doc_ce155af0fb1c::chunk_0010"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_d50f16f1b90f",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0000",
+        "doc_18ac17e18c48::chunk_0004",
+        "doc_18ac17e18c48::chunk_0007"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_acd2aba54290",
+      "chunk_ids": [
+        "doc_a42014b996c0::chunk_0003",
+        "doc_a42014b996c0::chunk_0009"
+      ],
+      "qa_score": 0.671,
+      "mcq_score": 0.702,
+      "hard_score": 0.614
+    },
+    {
+      "unit_id": "multi_57d005d2f918",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0001",
+        "doc_ce155af0fb1c::chunk_0004",
+        "doc_ce155af0fb1c::chunk_0010",
+        "doc_ce155af0fb1c::chunk_0011"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_11dcbbaddb52",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0000",
+        "doc_ce155af0fb1c::chunk_0003",
+        "doc_ce155af0fb1c::chunk_0004"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_00510f2ff13b",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0001",
+        "doc_18ac17e18c48::chunk_0002",
+        "doc_18ac17e18c48::chunk_0004",
+        "doc_18ac17e18c48::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_220746373ebc",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0000",
+        "doc_18ac17e18c48::chunk_0003",
+        "doc_18ac17e18c48::chunk_0004"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_778760788b5e",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0000",
+        "doc_18ac17e18c48::chunk_0006",
+        "doc_18ac17e18c48::chunk_0007",
+        "doc_18ac17e18c48::chunk_0008"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_2912af5b51e4",
+      "chunk_ids": [
+        "doc_4825befa3f48::chunk_0000",
+        "doc_4825befa3f48::chunk_0001",
+        "doc_4825befa3f48::chunk_0004",
+        "doc_4825befa3f48::chunk_0005"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_a3b067757376",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0000",
+        "doc_ce155af0fb1c::chunk_0003",
+        "doc_ce155af0fb1c::chunk_0007",
+        "doc_ce155af0fb1c::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_e57b303202d4",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0000",
+        "doc_ce155af0fb1c::chunk_0003",
+        "doc_ce155af0fb1c::chunk_0005",
+        "doc_ce155af0fb1c::chunk_0008"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_58588e07ef67",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0002",
+        "doc_18ac17e18c48::chunk_0004",
+        "doc_18ac17e18c48::chunk_0006"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_174394971f25",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0003",
+        "doc_18ac17e18c48::chunk_0005",
+        "doc_18ac17e18c48::chunk_0007"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_babc32ab4fd1",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0003",
+        "doc_18ac17e18c48::chunk_0004",
+        "doc_18ac17e18c48::chunk_0007"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_14f214389a7f",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0001",
+        "doc_18ac17e18c48::chunk_0002",
+        "doc_18ac17e18c48::chunk_0006",
+        "doc_18ac17e18c48::chunk_0007"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_8b1315d1f9de",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0000",
+        "doc_18ac17e18c48::chunk_0001",
+        "doc_18ac17e18c48::chunk_0003",
+        "doc_18ac17e18c48::chunk_0006"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_29bda13d7d97",
+      "chunk_ids": [
+        "doc_a42014b996c0::chunk_0002",
+        "doc_a42014b996c0::chunk_0003",
+        "doc_a42014b996c0::chunk_0005",
+        "doc_a42014b996c0::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_0fb4c8cc26ce",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0000",
+        "doc_18ac17e18c48::chunk_0001",
+        "doc_18ac17e18c48::chunk_0004"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_fd9846dc68ef",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0000",
+        "doc_ce155af0fb1c::chunk_0005",
+        "doc_ce155af0fb1c::chunk_0008",
+        "doc_ce155af0fb1c::chunk_0011"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_29957959629a",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0004",
+        "doc_ce155af0fb1c::chunk_0006",
+        "doc_ce155af0fb1c::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_b0b82abab0e9",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0005",
+        "doc_ce155af0fb1c::chunk_0006",
+        "doc_ce155af0fb1c::chunk_0010"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_bcb1d88a7da9",
+      "chunk_ids": [
+        "doc_4825befa3f48::chunk_0001",
+        "doc_4825befa3f48::chunk_0004",
+        "doc_4825befa3f48::chunk_0005",
+        "doc_4825befa3f48::chunk_0006"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_a8712e96f744",
+      "chunk_ids": [
+        "doc_4825befa3f48::chunk_0000",
+        "doc_4825befa3f48::chunk_0004",
+        "doc_4825befa3f48::chunk_0005"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_8b0cd4790b3c",
+      "chunk_ids": [
+        "doc_4825befa3f48::chunk_0000",
+        "doc_4825befa3f48::chunk_0004",
+        "doc_4825befa3f48::chunk_0005",
+        "doc_4825befa3f48::chunk_0006"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_bef2e862f298",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0004",
+        "doc_18ac17e18c48::chunk_0006",
+        "doc_18ac17e18c48::chunk_0009",
+        "doc_18ac17e18c48::chunk_0010"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_441b164d81fe",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0002",
+        "doc_18ac17e18c48::chunk_0003",
+        "doc_18ac17e18c48::chunk_0005",
+        "doc_18ac17e18c48::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_d366cc50eca8",
+      "chunk_ids": [
+        "doc_ce155af0fb1c::chunk_0000",
+        "doc_ce155af0fb1c::chunk_0005",
+        "doc_ce155af0fb1c::chunk_0007",
+        "doc_ce155af0fb1c::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_e03b59670759",
+      "chunk_ids": [
+        "doc_4825befa3f48::chunk_0000",
+        "doc_4825befa3f48::chunk_0001",
+        "doc_4825befa3f48::chunk_0004",
+        "doc_4825befa3f48::chunk_0006"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    },
+    {
+      "unit_id": "multi_5de6f2252bc9",
+      "chunk_ids": [
+        "doc_18ac17e18c48::chunk_0003",
+        "doc_18ac17e18c48::chunk_0007",
+        "doc_18ac17e18c48::chunk_0009"
+      ],
+      "qa_score": 0.465,
+      "mcq_score": 0.475,
+      "hard_score": 0.665
+    }
+  ]
+}
