@@ -1,0 +1,78 @@
+{
+  "task_id": "task_001",
+  "run_id": "run_001",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "task_001",
+    "run_id": "run_001",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Renewable Energy",
+      "Human Evolution"
+    ],
+    "modes": {
+      "qa": {
+        "count": 10,
+        "max_rounds": 5,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.4,
+          "hard": 0.3
+        }
+      },
+      "multiple_choice": {
+        "count": 10,
+        "max_rounds": 5,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.4,
+          "hard": 0.3
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "task_001",
+    "run_id": "run_001",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Renewable Energy",
+      "Human Evolution"
+    ],
+    "modes": {
+      "qa": {
+        "count": 10,
+        "max_rounds": 5,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.4,
+          "hard": 0.3
+        }
+      },
+      "multiple_choice": {
+        "count": 10,
+        "max_rounds": 5,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.4,
+          "hard": 0.3
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs\\task_001\\run_001\\qa\\candidate_pool.json",
+    "multiple_choice_candidate_pool": "runs\\task_001\\run_001\\multiple_choice\\candidate_pool.json",
+    "chunked_evidence": "runs\\task_001\\run_001\\evidence\\chunked.jsonl",
+    "llm_calls": "runs\\task_001\\run_001\\llm_calls.jsonl",
+    "generation_report": "runs\\task_001\\run_001\\generation_report.json"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "pending",
+    "evaluation": "pending"
+  }
+}

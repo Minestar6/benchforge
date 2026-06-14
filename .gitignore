@@ -33,10 +33,10 @@ models/
 *.gguf
 
 # ── 运行时产物 ───────────────────────────────────────────────────────────
-logs/
-*.log
-llm_calls.jsonl
-shared_state.json
+# logs/
+# *.log
+# llm_calls.jsonl
+# shared_state.json
 
 # ── 测试产物 ─────────────────────────────────────────────────────────────
 .pytest_cache/

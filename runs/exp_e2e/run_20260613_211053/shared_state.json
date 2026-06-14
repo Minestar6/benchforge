@@ -1,0 +1,76 @@
+{
+  "task_id": "exp_e2e",
+  "run_id": "run_20260613_211053",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "exp_e2e",
+    "run_id": "run_20260613_211053",
+    "language": "en",
+    "topics": [
+      "Python (programming language)",
+      "Machine learning"
+    ],
+    "modes": {
+      "qa": {
+        "count": 4,
+        "max_rounds": 2,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.4,
+          "hard": 0.3
+        }
+      },
+      "multiple_choice": {
+        "count": 2,
+        "max_rounds": 2,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.4,
+          "hard": 0.3
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "exp_e2e",
+    "run_id": "run_20260613_211053",
+    "language": "en",
+    "topics": [
+      "Python (programming language)",
+      "Machine learning"
+    ],
+    "modes": {
+      "qa": {
+        "count": 4,
+        "max_rounds": 2,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.4,
+          "hard": 0.3
+        }
+      },
+      "multiple_choice": {
+        "count": 2,
+        "max_rounds": 2,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.4,
+          "hard": 0.3
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs\\exp_e2e\\run_20260613_211053\\qa\\candidate_pool.json",
+    "multiple_choice_candidate_pool": "runs\\exp_e2e\\run_20260613_211053\\multiple_choice\\candidate_pool.json",
+    "chunked_evidence": "runs\\exp_e2e\\run_20260613_211053\\evidence\\chunked.jsonl",
+    "llm_calls": "runs\\exp_e2e\\run_20260613_211053\\llm_calls.jsonl",
+    "generation_report": "runs\\exp_e2e\\run_20260613_211053\\generation_report.json"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "pending",
+    "evaluation": "pending"
+  }
+}
