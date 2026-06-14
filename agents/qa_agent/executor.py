@@ -339,6 +339,17 @@ async def _generate_for_topic(
 
         raw_questions = parse_questions(raw_items)
         accepted_questions, rejected_questions = _question_filter.filter_questions(raw_questions)
+
+        chunk_id_list = raw_chunk_ids(chunks)
+        chunk_text_map: dict[str, str] = {}
+        for u in chunks:
+            if hasattr(u, "chunk_ids") and hasattr(u, "texts"):
+                for cid, txt in zip(u.chunk_ids, u.texts):
+                    chunk_text_map[cid] = txt
+            elif hasattr(u, "chunk_id"):
+                chunk_text_map[u.chunk_id] = getattr(u, "text", "")
+        chunk_texts = [chunk_text_map.get(cid, "") for cid in chunk_id_list]
+
         filter_failures = [
             {
                 "question": item.get("question", ""),
@@ -353,17 +364,9 @@ async def _generate_for_topic(
             for item, reason in rejected_questions
         ]
 
-        chunk_id_list = raw_chunk_ids(chunks)
-        chunk_text_map: dict[str, str] = {}
-        for u in chunks:
-            if hasattr(u, "chunk_ids") and hasattr(u, "texts"):
-                for cid, txt in zip(u.chunk_ids, u.texts):
-                    chunk_text_map[cid] = txt
-            elif hasattr(u, "chunk_id"):
-                chunk_text_map[u.chunk_id] = getattr(u, "text", "")
         for q in accepted_questions:
             q["chunk_ids"] = chunk_id_list
-            q["chunks"] = [chunk_text_map.get(cid, "") for cid in chunk_id_list]
+            q["chunks"] = chunk_texts
             q["topic"] = topic
             q["llm_call_id"] = llm_call_id
             q["generation_round"] = round_plan.round_in_mode

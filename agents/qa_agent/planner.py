@@ -148,7 +148,7 @@ def select_strategy(
 
     med_ratio = mode_cfg.difficulty_distribution.get("medium", 0.3)
     # EVOLVE_TO_HARDER is disabled; hard gap now triggers direct HARD_GENERATE.
-    if hard_gap_val > 0 or too_easy > too_easy_threshold:
+    if hard_gap_val > hard_gap_threshold or too_easy > too_easy_threshold:
         return RoundStrategy.HARD_GENERATE, (
             f"hard_gap={hard_gap_val:.2f}, too_easy={too_easy:.2f}; "
             "use direct hard generation"
@@ -215,6 +215,9 @@ def build_adaptive_plan(
             selected_topic_count=max(1, len(topics)),
             mode_state=mode_state, blueprint=blueprint, config=config,
         )
+
+        multi_k = max(multi_k, single_k)
+
         return ModeRoundPlan(
             mode=mode, round_in_mode=mode_state.round_in_mode,
             strategy=RoundStrategy.HARD_GENERATE, difficulty="hard",
