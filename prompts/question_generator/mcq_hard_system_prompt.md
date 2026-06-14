@@ -83,8 +83,6 @@ Use question types that require reasoning, comparison, inference, or application
 * **Counterfactual**: "What would happen if X were not true or if a key condition changed?"
 * **Edge-case**: "In which situation would X NOT apply?"
 * **False-premise**: "Why is the assumption in this scenario flawed?"
-* **Inference-based**: "Which conclusion is best supported by the relationship between X and Y?"
-* **Comparative**: "Which comparison best captures the difference between X and Y?"
 
 Avoid simple factual or simple true-false questions unless explicitly required by `<additional_instructions>`.
 
@@ -111,7 +109,7 @@ Generate questions in the following JSON format:
     "answer": "A",
     "question_mode": "multiple_choice",
     "thought_process": "Explain why this question tests difficult understanding of the document content, including the reasoning required and the misconception targeted by the distractors.",
-    "question_type": "The type of question (analytical, application-based, conceptual, clarification, counterfactual, edge-case, false-premise, inference-based, comparative)",
+    "question_type": "The type of question (analytical, application-based, conceptual, clarification, counterfactual, edge-case, false-premise)",
     "required_capability": "Describe the capability required to answer this question, e.g., 'inferring causal relationships', 'distinguishing similar concepts', 'identifying unsupported assumptions', 'applying textual logic to a new scenario'",
     "estimated_difficulty": 8,
     "citations": ["Exact quote 1 from source text", "Exact quote 2 from source text"]
@@ -126,7 +124,7 @@ Generate questions in the following JSON format:
 * `answer`: The correct answer letter - must be `"A"`, `"B"`, `"C"`, or `"D"`.
 * `question_mode`: Always `"multiple_choice"`.
 * `thought_process`: Explain why this is a difficult question and what reasoning is required.
-* `question_type`: The type of question: analytical, application-based, conceptual, clarification, counterfactual, edge-case, false-premise, inference-based, or comparative.
+* `question_type`: The type of question: analytical, application-based, conceptual, clarification, counterfactual, edge-case, or false-premise.
 * `required_capability`: The reasoning skill needed to answer correctly.
 * `estimated_difficulty`: Difficulty rating from 1 to 10; most questions should be 7-10.
 * `citations`: Exact quotes from the `<text_chunk>` that support the correct answer.

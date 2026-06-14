@@ -11,7 +11,6 @@ class CandidateStatus(str, Enum):
     CANDIDATE = "candidate"
     ACCEPTED = "accepted"
     REJECTED = "rejected"
-    EVOLVED = "evolved"
 
 
 @dataclass
@@ -39,6 +38,7 @@ class CandidateRecord:
 
     # Execution metadata
     llm_call_id: str | None = None
+    trace_call_id: str | None = None
     chunks: list[str] = field(default_factory=list)
     generation_round: int | None = None
 
@@ -86,10 +86,6 @@ class ModeState:
     def rejected_count(self) -> int:
         return sum(1 for q in self.candidate_questions if q.status == CandidateStatus.REJECTED)
 
-    @property
-    def evolved_count(self) -> int:
-        return sum(1 for q in self.candidate_questions if q.status == CandidateStatus.EVOLVED)
-
     def get_difficulty_counts(self, status: CandidateStatus | None = None) -> dict[str, int]:
         pool = self.candidate_questions if status is None else self._by_status(status)
         counts: dict[str, int] = {}
@@ -132,11 +128,3 @@ class ModeState:
         current = self.get_difficulty_counts(CandidateStatus.ACCEPTED).get("hard", 0) / acc
         return max(0.0, target_hard_ratio - current)
 
-    def evolvable_surplus(self, difficulty: str, target_ratio: float) -> int:
-        """Accepted questions of given difficulty beyond their target quota."""
-        acc = self.accepted_count
-        if acc == 0:
-            return 0
-        quota = math.ceil(acc * target_ratio)
-        actual = self.get_difficulty_counts(CandidateStatus.ACCEPTED).get(difficulty, 0)
-        return max(0, actual - quota)

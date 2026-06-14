@@ -1,4 +1,4 @@
-"""多证据单元构建模块。"""
+﻿"""多证据单元构建模块。"""
 
 import hashlib
 from typing import Any
@@ -94,7 +94,7 @@ class MultiChunkBuilder:
             seed = int(hashlib.md5(doc_id.encode()).hexdigest(), 16) % (2 ** 31)
             rng = np.random.default_rng(seed)
 
-            n_combinations = max(1, n // combinations_per_doc_factor)
+            n_combinations = max(1, int(n * combinations_per_doc_factor))
             seen: set[tuple[int, ...]] = set()
 
             for _ in range(n_combinations * 10):  # 超采样后去重

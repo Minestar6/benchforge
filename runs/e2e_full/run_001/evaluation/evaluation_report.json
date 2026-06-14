@@ -1,7 +1,0 @@
-{
-  "task_id": "e2e_full",
-  "run_id": "run_001",
-  "num_questions": 1,
-  "num_models": 2,
-  "output_root": "runs\\e2e_full\\run_001\\evaluation"
-}

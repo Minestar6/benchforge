@@ -616,6 +616,52 @@ Provide a concise overview in <final_summary> tags."""
             new_multi_units=len(multi_units),
         )
 
+    def _merge_chunked_json(
+        self,
+        evidence_dir: pathlib.Path,
+        topic: str,
+        new_rows: list[dict[str, Any]],
+    ) -> None:
+        """?????? chunked.json?? topic ??????"""
+        chunked_path = evidence_dir / "chunked.json"
+
+        if chunked_path.exists():
+            with open(chunked_path, "r", encoding="utf-8") as f:
+                existing = json.load(f) or {}
+        else:
+            # ????? chunked.jsonl ????
+            old_path = evidence_dir / "chunked.jsonl"
+            if old_path.exists():
+                existing: dict[str, list] = {}
+                with open(old_path, "r", encoding="utf-8") as f:
+                    for line in f:
+                        line = line.strip()
+                        if line:
+                            row = json.loads(line)
+                            t = row.get("topic", "unknown")
+                            existing.setdefault(t, []).append(row)
+                # ???????????
+                with open(chunked_path, "w", encoding="utf-8") as f:
+                    json.dump(existing, f, ensure_ascii=False, indent=2, default=str)
+                try:
+                    old_path.unlink()
+                except OSError:
+                    pass
+            else:
+                existing = {}
+
+        existing.setdefault(topic, [])
+        # ?? document_id ??
+        seen_doc_ids = {r["document_id"] for r in existing[topic]}
+        for row in new_rows:
+            if row["document_id"] not in seen_doc_ids:
+                existing[topic].append(row)
+                seen_doc_ids.add(row["document_id"])
+
+        with open(chunked_path, "w", encoding="utf-8") as f:
+            json.dump(existing, f, ensure_ascii=False, indent=2, default=str)
+
+    
     def _append_expanded_evidence_to_disk(
         self,
         topic: str,

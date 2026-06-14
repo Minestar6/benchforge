@@ -1,3 +1,0 @@
-model_name,num_questions,accuracy,exact_match,f1,semantic_similarity,judge_correctness,judge_faithfulness,estimated_difficulty
-candidate-llama,1,,1.0,1.0,,0.85,0.9,3
-candidate-qwen,1,,1.0,1.0,,0.85,0.9,3

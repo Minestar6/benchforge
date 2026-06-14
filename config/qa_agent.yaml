@@ -44,8 +44,8 @@ multi_chunk:
   h_min: 2
   h_max: 4
   num_multihops_factor: 2
-  max_units_per_topic: 120
-  max_units_per_expansion: 60
+  max_units_per_topic: 300
+  max_units_per_expansion: 300
   combinations_per_doc_factor: 2
 
 # ── 候选池 ────────────────────────────────────────────────────────────────────

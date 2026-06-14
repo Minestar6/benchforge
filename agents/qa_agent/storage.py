@@ -78,6 +78,23 @@ def save_mode_outputs(task_id: str, run_id: str, mode: str, mode_state: ModeStat
             "reject_reason": r.reject_reason,
             "parent_question_id": r.parent_question_id,
             "choices": r.choices,
+
+            # Prompt output metadata
+            "question_mode": r.question_mode,
+            "question_type": r.question_type,
+            "required_capability": r.required_capability,
+            "estimated_difficulty": r.estimated_difficulty,
+            "citations": r.citations,
+            "thought_process": r.thought_process,
+
+            # Execution metadata
+            "llm_call_id": r.llm_call_id,
+            "trace_call_id": r.trace_call_id,
+            "chunks": r.chunks,
+            "generation_round": r.generation_round,
+
+            # Preserve original model output
+            "raw_item": r.raw_item,
        }
 
     accepted = [r for r in mode_state.candidate_questions if r.status == CandidateStatus.ACCEPTED]
@@ -91,7 +108,6 @@ def save_mode_outputs(task_id: str, run_id: str, mode: str, mode_state: ModeStat
         "total_record_count": len(mode_state.candidate_questions),
         "accepted_count": mode_state.accepted_count,
         "rejected_count": mode_state.rejected_count,
-        "evolved_count": mode_state.evolved_count,
         "difficulty_counts": mode_state.get_difficulty_counts(CandidateStatus.ACCEPTED),
         "topic_counts": mode_state.get_topic_counts(CandidateStatus.ACCEPTED),
         "stopped_reason": mode_state.stopped_reason,

@@ -1,4 +1,4 @@
-"""Generator 模块：根据 GenerationBatch 调用 LLM 生成题目。"""
+﻿"""Generator 模块：根据 GenerationBatch 调用 LLM 生成题目。"""
 
 from pathlib import Path
 from typing import Any
@@ -129,4 +129,4 @@ class Generator:
             logger.error(f"Generator LLM call failed: {e}")
             raise
 
-        return raw_text, None, llm_call_id
+        return raw_text, None, llm_call_id, None

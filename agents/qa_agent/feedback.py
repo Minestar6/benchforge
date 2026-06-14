@@ -18,8 +18,6 @@ class RoundFeedback:
     raw_candidate_count: int   # LLM 产出总数（accepted + rejected）
     accepted_count: int
     rejected_count: int
-    evolved_count: int
-
     failure_reason_counts: dict[str, int]
 
     generated_topic_counts: dict[str, int]
@@ -43,7 +41,6 @@ def build_round_feedback(
     round_results: list[dict],
     new_records: list,
     mode_state_before: ModeState | None = None,
-    evolved_seed_count: int = 0,
 ) -> RoundFeedback:
     """Aggregate one round's execution results into a RoundFeedback.
 
@@ -100,7 +97,6 @@ def build_round_feedback(
         raw_candidate_count=raw_candidate_count,
         accepted_count=acc_count,
         rejected_count=rej_count,
-        evolved_count=evolved_seed_count,
         failure_reason_counts=fail_reasons,
         generated_topic_counts=gen_topic,
         accepted_topic_counts=acc_topic,

@@ -17,7 +17,6 @@ class RoundStrategy(str, Enum):
     FOCUS_TOPIC = "focus_topic"
     FOCUS_DIFFICULTY = "focus_difficulty"
     EXPAND_EVIDENCE = "expand_evidence"
-    EVOLVE_TO_HARDER = "evolve_to_harder"
     HARD_GENERATE = "hard_generate"
 
 @dataclass(frozen=True)
@@ -147,7 +146,6 @@ def select_strategy(
 
 
     med_ratio = mode_cfg.difficulty_distribution.get("medium", 0.3)
-    # EVOLVE_TO_HARDER is disabled; hard gap now triggers direct HARD_GENERATE.
     if hard_gap_val > hard_gap_threshold or too_easy > too_easy_threshold:
         return RoundStrategy.HARD_GENERATE, (
             f"hard_gap={hard_gap_val:.2f}, too_easy={too_easy:.2f}; "

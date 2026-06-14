@@ -77,6 +77,12 @@ async def run_generation_agent(
 
     model_client = _resolve_model_client_fn(model_ref.name, registry_path)
 
+    # ?? agent ?????????? model_registry ????
+    setattr(model_client, "model_name", model_ref.name)
+    setattr(model_client, "temperature", model_ref.temperature)
+    setattr(model_client, "max_tokens", model_ref.max_tokens)
+    setattr(model_client, "max_retries", model_ref.max_retries)
+
     # Thin config wrapper matching the interface EvidenceManager expects
     class _EvidenceConfig:
         __slots__ = ("retrieval", "chunking", "summarization_chunking", "multi_chunk")
@@ -181,7 +187,12 @@ async def _run_generation_agent_impl(
             ]
 
     if chunked_rows_all:
-        evidence_store.append_jsonl("chunked.jsonl", chunked_rows_all)
+        # ? topic ??? {topic: [doc_records]} ??
+        chunked_by_topic: dict[str, list] = {}
+        for row in chunked_rows_all:
+            topic = row.get("topic", "unknown")
+            chunked_by_topic.setdefault(topic, []).append(row)
+        evidence_store.save_json("chunked.json", chunked_by_topic)
     evidence_store.save_json("single_units.json", all_single_units)
     evidence_store.save_json("multi_units.json", all_multi_units)
 
