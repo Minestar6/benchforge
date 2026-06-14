@@ -275,13 +275,10 @@ class GenerationBatch(BaseModel):
     topic: str
     target_mode: str
     target_difficulty: str
-    remaining_count: int
     single_chunk_ids: list[str] = Field(default_factory=list)
     multi_chunk_ids: list[str] = Field(default_factory=list)
     prompt_template_id: str
     additional_instructions: str = ""
-    requested_min_questions: int
-    requested_target_questions: int
 
 
 class NextStepPlan(BaseModel):

@@ -17,6 +17,58 @@ from benchforge.utils.llm_tracer import LLMTracer
 _question_filter = LightweightFilter()
 
 
+def get_question_mode(q: dict, fallback_mode: str) -> str:
+    return q.get("question_mode") or fallback_mode
+
+
+def get_answer(q: dict) -> str:
+    return q.get("answer") or q.get("correct_answer") or ""
+
+
+def get_choices(q: dict) -> list | None:
+    return q.get("choices") or q.get("options")
+
+
+def normalize_item_for_record(q: dict, fallback_mode: str) -> dict:
+    """Normalize common aliases without dropping original fields."""
+    item = dict(q)
+
+    if not item.get("question_mode"):
+        item["question_mode"] = fallback_mode
+
+    if "answer" not in item and "correct_answer" in item:
+        item["answer"] = item.get("correct_answer")
+
+    if "choices" not in item and "options" in item:
+        item["choices"] = item.get("options")
+
+    citations = item.get("citations", [])
+    if citations is None:
+        citations = []
+    elif isinstance(citations, str):
+        citations = [citations]
+    item["citations"] = citations
+
+    return item
+
+
+def resolve_prompt_template_id(mode: str, difficulty: str) -> str:
+    mode = str(mode or "").lower()
+    difficulty = str(difficulty or "").lower()
+
+    if mode == "qa":
+        return "qa_hard_generation_v1" if difficulty == "hard" else "qa_generation_v1"
+
+    if mode == "multiple_choice":
+        return (
+            "mcq_hard_generation_v1"
+            if difficulty == "hard"
+            else "mcq_generation_v1"
+        )
+
+    return "qa_generation_v1"
+
+
 def normalize_difficulty(value: Any) -> str:
     if not value:
         return "medium"
@@ -58,36 +110,82 @@ def update_mode_state(
     """Append new CandidateRecords; return the list of newly added records."""
     new_records: list[CandidateRecord] = []
     for q in parsed_questions:
-        difficulty = normalize_difficulty(q.get("estimated_difficulty") or q.get("difficulty") or round_plan.difficulty)
+        raw_item = dict(q)
+        q_norm = normalize_item_for_record(q, round_plan.mode)
+
+        raw_estimated = (
+            q_norm.get("estimated_difficulty")
+            or q_norm.get("difficulty")
+            or round_plan.difficulty
+        )
+        difficulty = normalize_difficulty(raw_estimated)
+        question_mode = get_question_mode(q_norm, round_plan.mode)
+
         record = CandidateRecord(
-            question_id=q.get("question_id") or str(uuid.uuid4()),
-            question=q.get("question", ""),
-            answer=q.get("answer", ""),
-            topic=topic,
+            question_id=q_norm.get("question_id") or str(uuid.uuid4()),
+            question=q_norm.get("question", ""),
+            answer=get_answer(q_norm),
+            topic=q_norm.get("topic") or topic,
             difficulty=difficulty,
             status=CandidateStatus.ACCEPTED,
             source_round=round_plan.round_in_mode,
             source_strategy=round_plan.strategy.value,
-            chunk_ids=q.get("chunk_ids", []),
+            chunk_ids=q_norm.get("chunk_ids", []),
             parent_question_id=parent_question_id,
-            choices=q.get("choices") if q.get("question_mode") == "multiple_choice" else None,
+            choices=get_choices(q_norm) if question_mode == "multiple_choice" else None,
+
+            question_mode=question_mode,
+            question_type=q_norm.get("question_type"),
+            required_capability=q_norm.get("required_capability"),
+            estimated_difficulty=q_norm.get("estimated_difficulty"),
+            citations=q_norm.get("citations", []),
+            thought_process=q_norm.get("thought_process"),
+
+            llm_call_id=q_norm.get("llm_call_id"),
+            chunks=q_norm.get("chunks", []),
+            generation_round=q_norm.get("generation_round"),
+            raw_item=raw_item,
        )
         mode_state.candidate_questions.append(record)
         new_records.append(record)
     for item in (filter_failures or []):
+        raw = dict(item.get("raw_item") or item)
+        q_norm = normalize_item_for_record(raw, round_plan.mode)
+
+        raw_estimated = (
+            q_norm.get("estimated_difficulty")
+            or q_norm.get("difficulty")
+            or round_plan.difficulty
+        )
+        question_mode = get_question_mode(q_norm, round_plan.mode)
+
         record = CandidateRecord(
-            question_id=str(uuid.uuid4()),
-            question=item.get("question", ""),
-            answer="",
-            topic=topic,
-            difficulty=round_plan.difficulty,
+            question_id=q_norm.get("question_id") or str(uuid.uuid4()),
+            question=q_norm.get("question", item.get("question", "")),
+            answer=get_answer(q_norm),
+            topic=item.get("topic") or q_norm.get("topic") or topic,
+            difficulty=normalize_difficulty(raw_estimated),
             status=CandidateStatus.REJECTED,
             source_round=round_plan.round_in_mode,
             source_strategy=round_plan.strategy.value,
-            chunk_ids=[],
+            chunk_ids=item.get("chunk_ids") or q_norm.get("chunk_ids", []),
             reject_reason=item.get("reason", "filter_rejected"),
-            parent_question_id=None,  # REJECTED 记录不继承父题
-        )
+            parent_question_id=None,
+
+            choices=get_choices(q_norm) if question_mode == "multiple_choice" else None,
+
+            question_mode=question_mode,
+            question_type=q_norm.get("question_type"),
+            required_capability=q_norm.get("required_capability"),
+            estimated_difficulty=q_norm.get("estimated_difficulty"),
+            citations=q_norm.get("citations", []),
+            thought_process=q_norm.get("thought_process"),
+
+            llm_call_id=item.get("llm_call_id") or q_norm.get("llm_call_id"),
+            chunks=item.get("chunks") or q_norm.get("chunks", []),
+            generation_round=item.get("generation_round") or q_norm.get("generation_round"),
+            raw_item=raw,
+       )
         mode_state.candidate_questions.append(record)
         new_records.append(record)
     return new_records
@@ -245,6 +343,12 @@ async def _generate_for_topic(
             {
                 "question": item.get("question", ""),
                 "reason": reason,
+                "raw_item": dict(item),
+                "topic": topic,
+                "chunk_ids": chunk_id_list,
+                "chunks": chunk_texts,
+                "llm_call_id": llm_call_id,
+                "generation_round": round_plan.round_in_mode,
             }
             for item, reason in rejected_questions
         ]
@@ -306,13 +410,9 @@ async def execute_mode_round_plan(
     tracer: LLMTracer | None = None,
 ) -> tuple[list[dict], RoundFeedback]:
     # EVOLVE_TO_HARDER: re-generate from accepted easy/medium as seed context
-    if round_plan.strategy == RoundStrategy.EVOLVE_TO_HARDER:
-        return await _execute_evolve_round(
-            round_plan=round_plan, blueprint=blueprint, config=config,
-            global_state=global_state, mode_state=mode_state,
-            evidence_manager=evidence_manager, generator=generator,
-            mode_cfg=mode_cfg, tracer=tracer,
-        )
+    # EVOLVE_TO_HARDER is disabled in the current version.
+    # Planner should not emit this strategy. All rounds use the normal
+    # topic generation path, including HARD_GENERATE.
 
     # EXPAND_EVIDENCE: just mark topics as needing more evidence (no LLM call)
     if round_plan.strategy == RoundStrategy.EXPAND_EVIDENCE:
@@ -578,12 +678,10 @@ def _make_batch(topic: str, round_plan: ModeRoundPlan, chunks: list, evidence_po
         topic=topic,
         target_mode=round_plan.mode,
         target_difficulty=round_plan.difficulty,
-        remaining_count=round_plan.target_candidates_per_topic,
         single_chunk_ids=single_ids,
         multi_chunk_ids=multi_ids,
-        prompt_template_id=(
-            "mcq_generation_v1" if round_plan.mode == "multiple_choice" else "qa_generation_v1"
+        prompt_template_id=resolve_prompt_template_id(
+            round_plan.mode,
+            round_plan.difficulty,
         ),
-        requested_min_questions=round_plan.target_candidates_per_topic,
-        requested_target_questions=round_plan.target_candidates_per_topic,
     )

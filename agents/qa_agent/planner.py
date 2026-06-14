@@ -1,4 +1,4 @@
-"""Planning logic: round plan construction and difficulty/topic selection."""
+﻿"""Planning logic: round plan construction and difficulty/topic selection."""
 
 from __future__ import annotations
 
@@ -18,13 +18,7 @@ class RoundStrategy(str, Enum):
     FOCUS_DIFFICULTY = "focus_difficulty"
     EXPAND_EVIDENCE = "expand_evidence"
     EVOLVE_TO_HARDER = "evolve_to_harder"
-
-
-class EvidenceStrategy(str, Enum):
-    DEFAULT = "default"
-    HIGH_HARD_SCORE = "high_hard_score"
-    MULTI_GROUP = "multi_group"
-
+    HARD_GENERATE = "hard_generate"
 
 @dataclass(frozen=True)
 class ModeRoundPlan:
@@ -37,10 +31,7 @@ class ModeRoundPlan:
     multi_k: int
     target_candidates_per_topic: int
     reason: str
-    evidence_strategy: EvidenceStrategy = EvidenceStrategy.DEFAULT
-    expand_docs: int = 0
     expand_topics: tuple[str, ...] = ()
-    evolve_source_count: int = 0
 
 
 
@@ -125,7 +116,7 @@ def _missing_topics(blueprint: Any, mode_state: ModeState, min_per_topic: int = 
     return [t for t in blueprint.topics if topic_counts.get(t, 0) < min_per_topic]
 
 
-# ── Rule-based strategy selection ──────────────────────────────────────────────
+# 鈹€鈹€ Rule-based strategy selection 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def select_strategy(
     mode_cfg: Any,
@@ -156,10 +147,12 @@ def select_strategy(
 
 
     med_ratio = mode_cfg.difficulty_distribution.get("medium", 0.3)
-    if (hard_gap_val > 0 and too_easy > too_easy_threshold
-            and mode_state.evolvable_surplus("medium", med_ratio) > 0):
-        surplus = mode_state.evolvable_surplus("medium", med_ratio)
-        return RoundStrategy.EVOLVE_TO_HARDER, f"too_easy={too_easy:.2f}, surplus={surplus}"
+    # EVOLVE_TO_HARDER is disabled; hard gap now triggers direct HARD_GENERATE.
+    if hard_gap_val > 0 or too_easy > too_easy_threshold:
+        return RoundStrategy.HARD_GENERATE, (
+            f"hard_gap={hard_gap_val:.2f}, too_easy={too_easy:.2f}; "
+            "use direct hard generation"
+        )
 
     if acc_rate < accept_rate_threshold and len(mode_state.candidate_questions) > 0:
         if missing:
@@ -184,7 +177,7 @@ def select_strategy(
     return RoundStrategy.NORMAL_GENERATE, "normal"
 
 
-# ── Plan builders ───────────────────────────────────────────────────────────────
+# 鈹€鈹€ Plan builders 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
 def build_initial_breadth_plan(
     mode: str, mode_cfg: Any, blueprint: Any, config: Any, mode_state: ModeState,
@@ -213,16 +206,20 @@ def build_adaptive_plan(
 ) -> ModeRoundPlan:
     strategy, reason = select_strategy(mode_cfg, mode_state, blueprint, feedback, config)
 
-    if strategy == RoundStrategy.EVOLVE_TO_HARDER:
-        med_ratio = mode_cfg.difficulty_distribution.get("medium", 0.3)
-        surplus = mode_state.evolvable_surplus("medium", med_ratio)
+    if strategy == RoundStrategy.HARD_GENERATE:
+        topics = tuple(
+            choose_low_coverage_topics(blueprint, mode_state, config.planner.topics_per_round)
+        )
+        single_k, multi_k, tgt = compute_dynamic_chunk_k(
+            mode=mode, mode_cfg=mode_cfg, difficulty="hard",
+            selected_topic_count=max(1, len(topics)),
+            mode_state=mode_state, blueprint=blueprint, config=config,
+        )
         return ModeRoundPlan(
             mode=mode, round_in_mode=mode_state.round_in_mode,
-            strategy=strategy, difficulty="hard",
-            topics=tuple(blueprint.topics[:config.planner.topics_per_round]),
-            single_k=0, multi_k=0,
-            target_candidates_per_topic=min(surplus, 3),
-            evolve_source_count=min(surplus, 3),
+            strategy=RoundStrategy.HARD_GENERATE, difficulty="hard",
+            topics=topics, single_k=single_k, multi_k=multi_k,
+            target_candidates_per_topic=tgt,
             reason=reason,
         )
 
@@ -234,16 +231,12 @@ def build_adaptive_plan(
             strategy=strategy, difficulty="medium",
             topics=expand_topics, single_k=0, multi_k=0,
             target_candidates_per_topic=0,
-            expand_docs=2, expand_topics=expand_topics,
+            expand_topics=expand_topics,
             reason=reason,
         )
 
     difficulty = (
         choose_difficulty_for_mode(mode_cfg, mode_state)
-    )
-    evidence_strategy = (
-        EvidenceStrategy.HIGH_HARD_SCORE if difficulty == "hard"
-        else EvidenceStrategy.DEFAULT
     )
     topics = (
         tuple(_missing_topics(blueprint, mode_state)[:config.planner.topics_per_round])
@@ -266,7 +259,6 @@ def build_adaptive_plan(
         strategy=strategy, difficulty=difficulty,
         topics=topics, single_k=single_k, multi_k=multi_k,
         target_candidates_per_topic=tgt,
-        evidence_strategy=evidence_strategy,
         reason=reason,
     )
 

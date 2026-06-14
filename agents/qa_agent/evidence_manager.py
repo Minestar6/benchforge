@@ -460,11 +460,6 @@ Provide a concise overview in <final_summary> tags."""
             num_evidence=num_evidence,
             prefer_multi_chunk=prefer_multi_chunk,
         )
-        # 设置请求数量
-        min_questions, target_questions = self._calculate_batch_request_counts(remaining)
-        batch.requested_min_questions = min_questions
-        batch.requested_target_questions = target_questions
-
         # 更新使用计数
         for unit in evidence_pool.single_chunks:
             if unit.chunk_id in batch.single_chunk_ids:

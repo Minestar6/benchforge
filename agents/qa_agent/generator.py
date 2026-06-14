@@ -19,8 +19,12 @@ def _load_prompt(template_id: str) -> tuple[str, str]:
 
     if template_id == "qa_generation_v1":
         sys_key, user_key = "qa_system_prompt", "qa_user_prompt"
+    elif template_id == "qa_hard_generation_v1":
+        sys_key, user_key = "qa_hard_system_prompt", "qa_user_prompt"
     elif template_id == "mcq_generation_v1":
         sys_key, user_key = "mcq_system_prompt", "mcq_user_prompt"
+    elif template_id == "mcq_hard_generation_v1":
+        sys_key, user_key = "mcq_hard_system_prompt", "mcq_user_prompt"
     else:
         sys_key, user_key = f"{template_id}_system", f"{template_id}_user"
 

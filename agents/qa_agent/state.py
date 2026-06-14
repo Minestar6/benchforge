@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 import math
+from typing import Any
 from collections import deque
 from dataclasses import dataclass, field
 from enum import Enum
@@ -27,6 +28,22 @@ class CandidateRecord:
     reject_reason: str | None = None
     parent_question_id: str | None = None
     choices: list[str] | None = None  # MCQ 选项列表，QA 模式为 None
+
+    # Prompt output metadata
+    question_mode: str | None = None
+    question_type: str | None = None
+    required_capability: str | None = None
+    estimated_difficulty: int | float | str | None = None
+    citations: list[Any] = field(default_factory=list)
+    thought_process: str | None = None
+
+    # Execution metadata
+    llm_call_id: str | None = None
+    chunks: list[str] = field(default_factory=list)
+    generation_round: int | None = None
+
+    # Preserve original model output
+    raw_item: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
