@@ -131,31 +131,26 @@ class Span:
 
     def _build_record(self) -> dict[str, Any]:
         latency_ms = int((time.monotonic() - self._start_time) * 1000)
+        gen_params = self.generation_params or {}
+        resp = self.response or {}
         return {
-            # 调用标识
             "call_id": self.call_id,
             "parent_id": self.parent_id,
             "span_id": self.span_id,
-
-            # 调用方身份
             "agent": self.tracer.agent,
             "stage": self.tracer.stage or "",
-
-            # 模型身份
             "model": self.model,
             "provider": self.provider,
-
-            # 标准化生成参数（可复现性核心字段）
-            "params": self.generation_params or {},
-
-            # 业务标签
+            "params": gen_params,
+            "requested_temperature": gen_params.get("temperature"),
+            "requested_max_tokens": gen_params.get("max_tokens"),
+            "actual_prompt_tokens": resp.get("input_tokens"),
+            "actual_completion_tokens": resp.get("output_tokens"),
+            "finish_reason": resp.get("finish_reason"),
             "tags": self.tags,
-
-            # 完整原始数据
             "request": self.request,
             "response": self.response,
             "error": self.error,
-
             "latency_ms": latency_ms,
         }
 

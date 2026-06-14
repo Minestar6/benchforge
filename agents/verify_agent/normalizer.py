@@ -29,28 +29,46 @@ def _normalize_citations(raw: Any) -> list[str]:
     return result
 
 
-def _build_chunk_index(chunked_jsonl_path: str | Path) -> dict[str, str]:
-    """从 evidence/chunked.jsonl 构建 chunk_id -> chunk_text 内存索引。"""
-    path = Path(chunked_jsonl_path)
+def _build_chunk_index(chunked_path: str | Path) -> dict[str, str]:
+    """从 evidence/chunked.json (优先) 或 chunked.jsonl 构建 chunk_id -> chunk_text 内存索引。"""
+    path = Path(chunked_path)
     if not path.exists():
-        logger.warning(f"chunked.jsonl not found at {path}, chunk hydrate disabled")
+        logger.warning(f"chunked evidence not found at {path}, chunk hydrate disabled")
         return {}
 
     index: dict[str, str] = {}
-    with open(path, encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                doc = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            for chunk in doc.get("chunks", []):
-                cid = chunk.get("chunk_id", "")
-                text = chunk.get("chunk_text", "")
-                if cid and text:
-                    index[cid] = text
+
+    def _index_doc(doc: dict) -> None:
+        for chunk in doc.get("chunks", []):
+            cid = chunk.get("chunk_id", "")
+            text = chunk.get("chunk_text", "")
+            if cid and text:
+                index[cid] = text
+
+    if path.suffix == ".json":
+        # chunked.json: {topic: [doc_records]}
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        if isinstance(data, dict):
+            for topic, rows in data.items():
+                for row in rows:
+                    _index_doc(row)
+        elif isinstance(data, list):
+            for row in data:
+                _index_doc(row)
+    else:
+        # chunked.jsonl: 每行一个 doc record
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    doc = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                _index_doc(doc)
+
     logger.info(f"Built chunk index with {len(index)} entries from {path}")
     return index
 
@@ -155,14 +173,17 @@ def load_and_normalize(
     if chunk_index_path:
         chunk_index = _build_chunk_index(chunk_index_path)
     else:
-        # 从 run_id 对应的目录自动查找 evidence/chunked.jsonl
+        # 从 run_id 对应的目录自动查找 evidence/chunked.json（优先）或 chunked.jsonl
         for p in input_paths:
             candidate_path = Path(p)
-            # 向上找到 run_id 目录
             for parent in candidate_path.parents:
-                chunked = parent / "evidence" / "chunked.jsonl"
-                if chunked.exists():
-                    chunk_index = _build_chunk_index(chunked)
+                chunked_json = parent / "evidence" / "chunked.json"
+                chunked_jsonl = parent / "evidence" / "chunked.jsonl"
+                if chunked_json.exists():
+                    chunk_index = _build_chunk_index(chunked_json)
+                    break
+                elif chunked_jsonl.exists():
+                    chunk_index = _build_chunk_index(chunked_jsonl)
                     break
             if chunk_index:
                 break

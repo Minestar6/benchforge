@@ -256,11 +256,12 @@ class EvidenceManager:
             try:
                 prompt = self._get_summarization_prompt(chunk.text)
 
+                summarization_max_tokens = getattr(self.model_client, 'summarization_max_tokens', 0) or 500
                 response = await self.model_client.complete(
                     model=getattr(self.model_client, 'model_name', 'gpt-4o'),
                     messages=[{"role": "user", "content": prompt}],
                     temperature=0.3,
-                    max_tokens=500,  # 增加输出长度，因为输入是更大的 chunk
+                    max_tokens=summarization_max_tokens,
                     llm_trace_path=self._llm_trace_path(),
                 )
 
@@ -287,11 +288,12 @@ class EvidenceManager:
                 bullet_list = "\n".join(f"- {s}" for s in chunk_summaries if s)
                 combine_prompt = self._get_combine_summaries_prompt(bullet_list)
 
+                combine_max_tokens = getattr(self.model_client, 'summarization_combine_max_tokens', 0) or 800
                 response = await self.model_client.complete(
                     model=getattr(self.model_client, 'model_name', 'gpt-4o'),
                     messages=[{"role": "user", "content": combine_prompt}],
                     temperature=0.3,
-                    max_tokens=800,  # 合并摘要需要更多 tokens
+                    max_tokens=combine_max_tokens,
                     llm_trace_path=self._llm_trace_path(),
                 )
 
@@ -616,7 +618,7 @@ Provide a concise overview in <final_summary> tags."""
             new_multi_units=len(multi_units),
         )
 
-    def load_chunked_json(self, evidence_dir: pathlib.Path) -> dict:
+    def load_chunked_json(self, evidence_dir: Path) -> dict:
         """?? chunked.json???? chunked.jsonl ???"""
         import json as _json
         json_path = evidence_dir / "chunked.json"
@@ -642,7 +644,7 @@ Provide a concise overview in <final_summary> tags."""
 
     def merge_chunked_json(
         self,
-        evidence_dir: pathlib.Path,
+        evidence_dir: Path,
         topic: str,
         rows: list[dict[str, Any]],
     ) -> None:
@@ -684,7 +686,7 @@ Provide a concise overview in <final_summary> tags."""
         evidence_dir = Path(self.config.get_resolved_output_path()) / "evidence"
         evidence_dir.mkdir(parents=True, exist_ok=True)
 
-        # 1. append chunked.jsonl
+        # 1. merge into chunked.json (dedup by document_id + source)
         chunks_by_doc: dict[str, list[Any]] = {}
         for chunk in chunks:
             chunks_by_doc.setdefault(chunk.document_id, []).append(chunk)
@@ -718,9 +720,7 @@ Provide a concise overview in <final_summary> tags."""
             )
 
         if chunked_rows:
-            with open(evidence_dir / "chunked.jsonl", "a", encoding="utf-8") as f:
-                for row in chunked_rows:
-                    f.write(json.dumps(row, ensure_ascii=False) + "\n")
+            self.merge_chunked_json(evidence_dir, topic, chunked_rows)
 
         # 2. merge single_units.json
         single_path = evidence_dir / "single_units.json"

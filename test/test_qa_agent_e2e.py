@@ -160,7 +160,7 @@ async def test_fake_model_produces_report(blueprint):
     assert (run_dir / "shared_state.json").exists(), "shared_state.json missing"
     assert (run_dir / "qa" / "candidate_pool.json").exists(), "qa pool missing"
     assert (run_dir / "multiple_choice" / "candidate_pool.json").exists(), "mcq pool missing"
-    assert (run_dir / "evidence" / "chunked.jsonl").exists(), "chunked evidence missing"
+    assert (run_dir / "evidence" / "chunked.json").exists(), "chunked evidence missing"
     assert (run_dir / "generation_report.json").exists(), "generation report missing"
 
     # shared_state is valid JSON

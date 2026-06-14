@@ -108,14 +108,22 @@ class Generator:
         if system_prompt:
             messages = [{"role": "system", "content": system_prompt}] + messages
 
-        model_name = getattr(model_client, "model_name", "gpt-4o-mini")
+        model_name = getattr(model_client, "model_name", None) or "gpt-4o-mini"
+        temperature = getattr(model_client, "temperature", None) or 0.7
+        max_tokens = getattr(model_client, "max_tokens", None)
+        if not max_tokens or max_tokens <= 0:
+            logger.warning(
+                f"Generator: model_client.max_tokens={max_tokens}, falling back to 2000. "
+                f"Ensure model_ref.max_tokens is set in qa_agent.yaml"
+            )
+            max_tokens = 2000
 
         try:
             response = await model_client.complete(
                 model=model_name,
                 messages=messages,
-                temperature=getattr(model_client, "temperature", 0.7),
-                max_tokens=getattr(model_client, "max_tokens", 2000),
+                temperature=temperature,
+                max_tokens=max_tokens,
                 llm_trace_path=llm_trace_path,
             )
             raw_text = response.get("text", "")

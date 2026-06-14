@@ -80,15 +80,17 @@ def build_test_candidates(n: int = 12) -> list[dict]:
     return candidates
 
 
-def build_test_chunked_evidence(candidates: list[dict]) -> list[dict]:
-    """构建 chunked.jsonl 索引，供 verify_agent 的 normalizer 回溯 chunk 文本。"""
+def build_test_chunked_evidence(candidates: list[dict]) -> dict[str, list[dict]]:
+    """构建 chunked.json 索引（{topic: [doc_records]}），供 verify_agent 的 normalizer 回溯 chunk 文本。"""
+    result: dict[str, list[dict]] = {}
     seen_docs: dict[str, dict] = {}
     for c in candidates:
         doc_id = c["document_id"]
+        topic = c["topic"]
         if doc_id not in seen_docs:
             seen_docs[doc_id] = {
                 "document_id": doc_id,
-                "topic": c["topic"],
+                "topic": topic,
                 "chunks": [],
             }
         for cid in c.get("chunk_ids", []):
@@ -96,7 +98,9 @@ def build_test_chunked_evidence(candidates: list[dict]) -> list[dict]:
                 "chunk_id": cid,
                 "chunk_text": c.get("chunks", [""])[0] if c.get("chunks") else "",
             })
-    return list(seen_docs.values())
+    for doc in seen_docs.values():
+        result.setdefault(doc["topic"], []).append(doc)
+    return result
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -172,9 +176,8 @@ def prepare_run_dir() -> tuple[Path, dict]:
     evidence_dir = run_dir / "evidence"
     evidence_dir.mkdir(exist_ok=True)
     chunked = build_test_chunked_evidence(candidates)
-    with open(evidence_dir / "chunked.jsonl", "w", encoding="utf-8") as f:
-        for doc in chunked:
-            f.write(json.dumps(doc, ensure_ascii=False) + "\n")
+    with open(evidence_dir / "chunked.json", "w", encoding="utf-8") as f:
+        json.dump(chunked, f, ensure_ascii=False, indent=2)
 
     # 写入 shared_state.json（模拟 qa_agent 已运行完毕）
     shared_state = {
@@ -195,7 +198,7 @@ def prepare_run_dir() -> tuple[Path, dict]:
         },
         "artifacts": {
             "qa_candidate_pool": str(qa_dir / "candidate_pool.json"),
-            "chunked_evidence": str(evidence_dir / "chunked.jsonl"),
+            "chunked_evidence": str(evidence_dir / "chunked.json"),
         },
         "agent_status": {
             "generation": "completed",

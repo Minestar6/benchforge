@@ -95,9 +95,10 @@ class MultiChunkBuilder:
             rng = np.random.default_rng(seed)
 
             n_combinations = max(1, int(n * combinations_per_doc_factor))
+            max_attempts = n_combinations * 3  # 允许一定的随机碰撞重试
             seen: set[tuple[int, ...]] = set()
 
-            for _ in range(n_combinations * 10):  # 超采样后去重
+            for _ in range(max_attempts):  # ??????
                 if len(seen) >= n_combinations:
                     break
                 h = int(rng.integers(h_min, min(h_max, n) + 1))
@@ -192,6 +193,7 @@ class MultiChunkBuilder:
         设计原则：
         - 不枚举所有组合，按每篇文档的 chunk 数生成受控数量
         - 最终使用 max_units 控制全局上限
+        - 不再使用 n // h_max 过激压缩，改为 h_min 软上限
         """
         if not single_chunks:
             return 0
@@ -208,21 +210,19 @@ class MultiChunkBuilder:
             if n < h_min:
                 continue
 
-            effective_h_max = min(h_max, n)
+            # 基础数量：按文档 chunk 数缩放
+            doc_target = max(h_min, n // factor)
 
-            # YourBench 风格基础数量：按文档 chunk 数缩放
-            doc_target = max(1, n // factor)
-
-            # 防止每组过大时生成过多无效组合
-            if doc_target * effective_h_max > n:
-                doc_target = max(1, n // effective_h_max)
+            # 软上限：每个组合至少 h_min 个 chunk，且不超过 chunk 总数
+            max_by_min = n // h_min
+            doc_target = min(doc_target, max_by_min)
 
             total += doc_target
 
         if max_units is not None:
             total = min(total, int(max_units))
 
-        return max(0, total)
+        return max(h_min, total)
 
 
 def build_evidence_pool_from_chunks(

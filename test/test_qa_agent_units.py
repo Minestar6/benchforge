@@ -335,7 +335,7 @@ def test_save_shared_state_contains_verify_inputs(tmp_path):
         assert data["blueprint"]["topics"] == ["Topic A"]
         assert data["artifacts"]["qa_candidate_pool"].endswith("/qa/candidate_pool.json")
         assert data["artifacts"]["multiple_choice_candidate_pool"].endswith("/multiple_choice/candidate_pool.json")
-        assert data["artifacts"]["chunked_evidence"].endswith("/evidence/chunked.jsonl")
+        assert data["artifacts"]["chunked_evidence"].endswith("/evidence/chunked.json")
         assert data["agent_status"]["generation"] == "completed"
     finally:
         import os

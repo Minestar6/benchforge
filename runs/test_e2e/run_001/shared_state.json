@@ -1,0 +1,74 @@
+{
+  "task_id": "test_e2e",
+  "run_id": "run_001",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "test_e2e",
+    "run_id": "run_001",
+    "language": "en",
+    "topics": [
+      "Python (programming language)"
+    ],
+    "modes": {
+      "qa": {
+        "count": 4,
+        "max_rounds": 2,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.5,
+          "hard": 0.2
+        }
+      },
+      "multiple_choice": {
+        "count": 2,
+        "max_rounds": 2,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.5,
+          "hard": 0.2
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "test_e2e",
+    "run_id": "run_001",
+    "language": "en",
+    "topics": [
+      "Python (programming language)"
+    ],
+    "modes": {
+      "qa": {
+        "count": 4,
+        "max_rounds": 2,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.5,
+          "hard": 0.2
+        }
+      },
+      "multiple_choice": {
+        "count": 2,
+        "max_rounds": 2,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.5,
+          "hard": 0.2
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs\\test_e2e\\run_001\\qa\\candidate_pool.json",
+    "multiple_choice_candidate_pool": "runs\\test_e2e\\run_001\\multiple_choice\\candidate_pool.json",
+    "chunked_evidence": "runs\\test_e2e\\run_001\\evidence\\chunked.json",
+    "llm_calls": "runs\\test_e2e\\run_001\\llm_calls.jsonl",
+    "generation_report": "runs\\test_e2e\\run_001\\generation_report.json"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "pending",
+    "evaluation": "pending"
+  }
+}

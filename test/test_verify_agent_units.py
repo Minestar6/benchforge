@@ -102,7 +102,26 @@ class TestNormalizeCitations:
 
 
 class TestBuildChunkIndex:
-    def test_builds_index(self, tmp_path):
+    def test_builds_index_from_json(self, tmp_path):
+        chunked = tmp_path / "chunked.json"
+        # chunked.json 格式: {topic: [doc_records]}
+        data = {
+            "AI": [{
+                "document_id": "doc_abc",
+                "topic": "AI",
+                "chunks": [
+                    {"chunk_id": "doc_abc::chunk_0000", "chunk_text": "AI is great."},
+                    {"chunk_id": "doc_abc::chunk_0001", "chunk_text": "ML is a subset."},
+                ]
+            }]
+        }
+        chunked.write_text(json.dumps(data), encoding="utf-8")
+        index = _build_chunk_index(chunked)
+        assert index["doc_abc::chunk_0000"] == "AI is great."
+        assert index["doc_abc::chunk_0001"] == "ML is a subset."
+
+    def test_builds_index_from_jsonl(self, tmp_path):
+        """兼容旧 chunked.jsonl 格式。"""
         chunked = tmp_path / "chunked.jsonl"
         data = {
             "document_id": "doc_abc",
@@ -118,7 +137,7 @@ class TestBuildChunkIndex:
         assert index["doc_abc::chunk_0001"] == "ML is a subset."
 
     def test_missing_file(self, tmp_path):
-        index = _build_chunk_index(tmp_path / "nonexistent.jsonl")
+        index = _build_chunk_index(tmp_path / "nonexistent.json")
         assert index == {}
 
 
@@ -157,7 +176,7 @@ class TestLoadAndNormalize:
         assert candidates[0].question_id  # 非空
 
     def test_chunk_hydrate_from_index(self, tmp_path):
-        # chunks 为空 → 从 chunked.jsonl 回查
+        # chunks 为空 → 从 chunked.json 回查
         pool = [{
             "question": "What?", "answer": "It.", "question_mode": "qa", "topic": "t",
             "chunks": [], "chunk_ids": ["doc_abc::chunk_0000"],
@@ -167,13 +186,15 @@ class TestLoadAndNormalize:
 
         evidence_dir = tmp_path / "evidence"
         evidence_dir.mkdir()
-        chunked = evidence_dir / "chunked.jsonl"
+        chunked = evidence_dir / "chunked.json"
         chunked.write_text(
             json.dumps({
-                "document_id": "doc_abc",
-                "topic": "t",
-                "chunks": [{"chunk_id": "doc_abc::chunk_0000", "chunk_text": "Hydrated text."}]
-            }) + "\n",
+                "t": [{
+                    "document_id": "doc_abc",
+                    "topic": "t",
+                    "chunks": [{"chunk_id": "doc_abc::chunk_0000", "chunk_text": "Hydrated text."}]
+                }]
+            }),
             encoding="utf-8",
         )
 
@@ -227,9 +248,9 @@ async def test_run_verify_agent_from_shared_state_updates_artifacts(tmp_path, mo
     candidate_path = run_dir / "qa" / "candidate_pool.json"
     candidate_path.parent.mkdir(parents=True)
     candidate_path.write_text("[]", encoding="utf-8")
-    chunked_path = run_dir / "evidence" / "chunked.jsonl"
+    chunked_path = run_dir / "evidence" / "chunked.json"
     chunked_path.parent.mkdir(parents=True)
-    chunked_path.write_text("", encoding="utf-8")
+    chunked_path.write_text("{}", encoding="utf-8")
 
     state = SharedState(
         task_id="task_x",
@@ -237,7 +258,7 @@ async def test_run_verify_agent_from_shared_state_updates_artifacts(tmp_path, mo
         blueprint={"topics": ["AI"], "modes": {"qa": {"count": 1, "difficulty_distribution": {"easy": 1.0}}}},
         artifacts={
             "qa_candidate_pool": str(Path("runs") / "task_x" / "run_y" / "qa" / "candidate_pool.json"),
-            "chunked_evidence": str(Path("runs") / "task_x" / "run_y" / "evidence" / "chunked.jsonl"),
+            "chunked_evidence": str(Path("runs") / "task_x" / "run_y" / "evidence" / "chunked.json"),
         },
         agent_status={"generation": AgentStatus.COMPLETED},
     )

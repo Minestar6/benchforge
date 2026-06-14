@@ -33,6 +33,10 @@ class RoundFeedback:
     empty_round: bool
     too_easy_ratio: float
 
+    # Planner feedback
+    target_candidate_count: int = 0
+    over_target_count: int = 0
+
 
 def build_round_feedback(
     mode: str,

@@ -59,7 +59,7 @@ def build_shared_state(
         artifacts[f"{mode}_candidate_pool"] = str(base / mode / "candidate_pool.json")
 
     artifacts.update({
-        "chunked_evidence": str(base / "evidence" / "chunked.jsonl"),
+        "chunked_evidence": str(base / "evidence" / "chunked.json"),
         "llm_calls": str(base / "llm_calls.jsonl"),
         "generation_report": str(base / "generation_report.json"),
     })

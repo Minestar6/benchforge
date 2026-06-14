@@ -63,8 +63,13 @@ def _input_paths_from_shared_state(state: SharedState, run_dir: Path) -> list[st
 def _chunk_index_path_from_shared_state(state: SharedState, run_dir: Path) -> str:
     if chunked := state.artifact("chunked_evidence"):
         return chunked
-    inferred = run_dir / "evidence" / "chunked.jsonl"
-    return str(inferred) if inferred.exists() else ""
+    chunked_json = run_dir / "evidence" / "chunked.json"
+    chunked_jsonl = run_dir / "evidence" / "chunked.jsonl"
+    if chunked_json.exists():
+        return str(chunked_json)
+    if chunked_jsonl.exists():
+        return str(chunked_jsonl)
+    return ""
 
 
 class VerifyAgent:

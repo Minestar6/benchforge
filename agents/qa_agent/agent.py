@@ -77,11 +77,16 @@ async def run_generation_agent(
 
     model_client = _resolve_model_client_fn(model_ref.name, registry_path)
 
-    # ?? agent ?????????? model_registry ????
+    # 将 model_ref 参数注入 model_client，确保后续调用（generator / evidence_manager）一致读取
     setattr(model_client, "model_name", model_ref.name)
     setattr(model_client, "temperature", model_ref.temperature)
-    setattr(model_client, "max_tokens", model_ref.max_tokens)
+    setattr(model_client, "max_tokens", max(model_ref.max_tokens, 1))  # 确保 > 0
     setattr(model_client, "max_retries", model_ref.max_retries)
+    # 摘要类调用的 max_tokens（独立于生成 max_tokens，可由 yaml 单独配置）
+    setattr(model_client, "summarization_max_tokens",
+            getattr(model_ref, "summarization_max_tokens", None) or model_ref.max_tokens)
+    setattr(model_client, "summarization_combine_max_tokens",
+            getattr(model_ref, "summarization_combine_max_tokens", None) or model_ref.max_tokens)
 
     # Thin config wrapper matching the interface EvidenceManager expects
     class _EvidenceConfig:

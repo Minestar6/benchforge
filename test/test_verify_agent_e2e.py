@@ -275,7 +275,7 @@ class TestE2EHappyPath:
             },
             "artifacts": {
                 "qa_candidate_pool": "runs/task_e2e/run_e2e/qa/candidate_pool.json",
-                "chunked_evidence": "runs/task_e2e/run_e2e/evidence/chunked.jsonl",
+                "chunked_evidence": "runs/task_e2e/run_e2e/evidence/chunked.json",
             },
             "agent_status": {"generation": "completed", "verification": "pending"},
         }
