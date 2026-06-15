@@ -1,0 +1,29 @@
+{
+  "task_id": "qa_agent_exp/seed_42",
+  "run_id": "B_no_feedback_multiple_choice_20260615_152326",
+  "modes": {
+    "multiple_choice": {
+      "candidate_count": 113,
+      "accepted_count": 113,
+      "min_candidate_target": 75,
+      "max_candidate_target": 100,
+      "target_candidate_count": 75,
+      "difficulty_counts": {
+        "easy": 33,
+        "medium": 76,
+        "hard": 4
+      },
+      "min_difficulty_targets": {
+        "easy": 15,
+        "medium": 23,
+        "hard": 38
+      },
+      "min_target_reached": false,
+      "max_target_reached": true,
+      "stopped_reason": "max_candidate_pool_reached"
+    }
+  },
+  "total_candidates": 113,
+  "global_used_chunk_combinations": 18,
+  "global_failures": 0
+}

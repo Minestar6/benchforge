@@ -1,0 +1,76 @@
+{
+  "task_id": "exp_task",
+  "run_id": "exp_run",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "exp_task",
+    "run_id": "exp_run",
+    "language": "en",
+    "topics": [
+      "topic_a",
+      "topic_b"
+    ],
+    "modes": {
+      "qa": {
+        "count": 5,
+        "max_rounds": 10,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.5,
+          "hard": 0.3
+        }
+      },
+      "mcq": {
+        "count": 5,
+        "max_rounds": 10,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.5,
+          "hard": 0.3
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "exp_task",
+    "run_id": "exp_run",
+    "language": "en",
+    "topics": [
+      "topic_a",
+      "topic_b"
+    ],
+    "modes": {
+      "qa": {
+        "count": 5,
+        "max_rounds": 10,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.5,
+          "hard": 0.3
+        }
+      },
+      "mcq": {
+        "count": 5,
+        "max_rounds": 10,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.5,
+          "hard": 0.3
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs/exp_task/exp_run/adaptive/qa/candidate_pool.json",
+    "mcq_candidate_pool": "runs/exp_task/exp_run/adaptive/mcq/candidate_pool.json",
+    "llm_calls": "runs/exp_task/exp_run/llm_calls.jsonl",
+    "generation_report": "runs/exp_task/exp_run/adaptive/generation_report.json",
+    "validated_questions": "runs/exp_task/exp_run/validation/validated_questions.jsonl"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "pending",
+    "evaluation": "pending"
+  }
+}

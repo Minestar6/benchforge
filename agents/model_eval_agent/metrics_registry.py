@@ -15,6 +15,7 @@ from benchforge.utils.metrics_auto import (
     BleuMetric,
     BertScoreMetric,
     SemanticSimilarityMetric,
+    SemanticAccuracyMetric,
 )
 
 from benchforge.utils.metrics_dataset import (
@@ -36,6 +37,7 @@ AUTO_METRIC_REGISTRY: dict[str, AutoMetric] = {
     "bleu": BleuMetric(),
     "bertscore": BertScoreMetric(),
     "semantic_similarity": SemanticSimilarityMetric(),
+    "semantic_accuracy": SemanticAccuracyMetric(),
 }
 
 # ─── 数据集指标注册表 ───────────────────────────────────────────

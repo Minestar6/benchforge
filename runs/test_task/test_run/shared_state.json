@@ -1,0 +1,57 @@
+{
+  "task_id": "test_task",
+  "run_id": "test_run",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "test_task",
+    "run_id": "test_run",
+    "language": "en",
+    "topics": [
+      "Python",
+      "Machine Learning"
+    ],
+    "modes": {
+      "qa": {
+        "count": 3,
+        "max_rounds": 5,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.4,
+          "hard": 0.3
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "test_task",
+    "run_id": "test_run",
+    "language": "en",
+    "topics": [
+      "Python",
+      "Machine Learning"
+    ],
+    "modes": {
+      "qa": {
+        "count": 3,
+        "max_rounds": 5,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.4,
+          "hard": 0.3
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs/test_task/test_run/adaptive/qa/candidate_pool.json",
+    "llm_calls": "runs/test_task/test_run/llm_calls.jsonl",
+    "generation_report": "runs/test_task/test_run/adaptive/generation_report.json",
+    "validated_questions": "runs/test_task/test_run/validation/validated_questions.jsonl"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "pending",
+    "evaluation": "pending"
+  }
+}

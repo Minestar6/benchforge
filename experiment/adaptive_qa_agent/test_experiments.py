@@ -18,7 +18,7 @@ from benchforge.models.fake import FakeModelClient
 
 # ── fixtures ────────────────────────────────────────────────────────────────
 
-def _blueprint(count=5, max_rounds=10, run_id="exp_run"):
+def _blueprint(count=5, max_rounds=5, run_id="exp_run"):
     ns = SimpleNamespace()
     ns.task_id = "exp_task"
     ns.run_id = run_id
@@ -131,7 +131,7 @@ async def test_group_b_single():
 @pytest.mark.asyncio
 async def test_group_c_nodiff():
     """多轮运行，关闭难度自适应（hard_gap_threshold=1.0, too_easy_ratio=1.0）。"""
-    bp = _blueprint(count=5, max_rounds=10, run_id="run_c_nodiff")
+    bp = _blueprint(count=5, max_rounds=5, run_id="run_c_nodiff")
     cfg = _adaptive_config(hard_gap_threshold=1.0, too_easy_ratio=1.0)
     with patch("agents.adaptive_qa_agent.agent.VerifyAgent") as MockVerify:
         MockVerify.return_value = _partial_accept_mock(bp)
@@ -148,7 +148,7 @@ async def test_group_c_nodiff():
 @pytest.mark.asyncio
 async def test_group_d_full():
     """全部机制开启，多轮运行，默认阈值配置。"""
-    bp = _blueprint(count=5, max_rounds=10, run_id="run_d_full")
+    bp = _blueprint(count=5, max_rounds=5, run_id="run_d_full")
     with patch("agents.adaptive_qa_agent.agent.VerifyAgent") as MockVerify:
         MockVerify.return_value = _partial_accept_mock(bp)
         await run_adaptive_generation_agent(

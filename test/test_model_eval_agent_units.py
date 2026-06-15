@@ -12,10 +12,14 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 from benchforge.agents.model_eval_agent import agent as agent_module
-from benchforge.agents.model_eval_agent.aggregator import build_model_by_dimension
+from benchforge.agents.model_eval_agent.aggregator import (
+    build_model_by_dimension,
+    build_model_overall_report,
+)
 from benchforge.agents.model_eval_agent.auto_metric_executor import run_automatic_metrics
 from benchforge.agents.model_eval_agent.dataset_metric_executor import run_dataset_metrics
 from benchforge.agents.model_eval_agent.llm_judge_executor import _judge_single
+from benchforge.agents.model_eval_agent.model_runner import _build_prompt
 from benchforge.agents.model_eval_agent.schema import (
     AutoMetricSpec,
     DatasetMetricSpec,
@@ -121,6 +125,41 @@ def test_run_automatic_metrics_aligns_missing_scores_to_shared_question_ids(tmp_
     assert row["models"]["model_b"]["scores"] == [1.0, None]
 
 
+def test_run_automatic_metrics_supports_semantic_accuracy(tmp_path):
+    questions = [
+        {"question_id": "q1", "question_mode": "qa", "answer": "A1"},
+        {"question_id": "q2", "question_mode": "qa", "answer": "A2"},
+    ]
+    model_responses = [
+        {"question_id": "q1", "question_mode": "qa", "model_name": "model_a", "prediction": "A1"},
+        {"question_id": "q2", "question_mode": "qa", "model_name": "model_a", "prediction": "A2"},
+    ]
+    metric_plans = {
+        "qa": QuestionModeMetricPlan(
+            automatic_metrics=[AutoMetricSpec(name="semantic_accuracy", threshold=0.8)]
+        )
+    }
+
+    import benchforge.agents.model_eval_agent.metrics_registry as metrics_registry
+
+    original_metric = metrics_registry.AUTO_METRIC_REGISTRY["semantic_accuracy"]
+
+    class StubSemanticAccuracy:
+        def compute(self, question, prediction, context=None):
+            return 1.0 if question["question_id"] == "q1" else 0.0
+
+    metrics_registry.AUTO_METRIC_REGISTRY["semantic_accuracy"] = StubSemanticAccuracy()
+    try:
+        results = run_automatic_metrics(questions, model_responses, metric_plans, tmp_path)
+    finally:
+        metrics_registry.AUTO_METRIC_REGISTRY["semantic_accuracy"] = original_metric
+
+    row = results[0]
+    assert row["metric_name"] == "semantic_accuracy"
+    assert row["models"]["model_a"]["scores"] == [1.0, 0.0]
+    assert row["models"]["model_a"]["pass_rate"] == 0.5
+
+
 def test_run_dataset_metrics_includes_grouped_citation_rows(tmp_path):
     questions = [
         {
@@ -177,6 +216,86 @@ async def test_judge_single_trace_records_llm_call_id():
     )
 
     assert trace["llm_call_id"] == "llm_test_call"
+
+
+def test_build_prompt_multiple_choice_does_not_double_label_choices():
+    prompt = _build_prompt(
+        {
+            "question": "Which option is correct?",
+            "question_mode": "multiple_choice",
+            "choices": [
+                "(A) Wrong",
+                "(B) Right",
+                "(C) Also wrong",
+                "(D) Nope",
+            ],
+        }
+    )
+    assert "A. (A) Wrong" not in prompt
+    assert "(B) Right" in prompt
+
+
+@pytest.mark.asyncio
+async def test_judge_single_for_multiple_choice_includes_choices():
+    client = RecordingJudgeClient()
+    trace = await _judge_single(
+        client=client,
+        judge_model_name="judge-model",
+        question={
+            "question_id": "q1",
+            "question_mode": "multiple_choice",
+            "question": "Which option is correct?",
+            "answer": "B",
+            "choices": ["(A) Wrong", "(B) Right", "(C) Also wrong", "(D) Nope"],
+            "citations": [],
+        },
+        model_name="candidate-model",
+        prediction="B",
+        metrics=[JudgeMetricSpec(name="correctness", description="is it correct")],
+        system_prompt="system",
+        user_template="",
+        judge_defaults={"temperature": 0.0},
+        llm_trace_path="",
+        tracer=None,
+        semaphore=asyncio.Semaphore(1),
+    )
+    assert "(B) Right" in trace["prompt"]["user"]
+
+
+def test_build_model_reports_follow_available_metrics():
+    questions = [
+        {"question_id": "q1", "question_mode": "qa", "topic": "AI", "estimated_difficulty": "easy", "answer": "A1"},
+    ]
+    automatic_scores = [
+        {
+            "metric_name": "semantic_accuracy",
+            "question_mode": "qa",
+            "question_ids": ["q1"],
+            "models": {"model_a": {"scores": [1.0], "passed": [True], "mean": 1.0, "pass_rate": 1.0}},
+        }
+    ]
+    judge_scores = [
+        {
+            "metric_name": "correctness",
+            "question_mode": "qa",
+            "question_ids": ["q1"],
+            "models": {"model_a": {"scores": [0.8], "mean": 0.8}},
+        },
+        {
+            "metric_name": "completeness",
+            "question_mode": "qa",
+            "question_ids": ["q1"],
+            "models": {"model_a": {"scores": [0.7], "mean": 0.7}},
+        },
+    ]
+
+    overall_rows = build_model_overall_report(questions, automatic_scores, judge_scores)
+    assert overall_rows[0]["semantic_accuracy"] == 1.0
+    assert overall_rows[0]["judge_completeness"] == 0.7
+
+    by_topic = build_model_by_dimension(questions, automatic_scores, judge_scores, "topic")
+    assert by_topic[0]["semantic_accuracy"] == 1.0
+    assert by_topic[0]["judge_completeness"] == 0.7
 
 
 @pytest.mark.asyncio

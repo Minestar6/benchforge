@@ -39,7 +39,11 @@ def mode_initial_breadth_not_done(mode_state: ModeState, blueprint: Any) -> bool
 
 
 def mode_candidate_target(mode_cfg: Any, config: Any) -> int:
-    return math.ceil(mode_cfg.count * config.candidate_pool.target_multiplier)
+    return math.ceil(mode_cfg.count * config.candidate_pool.min_candidate_multiplier)
+
+
+def mode_max_candidate_target(mode_cfg: Any, config: Any) -> int:
+    return math.ceil(mode_cfg.count * config.candidate_pool.max_candidate_multiplier)
 
 
 def remaining_mode_rounds(mode_cfg: Any, mode_state: ModeState) -> int:

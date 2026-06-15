@@ -222,3 +222,19 @@ class SemanticSimilarityMetric(AutoMetric):
         ref = str(question.get("answer", ""))
         embs = model.encode([prediction, ref], convert_to_numpy=True, normalize_embeddings=True)
         return float(np.dot(embs[0], embs[1]))
+
+
+class SemanticAccuracyMetric(AutoMetric):
+    name = "semantic_accuracy"
+
+    def __init__(self, similarity_metric: SemanticSimilarityMetric | None = None):
+        self.similarity_metric = similarity_metric or SemanticSimilarityMetric()
+
+    def compute(self, question: dict, prediction: str, context: dict | None = None) -> float | None:
+        threshold = None if context is None else context.get("threshold")
+        if threshold is None:
+            return None
+        similarity = self.similarity_metric.compute(question, prediction, context)
+        if similarity is None:
+            return None
+        return 1.0 if similarity >= threshold else 0.0

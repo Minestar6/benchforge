@@ -4,6 +4,17 @@ from collections import defaultdict
 from typing import Any
 
 
+def _collect_metric_names(score_rows: list[dict[str, Any]]) -> list[str]:
+    names: list[str] = []
+    seen: set[str] = set()
+    for row in score_rows:
+        metric_name = row.get("metric_name")
+        if metric_name and metric_name not in seen:
+            names.append(metric_name)
+            seen.add(metric_name)
+    return names
+
+
 def _subset_mean(
     score_rows: list[dict[str, Any]],
     metric_name: str,
@@ -125,11 +136,19 @@ def build_model_overall_report(
     for q in questions:
         mode_questions[q.get("question_mode", "unknown")].append(q["question_id"])
 
-    _AUTO_BY_MODE = {
-        "multiple_choice": ["accuracy", "accuracy_pass_rate", "invalid_rate"],
-        "qa": ["exact_match", "f1", "f1_pass_rate", "precision", "recall", "rouge_l", "bleu", "bertscore", "semantic_similarity"],
-    }
-    _JUDGE_METRICS = ["correctness", "completeness", "faithfulness", "hallucination"]
+    auto_metrics_by_mode: dict[str, list[str]] = defaultdict(list)
+    for row in automatic_scores:
+        mode = row.get("question_mode", "")
+        metric_name = row.get("metric_name")
+        if metric_name and metric_name not in auto_metrics_by_mode[mode]:
+            auto_metrics_by_mode[mode].append(metric_name)
+
+    judge_metrics_by_mode: dict[str, list[str]] = defaultdict(list)
+    for row in judge_scores:
+        mode = row.get("question_mode", "")
+        metric_name = row.get("metric_name")
+        if metric_name and metric_name not in judge_metrics_by_mode[mode]:
+            judge_metrics_by_mode[mode].append(metric_name)
 
     rows = []
     for model_name in sorted(all_models):
@@ -139,27 +158,21 @@ def build_model_overall_report(
                 "question_mode": mode,
                 "num_questions": len(qids),
             }
-            # auto metrics
-            relevant_auto = _AUTO_BY_MODE.get(mode, [])
-            for mn in ["accuracy", "accuracy_pass_rate", "invalid_rate", "exact_match", "f1", "f1_pass_rate",
-                       "precision", "recall", "rouge_l", "bleu", "bertscore", "semantic_similarity"]:
-                if mn.endswith("_pass_rate"):
-                    base = mn.replace("_pass_rate", "")
-                    val = None
-                    for r in automatic_scores:
-                        if r.get("metric_name") == base and r.get("question_mode") == mode:
-                            val = (r.get("models", {}).get(model_name) or {}).get("pass_rate")
-                            break
-                else:
-                    val = _auto_mean(
-                        [r for r in automatic_scores if r.get("question_mode") == mode],
-                        mn, model_name,
-                    )
-                row[mn] = val if mn in relevant_auto or mn.replace("_pass_rate", "") in relevant_auto else None
-            # judge metrics
-            for jm in _JUDGE_METRICS:
+            mode_auto_rows = [r for r in automatic_scores if r.get("question_mode") == mode]
+            for metric_name in auto_metrics_by_mode.get(mode, []):
+                row[metric_name] = _auto_mean(mode_auto_rows, metric_name, model_name)
+                pass_rate = None
+                for r in mode_auto_rows:
+                    if r.get("metric_name") == metric_name:
+                        pass_rate = (r.get("models", {}).get(model_name) or {}).get("pass_rate")
+                        break
+                if pass_rate is not None:
+                    row[f"{metric_name}_pass_rate"] = pass_rate
+
+            mode_judge_rows = [r for r in judge_scores if r.get("question_mode") == mode]
+            for jm in judge_metrics_by_mode.get(mode, []):
                 row[f"judge_{jm}"] = _judge_mean(
-                    [r for r in judge_scores if r.get("question_mode") == mode],
+                    mode_judge_rows,
                     jm, model_name,
                 )
             rows.append(row)
@@ -194,8 +207,6 @@ def build_model_by_dimension(
             row: dict[str, Any] = {
                 "model_name": model_name,
                 "num_questions": len(group_questions),
-                "accuracy": None, "exact_match": None, "f1": None, "semantic_similarity": None,
-                "judge_correctness": None, "judge_faithfulness": None,
             }
 
             if dimension_key == "question_mode_and_difficulty":
@@ -205,14 +216,9 @@ def build_model_by_dimension(
             else:
                 row[dimension_key] = group_key
 
-            for mn, field in [
-                ("accuracy", "accuracy"),
-                ("exact_match", "exact_match"),
-                ("f1", "f1"),
-                ("semantic_similarity", "semantic_similarity"),
-            ]:
-                row[field] = _subset_mean(automatic_scores, mn, model_name, qids)
-            row["judge_correctness"] = _subset_mean(judge_scores, "correctness", model_name, qids)
-            row["judge_faithfulness"] = _subset_mean(judge_scores, "faithfulness", model_name, qids)
+            for metric_name in _collect_metric_names(automatic_scores):
+                row[metric_name] = _subset_mean(automatic_scores, metric_name, model_name, qids)
+            for metric_name in _collect_metric_names(judge_scores):
+                row[f"judge_{metric_name}"] = _subset_mean(judge_scores, metric_name, model_name, qids)
             rows.append(row)
     return rows

@@ -1,0 +1,2 @@
+model_name,num_questions,topic,question_mode,accuracy,invalid_rate
+fake,3,Artificial Intelligence,multiple_choice,,1.0

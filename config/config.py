@@ -86,6 +86,9 @@ def load_prompt(path: str | Path) -> str:
     Returns:
         文件内容；文件不存在时返回空字符串
     """
+    if not path:
+        return ""
+
     p = Path(path)
     candidates: list[Path] = [p]
 

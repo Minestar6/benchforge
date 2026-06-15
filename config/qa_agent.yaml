@@ -49,7 +49,8 @@ multi_chunk:
 
 # ── 候选池 ────────────────────────────────────────────────────────────────────
 candidate_pool:
-  target_multiplier: 1.2       # 候选池目标 = count × 2.5（过生成供下游筛选）
+  min_candidate_multiplier: 1.2  # 每个难度达到的最小候选倍率
+  max_candidate_multiplier: 2.0  # 总候选数硬上限，避免过生成
 
 # ── 初始广度轮 ────────────────────────────────────────────────────────────────
 initial_breadth:

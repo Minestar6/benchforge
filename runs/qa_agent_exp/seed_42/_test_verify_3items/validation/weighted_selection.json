@@ -1,0 +1,19 @@
+{
+  "selected_question_ids": [
+    "48aac44a-1f53-4bdb-842a-c1145907b3c6",
+    "bf7a55c0-18a0-49df-931d-5f504a6d38a7",
+    "f71e2ef0-7c6c-46a2-822e-59a3535e4fc5"
+  ],
+  "dropped_as_duplicate": [],
+  "dropped_as_overquota": [],
+  "group_assignments": {
+    "48aac44a-1f53-4bdb-842a-c1145907b3c6": "multiple_choice::medium",
+    "bf7a55c0-18a0-49df-931d-5f504a6d38a7": "multiple_choice::medium",
+    "f71e2ef0-7c6c-46a2-822e-59a3535e4fc5": "multiple_choice::easy"
+  },
+  "sampling_weights": {
+    "48aac44a-1f53-4bdb-842a-c1145907b3c6": 0.830625,
+    "bf7a55c0-18a0-49df-931d-5f504a6d38a7": 0.7618750000000001,
+    "f71e2ef0-7c6c-46a2-822e-59a3535e4fc5": 0.865
+  }
+}

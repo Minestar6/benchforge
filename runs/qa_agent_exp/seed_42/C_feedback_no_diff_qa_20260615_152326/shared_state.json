@@ -1,0 +1,59 @@
+{
+  "task_id": "qa_agent_exp/seed_42",
+  "run_id": "C_feedback_no_diff_qa_20260615_152326",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "qa_agent_exp/seed_42",
+    "run_id": "C_feedback_no_diff_qa_20260615_152326",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "modes": {
+      "qa": {
+        "count": 50,
+        "max_rounds": 5,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "qa_agent_exp/seed_42",
+    "run_id": "C_feedback_no_diff_qa_20260615_152326",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "modes": {
+      "qa": {
+        "count": 50,
+        "max_rounds": 5,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs/qa_agent_exp/seed_42/C_feedback_no_diff_qa_20260615_152326/qa/candidate_pool.json",
+    "chunked_evidence": "runs/qa_agent_exp/seed_42/C_feedback_no_diff_qa_20260615_152326/evidence/chunked.json",
+    "llm_calls": "runs/qa_agent_exp/seed_42/C_feedback_no_diff_qa_20260615_152326/llm_calls.jsonl",
+    "generation_report": "runs/qa_agent_exp/seed_42/C_feedback_no_diff_qa_20260615_152326/generation_report.json"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "pending",
+    "evaluation": "pending"
+  }
+}

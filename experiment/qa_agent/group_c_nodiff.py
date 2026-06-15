@@ -32,7 +32,7 @@ async def run(
     run_id = f"run_c_nodiff_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
     blueprint = make_blueprint(
-        count=qa_count, max_rounds=10, run_id=run_id,
+        count=qa_count, max_rounds=5, run_id=run_id,
         task_id=task_id, topics=topics, language=language,
         difficulty_distribution=difficulty_distribution,
     )

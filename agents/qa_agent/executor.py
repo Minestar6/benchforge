@@ -9,7 +9,13 @@ from typing import Any
 from loguru import logger
 
 from .state import GlobalState, ModeState, CandidateRecord, CandidateStatus
-from .planner import ModeRoundPlan, RoundStrategy, mode_candidate_target, mode_initial_breadth_not_done
+from .planner import (
+    ModeRoundPlan,
+    RoundStrategy,
+    mode_candidate_target,
+    mode_initial_breadth_not_done,
+    mode_max_candidate_target,
+)
 from .feedback import build_round_feedback, RoundFeedback
 from .sampling import sample_chunks, raw_chunk_ids, _unit_combos, record_global_chunk_usage, pre_sample_all_units
 from benchforge.utils.filter import LightweightFilter
@@ -238,13 +244,27 @@ def mode_should_stop(
     config: Any,
 ) -> tuple[bool, str | None]:
     """Pure predicate — no side effects. Caller sets mode_state.stopped_reason."""
-    initial_done = not mode_initial_breadth_not_done(mode_state, blueprint)
-    target = mode_candidate_target(mode_cfg, config)
+    exp_cfg = getattr(config, "experiment", None)
+    breadth_disabled = (
+        getattr(exp_cfg, "disable_initial_breadth", False)
+        if exp_cfg is not None
+        else False
+    )
+    initial_done = (
+        not mode_initial_breadth_not_done(mode_state, blueprint)
+        or breadth_disabled
+        or not config.initial_breadth.enabled
+    )
+    min_target = mode_candidate_target(mode_cfg, config)
+    max_target = mode_max_candidate_target(mode_cfg, config)
 
-    if initial_done and mode_state.accepted_count >= target:
+    if initial_done and mode_state.accepted_count >= max_target:
+        return True, "max_candidate_pool_reached"
+
+    if initial_done and mode_state.accepted_count >= min_target:
         diff_targets = _per_difficulty_targets(mode_cfg, config)
         if _check_per_difficulty_sufficient(mode_state, diff_targets):
-            return True, "candidate_pool_sufficient"
+            return True, "min_candidate_pool_sufficient"
 
     if mode_state.round_in_mode > mode_cfg.max_rounds:
         return True, "max_rounds_reached"

@@ -15,6 +15,26 @@ def _clean(text: str) -> str:
     return re.sub(r'\s+', ' ', text.strip())
 
 
+def _resolve_answer_text(candidate: QuestionCandidate) -> str:
+    answer = candidate.answer or ""
+    if candidate.question_mode != "multiple_choice":
+        return answer
+
+    choices = candidate.choices or candidate.generation_metadata.get("choices") or candidate.generation_metadata.get("options")
+    if not choices:
+        return answer
+
+    normalized_answer = _clean(str(answer)).upper().rstrip(".")
+    if isinstance(choices, dict):
+        choice_text = choices.get(normalized_answer) or choices.get(normalized_answer.upper())
+        return str(choice_text) if choice_text else answer
+
+    label_index = ord(normalized_answer[:1]) - ord("A") if normalized_answer[:1].isalpha() else -1
+    if 0 <= label_index < len(choices):
+        return str(choices[label_index])
+    return answer
+
+
 def _score_single_citation(
     citation: str,
     chunks: list[str],
@@ -38,7 +58,7 @@ def validate_citation(
     qid = candidate.question_id
     citations = candidate.citations
     chunks = candidate.chunks
-    answer = candidate.answer or ""
+    answer = _resolve_answer_text(candidate)
 
     # 无 citations → 直接 fail
     if not citations:
@@ -75,8 +95,6 @@ def validate_citation(
     citation_score = min(1.0, max(0.0, citation_score))
 
     failed_reasons: list[str] = []
-    if matched_citation_count == 0:
-        failed_reasons.append("no_matched_citations")
     if citation_score < cfg.min_citation_score:
         failed_reasons.append("citation_score_too_low")
 

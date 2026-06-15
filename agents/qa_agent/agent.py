@@ -217,7 +217,14 @@ async def _run_generation_agent_impl(
         )
 
         save_mode_outputs(blueprint.task_id, blueprint.run_id, mode, mode_state)
-        save_mode_metrics(blueprint.task_id, blueprint.run_id, mode, mode_state, target, mode_cfg)
+        save_mode_metrics(
+            blueprint.task_id,
+            blueprint.run_id,
+            mode,
+            mode_state,
+            mode_cfg=mode_cfg,
+            config=config,
+        )
         logger.info(
             f"Mode {mode} complete: {mode_state.accepted_count} accepted, "
             f"stopped_reason={mode_state.stopped_reason}"

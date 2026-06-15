@@ -26,14 +26,8 @@ class LLMValidationCfg:
     min_overall_score: float = 0.75
     max_concurrency: int = 8
     max_retries: int = 2
-    hard_floor: dict = field(default_factory=lambda: {
-        "clarity": 0.6,
-        "answerability": 0.7,
-        "faithfulness": 0.7,
-        "mode_alignment": 0.7,
-    })
-    prompt_system: str = "benchforge/prompts/verify_agent/quality_system_prompt.md"
-    prompt_user: str = "benchforge/prompts/verify_agent/quality_user_prompt.md"
+    prompt_path: str = "benchforge/prompts/verify_agent/quality_prompt.md"
+    prompt_user: str = ""
 
 
 @dataclass
@@ -84,7 +78,6 @@ def load_verify_agent_config(path: str | Path) -> VerifyAgentConfig:
         citation_match_threshold=citation_raw.get("citation_match_threshold", 0.8),
     )
 
-    hard_floor_default = {"clarity": 0.6, "answerability": 0.7, "faithfulness": 0.7, "mode_alignment": 0.7}
     llm_cfg = LLMValidationCfg(
         enabled=llm_raw.get("enabled", True),
         model=llm_raw.get("model", "gpt-4o-mini"),
@@ -93,9 +86,8 @@ def load_verify_agent_config(path: str | Path) -> VerifyAgentConfig:
         min_overall_score=llm_raw.get("min_overall_score", 0.75),
         max_concurrency=llm_raw.get("max_concurrency", 8),
         max_retries=llm_raw.get("max_retries", 2),
-        hard_floor=llm_raw.get("hard_floor", hard_floor_default),
-        prompt_system=llm_raw.get("prompt_system", "benchforge/prompts/verify_agent/quality_system_prompt.md"),
-        prompt_user=llm_raw.get("prompt_user", "benchforge/prompts/verify_agent/quality_user_prompt.md"),
+        prompt_path=llm_raw.get("prompt_path", "benchforge/prompts/verify_agent/quality_prompt.md"),
+        prompt_user=llm_raw.get("prompt_user", ""),
     )
 
     selection_cfg = SelectionCfg(

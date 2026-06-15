@@ -1,0 +1,1624 @@
+[
+  {
+    "question": "What is the primary goal of the general problem of simulating intelligence?",
+    "options": [
+      "A. To create robots that can perform physical tasks",
+      "B. To break it into subproblems consisting of particular traits or capabilities",
+      "C. To develop a single algorithm for all intelligent behavior",
+      "D. To replicate human emotions perfectly"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "The general problem of simulating (or creating) intelligence has been broken into subproblems. These consist of particular traits or capabilities that researchers expect an intelligent system to display."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What issue did early AI reasoning algorithms face when dealing with large problems?",
+    "options": [
+      "A. They required too much memory",
+      "B. They became exponentially slower, experiencing a 'combinatorial explosion'",
+      "C. They could only handle symbolic data",
+      "D. They were too fast and produced inaccurate results"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Many of these algorithms are insufficient for solving large reasoning problems because they experience a \"combinatorial explosion\": They become exponentially slower as the problems grow."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "According to the text, how do humans solve most of their problems?",
+    "options": [
+      "A. Using step-by-step logical deduction",
+      "B. By consulting knowledge bases",
+      "C. Using fast, intuitive judgments",
+      "D. Through unsupervised learning algorithms"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "Humans solve most of their problems using fast, intuitive judgments."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What type of model, emerging in 2024, allowed improved performance on complex mathematics and coding problems?",
+    "options": [
+      "A. Neural networks",
+      "B. Reasoning models",
+      "C. Decision trees",
+      "D. Support vector machines"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Reasoning models, a type of large language model trained to generate intermediate chains-of-thought, emerged in 2024 and allowed improved performance on complex problems in mathematics and coding."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the purpose of knowledge representation and knowledge engineering in AI?",
+    "options": [
+      "A. To make AI programs run faster",
+      "B. To allow AI programs to answer questions intelligently and make deductions about real-world facts",
+      "C. To reduce the size of data storage",
+      "D. To create visual interfaces for users"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Knowledge representation and knowledge engineering allow AI programs to answer questions intelligently and make deductions about real-world facts."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is a 'knowledge base' as defined in the text?",
+    "options": [
+      "A. A database of user queries",
+      "B. A body of knowledge represented in a form that can be used by a program",
+      "C. A collection of algorithms for problem-solving",
+      "D. A library of training datasets for machine learning"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "A knowledge base is a body of knowledge represented in a form that can be used by a program."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is an 'ontology' in the context of knowledge representation?",
+    "options": [
+      "A. The study of existence",
+      "B. A programming language for AI",
+      "C. The set of objects, relations, concepts, and properties used by a particular domain of knowledge",
+      "D. A method for data encryption"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "An ontology is the set of objects, relations, concepts, and properties used by a particular domain of knowledge."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is a key characteristic of a 'rational agent'?",
+    "options": [
+      "A. It must be artificial",
+      "B. It has goals or preferences and takes actions to make them happen",
+      "C. It can only operate in simulated environments",
+      "D. It does not require perception"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "A rational agent has goals or preferences and takes actions to make them happen."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "In automated decision-making, what does an agent assign to each situation to measure preference?",
+    "options": [
+      "A. A probability",
+      "B. A weight",
+      "C. A utility",
+      "D. A score"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "The decision-making agent assigns a number to each situation (called its \"utility\") that measures how much the agent prefers it."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is machine learning the study of?",
+    "options": [
+      "A. Programs that can debug themselves",
+      "B. Programs that can improve their performance on a given task automatically",
+      "C. Programs that can write other programs",
+      "D. Programs that can simulate human conversation"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Machine learning is the study of programs that can improve their performance on a given task automatically."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which of the following is NOT listed as a use of formal knowledge representations in AI?",
+    "options": [
+      "A. Content-based indexing and retrieval",
+      "B. Scene interpretation",
+      "C. Clinical decision support",
+      "D. Real-time language translation"
+    ],
+    "answer": "D",
+    "difficulty": "medium",
+    "citations": [
+      "Formal knowledge representations are used in content-based indexing and retrieval, scene interpretation, clinical decision support, knowledge discovery (mining \"interesting\" and actionable inferences from large databases), and other areas."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What must a knowledge base be able to represent, according to the text?",
+    "options": [
+      "A. Only objects and their properties",
+      "B. Only causes and effects",
+      "C. Objects, properties, categories, relations, situations, events, states, time, causes, effects, knowledge about knowledge, and default reasoning",
+      "D. Only symbolic logic and mathematical formulas"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "Knowledge bases need to represent things such as objects, properties, categories, and relations between objects; situations, events, states, and time; causes and effects; knowledge about knowledge (what we know about what other people know); default reasoning (things that humans assume are true until they are told differently and will remain true even when other facts are changing); and many other aspects and domains of knowledge."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are among the most difficult problems in knowledge representation?",
+    "options": [
+      "A. The speed of processing and the cost of storage",
+      "B. The breadth of commonsense knowledge and its sub-symbolic form",
+      "C. The lack of available data and high computational power requirements",
+      "D. The integration with hardware and user interface design"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "Among the most difficult problems in knowledge representation are the breadth of commonsense knowledge (the set of atomic facts that the average person knows is enormous); and the sub-symbolic form of most commonsense knowledge (much of what people know is not represented as \"facts\" or \"statements\" that they could express verbally)."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "In classical planning, what does the agent know about the effects of its actions?",
+    "options": [
+      "A. The agent is uncertain and must guess probabilistically",
+      "B. The agent knows exactly what the effect of any action will be",
+      "C. The agent only knows the effects after the action is taken",
+      "D. The agent relies on human feedback to understand effects"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "In classical planning, the agent knows exactly what the effect of any action will be."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "In most real-world planning problems, why might an agent be uncertain?",
+    "options": [
+      "A. Because it operates on outdated information",
+      "B. Because the situation may be unknown/unobservable and outcomes may not be deterministic",
+      "C. Because it lacks any goals or preferences",
+      "D. Because it is programmed to be random"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "In most real-world problems, however, the agent may not be certain about the situation it is in (it is \"unknown\" or \"unobservable\") and it may not know for certain what will happen after each possible action (it is not \"deterministic\")."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "How can an agent build trust in its decisions, according to the text?",
+    "options": [
+      "A. By always choosing the safest action",
+      "B. By operating in complete secrecy",
+      "C. By having an explanation for why it took certain decisions",
+      "D. By mimicking human decision-makers exactly"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "Alongside thorough testing and improvement based on previous decisions, having an explanation for why the agent took certain decisions is a way to build trust, especially when the decisions have to be relied upon."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "How can an agent deal with uncertain preferences, especially involving other agents?",
+    "options": [
+      "A. By ignoring other agents' preferences",
+      "B. By randomly selecting a preference set",
+      "C. By learning them (e.g., with inverse reinforcement learning) or seeking information to improve them",
+      "D. By always assuming the worst-case scenario"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "In some problems, the agent's preferences may be uncertain, especially if there are other agents or humans involved. These preferences be learned (e.g., with inverse reinforcement learning), or the agent can seek information to improve them."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is machine learning?",
+    "options": [
+      "A. The study of programs that can improve their performance on a given task automatically.",
+      "B. The ability of programs to communicate in human languages.",
+      "C. The use of sensors to deduce aspects of the world.",
+      "D. The simulation of human feeling and emotion."
+    ],
+    "answer": "A",
+    "difficulty": "easy",
+    "citations": [
+      "Machine learning is the study of programs that can improve their performance on a given task automatically."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which type of machine learning analyzes data without any guidance?",
+    "options": [
+      "A. Supervised learning",
+      "B. Reinforcement learning",
+      "C. Unsupervised learning",
+      "D. Transfer learning"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "Unsupervised learning analyzes a stream of data and finds patterns and makes predictions without any other guidance."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What does NLP stand for?",
+    "options": [
+      "A. Natural Language Processing",
+      "B. Neural Learning Process",
+      "C. Network Logic Programming",
+      "D. Non-Linear Perception"
+    ],
+    "answer": "A",
+    "difficulty": "easy",
+    "citations": [
+      "Natural language processing (NLP) allows programs to read, write and communicate in human languages."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which technique is used for game-playing programs like chess?",
+    "options": [
+      "A. Local search",
+      "B. Adversarial search",
+      "C. Gradient descent",
+      "D. Evolutionary computation"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Adversarial search is used for game-playing programs, such as chess or Go."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the key component of deep learning for NLP introduced around 2019?",
+    "options": [
+      "A. Semantic networks",
+      "B. Generative pre-trained transformer (GPT)",
+      "C. Word embedding",
+      "D. Thesauri"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "In 2019, generative pre-trained transformer (or \"GPT\") language models began to generate coherent text."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What does affective computing involve?",
+    "options": [
+      "A. Analyzing visual input",
+      "B. Improving performance on tasks automatically",
+      "C. Recognizing, interpreting, processing, or simulating human feeling, emotion, and mood",
+      "D. Searching through trees of possible states"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "Affective computing is a field that comprises systems that recognize, interpret, process, or simulate human feeling, emotion, and mood."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which type of search uses heuristics to prioritize choices?",
+    "options": [
+      "A. Exhaustive search",
+      "B. State space search",
+      "C. Local search",
+      "D. Adversarial search"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "\"Heuristics\" or \"rules of thumb\" can help prioritize choices that are more likely to reach a goal."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is a common application of gradient descent?",
+    "options": [
+      "A. Game-playing programs",
+      "B. Training neural networks",
+      "C. Speech recognition",
+      "D. Evolutionary computation"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Variants of gradient descent are commonly used to train neural networks, through the backpropagation algorithm."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What does machine perception use to deduce aspects of the world?",
+    "options": [
+      "A. Logic and reasoning",
+      "B. Input from sensors",
+      "C. Human languages",
+      "D. Heuristics"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Machine perception is the ability to use input from sensors (such as cameras, microphones, wireless signals, active lidar, sonar, radar, and tactile sensors) to deduce aspects of the world."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which type of learning involves rewarding good responses and punishing bad ones?",
+    "options": [
+      "A. Supervised learning",
+      "B. Unsupervised learning",
+      "C. Reinforcement learning",
+      "D. Transfer learning"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "In reinforcement learning, the agent is rewarded for good responses and punished for bad ones."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the main challenge early NLP work faced due to the common sense knowledge problem?",
+    "options": [
+      "A. Difficulty with word-sense disambiguation unless restricted to small domains called \"micro-worlds\"",
+      "B. Inability to generate coherent text",
+      "C. Lack of computational power",
+      "D. Poor grammar understanding"
+    ],
+    "answer": "A",
+    "difficulty": "medium",
+    "citations": [
+      "Early work, based on Noam Chomsky's generative grammar and semantic networks, had difficulty with word-sense disambiguation[f] unless restricted to small domains called \"micro-worlds\" (due to the common sense knowledge problem)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are the two main varieties of supervised learning?",
+    "options": [
+      "A. Classification and regression",
+      "B. Unsupervised and reinforcement",
+      "C. Transfer and deep learning",
+      "D. Logic and search"
+    ],
+    "answer": "A",
+    "difficulty": "medium",
+    "citations": [
+      "Supervised learning requires labeling the training data with the expected answers, and comes in two main varieties: classification (where the program must learn to predict what category the input belongs in) and regression (where the program must deduce a numeric function based on numeric input)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which computational learning theory aspect assesses how much data is required?",
+    "options": [
+      "A. Computational complexity",
+      "B. Sample complexity",
+      "C. Optimization notions",
+      "D. Heuristic evaluation"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "Computational learning theory can assess learners by computational complexity, by sample complexity (how much data is required), or by other notions of optimization."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What did Margaret Masterman believe was key to understanding languages?",
+    "options": [
+      "A. Grammar",
+      "B. Meaning",
+      "C. Dictionaries",
+      "D. Semantic networks"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "Margaret Masterman believed that it was meaning and not grammar that was the key to understanding languages, and that thesauri and not dictionaries should be the basis of computational language structure."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What process is used in planning algorithms to find a path to a target goal?",
+    "options": [
+      "A. Gradient descent",
+      "B. Means-ends analysis",
+      "C. Evolutionary computation",
+      "D. Particle swarm optimization"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "For example, planning algorithms search through trees of goals and subgoals, attempting to find a path to a target goal, a process called means-ends analysis."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which modern deep learning technique for NLP represents words as vectors encoding their meaning?",
+    "options": [
+      "A. Transformers",
+      "B. Word embedding",
+      "C. Generative pre-trained transformer",
+      "D. Backpropagation"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "Modern deep learning techniques for NLP include word embedding (representing words, typically as vectors encoding their meaning)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What type of search begins with a guess and refines it incrementally?",
+    "options": [
+      "A. State space search",
+      "B. Adversarial search",
+      "C. Local search",
+      "D. Exhaustive search"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "Local search uses mathematical optimization to find a solution to a problem. It begins with some form of guess and refines it incrementally."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which swarm intelligence algorithm is inspired by bird flocking?",
+    "options": [
+      "A. Ant colony optimization",
+      "B. Particle swarm optimization",
+      "C. Evolutionary computation",
+      "D. Gradient descent"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "Two popular swarm algorithms used in search are particle swarm optimization (inspired by bird flocking) and ant colony optimization (inspired by ant trails)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is a risk of affective computing in virtual assistants?",
+    "options": [
+      "A. They become too emotional",
+      "B. They give naïve users an unrealistic conception of the intelligence of existing computer agents",
+      "C. They fail to recognize human feelings",
+      "D. They are too slow in processing emotions"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "However, this tends to give naïve users an unrealistic conception of the intelligence of existing computer agents."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are the two main forms of formal logic mentioned in the text?",
+    "options": [
+      "A. Propositional logic and predicate logic",
+      "B. Deductive logic and inductive logic",
+      "C. Fuzzy logic and non-monotonic logic",
+      "D. Horn clause logic and first-order logic"
+    ],
+    "answer": "A",
+    "difficulty": "easy",
+    "citations": [
+      "Formal logic comes in two main forms: propositional logic (which operates on statements that are true or false and uses logical connectives such as \"and\", \"or\", \"not\" and \"implies\") and predicate logic (which also operates on objects, predicates and relations and uses quantifiers such as \"Every X is a Y\" and \"There are some Xs that are Ys\")."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the simplest and most widely used symbolic machine learning algorithm according to the text?",
+    "options": [
+      "A. K-nearest neighbor algorithm",
+      "B. Decision tree",
+      "C. Support vector machine (SVM)",
+      "D. Naive Bayes classifier"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "The decision tree is the simplest and most widely used symbolic machine learning algorithm."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the most common training technique for neural networks?",
+    "options": [
+      "A. Expectation-maximization algorithm",
+      "B. Bayesian inference algorithm",
+      "C. Backpropagation algorithm",
+      "D. Markov decision processes"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "The most common training technique is the backpropagation algorithm."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What type of logic is designed to handle default reasoning?",
+    "options": [
+      "A. Propositional logic",
+      "B. Predicate logic",
+      "C. Fuzzy logic",
+      "D. Non-monotonic logics"
+    ],
+    "answer": "D",
+    "difficulty": "easy",
+    "citations": [
+      "Non-monotonic logics, including logic programming with negation as failure, are designed to handle default reasoning."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is reportedly the 'most widely used learner' at Google?",
+    "options": [
+      "A. Decision tree",
+      "B. K-nearest neighbor algorithm",
+      "C. Naive Bayes classifier",
+      "D. Support vector machine (SVM)"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "The naive Bayes classifier is reportedly the \"most widely used learner\" at Google, due in part to its scalability."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the process of proving a new statement from other assumed true statements called?",
+    "options": [
+      "A. Inductive reasoning",
+      "B. Deductive reasoning",
+      "C. Default reasoning",
+      "D. Probabilistic reasoning"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Deductive reasoning in logic is the process of proving a new statement (conclusion) from other statements that are given and assumed to be true (the premises)."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the main characteristic of fuzzy logic?",
+    "options": [
+      "A. It uses quantifiers like 'Every X is a Y'",
+      "B. It assigns a 'degree of truth' between 0 and 1",
+      "C. It is designed to handle default reasoning",
+      "D. It operates on statements that are strictly true or false"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Fuzzy logic assigns a \"degree of truth\" between 0 and 1."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the minimum number of hidden layers for a network to be typically called a deep neural network?",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "A network is typically called a deep neural network if it has at least 2 hidden layers."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What type of AI applications are divided into classifiers and controllers?",
+    "options": [
+      "A. The most complex AI applications",
+      "B. The simplest AI applications",
+      "C. All probabilistic AI applications",
+      "D. All neural network applications"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "The simplest AI applications can be divided into two types: classifiers (e.g., \"if shiny then diamond\"), on one hand, and controllers (e.g., \"if diamond then pick up\"), on the other hand."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What algorithm displaced k-nearest neighbor as the most widely used analogical AI in the 1990s?",
+    "options": [
+      "A. Decision tree",
+      "B. Naive Bayes classifier",
+      "C. Kernel methods such as the support vector machine (SVM)",
+      "D. Backpropagation algorithm"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "Kernel methods such as the support vector machine (SVM) displaced k-nearest neighbor in the 1990s."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "In the context of problem-solving with logic, what does the root node of a proof tree represent?",
+    "options": [
+      "A. The premises or axioms",
+      "B. A solution of the problem",
+      "C. An inference rule",
+      "D. A contradiction"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "Given a problem and a set of premises, problem-solving reduces to searching for a proof tree whose root node is labelled by a solution of the problem and whose leaf nodes are labelled by premises or axioms."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the single, axiom-free rule of inference used in the clausal form of first-order logic?",
+    "options": [
+      "A. Backward reasoning",
+      "B. Forward reasoning",
+      "C. Resolution",
+      "D. Deduction"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "In the more general case of the clausal form of first-order logic, resolution is a single, axiom-free rule of inference, in which a problem is solved by proving a contradiction from premises that include the negation of the problem to be solved."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What property of inference in Horn clause logic and first-order logic makes it intractable?",
+    "options": [
+      "A. It is decidable",
+      "B. It is undecidable",
+      "C. It is Turing complete",
+      "D. It uses fuzzy values"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "Inference in both Horn clause logic and first-order logic is undecidable, and therefore intractable."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which computation model underpins the logic programming language Prolog?",
+    "options": [
+      "A. Forward reasoning with Horn clauses",
+      "B. Backward reasoning with Horn clauses",
+      "C. Resolution with first-order logic",
+      "D. Fuzzy logic inference"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "However, backward reasoning with Horn clauses, which underpins computation in the logic programming language Prolog, is Turing complete."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What mathematical tools are mentioned for analyzing how an agent can make choices and plan under uncertainty?",
+    "options": [
+      "A. Propositional logic and predicate logic",
+      "B. Decision theory, decision analysis, and information value theory",
+      "C. Backpropagation and local search",
+      "D. Kernel methods and support vector machines"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "Precise mathematical tools have been developed that analyze how an agent can make choices and plan, using decision theory, decision analysis, and information value theory."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which of the following is NOT listed as a model used in decision-making tools for uncertain reasoning?",
+    "options": [
+      "A. Markov decision processes",
+      "B. Dynamic decision networks",
+      "C. Game theory and mechanism design",
+      "D. K-nearest neighbor algorithm"
+    ],
+    "answer": "D",
+    "difficulty": "medium",
+    "citations": [
+      "These tools include models such as Markov decision processes, dynamic decision networks, game theory and mechanism design."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "For what purposes can Bayesian networks be used, according to the text?",
+    "options": [
+      "A. Only for reasoning and learning",
+      "B. Only for planning and perception",
+      "C. For reasoning, learning, planning, and perception",
+      "D. Only for filtering and prediction"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "Bayesian networks are a tool that can be used for reasoning (using the Bayesian inference algorithm),[g] learning (using the expectation–maximization algorithm),[h] planning (using decision networks) and perception (using dynamic Bayesian networks)."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the most common training technique for neural networks?",
+    "options": [
+      "A. Reinforcement learning",
+      "B. The backpropagation algorithm",
+      "C. Local search",
+      "D. Convolution"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "The most common training technique is the backpropagation algorithm."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "In a feedforward neural network, how does the signal pass through the network?",
+    "options": [
+      "A. In multiple directions",
+      "B. In a loop",
+      "C. In only one direction",
+      "D. It does not pass a signal"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "In feedforward neural networks the signal passes in only one direction."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What type of neural network is typically referred to by the term 'perceptron'?",
+    "options": [
+      "A. A deep neural network",
+      "B. A convolutional neural network",
+      "C. A single-layer neural network",
+      "D. A recurrent neural network"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "The term perceptron typically refers to a single-layer neural network."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is a key feature of Recurrent Neural Networks (RNNs)?",
+    "options": [
+      "A. They use many layers of neurons.",
+      "B. They feed the output signal back into the input.",
+      "C. They are only used for image processing.",
+      "D. They cannot preserve memories of previous inputs."
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Recurrent neural networks (RNNs) feed the output signal back into the input, which allows short-term memories of previous input events."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are Convolutional Neural Networks (CNNs) especially important for processing?",
+    "options": [
+      "A. Text data",
+      "B. Audio signals",
+      "C. Images",
+      "D. Tabular data"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "This local processing is especially important in image processing, where the early CNN layers typically identify simple local patterns such as edges and curves"
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What does deep learning use between the network's inputs and outputs?",
+    "options": [
+      "A. A single layer of neurons",
+      "B. Several layers of neurons",
+      "C. No layers",
+      "D. Only output layers"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Deep learning uses several layers of neurons between the network's inputs and outputs."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "In deep learning for image processing, what might lower layers identify?",
+    "options": [
+      "A. Whole objects",
+      "B. Digits and letters",
+      "C. Edges",
+      "D. Complex textures"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "For example, in image processing, lower layers may identify edges"
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What does GPT stand for in the context of large language models?",
+    "options": [
+      "A. General Purpose Transformer",
+      "B. Generative Pre-trained Transformer",
+      "C. Guided Predictive Text",
+      "D. Global Processing Technique"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Generative pre-trained transformers (GPT) are large language models (LLMs)"
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is a primary component used for training large-scale machine learning models as of the late 2010s?",
+    "options": [
+      "A. Central Processing Units (CPUs)",
+      "B. Graphics Processing Units (GPUs)",
+      "C. Random Access Memory (RAM)",
+      "D. Solid State Drives (SSDs)"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "graphics processing units (GPUs) that were increasingly designed with AI-specific enhancements and used with specialized TensorFlow software had replaced previously used central processing unit (CPUs) as the dominant means for large-scale (commercial and academic) machine learning models' training."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the trend of transistor density doubling roughly every 18 months called?",
+    "options": [
+      "A. Huang's Law",
+      "B. Newton's Law",
+      "C. Moore's Law",
+      "D. The Law of Accelerating Returns"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "The transistor density in integrated circuits has been observed to roughly double every 18 months—a trend known as Moore's law"
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What problem are Long Short-Term Memory networks (LSTMs) designed to be less sensitive to?",
+    "options": [
+      "A. The overfitting problem",
+      "B. The exploding gradient problem",
+      "C. The vanishing gradient problem",
+      "D. The local minima problem"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "Long short-term memory networks (LSTMs) are recurrent neural networks that better preserve longterm dependencies and are less sensitive to the vanishing gradient problem."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the primary task during the pretraining of a GPT model?",
+    "options": [
+      "A. Translating between languages",
+      "B. Classifying images",
+      "C. Predicting the next token in a sequence",
+      "D. Generating human feedback"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "The pretraining consists of predicting the next token (a token being usually a word, subword, or punctuation)."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "According to the text, what is a common technique used to make GPT models more truthful and harmless after pretraining?",
+    "options": [
+      "A. Supervised fine-tuning",
+      "B. Backpropagation",
+      "C. Reinforcement learning from human feedback (RLHF)",
+      "D. Convolutional filtering"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "Typically, a subsequent training phase makes the model more truthful, useful, and harmless, usually with a technique called reinforcement learning from human feedback (RLHF)."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is a known issue with current GPT models that RLHF attempts to reduce?",
+    "options": [
+      "A. Slow processing speed",
+      "B. High computational cost",
+      "C. Generating falsehoods or 'hallucinations'",
+      "D. Inability to process images"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "Current GPT models are prone to generating falsehoods called \"hallucinations\". These can be reduced with RLHF and quality data"
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What type of GPT model can process data like images, videos, sound, and text?",
+    "options": [
+      "A. Unimodal models",
+      "B. Text-based models",
+      "C. Multimodal models",
+      "D. Recurrent models"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "Multimodal GPT models can process different types of data (modalities) such as images, videos, sound, and text."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the name of the trend describing rapid improvements in GPU performance, named after an Nvidia co-founder?",
+    "options": [
+      "A. Moore's Law",
+      "B. Huang's Law",
+      "C. Amdahl's Law",
+      "D. Metcalfe's Law"
+    ],
+    "answer": "B",
+    "difficulty": "medium",
+    "citations": [
+      "Improvements in GPUs have been even faster, a trend sometimes called Huang's law, named after Nvidia co-founder and CEO Jensen Huang."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which of the following is NOT listed as an application of AI in the text?",
+    "options": [
+      "A. Search engines",
+      "B. Autonomous vehicles",
+      "C. Cooking recipes",
+      "D. Facial recognition"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "search engines (such as Google Search)",
+      "autonomous vehicles (including drones, ADAS and self-driving cars)",
+      "facial recognition (Apple's FaceID or Microsoft's DeepFace and Google's FaceNet)"
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What did the sudden success of deep learning around 2012-2015 primarily result from, according to the text?",
+    "options": [
+      "A. A major theoretical breakthrough in neural network design",
+      "B. The discovery of backpropagation",
+      "C. Increased computer power and vast amounts of training data",
+      "D. The invention of new programming languages like Python"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "The sudden success of deep learning in 2012–2015 did not occur because of some new discovery or theoretical breakthrough... but because of two factors: the increase in computer power... and the availability of vast amounts of training data"
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the role of kernels in Convolutional Neural Networks (CNNs)?",
+    "options": [
+      "A. To generate text output",
+      "B. To provide long-term memory",
+      "C. To more efficiently process local patterns",
+      "D. To increase the network's depth"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "Convolutional neural networks (CNNs) use layers of kernels to more efficiently process local patterns."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What general-purpose programming language has become predominant in AI, according to the text?",
+    "options": [
+      "A. Prolog",
+      "B. Java",
+      "C. C++",
+      "D. Python"
+    ],
+    "answer": "D",
+    "difficulty": "medium",
+    "citations": [
+      "Specialized programming languages such as Prolog were used in early AI research, but general-purpose programming languages like Python have become predominant."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What did AlphaFold 2 demonstrate in 2021?",
+    "options": [
+      "A. It could predict protein structures in hours instead of months",
+      "B. It discovered a new class of antibiotics",
+      "C. It diagnosed Parkinson's disease from brain scans",
+      "D. It created synthetic proteins for drug development"
+    ],
+    "answer": "A",
+    "difficulty": "easy",
+    "citations": [
+      "AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which AI system defeated Garry Kasparov in chess?",
+    "options": [
+      "A. Deep Blue",
+      "B. AlphaGo",
+      "C. Watson",
+      "D. Pluribus"
+    ],
+    "answer": "A",
+    "difficulty": "easy",
+    "citations": [
+      "Deep Blue became the first computer chess-playing system to beat a reigning world chess champion, Garry Kasparov, on 11 May 1997."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What did IBM's Watson defeat in 2011?",
+    "options": [
+      "A. The world chess champion",
+      "B. The best Go players",
+      "C. The two greatest Jeopardy! champions",
+      "D. Professional StarCraft II players"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "In 2011, in a Jeopardy! quiz show exhibition match, IBM's question answering system, Watson, defeated the two greatest Jeopardy! champions, Brad Rutter and Ken Jennings, by a significant margin."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which game did AlphaGo play against Lee Sedol?",
+    "options": [
+      "A. Chess",
+      "B. Poker",
+      "C. Go",
+      "D. StarCraft II"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "In March 2016, AlphaGo won 4 out of 5 games of Go in a match with Go champion Lee Sedol, becoming the first computer Go-playing system to beat a professional Go player without handicaps."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What was the focus of the 2024 machine learning research for Parkinson's disease?",
+    "options": [
+      "A. Diagnosing the disease from symptoms",
+      "B. Identifying compounds that block alpha-synuclein aggregation",
+      "C. Creating synthetic dopamine",
+      "D. Predicting disease progression from genetic data"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Their aim was to identify compounds that block the clumping, or aggregation, of alpha-synuclein (the protein that characterises Parkinson's disease)."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What did the 2023 AI-guided drug discovery help find?",
+    "options": [
+      "A. A cure for Alzheimer's disease",
+      "B. A new cancer treatment",
+      "C. A class of antibiotics killing drug-resistant bacteria",
+      "D. A vaccine for COVID-19"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "In 2023, it was reported that AI-guided drug discovery helped find a class of antibiotics capable of killing two different types of drug-resistant bacteria."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which AI system achieved grandmaster level in StarCraft II?",
+    "options": [
+      "A. AlphaGo",
+      "B. AlphaStar",
+      "C. MuZero",
+      "D. SIMA"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "In 2019, DeepMind's AlphaStar achieved grandmaster level in StarCraft II, a particularly challenging real-time strategy game that involves incomplete knowledge of what happens on the map."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What did the 2024 Nature article highlight about AI medical prediction models?",
+    "options": [
+      "A. They were highly accurate for all diseases",
+      "B. They were trained on unreliable data",
+      "C. They replaced all human doctors",
+      "D. They were too expensive to develop"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "Published in Nature an article \"Dozens of AI disease-prediction models were trained on dubious data\" highlighted the use of unreliable data being used to train AI medical prediction models for stroke and diabetes in 125 research articles."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What type of games does Pluribus play?",
+    "options": [
+      "A. Chess",
+      "B. Go",
+      "C. Poker",
+      "D. Real-time strategy games"
+    ],
+    "answer": "C",
+    "difficulty": "easy",
+    "citations": [
+      "Other programs handle imperfect-information games, such as the poker-playing program Pluribus."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What did the Executive Director of Novartis highlight as needed in an AI-driven world?",
+    "options": [
+      "A. More AI researchers",
+      "B. Better clinical data standards",
+      "C. Faster computers",
+      "D. Cheaper drug development"
+    ],
+    "answer": "B",
+    "difficulty": "easy",
+    "citations": [
+      "An Executive Director of Novartis highlighted the need for better clinical data standards in a blog \"Why Clinical Data Standards Matter In An AI-Driven World\"."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "How much did machine learning accelerate the initial screening process for Parkinson's disease drug treatments in 2024?",
+    "options": [
+      "A. Two-fold",
+      "B. Five-fold",
+      "C. Ten-fold",
+      "D. One hundred-fold"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "They were able to speed up the initial screening process ten-fold and reduce the cost by a thousand-fold."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What was the cost reduction achieved by machine learning in the 2024 Parkinson's disease drug search?",
+    "options": [
+      "A. Ten-fold",
+      "B. One hundred-fold",
+      "C. Five hundred-fold",
+      "D. A thousand-fold"
+    ],
+    "answer": "D",
+    "difficulty": "medium",
+    "citations": [
+      "They were able to speed up the initial screening process ten-fold and reduce the cost by a thousand-fold."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Which AI system won against four of the world's best Gran Turismo drivers in 2021?",
+    "options": [
+      "A. A deep reinforcement learning agent",
+      "B. AlphaGo",
+      "C. Watson",
+      "D. MuZero"
+    ],
+    "answer": "A",
+    "difficulty": "medium",
+    "citations": [
+      "In 2021, an AI agent competed in a PlayStation Gran Turismo competition, winning against four of the world's best Gran Turismo drivers using deep reinforcement learning."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What did Google DeepMind introduce in 2024 that could autonomously play nine previously unseen open-world video games?",
+    "options": [
+      "A. AlphaGo",
+      "B. AlphaStar",
+      "C. SIMA",
+      "D. MuZero"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "In 2024, Google DeepMind introduced SIMA, a type of AI capable of autonomously playing nine previously unseen open-world video games by observing screen output, as well as executing short, specific tasks in response to natural language instructions."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What problem do probabilistic large language models have in mathematics according to the text?",
+    "options": [
+      "A. They are too slow",
+      "B. They require too much training data",
+      "C. They can produce wrong answers in the form of hallucinations",
+      "D. They only work with simple arithmetic"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "In mathematics, probabilistic large language models are versatile, but can also produce wrong answers in the form of hallucinations."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What accuracy did Qwen2-Math achieve on the MATH dataset?",
+    "options": [
+      "A. 53%",
+      "B. 75%",
+      "C. 84%",
+      "D. 90%"
+    ],
+    "answer": "C",
+    "difficulty": "medium",
+    "citations": [
+      "The Alibaba Group developed a version of its Qwen models called Qwen2-Math, that achieved state-of-the-art performance on several mathematical benchmarks, including 84% accuracy on the MATH dataset of competition mathematics problems."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What percentage of AIME 2024 problems could rStar-Math enable Qwen-7B to solve?",
+    "options": [
+      "A. 53%",
+      "B. 84%",
+      "C. 90%",
+      "D. 95%"
+    ],
+    "answer": "A",
+    "difficulty": "medium",
+    "citations": [
+      "In January 2025, Microsoft proposed the technique rStar-Math that leverages Monte Carlo tree search and step-by-step reasoning, enabling a relatively small language model like Qwen-7B to solve 53% of the AIME 2024 and 90% of the MATH benchmark problems."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  }
+]

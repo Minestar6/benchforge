@@ -1,0 +1,36 @@
+{
+  "task_id": "e2e_full",
+  "run_id": "run_001",
+  "blueprint": {
+    "task_id": "e2e_full",
+    "run_id": "run_001",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence"
+    ],
+    "modes": {
+      "qa": {
+        "count": 4,
+        "max_rounds": 2,
+        "difficulty_distribution": {
+          "easy": 0.5,
+          "medium": 0.5,
+          "hard": 0.0
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs\\e2e_full\\run_001\\qa\\candidate_pool.json",
+    "chunked_evidence": "runs\\e2e_full\\run_001\\evidence\\chunked.jsonl",
+    "llm_calls": "runs\\e2e_full\\run_001\\llm_calls.jsonl",
+    "generation_report": "runs\\e2e_full\\run_001\\generation_report.json",
+    "validated_questions": "runs\\e2e_full\\run_001\\validation\\validated_questions.jsonl",
+    "evaluation_report": "runs\\e2e_full\\run_001\\evaluation\\evaluation_report.json"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "completed",
+    "evaluation": "completed"
+  }
+}

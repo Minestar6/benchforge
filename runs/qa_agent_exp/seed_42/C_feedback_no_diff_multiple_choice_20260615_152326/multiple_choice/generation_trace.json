@@ -1,0 +1,588 @@
+[
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "medium",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "single_k": 2,
+    "multi_k": 2,
+    "target_candidates_per_topic": 5,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 21,
+        "raw_count": 23,
+        "filtered_count": 21,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "The text describes a shift in reasoning research by the late 1980s and 1990s. What was the focus of the new methods developed during this period?",
+            "reason": "答案过短",
+            "raw_item": {
+              "question": "The text describes a shift in reasoning research by the late 1980s and 1990s. What was the focus of the new methods developed during this period?",
+              "choices": [
+                "(A) Creating the first knowledge bases for commonsense reasoning",
+                "(B) Developing algorithms that perfectly mimicked human intuitive judgment",
+                "(C) Employing concepts from probability and economics to deal with uncertain or incomplete information",
+                "(D) Using transformer architectures to accelerate deep learning performance"
+              ],
+              "answer": "C",
+              "thought_process": "This question tests understanding of a historical progression within a subfield. It requires the reader to place a specific technical development (handling uncertainty with probability/economics) in the correct historical timeline and distinguish it from earlier, later, or unrelated advancements.",
+              "question_type": "analytical",
+              "required_capability": "Analyzing the historical evolution of techniques in AI reasoning and problem-solving",
+              "estimated_difficulty": 5,
+              "citations": [
+                "By the late 1980s and 1990s, methods were developed for dealing with uncertain or incomplete information, employing concepts from probability and economics."
+              ]
+            },
+            "topic": "Artificial Intelligence",
+            "chunk_ids": [
+              "doc_aef977fc2141::chunk_0000"
+            ],
+            "chunks": [
+              "#Subheading: Goals\nThe general problem of simulating (or creating) intelligence has been broken into subproblems. These consist of particular traits or capabilities that researchers expect an intelligent system to display. The traits described below have received the most attention and cover the scope of AI research.[a].\n##Subheading: Reasoning and problem-solving\nEarly researchers developed algorithms that imitated step-by-step reasoning that humans use when they solve puzzles or make logical deductions. By the late 1980s and 1990s, methods were developed for dealing with uncertain or incomplete information, employing concepts from probability and economics.\nMany of these algorithms are insufficient for solving large reasoning problems because they experience a \"combinatorial explosion\": They become exponentially slower as the problems grow. Even humans rarely use the step-by-step deduction that early AI research could model. Humans solve most of their problems using fast, intuitive judgments.\nReasoning models, a type of large language model trained to generate intermediate chains-of-thought, emerged in 2024 and allowed improved performance on complex problems in mathematics and coding.\n##Subheading: Knowledge representation\nKnowledge representation and knowledge engineering allow AI programs to answer questions intelligently and make deductions about real-world facts. Formal knowledge representations are used in content-based indexing and retrieval, scene interpretation, clinical decision support, knowledge discovery (mining \"interesting\" and actionable inferences from large databases), and other areas.\nA knowledge base is a body of knowledge represented in a form that can be used by a program. An ontology is the set of objects, relations, concepts, and properties used by a particular domain of knowledge. Knowledge bases need to represent things such as objects, properties, categories, and relations between objects; situations, events, states, and time; causes and effects; knowledge about knowledge (what we know about what other people know); default reasoning (things that humans assume are true until they are told differently and will remain true even when other facts are changing); and many other aspects and domains of knowledge.\nAmong the most difficult problems in knowledge representation are the breadth of commonsense knowledge (the set of atomic facts that the average person knows is enormous); and the sub-symbolic form of most commonsense knowledge (much of what people know is not represented as \"facts\" or \"statements\" that they could express verbally). There is also the difficulty of knowledge acquisition, the problem of obtaining knowledge for AI applications.[c].\n##Subheading: Planning and decision-making\nAn \"agent\" is any entity (artificial or not) that perceives and takes actions in the world. A rational agent has goals or preferences and takes actions to make them happen.[d] In automated planning, the agent has a specific goal. In automated decision-making, the agent has preferences—there are some situations it would prefer to be in, and some situations it is trying to avoid. The decision-making agent assigns a number to each situation (called its \"utility\") that measures how much the agent prefers it. For each possible action, it can calculate the \"expected utility\": the utility of all possible outcomes of the action, weighted by the probability that the outcome will occur. It can then choose the action with the maximum expected utility.\nIn classical planning, the agent knows exactly what the effect of any action will be. In most real-world problems, however, the agent may not be certain about the situation it is in (it is \"unknown\" or \"unobservable\") and it may not know for certain what will happen after each possible action (it is not \"deterministic\"). It must choose an action by making a probabilistic guess and then reassess the situation to see if the action worked.\nAlongside thorough testing and improvement based on previous decisions, having an explanation for why the agent took certain decisions is a way to build trust, especially when the decisions have to be relied upon.\nIn some problems, the agent's preferences may be uncertain, especially if there are other agents or humans involved. These preferences be learned (e.g., with inverse reinforcement learning), or the agent can seek information to improve them. Information value theory can be used to weigh the value of exploratory or experimental actions. The space of possible future actions and situations is typically intractably large, so the agents must take actions and evaluate situations while being uncertain of what the outcome will be.\nA Markov decision process has a transition model that describes the probability that a particular action will change the state in a particular way and a reward function that supplies the utility of each state and the cost of each action. A policy associates a decision with each possible state. The policy could be calculated (e.g., by iteration), be heuristic, or it can be learned.\nGame theory describes the rational behavior of multiple interacting agents and is used in AI programs that make decisions that involve other agents.\n##Subheading: Learning\nMachine learning is the study of programs that can improve their performance on a given task automatically. It has been a part of AI from the beginning.[e].\nThere are several kinds of machine learning. Unsupervised learning"
+            ],
+            "llm_call_id": "llm_1fe31a0561f54b4d972638981d0db5aa",
+            "trace_call_id": "llm_cb8b9451705849b3a4c41c8172614aae",
+            "generation_round": 1
+          },
+          {
+            "question": "According to the document, what is a primary reason why estimates for achieving AGI through whole brain emulation might be overly optimistic?",
+            "reason": "答案过短",
+            "raw_item": {
+              "question": "According to the document, what is a primary reason why estimates for achieving AGI through whole brain emulation might be overly optimistic?",
+              "choices": [
+                "(A) The computational power required to simulate a human brain at a molecular level is several orders of magnitude greater than early estimates predicted.",
+                "(B) The approach is fundamentally flawed because it cannot replicate the emergent consciousness that defines human intelligence.",
+                "(C) Neuroimaging technology is not improving rapidly enough to provide the detailed brain maps needed for simulation.",
+                "(D) The approach focuses on emulating glial cells, which play a negligible role in human cognitive processes."
+              ],
+              "answer": "A",
+              "question_module": "multiple_choice",
+              "thought_process": "This question targets understanding of a specific critique within a technical subsection. The correct answer (A) synthesizes two points from the 'Criticisms' section: that full modeling requires capturing detailed cellular/molecular behavior, and that this introduces an 'overhead' requiring vastly more computational power than simpler models (like Kurzweil's estimate) assume. Distractor B introduces consciousness, which, while a related philosophical topic, is not the 'primary reason' cited for timeline optimism in the emulation section. Distractor C contradicts the text, which states neuroimaging tech 'is improving rapidly'. Distractor D inverts a fact; the text says early estimates do NOT account for glial cells, which ARE known to play a role.",
+              "question_type": "analytical",
+              "required_capability": "Analyzing the technical challenges and assumptions underlying the whole brain emulation approach to AGI",
+              "estimated_difficulty": 6,
+              "citations": [
+                "The artificial neuron model... is simple compared with biological neurons.",
+                "The overhead introduced by full modeling of the biological, chemical, and physical details of neural behaviour (especially on a molecular scale) would require computational powers several orders of magnitude larger than Kurzweil's estimate."
+              ]
+            },
+            "topic": "Artificial Intelligence",
+            "chunk_ids": [
+              "doc_1be62bde08fd::chunk_0000",
+              "doc_1be62bde08fd::chunk_0003",
+              "doc_1be62bde08fd::chunk_0004",
+              "doc_1be62bde08fd::chunk_0005"
+            ],
+            "chunks": [
+              "#Subheading: Terminology\nThe term \"artificial general intelligence\" was used in 1997 by Mark Gubrud in a discussion of the implications of fully automated military production and operations. A mathematical formalism of AGI named AIXI was proposed in 2000 by Marcus Hutter, who defines intelligence as \"an agent's ability to achieve goals or succeed in a wide range of environments\". This type of AGI has also been called \"universal artificial intelligence\". The term AGI was re-introduced and popularized by Shane Legg and Ben Goertzel around 2002.\nSome academic sources reserve the term \"strong AI\" for computer programs that will experience sentience or consciousness.[a] In contrast, weak AI (or narrow AI) can solve a specific problem but lacks general cognitive abilities. Some academic sources use \"weak AI\" to refer more broadly to any programs that neither experience consciousness nor have a mind in the same sense as humans.[a].\nRelated concepts include artificial superintelligence and transformative AI. An artificial superintelligence (ASI) is a hypothetical type of AGI that is much more generally intelligent than humans, while the notion of transformative AI relates to AI having a large impact on society, for example, similar to the agricultural or industrial revolution.\nA framework for classifying AGI was proposed in 2023 by Google DeepMind researchers. They define five performance levels of AGI: emerging, competent, expert, virtuoso, and superhuman. For example, a competent AGI is defined as an AI that outperforms 50% of skilled adults in a wide range of non-physical tasks, and a superhuman AGI (i.e., an artificial superintelligence) is similarly defined but with a threshold of 100%. They consider large language models like ChatGPT or LLaMA 2 to be instances of emerging AGI (comparable to unskilled humans). Regarding the autonomy of AGI and associated risks, they define five levels: tool (fully in human control), consultant, collaborator, expert, and agent (fully autonomous).\n#Subheading: Characteristics\nThere is no single agreed-upon definition of intelligence as applied to computers. Computer scientist John McCarthy wrote in 2007: \"We cannot yet characterize in general what kinds of computational procedures we want to call intelligent.\".\n##Subheading: Intelligence traits\nreason, use strategy, solve puzzles, and make judgments under uncertainty,\nrepresent knowledge, including common sense knowledge,\nplan,\nlearn,\ncommunicate in natural language,\nif necessary, integrate these skills in completion of any given goal.\nMany interdisciplinary approaches (e.g. cognitive science, computational intelligence, and decision making) consider additional traits such as imagination (the ability to form novel mental images and concepts) and autonomy.\nComputer-based systems exhibiting these capabilities are now widespread, with modern large language models demonstrating computational creativity, automated reasoning, and decision support simultaneously across domains.\n##Subheading: Physical traits\nOther capabilities are considered desirable in intelligent systems, as they may affect intelligence or aid in its expression. These include:.\nthe ability to sense (e.g. see, hear, etc.), and\nthe ability to act (e.g. move and manipulate objects, change location to explore, etc.).\n##Subheading: Tests for human-level AGI\nThe Turing test was proposed by Alan Turing in his 1950 paper \"Computing Machinery and Intelligence\". This test involves a human judge engaging in natural language conversations with both a human and a machine designed to generate human-like responses. The machine passes the test if it can convince the judge that it is human a significant fraction of the time. Turing proposed this as a practical measure of machine intelligence, focusing on the ability to produce human-like responses rather than on the internal workings of the machine.\nThe idea of the test is that the machine has to try and pretend to be a man, by answering questions put to it, and it will only pass if the pretence is reasonably convincing. A considerable portion of a jury, who should not be experts about machines, must be taken in by the pretence.\nIn 2014, a chatbot named Eugene Goostman, designed to imitate a 13-year-old Ukrainian boy, reportedly passed a Turing Test event by convincing 33% of judges that it was human. However, this claim was met with significant skepticism from the AI research community, who questioned the test's implementation and its relevance to AGI.\nA 2025 pre‑registered, three‑party Turing‑test study by Cameron R. Jones and Benjamin K. Bergen showed that GPT-4.5 was judged to be the human in 73% of five‑minute text conversations—surpassing the 67% humanness rate of real confederates and meeting the researchers' criterion for having passed the test.\nThe \"Ikea test\", also known as the Flat Pack Furniture Test, involves an AI controlling a robot which attempts to assemble an Ikea flat-pack furniture product after having been shown the parts and instructions. As early as",
+              " periods of rapid progress separated by periods when progress appeared to stop. Ending each hiatus were fundamental advances in hardware, software or both to create space for further progress. For example, the computer hardware available in the twentieth century was not sufficient to implement deep learning, which requires large numbers of GPU-enabled CPUs.\nIn the introduction to his 2006 book, Goertzel says that estimates of the time needed before a truly flexible AGI is built vary from 10 years to over a century. As of 2007[update], the consensus in the AGI research community seemed to be that the timeline discussed by Ray Kurzweil in 2005 in The Singularity is Near (i.e. between 2015 and 2045) was plausible. Mainstream AI researchers have given a wide range of opinions on whether progress will be this rapid. A 2012 meta-analysis of 95 such opinions found a bias towards predicting that the onset of AGI would occur within 16–26 years for modern and historical predictions alike. That paper has been criticized for how it categorized opinions as expert or non-expert.\nIn 2012, Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton developed a neural network called AlexNet, which won the ImageNet competition with a top-5 test error rate of 15.3%, significantly better than the second-best entry's rate of 26.3% (the traditional approach used a weighted sum of scores from different pre-defined classifiers). AlexNet was regarded as the initial ground-breaker of the current deep learning wave.\nIn 2017, researchers Feng Liu, Yong Shi, and Ying Liu conducted intelligence tests on publicly available and freely accessible weak AI such as Google AI, Apple's Siri, and others. At the maximum, these AIs reached an IQ value of about 47, which corresponds approximately to a six-year-old child in first grade. An adult comes to about 100 on average. Similar tests were carried out in 2014, with the IQ score reaching a maximum value of 27.\nIn 2020, OpenAI developed GPT-3, a language model capable of performing many diverse tasks without specific training. According to Gary Grossman in a VentureBeat article, while there is consensus that GPT-3 is not an example of AGI, it is considered by some to be too advanced to be classified as a narrow AI system.\nIn the same year, Jason Rohrer used his GPT-3 account to develop a chatbot, and provided a chatbot-developing platform called \"Project December\". OpenAI asked for changes to the chatbot to comply with their safety guidelines; Rohrer disconnected Project December from the GPT-3 API.\nThe idea that this stuff could actually get smarter than people – a few people believed that, [...]. But most people thought it was way off. And I thought it was way off. I thought it was 30 to 50 years or even longer away. Obviously, I no longer think that.\nHe estimated in 2024 (with low confidence) that systems smarter than humans could appear within 5 to 20 years and stressed the attendant existential risks.\nIn May 2023, Demis Hassabis similarly said that \"The progress in the last few years has been pretty incredible\", and that he sees no reason why it would slow, expecting AGI within a decade or even a few years. In March 2024, Nvidia's Chief Executive Officer (CEO), Jensen Huang, stated his expectation that within five years, AI would be capable of passing any test at least as well as humans. In June 2024, the AI researcher Leopold Aschenbrenner, a former OpenAI employee, estimated AGI by 2027 to be \"strikingly plausible\".\nIn September 2025, a review of surveys of scientists and industry experts from the last 15 years reported that most agreed that artificial general intelligence (AGI) will occur before the year 2100. A more recent analysis by AIMultiple reported that, \"Current surveys of AI researchers are predicting AGI around 2040\".\nOpenAI CEO Sam Altman said in December 2025 that \"we built AGIs\" and that \"AGI kinda went whooshing by\" with less societal impact than expected, proposing the field move on to defining superintelligence.\n#Subheading: Whole brain emulation\nWhile the development of transformer models like in ChatGPT is considered the most promising path to AGI, whole brain emulation can serve as an alternative approach. With whole brain simulation, a brain model is built by scanning and mapping a biological brain in detail, and then copying and simulating it on a computer system or another computational device. The simulation model must be sufficiently faithful to the original, so that it behaves in practically the same way as the original brain. Whole brain emulation is a type of brain simulation that is discussed in computational neuroscience and neuroinformatics, and for medical research purposes. It has been discussed in artificial",
+              " faithful to the original, so that it behaves in practically the same way as the original brain. Whole brain emulation is a type of brain simulation that is discussed in computational neuroscience and neuroinformatics, and for medical research purposes. It has been discussed in artificial intelligence research as an approach to strong AI. Neuroimaging technologies that could deliver the necessary detailed understanding are improving rapidly, and futurist Ray Kurzweil in the book The Singularity Is Near predicts that a map of sufficient quality will become available on a similar timescale to the computing power required to emulate it.\n##Subheading: Early estimates\nFor low-level brain simulation, a very powerful cluster of computers or GPUs would be required, given the enormous quantity of synapses within the human brain. Each of the 1011 (one hundred billion) neurons has on average 7,000 synaptic connections (synapses) to other neurons. The brain of a three-year-old child has about 1015 synapses (1 quadrillion). This number declines with age, stabilizing by adulthood. Estimates vary for an adult, ranging from 1014 to 5×1014 synapses (100 to 500 trillion). An estimate of the brain's processing power, based on a simple switch model for neuron activity, is around 1014 (100 trillion) synaptic updates per second (SUPS).\nIn 1997, Kurzweil looked at various estimates for the hardware required to equal the human brain and adopted a figure of 1016 computations per second.[d] (For comparison, if a \"computation\" was equivalent to one \"floating-point operation\" – a measure used to rate current supercomputers – then 1016 \"computations\" would be equivalent to 10 petaFLOPS, achieved in 2011, while 1018 was achieved in 2022.) He used this figure to predict that the necessary hardware would be available sometime between 2015 and 2025, if the exponential growth in computer power at the time of writing continued.\n##Subheading: Current research\nThe Human Brain Project, an EU-funded initiative active from 2013 to 2023, has developed a particularly detailed and publicly accessible atlas of the human brain. In 2023, researchers from Duke University performed a high-resolution scan of a mouse brain.\n##Subheading: Criticisms of simulation-based approaches\nThe artificial neuron model assumed by Kurzweil and used in many current artificial neural network implementations is simple compared with biological neurons. A brain simulation would likely have to capture the detailed cellular behaviour of biological neurons, presently understood only in broad outline. The overhead introduced by full modeling of the biological, chemical, and physical details of neural behaviour (especially on a molecular scale) would require computational powers several orders of magnitude larger than Kurzweil's estimate. In addition, the estimates do not account for glial cells, which are known to play a role in cognitive processes.\nA fundamental criticism of the simulated brain approach derives from embodied cognition theory, which asserts that human embodiment is an essential aspect of human intelligence and is necessary to ground meaning. If this theory is correct, any fully functional brain model will need to encompass more than just the neurons (e.g., a robotic body). Goertzel proposes virtual embodiment (like in metaverses like Second Life) as an option, but it is unknown whether this would be sufficient.\n#Subheading: Philosophical perspective\n##Subheading: \"Strong AI\" as defined in philosophy\nIn 1980, philosopher John Searle coined the term \"strong AI\" as part of his Chinese room argument. He proposed a distinction between two hypotheses about artificial intelligence:[e].\nStrong AI hypothesis: An artificial intelligence system can have \"a mind\" and \"consciousness\".\nWeak AI hypothesis: An artificial intelligence system can (only) act like it thinks and has a mind and consciousness.\nThe first one he called \"strong\" because it makes a stronger statement: it assumes something special has happened to the machine that goes beyond those abilities that we can test. The behaviour of a \"weak AI\" machine would be identical to a \"strong AI\" machine, but the latter would also have subjective conscious experience. This usage is also common in academic AI research and textbooks.\nIn contrast to Searle and mainstream AI, some futurists such as Ray Kurzweil use the term \"strong AI\" to mean \"human level artificial general intelligence\". This is not the same as Searle's strong AI, unless it is assumed that consciousness is necessary for human-level AGI. Academic philosophers such as Searle do not believe that is the case, and to most artificial intelligence researchers, the question is out of scope.\nMainstream AI is most interested in how a program behaves. According to Russell and Norvig, \"as long as the program works, they don't care if you call it real or a simulation.\" If the program can behave as if it has a mind, then there is no need to know if it actually has",
+              " to Russell and Norvig, \"as long as the program works, they don't care if you call it real or a simulation.\" If the program can behave as if it has a mind, then there is no need to know if it actually has a mind – indeed, there would be no way to tell. For AI research, Searle's \"weak AI hypothesis\" is equivalent to the statement \"artificial general intelligence is possible\". Thus, according to Russell and Norvig, \"most AI researchers take the weak AI hypothesis for granted, and don't care about the strong AI hypothesis.\" Thus, for academic AI research, \"Strong AI\" and \"AGI\" are two different things.\n##Subheading: Consciousness\nSentience (or \"phenomenal consciousness\"): The ability to \"feel\" perceptions or emotions subjectively, as opposed to the ability to reason about perceptions. Some philosophers, such as David Chalmers, use the term \"consciousness\" to refer exclusively to phenomenal consciousness, which is roughly equivalent to sentience. Determining why and how subjective experience arises is known as the hard problem of consciousness. Thomas Nagel explained in 1974 that it \"feels like\" something to be conscious. If we are not conscious, then it doesn't feel like anything. Nagel uses the example of a bat: we can sensibly ask \"what does it feel like to be a bat?\" However, we are unlikely to ask \"what does it feel like to be a toaster?\" Nagel concludes that a bat appears to be conscious (i.e., has consciousness) but a toaster does not. In 2022, a Google engineer claimed that the company's AI chatbot, LaMDA, had achieved sentience, though this claim was widely disputed by other experts.\nSelf-awareness: To have conscious awareness of oneself as a separate individual, especially to be consciously aware of one's own thoughts. This is opposed to simply being the \"subject of one's thought\"—an operating system or debugger can be \"aware of itself\" (that is, to represent itself in the same way it represents everything else)—but this is not what people typically mean when they use the term \"self-awareness\".[f] In some advanced AI models, systems construct internal representations of their own cognitive processes and feedback patterns—occasionally referring to themselves using second-person constructs such as 'you' within self-modeling frameworks.[citation needed].\nThese traits have a moral dimension. AI sentience would give rise to concerns of welfare and legal protection, similarly to animals. Other aspects of consciousness related to cognitive capabilities are also relevant to the concept of AI rights. Figuring out how to integrate advanced AI with existing legal and social frameworks is an emergent issue.\n#Subheading: Benefits\nAGI could improve productivity and efficiency in most jobs. For example, in public health, AGI could accelerate medical research, notably against cancer. It could take care of the elderly, and democratize access to rapid, high-quality medical diagnostics. It could offer fun, inexpensive and personalized education. The need to work to subsist could become obsolete if the wealth produced is properly redistributed. This also raises the question of the place of humans in a radically automated society.\nAGI could also help to make rational decisions, and to anticipate and prevent disasters. It could also help to reap the benefits of potentially catastrophic technologies such as nanotechnology or climate engineering, while avoiding the associated risks. If an AGI's primary goal is to prevent existential catastrophes such as human extinction (which could be difficult if the Vulnerable World Hypothesis turns out to be true), it could take measures to drastically reduce the risks while minimizing the impact of these measures on humanity's quality of life.\n#Subheading: Risks\n##Subheading: Existential risks\nAGI may represent multiple types of existential risk, which are risks that threaten \"the premature extinction of Earth-originating intelligent life or the permanent and drastic destruction of its potential for desirable future development\". The risk of human extinction from AGI has been the topic of many debates, but there is also the possibility that the development of AGI would lead to a permanently flawed future. Notably, it could be used to spread and preserve the set of values of whoever develops it. If humanity still has moral blind spots similar to slavery in the past, AGI might irreversibly entrench them, preventing moral progress. Furthermore, AGI could facilitate mass surveillance and indoctrination, which could be used to create an entrenched repressive worldwide totalitarian regime. There is also a risk for the machines themselves. If machines that are sentient or otherwise worthy of moral consideration are mass-created in the future, engaging in a civilizational path that indefinitely neglects their welfare and interests could be an existential catastrophe. Considering how much AGI could improve humanity's future and help reduce other existential risks, Toby Ord calls these existential risks \"an argument for proceeding with due caution\", not for \"abandoning AI\".\nThe thesis that AI poses an existential risk for humans"
+            ],
+            "llm_call_id": "llm_c3778fa9eb064367b047c85cf3c0c51e",
+            "trace_call_id": "llm_22d6196375fe4e4db8268af65ec48091",
+            "generation_round": 1
+          }
+        ],
+        "llm_call_id": "llm_c3778fa9eb064367b047c85cf3c0c51e",
+        "trace_call_id": "llm_22d6196375fe4e4db8268af65ec48091",
+        "chunks": [
+          "doc_10240d6c8bf0::chunk_0000",
+          "doc_10240d6c8bf0::chunk_0002",
+          "doc_10240d6c8bf0::chunk_0003",
+          "doc_10240d6c8bf0::chunk_0005",
+          "doc_1be62bde08fd::chunk_0000",
+          "doc_1be62bde08fd::chunk_0003",
+          "doc_1be62bde08fd::chunk_0004",
+          "doc_1be62bde08fd::chunk_0005",
+          "doc_804dae27c43f::chunk_0008",
+          "doc_aef977fc2141::chunk_0000"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 21,
+        "raw_count": 21,
+        "filtered_count": 21,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_1a3d0f07563440c2be0b33a7a6753b74",
+        "trace_call_id": "llm_dbdd5ba885104b5eada9a120356c9ca5",
+        "chunks": [
+          "doc_53bf4489cf6c::chunk_0002",
+          "doc_53bf4489cf6c::chunk_0010",
+          "doc_ca2ce923aeb2::chunk_0000",
+          "doc_ca2ce923aeb2::chunk_0002",
+          "doc_cd5a4b0bb607::chunk_0000",
+          "doc_cd5a4b0bb607::chunk_0005",
+          "doc_cd5a4b0bb607::chunk_0009",
+          "doc_cd5a4b0bb607::chunk_0010"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 17,
+        "raw_count": 20,
+        "filtered_count": 17,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "How did the Belgian Congo's wartime experience differ fundamentally from that of occupied Belgium?",
+            "reason": "非法问题类型: comparative",
+            "raw_item": {
+              "question": "How did the Belgian Congo's wartime experience differ fundamentally from that of occupied Belgium?",
+              "choices": [
+                "(A) The Congo was invaded and occupied by Axis forces, while Belgium was liberated.",
+                "(B) The Congo remained under the control of the pro-Allied Belgian government-in-exile, while Belgium itself was under German occupation.",
+                "(C) The Congo provided significant military forces for the Axis, while Belgium resisted them.",
+                "(D) The Congo's population overwhelmingly collaborated with the Axis, while Belgians resisted."
+              ],
+              "answer": "B",
+              "question_mode": "multiple_choice",
+              "thought_process": "This comparative question tests the ability to distinguish between the experiences of a colonizing nation and its colony. The key insight is that the colonial administration remained loyal to the Allies, making the Congo an asset, whereas the homeland was occupied and divided. This is a crucial nuance in understanding colonial roles in the war.",
+              "question_type": "comparative",
+              "required_capability": "Comparing and contrasting the wartime status and governance of a European nation and its overseas colony",
+              "estimated_difficulty": 7,
+              "citations": [
+                "Belgium's elected government fled the occupation, relocating to... London, where it established the Belgian government in exile",
+                "The Belgian Colonial Empire stayed loyal to the Allies: after Belgium's surrender, both the Belgian Congo and Ruanda-Urundi remained under the authority of the Belgian government in exile"
+              ]
+            },
+            "topic": "World War II",
+            "chunk_ids": [
+              "doc_ea11fb2dc7ae::chunk_0003"
+            ],
+            "chunks": [
+              " collaborated through the national administration and the Flemish and Walloon Legions of the Waffen-SS. In opposition, the Belgian Resistance comprised numerous groups that fought against the occupation in various ways. Groupe G ran a successful campaign of sabotage against railroads, while other groups worked to protect Jewish people from deportation or help downed Allied airmen escape from the country.\nBelgium's elected government fled the occupation, relocating to France and then London, where it established the Belgian government in exile under Hubert Pierlot and the Free Belgian Forces under Victor van Strydonck de Burkel. Belgian forces participated in the D-Day campaign, the Italian campaign, the landings on Walcheren Island, and the Battle of the Atlantic. Britain and the United States targeted occupied Belgium with strategic bombing, which caused many civilian casualties. The Liberation of Belgium began in September 1944 when Allied forces, including Free Belgians, entered the country. German troops counterattacked in December with the Ardennes Offensive; the failure of that offensive forced all German troops out of Belgium by February 1945. German V-bomb attacks continued until the end of the war.\nPost-war Belgium joined NATO and the Benelux customs union, while accusations of collaboration by King Leopold sparked the political crisis called the Royal Question.\n##Subheading: Belgian Congo\nThe Belgian Colonial Empire stayed loyal to the Allies: after Belgium's surrender, both the Belgian Congo and Ruanda-Urundi remained under the authority of the Belgian government in exile and the Free Belgian Forces. The Congo played an important role as an economic asset, producing large amounts of raw materials for the Allies, notably gold and uranium. The nuclear bombs dropped on Hiroshima and Nagasaki were made with uranium from Congolese mines. Congolese troops also fought as the Force Publique, which saw combat against Italian forces in the East African campaign. Medical troops were also brought on the east-Asian front.\nThe colonial government's demands on the Congolese population provoked strikes, riots and other forms of resistance. These were repressed, often violently, by the colonial authorities. The Congo's comparative prosperity during the conflict led to a wave of post-war immigration from Belgium, bringing the white population to 100,000 by 1950, as well as a period of industrialisation and urbanisation that continued throughout the 1950s.\n##Subheading: Ruanda-Urundi\nBelgium's mandate of Ruanda-Urundi consisted of the modern nations of Rwanda and Burundi. There, the war years were marked by the Ruzagayura famine. Though initially caused by a drought, the famine's effects were made worse by the Belgian war effort as authorities tried to send agricultural produce to the Congo to support the Allies. The famine killed between a fifth and a third of the colony's population and displaced many thousands more.\n#Subheading: Bhutan\nAlthough Bhutan was under British suzerainty, it remained independent; and it remained under the reign of Jigme Wangchuck the kingdom continued to maintain almost complete isolation from the outside world with only limited relations with the British Raj in India. Despite his policy of neutrality, upon the outbreak of the war, the king sent the government of India a gift of 100,000 rupees as a gesture of friendship.\n#Subheading: Bolivia\nBolivia was one of many South American countries to declare war on Germany later on in the war, joining the Allies on 7 April 1943. It was one of the three countries to declare war in 1943, the others being Chile and Colombia. Shortly after war was declared, the President of Bolivia, Enrique Peñaranda, was overthrown in a coup. The new ruler, Gualberto Villarroel, had fascist and anti-Semitic leanings, but foreign pressure[clarification needed] compelled him to remain at peace and to suppress his more extreme pro-Nazi supporters. Bolivian mines supplied needed tin to the Allies, but with no coastline, the landlocked country did not send troops or warplanes overseas.\n#Subheading: Brazil\nBrazil was under its second civilian-military dictatorship led by Getúlio Vargas, maintaining its official neutrality until 1941, when it allowed US forces to use bases to patrol the South Atlantic.  The United States built several airfields on Brazilian soil with the understanding that shortly after the war ended, they would be turned over to Brazil.  In the wake of the Japanese attack on Pearl Harbor and the declarations of war of Nazi Germany and Fascist Italy against the US, in January 1942 at the 9th Pan-American Conference held in Rio de Janeiro, Brazil helped to influence other American countries to cut diplomatic relations with Axis Powers.  In retaliation, Germany and Italy extended their submarine warfare against them.  In the first half of 1942, Axis submarines sank Brazilian merchant ships, and Brazilian naval forces chased and attacked these submarines.  When seven merchant ships were sunk by the German Submarine U-"
+            ],
+            "llm_call_id": "llm_6911a3505a044baabf72c9b75c5a84d3",
+            "trace_call_id": "llm_dfeb94411eca42849218b8cb2ab3fc9d",
+            "generation_round": 1
+          },
+          {
+            "question": "Bhutan's gesture of sending 100,000 rupees to the government of India at the war's outbreak primarily demonstrates what?",
+            "reason": "非法问题类型: interpretive",
+            "raw_item": {
+              "question": "Bhutan's gesture of sending 100,000 rupees to the government of India at the war's outbreak primarily demonstrates what?",
+              "choices": [
+                "(A) A full military and economic alliance with the British Empire.",
+                "(B) A direct response to Axis aggression against Himalayan nations.",
+                "(C) A symbolic act of support from an otherwise neutral and isolated kingdom.",
+                "(D) A payment of tribute required by its status as a British suzerainty."
+              ],
+              "answer": "C",
+              "question_mode": "multiple_choice",
+              "thought_process": "This question tests the ability to interpret a specific action within its described context. The text stresses Bhutan's isolation and neutrality, making the financial gift a notable but limited exception. The distractors exaggerate the action into a formal alliance, a necessary tribute, or a response to a non-existent direct threat.",
+              "question_type": "interpretive",
+              "required_capability": "Interpreting symbolic diplomatic actions within the context of a state's declared policy of neutrality and isolation",
+              "estimated_difficulty": 4,
+              "citations": [
+                "the kingdom continued to maintain almost complete isolation from the outside world... Despite his policy of neutrality, upon the outbreak of the war, the king sent the government of India a gift of 100,000 rupees as a gesture of friendship."
+              ]
+            },
+            "topic": "World War II",
+            "chunk_ids": [
+              "doc_ea11fb2dc7ae::chunk_0003"
+            ],
+            "chunks": [
+              " collaborated through the national administration and the Flemish and Walloon Legions of the Waffen-SS. In opposition, the Belgian Resistance comprised numerous groups that fought against the occupation in various ways. Groupe G ran a successful campaign of sabotage against railroads, while other groups worked to protect Jewish people from deportation or help downed Allied airmen escape from the country.\nBelgium's elected government fled the occupation, relocating to France and then London, where it established the Belgian government in exile under Hubert Pierlot and the Free Belgian Forces under Victor van Strydonck de Burkel. Belgian forces participated in the D-Day campaign, the Italian campaign, the landings on Walcheren Island, and the Battle of the Atlantic. Britain and the United States targeted occupied Belgium with strategic bombing, which caused many civilian casualties. The Liberation of Belgium began in September 1944 when Allied forces, including Free Belgians, entered the country. German troops counterattacked in December with the Ardennes Offensive; the failure of that offensive forced all German troops out of Belgium by February 1945. German V-bomb attacks continued until the end of the war.\nPost-war Belgium joined NATO and the Benelux customs union, while accusations of collaboration by King Leopold sparked the political crisis called the Royal Question.\n##Subheading: Belgian Congo\nThe Belgian Colonial Empire stayed loyal to the Allies: after Belgium's surrender, both the Belgian Congo and Ruanda-Urundi remained under the authority of the Belgian government in exile and the Free Belgian Forces. The Congo played an important role as an economic asset, producing large amounts of raw materials for the Allies, notably gold and uranium. The nuclear bombs dropped on Hiroshima and Nagasaki were made with uranium from Congolese mines. Congolese troops also fought as the Force Publique, which saw combat against Italian forces in the East African campaign. Medical troops were also brought on the east-Asian front.\nThe colonial government's demands on the Congolese population provoked strikes, riots and other forms of resistance. These were repressed, often violently, by the colonial authorities. The Congo's comparative prosperity during the conflict led to a wave of post-war immigration from Belgium, bringing the white population to 100,000 by 1950, as well as a period of industrialisation and urbanisation that continued throughout the 1950s.\n##Subheading: Ruanda-Urundi\nBelgium's mandate of Ruanda-Urundi consisted of the modern nations of Rwanda and Burundi. There, the war years were marked by the Ruzagayura famine. Though initially caused by a drought, the famine's effects were made worse by the Belgian war effort as authorities tried to send agricultural produce to the Congo to support the Allies. The famine killed between a fifth and a third of the colony's population and displaced many thousands more.\n#Subheading: Bhutan\nAlthough Bhutan was under British suzerainty, it remained independent; and it remained under the reign of Jigme Wangchuck the kingdom continued to maintain almost complete isolation from the outside world with only limited relations with the British Raj in India. Despite his policy of neutrality, upon the outbreak of the war, the king sent the government of India a gift of 100,000 rupees as a gesture of friendship.\n#Subheading: Bolivia\nBolivia was one of many South American countries to declare war on Germany later on in the war, joining the Allies on 7 April 1943. It was one of the three countries to declare war in 1943, the others being Chile and Colombia. Shortly after war was declared, the President of Bolivia, Enrique Peñaranda, was overthrown in a coup. The new ruler, Gualberto Villarroel, had fascist and anti-Semitic leanings, but foreign pressure[clarification needed] compelled him to remain at peace and to suppress his more extreme pro-Nazi supporters. Bolivian mines supplied needed tin to the Allies, but with no coastline, the landlocked country did not send troops or warplanes overseas.\n#Subheading: Brazil\nBrazil was under its second civilian-military dictatorship led by Getúlio Vargas, maintaining its official neutrality until 1941, when it allowed US forces to use bases to patrol the South Atlantic.  The United States built several airfields on Brazilian soil with the understanding that shortly after the war ended, they would be turned over to Brazil.  In the wake of the Japanese attack on Pearl Harbor and the declarations of war of Nazi Germany and Fascist Italy against the US, in January 1942 at the 9th Pan-American Conference held in Rio de Janeiro, Brazil helped to influence other American countries to cut diplomatic relations with Axis Powers.  In retaliation, Germany and Italy extended their submarine warfare against them.  In the first half of 1942, Axis submarines sank Brazilian merchant ships, and Brazilian naval forces chased and attacked these submarines.  When seven merchant ships were sunk by the German Submarine U-"
+            ],
+            "llm_call_id": "llm_6911a3505a044baabf72c9b75c5a84d3",
+            "trace_call_id": "llm_dfeb94411eca42849218b8cb2ab3fc9d",
+            "generation_round": 1
+          },
+          {
+            "question": "Based on the text, what was the sequence of Brazil's escalating involvement in World War II?",
+            "reason": "非法问题类型: sequential",
+            "raw_item": {
+              "question": "Based on the text, what was the sequence of Brazil's escalating involvement in World War II?",
+              "choices": [
+                "(A) Declaration of war → Allowing US bases → Suffering submarine attacks.",
+                "(B) Suffering submarine attacks → Declaration of war → Allowing US bases.",
+                "(C) Allowing US bases → Helping rally American nations against Axis → Suffering retaliatory submarine attacks.",
+                "(D) Helping rally American nations → Declaration of war → Allowing US bases."
+              ],
+              "answer": "C",
+              "question_mode": "multiple_choice",
+              "thought_process": "This question tests chronological and causal reasoning based on the incomplete narrative. The text clearly outlines the steps: neutrality, then allowing bases (1941), then diplomatic action at the Pan-American Conference (Jan 1942), then Axis retaliation via submarine warfare. The correct sequence must be pieced together from these events.",
+              "question_type": "sequential",
+              "required_capability": "Sequencing the key events that marked a neutral nation's path towards active involvement in the conflict",
+              "estimated_difficulty": 6,
+              "citations": [
+                "maintaining its official neutrality until 1941, when it allowed US forces to use bases",
+                "In January 1942... Brazil helped to influence other American countries to cut diplomatic relations with Axis Powers. In retaliation, Germany and Italy extended their submarine warfare against them."
+              ]
+            },
+            "topic": "World War II",
+            "chunk_ids": [
+              "doc_ea11fb2dc7ae::chunk_0003"
+            ],
+            "chunks": [
+              " collaborated through the national administration and the Flemish and Walloon Legions of the Waffen-SS. In opposition, the Belgian Resistance comprised numerous groups that fought against the occupation in various ways. Groupe G ran a successful campaign of sabotage against railroads, while other groups worked to protect Jewish people from deportation or help downed Allied airmen escape from the country.\nBelgium's elected government fled the occupation, relocating to France and then London, where it established the Belgian government in exile under Hubert Pierlot and the Free Belgian Forces under Victor van Strydonck de Burkel. Belgian forces participated in the D-Day campaign, the Italian campaign, the landings on Walcheren Island, and the Battle of the Atlantic. Britain and the United States targeted occupied Belgium with strategic bombing, which caused many civilian casualties. The Liberation of Belgium began in September 1944 when Allied forces, including Free Belgians, entered the country. German troops counterattacked in December with the Ardennes Offensive; the failure of that offensive forced all German troops out of Belgium by February 1945. German V-bomb attacks continued until the end of the war.\nPost-war Belgium joined NATO and the Benelux customs union, while accusations of collaboration by King Leopold sparked the political crisis called the Royal Question.\n##Subheading: Belgian Congo\nThe Belgian Colonial Empire stayed loyal to the Allies: after Belgium's surrender, both the Belgian Congo and Ruanda-Urundi remained under the authority of the Belgian government in exile and the Free Belgian Forces. The Congo played an important role as an economic asset, producing large amounts of raw materials for the Allies, notably gold and uranium. The nuclear bombs dropped on Hiroshima and Nagasaki were made with uranium from Congolese mines. Congolese troops also fought as the Force Publique, which saw combat against Italian forces in the East African campaign. Medical troops were also brought on the east-Asian front.\nThe colonial government's demands on the Congolese population provoked strikes, riots and other forms of resistance. These were repressed, often violently, by the colonial authorities. The Congo's comparative prosperity during the conflict led to a wave of post-war immigration from Belgium, bringing the white population to 100,000 by 1950, as well as a period of industrialisation and urbanisation that continued throughout the 1950s.\n##Subheading: Ruanda-Urundi\nBelgium's mandate of Ruanda-Urundi consisted of the modern nations of Rwanda and Burundi. There, the war years were marked by the Ruzagayura famine. Though initially caused by a drought, the famine's effects were made worse by the Belgian war effort as authorities tried to send agricultural produce to the Congo to support the Allies. The famine killed between a fifth and a third of the colony's population and displaced many thousands more.\n#Subheading: Bhutan\nAlthough Bhutan was under British suzerainty, it remained independent; and it remained under the reign of Jigme Wangchuck the kingdom continued to maintain almost complete isolation from the outside world with only limited relations with the British Raj in India. Despite his policy of neutrality, upon the outbreak of the war, the king sent the government of India a gift of 100,000 rupees as a gesture of friendship.\n#Subheading: Bolivia\nBolivia was one of many South American countries to declare war on Germany later on in the war, joining the Allies on 7 April 1943. It was one of the three countries to declare war in 1943, the others being Chile and Colombia. Shortly after war was declared, the President of Bolivia, Enrique Peñaranda, was overthrown in a coup. The new ruler, Gualberto Villarroel, had fascist and anti-Semitic leanings, but foreign pressure[clarification needed] compelled him to remain at peace and to suppress his more extreme pro-Nazi supporters. Bolivian mines supplied needed tin to the Allies, but with no coastline, the landlocked country did not send troops or warplanes overseas.\n#Subheading: Brazil\nBrazil was under its second civilian-military dictatorship led by Getúlio Vargas, maintaining its official neutrality until 1941, when it allowed US forces to use bases to patrol the South Atlantic.  The United States built several airfields on Brazilian soil with the understanding that shortly after the war ended, they would be turned over to Brazil.  In the wake of the Japanese attack on Pearl Harbor and the declarations of war of Nazi Germany and Fascist Italy against the US, in January 1942 at the 9th Pan-American Conference held in Rio de Janeiro, Brazil helped to influence other American countries to cut diplomatic relations with Axis Powers.  In retaliation, Germany and Italy extended their submarine warfare against them.  In the first half of 1942, Axis submarines sank Brazilian merchant ships, and Brazilian naval forces chased and attacked these submarines.  When seven merchant ships were sunk by the German Submarine U-"
+            ],
+            "llm_call_id": "llm_6911a3505a044baabf72c9b75c5a84d3",
+            "trace_call_id": "llm_dfeb94411eca42849218b8cb2ab3fc9d",
+            "generation_round": 1
+          }
+        ],
+        "llm_call_id": "llm_d0c5c49b9bf84393a48f56cd45963d3c",
+        "trace_call_id": "llm_b193be57a2934cbdb173918772a3a248",
+        "chunks": [
+          "doc_38b526149796::chunk_0011",
+          "doc_ea11fb2dc7ae::chunk_0000",
+          "doc_ea11fb2dc7ae::chunk_0003",
+          "doc_ea11fb2dc7ae::chunk_0008",
+          "doc_ea11fb2dc7ae::chunk_0019",
+          "doc_ea11fb2dc7ae::chunk_0020",
+          "doc_ea11fb2dc7ae::chunk_0027",
+          "doc_ea11fb2dc7ae::chunk_0029",
+          "doc_ea11fb2dc7ae::chunk_0033",
+          "doc_ea11fb2dc7ae::chunk_0035"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 2,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "World War II",
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 0,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 5,
+        "raw_count": 5,
+        "filtered_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_6bfaf3cdfeac44cd8b4154e90cf4e36b",
+        "trace_call_id": "llm_0f24d261ed15472da29db5cf8144eb72",
+        "chunks": [
+          "doc_ea11fb2dc7ae::chunk_0000",
+          "doc_ea11fb2dc7ae::chunk_0013",
+          "doc_ea11fb2dc7ae::chunk_0032",
+          "doc_ea11fb2dc7ae::chunk_0039"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_dd4b048d976b4adca6bdf0484e00bf23",
+        "trace_call_id": "llm_fae985dc60124e33afcbc51baf55d3b3",
+        "chunks": [
+          "doc_aef977fc2141::chunk_0007",
+          "doc_aef977fc2141::chunk_0011",
+          "doc_aef977fc2141::chunk_0013"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 5,
+        "filtered_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "The text describes Two-Level System (TLS) defects as a dominant noise source and mentions experiments with niobium and tantalum as potential mitigations. Based on the description of TLS origins and the properties of these materials, what is the most likely reasoning behind this material-based mitigation strategy?",
+            "reason": "答案过短",
+            "raw_item": {
+              "question": "The text describes Two-Level System (TLS) defects as a dominant noise source and mentions experiments with niobium and tantalum as potential mitigations. Based on the description of TLS origins and the properties of these materials, what is the most likely reasoning behind this material-based mitigation strategy?",
+              "choices": [
+                "(A) Niobium and tantalum have higher superconducting critical temperatures than aluminum, allowing operation at warmer temperatures and reducing quasiparticle noise.",
+                "(B) Niobium and tantalum are d-band superconductors, which may have different surface oxide properties or be less prone to the fabrication deformities thought to cause TLS.",
+                "(C) Niobium and tantalum junctions have naturally higher Josephson energies, moving the qubit's operating frequency away from common TLS resonance frequencies.",
+                "(D) Niobium and tantalum are easier to pattern with electron-beam lithography, leading to fewer defects and improved coherence times across all noise sources."
+              ],
+              "answer": "B",
+              "thought_process": "This is an inference question that requires connecting two separate pieces of information: the proposed cause of TLS and a property of alternative materials. The text states TLS 'are thought to be caused by deformities during the fabrication process, and surface amorphous oxides that form on or near Josephson junctions.' It also separately notes that superconductors used 'can also be niobium or tantalum, both d-band superconductors.' The most logical inference is that researchers are exploring these materials because their different electronic band structure (d-band vs. aluminum's s-p band) might lead to different oxide formation or mechanical properties, potentially reducing TLS. Distractor (A) introduces an unrelated noise source (quasiparticles). (C) speculates about Josephson energy without textual support. (D) makes a general claim about fabrication ease that isn't tied to the specific TLS mechanism described.",
+              "question_type": "analytical",
+              "required_capability": "Inferring a plausible research rationale by connecting a described problem (TLS origin) with a mentioned property of proposed solutions (material class).",
+              "estimated_difficulty": 9,
+              "citations": [
+                "They are thought to be caused by deformities during the fabrication process, and surface amorphous oxides that form on or near Josephson junctions.",
+                "The superconductor used to make superconducting circuits is usually aluminum, deposited on a silicon substrate, but can also be niobium or tantalum, both d-band superconductors."
+              ]
+            },
+            "topic": "Quantum Computing",
+            "chunk_ids": [
+              "doc_1445315a96fe::chunk_0000",
+              "doc_1445315a96fe::chunk_0003",
+              "doc_1445315a96fe::chunk_0005",
+              "doc_1445315a96fe::chunk_0007"
+            ],
+            "chunks": [
+              "#Subheading: History\nQuantum computers were first proposed by Richard Feynman, who in 1982 proposed using such a computer to simulate and understand the properties of other quantum systems. In the 1990s, two quantum algorithms were published, which further stirred interest in realizing quantum computers. Peter Shor proposed Shor's algorithm, a quantum algorithm for finding the prime factors of an integer, which could in theory break RSA encryption. Similarly, Lov Grover proposed the Grover search algorithm, which provides an alternative to binary search that can be done with quadratic speedup.\nAt the time, superconducting quantum circuits were already being used to construct highly sensitive SQUID devices, and had also been used to demonstrate macroscopic quantum phenomena, such as quantized energy levels. It became apparent that these superconducting qubits could be used to achieve quantum computation. This was especially true because such \"solid state\" approaches to quantum computing were seen as far more viable than other approaches at the time, including NMR (nuclear magnetic resonance) quantum computing, due in part to the fact that existing fabrication techniques would apply.\nIn 1999, a paper was published by Yasunobu Nakamura, demonstrating the first superconducting qubit. It is a form of Cooper pair box, now known as the \"charge qubit\". Although the design had been proposed in 1997 by the Saclay team (including Devoret), this paper was the first to show coherent control and readout, in the form of Rabi oscillations between the ground and excited states of the qubit. However, even after this first result, it was unclear if superconducting qubits would be viable, and some argued that the system was not truly capable of containing quantum information. Part of the problem was that this initial design maintained coherence for less than a nanosecond, not long enough to do any calculations.\nIn the following years, several other superconducting qubits were invented, including the phase qubit, flux qubit, quatronium, the transmon qubit, and the fluxonium. Successive advances in qubit design, materials science, and fabrication techniques improved coherence by roughly five orders of magnitude over two decades. The transmon design, introduced in 2007, reduced sensitivity to charge noise and has since become the dominant architecture in superconducting quantum computing processors deployed by IBM, Google, and others. Transmon coherence times were brought into the range of \n\n\n\n10\n\n - \n\n100\n \nμ\n\ns\n\n\n\n{\\displaystyle 10{\text{ - }}100\\ \\mu {\text{s}}}\n\n, though further gains on that architecture plateaued for nearly a decade. In 2021, a fluxonium qubit achieved a \n\n\n\n\nT\n\n2\n\n\n\n\n{\\displaystyle T_{2}}\n\n coherence time exceeding 1 ms, an improvement by an order of magnitude. In 2025, developments in readout and design allowed superconducting transmon qubits to reach millisecond coherence times as well.\nGoogle in 2016, implemented 16 qubits to convey a demonstration of the Fermi-Hubbard Model. In another experiment, Google used 17 qubits to optimize the Sherrington-Kirkpatrick model. In 2019, Google produced the Sycamore quantum computer which performed a task in 200 seconds that Google claimed would have taken 10,000 years on a classical computer. The task was random circuit sampling, a common benchmark for claims of \"quantum supremacy\" or quantum advantage.\nAs of 2025, superconducting quantum processors have exceeded 1,000 qubits, the largest being IBM Condor, a 1,121-qubit quantum processor. In 2025, Google announced one of the first independently verifiable quantum advantages on hardware using the Willow processor.\n#Subheading: Background\n##Subheading: Quantum computing\nClassical computation models rely on physical implementations consistent with the laws of classical mechanics. Some very small systems, or certain systems under extreme conditions, are instead described by the quantum mechanics, which obey different sets of physical rules.\nQuantum computation is a method of constructing a quantum system for the purpose of encoding information. Applications of a quantum computer would include simulating quantum phenomena beyond the scope of classical approximation, and speeding up certain calculations, particularly those that involve an \"oracle\". Certain algorithms designed for quantum computers, such as Grover Search or Shor's algorithm, are believed to be able to do some calculations better than their classical counterparts.\nGate-based quantum computing is a method of quantum computing that, much like traditional computing, use qubits (analogous to bits) and quantum gates (analogous to classical gates).\nA qubit is any two-level system in quantum mechanics. Much like a classical bit, it is a system with two possible states. However, the difference lies in the fact that because a qubit obeys the laws of quantum mechanics, it is capable of occupying a quantum superposition of both states.\nThe primary",
+              ", as CMOS (Complementary Metal-Oxide-Semiconductor) fabrication used for commercial silicon computer chips. A major difference is the use of electron-beam lithography, as opposed to optical lithographic techniques, which is hard to scale and has low yield. However, electron beams allow for a much sharper resolution, which is often necessary for certain device designs.\nThe superconductor used to make superconducting circuits is usually aluminum, deposited on a silicon substrate, but can also be niobium or tantalum, both d-band superconductors.\nImprovements in fabrication continue to improve the lifetime of superconducting qubits and have made significant improvements since the early 2000s.: 4.\n##Subheading: Refrigeration\nCryogenic dilution refrigerators are used to keep the superconducting circuits cold. They are cooled to temperatures below 15 mK. Although superconductivity itself onsets before this temperature, a large population of thermal quasiparticles exist within the circuit, which can interfere with the circuit's superconductivity. These so-called 'equilibrium quasiparticles' are exponentially suppressed at lower temperatures. Therefore, it is favorable to cool the circuit to as low of a temperature as possible.\nInside of the dilution fridge, the superconducting circuits are connected to various filters and amplifiers that enable the qubit to be read out from observers outside of the dilution fridge.\n#Subheading: Qubit types\n##Subheading: Phase, flux, and charge qubits\nThe three primary superconducting qubit archetypes are the phase, charge and flux qubit. These archetypes correspond to limits of the underlying Josephson hamiltonian. Depending on what limit the hamiltonian is in, a different aspect of the qubit will be well defined. The choice of qubit archetype impacts the qubit's transition frequency, anharmonicity (or nonlinearity), and susceptibility to noise.\nOf the three archetypes, phase qubits allow the most of Cooper pairs to tunnel through the junction, followed by flux qubits, and charge qubits allow the fewest.\nThe charge qubit, also known as the Cooper pair box, possesses a Josephson to charging energy ratio on the order of magnitude \n\n\n\n<\n1\n\n\n{\\displaystyle <1}\n\n. For charge qubits, different energy levels correspond to an integer number of Cooper pairs on a superconducting island (a small superconducting area with a controllable number of charge carriers). Indeed, the first experimentally realized qubit was the Cooper pair box, achieved in 1999.\nThe flux qubit (also known as a persistent-current qubit) possesses a Josephson to charging energy ratio on the order of magnitude \n\n\n\n10\n\n\n{\\displaystyle 10}\n\n. For flux qubits, the energy levels correspond to different integer numbers of magnetic flux quanta trapped in a superconducting ring.\nThe phase qubit possesses a Josephson to charge energy ratio on the order of magnitude \n\n\n\n\n10\n\n6\n\n\n\n\n{\\displaystyle 10^{6}}\n\n. For phase qubits, energy levels correspond to different quantum charge oscillation amplitudes across a Josephson junction, where charge and phase are analogous to momentum and position respectively as analogous to a quantum harmonic oscillator. Note that in this context phase is the complex argument of the superconducting wave function (also known as the superconducting order parameter), not the phase between the different states of the qubit.\nIn this case \n\n\n\nN\n\n\n{\\displaystyle N}\n\n is the number of Cooper pairs to tunnel through the junction, \n\n\n\n\nN\n\ng\n\n\n=\nC\n\nV\n\n0\n\n\n\n/\n\n2\ne\n\n\n{\\displaystyle N_{g}=CV_{0}/2e}\n\n is the charge on the capacitor in units of Cooper pairs number, \n\n\n\n\nE\n\nC\n\n\n=\n(\n2\ne\n\n)\n\n2\n\n\n\n/\n\n2\n(\n\nC\n\nJ\n\n\n+\nC\n)\n\n\n{\\displaystyle E_{C}=(2e)^{2}/2(C_{J}+C)}\n\n is the charging energy associated with both capacitance \n\n\n\nC\n\n\n{\\displaystyle C}\n\n and Josephson junction capacitance \n\n\n\n\nC\n\nJ\n\n\n\n\n{\\displaystyle C_{J}}\n\n.\nNote that \n\n\n\nϕ\n\n\n{\\displaystyle \\phi }\n\n is only allowed to take values greater than \n\n\n\n2\nπ\n\n\n{\\displaystyle 2\\pi }\n\n and is alternatively defined as the time integral of voltage along inductance \n\n\n\nL\n\n\n{\\displaystyle L}\n\n.\nH\n=\n\n\n\n(\n2\ne\n\n)\n\n2\n\n\n\n\n2\n\nC\n\nJ\n\n\n\n\n\n\nq\n\n2\n\n\n−\n\nI\n\n0\n\n\n\n\n\nΦ\n\n0\n\n\n\n2\nπ\n\n\n\nϕ\n−\n\nE\n\nJ\n\n\ncos\n⁡\nϕ\n\n\n{\\displaystyle H={\frac {(2e)^{2}}{2C_{J}}}q^{2}-I_{0}{\frac {\\Phi _{0}}{2\\pi }}\\phi -E_{J}\\cos \\phi }\n\nHere \n\n\n\n\n�",
+              " where \n\n\n\n\nE\n\nL\n\n\n=\n(\nℏ\n\n/\n\n2\ne\n\n)\n\n2\n\n\n\n/\n\nL\n\n\n{\\displaystyle E_{L}=(\\hbar /2e)^{2}/L}\n\n. In practice, the linear inductor is usually implemented by a Josephson junction array that is composed of a large number (can be often \n\n\n\nN\n>\n100\n\n\n{\\displaystyle N>100}\n\n) of large-sized Josephson junctions connected in a series. Under this condition, the Hamiltonian of a fluxonium can be written as:.\nOne important property of the fluxonium qubit is the longer qubit lifetime at the half flux sweet spot, which can exceed 1 millisecond. Another crucial advantage of the fluxonium qubit when biased at the sweet spot is its large anharmonicity. In this context, anharmonicity refers to the unequal spacing of energy levels in a superconducting circuit. Large anharmonicity is beneficial because it allows fast local microwave control and mitigates spectral crowding problems, leading to better scalability.\nThe 0-π qubit is a protected qubit design where logical states are protected by circuit symmetry. The logical states of the qubit are exponentially protected against relaxation and exponentially (first-order) protected to first order against dephasing due to charge (flux) noise. This ideal behavior, however, is not always realistic because it requires that parameter dispersion among nominally identical circuit elements vanishes.\n#Subheading: Operation and readout\n##Subheading: Single qubits\nThe GHz energy gap between energy levels of a superconducting qubit is designed to be compatible with available electronic equipment, due to the terahertz gap (lack of equipment in the higher frequency band). The superconductor energy gap implies a top limit of operation below ~1THz beyond which Cooper pairs break, so energy level separation cannot be too high. On the other hand, energy level separation cannot be too small due to cooling considerations: a temperature of 1 K implies energy fluctuations of 20 GHz. Temperatures of tens of millikelvins are achieved in dilution refrigerators and allow qubit operation at a ~5 GHz energy level separation. Qubit energy level separation is frequently adjusted by controlling a dedicated bias current line, providing a \"knob\" to fine tune the qubit parameters.\nA single qubit gate is achieved by rotation in the Bloch sphere. Rotations between different energy levels of a single qubit are induced by microwave pulses sent to an antenna or transmission line coupled to the qubit with a frequency resonant with the energy separation between levels. Individual qubits may be addressed by a dedicated transmission line or by a shared one if the other qubits are off resonance. The axis of rotation is set by quadrature amplitude modulation of microwave pulse, while pulse length determines the angle of rotation.\nwhere \n\n\n\nω\n\n\n{\\displaystyle \\omega }\n\n is the qubit resonance and \n\n\n\n\nσ\n\nx\n\n\n,\n\nσ\n\ny\n\n\n\n\n{\\displaystyle \\sigma _{x},\\sigma _{y}}\n\n are Pauli matrices.\nTo implement a rotation about the \n\n\n\nX\n\n\n{\\displaystyle X}\n\n axis, one can set \n\n\n\n\n\n\nE\n\n\n\ny\n\n\n(\nt\n)\n=\n0\n\n\n{\\displaystyle {\\mathcal {E}}^{y}(t)=0}\n\n and apply a microwave pulse at frequency \n\n\n\n\nω\n\nd\n\n\n=\nω\n\n\n{\\displaystyle \\omega _{d}=\\omega }\n\n for time \n\n\n\n\nt\n\ng\n\n\n\n\n{\\displaystyle t_{g}}\n\n. The resulting transformation is.\nThis is exactly the rotation operator \n\n\n\n\nR\n\nX\n\n\n(\nθ\n)\n\n\n{\\displaystyle R_{X}(\theta )}\n\n by angle \n\n\n\nθ\n=\n\n∫\n\n0\n\n\n\nt\n\ng\n\n\n\n\n\n\n\nE\n\n\n\nx\n\n\n(\nt\n)\nd\nt\n\n\n{\\displaystyle \theta =\\int _{0}^{t_{g}}{\\mathcal {E}}^{x}(t)dt}\n\n about the \n\n\n\nX\n\n\n{\\displaystyle X}\n\n axis in the Bloch sphere. A rotation about the \n\n\n\nY\n\n\n{\\displaystyle Y}\n\n axis can be implemented in a similar way. Showing the two rotation operators is sufficient for satisfying universality as every single qubit unitary operator \n\n\n\nU\n\n\n{\\displaystyle U}\n\n may be presented as \n\n\n\nU\n=\n\nR\n\nX\n\n\n(\n\nθ\n\n1\n\n\n)\n\nR\n\nY\n\n\n(\n\nθ\n\n2\n\n\n)\n\nR\n\nX\n\n\n(\n\nθ\n\n3\n\n\n)\n\n\n{\\displaystyle U=R_{X}(\theta _{1})R_{Y}(\theta _{2})R_{X}(\theta _{3})}\n\n (up to a global phase which is physically inconsequential) by a procedure known as the \n\n\n\nX\n−\nY\n\n\n{\\displaystyle X-Y}\n\n decomposition. Setting \n\n\n\n\n∫\n\n0\n\n\n\nt\n\ng\n\n\n\n\n\n\n\nE\n\n\n\nx\n\n\n(\nt\n)\nd\nt\n=\nπ\n\n\n{\\displaystyle \\int _{0}^{t_{g}}{\\mathcal",
+              " the relevant qubit states. This effect has been implemented by flux-tuning the qubit spectra  and by using selective microwave driving. Off-resonant driving can be used to induce differential ac-Stark shift, allowing the implementation of all-microwave controlled-phase gates.\n##Subheading: Qubit readout\nArchitecture-specific readout, or measurement, mechanisms exist. Readout of a phase qubit is explained in the qubit archetypes table above. A flux qubit state is often read using an adjustable DC-SQUID magnetometer. States may also be measured using an electrometer. A more general readout scheme includes a coupling to a microwave resonator, where resonance frequency of the resonator is dispersively shifted by the qubit state. Multi-level systems (qudits) can be readout using electron shelving.\n#Subheading: Performance\n##Subheading: Criteria for quantum computation\nDiVincenzo's criteria is a list describing the requirements for a physical system to be capable of implementing a logical qubit. DiVincenzo's criteria is satisfied by superconducting quantum computing implementation. Much of the current development effort in superconducting quantum computing aims to achieve interconnect, control, and readout in the 3rd dimension with additional lithography layers. The list of DiVincenzo's criteria for a physical system to implement a logical qubit is satisfied by the implementation of superconducting qubits. Although DiVincenzo's criteria as originally proposed consists of five criteria required for physically implementing a quantum computer, the more complete list consists of seven criteria as it takes into account communication over a computer network capable of transmitting quantum information between computers, known as the \"quantum internet\". Therefore, the first five criteria ensure successful quantum computing, while the final two criteria allow for quantum communication.\nThe final two criteria have been experimentally proven by research performed by ETH Zurich university with two superconducting qubits connected by a coaxial cable.\n#Subheading: Challenges\nMany current challenges faced by superconducting quantum computing lie in the field of microwave engineering. Some challenges in superconducting qubit design are shaping the potential well and choosing particle mass such that energy separation between two specific energy levels is unique, differing from all other interlevel energy separation in the system, since these two levels are used as logical states of the qubit. Other challenges are mitigating sources of noise in the system. Finally, even more challenges occur a result of scaling to larger and larger device sizes.\n##Subheading: Noise\nSuperconducting quantum computing must mitigate quantum noise (disruptions of the system caused by its interaction with an environment) as well as leakage (information being lost to the surrounding environment). One way to reduce leakage is with parity measurements. Another strategy is to use qubits with large anharmonicity.\nTwo-level system (TLS) effects are a dominant source of noise in superconducting qubits. TLS act as resonant, two-level absorbers which drain energy from the qubit, significantly reducing coherence times. They are thought to be caused by deformities during the fabrication process, and surface amorphous oxides that form on or near Josephson junctions. Additionally, coherent TLS defects fluctuate in time, and at the moment, mitigating them requires full recalibration of quantum processors containing 100 qubits around once per day. As the TLS density increases, it becomes harder to protect a system from TLS effects.\nAttempts to mitigate TLS effects include developing new fabrication techniques, and experimenting with new materials such as niobium and tantalum.\nQuasiparticles are single-electron excitations that occur when Cooper pairs break. They consist of a superposition of an electron and an 'electron hole'. They occur when a Cooper pair is hit by a photon, causing it to break. There are two kinds of particles; thermally-generated equilibrium quasiparticles, and non-equilibrium quasiparticles which get excited due to other effects in the system. While equilibrium quasiparticles can be suppressed exponentially by operating at low temperatures, but non-equilibrium quasiparticles, due to radiation such as gammas and cosmic ray muons, cannot.\nAttempts to mitigate quasiparticle generation include increasing shielding against radiation, quasiparticle trapping, gap engineering, or otherwise removing them from the system.\n##Subheading: Scaling\nAs superconducting quantum computing approaches larger scale devices, researchers face difficulties in qubit coherence, scalable calibration software, efficient determination of fidelity of quantum states across an entire chip, and qubit and gate fidelity. Moreover, superconducting quantum computing devices must be reliably reproducible at increasingly large scales such that they are compatible with these improvements."
+            ],
+            "llm_call_id": "llm_a6e35cce4e4a45dd8435af282a439c49",
+            "trace_call_id": "llm_8e4ecabbaee8414fb0e732bfb12bb6a7",
+            "generation_round": 2
+          }
+        ],
+        "llm_call_id": "llm_a6e35cce4e4a45dd8435af282a439c49",
+        "trace_call_id": "llm_8e4ecabbaee8414fb0e732bfb12bb6a7",
+        "chunks": [
+          "doc_1445315a96fe::chunk_0000",
+          "doc_1445315a96fe::chunk_0003",
+          "doc_1445315a96fe::chunk_0005",
+          "doc_1445315a96fe::chunk_0007"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 3,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "World War II",
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 0,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 3,
+        "raw_count": 3,
+        "filtered_count": 3,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_bc4cab27e7f54941b7023b1fd487ad53",
+        "trace_call_id": "llm_1e449cda569644e081b9cf4c3d883e7d",
+        "chunks": [
+          "doc_38b526149796::chunk_0001",
+          "doc_38b526149796::chunk_0005",
+          "doc_38b526149796::chunk_0012",
+          "doc_38b526149796::chunk_0018"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_98e6e864a31d4a1c89ba6be3dd65a982",
+        "trace_call_id": "llm_ebf61ead82f8470eb743956ee59d83c7",
+        "chunks": [
+          "doc_1be62bde08fd::chunk_0000",
+          "doc_1be62bde08fd::chunk_0002",
+          "doc_1be62bde08fd::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 5,
+        "raw_count": 5,
+        "filtered_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_1fb13bd145384abd8a75edd3c7cf02b1",
+        "trace_call_id": "llm_5634e0e5fc064dd3a0353cfafb757585",
+        "chunks": [
+          "doc_7d4efb3cc0af::chunk_0000",
+          "doc_7d4efb3cc0af::chunk_0001",
+          "doc_7d4efb3cc0af::chunk_0003",
+          "doc_7d4efb3cc0af::chunk_0005"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 4,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "World War II",
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 0,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_7c08fff7b3b84c15a9e8646ed71ed9b2",
+        "trace_call_id": "llm_607d8fd9bcb7414f9674c7f60512c930",
+        "chunks": [
+          "doc_ea11fb2dc7ae::chunk_0006",
+          "doc_ea11fb2dc7ae::chunk_0009",
+          "doc_ea11fb2dc7ae::chunk_0038"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 5,
+        "raw_count": 5,
+        "filtered_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_6f5e2c703e8145e294b466f27d8f3a16",
+        "trace_call_id": "llm_80a1c8bbd7104da49f256c450012a313",
+        "chunks": [
+          "doc_aef977fc2141::chunk_0001",
+          "doc_aef977fc2141::chunk_0004",
+          "doc_aef977fc2141::chunk_0010",
+          "doc_aef977fc2141::chunk_0011"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_6cb836e523b8477a84548120b737c510",
+        "trace_call_id": "llm_38e80033b0314e66b2ea719c08114e62",
+        "chunks": [
+          "doc_1445315a96fe::chunk_0000",
+          "doc_1445315a96fe::chunk_0003",
+          "doc_1445315a96fe::chunk_0004",
+          "doc_1445315a96fe::chunk_0007"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 5,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "World War II",
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 0,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 5,
+        "raw_count": 5,
+        "filtered_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_c2e2331768a04e2abe70e2ca03f07d91",
+        "trace_call_id": "llm_2a2e38453aad405681eaf93309253bf9",
+        "chunks": [
+          "doc_38b526149796::chunk_0000",
+          "doc_38b526149796::chunk_0009",
+          "doc_38b526149796::chunk_0014",
+          "doc_38b526149796::chunk_0021"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_661168a25ba244b88568cf6580d3deba",
+        "trace_call_id": "llm_71966f56b8d346599244844cbae79941",
+        "chunks": [
+          "doc_10240d6c8bf0::chunk_0000",
+          "doc_10240d6c8bf0::chunk_0001",
+          "doc_10240d6c8bf0::chunk_0002",
+          "doc_10240d6c8bf0::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 5,
+        "raw_count": 5,
+        "filtered_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_f747f8a891214d0db4b907139c91d532",
+        "trace_call_id": "llm_8b7d574fd62f4c06825f07f2921d0ab1",
+        "chunks": [
+          "doc_7d4efb3cc0af::chunk_0000",
+          "doc_7d4efb3cc0af::chunk_0003",
+          "doc_7d4efb3cc0af::chunk_0005"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

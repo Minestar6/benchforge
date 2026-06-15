@@ -1,0 +1,154 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "normal_generate",
+    "difficulty": "medium",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "single_k": 2,
+    "multi_k": 1,
+    "target_candidates_per_topic": 5,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 24,
+        "raw_count": 24,
+        "filtered_count": 24,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_34bf3ab96cc648e1a8e1bb1c9aeaaac8",
+        "trace_call_id": "llm_bdf501b756af46a78e7bf251108238c2",
+        "chunks": [
+          "doc_804dae27c43f::chunk_0002",
+          "doc_804dae27c43f::chunk_0006",
+          "doc_aef977fc2141::chunk_0001",
+          "doc_aef977fc2141::chunk_0008",
+          "doc_aef977fc2141::chunk_0013",
+          "doc_aef977fc2141::chunk_0014"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 24,
+        "raw_count": 24,
+        "filtered_count": 24,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_2b259ce2d8e343789553f80a5ae490c6",
+        "trace_call_id": "llm_d672fbe9a20548c48cffd3e113516de4",
+        "chunks": [
+          "doc_1445315a96fe::chunk_0006",
+          "doc_53bf4489cf6c::chunk_0007",
+          "doc_53bf4489cf6c::chunk_0008",
+          "doc_53bf4489cf6c::chunk_0009",
+          "doc_53bf4489cf6c::chunk_0010",
+          "doc_7d4efb3cc0af::chunk_0001"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 28,
+        "raw_count": 28,
+        "filtered_count": 28,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_a2b8ff46b85541c4a2ecd229c7aff211",
+        "trace_call_id": "llm_9ffcf42387934d34a92c3e49f148d2ae",
+        "chunks": [
+          "doc_ea11fb2dc7ae::chunk_0000",
+          "doc_ea11fb2dc7ae::chunk_0007",
+          "doc_ea11fb2dc7ae::chunk_0020",
+          "doc_ea11fb2dc7ae::chunk_0021",
+          "doc_ea11fb2dc7ae::chunk_0025",
+          "doc_ea11fb2dc7ae::chunk_0030"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "strategy": "normal_generate",
+    "difficulty": "medium",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 20,
+        "raw_count": 20,
+        "filtered_count": 20,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_64b30c0aa97348c1b905bd107e8b99d2",
+        "trace_call_id": "llm_aaa4f11b24de439688a3be351904592f",
+        "chunks": [
+          "doc_80583f4e8964::chunk_0001",
+          "doc_80583f4e8964::chunk_0002",
+          "doc_80583f4e8964::chunk_0004",
+          "doc_aef977fc2141::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 16,
+        "raw_count": 16,
+        "filtered_count": 16,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_f6f157cdbe434ea3a640e69fcde0acff",
+        "trace_call_id": "llm_b5885c2f9ee642d295e39102b292e5f1",
+        "chunks": [
+          "doc_cd5a4b0bb607::chunk_0002",
+          "doc_dcabda2ebcc3::chunk_0001",
+          "doc_dcabda2ebcc3::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 17,
+        "raw_count": 17,
+        "filtered_count": 17,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_6465e033b50d450ba07ff893d878eac3",
+        "trace_call_id": "llm_3354830c7a714d928ca63bb729d3763c",
+        "chunks": [
+          "doc_0179a47d7650::chunk_0010",
+          "doc_ea11fb2dc7ae::chunk_0007",
+          "doc_ea11fb2dc7ae::chunk_0013",
+          "doc_ea11fb2dc7ae::chunk_0027",
+          "doc_ea11fb2dc7ae::chunk_0031"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

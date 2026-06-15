@@ -21,7 +21,7 @@ CONFIG_PATH = Path(__file__).parent.parent.parent / "config" / "qa_agent.yaml"
 
 def make_blueprint(
     count: int = 5,
-    max_rounds: int = 10,
+    max_rounds: int = 5,
     run_id: str = "exp_run",
     task_id: str = "exp_task",
     topics: list[str] | None = None,
@@ -39,7 +39,10 @@ def make_blueprint(
 
 def make_config(hard_gap_threshold: float = 0.2, too_easy_ratio: float = 0.4) -> AgentConfig:
     return AgentConfig(
-        candidate_pool=CandidatePoolConfig(target_multiplier=2.0),
+        candidate_pool=CandidatePoolConfig(
+            min_candidate_multiplier=1.5,
+            max_candidate_multiplier=2.0,
+        ),
         initial_breadth=InitialBreadthConfig(enabled=True, max_topics_per_round=10, difficulty="medium"),
         planner=PlannerConfig(topics_per_round=3),
         chunk_mix=ChunkMixConfig(

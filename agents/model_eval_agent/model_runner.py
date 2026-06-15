@@ -12,6 +12,23 @@ from benchforge.utils.artifact_store import ArtifactStore
 from benchforge.utils.llm_tracer import LLMTracer
 
 
+def _format_multiple_choice_options(choices: Any) -> str:
+    if not choices:
+        return ""
+    if isinstance(choices, dict):
+        return "\n".join(f"{k}. {v}" for k, v in choices.items())
+
+    formatted: list[str] = []
+    for idx, choice in enumerate(choices):
+        text = str(choice)
+        stripped = text.lstrip()
+        if stripped.startswith(("A.", "B.", "C.", "D.", "(A)", "(B)", "(C)", "(D)")):
+            formatted.append(text)
+        else:
+            formatted.append(f"{chr(65 + idx)}. {text}")
+    return "\n".join(formatted)
+
+
 async def _run_single(
     client: BaseModelClient,
     model_name: str,
@@ -77,9 +94,7 @@ def _build_prompt(question: dict[str, Any]) -> str:
 
     if mode == "multiple_choice":
         choices = question.get("choices") or question.get("options") or {}
-        if isinstance(choices, list):
-            choices = {chr(65 + i): v for i, v in enumerate(choices)}
-        options_text = "\n".join(f"{k}. {v}" for k, v in choices.items())
+        options_text = _format_multiple_choice_options(choices)
         return (
             f"{q_text}\n\n{options_text}\n\n"
             "Please answer with the option letter only (A, B, C, or D)."

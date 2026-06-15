@@ -16,6 +16,18 @@ from benchforge.utils.artifact_store import ArtifactStore
 from benchforge.utils.llm_tracer import LLMTracer
 
 from .schema import JudgeConfig, JudgeMetricSpec, QuestionModeMetricPlan
+from .model_runner import _format_multiple_choice_options
+
+
+def _question_text_for_judge(question: dict[str, Any]) -> str:
+    question_text = question.get("question", "")
+    if question.get("question_mode") != "multiple_choice":
+        return question_text
+    choices = question.get("choices") or question.get("options") or {}
+    options_text = _format_multiple_choice_options(choices)
+    if not options_text:
+        return question_text
+    return f"{question_text}\n{options_text}"
 
 
 def _render_user_prompt(
@@ -40,7 +52,7 @@ def _render_user_prompt(
             for c in citations[:3]
         ) or "N/A"
         return (
-            f"Question:\n{question.get('question', '')}\n\n"
+            f"Question:\n{_question_text_for_judge(question)}\n\n"
             f"Reference Answer:\n{question.get('answer', '')}\n\n"
             f"Evidence / Citations:\n{evidence}\n\n"
             f"Model Answer:\n{prediction}\n\n"
@@ -51,7 +63,7 @@ def _render_user_prompt(
     try:
         from jinja2 import Template
         return Template(template).render(
-            question=question.get("question", ""),
+            question=_question_text_for_judge(question),
             reference_answer=question.get("answer", ""),
             evidence="\n".join(
                 c.get("text", c) if isinstance(c, dict) else str(c)
@@ -131,6 +143,7 @@ async def _judge_single(
         "judge_model": judge_model_name,
         "input": {
             "question": question.get("question", ""),
+            "question_with_choices": _question_text_for_judge(question),
             "reference_answer": question.get("answer", ""),
             "model_answer": prediction,
             "citations": question.get("citations", []),

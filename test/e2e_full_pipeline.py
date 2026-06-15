@@ -144,8 +144,8 @@ async def stage_verification():
         citation=CitationCfg(enabled=True, min_citation_score=0.65, alpha=0.7, beta=0.3, citation_match_threshold=0.5),
         llm_validation=LLMValidationCfg(enabled=True, model="e2e-fake-model", temperature=0.0, max_tokens=800,
             min_overall_score=0.75, max_concurrency=4, max_retries=0,
-            prompt_system=str(project_root / "prompts/verify_agent/quality_system_prompt.md"),
-            prompt_user=str(project_root / "prompts/verify_agent/quality_user_prompt.md")),
+            prompt_path=str(project_root / "prompts/verify_agent/quality_prompt.md"),
+            prompt_user=""),
         selection=SelectionCfg(enabled=True, embedding_model="all-MiniLM-L6-v2"))
 
     shared_state_path = str(Path("runs") / TASK_ID / RUN_ID / "shared_state.json")

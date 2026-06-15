@@ -65,7 +65,7 @@ After closing `</document_analysis>`, output your questions in the specified JSO
 - **Counterfactual**: Explore "what if" scenarios - tests flexible thinking
 - **Edge-case**: Test boundary conditions - tests complete understanding
 - **True-false**: Verify factual understanding - tests accuracy (use sparingly)
-- **Open-ended**: Encourage synthesis and exploration - tests holistic understanding
+- **Open-ended**: Encourage multi-angle, exploratory thinking - tests holistic understanding
 - **False-premise**: Identify flawed assumptions - tests critical thinking
 
 ### Quality Standards
@@ -79,7 +79,7 @@ After closing `</document_analysis>`, output your questions in the specified JSO
 
 ### Difficulty Calibration (1-10 scale)
 - **1-3**: Basic recall and surface comprehension
-- **4-7**: Application, analysis, and synthesis
+- **4-7**: Application-based and analytical questions requiring multi-step reasoning
 - **8-10**: Deep insights, connections, and expert-level understanding
 
 **Important**: Include a mix across all difficulty levels. Someone should be able to answer the easy questions quickly to build confidence, while the harder questions truly test their mastery of the material.
@@ -108,7 +108,7 @@ Generate questions in the following JSON format:
 - `answer`: Complete, accurate answer to the question
 - `question_mode`: Always "qa" for this prompt
 - `thought_process`: Explain why this question effectively tests understanding of the document content
-- `question_type`: The type of question that best categorizes this entry (factual, analytical, conceptual, application-based, clarification, counterfactual, edge-case, true-false, open-ended, false-premise)
+- `question_type`: The type of question that best categorizes this entry — **must be exactly one of**: `factual`, `analytical`, `conceptual`, `application-based`, `clarification`, `counterfactual`, `edge-case`, `true-false`, `open-ended`, `false-premise`. Do not use any other value.
 - `required_capability`: Describe the capability required to answer this question (e.g., "understanding industrial production systems", "analyzing historical causal relationships", "comparing different concepts")
 - `estimated_difficulty`: Difficulty rating from 1 (easiest) to 10 (hardest)
 - `citations`: Exact quotes from the source text that support the answer

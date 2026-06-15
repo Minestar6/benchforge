@@ -39,6 +39,13 @@ def load_jsonl(path: Path) -> list[dict]:
     return records
 
 
+def _mode_summary_from_report(gen_report: dict) -> dict:
+    modes = gen_report.get("modes")
+    if not isinstance(modes, dict) or not modes:
+        return {}
+    return next(iter(modes.values()))
+
+
 def compute_metrics(run_dir: Path) -> dict:
     """从各输出文件中提取统计指标。"""
     metadata = load_json(run_dir / "metadata.json") or {}
@@ -46,9 +53,14 @@ def compute_metrics(run_dir: Path) -> dict:
     candidates = load_json(run_dir / "candidate_pool.jsonl") or load_json(run_dir / "direct_questions.json") or []
     round_records = load_jsonl(run_dir / "round_summary.jsonl")
     llm_calls = load_jsonl(run_dir / "llm_calls.jsonl")
+    mode_summary = _mode_summary_from_report(gen_report) if isinstance(gen_report, dict) else {}
 
     # ── 基本指标 ──
-    accepted_count = gen_report.get("candidate_count", 0) if gen_report else len(candidates)
+    accepted_count = (
+        gen_report.get("candidate_count")
+        or mode_summary.get("candidate_count")
+        or len(candidates)
+    )
     generated_count = gen_report.get("total_generated", 0) if gen_report else 0
 
     # 从 round_summary 汇总
@@ -71,7 +83,11 @@ def compute_metrics(run_dir: Path) -> dict:
         accept_rate = 0.0
 
     # ── 难度分布 ──
-    diff_counts = gen_report.get("difficulty_counts", {}) if gen_report else {}
+    diff_counts = (
+        gen_report.get("difficulty_counts")
+        or mode_summary.get("difficulty_counts")
+        or {}
+    ) if gen_report else {}
     total_diff = sum(diff_counts.values()) or accepted_count
     easy_ratio = diff_counts.get("easy", 0) / max(1, total_diff)
     medium_ratio = diff_counts.get("medium", 0) / max(1, total_diff)
@@ -109,6 +125,21 @@ def compute_metrics(run_dir: Path) -> dict:
 
     # ── 重复率（从 metadata 或 report） ──
     duplicate_ratio = gen_report.get("duplicate_ratio", 0.0) if gen_report else 0.0
+    stopped_reason = (
+        gen_report.get("stopped_reason")
+        or mode_summary.get("stopped_reason")
+        or "-"
+    ) if gen_report else "-"
+    min_target_reached = (
+        gen_report.get("min_target_reached")
+        if "min_target_reached" in gen_report
+        else mode_summary.get("min_target_reached", False)
+    ) if gen_report else False
+    max_target_reached = (
+        gen_report.get("max_target_reached")
+        if "max_target_reached" in gen_report
+        else mode_summary.get("max_target_reached", False)
+    ) if gen_report else False
 
     run_id = metadata.get("run_id", run_dir.name)
     group_id = metadata.get("group_id", run_id.split("_")[0])
@@ -134,6 +165,9 @@ def compute_metrics(run_dir: Path) -> dict:
         "total_completion_tokens": total_completion_tokens,
         "total_tokens": total_tokens,
         "tokens_per_accepted": round(tokens_per_accepted, 1),
+        "stopped_reason": stopped_reason,
+        "min_target_reached": bool(min_target_reached),
+        "max_target_reached": bool(max_target_reached),
         "strategy_counts": dict(strategy_counts),
     }
 
@@ -177,6 +211,7 @@ def write_csv(rows: list[dict], path: Path):
             "easy_ratio", "medium_ratio", "hard_ratio",
             "multi_chunk_ratio", "duplicate_ratio",
             "total_llm_calls", "total_tokens", "tokens_per_accepted",
+            "stopped_reason", "min_target_reached", "max_target_reached",
             "strategy_counts"]
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=keys, extrasaction="ignore")
@@ -204,6 +239,9 @@ def write_md(rows: list[dict], deltas: dict[str, dict], path: Path):
         ("total_llm_calls", "LLM Calls"),
         ("total_tokens", "Tokens"),
         ("tokens_per_accepted", "Tokens/Accepted"),
+        ("stopped_reason", "Stop Reason"),
+        ("min_target_reached", "Min Reached"),
+        ("max_target_reached", "Max Reached"),
     ]
     header = "| " + " | ".join(h for _, h in cols) + " |"
     sep = "|" + "|".join(" --- " for _ in cols) + "|"

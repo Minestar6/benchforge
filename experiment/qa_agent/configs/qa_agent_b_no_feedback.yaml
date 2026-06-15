@@ -39,7 +39,8 @@ multi_chunk:
 
 # ── 候选池 ────────────────────────────────────────────────────────────────────
 candidate_pool:
-  target_multiplier: 1.5
+  min_candidate_multiplier: 1.5
+  max_candidate_multiplier: 2.0
 
 # ── 初始广度轮 ────────────────────────────────────────────────────────────────
 initial_breadth:

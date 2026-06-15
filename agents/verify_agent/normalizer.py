@@ -118,6 +118,7 @@ def _normalize_one(
         topic=raw.get("topic", ""),
         question=question,
         answer=raw.get("answer", ""),
+        choices=raw.get("choices") or raw.get("options"),
         question_mode=raw.get("question_mode", ""),
         question_type=raw.get("question_type", ""),
         required_capability=raw.get("required_capability", ""),
@@ -130,7 +131,7 @@ def _normalize_one(
             k: v for k, v in raw.items()
             if k not in {
                 "question_id", "task_id", "run_id", "topic", "question", "answer",
-                "question_mode", "question_type", "required_capability",
+                "choices", "options", "question_mode", "question_type", "required_capability",
                 "estimated_difficulty", "citations", "document_id",
                 "chunk_ids", "chunks",
             }

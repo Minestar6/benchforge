@@ -242,8 +242,8 @@ async def stage_verify(run_dir: Path) -> dict:
             min_overall_score=0.75,
             max_concurrency=4,
             max_retries=0,
-            prompt_system=str(project_root / "prompts/verify_agent/quality_system_prompt.md"),
-            prompt_user=str(project_root / "prompts/verify_agent/quality_user_prompt.md"),
+            prompt_path=str(project_root / "prompts/verify_agent/quality_prompt.md"),
+            prompt_user="",
         ),
         selection=SelectionCfg(
             enabled=True,

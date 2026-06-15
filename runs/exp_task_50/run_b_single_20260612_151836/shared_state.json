@@ -1,0 +1,76 @@
+{
+  "task_id": "exp_task_50",
+  "run_id": "run_b_single_20260612_151836",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "exp_task_50",
+    "run_id": "run_b_single_20260612_151836",
+    "language": "en",
+    "topics": [
+      "Climate Change",
+      "Artificial Intelligence"
+    ],
+    "modes": {
+      "qa": {
+        "count": 50,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.2,
+          "hard": 0.6
+        }
+      },
+      "mcq": {
+        "count": 50,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.2,
+          "hard": 0.6
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "exp_task_50",
+    "run_id": "run_b_single_20260612_151836",
+    "language": "en",
+    "topics": [
+      "Climate Change",
+      "Artificial Intelligence"
+    ],
+    "modes": {
+      "qa": {
+        "count": 50,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.2,
+          "hard": 0.6
+        }
+      },
+      "mcq": {
+        "count": 50,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.2,
+          "hard": 0.6
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs/exp_task_50/run_b_single_20260612_151836/adaptive/qa/candidate_pool.json",
+    "mcq_candidate_pool": "runs/exp_task_50/run_b_single_20260612_151836/adaptive/mcq/candidate_pool.json",
+    "llm_calls": "runs/exp_task_50/run_b_single_20260612_151836/llm_calls.jsonl",
+    "generation_report": "runs/exp_task_50/run_b_single_20260612_151836/adaptive/generation_report.json",
+    "validated_questions": "runs/exp_task_50/run_b_single_20260612_151836/validation/validated_questions.jsonl"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "pending",
+    "evaluation": "pending"
+  }
+}

@@ -45,7 +45,7 @@ def run_automatic_metrics(
                 metric = AUTO_METRIC_REGISTRY.get(spec.name)
                 if metric is None:
                     continue
-                score = metric.compute(question, prediction)
+                score = metric.compute(question, prediction, {"threshold": spec.threshold})
             buckets[(mode, spec.name)][model_name][qid] = score
 
     results: list[dict[str, Any]] = []

@@ -47,7 +47,7 @@ def build_blueprint(
     language: str = LANGUAGE,
     mode: str = "qa",
     count: int = 50,
-    max_rounds: int = 10,
+    max_rounds: int = 5,
     difficulty_distribution: dict[str, float] | None = None,
     timestamp: str = "",
 ) -> Blueprint:

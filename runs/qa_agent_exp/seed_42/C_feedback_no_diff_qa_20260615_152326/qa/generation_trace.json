@@ -1,0 +1,261 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "medium",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "single_k": 2,
+    "multi_k": 1,
+    "target_candidates_per_topic": 5,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 23,
+        "raw_count": 23,
+        "filtered_count": 23,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_7d6b02c733994439b4146525489016c3",
+        "trace_call_id": "llm_34fd3824e91240149fc3ff408873a7f1",
+        "chunks": [
+          "doc_10240d6c8bf0::chunk_0005",
+          "doc_80583f4e8964::chunk_0000",
+          "doc_80583f4e8964::chunk_0002",
+          "doc_80583f4e8964::chunk_0003",
+          "doc_80583f4e8964::chunk_0004",
+          "doc_80583f4e8964::chunk_0005"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 26,
+        "raw_count": 26,
+        "filtered_count": 26,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_bf109bcdbd16481da844d74c9de4a471",
+        "trace_call_id": "llm_d376bbd5ee024ea287a15f264773d376",
+        "chunks": [
+          "doc_1445315a96fe::chunk_0001",
+          "doc_1445315a96fe::chunk_0002",
+          "doc_1445315a96fe::chunk_0004",
+          "doc_1445315a96fe::chunk_0006",
+          "doc_1445315a96fe::chunk_0007",
+          "doc_53bf4489cf6c::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 27,
+        "raw_count": 27,
+        "filtered_count": 27,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_2289af308e7b46c2be68b1191df0a004",
+        "trace_call_id": "llm_2b38e70cf4394aa08bccb3eb69dbeb1b",
+        "chunks": [
+          "doc_a397697ae41f::chunk_0001",
+          "doc_a397697ae41f::chunk_0006",
+          "doc_a397697ae41f::chunk_0009",
+          "doc_a397697ae41f::chunk_0016",
+          "doc_ea11fb2dc7ae::chunk_0021",
+          "doc_ea11fb2dc7ae::chunk_0023"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 7,
+        "raw_count": 7,
+        "filtered_count": 7,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_a4f1359079f64ffd8aa7c75ed1bd6eba",
+        "trace_call_id": "llm_1b377592189148239940f3bf90f1d759",
+        "chunks": [
+          "doc_804dae27c43f::chunk_0000",
+          "doc_804dae27c43f::chunk_0004",
+          "doc_804dae27c43f::chunk_0011",
+          "doc_804dae27c43f::chunk_0013",
+          "doc_804dae27c43f::chunk_0014"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 8,
+        "raw_count": 8,
+        "filtered_count": 8,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_a3ae0aee7e764487aead37ca4a135848",
+        "trace_call_id": "llm_5187936b24c04f949e50aa3f8c493509",
+        "chunks": [
+          "doc_1445315a96fe::chunk_0000",
+          "doc_1445315a96fe::chunk_0003",
+          "doc_1445315a96fe::chunk_0004",
+          "doc_1445315a96fe::chunk_0007",
+          "doc_53bf4489cf6c::chunk_0006"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 8,
+        "raw_count": 8,
+        "filtered_count": 8,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_c9456ffa383f49d897003a63364450b9",
+        "trace_call_id": "llm_e047cb1391544384ad960058b7d5be8d",
+        "chunks": [
+          "doc_38b526149796::chunk_0001",
+          "doc_38b526149796::chunk_0005",
+          "doc_38b526149796::chunk_0008",
+          "doc_38b526149796::chunk_0014",
+          "doc_ea11fb2dc7ae::chunk_0009"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 3,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 8,
+        "raw_count": 8,
+        "filtered_count": 8,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_dbe5c3ef015e4d3a81123cc5c206ff5f",
+        "trace_call_id": "llm_6d6dc4b5be204fb1b01f92dcdde626ef",
+        "chunks": [
+          "doc_1be62bde08fd::chunk_0003",
+          "doc_80583f4e8964::chunk_0005",
+          "doc_80583f4e8964::chunk_0006"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 7,
+        "raw_count": 8,
+        "filtered_count": 7,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "The text states that quantum simulation 'may be an important application' and is identified as 'one of the most promising application areas.' What specific reasoning does the text provide to justify this promise, given that classical computers currently outperform quantum computers? Contrast this with the text's more tempered discussion of quantum machine learning.",
+            "reason": "非法问题类型: comparative",
+            "raw_item": {
+              "question": "The text states that quantum simulation 'may be an important application' and is identified as 'one of the most promising application areas.' What specific reasoning does the text provide to justify this promise, given that classical computers currently outperform quantum computers? Contrast this with the text's more tempered discussion of quantum machine learning.",
+              "answer": "The text justifies the promise of quantum simulation based on a fundamental computational complexity argument: quantum systems 'are impossible to simulate in an efficient manner classically.' This is a problem rooted in the nature of the physics being simulated, not just an engineering shortfall. Therefore, even powerful classical supercomputers face exponential overhead when simulating quantum dynamics (as noted in the history regarding Feynman's conjecture). Quantum computers, which operate by the same quantum-mechanical principles, are naturally suited to this task and can simulate these systems without the exponential overhead. This provides a clear, inherent theoretical advantage. In contrast, the text's discussion of quantum machine learning is more tempered because proposed advantages often 'rely on assumptions about efficient data encoding or continued access to quantum hardware, and have not yet translated into broad practical end-to-end advantage.' The promise for simulation is based on a proven hardness of the classical problem, whereas for machine learning, the advantages are more speculative and contingent on unresolved engineering and algorithmic challenges.",
+              "question_mode": "qa",
+              "thought_process": "This question tests comparative reasoning and the ability to extract the underlying justification for a claim. The reader must identify the different types of evidence used to support the promise of two different applications: one based on fundamental complexity theory (simulation) and the other based on more conditional and unproven potential (machine learning). It requires distinguishing between a inherent, theoretical advantage and a contingent, hypothesized one.",
+              "question_type": "comparative",
+              "required_capability": "Comparing and contrasting the textual evidence supporting the promise of different applications, identifying the nature of the argument (fundamental vs. contingent) in each case.",
+              "estimated_difficulty": 8,
+              "citations": [
+                "Since chemistry and nanotechnology rely on understanding quantum systems, and such systems are impossible to simulate in an efficient manner classically, quantum simulation may be an important application of quantum computing.",
+                "Seth Lloyd proved that quantum computers could simulate quantum systems without the exponential overhead present in classical simulations, validating Feynman's 1982 conjecture.",
+                "However, review literature notes that many proposed quantum machine-learning advantages rely on assumptions about efficient data encoding or continued access to quantum hardware, and have not yet translated into broad practical end-to-end advantage on current devices."
+              ]
+            },
+            "topic": "Quantum Computing",
+            "chunk_ids": [
+              "doc_cd5a4b0bb607::chunk_0000",
+              "doc_cd5a4b0bb607::chunk_0005",
+              "doc_cd5a4b0bb607::chunk_0006"
+            ],
+            "chunks": [
+              "#Subheading: History\nFor many years, the fields of quantum mechanics and computer science formed distinct academic communities. Modern quantum theory was developed in the 1920s to explain perplexing physical phenomena observed at atomic scales, and digital computers emerged in the following decades to replace human computers for tedious calculations. Both disciplines had practical applications during World War II; computers played a major role in wartime cryptography, and quantum physics was essential for nuclear physics used in the Manhattan Project.\nAs physicists applied quantum mechanical models to computational problems and swapped digital bits for qubits, the fields of quantum mechanics and computer science began to converge. In 1980, Paul Benioff introduced the quantum Turing machine, which uses quantum theory to describe a simplified computer.\nWhen digital computers became faster, physicists faced an exponential increase in overhead when simulating quantum dynamics, prompting Yuri Manin and Richard Feynman to independently suggest that hardware based on quantum phenomena might be more efficient for computer simulation.\nIn a 1984 paper, Charles Bennett and Gilles Brassard applied quantum theory to cryptography protocols and demonstrated that quantum key distribution could enhance information security.\nQuantum algorithms then emerged for solving oracle problems, such as Deutsch's algorithm in 1985, the Bernstein–Vazirani algorithm in 1993, and Simon's algorithm in 1994.\nThese algorithms did not solve practical problems, but demonstrated mathematically that one could obtain more information by querying a black box with a quantum state in superposition, sometimes referred to as quantum parallelism.\nPeter Shor built on these results with his 1994 algorithm for breaking the widely used RSA and Diffie–Hellman encryption protocols, which drew significant attention to the field of quantum computing. In 1996, Grover's algorithm established a quantum speedup for the widely applicable unstructured search problem. The same year, Seth Lloyd proved that quantum computers could simulate quantum systems without the exponential overhead present in classical simulations, validating Feynman's 1982 conjecture.\nOver the years, experimentalists have constructed small-scale quantum computers using trapped ions and superconductors.\nIn 1998, a two-qubit quantum computer demonstrated the feasibility of the technology, and subsequent experiments have increased the number of qubits and reduced error rates.\nIn 2019, Google AI and NASA announced that they had achieved quantum supremacy with a 54-qubit machine, performing a computation that classical supercomputers would take an estimated 10,000 years to complete—a claim subsequently disputed by IBM, which argued the calculation could be done in approximately 2.5 days on its Summit supercomputer with optimized algorithms, sparking a debate over the precise threshold for this milestone.\nRecent milestones in quantum computing have increasingly focused on controlling decoherence through quantum error correction. In 2024, researchers demonstrated theoretical and practical approaches for high threshold, low-overhead fault-tolerant quantum memory. These developments represent a critical step toward scaling systems beyond the noisy intermediate-scale quantum (NISQ) era into reliable, fault-tolerant computing architectures, though large-scale physical implementation remains an ongoing engineering challenge.\n#Subheading: Quantum information processing\nComputer engineers typically describe a modern computer's operation in terms of classical electrodynamics. In these \"classical\" computers, some components (such as semiconductors and random number generators) may rely on quantum behavior; however, because they are not isolated from their environment, any quantum information eventually quickly decoheres. While programmers may depend on probability theory when designing a randomized algorithm, quantum-mechanical notions such as superposition and wave interference are largely irrelevant in program analysis.\nThe \"classical\" in classical computation thus refers to the computational model, not to whether the microscopic physics of the hardware is ultimately quantum-mechanical. A conventional digital computer can be described by classical states and transition rules: memory stores bits, while logic elements transform one configuration of bits into another. This computational behavior is not tied to electronics, and can be abstracted through the idea of a Turing machine, a mechanical device that performs deterministic transformations on a finite state. In principle, the same classical transition rules can be implemented by some entirely classical mechanical device, possibly with a fixed slow-down in physical time. If a classical computation uses randomness, this can be modeled as access to random classical bits rather than as coherent quantum information. A quantum computer, by contrast, uses coherent quantum states, so that superposition, relative phase, and interference are part of the computation itself, and has no classical counterpart.\nQuantum programs instead rely on precise control of coherent quantum systems. Physicists describe these systems mathematically using linear algebra. Complex numbers model probability amplitudes, vectors model quantum states, and matrices model the operations that can be performed on these states. Programming a quantum computer is then a matter of composing operations in such a way that the resulting program computes a useful result in theory and is implementable in practice.\nA classical computer is a quantum computer ... so we shouldn't be asking about \"where do quantum speedups come from?\" We should say, \"Well,",
+              " which is believed to be unlikely.\nIn addition to these problems, quantum algorithms are being explored for applications in cryptography, optimization, and machine learning, although most of these remain at the research stage and require significant advances in error correction and hardware scalability before practical implementation.\nSome quantum algorithms, such as Grover's algorithm and amplitude amplification, give polynomial speedups over corresponding classical algorithms. Though these algorithms give comparably modest quadratic speedup, they are widely applicable and thus give speedups for a wide range of problems. These speed-ups are, however, over the theoretical worst-case of classical algorithms, and concrete real-world speed-ups over algorithms used in practice have not been demonstrated.\n##Subheading: Simulation of quantum systems\nSince chemistry and nanotechnology rely on understanding quantum systems, and such systems are impossible to simulate in an efficient manner classically, quantum simulation may be an important application of quantum computing. Recent reviews identify quantum chemistry as one of the most promising application areas for quantum computing, particularly for problems in electronic structure, chemical dynamics, and spectroscopy, while noting that useful implementations remain limited by current hardware. Quantum simulation could also be used to simulate the behavior of atoms and particles at unusual conditions such as the reactions inside a collider. In June 2023, IBM computer scientists reported that a quantum computer produced better results for a physics problem than a conventional supercomputer.\nAbout 2% of the annual global energy output is used for nitrogen fixation to produce ammonia for the Haber process in the agricultural fertiliser industry (even though naturally occurring organisms also produce ammonia). Quantum simulations might be used to understand this process and increase the energy efficiency of production. It is expected that an early use of quantum computing will be modeling that improves the efficiency of the Haber–Bosch process by the mid-2020s although some have predicted it will take longer.\n##Subheading: Post-quantum cryptography\nA notable application of quantum computing is in attacking cryptographic systems that are currently in use. Integer factorization, which underpins the security of public key cryptographic systems, is believed to be computationally infeasible on a classical computer for large integers if they are the product of a few prime numbers (e.g., the product of two 300-digit primes). By contrast, a quantum computer could solve this problem exponentially faster using Shor's algorithm to factor the integer. This ability would allow a quantum computer to break many of the cryptographic systems in use today, in the sense that there would be a polynomial time (in the number of digits of the integer) algorithm for solving the problem. In particular, most of the popular public key ciphers are based on the difficulty of factoring integers or the discrete logarithm problem, both of which can be solved by Shor's algorithm. In particular, the RSA, Diffie–Hellman, and elliptic curve Diffie–Hellman algorithms could be broken. These are used to protect secure Web pages, encrypted email, and many other types of data. Breaking these would have significant ramifications for electronic privacy and security.\nIdentifying cryptographic systems that may be secure against quantum algorithms is an actively researched topic under the field of post-quantum cryptography. Some public-key algorithms are based on problems other than the integer factorization and discrete logarithm problems to which Shor's algorithm applies, such as the McEliece cryptosystem, which relies on a hard problem in coding theory. Lattice-based cryptosystems are also not known to be broken by quantum computers, and finding a polynomial time algorithm for solving the dihedral hidden subgroup problem, which would break many lattice-based cryptosystems, is a well-studied open problem. It has been shown that applying Grover's algorithm to break a symmetric (secret-key) algorithm by brute force requires time equal to roughly 2n/2 invocations of the underlying cryptographic algorithm, compared with roughly 2n in the classical case, meaning that symmetric key lengths are effectively halved: AES-256 would have comparable security against an attack using Grover's algorithm to that AES-128 has against classical brute-force search (see Key size).\n##Subheading: Search problems\nThe most well-known example of a problem that allows for a polynomial quantum speedup is unstructured search, which involves finding a marked item out of a list of \n\n\n\nn\n\n\n{\\displaystyle n}\n\n items in a database. This can be solved by Grover's algorithm using \n\n\n\nO\n(\n\n\nn\n\n\n)\n\n\n{\\displaystyle O({\\sqrt {n}})}\n\n queries to the database, quadratically fewer than the \n\n\n\nΩ\n(\nn\n)\n\n\n{\\displaystyle \\Omega (n)}\n\n queries required for classical algorithms. In this case, the advantage is not only provable but also optimal: it has been shown that Grover's algorithm gives the maximal possible probability of finding the desired element for any number of oracle lookups. Many examples of provable quantum speedups for query problems are based on Grover's algorithm, including Brassard, Høyer, and Tapp's algorithm for finding collisions in two",
+              " of finding the desired element for any number of oracle lookups. Many examples of provable quantum speedups for query problems are based on Grover's algorithm, including Brassard, Høyer, and Tapp's algorithm for finding collisions in two-to-one functions, and Farhi, Goldstone, and Gutmann's algorithm for evaluating NAND trees.\nFor problems with all these properties, the running time of Grover's algorithm on a quantum computer scales as the square root of the number of inputs (or elements in the database), as opposed to the linear scaling of classical algorithms. A general class of problems to which Grover's algorithm can be applied is a Boolean satisfiability problem, where the database through which the algorithm iterates is that of all possible answers. An example and possible application of this is a password cracker that attempts to guess a password. Breaking symmetric ciphers with this algorithm is of interest to government agencies.\n##Subheading: Quantum annealing\nQuantum annealing uses the adiabatic theorem to perform calculations. A system is placed in the ground state for a simple Hamiltonian, which slowly evolves to a more complicated Hamiltonian whose ground state represents the solution to the problem in question. The adiabatic theorem states that if the evolution is slow enough, the system will stay in its ground state at all times through the process. Quantum annealing can solve Ising models and the (computationally equivalent) QUBO problem, which in turn can be used to encode a wide range of combinatorial optimization problems. Adiabatic optimization may be helpful for solving computational biology problems.\n##Subheading: Machine learning\nSince quantum computers can produce outputs that classical computers cannot produce efficiently, and since quantum computation is fundamentally linear algebraic, some express hope in developing quantum algorithms that can speed up machine learning tasks.\nHowever, review literature notes that many proposed quantum machine-learning advantages rely on assumptions about efficient data encoding or continued access to quantum hardware, and have not yet translated into broad practical end-to-end advantage on current devices.\nFor example, the HHL Algorithm, named after its discoverers Harrow, Hassidim, and Lloyd, is believed to provide speedup over classical counterparts. Some research groups have recently explored the use of quantum annealing hardware for training Boltzmann machines and deep neural networks.\nDeep generative chemistry models have been explored for potential applications in drug discovery. Early experimental work has explored the use of near-term quantum hardware in molecular generative modeling for drug discovery. In 2023, researchers at Gero reported a hybrid quantum–classical generative model based on a restricted Boltzmann machine, implemented on a commercially available quantum annealing device, to generate novel drug-like small molecules with physicochemical properties comparable to known medicinal compounds. However, the immense size and complexity of the structural space of all possible drug-like molecules pose significant obstacles, which could be overcome in the future by quantum computers. Quantum computers are naturally good for solving complex quantum many-body problems and thus may be instrumental in applications involving quantum chemistry. Therefore, one can expect that quantum-enhanced generative models including quantum GANs may eventually be developed into ultimate generative chemistry algorithms.\n##Subheading: AI-assisted algorithm discovery\nArtificial intelligence has also been explored as a tool for discovering and optimizing algorithms relevant to quantum computing. AlphaEvolve, a Google DeepMind system based on large language models and evolutionary algorithms, has been described as a coding agent for scientific and algorithmic discovery. In quantum-computing research, AlphaEvolve-optimized quantum circuits have been used in work on quantum computation of molecular geometry through many-body nuclear spin echoes.\n#Subheading: Engineering\nAs of 2023,[update] classical computers outperform quantum computers for all real-world applications. While current quantum computers may speed up solutions to particular mathematical problems, they give no computational advantage for practical tasks. Scientists and engineers are exploring multiple technologies for quantum computing hardware and hope to develop scalable quantum architectures, but serious obstacles remain. In practice, improvements in qubit counts alone are not enough, because error rates, connectivity, and data movement also affect whether an end-to-end application can outperform classical methods.\n##Subheading: Challenges\nThere are a number of technical challenges in building a large-scale quantum computer. Physicist David DiVincenzo has listed these requirements for a practical quantum computer:.\nPhysically scalable to increase the number of qubits\nQubits that can be initialized to arbitrary values\nQuantum gates that are faster than decoherence time\nUniversal gate set\nQubits that can be read easily.\nThe control of multi-qubit systems requires the generation and coordination of a large number of electrical signals with tight and deterministic timing resolution. This has led to the development of quantum controllers that enable interfacing with the qubits. Scaling these systems to support a growing number of qubits is an additional challenge.\nThe theoretical potential for large-scale quantum computers to eventually break widely used public-key encryption schemes has prompted significant motivated changes in global cybersecurity strategies. In response to"
+            ],
+            "llm_call_id": "llm_cf7dc3aa16044d90b589797bf578446f",
+            "trace_call_id": "llm_10aa534d52ef4b4c93d028a9a9a32d06",
+            "generation_round": 3
+          }
+        ],
+        "llm_call_id": "llm_cf7dc3aa16044d90b589797bf578446f",
+        "trace_call_id": "llm_10aa534d52ef4b4c93d028a9a9a32d06",
+        "chunks": [
+          "doc_cd5a4b0bb607::chunk_0000",
+          "doc_cd5a4b0bb607::chunk_0005",
+          "doc_cd5a4b0bb607::chunk_0006",
+          "doc_dcabda2ebcc3::chunk_0001"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 9,
+        "filtered_count": 9,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_8e62bdbf72944103a01b3ffad8517d17",
+        "trace_call_id": "llm_b08c02770b0147af88ef80e6de81b6b4",
+        "chunks": [
+          "doc_38b526149796::chunk_0015",
+          "doc_ea11fb2dc7ae::chunk_0013",
+          "doc_ea11fb2dc7ae::chunk_0023"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

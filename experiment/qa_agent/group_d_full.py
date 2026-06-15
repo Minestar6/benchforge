@@ -82,6 +82,6 @@ if __name__ == "__main__":
         topics=["Climate Change", "Artificial Intelligence"],
         task_id="qa_ablation",
         language="en",
-        qa_count=20, max_rounds=10,
+        qa_count=20, max_rounds=5,
         difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
     ))

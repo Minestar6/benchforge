@@ -1,0 +1,27 @@
+{
+  "group_id": "A",
+  "method": "direct",
+  "seed": 42,
+  "run_id": "A_direct_qa_20260615_181308",
+  "task_id": "qa_agent_exp/seed_42",
+  "language": "en",
+  "topics": [
+    "Artificial Intelligence",
+    "Quantum Computing",
+    "World War II"
+  ],
+  "mode": "qa",
+  "count": 50,
+  "max_rounds": 5,
+  "difficulty_distribution": {
+    "easy": 0.2,
+    "medium": 0.3,
+    "hard": 0.5
+  },
+  "config_path": "/Users/zhaoziqing/Desktop/benchforge/experiment/qa_agent/configs/qa_agent_a_direct.yaml",
+  "model_name": "deepseek-v3-2-251201",
+  "enable_feedback": false,
+  "enable_hard_generate": false,
+  "enable_difficulty_adaptation": false,
+  "is_direct_baseline": true
+}

@@ -23,6 +23,7 @@ class QuestionCandidate(BaseModel):
     topic: str
     question: str
     answer: str
+    choices: list[str] | None = None
     question_mode: str
     question_type: str = ""
     required_capability: str = ""
@@ -103,7 +104,6 @@ class ValidatedQuestionRecord(BaseModel):
     citation_validation: CitationValidationResult | None = None
     llm_validation: LLMValidationResult | None = None
     group_id: str | None = None
-    cluster_id: str | None = None
     duplicate_of: str | None = None
     final_weight: float | None = None
     final_status: str  # FinalStatus value

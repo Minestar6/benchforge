@@ -49,7 +49,8 @@ class RuntimeConfig:
 
 @dataclass
 class CandidatePoolConfig:
-    target_multiplier: float = 2.5
+    min_candidate_multiplier: float = 1.5
+    max_candidate_multiplier: float = 2.0
 
 
 @dataclass

@@ -1,0 +1,37 @@
+{
+  "task_id": "qa_ablation/seed_42",
+  "run_id": "A_direct_qa_20260615_132743",
+  "group": "A - Direct Generation",
+  "topics": [
+    "Artificial Intelligence",
+    "Quantum Computing",
+    "World War II"
+  ],
+  "target_per_mode": 50,
+  "min_difficulty_targets": {
+    "easy": 10,
+    "medium": 15,
+    "hard": 25
+  },
+  "max_candidate_target": 100,
+  "max_rounds": 10,
+  "rounds_processed": 5,
+  "difficulty_counts": {
+    "easy": 50,
+    "medium": 67,
+    "hard": 1
+  },
+  "min_target_reached": false,
+  "max_target_reached": true,
+  "stopped_reason": "max_candidate_pool_reached",
+  "candidate_count": 118,
+  "token_stats": {
+    "calls": 5,
+    "errors": 0,
+    "input_tokens": 6095,
+    "output_tokens": 10240,
+    "total_tokens": 16335,
+    "avg_latency_ms": 65338,
+    "total_latency_ms": 326689
+  }
+}

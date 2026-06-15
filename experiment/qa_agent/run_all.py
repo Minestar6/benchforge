@@ -34,7 +34,7 @@ MODEL_API_KEY = os.getenv("CUSTOM_API_KEY", "")
 MODEL_BASE_URL = os.getenv("CUSTOM_API_BASE_URL", "https://ark.cn-beijing.volces.com/api/v3")
 MODEL_NAME = os.getenv("MODEL_NAME", "deepseek-v3-2-251201")
 
-TASK_ID = "qa_ablation"
+TASK_ID = "qa_agent_exp"
 LANGUAGE = "en"
 
 TOPICS = [

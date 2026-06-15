@@ -58,6 +58,7 @@ def make_candidate(
     chunk_ids=None,
     question_mode="qa",
     estimated_difficulty=5,
+    choices=None,
 ) -> QuestionCandidate:
     return QuestionCandidate(
         question_id=question_id,
@@ -71,6 +72,7 @@ def make_candidate(
         chunks=chunks if chunks is not _SENTINEL else ["AI stands for artificial intelligence, a field of computer science."],
         chunk_ids=chunk_ids or ["doc_abc::chunk_0000"],
         estimated_difficulty=estimated_difficulty,
+        choices=choices,
     )
 
 
@@ -299,7 +301,7 @@ async def test_run_verify_agent_from_shared_state_updates_artifacts(tmp_path, mo
 
 
 @pytest.mark.asyncio
-async def test_verify_agent_raises_when_llm_validation_enabled_without_model_client(tmp_path, monkeypatch):
+async def test_verify_agent_skips_llm_validation_when_model_client_missing(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
 
     agent = VerifyAgent(
@@ -307,13 +309,13 @@ async def test_verify_agent_raises_when_llm_validation_enabled_without_model_cli
         model_client=None,
     )
 
-    with pytest.raises(RuntimeError, match="LLM validation enabled but no model_client provided"):
-        await agent.run(
-            task_id="task_test",
-            run_id="run_test",
-            blueprint=make_blueprint(),
-            candidates=[make_candidate()],
-        )
+    result = await agent.run(
+        task_id="task_test",
+        run_id="run_test",
+        blueprint=make_blueprint(),
+        candidates=[make_candidate()],
+    )
+    assert result.task_id == "task_test"
 
 
 def test_run_weighted_selection_marks_overquota_in_validated_records(monkeypatch):
@@ -418,6 +420,23 @@ class TestValidateCitation:
         )
         result = validate_citation(c, self.cfg)
         assert result.chunk_citation_score == 0.0
+
+    def test_multiple_choice_uses_correct_option_text_for_answer_score(self):
+        c = make_candidate(
+            question="Which option is correct?",
+            answer="B",
+            question_mode="multiple_choice",
+            choices=[
+                "(A) Wrong option",
+                "(B) Correct option supported by evidence",
+                "(C) Another wrong option",
+                "(D) Final wrong option",
+            ],
+            citations=["Correct option supported by evidence"],
+            chunks=["Correct option supported by evidence appears in the source chunk."],
+        )
+        result = validate_citation(c, self.cfg)
+        assert result.answer_citation_score > 0.8
 
     def test_run_citation_validation_disabled(self):
         cfg = CitationCfg(enabled=False)
@@ -564,15 +583,23 @@ class TestLLMValidator:
 
     def test_llm_validation_passed(self):
         good_response = {
-            "passed": True, "overall_score": 0.85,
-            "dimensions": {"clarity": 0.9, "answerability": 0.8,
-                           "faithfulness": 0.85, "difficulty_alignment": 0.75, "mode_alignment": 0.9},
-            "failed_reasons": [], "judge_summary": "Good question."
+            "correctness": 5,
+            "answerability": 4,
+            "clarity": 4,
+            "difficulty_consistency": 4,
+            "reason": "Good question.",
         }
         client = self._make_fake_client_with_response(good_response)
         candidates = [make_candidate()]
         blueprint = make_blueprint()
-        cfg = LLMValidationCfg(enabled=True, min_overall_score=0.75, max_concurrency=1, max_retries=0)
+        cfg = LLMValidationCfg(
+            enabled=True,
+            min_overall_score=0.75,
+            max_concurrency=1,
+            max_retries=0,
+            prompt_path="",
+            prompt_user="",
+        )
 
         results = asyncio.run(
             __import__(
@@ -581,7 +608,78 @@ class TestLLMValidator:
             ).run_llm_validation(candidates, blueprint, cfg, client, "/tmp/llm_calls.jsonl")
         )
         assert results["q1"].passed is True
-        assert results["q1"].overall_score == 0.85
+        assert results["q1"].overall_score == 0.8125
+        assert results["q1"].dimensions == {
+            "correctness": 1.0,
+            "answerability": 0.75,
+            "clarity": 0.75,
+            "difficulty_consistency": 0.75,
+        }
+        assert results["q1"].judge_summary == "Good question."
+
+    def test_llm_validation_rejects_below_min_overall_score(self):
+        response = {
+            "correctness": 3,
+            "answerability": 2,
+            "clarity": 3,
+            "difficulty_consistency": 2,
+            "reason": "Poor quality question.",
+        }
+        client = self._make_fake_client_with_response(response)
+        candidates = [make_candidate()]
+        blueprint = make_blueprint()
+        cfg = LLMValidationCfg(
+            enabled=True,
+            min_overall_score=0.75,
+            max_concurrency=1,
+            max_retries=0,
+            prompt_path="",
+            prompt_user="",
+        )
+
+        from benchforge.agents.verify_agent.llm_validator import run_llm_validation
+        results = asyncio.run(
+            run_llm_validation(candidates, blueprint, cfg, client, "/tmp/llm_calls.jsonl")
+        )
+        # raw: 3,2,3,2 → unit: 0.5, 0.25, 0.5, 0.25 → overall = 0.375 < 0.75
+        assert results["q1"].passed is False
+        assert "overall_score_too_low" in results["q1"].failed_reasons
+
+    def test_build_messages_for_multiple_choice_includes_choices_in_question_text(self):
+        from benchforge.agents.verify_agent.llm_validator import _build_messages
+
+        candidate = make_candidate(
+            question="Which option best defines AI?",
+            answer="B",
+            question_mode="multiple_choice",
+            choices=[
+                "(A) A database system",
+                "(B) A field focused on intelligent machines",
+                "(C) A network cable standard",
+                "(D) A graphics format",
+            ],
+        )
+        blueprint = ValidationBlueprintView(
+            topics=["AI"],
+            modes={
+                "multiple_choice": ModeCfg(
+                    count=5,
+                    difficulty_distribution={"easy": 2, "medium": 2, "hard": 1},
+                ),
+            },
+        )
+        messages = _build_messages(
+            candidate,
+            blueprint,
+            "",
+            "Question:\n{question}\n\nAnswer:\n{answer}\nDifficulty:\n{difficulty}",
+        )
+
+        assert len(messages) == 1
+        content = messages[0]["content"]
+        assert "Which option best defines AI?" in content
+        assert "(B) A field focused on intelligent machines" in content
+        assert "Difficulty:\n5" in content
 
     def test_llm_validation_error_marks_validator_error(self):
         class _ErrorClient(FakeModelClient):

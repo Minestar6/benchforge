@@ -1,0 +1,7 @@
+{
+  "task_id": "qa_agent_exp/seed_42",
+  "run_id": "_test_verify_3items",
+  "num_questions": 3,
+  "num_models": 1,
+  "output_root": "runs/qa_agent_exp/seed_42/_test_verify_3items/evaluation"
+}

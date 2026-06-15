@@ -15,7 +15,7 @@ from benchforge.models.fake import FakeModelClient
 
 def make_blueprint(
     count: int = 5,
-    max_rounds: int = 10,
+    max_rounds: int = 5,
     run_id: str = "exp_run",
     task_id: str = "exp_task",
     topics: list[str] | None = None,

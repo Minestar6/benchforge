@@ -1,0 +1,42 @@
+{
+  "task_id": "qa_agent_exp/seed_42",
+  "run_id": "_test_verify",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "qa_agent_exp/seed_42",
+    "run_id": "_test_verify",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "modes": {
+      "multiple_choice": {
+        "count": 50,
+        "max_rounds": 5,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "blueprint_cache": null,
+  "artifacts": {
+    "multiple_choice_candidate_pool": "runs/qa_agent_exp/seed_42/_test_verify/multiple_choice/candidate_pool.json",
+    "chunked_evidence": "runs/qa_agent_exp/seed_42/_test_verify/evidence/chunked.json",
+    "llm_calls": "runs/qa_agent_exp/seed_42/_test_verify/llm_calls.jsonl",
+    "generation_report": "runs/qa_agent_exp/seed_42/_test_verify/generation_report.json",
+    "validation_report": "runs/qa_agent_exp/seed_42/_test_verify/validation/validation_report.json",
+    "validated_questions": "runs/qa_agent_exp/seed_42/_test_verify/validation/validated_questions.jsonl",
+    "weighted_selection": "runs/qa_agent_exp/seed_42/_test_verify/validation/weighted_selection.json"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "completed",
+    "evaluation": "pending"
+  }
+}

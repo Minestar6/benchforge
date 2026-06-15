@@ -1,0 +1,9 @@
+{
+  "fake": {
+    "multiple_choice": {
+      "num_questions": 3,
+      "accuracy": null,
+      "invalid_rate": 1.0
+    }
+  }
+}

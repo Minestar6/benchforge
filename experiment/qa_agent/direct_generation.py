@@ -21,9 +21,11 @@ from benchforge.utils.filter import parse_llm_response
 
 _QA_SYSTEM = """\
 You are a question generator. Generate question-answer pairs from the provided text.
-Each generated question must include two additional fields: `difficulty` and `citations`.
-`difficulty` must be one of: `easy`, `medium`, or `hard`.
-`citations` must be a list of exact quotes copied from the source text that directly support the answer. Each quote should be sufficient to verify the answer and should not be paraphrased.
+Each generated question must include two additional fields: `estimated_difficulty` and `citations`.
+`question`: The question text
+`answer`: Complete, accurate answer to the question
+`estimated_difficulty`: Difficulty rating from 1 (easiest) to 10 (hardest)
+`citations`: Exact quotes from the source text that support the answer
 Generate questions in the following JSON format:
 
 ```json
@@ -31,23 +33,24 @@ Generate questions in the following JSON format:
   {{
     "question": "The question text",
     "answer": "The correct answer",
-    "difficulty": "easy | medium | hard",
+    "estimated_difficulty": 5,
     "citations": ["Exact quote 1 from source text"]
   }}
 ]
 ```
 
-Target distribution: {easy} easy, {medium} medium, {hard} hard questions.
-Return ONLY the JSON array. No markdown, no explanation."""
+Return ONLY the JSON array. No markdown, no explanation.
+"""
 
 _MCQ_SYSTEM = """\
 You are a multiple-choice question generator. Generate multiple-choice questions from the provided text.
 Each question must have exactly 4 options (A, B, C, D) with one correct answer.
-Each generated question must include the following fields: `question`, `options`, `answer`, `difficulty`, and `citations`.
-`difficulty` must be one of: `easy`, `medium`, or `hard`.
-`citations` must be a list of exact quotes copied from the source text that directly support the correct answer. Each quote should be sufficient to verify the answer and should not be paraphrased.
-`options` must be an array of 4 strings, each prefixed with the letter (e.g. "A. ...", "B. ...").
-`answer` must be the letter of the correct option: "A", "B", "C", or "D".
+Each generated question must include the following fields: `question`, `options`, `answer`, `estimated_difficulty`, and `citations`.
+`question`: The question text
+`options`: Must be an array of 4 strings, each prefixed with the letter (e.g. "A. ...", "B. ...").
+`answer`: Must be the letter of the correct option: "A", "B", "C", or "D".
+`estimated_difficulty`: Difficulty rating from 1 (easiest) to 10 (hardest)
+`citations`: Exact quotes from the source text that support the answer
 Generate questions in the following JSON format:
 
 ```json
@@ -56,14 +59,12 @@ Generate questions in the following JSON format:
     "question": "The question text",
     "options": ["A. Option A text", "B. Option B text", "C. Option C text", "D. Option D text"],
     "answer": "A",
-    "difficulty": "easy | medium | hard",
+    "estimated_difficulty": 5,
     "citations": ["Exact quote 1 from source text"]
   }}
 ]
 ```
 
-Target distribution: {easy} easy, {medium} medium, {hard} hard questions.
-Ensure all distractors (wrong options) are plausible but clearly incorrect based on the source text.
 Return ONLY the JSON array. No markdown, no explanation."""
 
 _USER_TEMPLATE = """\
@@ -91,6 +92,31 @@ def _difficulty_targets(count: int, dist: dict[str, float]) -> dict[str, int]:
 
 def _all_targets_met(counts: dict[str, int], targets: dict[str, int]) -> bool:
     return all(counts.get(d, 0) >= t for d, t in targets.items())
+
+
+def _max_candidate_target(count: int, multiplier: float) -> int:
+    return math.ceil(count * multiplier)
+
+
+def _should_stop_direct(
+    *,
+    candidate_count: int,
+    diff_counts: dict[str, int],
+    diff_targets: dict[str, int],
+    max_candidate_target: int,
+    rounds_processed: int,
+    max_rounds: int,
+) -> tuple[bool, str | None]:
+    if candidate_count >= max_candidate_target:
+        return True, "max_candidate_pool_reached"
+
+    if _all_targets_met(diff_counts, diff_targets):
+        return True, "min_candidate_pool_sufficient"
+
+    if rounds_processed >= max_rounds:
+        return True, "max_rounds_reached"
+
+    return False, None
 
 
 def _write_json(path: Path, data) -> None:
@@ -247,15 +273,19 @@ async def run_direct_generation(
     tracker = TokenTracker()
     diff_counts: dict[str, int] = {d: 0 for d in diff_targets}
     all_candidates: list[dict] = []
-    max_chunks = mode_cfg.count  # 最多处理 count 个 chunk
-    chunks_processed = 0
+    max_candidate_target = _max_candidate_target(
+        mode_cfg.count,
+        agent_config.candidate_pool.max_candidate_multiplier,
+    )
+    rounds_processed = 0
     stopped = False
+    stop_reason = None
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
     logger.info(
-        f"[Direct] target={mode_cfg.count}, diff_targets={diff_targets}, "
-        f"max_chunks={max_chunks}, topics={blueprint.topics}"
+        f"[Direct] min_target={diff_targets}, max_target={max_candidate_target}, "
+        f"max_rounds={mode_cfg.max_rounds}, topics={blueprint.topics}"
     )
 
     for topic, (chunks, evidence_pool) in topic_evidence:
@@ -279,10 +309,6 @@ async def run_direct_generation(
             for idx, chunk in enumerate(doc_chunks):
                 if stopped:
                     break
-                if chunks_processed >= max_chunks:
-                    logger.info(f"[Direct] max_chunks ({max_chunks}) reached, stopping.")
-                    stopped = True
-                    break
 
                 items = await _generate_from_chunk(
                     model_client, model_name,
@@ -293,12 +319,16 @@ async def run_direct_generation(
                     system_prompt=system_prompt,
                     tracker=tracker,
                 )
-                chunks_processed += 1
+                rounds_processed += 1
 
                 for item in items:
                     item["topic"] = topic
                     item["document_id"] = doc_id
-                    d = item.get("difficulty", "medium")
+                    d_raw = item.get("estimated_difficulty", 5)
+                    if isinstance(d_raw, (int, float)):
+                        d = "easy" if d_raw <= 3 else "medium" if d_raw <= 6 else "hard"
+                    else:
+                        d = str(d_raw)
                     if d in diff_counts:
                         diff_counts[d] += 1
 
@@ -307,16 +337,43 @@ async def run_direct_generation(
                 logger.info(
                     f"[Direct] chunk {idx + 1}/{len(doc_chunks)} → {len(items)} items "
                     f"| counts={diff_counts} / targets={diff_targets} "
-                    f"| chunks_used={chunks_processed}/{max_chunks}"
+                    f"| candidates={len(all_candidates)}/{max_candidate_target} "
+                    f"| rounds={rounds_processed}/{mode_cfg.max_rounds}"
                 )
 
-                if _all_targets_met(diff_counts, diff_targets):
-                    logger.info(f"[Direct] all difficulty targets met, stopping.")
+                should_stop, stop_reason = _should_stop_direct(
+                    candidate_count=len(all_candidates),
+                    diff_counts=diff_counts,
+                    diff_targets=diff_targets,
+                    max_candidate_target=max_candidate_target,
+                    rounds_processed=rounds_processed,
+                    max_rounds=mode_cfg.max_rounds,
+                )
+                if should_stop:
+                    logger.info(f"[Direct] stopping: {stop_reason}")
                     stopped = True
                     break
 
     # ── 保存结果 ──
+    # 为每个候选添加 question_mode，便于下游统一加载
+    for item in all_candidates:
+        item["question_mode"] = mode_name
+
     _write_json(output_dir / "direct_questions.json", all_candidates)
+
+    # 保存到 {mode}/candidate_pool.json，与 B/C/D 组保持一致
+    mode_output_dir = output_dir / mode_name
+    mode_output_dir.mkdir(parents=True, exist_ok=True)
+    _write_json(mode_output_dir / "candidate_pool.json", all_candidates)
+
+    # 构建并保存 shared_state.json，使 verify_agent 可复用统一入口
+    from benchforge.utils.shared_state import build_shared_state, save_shared_state as _save_ss
+    _state = build_shared_state(
+        task_id=blueprint.task_id,
+        run_id=blueprint.run_id,
+        blueprint=blueprint,
+    )
+    _save_ss(_state, output_dir)
 
     report = {
         "task_id": blueprint.task_id,
@@ -324,11 +381,14 @@ async def run_direct_generation(
         "group": "A - Direct Generation",
         "topics": blueprint.topics,
         "target_per_mode": mode_cfg.count,
-        "difficulty_targets": diff_targets,
-        "max_chunks": max_chunks,
-        "chunks_processed": chunks_processed,
+        "min_difficulty_targets": diff_targets,
+        "max_candidate_target": max_candidate_target,
+        "max_rounds": mode_cfg.max_rounds,
+        "rounds_processed": rounds_processed,
         "difficulty_counts": diff_counts,
-        "target_reached": _all_targets_met(diff_counts, diff_targets),
+        "min_target_reached": _all_targets_met(diff_counts, diff_targets),
+        "max_target_reached": len(all_candidates) >= max_candidate_target,
+        "stopped_reason": stop_reason,
         "candidate_count": len(all_candidates),
         "token_stats": tracker.summary(),
     }

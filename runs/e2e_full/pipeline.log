@@ -1,0 +1,120 @@
+2026-06-07 18:47:57.822 | INFO     | __main__:main:498 - Pipeline start: e2e_full / run_001
+2026-06-07 18:47:57.822 | INFO     | __main__:main:499 - Working dir: D:\Download\vscode\code\master\benchforge
+2026-06-07 18:47:59.319 | INFO     | __main__:stage_generation:180 - ============================================================
+2026-06-07 18:47:59.319 | INFO     | __main__:stage_generation:181 - Stage 1/3: qa_agent — 题目生成
+2026-06-07 18:47:59.319 | INFO     | __main__:stage_generation:182 - ============================================================
+2026-06-07 18:47:59.575 | INFO     | benchforge.agents.qa_agent.agent:run_generation_agent:119 - Preparing evidence for 1 topics (parallel)
+2026-06-07 18:47:59.593 | INFO     | benchforge.utils.artifact_store:append_jsonl:39 - Appended 1 records to runs\e2e_full\run_001\evidence\chunked.jsonl
+2026-06-07 18:47:59.593 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\e2e_full\run_001\evidence\single_units.json
+2026-06-07 18:47:59.593 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\e2e_full\run_001\evidence\multi_units.json
+2026-06-07 18:47:59.593 | INFO     | benchforge.agents.qa_agent.agent:run_generation_agent:179 - Starting mode: qa
+2026-06-07 18:47:59.593 | DEBUG    | benchforge.agents.qa_agent.generator:generate:118 - Generator: mode=qa difficulty=medium response_len=1390
+2026-06-07 18:47:59.593 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:79 - Mode=qa round=1 strategy=initial_breadth generated=2 total_candidates=2
+2026-06-07 18:47:59.593 | DEBUG    | benchforge.agents.qa_agent.evidence_manager:sample:421 - Duplicate chunk combination detected, retry 1
+2026-06-07 18:47:59.593 | DEBUG    | benchforge.agents.qa_agent.evidence_manager:sample:421 - Duplicate chunk combination detected, retry 2
+2026-06-07 18:47:59.593 | DEBUG    | benchforge.agents.qa_agent.evidence_manager:sample:421 - Duplicate chunk combination detected, retry 3
+2026-06-07 18:47:59.593 | DEBUG    | benchforge.agents.qa_agent.evidence_manager:sample:421 - Duplicate chunk combination detected, retry 4
+2026-06-07 18:47:59.593 | DEBUG    | benchforge.agents.qa_agent.evidence_manager:sample:421 - Duplicate chunk combination detected, retry 5
+2026-06-07 18:47:59.593 | WARNING  | benchforge.agents.qa_agent.evidence_manager:_force_unique_sample:514 - No unused chunks available, returning empty batch
+2026-06-07 18:47:59.593 | WARNING  | benchforge.agents.qa_agent.executor:_generate_for_topic:211 - Topic Artificial Intelligence failed in round 2: 2 validation errors for GenerationBatch
+requested_min_questions
+  Field required [type=missing, input_value={'topic': 'Artificial Int...id': 'qa_generation_v1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+requested_target_questions
+  Field required [type=missing, input_value={'topic': 'Artificial Int...id': 'qa_generation_v1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2026-06-07 18:47:59.593 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:79 - Mode=qa round=2 strategy=adaptive generated=0 total_candidates=2
+2026-06-07 18:47:59.604 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:42 - Mode qa stopped: max_rounds_reached
+2026-06-07 18:47:59.608 | INFO     | benchforge.agents.qa_agent.agent:run_generation_agent:196 - Mode qa complete: 2 candidates, stopped_reason=max_rounds_reached
+2026-06-07 18:47:59.611 | INFO     | benchforge.agents.qa_agent.agent:run_generation_agent:212 - Generation complete. Output: runs/e2e_full/run_001/
+2026-06-07 18:47:59.611 | INFO     | __main__:stage_generation:271 - qa_agent done: 2 total candidates
+2026-06-07 18:47:59.611 | INFO     | __main__:stage_generation:273 -   qa: 2/10 stopped=max_rounds_reached
+2026-06-07 18:47:59.613 | INFO     | __main__:stage_generation:279 - shared_state: agent_status={'generation': 'completed', 'verification': 'pending', 'evaluation': 'pending'}
+2026-06-07 18:47:59.613 | INFO     | __main__:stage_generation:280 - shared_state: artifacts=['qa_candidate_pool', 'chunked_evidence', 'llm_calls', 'generation_report']
+2026-06-07 18:47:59.613 | INFO     | __main__:stage_verification:296 - ============================================================
+2026-06-07 18:47:59.614 | INFO     | __main__:stage_verification:297 - Stage 2/3: verify_agent — 题目验证
+2026-06-07 18:47:59.614 | INFO     | __main__:stage_verification:298 - ============================================================
+2026-06-07 18:47:59.625 | INFO     | benchforge.agents.verify_agent.normalizer:_build_chunk_index:54 - Built chunk index with 1 entries from runs\e2e_full\run_001\evidence\chunked.jsonl
+2026-06-07 18:47:59.636 | INFO     | benchforge.agents.verify_agent.normalizer:load_and_normalize:187 - Loaded 2 raw candidates from runs\e2e_full\run_001\qa\candidate_pool.json
+2026-06-07 18:47:59.636 | INFO     | benchforge.agents.verify_agent.normalizer:load_and_normalize:206 - Normalized 2 candidates total
+2026-06-07 18:47:59.637 | INFO     | benchforge.agents.verify_agent.agent:run:89 - [VerifyAgent] start task=e2e_full run=run_001 candidates=2
+2026-06-07 18:47:59.639 | INFO     | benchforge.utils.artifact_store:append_jsonl:39 - Appended 2 records to runs\e2e_full\run_001\validation\normalized_candidates.jsonl
+2026-06-07 18:47:59.640 | DEBUG    | benchforge.agents.verify_agent.citation_validator:validate_citation:85 - [citation] 38854a2a16d5: score=0.907 chunk=1.000 ans=0.690 matched=3/3 passed=True
+2026-06-07 18:47:59.642 | DEBUG    | benchforge.agents.verify_agent.citation_validator:validate_citation:85 - [citation] 51097da6d439: score=0.949 chunk=1.000 ans=0.830 matched=3/3 passed=True
+2026-06-07 18:47:59.642 | INFO     | benchforge.agents.verify_agent.citation_validator:run_citation_validation:130 - Citation validation: 2/2 passed
+2026-06-07 18:47:59.643 | INFO     | benchforge.utils.artifact_store:append_jsonl:39 - Appended 2 records to runs\e2e_full\run_001\validation\citation_validation.jsonl
+2026-06-07 18:47:59.646 | INFO     | benchforge.agents.verify_agent.llm_validator:run_llm_validation:224 - LLM validation: 2/2 passed, 0 errors, tokens: 300 in / 400 out
+2026-06-07 18:47:59.647 | INFO     | benchforge.utils.artifact_store:append_jsonl:39 - Appended 2 records to runs\e2e_full\run_001\validation\llm_validation.jsonl
+2026-06-07 18:47:59.648 | INFO     | benchforge.agents.verify_agent.selector:run_weighted_selection:324 - Selection: selected=1 duplicate=0 overquota=0
+2026-06-07 18:47:59.649 | INFO     | benchforge.utils.artifact_store:append_jsonl:39 - Appended 2 records to runs\e2e_full\run_001\validation\validated_questions.jsonl
+2026-06-07 18:47:59.650 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\e2e_full\run_001\validation\weighted_selection.json
+2026-06-07 18:47:59.650 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\e2e_full\run_001\validation\validation_report.json
+2026-06-07 18:47:59.651 | INFO     | benchforge.agents.verify_agent.agent:run:253 - [VerifyAgent] done: selected=1 report=runs\e2e_full\run_001\validation\validation_report.json
+2026-06-07 18:47:59.652 | INFO     | __main__:stage_verification:324 - verify_agent done: selected=1
+2026-06-07 18:47:59.652 | INFO     | __main__:stage_verification:325 -   failed_by_stage: {'citation': 0, 'llm': 0, 'validator_error': 0, 'duplicate': 0}
+2026-06-07 18:47:59.662 | INFO     | __main__:stage_verification:333 -   report: total=2 citation_pass=2 llm_pass=2 final=1
+2026-06-07 18:47:59.664 | INFO     | __main__:stage_evaluation:359 - ============================================================
+2026-06-07 18:47:59.665 | INFO     | __main__:stage_evaluation:360 - Stage 3/3: model_eval_agent — 模型评估
+2026-06-07 18:47:59.665 | INFO     | __main__:stage_evaluation:361 - ============================================================
+2026-06-07 18:47:59.665 | INFO     | benchforge.agents.model_eval_agent.agent:_run:108 - [ModelEvalAgent] start task=e2e_full run=run_001
+2026-06-07 18:47:59.677 | INFO     | benchforge.agents.model_eval_agent.agent:_run:113 - [ModelEvalAgent] loaded 1 evaluation questions
+2026-06-07 18:47:59.678 | INFO     | benchforge.agents.model_eval_agent.dataset_metric_executor:run_dataset_metrics:53 - [DatasetMetricExecutor] computed citation_score
+2026-06-07 18:47:59.679 | INFO     | benchforge.utils.artifact_store:append_jsonl:39 - Appended 4 records to runs\e2e_full\run_001\evaluation\dataset_report\dataset_scores.jsonl
+2026-06-07 18:47:59.679 | INFO     | benchforge.agents.model_eval_agent.model_runner:run_candidate_models:117 - [ModelRunner] running 2 inferences (2 models × 1 questions)
+2026-06-07 18:47:59.681 | INFO     | benchforge.utils.artifact_store:append_jsonl:39 - Appended 2 records to runs\e2e_full\run_001\evaluation\model_report\model_responses.jsonl
+2026-06-07 18:47:59.681 | INFO     | benchforge.agents.model_eval_agent.model_runner:run_candidate_models:124 - [ModelRunner] done, 2 responses, llm_usage={'calls': 2, 'input_tokens': 0, 'output_tokens': 0, 'errors': 0}
+2026-06-07 18:47:59.681 | INFO     | benchforge.agents.model_eval_agent.model_runner:run_candidate_models:127 - [ModelRunner] done, saved 2 responses
+2026-06-07 18:47:59.689 | INFO     | benchforge.utils.artifact_store:append_jsonl:39 - Appended 3 records to runs\e2e_full\run_001\evaluation\model_report\automatic_scores.jsonl
+2026-06-07 18:47:59.689 | INFO     | benchforge.agents.model_eval_agent.auto_metric_executor:run_automatic_metrics:90 - [AutoMetricExecutor] computed 3 metric×mode rows
+2026-06-07 18:47:59.690 | INFO     | benchforge.agents.model_eval_agent.llm_judge_executor:run_llm_judge:242 - [LLMJudgeExecutor] running 2 judge calls
+2026-06-07 18:47:59.747 | INFO     | benchforge.utils.artifact_store:append_jsonl:39 - Appended 2 records to runs\e2e_full\run_001\evaluation\model_report\traces\llm_judge_traces.jsonl
+2026-06-07 18:47:59.747 | INFO     | benchforge.utils.artifact_store:append_jsonl:39 - Appended 4 records to runs\e2e_full\run_001\evaluation\model_report\llm_judge_scores.jsonl
+2026-06-07 18:47:59.748 | INFO     | benchforge.agents.model_eval_agent.llm_judge_executor:run_llm_judge:311 - [LLMJudgeExecutor] done, 4 metric rows, 2 traces
+2026-06-07 18:47:59.755 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\e2e_full\run_001\evaluation\evaluation_report.json
+2026-06-07 18:47:59.755 | INFO     | benchforge.agents.model_eval_agent.agent:_run:222 - [ModelEvalAgent] done: runs\e2e_full\run_001\evaluation
+2026-06-07 18:47:59.755 | INFO     | __main__:stage_evaluation:434 - model_eval_agent done: 1 questions x 2 models
+2026-06-07 18:47:59.755 | INFO     | __main__:stage_evaluation:435 -   output_root: runs\e2e_full\run_001\evaluation
+2026-06-07 18:47:59.755 | INFO     | __main__:print_artifacts:456 - ============================================================
+2026-06-07 18:47:59.755 | INFO     | __main__:print_artifacts:457 - 产物文件清单
+2026-06-07 18:47:59.755 | INFO     | __main__:print_artifacts:458 - ============================================================
+2026-06-07 18:47:59.755 | INFO     | __main__:print_artifacts:461 - shared_state: generation=completed, verification=completed, evaluation=completed
+2026-06-07 18:47:59.770 | INFO     | __main__:print_artifacts:472 -   evaluation\dataset_report\dataset_quality_by_group.csv (224B)
+2026-06-07 18:47:59.770 | INFO     | __main__:print_artifacts:472 -   evaluation\dataset_report\dataset_quality_summary.json (179B)
+2026-06-07 18:47:59.779 | INFO     | __main__:print_artifacts:470 -   evaluation\dataset_report\dataset_scores.jsonl (4 lines, 1200B)
+2026-06-07 18:47:59.780 | INFO     | __main__:print_artifacts:472 -   evaluation\evaluation_report.json (153B)
+2026-06-07 18:47:59.789 | INFO     | __main__:print_artifacts:470 -   evaluation\model_report\automatic_scores.jsonl (3 lines, 959B)
+2026-06-07 18:47:59.798 | INFO     | __main__:print_artifacts:470 -   evaluation\model_report\llm_judge_scores.jsonl (4 lines, 1059B)
+2026-06-07 18:47:59.798 | INFO     | __main__:print_artifacts:472 -   evaluation\model_report\model_aggregate_report.json (1064B)
+2026-06-07 18:47:59.799 | INFO     | __main__:print_artifacts:472 -   evaluation\model_report\model_by_difficulty.csv (207B)
+2026-06-07 18:47:59.799 | INFO     | __main__:print_artifacts:472 -   evaluation\model_report\model_by_question_mode.csv (202B)
+2026-06-07 18:47:59.799 | INFO     | __main__:print_artifacts:472 -   evaluation\model_report\model_by_question_mode_and_difficulty.csv (227B)
+2026-06-07 18:47:59.799 | INFO     | __main__:print_artifacts:472 -   evaluation\model_report\model_by_topic.csv (236B)
+2026-06-07 18:47:59.800 | INFO     | __main__:print_artifacts:472 -   evaluation\model_report\model_by_topic_and_question_mode.csv (256B)
+2026-06-07 18:47:59.800 | INFO     | __main__:print_artifacts:472 -   evaluation\model_report\model_overall_report.csv (364B)
+2026-06-07 18:47:59.809 | INFO     | __main__:print_artifacts:470 -   evaluation\model_report\model_responses.jsonl (2 lines, 601B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:470 -   evaluation\model_report\traces\llm_judge_traces.jsonl (2 lines, 5886B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:470 -   evidence\chunked.jsonl (1 lines, 8322B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:472 -   evidence\multi_units.json (37B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:472 -   evidence\single_units.json (4210B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:472 -   generation_report.json (296B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:472 -   global_state.json (61B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:470 -   llm_calls.jsonl (7 lines, 2620B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:472 -   qa\candidate_pool.json (9889B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:472 -   qa\failures.json (687B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:472 -   qa\generation_trace.json (1734B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:472 -   qa\mode_state.json (198B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:472 -   shared_state.json (1052B)
+2026-06-07 18:47:59.820 | INFO     | __main__:print_artifacts:472 -   used_chunks.json (161B)
+2026-06-07 18:47:59.844 | INFO     | __main__:print_artifacts:470 -   validation\citation_validation.jsonl (2 lines, 1192B)
+2026-06-07 18:47:59.856 | INFO     | __main__:print_artifacts:470 -   validation\llm_validation.jsonl (2 lines, 820B)
+2026-06-07 18:47:59.859 | INFO     | __main__:print_artifacts:470 -   validation\normalized_candidates.jsonl (2 lines, 9894B)
+2026-06-07 18:47:59.859 | INFO     | __main__:print_artifacts:470 -   validation\validated_questions.jsonl (2 lines, 12317B)
+2026-06-07 18:47:59.859 | INFO     | __main__:print_artifacts:472 -   validation\validation_report.json (463B)
+2026-06-07 18:47:59.859 | INFO     | __main__:print_artifacts:472 -   validation\weighted_selection.json (308B)
+2026-06-07 18:47:59.859 | INFO     | __main__:main:516 - ============================================================
+2026-06-07 18:47:59.859 | INFO     | __main__:main:517 - ALL 3 STAGES PASSED
+2026-06-07 18:47:59.859 | INFO     | __main__:main:518 -   qa_agent:     2 candidates generated
+2026-06-07 18:47:59.859 | INFO     | __main__:main:519 -   verify_agent: 1 questions selected
+2026-06-07 18:47:59.859 | INFO     | __main__:main:520 -   model_eval:   1 questions x 2 models
+2026-06-07 18:47:59.859 | INFO     | __main__:main:521 -   artifacts:    runs/e2e_full/run_001/
+2026-06-07 18:47:59.859 | INFO     | __main__:main:522 - ============================================================

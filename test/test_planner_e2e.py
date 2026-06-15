@@ -173,7 +173,7 @@ async def test_stop_condition_targets_satisfied(test_blueprint, mock_model_clien
     """测试终止条件：targets_satisfied。"""
     # 修改 blueprint，降低 target
     test_blueprint.final_targets = FinalTargets(qa=5, multiple_choice=3)
-    test_blueprint.stop_conditions.max_rounds = 10  # 提高 max_rounds，让 targets 优先触发
+    test_blueprint.stop_conditions.max_rounds = 5  # 提高 max_rounds，让 targets 优先触发
 
     state_dir = tmp_path / "planner_state"
 

@@ -1,0 +1,687 @@
+[
+  {
+    "question": "What are the main subproblems into which the general problem of simulating or creating intelligence has been broken?",
+    "answer": "The main subproblems are particular traits or capabilities that researchers expect an intelligent system to display, which include reasoning and problem-solving, knowledge representation, planning and decision-making, and learning.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "The general problem of simulating (or creating) intelligence has been broken into subproblems. These consist of particular traits or capabilities that researchers expect an intelligent system to display."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What limitation did early AI reasoning algorithms face when dealing with large problems?",
+    "answer": "Early AI reasoning algorithms became insufficient for solving large reasoning problems because they experienced a \"combinatorial explosion,\" meaning they became exponentially slower as the problems grew.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Many of these algorithms are insufficient for solving large reasoning problems because they experience a \"combinatorial explosion\": They become exponentially slower as the problems grow."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are reasoning models, and what improvement did they allow in 2024?",
+    "answer": "Reasoning models are a type of large language model trained to generate intermediate chains-of-thought. They emerged in 2024 and allowed improved performance on complex problems in mathematics and coding.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Reasoning models, a type of large language model trained to generate intermediate chains-of-thought, emerged in 2024 and allowed improved performance on complex problems in mathematics and coding."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the purpose of knowledge representation and knowledge engineering in AI?",
+    "answer": "Knowledge representation and knowledge engineering allow AI programs to answer questions intelligently and make deductions about real-world facts.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Knowledge representation and knowledge engineering allow AI programs to answer questions intelligently and make deductions about real-world facts."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are two of the most difficult problems in knowledge representation?",
+    "answer": "Two of the most difficult problems in knowledge representation are the breadth of commonsense knowledge (the enormous set of atomic facts the average person knows) and the sub-symbolic form of most commonsense knowledge (much of what people know is not represented as expressible facts or statements).",
+    "estimated_difficulty": 7,
+    "citations": [
+      "Among the most difficult problems in knowledge representation are the breadth of commonsense knowledge (the set of atomic facts that the average person knows is enormous); and the sub-symbolic form of most commonsense knowledge (much of what people know is not represented as \"facts\" or \"statements\" that they could express verbally)."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "In the context of AI, what is a rational agent?",
+    "answer": "A rational agent is any entity (artificial or not) that perceives and takes actions in the world, and has goals or preferences and takes actions to make them happen.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "An \"agent\" is any entity (artificial or not) that perceives and takes actions in the world. A rational agent has goals or preferences and takes actions to make them happen."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "How does a decision-making agent choose an action according to the principle of maximum expected utility?",
+    "answer": "The decision-making agent assigns a utility number to each situation, calculates the expected utility for each possible action (the utility of all possible outcomes weighted by their probability), and then chooses the action with the maximum expected utility.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "The decision-making agent assigns a number to each situation (called its \"utility\") that measures how much the agent prefers it. For each possible action, it can calculate the \"expected utility\": the utility of all possible outcomes of the action, weighted by the probability that the outcome will occur. It can then choose the action with the maximum expected utility."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is a key difference between classical planning and most real-world planning problems?",
+    "answer": "In classical planning, the agent knows exactly what the effect of any action will be. In most real-world problems, the agent may not be certain about the situation it is in (it is unknown or unobservable) and may not know for certain what will happen after each possible action (it is not deterministic).",
+    "estimated_difficulty": 5,
+    "citations": [
+      "In classical planning, the agent knows exactly what the effect of any action will be. In most real-world problems, however, the agent may not be certain about the situation it is in (it is \"unknown\" or \"unobservable\") and it may not know for certain what will happen after each possible action (it is not \"deterministic\")."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the role of game theory in AI decision-making?",
+    "answer": "Game theory describes the rational behavior of multiple interacting agents and is used in AI programs that make decisions that involve other agents.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Game theory describes the rational behavior of multiple interacting agents and is used in AI programs that make decisions that involve other agents."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is machine learning?",
+    "answer": "Machine learning is the study of programs that can improve their performance on a given task automatically.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Machine learning is the study of programs that can improve their performance on a given task automatically."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is machine learning and how has it been historically related to AI?",
+    "answer": "Machine learning is the study of programs that can improve their performance on a given task automatically. It has been a part of AI from the beginning.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Machine learning is the study of programs that can improve their performance on a given task automatically. It has been a part of AI from the beginning."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are the two main varieties of supervised learning and how do they differ?",
+    "answer": "The two main varieties of supervised learning are classification and regression. Classification requires the program to learn to predict what category the input belongs in, while regression requires the program to deduce a numeric function based on numeric input.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Supervised learning requires labeling the training data with the expected answers, and comes in two main varieties: classification (where the program must learn to predict what category the input belongs in) and regression (where the program must deduce a numeric function based on numeric input)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "How does reinforcement learning work?",
+    "answer": "In reinforcement learning, the agent is rewarded for good responses and punished for bad ones, and learns to choose responses that are classified as \"good\".",
+    "estimated_difficulty": 3,
+    "citations": [
+      "In reinforcement learning, the agent is rewarded for good responses and punished for bad ones. The agent learns to choose responses that are classified as \"good\"."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are the three main ways computational learning theory can assess learners?",
+    "answer": "Computational learning theory can assess learners by computational complexity, by sample complexity (how much data is required), or by other notions of optimization.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Computational learning theory can assess learners by computational complexity, by sample complexity (how much data is required), or by other notions of optimization."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What specific problems does Natural Language Processing (NLP) address?",
+    "answer": "Natural language processing addresses problems including speech recognition, speech synthesis, machine translation, information extraction, information retrieval and question answering.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Specific problems include speech recognition, speech synthesis, machine translation, information extraction, information retrieval and question answering."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What was Margaret Masterman's key belief about understanding languages, and what did she think should be the basis of computational language structure?",
+    "answer": "Margaret Masterman believed that meaning and not grammar was the key to understanding languages, and that thesauri and not dictionaries should be the basis of computational language structure.",
+    "estimated_difficulty": 7,
+    "citations": [
+      "Margaret Masterman believed that it was meaning and not grammar that was the key to understanding languages, and that thesauri and not dictionaries should be the basis of computational language structure."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are three modern deep learning techniques for NLP mentioned in the text?",
+    "answer": "Three modern deep learning techniques for NLP are word embedding (representing words, typically as vectors encoding their meaning), transformers (a deep learning architecture using an attention mechanism), and generative pre-trained transformer (GPT) language models.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Modern deep learning techniques for NLP include word embedding (representing words, typically as vectors encoding their meaning), transformers (a deep learning architecture using an attention mechanism), and others. In 2019, generative pre-trained transformer (or \"GPT\") language models began to generate coherent text"
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is affective computing and what is one example of its application mentioned in the text?",
+    "answer": "Affective computing is a field that comprises systems that recognize, interpret, process, or simulate human feeling, emotion, and mood. One example is virtual assistants programmed to speak conversationally or banter humorously to appear more sensitive to emotional dynamics or facilitate human-computer interaction.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Affective computing is a field that comprises systems that recognize, interpret, process, or simulate human feeling, emotion, and mood. For example, some virtual assistants are programmed to speak conversationally or even to banter humorously; it makes them appear more sensitive to the emotional dynamics of human interaction, or to otherwise facilitate human–computer interaction."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Why are heuristics used in state space search?",
+    "answer": "Heuristics or \"rules of thumb\" are used to help prioritize choices that are more likely to reach a goal, because simple exhaustive searches are rarely sufficient for most real-world problems as the search space quickly grows to astronomical numbers, resulting in searches that are too slow or never complete.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Simple exhaustive searches are rarely sufficient for most real-world problems: the search space (the number of places to search) quickly grows to astronomical numbers. The result is a search that is too slow or never completes. \"Heuristics\" or \"rules of thumb\" can help prioritize choices that are more likely to reach a goal."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is gradient descent and how is it commonly used?",
+    "answer": "Gradient descent is a type of local search that optimizes a set of numerical parameters by incrementally adjusting them to minimize a loss function. Variants of gradient descent are commonly used to train neural networks through the backpropagation algorithm.",
+    "estimated_difficulty": 8,
+    "citations": [
+      "Gradient descent is a type of local search that optimizes a set of numerical parameters by incrementally adjusting them to minimize a loss function. Variants of gradient descent are commonly used to train neural networks, through the backpropagation algorithm."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is evolutionary computation and how does it work?",
+    "answer": "Evolutionary computation is a type of local search that aims to iteratively improve a set of candidate solutions by \"mutating\" and \"recombining\" them, selecting only the fittest to survive each generation.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Another type of local search is evolutionary computation, which aims to iteratively improve a set of candidate solutions by \"mutating\" and \"recombining\" them, selecting only the fittest to survive each generation."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are two popular swarm intelligence algorithms used in distributed search processes?",
+    "answer": "Two popular swarm intelligence algorithms used in distributed search processes are particle swarm optimization (inspired by bird flocking) and ant colony optimization (inspired by ant trails).",
+    "estimated_difficulty": 7,
+    "citations": [
+      "Distributed search processes can coordinate via swarm intelligence algorithms. Two popular swarm algorithms used in search are particle swarm optimization (inspired by bird flocking) and ant colony optimization (inspired by ant trails)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are the two main forms of formal logic used in AI for reasoning and knowledge representation?",
+    "answer": "The two main forms are propositional logic and predicate logic.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Formal logic comes in two main forms: propositional logic (which operates on statements that are true or false and uses logical connectives such as \"and\", \"or\", \"not\" and \"implies\") and predicate logic (which also operates on objects, predicates and relations and uses quantifiers such as \"Every X is a Y\" and \"There are some Xs that are Ys\")."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "In the context of logic, what is deductive reasoning?",
+    "answer": "Deductive reasoning in logic is the process of proving a new statement (conclusion) from other statements that are given and assumed to be true (the premises).",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Deductive reasoning in logic is the process of proving a new statement (conclusion) from other statements that are given and assumed to be true (the premises)."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the key difference between propositional logic and predicate logic?",
+    "answer": "Propositional logic operates on statements that are true or false using logical connectives, while predicate logic also operates on objects, predicates, and relations using quantifiers.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "propositional logic (which operates on statements that are true or false and uses logical connectives such as \"and\", \"or\", \"not\" and \"implies\") and predicate logic (which also operates on objects, predicates and relations and uses quantifiers such as \"Every X is a Y\" and \"There are some Xs that are Ys\")."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the purpose of fuzzy logic?",
+    "answer": "Fuzzy logic assigns a \"degree of truth\" between 0 and 1 to handle propositions that are vague and partially true.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Fuzzy logic assigns a \"degree of truth\" between 0 and 1. It can therefore handle propositions that are vague and partially true."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "Why are probabilistic methods used in AI?",
+    "answer": "Probabilistic methods are used to solve problems requiring the agent to operate with incomplete or uncertain information, which is common in reasoning, planning, learning, perception, and robotics.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Many problems in AI (including reasoning, planning, learning, perception, and robotics) require the agent to operate with incomplete or uncertain information. AI researchers have devised a number of tools to solve these problems using methods from probability theory and economics."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is a Bayesian network and for what tasks can it be used?",
+    "answer": "A Bayesian network is a tool that can be used for reasoning (using Bayesian inference), learning (using the expectation–maximization algorithm), planning (using decision networks), and perception (using dynamic Bayesian networks).",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Bayesian networks are a tool that can be used for reasoning (using the Bayesian inference algorithm),[g] learning (using the expectation–maximization algorithm),[h] planning (using decision networks) and perception (using dynamic Bayesian networks)."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the simplest and most widely used symbolic machine learning algorithm?",
+    "answer": "The decision tree is the simplest and most widely used symbolic machine learning algorithm.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "The decision tree is the simplest and most widely used symbolic machine learning algorithm."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What algorithm was the most widely used analogical AI until the mid-1990s, and what displaced it?",
+    "answer": "The k-nearest neighbor algorithm was the most widely used analogical AI until the mid-1990s, and it was displaced by kernel methods such as the support vector machine (SVM) in the 1990s.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "K-nearest neighbor algorithm was the most widely used analogical AI until the mid-1990s, and Kernel methods such as the support vector machine (SVM) displaced k-nearest neighbor in the 1990s."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is reportedly the most widely used learner at Google and why?",
+    "answer": "The naive Bayes classifier is reportedly the \"most widely used learner\" at Google, due in part to its scalability.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The naive Bayes classifier is reportedly the \"most widely used learner\" at Google, due in part to its scalability."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the most common training technique for neural networks?",
+    "answer": "The most common training technique for neural networks is the backpropagation algorithm.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "The most common training technique is the backpropagation algorithm."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "How is a deep neural network typically defined?",
+    "answer": "A network is typically called a deep neural network if it has at least 2 hidden layers.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "A network is typically called a deep neural network if it has at least 2 hidden layers."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "In logic, what does problem-solving search reduce to, given a problem and a set of premises?",
+    "answer": "Problem-solving reduces to searching for a proof tree whose root node is labelled by a solution of the problem and whose leaf nodes are labelled by premises or axioms.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Given a problem and a set of premises, problem-solving reduces to searching for a proof tree whose root node is labelled by a solution of the problem and whose leaf nodes are labelled by premises or axioms."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the tractability status of inference in Horn clause logic and first-order logic?",
+    "answer": "Inference in both Horn clause logic and first-order logic is undecidable, and therefore intractable.",
+    "estimated_difficulty": 7,
+    "citations": [
+      "Inference in both Horn clause logic and first-order logic is undecidable, and therefore intractable."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the purpose of non-monotonic logics?",
+    "answer": "Non-monotonic logics, including logic programming with negation as failure, are designed to handle default reasoning.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Non-monotonic logics, including logic programming with negation as failure, are designed to handle default reasoning."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are classifiers and controllers in the context of simple AI applications?",
+    "answer": "Classifiers (e.g., \"if shiny then diamond\") determine the closest match using pattern matching, while controllers (e.g., \"if diamond then pick up\") perform actions based on conditions.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The simplest AI applications can be divided into two types: classifiers (e.g., \"if shiny then diamond\"), on one hand, and controllers (e.g., \"if diamond then pick up\"), on the other hand."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the most common training technique for neural networks?",
+    "answer": "The most common training technique for neural networks is the backpropagation algorithm.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "The most common training technique is the backpropagation algorithm."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the key difference between feedforward neural networks and recurrent neural networks (RNNs)?",
+    "answer": "In feedforward neural networks, the signal passes in only one direction, while in recurrent neural networks (RNNs), the output signal is fed back into the input, which allows short-term memories of previous input events.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In feedforward neural networks the signal passes in only one direction.",
+      "Recurrent neural networks (RNNs) feed the output signal back into the input, which allows short-term memories of previous input events."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are the two main factors cited for the sudden success of deep learning in 2012–2015?",
+    "answer": "The two main factors were the increase in computer power (including the hundred-fold increase in speed by switching to GPUs) and the availability of vast amounts of training data, especially the giant curated datasets used for benchmark testing, such as ImageNet.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The sudden success of deep learning in 2012–2015 did not occur because of some new discovery or theoretical breakthrough... but because of two factors: the increase in computer power (including the hundred-fold increase in speed by switching to GPUs) and the availability of vast amounts of training data, especially the giant curated datasets used for benchmark testing, such as ImageNet."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the primary training method used to make GPT models more truthful, useful, and harmless after their initial pre-training?",
+    "answer": "A subsequent training phase makes the model more truthful, useful, and harmless, usually with a technique called reinforcement learning from human feedback (RLHF).",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Typically, a subsequent training phase makes the model more truthful, useful, and harmless, usually with a technique called reinforcement learning from human feedback (RLHF)."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What hardware and software combination replaced CPUs as the dominant means for training large-scale machine learning models in the late 2010s?",
+    "answer": "In the late 2010s, graphics processing units (GPUs) that were increasingly designed with AI-specific enhancements and used with specialized TensorFlow software had replaced previously used central processing unit (CPUs) as the dominant means for large-scale machine learning models' training.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In the late 2010s, graphics processing units (GPUs) that were increasingly designed with AI-specific enhancements and used with specialized TensorFlow software had replaced previously used central processing unit (CPUs) as the dominant means for large-scale (commercial and academic) machine learning models' training."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What problem are Long Short-Term Memory networks (LSTMs) designed to address compared to standard Recurrent Neural Networks?",
+    "answer": "Long Short-Term Memory networks (LSTMs) are recurrent neural networks that better preserve long-term dependencies and are less sensitive to the vanishing gradient problem.",
+    "estimated_difficulty": 7,
+    "citations": [
+      "Long short-term memory networks (LSTMs) are recurrent neural networks that better preserve longterm dependencies and are less sensitive to the vanishing gradient problem."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the core task during the pre-training of a Generative Pre-trained Transformer (GPT) model?",
+    "answer": "The pre-training consists of predicting the next token (a token being usually a word, subword, or punctuation).",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The pretraining consists of predicting the next token (a token being usually a word, subword, or punctuation)."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "According to the text, what is a key characteristic of Convolutional Neural Networks (CNNs) that makes them efficient for processing local patterns, especially in images?",
+    "answer": "Convolutional neural networks (CNNs) use layers of kernels to more efficiently process local patterns. This local processing is especially important in image processing.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Convolutional neural networks (CNNs) use layers of kernels to more efficiently process local patterns. This local processing is especially important in image processing."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the trend named after Nvidia's Jensen Huang that describes the rapid improvement rate of GPUs?",
+    "answer": "Improvements in GPUs have been even faster, a trend sometimes called Huang's law, named after Nvidia co-founder and CEO Jensen Huang.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Improvements in GPUs have been even faster, a trend sometimes called Huang's law, named after Nvidia co-founder and CEO Jensen Huang."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is the primary capability demonstrated by AlphaFold 2 in 2021 according to the text?",
+    "answer": "AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What significant achievement did AlphaFold 2 demonstrate in 2021 regarding protein structures?",
+    "answer": "AlphaFold 2 demonstrated the ability to approximate the 3D structure of a protein in hours rather than months.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "According to a 2023 report, what did AI-guided drug discovery help find?",
+    "answer": "AI-guided drug discovery helped find a class of antibiotics capable of killing two different types of drug-resistant bacteria.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In 2023, it was reported that AI-guided drug discovery helped find a class of antibiotics capable of killing two different types of drug-resistant bacteria."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "In 2024, how did researchers use machine learning in the search for Parkinson's disease treatments, and what were the results?",
+    "answer": "Researchers used machine learning to accelerate the search for Parkinson's disease drug treatments by identifying compounds that block the clumping of alpha-synuclein. They were able to speed up the initial screening process ten-fold and reduce the cost by a thousand-fold.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "In 2024, researchers used machine learning to accelerate the search for Parkinson's disease drug treatments. Their aim was to identify compounds that block the clumping, or aggregation, of alpha-synuclein (the protein that characterises Parkinson's disease). They were able to speed up the initial screening process ten-fold and reduce the cost by a thousand-fold."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What issue did a Nature article highlight regarding AI disease-prediction models, and what was one consequence?",
+    "answer": "The Nature article highlighted that dozens of AI disease-prediction models for stroke and diabetes were trained on dubious data. Evidence suggested some of these AI tools had been used on patients, although it was not clear if there were adverse outcomes.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Published in Nature an article \"Dozens of AI disease-prediction models were trained on dubious data\" highlighted the use of unreliable data being used to train AI medical prediction models for stroke and diabetes in 125 research articles. Evidence suggested some of the AI tools that were developed on unreliable data had been used on patients, although it was not clear if there were adverse outcomes."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What was the significance of Deep Blue's victory on 11 May 1997?",
+    "answer": "Deep Blue became the first computer chess-playing system to beat a reigning world chess champion, Garry Kasparov.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Deep Blue became the first computer chess-playing system to beat a reigning world chess champion, Garry Kasparov, on 11 May 1997."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What did AlphaGo achieve in March 2016, and what was its significance?",
+    "answer": "In March 2016, AlphaGo won 4 out of 5 games of Go in a match with Go champion Lee Sedol, becoming the first computer Go-playing system to beat a professional Go player without handicaps.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In March 2016, AlphaGo won 4 out of 5 games of Go in a match with Go champion Lee Sedol, becoming the first computer Go-playing system to beat a professional Go player without handicaps."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What is a key limitation of probabilistic large language models in mathematics, and what did the Alibaba Group develop to address mathematical problem-solving?",
+    "answer": "A key limitation is that they can produce wrong answers in the form of hallucinations. The Alibaba Group developed a version of its Qwen models called Qwen2-Math, which achieved state-of-the-art performance on several mathematical benchmarks.",
+    "estimated_difficulty": 7,
+    "citations": [
+      "In mathematics, probabilistic large language models are versatile, but can also produce wrong answers in the form of hallucinations. The Alibaba Group developed a version of its Qwen models called Qwen2-Math, that achieved state-of-the-art performance on several mathematical benchmarks, including 84% accuracy on the MATH dataset of competition mathematics problems."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What did the experimental model Gemini Deep Think achieve in 2025?",
+    "answer": "Gemini Deep Think achieved gold medal results in the International Math Olympiad of 2025.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The experimental model Gemini Deep Think accepts natural language prompts directly and achieved gold medal results in the International Math Olympiad of 2025."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "According to Nicolas Firzli, what is the likely impact of AI tool deployment in finance, and what does he doubt it will unleash?",
+    "answer": "He argues that the deployment of AI tools will further automatise things, destroying tens of thousands of jobs in banking, financial planning, and pension advice. He doubts it will unleash a new wave of sophisticated pension innovation.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "He argues that \"the deployment of AI tools will simply further automatise things: destroying tens of thousands of jobs in banking, financial planning, and pension advice in the process, but I'm not sure it will unleash a new wave of [e.g., sophisticated] pension innovation.\""
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  },
+  {
+    "question": "What are the main applications of AI being deployed in the military, according to the text?",
+    "answer": "The main applications enhance command and control, communications, sensors, integration and interoperability.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "The main applications enhance command and control, communications, sensors, integration and interoperability."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141"
+  }
+]

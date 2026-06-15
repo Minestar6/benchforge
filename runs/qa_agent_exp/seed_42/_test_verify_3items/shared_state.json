@@ -1,0 +1,68 @@
+{
+  "task_id": "qa_agent_exp/seed_42",
+  "run_id": "_test_verify_3items",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "qa_agent_exp/seed_42",
+    "run_id": "D_full_multiple_choice_20260615_152326",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "modes": {
+      "multiple_choice": {
+        "count": 50,
+        "max_rounds": 5,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "qa_agent_exp/seed_42",
+    "run_id": "D_full_multiple_choice_20260615_152326",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "modes": {
+      "multiple_choice": {
+        "count": 50,
+        "max_rounds": 5,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "multiple_choice_candidate_pool": "runs/qa_agent_exp/seed_42/_test_verify_3items/multiple_choice/candidate_pool.json",
+    "chunked_evidence": "runs/qa_agent_exp/seed_42/_test_verify_3items/evidence/chunked.json",
+    "llm_calls": "runs/qa_agent_exp/seed_42/_test_verify_3items/llm_calls.jsonl",
+    "validation_report": "runs/qa_agent_exp/seed_42/_test_verify_3items/validation/validation_report.json",
+    "validated_questions": "runs/qa_agent_exp/seed_42/_test_verify_3items/validation/validated_questions.jsonl",
+    "weighted_selection": "runs/qa_agent_exp/seed_42/_test_verify_3items/validation/weighted_selection.json",
+    "evaluation_report": "runs/qa_agent_exp/seed_42/_test_verify_3items/evaluation/evaluation_report.json",
+    "dataset_quality_summary": "runs/qa_agent_exp/seed_42/_test_verify_3items/evaluation/dataset_report/dataset_quality_summary.json",
+    "model_overall_report": "runs/qa_agent_exp/seed_42/_test_verify_3items/evaluation/model_report/model_overall_report.csv",
+    "model_aggregate_report": "runs/qa_agent_exp/seed_42/_test_verify_3items/evaluation/model_report/model_aggregate_report.json",
+    "model_by_topic": "runs/qa_agent_exp/seed_42/_test_verify_3items/evaluation/model_report/model_by_topic.csv",
+    "model_by_difficulty": "runs/qa_agent_exp/seed_42/_test_verify_3items/evaluation/model_report/model_by_difficulty.csv",
+    "model_by_question_mode": "runs/qa_agent_exp/seed_42/_test_verify_3items/evaluation/model_report/model_by_question_mode.csv"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "completed",
+    "evaluation": "completed"
+  }
+}

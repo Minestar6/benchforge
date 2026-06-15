@@ -1,0 +1,25 @@
+{
+  "task_id": "qa_agent_exp/seed_42",
+  "run_id": "_test_verify_3items",
+  "total_candidates": 3,
+  "citation_passed": 3,
+  "llm_passed": 3,
+  "final_selected": 3,
+  "stage_latencies_ms": {
+    "citation_validation": 1,
+    "llm_validation": 61736,
+    "selection": 0
+  },
+  "llm_usage": {
+    "calls": 3,
+    "input_tokens": 1550,
+    "output_tokens": 5637
+  },
+  "failed_by_stage": {
+    "citation": 0,
+    "llm": 0,
+    "validator_error": 0,
+    "duplicate": 0,
+    "overquota": 0
+  }
+}

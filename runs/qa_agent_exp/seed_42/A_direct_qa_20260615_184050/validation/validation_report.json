@@ -1,0 +1,25 @@
+{
+  "task_id": "qa_agent_exp/seed_42",
+  "run_id": "A_direct_qa_20260615_184050",
+  "total_candidates": 107,
+  "citation_passed": 0,
+  "llm_passed": 0,
+  "final_selected": 0,
+  "stage_latencies_ms": {
+    "citation_validation": 13,
+    "llm_validation": 0,
+    "selection": 0
+  },
+  "llm_usage": {
+    "calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "failed_by_stage": {
+    "citation": 107,
+    "llm": 0,
+    "validator_error": 0,
+    "duplicate": 0,
+    "overquota": 0
+  }
+}

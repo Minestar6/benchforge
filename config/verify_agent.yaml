@@ -7,19 +7,13 @@ citation_validation:
 
 llm_validation:
   enabled: true
-  model: "deepseek-v3"           # model_registry.yaml 中的 key（逻辑名）
+  model: "glm-4.7"           # model_registry.yaml 中的 key（逻辑名）
   temperature: 0.0                # 调用参数（不在 registry 中）
   max_tokens: 800
   min_overall_score: 0.75
-  max_concurrency: 8
+  max_concurrency: 2
   max_retries: 2
-  prompt_system: "benchforge/prompts/verify_agent/quality_system_prompt.md"
-  prompt_user: "benchforge/prompts/verify_agent/quality_user_prompt.md"
-  hard_floor:
-    clarity: 0.6
-    answerability: 0.7
-    faithfulness: 0.7
-    mode_alignment: 0.7
+  prompt_path: "benchforge/prompts/verify_agent/quality_prompt.md"
 
 selection:
   enabled: true

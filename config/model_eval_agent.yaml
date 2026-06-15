@@ -38,8 +38,8 @@ metrics:
 
   qa:
     automatic_metrics:
-      - name: "accuracy"
-        threshold: 1.0
+      - name: "semantic_accuracy"
+        threshold: 0.85
       - name: "exact_match"
         threshold: 1.0
       - name: "f1"

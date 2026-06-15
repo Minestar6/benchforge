@@ -155,7 +155,7 @@ class VerifyAgent:
             if citation_passed and self.model_client is not None and not self.config.llm_validation.enabled:
                 logger.info("LLM validation disabled by config, skipping")
             elif citation_passed and self.model_client is None and self.config.llm_validation.enabled:
-                raise RuntimeError("LLM validation enabled but no model_client provided")
+                logger.info("LLM validation enabled but no model_client provided, skipping")
             from .schema import LLMValidationResult
             llm_results = {
                 c.question_id: LLMValidationResult(

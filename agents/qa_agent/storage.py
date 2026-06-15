@@ -2,12 +2,29 @@
 
 import dataclasses
 import json
+import math
 from pathlib import Path
 from typing import Any
 
 from benchforge.utils.shared_state import build_shared_state, save_shared_state as save_ss
 
 from .state import GlobalState, ModeState, CandidateStatus
+
+
+def _mode_min_candidate_target(mode_cfg: Any, config: Any) -> int:
+    return math.ceil(mode_cfg.count * config.candidate_pool.min_candidate_multiplier)
+
+
+def _mode_max_candidate_target(mode_cfg: Any, config: Any) -> int:
+    return math.ceil(mode_cfg.count * config.candidate_pool.max_candidate_multiplier)
+
+
+def _mode_min_per_difficulty_targets(mode_cfg: Any, config: Any) -> dict[str, int]:
+    total = _mode_min_candidate_target(mode_cfg, config)
+    return {
+        diff: math.ceil(total * ratio)
+        for diff, ratio in (mode_cfg.difficulty_distribution or {}).items()
+    }
 
 
 def _default(obj: Any) -> Any:
@@ -40,12 +57,29 @@ def append_round_feedback(task_id: str, run_id: str, mode: str, feedback: Any) -
     _append_jsonl(path, dataclasses.asdict(feedback) if dataclasses.is_dataclass(feedback) else feedback)
 
 
-def save_mode_metrics(task_id: str, run_id: str, mode: str, mode_state: ModeState, target: int, mode_cfg: Any = None) -> None:
+def save_mode_metrics(
+    task_id: str,
+    run_id: str,
+    mode: str,
+    mode_state: ModeState,
+    mode_cfg: Any = None,
+    config: Any = None,
+) -> None:
     hard_target = (
         mode_cfg.difficulty_distribution.get("hard", 0.6) if mode_cfg is not None else 0.6
     )
     acc_diff = mode_state.get_difficulty_counts(CandidateStatus.ACCEPTED)
     acc_topic = mode_state.get_topic_counts(CandidateStatus.ACCEPTED)
+    min_target = _mode_min_candidate_target(mode_cfg, config) if mode_cfg is not None and config is not None else 0
+    max_target = _mode_max_candidate_target(mode_cfg, config) if mode_cfg is not None and config is not None else 0
+    min_diff_targets = (
+        _mode_min_per_difficulty_targets(mode_cfg, config)
+        if mode_cfg is not None and config is not None
+        else {}
+    )
+    min_target_reached = all(
+        acc_diff.get(diff, 0) >= target for diff, target in min_diff_targets.items()
+    ) if min_diff_targets else False
     metrics = {
         "candidate_count": mode_state.accepted_count,
         "accepted_count": mode_state.accepted_count,
@@ -55,8 +89,11 @@ def save_mode_metrics(task_id: str, run_id: str, mode: str, mode_state: ModeStat
         "difficulty_distribution": acc_diff,
         "hard_gap": round(mode_state.hard_gap(hard_target), 4),
         "stopped_reason": mode_state.stopped_reason,
-        "target": target,
-        "target_reached": mode_state.accepted_count >= target,
+        "min_candidate_target": min_target,
+        "max_candidate_target": max_target,
+        "min_difficulty_targets": min_diff_targets,
+        "min_target_reached": min_target_reached,
+        "max_target_reached": mode_state.accepted_count >= max_target if max_target > 0 else False,
     }
     _write_json(Path("runs") / task_id / run_id / mode / "mode_metrics.json", metrics)
 
@@ -145,18 +182,29 @@ def save_generation_report(
     mode_cfgs: dict[str, Any],
     config: Any,
 ) -> dict:
-    from .planner import mode_candidate_target
+    from .planner import mode_candidate_target, mode_max_candidate_target
 
     modes_summary = {}
     total_candidates = 0
 
     for mode, ms in mode_states.items():
-        target = mode_candidate_target(mode_cfgs[mode], config)
+        min_target = mode_candidate_target(mode_cfgs[mode], config)
+        max_target = mode_max_candidate_target(mode_cfgs[mode], config)
+        difficulty_counts = ms.get_difficulty_counts(CandidateStatus.ACCEPTED)
+        min_diff_targets = _mode_min_per_difficulty_targets(mode_cfgs[mode], config)
         modes_summary[mode] = {
             "candidate_count": ms.accepted_count,
             "accepted_count": ms.accepted_count,
-            "target_candidate_count": target,
-            "difficulty_counts": ms.get_difficulty_counts(CandidateStatus.ACCEPTED),
+            "min_candidate_target": min_target,
+            "max_candidate_target": max_target,
+            "target_candidate_count": min_target,
+            "difficulty_counts": difficulty_counts,
+            "min_difficulty_targets": min_diff_targets,
+            "min_target_reached": all(
+                difficulty_counts.get(diff, 0) >= target
+                for diff, target in min_diff_targets.items()
+            ) if min_diff_targets else False,
+            "max_target_reached": ms.accepted_count >= max_target,
             "stopped_reason": ms.stopped_reason,
         }
         total_candidates += ms.accepted_count

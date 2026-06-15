@@ -1,0 +1,2 @@
+model_name,question_mode,num_questions,accuracy,invalid_rate
+fake,multiple_choice,3,,1.0
