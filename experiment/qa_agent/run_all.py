@@ -37,11 +37,8 @@ TASK_ID = "qa_ablation"
 LANGUAGE = "en"
 
 TOPICS = [
-    "Climate Change",
     "Artificial Intelligence",
     "Quantum Computing",
-    "Renewable Energy",
-    "Human Immune System",
     "World War II",
 ]
 
@@ -58,9 +55,9 @@ SEEDS = [42]
 
 GROUPS = [
     ("A - Direct Generation", group_a_direct.run),
-    ("B - Multi-round No Feedback", group_b_no_feedback.run),
-    ("C - Feedback No Difficulty", group_c_feedback_no_difficulty.run),
-    ("D - Full Method", group_d_full.run),
+    # ("B - Multi-round No Feedback", group_b_no_feedback.run),
+    # ("C - Feedback No Difficulty", group_c_feedback_no_difficulty.run),
+    # ("D - Full Method", group_d_full.run),
 ]
 
 

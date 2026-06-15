@@ -1,0 +1,20 @@
+{
+  "task_id": "qa_ablation/seed_42",
+  "run_id": "D_full",
+  "modes": {
+    "qa": {
+      "candidate_count": 127,
+      "accepted_count": 127,
+      "target_candidate_count": 75,
+      "difficulty_counts": {
+        "medium": 55,
+        "easy": 16,
+        "hard": 56
+      },
+      "stopped_reason": "candidate_pool_sufficient"
+    }
+  },
+  "total_candidates": 127,
+  "global_used_chunk_combinations": 24,
+  "global_failures": 0
+}

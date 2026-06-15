@@ -28,12 +28,12 @@ Generate questions in the following JSON format:
 
 ```json
 [
-  {
+  {{
     "question": "The question text",
     "answer": "The correct answer",
     "difficulty": "easy | medium | hard",
     "citations": ["Exact quote 1 from source text"]
-  }
+  }}
 ]
 ```
 

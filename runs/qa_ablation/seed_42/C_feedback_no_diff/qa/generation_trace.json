@@ -1,0 +1,471 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "medium",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 3,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 18,
+        "raw_count": 18,
+        "filtered_count": 18,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_93055a5eb3a842c3a527370f39da0fcb",
+        "trace_call_id": "llm_08d57d3fb18f413f9993cb40e7372567",
+        "chunks": [
+          "doc_1be62bde08fd::chunk_0000",
+          "doc_1be62bde08fd::chunk_0004",
+          "doc_1be62bde08fd::chunk_0006",
+          "doc_804dae27c43f::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 20,
+        "raw_count": 20,
+        "filtered_count": 20,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_cff7cdf033874ebabc8b98824e9b8fba",
+        "trace_call_id": "llm_beba0310325549dfb57bd38c140b051d",
+        "chunks": [
+          "doc_53bf4489cf6c::chunk_0006",
+          "doc_cd5a4b0bb607::chunk_0007",
+          "doc_cd5a4b0bb607::chunk_0008",
+          "doc_cd5a4b0bb607::chunk_0009"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 16,
+        "raw_count": 16,
+        "filtered_count": 16,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_244920311ceb435eb7f2821cebfaf5f0",
+        "trace_call_id": "llm_d74b27c3041c447e998f447a0912fa89",
+        "chunks": [
+          "doc_a397697ae41f::chunk_0001",
+          "doc_a397697ae41f::chunk_0004",
+          "doc_a397697ae41f::chunk_0006",
+          "doc_a397697ae41f::chunk_0015"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "World War II",
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 8,
+        "raw_count": 8,
+        "filtered_count": 8,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_c990942b0c1f4b55a4f572fa180ad851",
+        "trace_call_id": "llm_331c1f8b4dc241359635e5da8915fd06",
+        "chunks": [
+          "doc_ea11fb2dc7ae::chunk_0013",
+          "doc_ea11fb2dc7ae::chunk_0015",
+          "doc_ea11fb2dc7ae::chunk_0023"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 8,
+        "raw_count": 8,
+        "filtered_count": 8,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_94618aa1319c46a7b3b0a9d23c9bbef1",
+        "trace_call_id": "llm_3c52783db96a42848d0d571fc3e3d9a3",
+        "chunks": [
+          "doc_10240d6c8bf0::chunk_0000",
+          "doc_10240d6c8bf0::chunk_0001",
+          "doc_10240d6c8bf0::chunk_0002",
+          "doc_10240d6c8bf0::chunk_0004"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 9,
+        "filtered_count": 9,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_8e9381edc246439a8aa354e4e078aa09",
+        "trace_call_id": "llm_282e8b99219841d4be6d8ca4187414e4",
+        "chunks": [
+          "doc_1445315a96fe::chunk_0006",
+          "doc_cd5a4b0bb607::chunk_0000",
+          "doc_cd5a4b0bb607::chunk_0004",
+          "doc_cd5a4b0bb607::chunk_0006",
+          "doc_cd5a4b0bb607::chunk_0009"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 3,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "World War II",
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 9,
+        "filtered_count": 9,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_2422a995912a460ab58e7a3dc8036d4c",
+        "trace_call_id": "llm_a839fce2552b41b28755457f9f44ffdd",
+        "chunks": [
+          "doc_38b526149796::chunk_0000",
+          "doc_ea11fb2dc7ae::chunk_0000",
+          "doc_ea11fb2dc7ae::chunk_0007",
+          "doc_ea11fb2dc7ae::chunk_0025",
+          "doc_ea11fb2dc7ae::chunk_0030"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 8,
+        "raw_count": 8,
+        "filtered_count": 8,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_b75095ffb2984c5b89ca71ca9977729f",
+        "trace_call_id": "llm_3c9c214d8f4943aea0cc92b9cc2cd3ae",
+        "chunks": [
+          "doc_804dae27c43f::chunk_0015",
+          "doc_aef977fc2141::chunk_0000",
+          "doc_aef977fc2141::chunk_0011",
+          "doc_aef977fc2141::chunk_0013",
+          "doc_aef977fc2141::chunk_0014"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 9,
+        "filtered_count": 9,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_fbac35988ecd4cc5982647e68e818a09",
+        "trace_call_id": "llm_ca72526219a94f27a77e1925ba5d7093",
+        "chunks": [
+          "doc_7d4efb3cc0af::chunk_0003",
+          "doc_ca2ce923aeb2::chunk_0000",
+          "doc_ca2ce923aeb2::chunk_0001",
+          "doc_ca2ce923aeb2::chunk_0002"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 4,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "World War II",
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 9,
+        "filtered_count": 9,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_970b623ef5e2438d8a35bf15439eb558",
+        "trace_call_id": "llm_7454ac05847b4393b7f95ac06a896562",
+        "chunks": [
+          "doc_0179a47d7650::chunk_0007",
+          "doc_9b6ecb700538::chunk_0000",
+          "doc_9b6ecb700538::chunk_0002",
+          "doc_9b6ecb700538::chunk_0003",
+          "doc_9b6ecb700538::chunk_0005"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 10,
+        "filtered_count": 9,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "The film's marketing strategy, as described, involved specific choices to manage audience expectations. Based on the box office performance details and the described marketing tactics, what inference can be made about the perceived mismatch between the film's content and its potential audience, and what was one concrete action taken to address this?",
+            "reason": "非法问题类型: inferential",
+            "raw_item": {
+              "question": "The film's marketing strategy, as described, involved specific choices to manage audience expectations. Based on the box office performance details and the described marketing tactics, what inference can be made about the perceived mismatch between the film's content and its potential audience, and what was one concrete action taken to address this?",
+              "answer": "The inference is that the studio (Warner Bros.) perceived a risk that audiences might mistake A.I., with its childlike protagonist and fairy-tale references, for a light family film, which would create a mismatch with its dark, complex, and philosophically mature content. This could lead to negative audience reactions if expectations were not properly set. One concrete action taken to address this was the deliberate decision to not create any action figures, a common merchandising tactic for family-friendly blockbusters. The text explicitly states this was done \"To avoid audiences mistaking A.I. for a family film.\" This caution is somewhat supported by the CinemaScore grade of \"C+\" from audiences, suggesting the film's challenging nature did not meet the expectations of a portion of the general viewing public.",
+              "question_mode": "qa",
+              "thought_process": "This question requires inferential reasoning by connecting a logistical business decision (no action figures) described in the 'Marketing' section to a potential problem inferred from the film's tone (described in the plot and critical sections) and later validated by a data point (the mediocre audience grade). It tests the ability to see a practical decision as evidence of a strategic concern about audience perception and genre alignment.",
+              "question_type": "inferential",
+              "required_capability": "Inferring strategic rationale from a tactical decision; connecting descriptive content analysis to marketing data and audience response.",
+              "estimated_difficulty": 7,
+              "citations": [
+                "To avoid audiences mistaking A.I. for a family film, no action figures were created, although Hasbro released a talking Teddy following the film's release in June 2001.",
+                "Audiences surveyed by CinemaScore gave the film an average grade of \"C+\" on a scale of A+ to F."
+              ]
+            },
+            "topic": "Artificial Intelligence",
+            "chunk_ids": [
+              "doc_10240d6c8bf0::chunk_0000",
+              "doc_10240d6c8bf0::chunk_0002",
+              "doc_10240d6c8bf0::chunk_0003",
+              "doc_10240d6c8bf0::chunk_0005"
+            ],
+            "chunks": [
+              "#Subheading: Plot\nIn the 22nd century, rising sea levels caused by global warming have wiped out coastal cities and altered the world's climate. With the human population in decline, advanced nations have created humanoid robots called mechas to fulfill various roles in society.\nIn Madison, New Jersey, David, an 11-year-old prototype mecha child capable of experiencing love, is given to Henry Swinton and his wife, Monica, whose son, Martin, is in suspended animation after contracting a rare disease. Initially uncomfortable with David, Monica eventually warms to him and activates his imprinting protocol. Touched by his love for her, she introduces him to Teddy, Martin's old robotic teddy bear, and the two become friends.\nAfter Martin is unexpectedly cured of his disease and brought home, he jealously goads David into cutting off a piece of Monica's hair. That night, David enters his adoptive parents' room, but as Monica turns over, the scissors accidentally poke her in the eye. While Henry attends to her wounds, Teddy picks up the lock of hair from the floor and places it in his pocket. During a pool party, one of Martin's friends pokes David with a knife, triggering his self-protection programming. David grabs Martin, causing both of them to fall into the pool. While Martin is rescued, David is accused of endangering others.\nFrightful of David's reactions and fearing for his family's safety, Henry convinces Monica to return David to his creators for destruction. En route, she instead spares David by abandoning him in a forest full of scrap metal and obsolete mechas, telling him to avoid people and find solace with his own kind. Now accompanied solely by Teddy, David recalls The Adventures of Pinocchio and decides to find the Blue Fairy in the hope that she will make him a \"real boy\" (and therefore worthy of Monica's love).\nDavid and Teddy are captured by the \"Flesh Fair\", a kind of traveling circus, in which obsolete mechas are destroyed in front of jeering crowds. About to be destroyed himself, David pleads for his life. The audience revolts, allowing David to escape with Gigolo Joe, a prostitute mecha on the run after being framed for murder. David, Teddy, and Joe go to the decadent resort town of Rouge City, where \"Dr. Know\", a holographic answer engine, directs them to the top of Rockefeller Center in the flooded ruins of New York City.\nAbove the ruins of New York, David meets Professor Hobby, his creator, who tells him that their meeting demonstrates David's ability to love and desire, as well as to pursue his dreams, like a human. David finds copies of himself, including female variants called \"Darlene\", ready to be shipped. Disheartened by his lost sense of individuality, David attempts suicide by falling from a skyscraper into the ocean. While underwater, he notices a figure resembling the Blue Fairy, before Joe rescues him in an amphibious aircraft. Before David can explain, authorities capture Joe with an electromagnet. David and Teddy take control of the aircraft to see the Blue Fairy, which turns out to be a statue from an attraction on Coney Island. The two become trapped when the Wonder Wheel falls on their vehicle. Believing that the Blue Fairy is real, David repeatedly asks the statue to turn him into a real boy until his power source is depleted.\nTwo thousand years later, humanity is extinct and Manhattan is buried under glacial ice. Mechas have evolved into an advanced form, and a group known as the Specialists, interested in humanity, find and resurrect David and Teddy. They reconstruct the Swinton family home from David's memories before explaining, via an interactive version of the Blue Fairy, that he cannot become human. However, they recreate Monica through genetic material from the strand of hair that Teddy kept. This version of Monica can live for only one day and cannot be revived. David spends his happiest day with Monica, and as she falls asleep in the evening, Monica tells David that she has always loved him. David lies down next to her and closes his eyes as Teddy watches over them.\n#Subheading: Cast\nHaley Joel Osment as David. Osment was Spielberg's first and only choice for the role. To portray the character, Osment avoided blinking his eyes and \"programmed\" himself with good posture.\nFrances O'Connor as Monica Swinton\nSam Robards as Henry Swinton\nJude Law as Gigolo Joe. To prepare for the role, Law studied the acting of Fred Astaire and Gene Kelly, whose movements Joe emulates.\nJake Thomas as Martin Swinton\nWilliam Hurt as Professor Allen Hobby\nBrendan Gleeson as Flesh Fair impresario Lord Johnson-Johnson\nJack Angel as Teddy (voice)\nSabrina Grdevich as Sheila\nApril Grace as Female Colleague\nKen Leung, Matt Winston, Eugene Osment and Clark Gregg as Cybertronics Corp employees\nEnrico Colantoni as The",
+              " November 1999, Spielberg was writing the screenplay based on Watson's 90-page story treatment. It was his first solo screenplay credit since Close Encounters of the Third Kind (1977). Pre-production was briefly halted during February 2000 because Spielberg pondered directing other projects, which were Harry Potter and the Philosopher's Stone, Minority Report and Memoirs of a Geisha. The following month, Spielberg announced that A.I. would be his next project, with Minority Report as a follow-up. When he decided to fast track A.I., Spielberg brought back Chris Baker as concept artist. Ian Watson reported that the final script was very faithful to Kubrick's vision; even the ending, which is often attributed to Spielberg, saying, \"The final 20 minutes are pretty close to what I wrote for Stanley, and what Stanley wanted, faithfully filmed by Spielberg without added schmaltz\".\n##Subheading: Filming and visual effects\nThe original start date was July 10, 2000, but filming was delayed until August. Aside from a couple of weeks of shooting on location in Oxbow Regional Park in Oregon, A.I. was shot entirely using sound stages at Warner Bros. Studios and the Spruce Goose Dome in Long Beach, California.\nSpielberg copied Kubrick's obsessively secretive approach to filmmaking by refusing to give the complete script to cast and crew, banning press from the set, and making actors sign confidentiality agreements. For instance, Jack Angel, who voiced Teddy, recorded his lines entirely out of context, only receiving direction to sound like Eeyore from Winnie the Pooh, except \"very wise and old and stoic\". However, Spielberg asked Angel to be on the set every day to make line alterations wherever he felt necessary. Spielberg initially wanted to follow Kubrick's vision to have David as a robot, he hired Stan Winston to build an animatronic of David until it was dropped after Spielberg and the crew saw Osment's performance in The Sixth Sense. Social robotics expert Cynthia Breazeal served as technical consultant during production. Costume designer Bob Ringwood studied pedestrians on the Las Vegas Strip for his influence on the Rouge City extras. Visual effects, such as removing the visible rods controlling Teddy and removing Haley Joel Osment's breath, were provided in-houses by PDI/DreamWorks.\n##Subheading: Casting\nJulianne Moore and Gwyneth Paltrow were considered for the role of Monica Swinton before Frances O'Connor was cast. Jerry Seinfeld was originally considered to voice and play the Comedian Robot before Chris Rock was cast.\n##Subheading: Allusions\nA. O. Scott notes Spielberg's homages to Kubrick, \"sly references to A Clockwork Orange, The Shining and predominantly 2001: A Space Odyssey\", as well as Collodi's Pinocchio. The lines Dr. Know quotes are from W. B. Yeats's \"The Stolen Child\":.\nCome away, O human child!\nTo the waters and the wild\nWith a faery, hand in hand,\nFor the world’s more full of weeping\nthan you can understand.\n#Subheading: Soundtrack\nThe film's soundtrack album was released by Warner Sunset Records in 2001. The original score was composed and conducted by John Williams, performed by the Hollywood Studio Symphony and features singers Lara Fabian on two songs and Josh Groban on one. The film's score also had a limited release as an official \"For your consideration Academy Promo\", as well as a complete score issued by La-La Land Records in 2015. The band Ministry appears in the film playing the song \"What About Us?\", but the song does not appear on the official soundtrack album.\nWilliams called his score an \"homage a Kubrick\". He includes echoes of György Ligeti's choral music, which Kubrick used in 2001: A Space Odyssey. Per Kubrick's request, Williams included a quotation of Richard Strauss's Der Rosenkavalier in his score.\n#Subheading: Release\n##Subheading: Marketing\nThe teaser trailer debuted on December 8, 2000, with the theatrical release of Proof of Life. Warner Bros. used an alternate reality game titled The Beast to promote the film. Over forty websites were created by Atomic Pictures in New York City (kept online at Cloudmakers.org), including the website for Cybertronics Corp. There were to be a series of video games for the Xbox video game console that followed the storyline of The Beast, but they went undeveloped. To avoid audiences mistaking A.I. for a family film, no action figures were created, although Hasbro released a talking Teddy following the film's release in June 2001. A.I. premiered at the Venice Film Festival in 2001.\n##Subheading: Home media\nA.I. Artificial Intelligence was released on VHS and DVD in the United States by DreamWorks Home Entertainment on March 5, 2002, in widescreen and fullscreen",
+              " Venice Film Festival in 2001.\n##Subheading: Home media\nA.I. Artificial Intelligence was released on VHS and DVD in the United States by DreamWorks Home Entertainment on March 5, 2002, in widescreen and fullscreen two-disc special editions featuring an extensive sixteen-part documentary detailing the film's development, production, visual effects, sound design and music. The bonuses also include interviews with Haley Joel Osment, Jude Law, Frances O'Connor, Steven Spielberg and John Williams, two teaser trailers for the film's original theatrical release, and an extensive photo gallery featuring production stills and Stanley Kubrick's original storyboards. It was released overseas by Warner Home Video.\nThe film was released on Blu-ray in Japan by Warner Home Video on December 22, 2010, followed shortly by a United States release by Paramount Home Entertainment (Paramount currently owns the pre-2010 live-action DreamWorks catalog) on April 5, 2011. This Blu-ray features the film remastered in high-definition and incorporates all the bonus features previously included on the two-disc special-edition DVD.\n#Subheading: Reception\n##Subheading: Box office\nThe film opened in 3,242 theaters in the United States and Canada on June 29, 2001, earning $29.35 million at #1 during its opening weekend. A.I. went on to gross $78.62 million in the United States and Canada. Opening on 524 screens in Japan, A.I. grossed almost two billion Yen in its first five days, the biggest June opening in Japan at the time, and sold more tickets in its opening weekend than Star Wars: Episode I – The Phantom Menace, although it grossed slightly less. It went on to gross $78 million in Japan. It grossed $157 million in other countries, for a worldwide total of $235.93 million.\n##Subheading: Critical response\nOn Rotten Tomatoes, A.I. Artificial Intelligence holds an approval rating of 76% based on reviews from 201 critics, with an average rating of 6.60/10. The website's critical consensus reads: \"A curious, not always seamless, amalgamation of Kubrick's chilly bleakness and Spielberg's warm-hearted optimism. A.I. is, in a word, fascinating.\" On Metacritic, it has a weighted average score of 65 out of 100 based on reviews from 32 critics, which indicates \"generally favorable reviews\". Audiences surveyed by CinemaScore gave the film an average grade of \"C+\" on a scale of A+ to F.\nProducer Jan Harlan stated that Kubrick \"would have applauded\" the final film, while Kubrick's widow Christiane also enjoyed A.I. Brian Aldiss admired the film as well: \"I thought what an inventive, intriguing, ingenious, involving film this was. There are flaws in it and I suppose I might have a personal quibble but it's so long since I wrote it.\" Of the film's ending, he wondered how it might have been had Kubrick directed the film: \"That is one of the 'ifs' of film history—at least the ending indicates Spielberg adding some sugar to Kubrick's wine. The actual ending is overly sympathetic and moreover rather overtly engineered by a plot device that does not really bear credence. But it's a brilliant piece of film and of course it's a phenomenon because it contains the energies and talents of two brilliant filmmakers.\".\nA. O. Scott writes: \"Mr. Spielberg seems to be attempting the improbable feat of melding Kubrick's chilly, analytical style with his own warmer, needier sensibility. He tells the story slowly and films it with lucid, mesmerizing objectivity, creating a mood as layered, dissonant and strange as John Williams's unusually restrained, modernist score.\" He concludes: \"The very end somehow fuses the cathartic comfort of infantile wish fulfillment -- the dream that the first perfect love whose loss we experience as the fall from Eden might be restored -- with a feeling almost too terrible to acknowledge or to name. Refusing to cuddle us or lull us into easy sleep, Mr. Spielberg locates the unspoken moral of all our fairy tales. To be real is to be mortal; to be human is to love, to dream and to perish.\".\nRoger Ebert of the Chicago Sun-Times gave the film three stars out of a possible four, saying that it is \"wonderful and maddening\". Ebert later gave the film a full four stars and added it to his \"Great Movies\" canon in 2011.\nLeonard Maltin, on the other hand, gives the film two stars out of four in his Movie Guide, writing, \"[The] intriguing story draws us in, thanks in part to Osment's exceptional performance, but takes several wrong turns; ultimately, it just doesn't work. Spielberg rewrote the adaptation Stanley Kubrick commissioned of the Brian Aldiss short",
+              " see why. Because, obviously, I've done a lot of movies where people have cried and have been sentimental. And I've been accused of sentimentalizing hard-core material. But in fact it was Stanley who did the sweetest parts of A.I., not me. I'm the guy who did the dark center of the movie, with the Flesh Fair and everything else. That's why he wanted me to make the movie in the first place. He said, 'This is much closer to your sensibilities than my own.'\" Spielberg said, \"While there was divisiveness when A.I. came out, I felt that I had achieved Stanley's wishes, or goals.\".\nOn re-watching the film many years after its release, BBC film critic Mark Kermode apologized to Spielberg in a January 2013 interview for \"getting it wrong\" on the film when he first viewed it in 2001. He came to believe that the film is Spielberg's \"enduring masterpiece\".\nIn July 2025, it was one of the films voted for the \"Readers' Choice\" edition of The New York Times' list of \"The 100 Best Movies of the 21st Century,\" finishing at number 258. That same month, it ranked number 61 on Rolling Stone's list of \"The 100 Best Movies of the 21st Century.\".\n#Subheading: Accolades\nVisual effects supervisors Dennis Muren, Stan Winston, Michael Lantieri and Scott Farrar were nominated for the Academy Award for Best Visual Effects, and John Williams was nominated for Best Original Music Score. Steven Spielberg, Jude Law and Williams received nominations at the 59th Golden Globe Awards. A.I. was successful at the Saturn Awards, winning five awards, including Best Science Fiction Film along with Best Writing for Spielberg and Best Performance by a Younger Actor for Osment."
+            ],
+            "llm_call_id": "llm_29b6973207d947c29a08e767d47d926c",
+            "trace_call_id": "llm_f03b2b249d9c4845ac0362509a7c142d",
+            "generation_round": 4
+          }
+        ],
+        "llm_call_id": "llm_29b6973207d947c29a08e767d47d926c",
+        "trace_call_id": "llm_f03b2b249d9c4845ac0362509a7c142d",
+        "chunks": [
+          "doc_10240d6c8bf0::chunk_0000",
+          "doc_10240d6c8bf0::chunk_0002",
+          "doc_10240d6c8bf0::chunk_0003",
+          "doc_10240d6c8bf0::chunk_0005",
+          "doc_1be62bde08fd::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 9,
+        "filtered_count": 9,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_3159ea92868e4d289ddfad2b30f50999",
+        "trace_call_id": "llm_ab9db2ede1d44320b1e9c05355f8f17b",
+        "chunks": [
+          "doc_7d4efb3cc0af::chunk_0000",
+          "doc_7d4efb3cc0af::chunk_0003",
+          "doc_7d4efb3cc0af::chunk_0004",
+          "doc_cd5a4b0bb607::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 5,
+    "strategy": "normal_generate",
+    "difficulty": "easy",
+    "topics": [
+      "World War II",
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 16,
+        "raw_count": 16,
+        "filtered_count": 16,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_3aef6a314eb94eaa8b7d513a9bb3f801",
+        "trace_call_id": "llm_0ef1168bc0334bd0952b70734f4ca886",
+        "chunks": [
+          "doc_0179a47d7650::chunk_0010",
+          "doc_38b526149796::chunk_0000",
+          "doc_38b526149796::chunk_0009",
+          "doc_38b526149796::chunk_0014",
+          "doc_38b526149796::chunk_0021"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 16,
+        "raw_count": 16,
+        "filtered_count": 16,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_6dfd54544ae446a2b6636095f7412eb8",
+        "trace_call_id": "llm_a13abb3fa4a948ec8320224fea21bb48",
+        "chunks": [
+          "doc_804dae27c43f::chunk_0000",
+          "doc_804dae27c43f::chunk_0004",
+          "doc_804dae27c43f::chunk_0011",
+          "doc_804dae27c43f::chunk_0013"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 15,
+        "raw_count": 17,
+        "filtered_count": 15,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "What is the relationship between the complexity classes P, BQP, and PSPACE as stated in the text, and what is the suspected (but unproven) relationship between BQP and P that would demonstrate a quantum advantage?",
+            "reason": "非法问题类型: theoretical",
+            "raw_item": {
+              "question": "What is the relationship between the complexity classes P, BQP, and PSPACE as stated in the text, and what is the suspected (but unproven) relationship between BQP and P that would demonstrate a quantum advantage?",
+              "answer": "The text states that P ⊆ BQP ⊆ PSPACE. This means all problems efficiently solvable by a classical deterministic computer (P) are also in BQP (efficiently solvable by a quantum computer), and all problems in BQP can be solved by a classical computer using polynomial space (PSPACE). The suspected, but unproven, relationship is that BQP is a strict superset of P (BQP ⊃ P). This would mean there exist problems that quantum computers can solve efficiently that classical deterministic computers cannot, which is the essence of the believed quantum advantage for problems like integer factorization.",
+              "question_mode": "qa",
+              "thought_process": "This question tests comprehension of the theoretical computer science framework used to classify quantum computational power. It requires the reader to recall the proven containment relationships and the more important conjectured one that underpins the entire field's promise. It moves from rote memory to interpreting what the conjecture means.",
+              "question_type": "theoretical",
+              "required_capability": "understanding and interpreting the relationships between computational complexity classes relevant to quantum computing",
+              "estimated_difficulty": 7,
+              "citations": [
+                "However, it is known that P ⊆ BQP ⊆ PSPACE; that is, all problems that can be efficiently solved by a deterministic classical computer can also be efficiently solved by a quantum computer, and all problems that can be efficiently solved by a quantum computer can also be solved by a deterministic classical computer with polynomial space resources. It is further suspected that BQP is a strict superset of P, meaning that there exist problems that are efficiently solvable by quantum computers that are not efficiently solvable by deterministic classical computers."
+              ]
+            },
+            "topic": "Quantum Computing",
+            "chunk_ids": [
+              "doc_cd5a4b0bb607::chunk_0000",
+              "doc_cd5a4b0bb607::chunk_0005",
+              "doc_cd5a4b0bb607::chunk_0009",
+              "doc_cd5a4b0bb607::chunk_0010"
+            ],
+            "chunks": [
+              "#Subheading: History\nFor many years, the fields of quantum mechanics and computer science formed distinct academic communities. Modern quantum theory was developed in the 1920s to explain perplexing physical phenomena observed at atomic scales, and digital computers emerged in the following decades to replace human computers for tedious calculations. Both disciplines had practical applications during World War II; computers played a major role in wartime cryptography, and quantum physics was essential for nuclear physics used in the Manhattan Project.\nAs physicists applied quantum mechanical models to computational problems and swapped digital bits for qubits, the fields of quantum mechanics and computer science began to converge. In 1980, Paul Benioff introduced the quantum Turing machine, which uses quantum theory to describe a simplified computer.\nWhen digital computers became faster, physicists faced an exponential increase in overhead when simulating quantum dynamics, prompting Yuri Manin and Richard Feynman to independently suggest that hardware based on quantum phenomena might be more efficient for computer simulation.\nIn a 1984 paper, Charles Bennett and Gilles Brassard applied quantum theory to cryptography protocols and demonstrated that quantum key distribution could enhance information security.\nQuantum algorithms then emerged for solving oracle problems, such as Deutsch's algorithm in 1985, the Bernstein–Vazirani algorithm in 1993, and Simon's algorithm in 1994.\nThese algorithms did not solve practical problems, but demonstrated mathematically that one could obtain more information by querying a black box with a quantum state in superposition, sometimes referred to as quantum parallelism.\nPeter Shor built on these results with his 1994 algorithm for breaking the widely used RSA and Diffie–Hellman encryption protocols, which drew significant attention to the field of quantum computing. In 1996, Grover's algorithm established a quantum speedup for the widely applicable unstructured search problem. The same year, Seth Lloyd proved that quantum computers could simulate quantum systems without the exponential overhead present in classical simulations, validating Feynman's 1982 conjecture.\nOver the years, experimentalists have constructed small-scale quantum computers using trapped ions and superconductors.\nIn 1998, a two-qubit quantum computer demonstrated the feasibility of the technology, and subsequent experiments have increased the number of qubits and reduced error rates.\nIn 2019, Google AI and NASA announced that they had achieved quantum supremacy with a 54-qubit machine, performing a computation that classical supercomputers would take an estimated 10,000 years to complete—a claim subsequently disputed by IBM, which argued the calculation could be done in approximately 2.5 days on its Summit supercomputer with optimized algorithms, sparking a debate over the precise threshold for this milestone.\nRecent milestones in quantum computing have increasingly focused on controlling decoherence through quantum error correction. In 2024, researchers demonstrated theoretical and practical approaches for high threshold, low-overhead fault-tolerant quantum memory. These developments represent a critical step toward scaling systems beyond the noisy intermediate-scale quantum (NISQ) era into reliable, fault-tolerant computing architectures, though large-scale physical implementation remains an ongoing engineering challenge.\n#Subheading: Quantum information processing\nComputer engineers typically describe a modern computer's operation in terms of classical electrodynamics. In these \"classical\" computers, some components (such as semiconductors and random number generators) may rely on quantum behavior; however, because they are not isolated from their environment, any quantum information eventually quickly decoheres. While programmers may depend on probability theory when designing a randomized algorithm, quantum-mechanical notions such as superposition and wave interference are largely irrelevant in program analysis.\nThe \"classical\" in classical computation thus refers to the computational model, not to whether the microscopic physics of the hardware is ultimately quantum-mechanical. A conventional digital computer can be described by classical states and transition rules: memory stores bits, while logic elements transform one configuration of bits into another. This computational behavior is not tied to electronics, and can be abstracted through the idea of a Turing machine, a mechanical device that performs deterministic transformations on a finite state. In principle, the same classical transition rules can be implemented by some entirely classical mechanical device, possibly with a fixed slow-down in physical time. If a classical computation uses randomness, this can be modeled as access to random classical bits rather than as coherent quantum information. A quantum computer, by contrast, uses coherent quantum states, so that superposition, relative phase, and interference are part of the computation itself, and has no classical counterpart.\nQuantum programs instead rely on precise control of coherent quantum systems. Physicists describe these systems mathematically using linear algebra. Complex numbers model probability amplitudes, vectors model quantum states, and matrices model the operations that can be performed on these states. Programming a quantum computer is then a matter of composing operations in such a way that the resulting program computes a useful result in theory and is implementable in practice.\nA classical computer is a quantum computer ... so we shouldn't be asking about \"where do quantum speedups come from?\" We should say, \"Well,",
+              " which is believed to be unlikely.\nIn addition to these problems, quantum algorithms are being explored for applications in cryptography, optimization, and machine learning, although most of these remain at the research stage and require significant advances in error correction and hardware scalability before practical implementation.\nSome quantum algorithms, such as Grover's algorithm and amplitude amplification, give polynomial speedups over corresponding classical algorithms. Though these algorithms give comparably modest quadratic speedup, they are widely applicable and thus give speedups for a wide range of problems. These speed-ups are, however, over the theoretical worst-case of classical algorithms, and concrete real-world speed-ups over algorithms used in practice have not been demonstrated.\n##Subheading: Simulation of quantum systems\nSince chemistry and nanotechnology rely on understanding quantum systems, and such systems are impossible to simulate in an efficient manner classically, quantum simulation may be an important application of quantum computing. Recent reviews identify quantum chemistry as one of the most promising application areas for quantum computing, particularly for problems in electronic structure, chemical dynamics, and spectroscopy, while noting that useful implementations remain limited by current hardware. Quantum simulation could also be used to simulate the behavior of atoms and particles at unusual conditions such as the reactions inside a collider. In June 2023, IBM computer scientists reported that a quantum computer produced better results for a physics problem than a conventional supercomputer.\nAbout 2% of the annual global energy output is used for nitrogen fixation to produce ammonia for the Haber process in the agricultural fertiliser industry (even though naturally occurring organisms also produce ammonia). Quantum simulations might be used to understand this process and increase the energy efficiency of production. It is expected that an early use of quantum computing will be modeling that improves the efficiency of the Haber–Bosch process by the mid-2020s although some have predicted it will take longer.\n##Subheading: Post-quantum cryptography\nA notable application of quantum computing is in attacking cryptographic systems that are currently in use. Integer factorization, which underpins the security of public key cryptographic systems, is believed to be computationally infeasible on a classical computer for large integers if they are the product of a few prime numbers (e.g., the product of two 300-digit primes). By contrast, a quantum computer could solve this problem exponentially faster using Shor's algorithm to factor the integer. This ability would allow a quantum computer to break many of the cryptographic systems in use today, in the sense that there would be a polynomial time (in the number of digits of the integer) algorithm for solving the problem. In particular, most of the popular public key ciphers are based on the difficulty of factoring integers or the discrete logarithm problem, both of which can be solved by Shor's algorithm. In particular, the RSA, Diffie–Hellman, and elliptic curve Diffie–Hellman algorithms could be broken. These are used to protect secure Web pages, encrypted email, and many other types of data. Breaking these would have significant ramifications for electronic privacy and security.\nIdentifying cryptographic systems that may be secure against quantum algorithms is an actively researched topic under the field of post-quantum cryptography. Some public-key algorithms are based on problems other than the integer factorization and discrete logarithm problems to which Shor's algorithm applies, such as the McEliece cryptosystem, which relies on a hard problem in coding theory. Lattice-based cryptosystems are also not known to be broken by quantum computers, and finding a polynomial time algorithm for solving the dihedral hidden subgroup problem, which would break many lattice-based cryptosystems, is a well-studied open problem. It has been shown that applying Grover's algorithm to break a symmetric (secret-key) algorithm by brute force requires time equal to roughly 2n/2 invocations of the underlying cryptographic algorithm, compared with roughly 2n in the classical case, meaning that symmetric key lengths are effectively halved: AES-256 would have comparable security against an attack using Grover's algorithm to that AES-128 has against classical brute-force search (see Key size).\n##Subheading: Search problems\nThe most well-known example of a problem that allows for a polynomial quantum speedup is unstructured search, which involves finding a marked item out of a list of \n\n\n\nn\n\n\n{\\displaystyle n}\n\n items in a database. This can be solved by Grover's algorithm using \n\n\n\nO\n(\n\n\nn\n\n\n)\n\n\n{\\displaystyle O({\\sqrt {n}})}\n\n queries to the database, quadratically fewer than the \n\n\n\nΩ\n(\nn\n)\n\n\n{\\displaystyle \\Omega (n)}\n\n queries required for classical algorithms. In this case, the advantage is not only provable but also optimal: it has been shown that Grover's algorithm gives the maximal possible probability of finding the desired element for any number of oracle lookups. Many examples of provable quantum speedups for query problems are based on Grover's algorithm, including Brassard, Høyer, and Tapp's algorithm for finding collisions in two",
+              "which may be unknown) and show that some quantum algorithms asymptotically improve upon those bounds.\nBill Unruh doubted the practicality of quantum computers in a paper published in 1994. Paul Davies argued that a 400-qubit computer would even come into conflict with the cosmological information bound implied by the holographic principle. Skeptics like Gil Kalai doubt that quantum supremacy will ever be achieved. Physicist Mikhail Dyakonov has expressed skepticism of quantum computing as follows:.\n##Subheading: Physical realizations\nA practical quantum computer must use a physical system as a programmable quantum register. Researchers are exploring several technologies as candidates for reliable qubit implementations. Superconductors and trapped ions are some of the most developed proposals, but experimentalists are considering other hardware possibilities as well.\nFor example, topological quantum computer approaches are being explored for more fault-tolerance computing systems.\nThe first quantum logic gates were implemented with trapped ions and prototype general-purpose machines with up to 20 qubits have been realized. However, the technology behind these devices combines complex vacuum equipment, lasers, and microwave and radio frequency equipment, making full-scale processors difficult to integrate with standard computing equipment. Moreover, the trapped ion system itself has engineering challenges to overcome.\nThe largest commercial systems are based on superconductor devices and have scaled to 2000 qubits. However, the error rates for larger machines have been on the order of 5%. Technologically, these devices are all cryogenic and scaling to large numbers of qubits requires wafer-scale integration, a serious engineering challenge by itself.\nIn addition to cryogenic platforms, room-temperature approaches to spin–photon interfaces have been experimentally demonstrated. In 2025, researchers at Stanford University realized a nanoscale device in which a thin layer of molybdenum diselenide is integrated on a nanostructured silicon substrate, enabling a spin–photon interface that operates at ambient conditions using structured \"twisted\" light to couple electronic and photonic degrees of freedom. Such room-temperature, chip-integrated spin–photon interfaces are being investigated as potential building blocks for heterogeneous quantum networks that combine different qubit modalities and reduce reliance on large cryogenic infrastructures.\n#Subheading: Theory\n##Subheading: Computability\nAny computational problem solvable by a classical computer is also solvable by a quantum computer. Intuitively, this is because it is believed that all physical phenomena, including the operation of classical computers, can be described using quantum mechanics, which underlies the operation of quantum computers.\nConversely, any problem solvable by a quantum computer is also solvable by a classical computer. It is possible to simulate both quantum and classical computers manually with just some paper and a pen, if given enough time. More formally, any quantum computer can be simulated by a Turing machine. In other words, quantum computers provide no additional power over classical computers in terms of computability. This means that quantum computers cannot solve undecidable problems like the halting problem, and the existence of quantum computers does not disprove the Church–Turing thesis.\n##Subheading: Complexity\nWhile quantum computers cannot solve any problems that classical computers cannot already solve, it is suspected that they can solve certain problems faster than classical computers. For instance, it is known that quantum computers can efficiently factor integers, while this is not believed to be the case for classical computers.\nThe class of problems that can be efficiently solved by a quantum computer with bounded error is called BQP, for \"bounded error, quantum, polynomial time\". More formally, BQP is the class of problems that can be solved by a polynomial-time quantum Turing machine with an error probability of at most 1/3. As a class of probabilistic problems, BQP is the quantum counterpart to BPP (\"bounded error, probabilistic, polynomial time\"), the class of problems that can be solved by polynomial-time probabilistic Turing machines with bounded error. It is known that \n\n\n\n\n\nB\nP\nP\n⊆\nB\nQ\nP\n\n\n\n\n{\\displaystyle {\\mathsf {BPP\\subseteq BQP}}}\n\n but there is no proof \n\n\n\n\n\nB\nQ\nP\n≠\nB\nP\nP\n\n\n\n\n{\\displaystyle {\\mathsf {BQP\neq BPP}}}\n\n, which intuitively would mean that quantum computers are more powerful than classical computers in terms of time complexity.\nThe exact relationship of BQP to P, NP, and PSPACE is not known. However, it is known that \n\n\n\n\n\nP\n⊆\nB\nQ\nP\n⊆\nP\nS\nP\nA\nC\nE\n\n\n\n\n{\\displaystyle {\\mathsf {P\\subseteq BQP\\subseteq PSPACE}}}\n\n; that is, all problems that can be efficiently solved by a deterministic classical computer can also be efficiently solved by a quantum computer, and all problems that can be efficiently solved by a quantum computer can also be solved by a deterministic classical computer with polynomial space resources.",
+              " is, all problems that can be efficiently solved by a deterministic classical computer can also be efficiently solved by a quantum computer, and all problems that can be efficiently solved by a quantum computer can also be solved by a deterministic classical computer with polynomial space resources. It is further suspected that BQP is a strict superset of P, meaning that there exist problems that are efficiently solvable by quantum computers that are not efficiently solvable by deterministic classical computers. For instance, integer factorization and the discrete logarithm problem are known to be in BQP and are suspected to be outside of P. On the relationship of BQP to NP, little is known beyond the fact that some NP problems that are believed not to be in P are also in BQP (integer factorization and the discrete logarithm problem are both in NP, for example). It is suspected that \n\n\n\n\n\nN\nP\n⊈\nB\nQ\nP\n\n\n\n\n{\\displaystyle {\\mathsf {NP\nsubseteq BQP}}}\n\n; that is, it is believed that there are efficiently checkable problems that are not efficiently solvable by a quantum computer. As a direct consequence of this belief, it is also suspected that BQP is disjoint from the class of NP-complete problems (if an NP-complete problem were in BQP, then it would follow from NP-hardness that all problems in NP are in BQP).\n#Subheading: List of quantum computers\nHanyuan-1 — 100-qubit neutral atom quantum computer from the Chinese Academy of Sciences in China.\nIBM Quantum System One — IBM superconducting quantum-computing system introduced in 2019.\nIBM Quantum System Two — modular superconducting system using IBM Heron processors.\nJiuzhang — photonic quantum-computing prototype for Gaussian boson sampling.\nQpiAI-Indus — 25-qubit superconducting quantum computer from QpiAI in India.\n##Subheading: Types of quantum computers\nCat qubit quantum computer — proposed approach based on cat-state qubits.\nKane quantum computer — proposed silicon-based nuclear spin quantum-computer architecture.\nLinear optical quantum computing — photonic model using photons and linear optical elements.\nNeutral atom quantum computer — approach using neutral atoms trapped and controlled with optical techniques.\nNuclear magnetic resonance quantum computer — approach using nuclear magnetic resonance and molecular nuclear-spin states.\nSpin qubit quantum computer — semiconductor architecture using spin states as qubits.\nSuperconducting quantum computing — approach using superconducting electronic circuits.\nTopological quantum computer — proposed approach using topological states such as anyons.\nTrapped-ion quantum computer — approach using trapped charged atoms as qubits."
+            ],
+            "llm_call_id": "llm_4e3d463cf2c3435ba302055612e49ceb",
+            "trace_call_id": "llm_9d8bd10bb1d5497d8d6a2b0cc9ee54b0",
+            "generation_round": 5
+          },
+          {
+            "question": "The text states that a primary focus of recent milestones is controlling decoherence through quantum error correction. What specific step beyond current technology does the text say this represents?",
+            "reason": "非法问题类型: synthesis",
+            "raw_item": {
+              "question": "The text states that a primary focus of recent milestones is controlling decoherence through quantum error correction. What specific step beyond current technology does the text say this represents?",
+              "answer": "Developments in quantum error correction, such as the 2024 demonstration of high-threshold, low-overhead fault-tolerant quantum memory, represent a critical step toward moving beyond the Noisy Intermediate-Scale Quantum (NISQ) era. The goal is to achieve reliable, fault-tolerant computing architectures, which are necessary for large-scale, practical quantum computation, though this remains an ongoing engineering challenge.",
+              "question_mode": "qa",
+              "thought_process": "This question tests if the reader understands the strategic direction of the field and the terminology used to describe its current state and future goals. It requires synthesizing the mention of error correction with the concept of the NISQ era and the target of fault tolerance.",
+              "question_type": "synthesis",
+              "required_capability": "synthesizing information about current research focus to understand its goal of transitioning between eras of quantum computing capability",
+              "estimated_difficulty": 6,
+              "citations": [
+                "Recent milestones in quantum computing have increasingly focused on controlling decoherence through quantum error correction. In 2024, researchers demonstrated theoretical and practical approaches for high threshold, low-overhead fault-tolerant quantum memory. These developments represent a critical step toward scaling systems beyond the noisy intermediate-scale quantum (NISQ) era into reliable, fault-tolerant computing architectures, though large-scale physical implementation remains an ongoing engineering challenge."
+              ]
+            },
+            "topic": "Quantum Computing",
+            "chunk_ids": [
+              "doc_cd5a4b0bb607::chunk_0000",
+              "doc_cd5a4b0bb607::chunk_0005",
+              "doc_cd5a4b0bb607::chunk_0009",
+              "doc_cd5a4b0bb607::chunk_0010"
+            ],
+            "chunks": [
+              "#Subheading: History\nFor many years, the fields of quantum mechanics and computer science formed distinct academic communities. Modern quantum theory was developed in the 1920s to explain perplexing physical phenomena observed at atomic scales, and digital computers emerged in the following decades to replace human computers for tedious calculations. Both disciplines had practical applications during World War II; computers played a major role in wartime cryptography, and quantum physics was essential for nuclear physics used in the Manhattan Project.\nAs physicists applied quantum mechanical models to computational problems and swapped digital bits for qubits, the fields of quantum mechanics and computer science began to converge. In 1980, Paul Benioff introduced the quantum Turing machine, which uses quantum theory to describe a simplified computer.\nWhen digital computers became faster, physicists faced an exponential increase in overhead when simulating quantum dynamics, prompting Yuri Manin and Richard Feynman to independently suggest that hardware based on quantum phenomena might be more efficient for computer simulation.\nIn a 1984 paper, Charles Bennett and Gilles Brassard applied quantum theory to cryptography protocols and demonstrated that quantum key distribution could enhance information security.\nQuantum algorithms then emerged for solving oracle problems, such as Deutsch's algorithm in 1985, the Bernstein–Vazirani algorithm in 1993, and Simon's algorithm in 1994.\nThese algorithms did not solve practical problems, but demonstrated mathematically that one could obtain more information by querying a black box with a quantum state in superposition, sometimes referred to as quantum parallelism.\nPeter Shor built on these results with his 1994 algorithm for breaking the widely used RSA and Diffie–Hellman encryption protocols, which drew significant attention to the field of quantum computing. In 1996, Grover's algorithm established a quantum speedup for the widely applicable unstructured search problem. The same year, Seth Lloyd proved that quantum computers could simulate quantum systems without the exponential overhead present in classical simulations, validating Feynman's 1982 conjecture.\nOver the years, experimentalists have constructed small-scale quantum computers using trapped ions and superconductors.\nIn 1998, a two-qubit quantum computer demonstrated the feasibility of the technology, and subsequent experiments have increased the number of qubits and reduced error rates.\nIn 2019, Google AI and NASA announced that they had achieved quantum supremacy with a 54-qubit machine, performing a computation that classical supercomputers would take an estimated 10,000 years to complete—a claim subsequently disputed by IBM, which argued the calculation could be done in approximately 2.5 days on its Summit supercomputer with optimized algorithms, sparking a debate over the precise threshold for this milestone.\nRecent milestones in quantum computing have increasingly focused on controlling decoherence through quantum error correction. In 2024, researchers demonstrated theoretical and practical approaches for high threshold, low-overhead fault-tolerant quantum memory. These developments represent a critical step toward scaling systems beyond the noisy intermediate-scale quantum (NISQ) era into reliable, fault-tolerant computing architectures, though large-scale physical implementation remains an ongoing engineering challenge.\n#Subheading: Quantum information processing\nComputer engineers typically describe a modern computer's operation in terms of classical electrodynamics. In these \"classical\" computers, some components (such as semiconductors and random number generators) may rely on quantum behavior; however, because they are not isolated from their environment, any quantum information eventually quickly decoheres. While programmers may depend on probability theory when designing a randomized algorithm, quantum-mechanical notions such as superposition and wave interference are largely irrelevant in program analysis.\nThe \"classical\" in classical computation thus refers to the computational model, not to whether the microscopic physics of the hardware is ultimately quantum-mechanical. A conventional digital computer can be described by classical states and transition rules: memory stores bits, while logic elements transform one configuration of bits into another. This computational behavior is not tied to electronics, and can be abstracted through the idea of a Turing machine, a mechanical device that performs deterministic transformations on a finite state. In principle, the same classical transition rules can be implemented by some entirely classical mechanical device, possibly with a fixed slow-down in physical time. If a classical computation uses randomness, this can be modeled as access to random classical bits rather than as coherent quantum information. A quantum computer, by contrast, uses coherent quantum states, so that superposition, relative phase, and interference are part of the computation itself, and has no classical counterpart.\nQuantum programs instead rely on precise control of coherent quantum systems. Physicists describe these systems mathematically using linear algebra. Complex numbers model probability amplitudes, vectors model quantum states, and matrices model the operations that can be performed on these states. Programming a quantum computer is then a matter of composing operations in such a way that the resulting program computes a useful result in theory and is implementable in practice.\nA classical computer is a quantum computer ... so we shouldn't be asking about \"where do quantum speedups come from?\" We should say, \"Well,",
+              " which is believed to be unlikely.\nIn addition to these problems, quantum algorithms are being explored for applications in cryptography, optimization, and machine learning, although most of these remain at the research stage and require significant advances in error correction and hardware scalability before practical implementation.\nSome quantum algorithms, such as Grover's algorithm and amplitude amplification, give polynomial speedups over corresponding classical algorithms. Though these algorithms give comparably modest quadratic speedup, they are widely applicable and thus give speedups for a wide range of problems. These speed-ups are, however, over the theoretical worst-case of classical algorithms, and concrete real-world speed-ups over algorithms used in practice have not been demonstrated.\n##Subheading: Simulation of quantum systems\nSince chemistry and nanotechnology rely on understanding quantum systems, and such systems are impossible to simulate in an efficient manner classically, quantum simulation may be an important application of quantum computing. Recent reviews identify quantum chemistry as one of the most promising application areas for quantum computing, particularly for problems in electronic structure, chemical dynamics, and spectroscopy, while noting that useful implementations remain limited by current hardware. Quantum simulation could also be used to simulate the behavior of atoms and particles at unusual conditions such as the reactions inside a collider. In June 2023, IBM computer scientists reported that a quantum computer produced better results for a physics problem than a conventional supercomputer.\nAbout 2% of the annual global energy output is used for nitrogen fixation to produce ammonia for the Haber process in the agricultural fertiliser industry (even though naturally occurring organisms also produce ammonia). Quantum simulations might be used to understand this process and increase the energy efficiency of production. It is expected that an early use of quantum computing will be modeling that improves the efficiency of the Haber–Bosch process by the mid-2020s although some have predicted it will take longer.\n##Subheading: Post-quantum cryptography\nA notable application of quantum computing is in attacking cryptographic systems that are currently in use. Integer factorization, which underpins the security of public key cryptographic systems, is believed to be computationally infeasible on a classical computer for large integers if they are the product of a few prime numbers (e.g., the product of two 300-digit primes). By contrast, a quantum computer could solve this problem exponentially faster using Shor's algorithm to factor the integer. This ability would allow a quantum computer to break many of the cryptographic systems in use today, in the sense that there would be a polynomial time (in the number of digits of the integer) algorithm for solving the problem. In particular, most of the popular public key ciphers are based on the difficulty of factoring integers or the discrete logarithm problem, both of which can be solved by Shor's algorithm. In particular, the RSA, Diffie–Hellman, and elliptic curve Diffie–Hellman algorithms could be broken. These are used to protect secure Web pages, encrypted email, and many other types of data. Breaking these would have significant ramifications for electronic privacy and security.\nIdentifying cryptographic systems that may be secure against quantum algorithms is an actively researched topic under the field of post-quantum cryptography. Some public-key algorithms are based on problems other than the integer factorization and discrete logarithm problems to which Shor's algorithm applies, such as the McEliece cryptosystem, which relies on a hard problem in coding theory. Lattice-based cryptosystems are also not known to be broken by quantum computers, and finding a polynomial time algorithm for solving the dihedral hidden subgroup problem, which would break many lattice-based cryptosystems, is a well-studied open problem. It has been shown that applying Grover's algorithm to break a symmetric (secret-key) algorithm by brute force requires time equal to roughly 2n/2 invocations of the underlying cryptographic algorithm, compared with roughly 2n in the classical case, meaning that symmetric key lengths are effectively halved: AES-256 would have comparable security against an attack using Grover's algorithm to that AES-128 has against classical brute-force search (see Key size).\n##Subheading: Search problems\nThe most well-known example of a problem that allows for a polynomial quantum speedup is unstructured search, which involves finding a marked item out of a list of \n\n\n\nn\n\n\n{\\displaystyle n}\n\n items in a database. This can be solved by Grover's algorithm using \n\n\n\nO\n(\n\n\nn\n\n\n)\n\n\n{\\displaystyle O({\\sqrt {n}})}\n\n queries to the database, quadratically fewer than the \n\n\n\nΩ\n(\nn\n)\n\n\n{\\displaystyle \\Omega (n)}\n\n queries required for classical algorithms. In this case, the advantage is not only provable but also optimal: it has been shown that Grover's algorithm gives the maximal possible probability of finding the desired element for any number of oracle lookups. Many examples of provable quantum speedups for query problems are based on Grover's algorithm, including Brassard, Høyer, and Tapp's algorithm for finding collisions in two",
+              "which may be unknown) and show that some quantum algorithms asymptotically improve upon those bounds.\nBill Unruh doubted the practicality of quantum computers in a paper published in 1994. Paul Davies argued that a 400-qubit computer would even come into conflict with the cosmological information bound implied by the holographic principle. Skeptics like Gil Kalai doubt that quantum supremacy will ever be achieved. Physicist Mikhail Dyakonov has expressed skepticism of quantum computing as follows:.\n##Subheading: Physical realizations\nA practical quantum computer must use a physical system as a programmable quantum register. Researchers are exploring several technologies as candidates for reliable qubit implementations. Superconductors and trapped ions are some of the most developed proposals, but experimentalists are considering other hardware possibilities as well.\nFor example, topological quantum computer approaches are being explored for more fault-tolerance computing systems.\nThe first quantum logic gates were implemented with trapped ions and prototype general-purpose machines with up to 20 qubits have been realized. However, the technology behind these devices combines complex vacuum equipment, lasers, and microwave and radio frequency equipment, making full-scale processors difficult to integrate with standard computing equipment. Moreover, the trapped ion system itself has engineering challenges to overcome.\nThe largest commercial systems are based on superconductor devices and have scaled to 2000 qubits. However, the error rates for larger machines have been on the order of 5%. Technologically, these devices are all cryogenic and scaling to large numbers of qubits requires wafer-scale integration, a serious engineering challenge by itself.\nIn addition to cryogenic platforms, room-temperature approaches to spin–photon interfaces have been experimentally demonstrated. In 2025, researchers at Stanford University realized a nanoscale device in which a thin layer of molybdenum diselenide is integrated on a nanostructured silicon substrate, enabling a spin–photon interface that operates at ambient conditions using structured \"twisted\" light to couple electronic and photonic degrees of freedom. Such room-temperature, chip-integrated spin–photon interfaces are being investigated as potential building blocks for heterogeneous quantum networks that combine different qubit modalities and reduce reliance on large cryogenic infrastructures.\n#Subheading: Theory\n##Subheading: Computability\nAny computational problem solvable by a classical computer is also solvable by a quantum computer. Intuitively, this is because it is believed that all physical phenomena, including the operation of classical computers, can be described using quantum mechanics, which underlies the operation of quantum computers.\nConversely, any problem solvable by a quantum computer is also solvable by a classical computer. It is possible to simulate both quantum and classical computers manually with just some paper and a pen, if given enough time. More formally, any quantum computer can be simulated by a Turing machine. In other words, quantum computers provide no additional power over classical computers in terms of computability. This means that quantum computers cannot solve undecidable problems like the halting problem, and the existence of quantum computers does not disprove the Church–Turing thesis.\n##Subheading: Complexity\nWhile quantum computers cannot solve any problems that classical computers cannot already solve, it is suspected that they can solve certain problems faster than classical computers. For instance, it is known that quantum computers can efficiently factor integers, while this is not believed to be the case for classical computers.\nThe class of problems that can be efficiently solved by a quantum computer with bounded error is called BQP, for \"bounded error, quantum, polynomial time\". More formally, BQP is the class of problems that can be solved by a polynomial-time quantum Turing machine with an error probability of at most 1/3. As a class of probabilistic problems, BQP is the quantum counterpart to BPP (\"bounded error, probabilistic, polynomial time\"), the class of problems that can be solved by polynomial-time probabilistic Turing machines with bounded error. It is known that \n\n\n\n\n\nB\nP\nP\n⊆\nB\nQ\nP\n\n\n\n\n{\\displaystyle {\\mathsf {BPP\\subseteq BQP}}}\n\n but there is no proof \n\n\n\n\n\nB\nQ\nP\n≠\nB\nP\nP\n\n\n\n\n{\\displaystyle {\\mathsf {BQP\neq BPP}}}\n\n, which intuitively would mean that quantum computers are more powerful than classical computers in terms of time complexity.\nThe exact relationship of BQP to P, NP, and PSPACE is not known. However, it is known that \n\n\n\n\n\nP\n⊆\nB\nQ\nP\n⊆\nP\nS\nP\nA\nC\nE\n\n\n\n\n{\\displaystyle {\\mathsf {P\\subseteq BQP\\subseteq PSPACE}}}\n\n; that is, all problems that can be efficiently solved by a deterministic classical computer can also be efficiently solved by a quantum computer, and all problems that can be efficiently solved by a quantum computer can also be solved by a deterministic classical computer with polynomial space resources.",
+              " is, all problems that can be efficiently solved by a deterministic classical computer can also be efficiently solved by a quantum computer, and all problems that can be efficiently solved by a quantum computer can also be solved by a deterministic classical computer with polynomial space resources. It is further suspected that BQP is a strict superset of P, meaning that there exist problems that are efficiently solvable by quantum computers that are not efficiently solvable by deterministic classical computers. For instance, integer factorization and the discrete logarithm problem are known to be in BQP and are suspected to be outside of P. On the relationship of BQP to NP, little is known beyond the fact that some NP problems that are believed not to be in P are also in BQP (integer factorization and the discrete logarithm problem are both in NP, for example). It is suspected that \n\n\n\n\n\nN\nP\n⊈\nB\nQ\nP\n\n\n\n\n{\\displaystyle {\\mathsf {NP\nsubseteq BQP}}}\n\n; that is, it is believed that there are efficiently checkable problems that are not efficiently solvable by a quantum computer. As a direct consequence of this belief, it is also suspected that BQP is disjoint from the class of NP-complete problems (if an NP-complete problem were in BQP, then it would follow from NP-hardness that all problems in NP are in BQP).\n#Subheading: List of quantum computers\nHanyuan-1 — 100-qubit neutral atom quantum computer from the Chinese Academy of Sciences in China.\nIBM Quantum System One — IBM superconducting quantum-computing system introduced in 2019.\nIBM Quantum System Two — modular superconducting system using IBM Heron processors.\nJiuzhang — photonic quantum-computing prototype for Gaussian boson sampling.\nQpiAI-Indus — 25-qubit superconducting quantum computer from QpiAI in India.\n##Subheading: Types of quantum computers\nCat qubit quantum computer — proposed approach based on cat-state qubits.\nKane quantum computer — proposed silicon-based nuclear spin quantum-computer architecture.\nLinear optical quantum computing — photonic model using photons and linear optical elements.\nNeutral atom quantum computer — approach using neutral atoms trapped and controlled with optical techniques.\nNuclear magnetic resonance quantum computer — approach using nuclear magnetic resonance and molecular nuclear-spin states.\nSpin qubit quantum computer — semiconductor architecture using spin states as qubits.\nSuperconducting quantum computing — approach using superconducting electronic circuits.\nTopological quantum computer — proposed approach using topological states such as anyons.\nTrapped-ion quantum computer — approach using trapped charged atoms as qubits."
+            ],
+            "llm_call_id": "llm_4e3d463cf2c3435ba302055612e49ceb",
+            "trace_call_id": "llm_9d8bd10bb1d5497d8d6a2b0cc9ee54b0",
+            "generation_round": 5
+          }
+        ],
+        "llm_call_id": "llm_4e3d463cf2c3435ba302055612e49ceb",
+        "trace_call_id": "llm_9d8bd10bb1d5497d8d6a2b0cc9ee54b0",
+        "chunks": [
+          "doc_cd5a4b0bb607::chunk_0000",
+          "doc_cd5a4b0bb607::chunk_0005",
+          "doc_cd5a4b0bb607::chunk_0009",
+          "doc_cd5a4b0bb607::chunk_0010"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

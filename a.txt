@@ -1,0 +1,335 @@
+(bench_agent) PS D:\Download\vscode\code\master\benchforge> & D:/Anaconda/envs/bench_agent/python.exe d:/Download/vscode/code/master/benchforge/experiment/qa_agent/run_all.py
+[run_all] Model: deepseek-v3-2-251201
+[run_all] Topics: ['Artificial Intelligence', 'Quantum Computing', 'World War II']
+[run_all] Seeds: [42]
+
+================================================================================
+[run_all] Starting A - Direct Generation, seed=42
+================================================================================
+2026-06-15 00:18:56.683 | INFO     | group_a_direct:run:64 - === Group A: Direct Generation === run_id=A_direct
+2026-06-15 00:18:56.962 | INFO     | direct_generation:run_direct_generation:198 - [Direct] Preparing evidence for 3 topics
+  [saliency] Artificial intelligence: 25.66M views
+  [saliency] Artificial general intelligence: 2.77M views
+  [saliency] A.I. Artificial Intelligence: 2.68M views
+  [saliency] History of artificial intelligence: 1.67M views
+  [saliency] Hallucination (artificial intelligence): 0.91M views
+  [saliency] Artificial Intelligence Act: 0.38M views
+  [saliency] Generative AI: 0.09M views
+  [saliency] Glossary of artificial intelligence: 0.23M views
+  [saliency] List of artificial intelligence companies: 0.00M views
+  [saliency] Ethics of artificial intelligence: 0.41M views
+  [saliency] Quantum computing: 4.04M views
+  [saliency] Superconducting quantum computing: 0.24M views
+  [saliency] Timeline of quantum computing and communication: 0.28M views
+  [saliency] Trapped-ion quantum computer: 0.06M views
+  [saliency] Glossary of quantum computing: 0.05M views
+  [saliency] Post-quantum cryptography: 0.78M views
+  [429] rate limited, retrying in 5s (attempt 1/4)...
+  [429] rate limited, retrying in 10s (attempt 2/4)...
+  [saliency] Silicon Quantum Computing: 0.00M views
+  [saliency] List of companies involved in quantum computing, communication or sensing: 0.00M views
+  [saliency] Fault tolerant quantum computing: 0.00M views
+  [saliency] QuEra Computing Inc.: 0.01M views
+  [saliency] World War II: 62.79M views
+  [saliency] Allies of World War II: 4.73M views
+  [429] rate limited, retrying in 5s (attempt 1/4)...
+  [429] rate limited, retrying in 10s (attempt 2/4)...
+  [429] rate limited, retrying in 20s (attempt 3/4)...
+  [saliency] World War II casualties: 5.30M views
+  [saliency] Aftermath of World War II: 1.11M views
+  [saliency] World War II by country: 1.51M views
+  [saliency] Pacific War: 3.20M views
+  [saliency] List of theaters and campaigns of World War II: 0.20M views
+  [saliency] Declarations of war during World War II: 0.31M views
+  [saliency] List of timelines of World War II: 0.61M views
+  [saliency] List of aircraft of World War II: 1.15M views
+  [429] rate limited, retrying in 5s (attempt 1/4)...
+  [429] rate limited, retrying in 10s (attempt 2/4)...
+  [429] rate limited, retrying in 20s (attempt 3/4)...
+[run_all] FAILED: A - Direct Generation, seed=42, error='\n    "question"'
+Traceback (most recent call last):
+  File "d:\Download\vscode\code\master\benchforge\experiment\qa_agent\run_all.py", line 93, in main
+    await run_fn(
+  File "d:\Download\vscode\code\master\benchforge\experiment\qa_agent\group_a_direct.py", line 65, in run
+    await run_direct_generation(
+  File "d:\Download\vscode\code\master\benchforge\experiment\qa_agent\direct_generation.py", line 214, in run_direct_generation
+    system_prompt = _QA_SYSTEM.format(easy=easy_n, medium=medium_n, hard=hard_n)
+KeyError: '\n    "question"'
+
+================================================================================
+[run_all] Starting B - Multi-round No Feedback, seed=42
+================================================================================
+2026-06-15 00:23:11.626 | INFO     | group_b_no_feedback:run:65 - === Group B: Multi-round No Feedback === run_id=B_no_feedback
+2026-06-15 00:23:11.779 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:142 - Preparing evidence for 3 topics (parallel)
+  [saliency] Artificial intelligence: 25.66M views
+  [saliency] Artificial general intelligence: 2.77M views
+  [saliency] A.I. Artificial Intelligence: 2.68M views
+  [saliency] History of artificial intelligence: 1.67M views
+  [saliency] Hallucination (artificial intelligence): 0.91M views
+  [saliency] Artificial Intelligence Act: 0.38M views
+  [saliency] Generative AI: 0.09M views
+  [saliency] Glossary of artificial intelligence: 0.23M views
+  [saliency] Existential risk from artificial intelligence: 0.04M views
+  [saliency] Association for the Advancement of Artificial Intelligence: 0.07M views
+  [saliency] Quantum computing: 4.04M views
+  [saliency] Superconducting quantum computing: 0.24M views
+  [saliency] Trapped-ion quantum computer: 0.06M views
+  [saliency] Timeline of quantum computing and communication: 0.28M views
+  [saliency] Glossary of quantum computing: 0.05M views
+  [429] rate limited, retrying in 5s (attempt 1/4)...
+  [saliency] Institute for Quantum Computing: 0.03M views
+  [saliency] Fault tolerant quantum computing: 0.00M views
+  [saliency] List of companies involved in quantum computing, communication or sensing: 0.00M views
+  [saliency] Post-quantum cryptography: 0.78M views
+  [saliency] Silicon Quantum Computing: 0.00M views
+  [saliency] World War II: 62.79M views
+  [saliency] World War II casualties: 5.30M views
+  [saliency] Aftermath of World War II: 1.11M views
+  [saliency] Allies of World War II: 4.73M views
+  [saliency] World War II by country: 1.51M views
+  [saliency] Pacific War: 3.20M views
+  [saliency] List of theaters and campaigns of World War II: 0.20M views
+  [saliency] Declarations of war during World War II: 0.31M views
+  [saliency] List of timelines of World War II: 0.61M views
+  [saliency] Tanks in World War II: 0.52M views
+  [429] rate limited, retrying in 5s (attempt 1/4)...
+2026-06-15 00:25:50.680 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\qa_ablation\seed_42\B_no_feedback\evidence\chunked.json
+2026-06-15 00:25:50.694 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\qa_ablation\seed_42\B_no_feedback\evidence\single_units.json
+2026-06-15 00:25:50.700 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\qa_ablation\seed_42\B_no_feedback\evidence\multi_units.json
+2026-06-15 00:25:50.701 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:208 - Starting mode: qa
+2026-06-15 00:27:12.541 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=11833
+2026-06-15 00:27:19.901 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=10943
+2026-06-15 00:27:32.856 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15525
+2026-06-15 00:28:56.663 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=14619
+2026-06-15 00:29:23.910 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=17472
+2026-06-15 00:29:31.559 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=16391
+2026-06-15 00:29:31.563 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=1 strategy=normal_generate generated=51 accepted=51 total_accepted=51
+2026-06-15 00:30:54.024 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=12224
+2026-06-15 00:30:58.749 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=12653
+2026-06-15 00:31:01.131 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=13601
+2026-06-15 00:32:45.644 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15029
+2026-06-15 00:33:11.382 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=19042
+2026-06-15 00:33:22.174 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=21574
+2026-06-15 00:33:22.178 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=2 strategy=normal_generate generated=49 accepted=49 total_accepted=100
+2026-06-15 00:34:49.974 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=12497
+2026-06-15 00:34:53.757 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=12675
+2026-06-15 00:35:02.646 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15737
+2026-06-15 00:36:34.180 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15118
+2026-06-15 00:36:44.944 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=14627
+2026-06-15 00:36:57.145 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=17971
+2026-06-15 00:36:57.152 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=3 strategy=normal_generate generated=47 accepted=47 total_accepted=147
+2026-06-15 00:38:11.382 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=10700
+2026-06-15 00:38:38.033 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15401
+2026-06-15 00:38:39.537 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15422
+2026-06-15 00:39:43.376 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=13427
+2026-06-15 00:40:30.961 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=17597
+2026-06-15 00:40:37.318 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=16304
+2026-06-15 00:40:37.322 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=4 strategy=normal_generate generated=49 accepted=49 total_accepted=196
+2026-06-15 00:41:51.539 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=9759
+2026-06-15 00:42:01.321 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=11661
+2026-06-15 00:42:06.504 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=13642
+2026-06-15 00:43:38.150 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=14107
+2026-06-15 00:43:56.512 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=17645
+2026-06-15 00:44:14.841 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=18364
+2026-06-15 00:44:14.845 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=5 strategy=normal_generate generated=49 accepted=49 total_accepted=245
+2026-06-15 00:45:35.658 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=12038
+2026-06-15 00:45:36.619 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=11385
+2026-06-15 00:45:46.596 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=14158
+2026-06-15 00:47:16.668 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15053
+2026-06-15 00:47:20.409 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15433
+2026-06-15 00:47:31.594 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=14505
+2026-06-15 00:47:31.601 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=6 strategy=normal_generate generated=50 accepted=50 total_accepted=295
+2026-06-15 00:48:37.181 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=9385
+2026-06-15 00:49:11.087 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=14052
+2026-06-15 00:49:12.410 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=14611
+2026-06-15 00:50:37.278 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=17599
+2026-06-15 00:50:53.363 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15231
+2026-06-15 00:50:58.981 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=16213
+2026-06-15 00:50:58.985 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=7 strategy=normal_generate generated=50 accepted=50 total_accepted=345
+2026-06-15 00:52:25.896 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=13048
+2026-06-15 00:52:31.362 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=13994
+2026-06-15 00:52:48.526 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15846
+2026-06-15 00:54:20.166 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=17509
+2026-06-15 00:54:24.039 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=16095
+2026-06-15 00:54:28.338 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=14392
+2026-06-15 00:54:28.341 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=8 strategy=normal_generate generated=52 accepted=52 total_accepted=397
+2026-06-15 00:55:47.452 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=11825
+2026-06-15 00:55:53.841 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=12671
+2026-06-15 00:55:59.051 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=12422
+2026-06-15 00:57:47.752 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=17795
+2026-06-15 00:57:50.271 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=17907
+2026-06-15 00:58:08.987 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=19042
+2026-06-15 00:58:08.994 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=9 strategy=normal_generate generated=50 accepted=50 total_accepted=447
+2026-06-15 00:59:19.990 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=10336
+2026-06-15 00:59:23.321 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=11246
+2026-06-15 00:59:53.220 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15562
+2026-06-15 01:01:04.247 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=14705
+2026-06-15 01:01:07.405 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15781
+2026-06-15 01:01:59.008 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=18209
+2026-06-15 01:01:59.013 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=10 strategy=normal_generate generated=50 accepted=50 total_accepted=497
+2026-06-15 01:01:59.013 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:265 - Mode qa stopped: max_rounds_reached
+2026-06-15 01:01:59.440 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:221 - Mode qa complete: 497 accepted, stopped_reason=max_rounds_reached
+2026-06-15 01:01:59.445 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:237 - Generation complete. Output: runs/qa_ablation/seed_42/B_no_feedback/
+2026-06-15 01:01:59.447 | INFO     | group_b_no_feedback:run:70 - Group B completed. run_id=B_no_feedback
+[run_all] Finished B - Multi-round No Feedback, seed=42
+
+================================================================================
+[run_all] Starting C - Feedback No Difficulty, seed=42
+================================================================================
+2026-06-15 01:01:59.448 | INFO     | group_c_feedback_no_difficulty:run:63 - === Group C: Feedback No Difficulty Evolution === run_id=C_feedback_no_diff
+2026-06-15 01:01:59.464 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:142 - Preparing evidence for 3 topics (parallel)
+  [saliency] Artificial intelligence: 25.66M views
+  [saliency] Artificial general intelligence: 2.77M views
+  [saliency] A.I. Artificial Intelligence: 2.68M views
+  [saliency] History of artificial intelligence: 1.67M views
+  [saliency] Hallucination (artificial intelligence): 0.91M views
+  [saliency] Artificial Intelligence Act: 0.38M views
+  [saliency] Association for the Advancement of Artificial Intelligence: 0.07M views
+  [saliency] Applications of artificial intelligence: 0.71M views
+  [saliency] Generative AI: 0.09M views
+  [saliency] Glossary of artificial intelligence: 0.23M views
+  [saliency] Quantum computing: 4.04M views
+  [saliency] Superconducting quantum computing: 0.24M views
+  [saliency] Trapped-ion quantum computer: 0.06M views
+  [saliency] Timeline of quantum computing and communication: 0.28M views
+  [saliency] Glossary of quantum computing: 0.05M views
+  [saliency] Post-quantum cryptography: 0.78M views
+  [saliency] Silicon Quantum Computing: 0.00M views
+  [saliency] Fault tolerant quantum computing: 0.00M views
+  [saliency] QuEra Computing Inc.: 0.01M views
+  [saliency] Institute for Quantum Computing: 0.03M views
+  [429] rate limited, retrying in 5s (attempt 1/4)...
+  [429] rate limited, retrying in 10s (attempt 2/4)...
+  [429] rate limited, retrying in 20s (attempt 3/4)...
+  [saliency] World War II: 62.79M views
+  [saliency] Allies of World War II: 4.73M views
+  [saliency] Aftermath of World War II: 1.11M views
+  [saliency] World War II casualties: 5.30M views
+  [saliency] World War II by country: 1.51M views
+  [saliency] Pacific War: 3.20M views
+  [saliency] List of theaters and campaigns of World War II: 0.20M views
+  [saliency] Declarations of war during World War II: 0.31M views
+  [saliency] List of timelines of World War II: 0.61M views
+  [saliency] List of aircraft of World War II: 1.15M views
+2026-06-15 01:04:35.304 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\qa_ablation\seed_42\C_feedback_no_diff\evidence\chunked.json
+2026-06-15 01:04:35.318 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\qa_ablation\seed_42\C_feedback_no_diff\evidence\single_units.json
+2026-06-15 01:04:35.325 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\qa_ablation\seed_42\C_feedback_no_diff\evidence\multi_units.json
+2026-06-15 01:04:35.325 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:208 - Starting mode: qa
+2026-06-15 01:06:08.668 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=12599
+2026-06-15 01:06:23.980 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=14838
+2026-06-15 01:06:37.454 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=17318
+2026-06-15 01:08:24.544 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=19749
+2026-06-15 01:08:29.502 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=18265
+2026-06-15 01:08:36.340 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=18358
+2026-06-15 01:08:36.344 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=1 strategy=initial_breadth generated=54 accepted=54 total_accepted=54
+2026-06-15 01:09:46.352 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=10044
+2026-06-15 01:10:02.141 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=12676
+2026-06-15 01:10:10.332 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=13958
+2026-06-15 01:11:33.783 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=12132
+2026-06-15 01:11:35.094 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=15508
+2026-06-15 01:11:52.313 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=16472
+2026-06-15 01:11:52.316 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=2 strategy=normal_generate generated=25 accepted=25 total_accepted=79
+2026-06-15 01:12:59.201 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=10101
+2026-06-15 01:13:12.936 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=11510
+2026-06-15 01:13:43.837 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=16790
+2026-06-15 01:14:39.167 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=14958
+2026-06-15 01:14:58.872 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=15204
+2026-06-15 01:15:21.251 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=14133
+2026-06-15 01:15:21.254 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=3 strategy=normal_generate generated=26 accepted=26 total_accepted=105
+2026-06-15 01:16:43.097 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=11796
+2026-06-15 01:16:50.060 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=13031
+2026-06-15 01:16:56.417 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=14474
+2026-06-15 01:18:33.780 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=16158
+2026-06-15 01:18:38.364 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=14623
+2026-06-15 01:18:39.473 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=15589
+2026-06-15 01:18:39.477 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=4 strategy=normal_generate generated=27 accepted=27 total_accepted=132
+2026-06-15 01:20:02.177 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=easy response_len=11772
+2026-06-15 01:20:12.068 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=easy response_len=13840
+2026-06-15 01:20:24.594 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=easy response_len=15583
+2026-06-15 01:21:42.748 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=easy response_len=14406
+2026-06-15 01:22:03.862 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=easy response_len=14555
+2026-06-15 01:22:22.706 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=easy response_len=20526
+2026-06-15 01:22:22.711 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=5 strategy=normal_generate generated=47 accepted=47 total_accepted=179
+2026-06-15 01:22:22.711 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:265 - Mode qa stopped: candidate_pool_sufficient
+2026-06-15 01:22:22.877 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:221 - Mode qa complete: 179 accepted, stopped_reason=candidate_pool_sufficient
+2026-06-15 01:22:22.881 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:237 - Generation complete. Output: runs/qa_ablation/seed_42/C_feedback_no_diff/
+2026-06-15 01:22:22.883 | INFO     | group_c_feedback_no_difficulty:run:68 - Group C completed. run_id=C_feedback_no_diff
+[run_all] Finished C - Feedback No Difficulty, seed=42
+
+================================================================================
+[run_all] Starting D - Full Method, seed=42
+================================================================================
+2026-06-15 01:22:22.884 | INFO     | group_d_full:run:63 - === Group D: Full Method === run_id=D_full
+2026-06-15 01:22:22.900 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:142 - Preparing evidence for 3 topics (parallel)
+  [saliency] Artificial intelligence: 25.66M views
+  [saliency] Artificial general intelligence: 2.77M views
+  [saliency] A.I. Artificial Intelligence: 2.68M views
+  [saliency] History of artificial intelligence: 1.67M views
+  [saliency] Hallucination (artificial intelligence): 0.91M views
+  [saliency] Artificial Intelligence Act: 0.38M views
+  [saliency] Generative AI: 0.09M views
+  [saliency] Existential risk from artificial intelligence: 0.04M views
+  [saliency] Association for the Advancement of Artificial Intelligence: 0.07M views
+  [saliency] Glossary of artificial intelligence: 0.23M views
+  [saliency] Quantum computing: 4.04M views
+  [saliency] Superconducting quantum computing: 0.24M views
+  [saliency] Trapped-ion quantum computer: 0.06M views
+  [saliency] Timeline of quantum computing and communication: 0.28M views
+  [saliency] Glossary of quantum computing: 0.05M views
+  [saliency] Post-quantum cryptography: 0.78M views
+  [saliency] Silicon Quantum Computing: 0.00M views
+  [saliency] Fault tolerant quantum computing: 0.00M views
+  [saliency] QuEra Computing Inc.: 0.01M views
+  [saliency] Institute for Quantum Computing: 0.03M views
+  [429] rate limited, retrying in 5s (attempt 1/4)...
+  [saliency] World War II: 62.79M views
+  [saliency] Allies of World War II: 4.73M views
+  [saliency] Aftermath of World War II: 1.11M views
+  [saliency] World War II casualties: 5.30M views
+  [saliency] World War II by country: 1.51M views
+  [saliency] Pacific War: 3.20M views
+  [saliency] List of theaters and campaigns of World War II: 0.20M views
+  [saliency] Declarations of war during World War II: 0.31M views
+  [saliency] List of timelines of World War II: 0.61M views
+  [saliency] List of aircraft of World War II: 1.15M views
+2026-06-15 01:24:05.944 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\qa_ablation\seed_42\D_full\evidence\chunked.json
+2026-06-15 01:24:05.957 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\qa_ablation\seed_42\D_full\evidence\single_units.json
+2026-06-15 01:24:05.964 | INFO     | benchforge.utils.artifact_store:save_json:76 - Saved JSON to runs\qa_ablation\seed_42\D_full\evidence\multi_units.json
+2026-06-15 01:24:05.964 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:208 - Starting mode: qa
+2026-06-15 01:25:20.552 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=10851
+2026-06-15 01:25:27.658 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=11857
+2026-06-15 01:25:37.282 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=13503
+2026-06-15 01:26:50.128 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=12893
+2026-06-15 01:27:19.837 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=15633
+2026-06-15 01:27:40.722 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=medium response_len=18147
+2026-06-15 01:27:40.726 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=1 strategy=initial_breadth generated=49 accepted=49 total_accepted=49
+2026-06-15 01:28:47.756 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=9903
+2026-06-15 01:29:03.489 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=12216
+2026-06-15 01:29:06.738 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=13260
+2026-06-15 01:30:07.356 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=12307
+2026-06-15 01:30:59.025 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=17038
+2026-06-15 01:31:17.664 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=20164
+2026-06-15 01:31:17.667 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=2 strategy=hard_generate generated=25 accepted=25 total_accepted=74
+2026-06-15 01:32:54.892 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=15240
+2026-06-15 01:32:55.626 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=14623
+2026-06-15 01:33:03.505 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=15318
+2026-06-15 01:34:16.894 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=11851
+2026-06-15 01:34:37.421 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=15029
+2026-06-15 01:34:56.015 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=16583
+2026-06-15 01:34:56.018 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=3 strategy=hard_generate generated=27 accepted=27 total_accepted=101
+2026-06-15 01:36:13.990 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=11802
+2026-06-15 01:36:15.865 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=11754
+2026-06-15 01:36:29.298 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=14243
+2026-06-15 01:37:58.546 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=15522
+2026-06-15 01:38:09.931 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=17319
+2026-06-15 01:38:31.455 | DEBUG    | benchforge.agents.qa_agent.generator:generate:131 - Generator: mode=qa difficulty=hard response_len=17664
+2026-06-15 01:38:31.458 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:300 - Mode=qa round=4 strategy=hard_generate generated=26 accepted=26 total_accepted=127
+2026-06-15 01:38:31.458 | INFO     | benchforge.agents.qa_agent.agent:run_mode_generation:265 - Mode qa stopped: candidate_pool_sufficient
+2026-06-15 01:38:31.576 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:221 - Mode qa complete: 127 accepted, stopped_reason=candidate_pool_sufficient
+2026-06-15 01:38:31.581 | INFO     | benchforge.agents.qa_agent.agent:_run_generation_agent_impl:237 - Generation complete. Output: runs/qa_ablation/seed_42/D_full/
+2026-06-15 01:38:31.583 | INFO     | group_d_full:run:68 - Group D completed. run_id=D_full
+[run_all] Finished D - Full Method, seed=42
+
+================================================================================
+[run_all] All experiments completed.
+================================================================================

@@ -1,0 +1,20 @@
+{
+  "candidate_count": 179,
+  "accepted_count": 179,
+  "rejected_count": 3,
+  "accept_rate": 0.9835,
+  "topic_distribution": {
+    "Artificial Intelligence": 59,
+    "Quantum Computing": 62,
+    "World War II": 58
+  },
+  "difficulty_distribution": {
+    "medium": 91,
+    "easy": 21,
+    "hard": 67
+  },
+  "hard_gap": 0.1257,
+  "stopped_reason": "candidate_pool_sufficient",
+  "target": 75,
+  "target_reached": true
+}

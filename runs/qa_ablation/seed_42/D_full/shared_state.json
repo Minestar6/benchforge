@@ -1,0 +1,59 @@
+{
+  "task_id": "qa_ablation/seed_42",
+  "run_id": "D_full",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "qa_ablation/seed_42",
+    "run_id": "D_full",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "modes": {
+      "qa": {
+        "count": 50,
+        "max_rounds": 10,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "qa_ablation/seed_42",
+    "run_id": "D_full",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "modes": {
+      "qa": {
+        "count": 50,
+        "max_rounds": 10,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs\\qa_ablation\\seed_42\\D_full\\qa\\candidate_pool.json",
+    "chunked_evidence": "runs\\qa_ablation\\seed_42\\D_full\\evidence\\chunked.json",
+    "llm_calls": "runs\\qa_ablation\\seed_42\\D_full\\llm_calls.jsonl",
+    "generation_report": "runs\\qa_ablation\\seed_42\\D_full\\generation_report.json"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "pending",
+    "evaluation": "pending"
+  }
+}
