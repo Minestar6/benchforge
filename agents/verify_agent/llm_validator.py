@@ -59,14 +59,19 @@ def _score_to_unit_interval(raw_score: float) -> float:
     return (bounded - 1.0) / 4.0
 
 
-def _normalize_judge_response(parsed: dict) -> tuple[bool, float, dict[str, float], list[str], str]:
+def _normalize_judge_response(parsed: dict) -> tuple[bool, float, dict[str, float], list[str], str, str | None]:
     if "dimensions" in parsed or "overall_score" in parsed or "passed" in parsed:
         passed_raw = bool(parsed.get("passed", False))
         overall_score = float(parsed.get("overall_score", 0.0))
         dimensions = {k: float(v) for k, v in parsed.get("dimensions", {}).items()}
         failed_reasons = list(parsed.get("failed_reasons", []))
         judge_summary = str(parsed.get("judge_summary", ""))
-        return passed_raw, overall_score, dimensions, failed_reasons, judge_summary
+        suggested_difficulty = parsed.get("suggested_difficulty")
+        if suggested_difficulty is not None:
+            suggested_difficulty = str(suggested_difficulty).strip().lower()
+            if suggested_difficulty not in ("easy", "medium", "hard"):
+                suggested_difficulty = None
+        return passed_raw, overall_score, dimensions, failed_reasons, judge_summary, suggested_difficulty
 
     required_dims = ("correctness", "answerability", "clarity", "difficulty_consistency")
     dimensions = {
@@ -81,7 +86,12 @@ def _normalize_judge_response(parsed: dict) -> tuple[bool, float, dict[str, floa
     overall_score = sum(dimensions.values()) / len(dimensions)
     failed_reasons: list[str] = []
     judge_summary = str(parsed.get("reason", ""))
-    return True, overall_score, dimensions, failed_reasons, judge_summary
+    suggested_difficulty = parsed.get("suggested_difficulty")
+    if suggested_difficulty is not None:
+        suggested_difficulty = str(suggested_difficulty).strip().lower()
+        if suggested_difficulty not in ("easy", "medium", "hard"):
+            suggested_difficulty = None
+    return True, overall_score, dimensions, failed_reasons, judge_summary, suggested_difficulty
 
 
 def _build_messages(
@@ -138,7 +148,7 @@ def _build_messages(
         f"Blueprint Constraints: {blueprint_constraints}\n\n"
         "Please evaluate this question and return JSON with fields: "
         "correctness (1-5), answerability (1-5), clarity (1-5), "
-        "difficulty_consistency (1-5), reason (str)."
+        "difficulty_consistency (1-5), suggested_difficulty (easy/medium/hard), reason (str)."
     )
     return [{"role": "user", "content": user_content}]
 
@@ -201,7 +211,7 @@ async def _validate_one(
                 output_tokens = resp.get("output_tokens", 0)
                 parsed = parse_json_response(resp.get("text", ""))
 
-                passed_raw, overall_score, dimensions, failed_reasons, judge_summary = _normalize_judge_response(parsed)
+                passed_raw, overall_score, dimensions, failed_reasons, judge_summary, suggested_difficulty = _normalize_judge_response(parsed)
 
                 if overall_score < cfg.min_overall_score and "overall_score_too_low" not in failed_reasons:
                     failed_reasons.append("overall_score_too_low")
@@ -215,6 +225,7 @@ async def _validate_one(
                     dimensions=dimensions,
                     failed_reasons=failed_reasons,
                     judge_summary=judge_summary,
+                    suggested_difficulty=suggested_difficulty,
                     llm_call_id=llm_call_id,
                     attempt_count=attempt_count,
                     latency_ms=latency_ms,

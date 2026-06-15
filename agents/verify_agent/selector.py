@@ -102,6 +102,18 @@ def _normalize_difficulty(difficulty) -> str:
     return "unknown"
 
 
+def _label_to_int_difficulty(label: str) -> int:
+    """将 difficulty 标签反向映射为 1-10 量表的中位数值。
+
+    映射规则（与 _int_difficulty_to_label 对称）：
+    - easy   → 2  (1-3 中位)
+    - medium → 5  (4-6 中位)
+    - hard   → 8  (7-10 中位)
+    """
+    _map = {"easy": 2, "medium": 5, "hard": 8}
+    return _map.get(label.strip().lower(), 5)
+
+
 # ─── 质量分 ───────────────────────────────────────────────────────────────────
 
 _SYNTHETIC_SUMMARIES = {"no_model_client", "llm_validation disabled", "llm_validation_disabled"}
@@ -267,7 +279,12 @@ def run_weighted_selection(
     group_assignments: dict[str, str] = {}
 
     for q in unique_questions:
-        diff = _normalize_difficulty(q.estimated_difficulty)
+        # 优先使用 LLM 验证建议的难度标签，回退到原始标签
+        llm_r = llm_results.get(q.question_id)
+        if llm_r and llm_r.suggested_difficulty in ("easy", "medium", "hard"):
+            diff = llm_r.suggested_difficulty
+        else:
+            diff = _normalize_difficulty(q.estimated_difficulty)
         key = f"{q.question_mode}::{diff}"
         buckets.setdefault(key, []).append(q)
         group_assignments[q.question_id] = key

@@ -24,7 +24,7 @@ from .schema import (
     ValidationTaskResult,
     ValidatedQuestionRecord,
 )
-from .selector import run_weighted_selection
+from .selector import _label_to_int_difficulty, _normalize_difficulty, run_weighted_selection
 
 
 def _blueprint_from_shared_state(state: SharedState) -> ValidationBlueprintView:
@@ -216,6 +216,15 @@ class VerifyAgent:
         all_records: list[ValidatedQuestionRecord] = (
             citation_rejected_records + llm_rejected_records + validated_records
         )
+
+        # 回写 suggested_difficulty → candidate.estimated_difficulty，仅在难度区间改变时
+        for rec in all_records:
+            llm_val = rec.llm_validation
+            if llm_val and llm_val.suggested_difficulty in ("easy", "medium", "hard"):
+                original_label = _normalize_difficulty(rec.candidate.estimated_difficulty)
+                if llm_val.suggested_difficulty != original_label:
+                    rec.candidate.estimated_difficulty = _label_to_int_difficulty(llm_val.suggested_difficulty)
+
         store.append_jsonl("validated_questions.jsonl", all_records)
         store.save_json("weighted_selection.json", selection_result.model_dump())
 

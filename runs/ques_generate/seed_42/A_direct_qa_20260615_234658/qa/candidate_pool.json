@@ -1,0 +1,1286 @@
+[
+  {
+    "question": "What are the main subproblems into which the general problem of simulating intelligence has been broken?",
+    "answer": "The general problem of simulating intelligence has been broken into subproblems consisting of particular traits or capabilities that researchers expect an intelligent system to display, such as reasoning and problem-solving, knowledge representation, planning and decision-making, and learning.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "The general problem of simulating (or creating) intelligence has been broken into subproblems. These consist of particular traits or capabilities that researchers expect an intelligent system to display."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What limitation did early algorithms for reasoning and problem-solving face when dealing with large problems?",
+    "answer": "Early algorithms for reasoning and problem-solving became exponentially slower as problems grew, a phenomenon known as a \"combinatorial explosion,\" making them insufficient for solving large reasoning problems.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Many of these algorithms are insufficient for solving large reasoning problems because they experience a \"combinatorial explosion\": They become exponentially slower as the problems grow."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is a knowledge base in the context of AI?",
+    "answer": "A knowledge base is a body of knowledge represented in a form that can be used by a program, including objects, properties, categories, relations, situations, events, states, time, causes and effects, and other aspects of knowledge.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "A knowledge base is a body of knowledge represented in a form that can be used by a program."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are two of the most difficult problems in knowledge representation?",
+    "answer": "Two of the most difficult problems in knowledge representation are the breadth of commonsense knowledge (the enormous set of atomic facts that the average person knows) and the sub-symbolic form of most commonsense knowledge (much of what people know is not represented as verbal facts or statements).",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Among the most difficult problems in knowledge representation are the breadth of commonsense knowledge (the set of atomic facts that the average person knows is enormous); and the sub-symbolic form of most commonsense knowledge (much of what people know is not represented as \"facts\" or \"statements\" that they could express verbally)."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How does a rational agent make decisions according to automated decision-making theory?",
+    "answer": "In automated decision-making, a rational agent assigns a utility number to each situation, calculates the expected utility for each possible action (weighted by the probability of outcomes), and then chooses the action with the maximum expected utility.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The decision-making agent assigns a number to each situation (called its \"utility\") that measures how much the agent prefers it. For each possible action, it can calculate the \"expected utility\": the utility of all possible outcomes of the action, weighted by the probability that the outcome will occur. It can then choose the action with the maximum expected utility."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the difference between classical planning and most real-world planning problems?",
+    "answer": "In classical planning, the agent knows exactly what the effect of any action will be. In most real-world problems, the agent may be uncertain about the situation (unknown or unobservable) and may not know for certain what will happen after each possible action (non-deterministic).",
+    "estimated_difficulty": 5,
+    "citations": [
+      "In classical planning, the agent knows exactly what the effect of any action will be. In most real-world problems, however, the agent may not be certain about the situation it is in (it is \"unknown\" or \"unobservable\") and it may not know for certain what will happen after each possible action (it is not \"deterministic\")."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What role does game theory play in AI?",
+    "answer": "Game theory describes the rational behavior of multiple interacting agents and is used in AI programs that make decisions involving other agents.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Game theory describes the rational behavior of multiple interacting agents and is used in AI programs that make decisions that involve other agents."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is machine learning?",
+    "answer": "Machine learning is the study of programs that can improve their performance on a given task automatically, and it has been a part of AI from the beginning.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Machine learning is the study of programs that can improve their performance on a given task automatically. It has been a part of AI from the beginning."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the two main varieties of supervised learning?",
+    "answer": "The two main varieties of supervised learning are classification (where the program must learn to predict what category the input belongs in) and regression (where the program must deduce a numeric function based on numeric input).",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Supervised learning requires labeling the training data with the expected answers, and comes in two main varieties: classification (where the program must learn to predict what category the input belongs in) and regression (where the program must deduce a numeric function based on numeric input)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the key difference between unsupervised learning and reinforcement learning?",
+    "answer": "Unsupervised learning analyzes data to find patterns and make predictions without guidance, while reinforcement learning involves an agent that is rewarded for good responses and punished for bad ones, learning to choose responses classified as 'good'.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Unsupervised learning analyzes a stream of data and finds patterns and makes predictions without any other guidance.",
+      "In reinforcement learning, the agent is rewarded for good responses and punished for bad ones. The agent learns to choose responses that are classified as \"good\"."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was Margaret Masterman's key belief about computational language structure?",
+    "answer": "Margaret Masterman believed that meaning, not grammar, was the key to understanding languages, and that thesauri, not dictionaries, should be the basis of computational language structure.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Margaret Masterman believed that it was meaning and not grammar that was the key to understanding languages, and that thesauri and not dictionaries should be the basis of computational language structure."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "By 2023, what real-world achievement did generative pre-trained transformer (GPT) language models accomplish?",
+    "answer": "By 2023, generative pre-trained transformer (GPT) language models were able to get human-level scores on the bar exam, SAT test, GRE test, and many other real-world applications.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "In 2019, generative pre-trained transformer (or \"GPT\") language models began to generate coherent text, and by 2023, these models were able to get human-level scores on the bar exam, SAT test, GRE test, and many other real-world applications."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the primary purpose of using heuristics in state space search?",
+    "answer": "The primary purpose of using heuristics in state space search is to help prioritize choices that are more likely to reach a goal, as simple exhaustive searches are often too slow or never complete due to the astronomical growth of the search space.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Simple exhaustive searches are rarely sufficient for most real-world problems: the search space (the number of places to search) quickly grows to astronomical numbers. The result is a search that is too slow or never completes. \"Heuristics\" or \"rules of thumb\" can help prioritize choices that are more likely to reach a goal."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are two swarm intelligence algorithms mentioned for distributed search processes, and what natural phenomena inspire them?",
+    "answer": "Two swarm intelligence algorithms mentioned are particle swarm optimization (inspired by bird flocking) and ant colony optimization (inspired by ant trails).",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Two popular swarm algorithms used in search are particle swarm optimization (inspired by bird flocking) and ant colony optimization (inspired by ant trails)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the common sense knowledge problem that early natural language processing work faced?",
+    "answer": "Early natural language processing work, based on Noam Chomsky's generative grammar and semantic networks, had difficulty with word-sense disambiguation unless restricted to small domains called 'micro-worlds' due to the common sense knowledge problem.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Early work, based on Noam Chomsky's generative grammar and semantic networks, had difficulty with word-sense disambiguation[f] unless restricted to small domains called \"micro-worlds\" (due to the common sense knowledge problem)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the process called when planning algorithms search through trees of goals and subgoals to find a path to a target goal?",
+    "answer": "The process is called means-ends analysis.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "For example, planning algorithms search through trees of goals and subgoals, attempting to find a path to a target goal, a process called means-ends analysis."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the two main forms of formal logic used in AI, and how do they differ?",
+    "answer": "The two main forms are propositional logic and predicate logic. Propositional logic operates on statements that are true or false and uses logical connectives like 'and', 'or', 'not', and 'implies'. Predicate logic also operates on objects, predicates, and relations and uses quantifiers such as 'Every X is a Y' and 'There are some Xs that are Ys'.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Formal logic comes in two main forms: propositional logic (which operates on statements that are true or false and uses logical connectives such as \"and\", \"or\", \"not\" and \"implies\") and predicate logic (which also operates on objects, predicates and relations and uses quantifiers such as \"Every X is a Y\" and \"There are some Xs that are Ys\")."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is deductive reasoning in logic, and how is it structured?",
+    "answer": "Deductive reasoning in logic is the process of proving a new statement (the conclusion) from other statements that are given and assumed to be true (the premises). Proofs can be structured as proof trees, where nodes are labeled by sentences, and children nodes are connected to parent nodes by inference rules.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Deductive reasoning in logic is the process of proving a new statement (conclusion) from other statements that are given and assumed to be true (the premises). Proofs can be structured as proof trees, in which nodes are labelled by sentences, and children nodes are connected to parent nodes by inference rules."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How does problem-solving in logic relate to proof trees?",
+    "answer": "Given a problem and a set of premises, problem-solving reduces to searching for a proof tree whose root node is labeled by a solution of the problem and whose leaf nodes are labeled by premises or axioms.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Given a problem and a set of premises, problem-solving reduces to searching for a proof tree whose root node is labelled by a solution of the problem and whose leaf nodes are labelled by premises or axioms."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the key difference between reasoning with Horn clauses and the more general clausal form of first-order logic?",
+    "answer": "In the case of Horn clauses, problem-solving search can be performed by reasoning forwards from the premises or backwards from the problem. In the more general case of the clausal form of first-order logic, resolution is a single, axiom-free rule of inference, in which a problem is solved by proving a contradiction from premises that include the negation of the problem to be solved.",
+    "estimated_difficulty": 7,
+    "citations": [
+      "In the case of Horn clauses, problem-solving search can be performed by reasoning forwards from the premises or backwards from the problem. In the more general case of the clausal form of first-order logic, resolution is a single, axiom-free rule of inference, in which a problem is solved by proving a contradiction from premises that include the negation of the problem to be solved."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the computational property of inference in Horn clause logic and first-order logic, and what is a notable feature of backward reasoning with Horn clauses?",
+    "answer": "Inference in both Horn clause logic and first-order logic is undecidable, and therefore intractable. However, backward reasoning with Horn clauses, which underpins computation in the logic programming language Prolog, is Turing complete and its efficiency is competitive with computation in other symbolic programming languages.",
+    "estimated_difficulty": 8,
+    "citations": [
+      "Inference in both Horn clause logic and first-order logic is undecidable, and therefore intractable. However, backward reasoning with Horn clauses, which underpins computation in the logic programming language Prolog, is Turing complete. Moreover, its efficiency is competitive with computation in other symbolic programming languages."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is fuzzy logic and what problem does it address?",
+    "answer": "Fuzzy logic assigns a 'degree of truth' between 0 and 1. It can therefore handle propositions that are vague and partially true.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Fuzzy logic assigns a \"degree of truth\" between 0 and 1. It can therefore handle propositions that are vague and partially true."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are non-monotonic logics designed to handle?",
+    "answer": "Non-monotonic logics, including logic programming with negation as failure, are designed to handle default reasoning.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Non-monotonic logics, including logic programming with negation as failure, are designed to handle default reasoning."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What mathematical fields provide tools for AI agents to operate with incomplete or uncertain information?",
+    "answer": "AI researchers use methods from probability theory and economics, including decision theory, decision analysis, and information value theory, to solve problems involving incomplete or uncertain information.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Many problems in AI (including reasoning, planning, learning, perception, and robotics) require the agent to operate with incomplete or uncertain information. AI researchers have devised a number of tools to solve these problems using methods from probability theory and economics. Precise mathematical tools have been developed that analyze how an agent can make choices and plan, using decision theory, decision analysis, and information value theory."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "Name four specific models or tools mentioned that are used for planning and decision-making under uncertainty.",
+    "answer": "The tools and models include Markov decision processes, dynamic decision networks, game theory, and mechanism design.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "These tools include models such as Markov decision processes, dynamic decision networks, game theory and mechanism design."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is a Bayesian network and for what four AI tasks can it be used?",
+    "answer": "A Bayesian network is a tool that can be used for reasoning (using the Bayesian inference algorithm), learning (using the expectation–maximization algorithm), planning (using decision networks), and perception (using dynamic Bayesian networks).",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Bayesian networks are a tool that can be used for reasoning (using the Bayesian inference algorithm),[g] learning (using the expectation–maximization algorithm),[h] planning (using decision networks) and perception (using dynamic Bayesian networks)."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the two simplest types of AI applications, and what is a classifier?",
+    "answer": "The two simplest types are classifiers and controllers. A classifier is a function that uses pattern matching to determine the closest match. It can be fine-tuned based on chosen examples using supervised learning.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "The simplest AI applications can be divided into two types: classifiers (e.g., \"if shiny then diamond\"), on one hand, and controllers (e.g., \"if diamond then pick up\"), on the other hand. Classifiers are functions that use pattern matching to determine the closest match. They can be fine-tuned based on chosen examples using supervised learning."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is a data set in the context of classifiers, and how is a new observation handled?",
+    "answer": "A data set consists of all the observations (patterns) combined with their predefined class labels. When a new observation is received, it is classified based on previous experience.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Each pattern (also called an \"observation\") is labeled with a certain predefined class. All the observations combined with their class labels are known as a data set. When a new observation is received, that observation is classified based on previous experience."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the most widely used analogical AI until the mid-1990s, and what displaced it in the 1990s?",
+    "answer": "The k-nearest neighbor algorithm was the most widely used analogical AI until the mid-1990s. Kernel methods such as the support vector machine (SVM) displaced k-nearest neighbor in the 1990s.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "K-nearest neighbor algorithm was the most widely used analogical AI until the mid-1990s, and Kernel methods such as the support vector machine (SVM) displaced k-nearest neighbor in the 1990s."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "Which classifier is reportedly the 'most widely used learner' at Google, and why?",
+    "answer": "The naive Bayes classifier is reportedly the 'most widely used learner' at Google, due in part to its scalability.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The naive Bayes classifier is reportedly the \"most widely used learner\" at Google, due in part to its scalability."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the basic components of an artificial neural network and what is its primary function?",
+    "answer": "An artificial neural network is based on a collection of nodes (artificial neurons) that loosely model neurons in a biological brain. It has an input, at least one hidden layer of nodes, and an output. Its primary function is to recognize patterns; once trained, it can recognize those patterns in fresh data.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "An artificial neural network is based on a collection of nodes also known as artificial neurons, which loosely model the neurons in a biological brain. It is trained to recognise patterns; once trained, it can recognise those patterns in fresh data. There is an input, at least one hidden layer of nodes and an output."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How is data transmitted between layers in a neural network, and what defines a 'deep' neural network?",
+    "answer": "Each node applies a function, and once the weight crosses its specified threshold, the data is transmitted to the next layer. A network is typically called a deep neural network if it has at least 2 hidden layers.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Each node applies a function and once the weight crosses its specified threshold, the data is transmitted to the next layer. A network is typically called a deep neural network if it has at least 2 hidden layers."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the most common training technique for neural networks, and what do the learning algorithms do?",
+    "answer": "The most common training technique is the backpropagation algorithm. Learning algorithms for neural networks use local search to choose the weights that will get the right output for each input during training.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Learning algorithms for neural networks use local search to choose the weights that will get the right output for each input during training. The most common training technique is the backpropagation algorithm."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the most common training technique for neural networks?",
+    "answer": "The most common training technique for neural networks is the backpropagation algorithm.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "The most common training technique is the backpropagation algorithm."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the key difference between feedforward neural networks and recurrent neural networks (RNNs)?",
+    "answer": "In feedforward neural networks, the signal passes in only one direction, while in recurrent neural networks (RNNs), the output signal is fed back into the input, allowing short-term memories of previous input events.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In feedforward neural networks the signal passes in only one direction.",
+      "Recurrent neural networks (RNNs) feed the output signal back into the input, which allows short-term memories of previous input events."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the two main factors that contributed to the sudden success of deep learning in 2012–2015?",
+    "answer": "The two main factors were: 1) the increase in computer power (including the hundred-fold increase in speed by switching to GPUs), and 2) the availability of vast amounts of training data, especially the giant curated datasets used for benchmark testing like ImageNet.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The sudden success of deep learning in 2012–2015 did not occur because of some new discovery or theoretical breakthrough... but because of two factors: the increase in computer power (including the hundred-fold increase in speed by switching to GPUs) and the availability of vast amounts of training data, especially the giant curated datasets used for benchmark testing, such as ImageNet."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the two main phases of training for GPT models?",
+    "answer": "GPT models undergo two main training phases: 1) pre-training on a large corpus of text by predicting the next token, and 2) a subsequent training phase that makes the model more truthful, useful, and harmless, usually with reinforcement learning from human feedback (RLHF).",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The pretraining consists of predicting the next token (a token being usually a word, subword, or punctuation).",
+      "Typically, a subsequent training phase makes the model more truthful, useful, and harmless, usually with a technique called reinforcement learning from human feedback (RLHF)."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What hardware and software combination replaced CPUs as the dominant means for large-scale machine learning model training in the late 2010s?",
+    "answer": "In the late 2010s, graphics processing units (GPUs) that were increasingly designed with AI-specific enhancements and used with specialized TensorFlow software replaced previously used central processing units (CPUs) as the dominant means for large-scale machine learning model training.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In the late 2010s, graphics processing units (GPUs) that were increasingly designed with AI-specific enhancements and used with specialized TensorFlow software had replaced previously used central processing unit (CPUs) as the dominant means for large-scale (commercial and academic) machine learning models' training."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the trend called where transistor density in integrated circuits roughly doubles every 18 months, and what is the similar trend for GPU improvements?",
+    "answer": "The trend where transistor density in integrated circuits roughly doubles every 18 months is called Moore's law, named after Intel co-founder Gordon Moore. The similar trend for GPU improvements is sometimes called Huang's law, named after Nvidia co-founder and CEO Jensen Huang.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The transistor density in integrated circuits has been observed to roughly double every 18 months—a trend known as Moore's law, named after the Intel co-founder Gordon Moore, who first identified it.",
+      "Improvements in GPUs have been even faster, a trend sometimes called Huang's law, named after Nvidia co-founder and CEO Jensen Huang."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are Long Short-Term Memory networks (LSTMs) and what problem are they designed to address?",
+    "answer": "Long Short-Term Memory networks (LSTMs) are recurrent neural networks that better preserve long-term dependencies and are less sensitive to the vanishing gradient problem compared to standard RNNs.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Long short-term memory networks (LSTMs) are recurrent neural networks that better preserve longterm dependencies and are less sensitive to the vanishing gradient problem."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the primary advantage of Convolutional Neural Networks (CNNs) in image processing?",
+    "answer": "Convolutional Neural Networks (CNNs) use layers of kernels to more efficiently process local patterns, which is especially important in image processing where early layers identify simple local patterns like edges and curves, with subsequent layers detecting more complex patterns like textures and eventually whole objects.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Convolutional neural networks (CNNs) use layers of kernels to more efficiently process local patterns. This local processing is especially important in image processing, where the early CNN layers typically identify simple local patterns such as edges and curves, with subsequent layers detecting more complex patterns like textures, and eventually whole objects."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the main problem that current GPT models are prone to, and how can it be reduced?",
+    "answer": "Current GPT models are prone to generating falsehoods called 'hallucinations'. These can be reduced with reinforcement learning from human feedback (RLHF) and quality data, though the problem has been getting worse for reasoning systems.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Current GPT models are prone to generating falsehoods called \"hallucinations\". These can be reduced with RLHF and quality data, but the problem has been getting worse for reasoning systems."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What significant achievement did AlphaFold 2 demonstrate in 2021?",
+    "answer": "AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the significance of AlphaFold 2 in 2021 regarding protein structure?",
+    "answer": "AlphaFold 2 demonstrated the ability to approximate the 3D structure of a protein in hours rather than months.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How did AI-guided drug discovery contribute to finding new antibiotics in 2023?",
+    "answer": "In 2023, AI-guided drug discovery helped find a class of antibiotics capable of killing two different types of drug-resistant bacteria.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In 2023, it was reported that AI-guided drug discovery helped find a class of antibiotics capable of killing two different types of drug-resistant bacteria."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the aim of researchers using machine learning for Parkinson's disease in 2024?",
+    "answer": "Their aim was to identify compounds that block the clumping, or aggregation, of alpha-synuclein, the protein that characterises Parkinson's disease.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Their aim was to identify compounds that block the clumping, or aggregation, of alpha-synuclein (the protein that characterises Parkinson's disease)."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What issue did the Nature article highlight regarding AI disease-prediction models?",
+    "answer": "The Nature article highlighted the use of unreliable data being used to train AI medical prediction models for stroke and diabetes in 125 research articles.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Published in Nature an article \"Dozens of AI disease-prediction models were trained on dubious data\" highlighted the use of unreliable data being used to train AI medical prediction models for stroke and diabetes in 125 research articles."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the significance of Deep Blue's victory on 11 May 1997?",
+    "answer": "Deep Blue became the first computer chess-playing system to beat a reigning world chess champion, Garry Kasparov.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Deep Blue became the first computer chess-playing system to beat a reigning world chess champion, Garry Kasparov, on 11 May 1997."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did IBM's Watson achieve in a 2011 Jeopardy! exhibition match?",
+    "answer": "IBM's question answering system, Watson, defeated the two greatest Jeopardy! champions, Brad Rutter and Ken Jennings, by a significant margin.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In 2011, in a Jeopardy! quiz show exhibition match, IBM's question answering system, Watson, defeated the two greatest Jeopardy! champions, Brad Rutter and Ken Jennings, by a significant margin."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did Google DeepMind introduce in 2024 that could play video games and execute tasks from natural language instructions?",
+    "answer": "Google DeepMind introduced SIMA, a type of AI capable of autonomously playing nine previously unseen open-world video games by observing screen output, as well as executing short, specific tasks in response to natural language instructions.",
+    "estimated_difficulty": 7,
+    "citations": [
+      "In 2024, Google DeepMind introduced SIMA, a type of AI capable of autonomously playing nine previously unseen open-world video games by observing screen output, as well as executing short, specific tasks in response to natural language instructions."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is a known issue with probabilistic large language models in mathematics?",
+    "answer": "Probabilistic large language models are versatile, but can also produce wrong answers in the form of hallucinations.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "In mathematics, probabilistic large language models are versatile, but can also produce wrong answers in the form of hallucinations."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did the experimental model Gemini Deep Think achieve in 2025?",
+    "answer": "The experimental model Gemini Deep Think achieved gold medal results in the International Math Olympiad of 2025.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "The experimental model Gemini Deep Think accepts natural language prompts directly and achieved gold medal results in the International Math Olympiad of 2025."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "According to Nicolas Firzli, what is a likely impact of AI tool deployment in finance?",
+    "answer": "He argues that the deployment of AI tools will simply further automatise things: destroying tens of thousands of jobs in banking, financial planning, and pension advice in the process.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "He argues that \"the deployment of AI tools will simply further automatise things: destroying tens of thousands of jobs in banking, financial planning, and pension advice in the process, but I'm not sure it will unleash a new wave of [e.g., sophisticated] pension innovation.\""
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are some of the main applications of AI in the military according to the text?",
+    "answer": "The main applications enhance command and control, communications, sensors, integration and interoperability.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "The main applications enhance command and control, communications, sensors, integration and interoperability."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is Generative AI (GenAI) and what does it do?",
+    "answer": "Generative AI (GenAI) is a subfield of artificial intelligence that uses generative models to generate text, images, videos, audio, software code, or other forms of data. These models learn the underlying patterns and structures of their training data and use them to generate new data in response to input, which often takes the form of natural language prompts.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Generative artificial intelligence (GenAI) is a subfield of artificial intelligence (AI) that uses generative models to generate text, images, videos, audio, software code (vibe coding) or other forms of data. These models learn the underlying patterns and structures of their training data, and use them to generate new data in response to input, which often takes the form of natural language prompts."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are AI agents and what are some of their key characteristics?",
+    "answer": "AI agents are software entities designed to perceive their environment, make decisions, and take actions autonomously to achieve specific goals. Key characteristics include: they operate within constraints of programming, computational resources, and hardware; they often face time constraints; many incorporate learning algorithms to improve performance over time; and they are used in applications like virtual assistants, chatbots, autonomous vehicles, and industrial robotics.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "AI agents are software entities designed to perceive their environment, make decisions, and take actions autonomously to achieve specific goals.",
+      "AI agents operate within the constraints of their programming, available computational resources, and hardware limitations.",
+      "In real-world applications, AI agents often face time constraints for decision-making and action execution.",
+      "Many AI agents incorporate learning algorithms, enabling them to improve their performance over time through experience or training.",
+      "AI agents are used in various applications, including virtual assistants, chatbots, autonomous vehicles, game-playing systems, and industrial robotics."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are some examples of applications of AI in the domain of sexuality?",
+    "answer": "Applications include AI-enabled menstruation and fertility trackers, AI-integrated sex toys (teledildonics), AI-generated sexual education content, AI agents that simulate sexual and romantic partners (e.g., Replika), and the production of non-consensual deepfake pornography.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Applications of AI in this domain include AI-enabled menstruation and fertility trackers that analyze user data to offer predictions, AI-integrated sex toys (e.g., teledildonics), AI-generated sexual education content, and AI agents that simulate sexual and romantic partners (e.g., Replika). AI is also used for the production of non-consensual deepfake pornography, raising significant ethical and legal concerns."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How was AI used during the 2024 Indian elections, and what was the scale of this use?",
+    "answer": "During the 2024 Indian elections, US$50 million was spent on authorized AI-generated content. This was notably done by creating deepfakes of allied (including sometimes deceased) politicians to better engage with voters and by translating speeches to various local languages.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "During the 2024 Indian elections, US$50 million was spent on authorized AI-generated content, notably by creating deepfakes of allied (including sometimes deceased) politicians to better engage with voters, and by translating speeches to various local languages."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the consequence of law firms using generative AI for legal research, leading to the creation of a specific database?",
+    "answer": "The use of generative AI by law firms for legal research resulted in the creation of the global \"AI Hallucination Cases\" database in April 2025, established by HEC Paris and Sciences Po legal data analysis lecturer Damien Charlotin. By 2026, judges had issued sanctions and bar associations had issued warnings due to attorney submissions containing fabricated case law citations hallucinated by AI tools.",
+    "estimated_difficulty": 7,
+    "citations": [
+      "The use of generative AI by law firms for legal research resulted in the creation of the global \"AI Hallucination Cases\" database, in April 2025, established by HEC Paris and Sciences Po legal data analysis lecturer Damien Charlotin. By 2026, judges had issued sanctions and bar associations had issued warnings due to attorney submissions to the courts containing fabricated case law citations hallucinated by AI tools."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are two major privacy concerns raised by the data requirements of AI and the devices that use it?",
+    "answer": "Two major privacy concerns are: 1) The techniques used to acquire the large amounts of data required for machine learning algorithms raise concerns about privacy, surveillance, and copyright. 2) AI-powered devices and services continuously collect personal information, raising concerns about intrusive data gathering and unauthorized access, potentially leading to a surveillance society where individual activities are constantly monitored without adequate safeguards.",
+    "estimated_difficulty": 8,
+    "citations": [
+      "Machine learning algorithms require large amounts of data. The techniques used to acquire this data have raised concerns about privacy, surveillance and copyright.",
+      "AI-powered devices and services, such as virtual assistants and IoT products, continuously collect personal information, raising concerns about intrusive data gathering and unauthorized access by third parties. The loss of privacy is further exacerbated by AI's ability to process and combine vast amounts of data, potentially leading to a surveillance society where individual activities are constantly monitored and analyzed without adequate safeguards or transparency."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are some techniques that AI developers have developed to preserve privacy while obtaining data?",
+    "answer": "AI developers have developed techniques such as data aggregation, de-identification, and differential privacy to preserve privacy while still obtaining data.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AI developers argue that this is the only way to deliver valuable applications and have developed several techniques that attempt to preserve privacy while still obtaining the data, such as data aggregation, de-identification and differential privacy."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "According to the text, what are the two main factors that may determine whether the use of copyrighted works to train generative AI qualifies as 'fair use'?",
+    "answer": "The two main factors are 'the purpose and character of the use of the copyrighted work' and 'the effect upon the potential market for the copyrighted work'.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Experts disagree about how well and under what circumstances this rationale will hold up in courts of law; relevant factors may include \"the purpose and character of the use of the copyrighted work\" and \"the effect upon the potential market for the copyrighted work\"."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did the 2025 McKinsey & Company report estimate regarding investment in AI infrastructure and data centers in the US by 2030?",
+    "answer": "The 2025 McKinsey & Company report estimated that by 2030, $2.7 trillion would be invested into AI infrastructure and data centers in the US, surpassing World War II's Manhattan Project every month.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "A 2025 report from the consulting firm McKinsey & Company estimated that by 2030, $2.7 trillion would be invested into AI infrastructure and data centers in the US, surpassing World War II's Manhattan Project every month."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "According to the International Energy Agency's 2024 report, what is projected to happen to power demand for data centers, AI, and cryptocurrency by 2026?",
+    "answer": "The International Energy Agency's 2024 report projects that power demand for data centers, AI, and cryptocurrency might double by 2026, with the additional power consumption equaling that of Japan.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "The report states that power demand for these uses might double by 2026, with the additional power consumption equaling that of Japan."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did the 2024 Goldman Sachs Research Paper forecast about US data center power consumption by 2030 compared to 2022?",
+    "answer": "The 2024 Goldman Sachs Research Paper forecast that by 2030, US data centers will consume 8% of US power, as opposed to 3% in 2022.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "A 2024 Goldman Sachs Research Paper, AI Data Centers and the Coming US Power Demand Surge, found \"US power demand (is) likely to experience growth not seen in a generation....\" and forecasts that, by 2030, US data centers will consume 8% of US power, as opposed to 3% in 2022, presaging growth for the electrical power generation industry by a variety of means."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What significant agreement did Microsoft announce in September 2024 regarding nuclear power for its data centers?",
+    "answer": "In September 2024, Microsoft announced an agreement with Constellation Energy to re-open the Three Mile Island nuclear power plant to provide Microsoft with 100% of all electric power produced by the plant for 20 years.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In September 2024, Microsoft announced an agreement with Constellation Energy to re-open the Three Mile Island nuclear power plant to provide Microsoft with 100% of all electric power produced by the plant for 20 years."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the estimated power output and cost for reopening the Three Mile Island nuclear power plant according to the text?",
+    "answer": "The reopening of Three Mile Island is estimated to produce over 835 megawatts of power (enough for 800,000 homes) and cost an estimated US$1.6 billion.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "If approved (this will be the first ever US re-commissioning of a nuclear plant), over 835 megawatts of power – enough for 800,000 homes – of energy will be produced. The cost for re-opening and upgrading is estimated at US$1.6 billion and is dependent on tax breaks for nuclear power contained in the 2022 US Inflation Reduction Act."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How does the electrical energy consumption of a ChatGPT search compare to that of a Google search according to the text?",
+    "answer": "A ChatGPT search involves the use of 10 times the electrical energy as a Google search.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "A ChatGPT search involves the use of 10 times the electrical energy as a Google search."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What approach has been discussed to address the use of copyrighted works in training generative AI, beyond the 'fair use' rationale?",
+    "answer": "Another discussed approach is to envision a separate sui generis system of protection for creations generated by AI to ensure fair attribution and compensation for human authors.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Another discussed approach is to envision a separate sui generis system of protection for creations generated by AI to ensure fair attribution and compensation for human authors."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What action did leading authors take in 2023 regarding the use of their work to train generative AI?",
+    "answer": "In 2023, leading authors (including John Grisham and Jonathan Franzen) sued AI companies for using their work to train generative AI.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "In 2023, leading authors (including John Grisham and Jonathan Franzen) sued AI companies for using their work to train generative AI."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "Why did Taiwan suspend approval of large data centers north of Taoyuan in 2024?",
+    "answer": "Taiwan suspended the approval of data centers north of Taoyuan with a capacity of more than 5 MW in 2024 due to power supply shortages.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Taiwan suspended the approval of data centers north of Taoyuan with a capacity of more than 5 MW in 2024, due to power supply shortages."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the estimated greenhouse gas emissions from AI energy consumption in 2025 according to an IEA report?",
+    "answer": "A report prepared by the IEA estimated the greenhouse gas emissions from the energy consumption of AI at 180 million tons in 2025.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "In 2025, a report prepared by the IEA estimated the greenhouse gas emissions from the energy consumption of AI at 180 million tons."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What harmful societal effect did AI recommender systems on platforms like YouTube and Facebook cause, according to the text?",
+    "answer": "The AI recommender systems, designed to maximize user engagement, learned to recommend misinformation, conspiracy theories, and extreme partisan content. This led users into filter bubbles, convinced many that the misinformation was true, and ultimately undermined trust in institutions, the media, and the government.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The AI learned that users tended to choose misinformation, conspiracy theories, and extreme partisan content, and, to keep them watching, the AI recommended more of it.",
+      "This convinced many users that the misinformation was true, and ultimately undermined trust in institutions, the media and the government."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What potential malicious use of generative AI is mentioned in the text?",
+    "answer": "The text mentions that bad actors could use generative AI technology to create massive amounts of misinformation or propaganda, with one specific potential malicious use being deepfakes for computational propaganda.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "It is possible for bad actors to use this technology to create massive amounts of misinformation or propaganda; one such potential malicious use is deepfakes for computational propaganda."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the specific problem and the flawed 'fix' in the 2015 Google Photos image labeling incident?",
+    "answer": "In 2015, Google Photos's image labeling feature mistakenly identified a black man and his friend as 'gorillas' because the training dataset contained very few images of black people (a sample size disparity). Google's 'fix' was to prevent the system from labeling anything as a 'gorilla', a limitation that reportedly still existed in similar products from major companies eight years later in 2023.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Google Photos's new image labeling feature mistakenly identified Jacky Alcine and a friend as 'gorillas' because they were black. The system was trained on a dataset that contained very few images of black people, a problem called 'sample size disparity'. Google 'fixed' this problem by preventing the system from labelling anything as a 'gorilla'. Eight years later, in 2023, Google Photos still could not identify a gorilla, and neither could similar products from Apple, Facebook, Microsoft and Amazon."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What problem did ProPublica discover with the COMPAS recidivism assessment tool in 2016, despite its calibration?",
+    "answer": "ProPublica discovered that the COMPAS program exhibited racial bias, even though it was not explicitly told the defendants' races. Although the overall error rate was calibrated to be equal (61%) for both white and black defendants, the nature of the errors differed: the system consistently overestimated the chance of recidivism for black defendants and underestimated it for white defendants.",
+    "estimated_difficulty": 7,
+    "citations": [
+      "In 2016, Julia Angwin at ProPublica discovered that COMPAS exhibited racial bias, despite the fact that the program was not told the races of the defendants. Although the error rate for both whites and blacks was calibrated equal at exactly 61%, the errors for each race were different—the system consistently overestimated the chance"
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the Federal Energy Regulatory Commission's (FERC) main concern when rejecting Talen Energy's application to supply power from the Susquehanna nuclear plant to an Amazon data center?",
+    "answer": "According to FERC Chairman Willie L. Phillips, the main concerns were that the arrangement would be a burden on the electricity grid and would involve significant cost shifting to households and other business sectors.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "According to the Commission Chairman Willie L. Phillips, it is a burden on the electricity grid as well as a significant cost shifting concern to households and other business sectors."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is one proposed method, mentioned in the text, to overcome online deception enabled by AI models?",
+    "answer": "AI researchers from Microsoft, OpenAI, universities, and other organizations have suggested using 'personhood credentials' as a way to overcome online deception enabled by AI models.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "AI researchers at Microsoft, OpenAI, universities and other organisations have suggested using 'personhood credentials' as a way to overcome online deception enabled by AI models."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "According to the text, what are the two primary ways bias can be introduced into a machine learning model?",
+    "answer": "Bias can be introduced by the way training data is selected and by the way a model is deployed.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Bias can be introduced by the way training data is selected and by the way a model is deployed."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What risk associated with AI did Geoffrey Hinton specifically express concern about?",
+    "answer": "AI pioneer Geoffrey Hinton expressed concern about AI enabling 'authoritarian leaders to manipulate their electorates' on a large scale.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AI pioneer and Nobel Prize-winning computer scientist Geoffrey Hinton expressed concern about AI enabling 'authoritarian leaders to manipulate their electorates' on a large scale, among other risks."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the key finding about the COMPAS algorithm's error rates for white and black defendants?",
+    "answer": "The error rate for both whites and blacks was calibrated equal at exactly 61%, but the errors for each race were different—the system consistently overestimated the chance that a black person would re-offend and would underestimate the chance that a white person would not re-offend.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "the errors for each race were different—the system consistently overestimated the chance that a black person would re-offend and would underestimate the chance that a white person would not re-offend."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "According to Moritz Hardt, what is 'the most robust fact in this research area' regarding fairness in AI?",
+    "answer": "Moritz Hardt said 'the most robust fact in this research area is that fairness through blindness doesn't work.'",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Moritz Hardt said \"the most robust fact in this research area is that fairness through blindness doesn't work.\""
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "Why might bias and unfairness in AI systems go undetected according to the text?",
+    "answer": "Bias and unfairness may go undetected because the developers are overwhelmingly white and male: among AI engineers, about 4% are black and 20% are women.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Bias and unfairness may go undetected because the developers are overwhelmingly white and male: among AI engineers, about 4% are black and 20% are women."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the problematic correlation discovered in a machine learning system designed to allocate medical resources for pneumonia patients?",
+    "answer": "The system was found to classify patients with asthma as being at 'low risk' of dying from pneumonia, because patients with asthma would usually get much more medical care and were thus relatively unlikely to die according to the training data, even though having asthma is actually a severe risk factor.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Another machine learning system designed to help effectively allocate medical resources was found to classify patients with asthma as being at \"low risk\" of dying from pneumonia. Having asthma is actually a severe risk factor, but since the patients having asthma would usually get much more medical care, they were relatively unlikely to die according to the training data."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the three broad categories of fairness definitions mentioned in the text?",
+    "answer": "The three broad categories are distributive fairness (focusing on outcomes and compensating for statistical disparities), representational fairness (ensuring AI systems do not reinforce negative stereotypes or render groups invisible), and procedural fairness (focusing on the decision process rather than the outcome).",
+    "estimated_difficulty": 5,
+    "citations": [
+      "One broad category is distributive fairness, which focuses on the outcomes, often identifying groups and seeking to compensate for statistical disparities. Representational fairness tries to ensure that AI systems do not reinforce negative stereotypes or render certain groups invisible. Procedural fairness focuses on the decision process rather than the outcome."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What recommendation did authors make regarding CLIP-based robotic systems that reproduced harmful stereotypes in a simulated manipulation task?",
+    "answer": "The authors recommended that robot-learning methods which physically manifest such harms be 'paused, reworked, or even wound down when appropriate, until outcomes can be proven safe, effective, and just.'",
+    "estimated_difficulty": 4,
+    "citations": [
+      "The authors recommended robot‑learning methods which physically manifest such harms be \"paused, reworked, or even wound down when appropriate, until outcomes can be proven safe, effective, and just.\""
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the fundamental problem with machine learning models making predictions in areas where we hope the future will be better than the past?",
+    "answer": "Machine learning models are designed to make predictions that are only valid if we assume the future will resemble the past. If trained on data that includes results of racist decisions in the past, they must predict that racist decisions will be made in the future, making them descriptive rather than prescriptive and unsuitable for areas where we hope for improvement.",
+    "estimated_difficulty": 7,
+    "citations": [
+      "Criticism of COMPAS highlighted that machine learning models are designed to make \"predictions\" that are only valid if we assume that the future will resemble the past. If they are trained on data that includes the results of racist decisions in the past, machine learning models must predict that racist decisions will be made in the future. Thus, machine learning is not well suited to help make decisions in areas where there is hope that the future will be better than the past. It is descriptive rather than prescriptive."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What three approaches are mentioned in the text to address the transparency problem in AI systems?",
+    "answer": "The three approaches mentioned are SHAP (which visualizes the contribution of each feature to the output), LIME (which can locally approximate a model's outputs with a simpler, interpretable model), and multitask learning (which provides additional outputs that can help developers deduce what the network has learned).",
+    "estimated_difficulty": 6,
+    "citations": [
+      "SHAP enables to visualise the contribution of each feature to the output. LIME can locally approximate a model's outputs with a simpler, interpretable model. Multitask learning provides a large number of outputs in addition to the target classification. These other outputs can help developers deduce what the network has learned"
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What technique did Anthropic develop for generative pre-trained transformers to make neuron activations understandable?",
+    "answer": "Anthropic developed a technique based on dictionary learning that associates patterns of neuron activations with human-understandable concepts.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "For generative pre-trained transformers, Anthropic developed a technique based on dictionary learning that associates patterns of neuron activations with human-understandable concepts."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is a lethal autonomous weapon according to the text?",
+    "answer": "A lethal autonomous weapon is a machine that locates, selects and engages human targets without human supervision.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "A lethal autonomous weapon is a machine that locates, selects and engages human targets without human supervision."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How many nations supported a ban on autonomous weapons under the UN Convention on Certain Conventional Weapons in 2014?",
+    "answer": "30 nations supported a ban on autonomous weapons under the United Nations' Convention on Certain Conventional Weapons in 2014.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "In 2014, 30 nations (including China) supported a ban on autonomous weapons under the United Nations' Convention on Certain Conventional Weapons"
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What percentage of U.S. jobs did Michael Osborne and Carl Benedikt Frey estimate were at 'high risk' of potential automation in the 2010s?",
+    "answer": "Michael Osborne and Carl Benedikt Frey estimated 47% of U.S. jobs are at 'high risk' of potential automation.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "in the 2010s, Michael Osborne and Carl Benedikt Frey estimated 47% of U.S. jobs are at 'high risk' of potential automation"
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did The Economist state in 2015 about AI's potential impact on white-collar jobs?",
+    "answer": "The Economist stated in 2015 that 'the worry that AI could do to white-collar jobs what steam power did to blue-collar ones during the Industrial Revolution' is 'worth taking seriously'.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The Economist stated in 2015 that 'the worry that AI could do to white-collar jobs what steam power did to blue-collar ones during the Industrial Revolution' is 'worth taking seriously'."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What percentage of jobs for Chinese video game illustrators had been eliminated by generative artificial intelligence by April 2023?",
+    "answer": "70% of the jobs for Chinese video game illustrators had been eliminated by generative artificial intelligence by April 2023.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "In April 2023, it was reported that 70% of the jobs for Chinese video game illustrators had been eliminated by generative artificial intelligence."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did Ford CEO Jim Farley predict about AI and white-collar workers in July 2025?",
+    "answer": "Ford CEO Jim Farley predicted that 'artificial intelligence is going to replace literally half of all white-collar workers in the U.S.' in July 2025.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "In July 2025, Ford CEO Jim Farley predicted that 'artificial intelligence is going to replace literally half of all white-collar workers in the U.S.'."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How can AI tools help authoritarian governments control their citizens according to the text?",
+    "answer": "AI tools help authoritarian governments control citizens through face and voice recognition for surveillance, machine learning to classify potential enemies, recommendation systems for targeted propaganda, deepfakes for misinformation production, and by making centralized decision-making more competitive and lowering the cost of digital warfare and spyware.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "AI tools make it easier for authoritarian governments to efficiently control their citizens in several ways. Face and voice recognition allow widespread surveillance. Machine learning, operating this data, can classify potential enemies of the state and prevent them from hiding. Recommendation systems can precisely target propaganda and misinformation for maximum effect. Deepfakes and generative AI aid in producing misinformation. Advanced AI can make authoritarian centralized decision-making more competitive than liberal and decentralized systems such as markets. It lowers the cost and difficulty of digital warfare and advanced spyware."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What example is given of machine-learning AI's ability to help bad actors in ways that might not be foreseen?",
+    "answer": "Machine-learning AI is able to design tens of thousands of toxic molecules in a matter of hours.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "For example, machine-learning AI is able to design tens of thousands of toxic molecules in a matter of hours."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are some methods mentioned for interpreting what deep learning networks have learned?",
+    "answer": "Methods mentioned include LIME (locally approximating model outputs), multitask learning (providing additional outputs), deconvolution, DeepDream, and other generative methods that allow developers to see what different layers have learned.",
+    "estimated_difficulty": 7,
+    "citations": [
+      "LIME can locally approximate a model's outputs with a simpler, interpretable model. Multitask learning provides a large number of outputs in addition to the target classification. These other outputs can help developers deduce what the network has learned. Deconvolution, DeepDream and other generative methods can allow developers to see what different layers of a deep network for computer vision have learned, and produce output that can suggest what the network is learning."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  }
+]

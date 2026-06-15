@@ -1,0 +1,62 @@
+{
+  "task_id": "ques_generate/seed_42",
+  "run_id": "A_direct_multiple_choice_20260615_234658",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "ques_generate/seed_42",
+    "run_id": "A_direct_multiple_choice_20260615_234658",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "modes": {
+      "multiple_choice": {
+        "count": 50,
+        "max_rounds": 10,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "ques_generate/seed_42",
+    "run_id": "A_direct_multiple_choice_20260615_234658",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "modes": {
+      "multiple_choice": {
+        "count": 50,
+        "max_rounds": 10,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "multiple_choice_candidate_pool": "runs\\ques_generate\\seed_42\\A_direct_multiple_choice_20260615_234658\\multiple_choice\\candidate_pool.json",
+    "chunked_evidence": "runs\\ques_generate\\seed_42\\A_direct_multiple_choice_20260615_234658\\evidence\\chunked.json",
+    "llm_calls": "runs\\ques_generate\\seed_42\\A_direct_multiple_choice_20260615_234658\\llm_calls.jsonl",
+    "generation_report": "runs\\ques_generate\\seed_42\\A_direct_multiple_choice_20260615_234658\\generation_report.json",
+    "validation_report": "runs\\ques_generate\\seed_42\\A_direct_multiple_choice_20260615_234658\\validation\\validation_report.json",
+    "validated_questions": "runs\\ques_generate\\seed_42\\A_direct_multiple_choice_20260615_234658\\validation\\validated_questions.jsonl",
+    "weighted_selection": "runs\\ques_generate\\seed_42\\A_direct_multiple_choice_20260615_234658\\validation\\weighted_selection.json"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "completed",
+    "evaluation": "pending"
+  }
+}

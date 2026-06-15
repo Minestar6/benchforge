@@ -54,6 +54,7 @@ class LLMValidationResult(BaseModel):
     dimensions: dict[str, float]
     failed_reasons: list[str]
     judge_summary: str
+    suggested_difficulty: str | None = None
     llm_call_id: str | None = None
     attempt_count: int = 1
     latency_ms: int | None = None

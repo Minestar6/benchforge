@@ -1,0 +1,350 @@
+2026-06-15 22:47:48.106 | INFO     | Log file: d:\Download\vscode\code\master\benchforge\runs\qa_agent_exp\seed_42\verify_all_logs\verify_all_20260615_224748.log
+2026-06-15 22:47:48.276 | INFO     | verify_agent model: registry='glm-4.7' → api='glm-4-7-251222'
+2026-06-15 22:47:48.280 | INFO     | ============================================================
+2026-06-15 22:47:48.280 | INFO     | [1/2] A_direct_multiple_choice_20260615_184050
+2026-06-15 22:47:48.280 | INFO     | ============================================================
+2026-06-15 22:47:48.281 | WARNING  | chunked evidence not found at runs\qa_agent_exp\seed_42\A_direct_multiple_choice_20260615_184050\evidence\chunked.json, chunk hydrate disabled
+2026-06-15 22:47:48.283 | INFO     | Loaded 89 raw candidates from runs\qa_agent_exp\seed_42\A_direct_multiple_choice_20260615_184050\multiple_choice\candidate_pool.json
+2026-06-15 22:47:48.285 | INFO     | Normalized 89 candidates total
+2026-06-15 22:47:48.285 | INFO     | [VerifyAgent] start task=qa_agent_exp/seed_42 run=A_direct_multiple_choice_20260615_184050 candidates=89
+2026-06-15 22:47:48.291 | INFO     | Appended 89 records to runs\qa_agent_exp\seed_42\A_direct_multiple_choice_20260615_184050\validation\normalized_candidates.jsonl
+2026-06-15 22:47:48.292 | DEBUG    | [citation] 965a2ef13290: score=0.207 chunk=0.000 ans=0.690 matched=0/1 passed=False
+2026-06-15 22:47:48.292 | DEBUG    | [citation] 48a69a9c24ac: score=0.264 chunk=0.000 ans=0.880 matched=0/1 passed=False
+2026-06-15 22:47:48.292 | DEBUG    | [citation] 7e99d037825e: score=0.234 chunk=0.000 ans=0.780 matched=0/1 passed=False
+2026-06-15 22:47:48.292 | DEBUG    | [citation] 5f275cadb088: score=0.273 chunk=0.000 ans=0.910 matched=0/1 passed=False
+2026-06-15 22:47:48.292 | DEBUG    | [citation] aeb502c25ebd: score=0.198 chunk=0.000 ans=0.660 matched=0/1 passed=False
+2026-06-15 22:47:48.292 | DEBUG    | [citation] c0e1df9a512e: score=0.264 chunk=0.000 ans=0.880 matched=0/1 passed=False
+2026-06-15 22:47:48.293 | DEBUG    | [citation] 1bf089550535: score=0.264 chunk=0.000 ans=0.880 matched=0/1 passed=False
+2026-06-15 22:47:48.293 | DEBUG    | [citation] 1ecd3b148e58: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.293 | DEBUG    | [citation] 36afd9b46db0: score=0.279 chunk=0.000 ans=0.930 matched=0/1 passed=False
+2026-06-15 22:47:48.293 | DEBUG    | [citation] 00ae18fd6a5a: score=0.279 chunk=0.000 ans=0.930 matched=0/1 passed=False
+2026-06-15 22:47:48.293 | DEBUG    | [citation] 63e16aff567c: score=0.195 chunk=0.000 ans=0.650 matched=0/1 passed=False
+2026-06-15 22:47:48.293 | DEBUG    | [citation] b1f9cdb55e3b: score=0.264 chunk=0.000 ans=0.880 matched=0/1 passed=False
+2026-06-15 22:47:48.293 | DEBUG    | [citation] 2e98d91a5066: score=0.267 chunk=0.000 ans=0.890 matched=0/1 passed=False
+2026-06-15 22:47:48.293 | DEBUG    | [citation] 6db5ec9f43ed: score=0.258 chunk=0.000 ans=0.860 matched=0/1 passed=False
+2026-06-15 22:47:48.294 | DEBUG    | [citation] b6cae8eb5556: score=0.249 chunk=0.000 ans=0.830 matched=0/1 passed=False
+2026-06-15 22:47:48.294 | DEBUG    | [citation] 47e6abdfbc80: score=0.201 chunk=0.000 ans=0.670 matched=0/1 passed=False
+2026-06-15 22:47:48.294 | DEBUG    | [citation] bafb31af812e: score=0.279 chunk=0.000 ans=0.930 matched=0/1 passed=False
+2026-06-15 22:47:48.294 | DEBUG    | [citation] e53922e7cc41: score=0.243 chunk=0.000 ans=0.810 matched=0/1 passed=False
+2026-06-15 22:47:48.294 | DEBUG    | [citation] 6d62014c5422: score=0.264 chunk=0.000 ans=0.880 matched=0/1 passed=False
+2026-06-15 22:47:48.294 | DEBUG    | [citation] a7e942e5e741: score=0.273 chunk=0.000 ans=0.910 matched=0/1 passed=False
+2026-06-15 22:47:48.294 | DEBUG    | [citation] 9038d6f86ff8: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.294 | DEBUG    | [citation] 1261f196e2ce: score=0.258 chunk=0.000 ans=0.860 matched=0/1 passed=False
+2026-06-15 22:47:48.295 | DEBUG    | [citation] 904eea1aeac3: score=0.291 chunk=0.000 ans=0.970 matched=0/1 passed=False
+2026-06-15 22:47:48.295 | DEBUG    | [citation] babf2d0bfc37: score=0.279 chunk=0.000 ans=0.930 matched=0/1 passed=False
+2026-06-15 22:47:48.295 | DEBUG    | [citation] b9b09baca3d1: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.295 | DEBUG    | [citation] 808bcaab6110: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.295 | DEBUG    | [citation] 8deffbbcf957: score=0.288 chunk=0.000 ans=0.960 matched=0/1 passed=False
+2026-06-15 22:47:48.295 | DEBUG    | [citation] ca110b5f6615: score=0.246 chunk=0.000 ans=0.820 matched=0/1 passed=False
+2026-06-15 22:47:48.295 | DEBUG    | [citation] c8d09057f720: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.296 | DEBUG    | [citation] ddae6f8d91cf: score=0.273 chunk=0.000 ans=0.910 matched=0/1 passed=False
+2026-06-15 22:47:48.296 | DEBUG    | [citation] 0c4bfec7af09: score=0.297 chunk=0.000 ans=0.990 matched=0/1 passed=False
+2026-06-15 22:47:48.296 | DEBUG    | [citation] 913bb60b9f9e: score=0.285 chunk=0.000 ans=0.950 matched=0/1 passed=False
+2026-06-15 22:47:48.296 | DEBUG    | [citation] 8447b317e657: score=0.267 chunk=0.000 ans=0.890 matched=0/1 passed=False
+2026-06-15 22:47:48.296 | DEBUG    | [citation] 96467463a83a: score=0.195 chunk=0.000 ans=0.650 matched=0/1 passed=False
+2026-06-15 22:47:48.296 | DEBUG    | [citation] 71b09c46774b: score=0.195 chunk=0.000 ans=0.650 matched=0/1 passed=False
+2026-06-15 22:47:48.296 | DEBUG    | [citation] 93569bf9e275: score=0.258 chunk=0.000 ans=0.860 matched=0/1 passed=False
+2026-06-15 22:47:48.296 | DEBUG    | [citation] 08eb59caee1d: score=0.234 chunk=0.000 ans=0.780 matched=0/1 passed=False
+2026-06-15 22:47:48.297 | DEBUG    | [citation] 37b89eb20e7b: score=0.273 chunk=0.000 ans=0.910 matched=0/1 passed=False
+2026-06-15 22:47:48.297 | DEBUG    | [citation] d2502e8a3887: score=0.222 chunk=0.000 ans=0.740 matched=0/1 passed=False
+2026-06-15 22:47:48.297 | DEBUG    | [citation] 632728f7e27c: score=0.246 chunk=0.000 ans=0.820 matched=0/1 passed=False
+2026-06-15 22:47:48.297 | DEBUG    | [citation] 0d636320c5cc: score=0.270 chunk=0.000 ans=0.900 matched=0/1 passed=False
+2026-06-15 22:47:48.297 | DEBUG    | [citation] 37d500f40020: score=0.267 chunk=0.000 ans=0.890 matched=0/1 passed=False
+2026-06-15 22:47:48.297 | DEBUG    | [citation] c9ec66573bae: score=0.240 chunk=0.000 ans=0.800 matched=0/1 passed=False
+2026-06-15 22:47:48.297 | DEBUG    | [citation] 6149fa9dd0ca: score=0.258 chunk=0.000 ans=0.860 matched=0/1 passed=False
+2026-06-15 22:47:48.297 | DEBUG    | [citation] df9a78fe8f9b: score=0.288 chunk=0.000 ans=0.960 matched=0/1 passed=False
+2026-06-15 22:47:48.299 | DEBUG    | [citation] 537a63bbdf77: score=0.120 chunk=0.000 ans=0.400 matched=0/1 passed=False
+2026-06-15 22:47:48.299 | DEBUG    | [citation] 0567a0af30ec: score=0.273 chunk=0.000 ans=0.910 matched=0/1 passed=False
+2026-06-15 22:47:48.299 | DEBUG    | [citation] 0f715c86c5c1: score=0.213 chunk=0.000 ans=0.710 matched=0/1 passed=False
+2026-06-15 22:47:48.299 | DEBUG    | [citation] 4ee89037e5ee: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.299 | DEBUG    | [citation] 5bb10eb547d7: score=0.204 chunk=0.000 ans=0.680 matched=0/1 passed=False
+2026-06-15 22:47:48.299 | DEBUG    | [citation] 7330ac51d5b4: score=0.255 chunk=0.000 ans=0.850 matched=0/1 passed=False
+2026-06-15 22:47:48.300 | DEBUG    | [citation] cdfd167e4d8e: score=0.201 chunk=0.000 ans=0.670 matched=0/1 passed=False
+2026-06-15 22:47:48.300 | DEBUG    | [citation] 19bcd9e5c582: score=0.222 chunk=0.000 ans=0.740 matched=0/1 passed=False
+2026-06-15 22:47:48.300 | DEBUG    | [citation] c0ce171618d4: score=0.252 chunk=0.000 ans=0.840 matched=0/1 passed=False
+2026-06-15 22:47:48.300 | DEBUG    | [citation] eddeb7320ec0: score=0.264 chunk=0.000 ans=0.880 matched=0/1 passed=False
+2026-06-15 22:47:48.300 | DEBUG    | [citation] c5d1eec22e28: score=0.264 chunk=0.000 ans=0.880 matched=0/1 passed=False
+2026-06-15 22:47:48.300 | DEBUG    | [citation] adf975cce807: score=0.255 chunk=0.000 ans=0.850 matched=0/1 passed=False
+2026-06-15 22:47:48.300 | DEBUG    | [citation] 8569026d1501: score=0.282 chunk=0.000 ans=0.940 matched=0/1 passed=False
+2026-06-15 22:47:48.301 | DEBUG    | [citation] 340350452d71: score=0.246 chunk=0.000 ans=0.820 matched=0/1 passed=False
+2026-06-15 22:47:48.301 | DEBUG    | [citation] 55f62a466a9b: score=0.261 chunk=0.000 ans=0.870 matched=0/1 passed=False
+2026-06-15 22:47:48.301 | DEBUG    | [citation] 97d9453b4db4: score=0.234 chunk=0.000 ans=0.780 matched=0/1 passed=False
+2026-06-15 22:47:48.301 | DEBUG    | [citation] 68237fda2303: score=0.219 chunk=0.000 ans=0.730 matched=0/1 passed=False
+2026-06-15 22:47:48.301 | DEBUG    | [citation] 8848d17005f2: score=0.180 chunk=0.000 ans=0.600 matched=0/1 passed=False
+2026-06-15 22:47:48.301 | DEBUG    | [citation] e26445a6e0d6: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.301 | DEBUG    | [citation] ba32016a15f8: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.302 | DEBUG    | [citation] aee1e9562628: score=0.207 chunk=0.000 ans=0.690 matched=0/1 passed=False
+2026-06-15 22:47:48.302 | DEBUG    | [citation] 695859f10a76: score=0.261 chunk=0.000 ans=0.870 matched=0/1 passed=False
+2026-06-15 22:47:48.302 | DEBUG    | [citation] 3f4c9ff9520a: score=0.135 chunk=0.000 ans=0.450 matched=0/1 passed=False
+2026-06-15 22:47:48.302 | DEBUG    | [citation] 6eedb719e894: score=0.216 chunk=0.000 ans=0.720 matched=0/1 passed=False
+2026-06-15 22:47:48.302 | DEBUG    | [citation] f9d247f8052b: score=0.264 chunk=0.000 ans=0.880 matched=0/1 passed=False
+2026-06-15 22:47:48.302 | DEBUG    | [citation] 312e11d69ca2: score=0.285 chunk=0.000 ans=0.950 matched=0/1 passed=False
+2026-06-15 22:47:48.302 | DEBUG    | [citation] 21fde2511af1: score=0.219 chunk=0.000 ans=0.730 matched=0/1 passed=False
+2026-06-15 22:47:48.302 | DEBUG    | [citation] 1c68684a61a4: score=0.282 chunk=0.000 ans=0.940 matched=0/1 passed=False
+2026-06-15 22:47:48.303 | DEBUG    | [citation] 15e7a0ee6ace: score=0.201 chunk=0.000 ans=0.670 matched=0/1 passed=False
+2026-06-15 22:47:48.303 | DEBUG    | [citation] 8121f921be52: score=0.213 chunk=0.000 ans=0.710 matched=0/1 passed=False
+2026-06-15 22:47:48.303 | DEBUG    | [citation] 37125918bc56: score=0.237 chunk=0.000 ans=0.790 matched=0/1 passed=False
+2026-06-15 22:47:48.303 | DEBUG    | [citation] 3366427dbecb: score=0.222 chunk=0.000 ans=0.740 matched=0/1 passed=False
+2026-06-15 22:47:48.303 | DEBUG    | [citation] 9ef3daaff9ef: score=0.282 chunk=0.000 ans=0.940 matched=0/1 passed=False
+2026-06-15 22:47:48.303 | DEBUG    | [citation] 247af99762a0: score=0.183 chunk=0.000 ans=0.610 matched=0/1 passed=False
+2026-06-15 22:47:48.303 | DEBUG    | [citation] 120374f293a3: score=0.186 chunk=0.000 ans=0.620 matched=0/1 passed=False
+2026-06-15 22:47:48.304 | DEBUG    | [citation] 1bfa9f339b90: score=0.264 chunk=0.000 ans=0.880 matched=0/1 passed=False
+2026-06-15 22:47:48.304 | DEBUG    | [citation] 32989908c6a4: score=0.270 chunk=0.000 ans=0.900 matched=0/1 passed=False
+2026-06-15 22:47:48.304 | DEBUG    | [citation] 91c2779d8425: score=0.219 chunk=0.000 ans=0.730 matched=0/1 passed=False
+2026-06-15 22:47:48.304 | DEBUG    | [citation] 9213bba0ed7e: score=0.219 chunk=0.000 ans=0.730 matched=0/1 passed=False
+2026-06-15 22:47:48.304 | DEBUG    | [citation] c05db8e9d9c2: score=0.231 chunk=0.000 ans=0.770 matched=0/1 passed=False
+2026-06-15 22:47:48.304 | DEBUG    | [citation] fa3a91986862: score=0.159 chunk=0.000 ans=0.530 matched=0/1 passed=False
+2026-06-15 22:47:48.304 | DEBUG    | [citation] ef4046a8e089: score=0.285 chunk=0.000 ans=0.950 matched=0/1 passed=False
+2026-06-15 22:47:48.305 | DEBUG    | [citation] 0bbde45ae5e3: score=0.288 chunk=0.000 ans=0.960 matched=0/1 passed=False
+2026-06-15 22:47:48.305 | DEBUG    | [citation] 6009eb938f89: score=0.219 chunk=0.000 ans=0.730 matched=0/1 passed=False
+2026-06-15 22:47:48.305 | INFO     | Citation validation: 0/89 passed
+2026-06-15 22:47:48.307 | INFO     | Appended 89 records to runs\qa_agent_exp\seed_42\A_direct_multiple_choice_20260615_184050\validation\citation_validation.jsonl
+2026-06-15 22:47:48.308 | INFO     | Appended 0 records to runs\qa_agent_exp\seed_42\A_direct_multiple_choice_20260615_184050\validation\llm_validation.jsonl
+2026-06-15 22:47:48.312 | INFO     | Appended 89 records to runs\qa_agent_exp\seed_42\A_direct_multiple_choice_20260615_184050\validation\validated_questions.jsonl
+2026-06-15 22:47:48.313 | INFO     | Saved JSON to runs\qa_agent_exp\seed_42\A_direct_multiple_choice_20260615_184050\validation\weighted_selection.json
+2026-06-15 22:47:48.314 | INFO     | Saved JSON to runs\qa_agent_exp\seed_42\A_direct_multiple_choice_20260615_184050\validation\validation_report.json
+2026-06-15 22:47:48.315 | INFO     | [VerifyAgent] done: selected=0 report=runs\qa_agent_exp\seed_42\A_direct_multiple_choice_20260615_184050\validation\validation_report.json
+2026-06-15 22:47:48.318 | ERROR    | Failed to verify A_direct_multiple_choice_20260615_184050
+Traceback (most recent call last):
+
+  File "d:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 409, in <module>
+    asyncio.run(main())
+    │       │   └ <function main at 0x00000207118AF010>
+    │       └ <function run at 0x0000020701D8C280>
+    └ <module 'asyncio' from 'D:\\Anaconda\\envs\\bench_agent\\lib\\asyncio\\__init__.py'>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object main at 0x0000020703E83990>
+           │    └ <function BaseEventLoop.run_until_complete at 0x0000020703C692D0>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000020703D0D000>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000020703C6AD40>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 1909, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000020703BAE710>
+    └ <Handle <TaskStepMethWrapper object at 0x0000020704351D80>()>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x0000020704351D80>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x0000020704351D80>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x0000020704351D80>()>
+
+> File "d:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 282, in main
+    orig_diff = dict(collect_orig_diff(dir_path))
+                     │                 └ WindowsPath('d:/Download/vscode/code/master/benchforge/runs/qa_agent_exp/seed_42/A_direct_multiple_choice_20260615_184050')
+                     └ <function collect_orig_diff at 0x000002070436DE10>
+
+  File "d:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 77, in collect_orig_diff
+    items = json.load(f)
+            │    │    └ <_io.TextIOWrapper name='d:\\Download\\vscode\\code\\master\\benchforge\\runs\\qa_agent_exp\\seed_42\\A_direct_multiple_choic...
+            │    └ <function load at 0x0000020703D0ED40>
+            └ <module 'json' from 'D:\\Anaconda\\envs\\bench_agent\\lib\\json\\__init__.py'>
+
+  File "D:\Anaconda\envs\bench_agent\lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+           │     │  └ <method 'read' of '_io.TextIOWrapper' objects>
+           │     └ <_io.TextIOWrapper name='d:\\Download\\vscode\\code\\master\\benchforge\\runs\\qa_agent_exp\\seed_42\\A_direct_multiple_choic...
+           └ <function loads at 0x0000020703D0EDD0>
+
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x93 in position 19234: illegal multibyte sequence
+2026-06-15 22:47:48.385 | INFO     | ============================================================
+2026-06-15 22:47:48.386 | INFO     | [2/2] A_direct_qa_20260615_184050
+2026-06-15 22:47:48.386 | INFO     | ============================================================
+2026-06-15 22:47:48.386 | WARNING  | chunked evidence not found at runs\qa_agent_exp\seed_42\A_direct_qa_20260615_184050\evidence\chunked.json, chunk hydrate disabled
+2026-06-15 22:47:48.387 | INFO     | Loaded 107 raw candidates from runs\qa_agent_exp\seed_42\A_direct_qa_20260615_184050\qa\candidate_pool.json
+2026-06-15 22:47:48.389 | INFO     | Normalized 107 candidates total
+2026-06-15 22:47:48.389 | INFO     | [VerifyAgent] start task=qa_agent_exp/seed_42 run=A_direct_qa_20260615_184050 candidates=107
+2026-06-15 22:47:48.392 | INFO     | Appended 107 records to runs\qa_agent_exp\seed_42\A_direct_qa_20260615_184050\validation\normalized_candidates.jsonl
+2026-06-15 22:47:48.394 | DEBUG    | [citation] f2b7d4f4b328: score=0.249 chunk=0.000 ans=0.830 matched=0/1 passed=False
+2026-06-15 22:47:48.394 | DEBUG    | [citation] 6ddf891bf194: score=0.258 chunk=0.000 ans=0.860 matched=0/1 passed=False
+2026-06-15 22:47:48.395 | DEBUG    | [citation] aa7961b73298: score=0.237 chunk=0.000 ans=0.790 matched=0/1 passed=False
+2026-06-15 22:47:48.395 | DEBUG    | [citation] d1a1fa770699: score=0.246 chunk=0.000 ans=0.820 matched=0/1 passed=False
+2026-06-15 22:47:48.395 | DEBUG    | [citation] 8d565d145b6d: score=0.261 chunk=0.000 ans=0.870 matched=0/1 passed=False
+2026-06-15 22:47:48.395 | DEBUG    | [citation] 59a067d2214b: score=0.255 chunk=0.000 ans=0.850 matched=0/1 passed=False
+2026-06-15 22:47:48.396 | DEBUG    | [citation] c53193233e2a: score=0.279 chunk=0.000 ans=0.930 matched=0/1 passed=False
+2026-06-15 22:47:48.396 | DEBUG    | [citation] a12b01acdf78: score=0.279 chunk=0.000 ans=0.930 matched=0/1 passed=False
+2026-06-15 22:47:48.396 | DEBUG    | [citation] 7d999c5d1263: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.396 | DEBUG    | [citation] b79c9ec5e42d: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.396 | DEBUG    | [citation] 7f8ba5e04cad: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.397 | DEBUG    | [citation] 6d434a605a30: score=0.237 chunk=0.000 ans=0.790 matched=0/1 passed=False
+2026-06-15 22:47:48.397 | DEBUG    | [citation] c5b070f3dfb5: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.397 | DEBUG    | [citation] 317403bd1dfa: score=0.270 chunk=0.000 ans=0.900 matched=0/1 passed=False
+2026-06-15 22:47:48.397 | DEBUG    | [citation] fabf4e02f5c0: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.398 | DEBUG    | [citation] 12a0546ed55f: score=0.288 chunk=0.000 ans=0.960 matched=0/1 passed=False
+2026-06-15 22:47:48.398 | DEBUG    | [citation] a7644819e947: score=0.267 chunk=0.000 ans=0.890 matched=0/1 passed=False
+2026-06-15 22:47:48.398 | DEBUG    | [citation] 193d1bd646a2: score=0.261 chunk=0.000 ans=0.870 matched=0/1 passed=False
+2026-06-15 22:47:48.398 | DEBUG    | [citation] 65ff1f4cd3eb: score=0.234 chunk=0.000 ans=0.780 matched=0/1 passed=False
+2026-06-15 22:47:48.400 | DEBUG    | [citation] ba3e99d03123: score=0.261 chunk=0.000 ans=0.870 matched=0/1 passed=False
+2026-06-15 22:47:48.400 | DEBUG    | [citation] 04f3f109e304: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.401 | DEBUG    | [citation] e124c2330e9f: score=0.279 chunk=0.000 ans=0.930 matched=0/1 passed=False
+2026-06-15 22:47:48.401 | DEBUG    | [citation] 5e252f9299b0: score=0.252 chunk=0.000 ans=0.840 matched=0/1 passed=False
+2026-06-15 22:47:48.401 | DEBUG    | [citation] 942b5827aa14: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.401 | DEBUG    | [citation] 5da2dd317ae0: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.402 | DEBUG    | [citation] ad7185212d21: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.402 | DEBUG    | [citation] 504c9604c32f: score=0.219 chunk=0.000 ans=0.730 matched=0/1 passed=False
+2026-06-15 22:47:48.403 | DEBUG    | [citation] d9b1d73b376c: score=0.285 chunk=0.000 ans=0.950 matched=0/1 passed=False
+2026-06-15 22:47:48.403 | DEBUG    | [citation] de0f89267c2f: score=0.255 chunk=0.000 ans=0.850 matched=0/1 passed=False
+2026-06-15 22:47:48.403 | DEBUG    | [citation] 856da0a539c9: score=0.207 chunk=0.000 ans=0.690 matched=0/1 passed=False
+2026-06-15 22:47:48.404 | DEBUG    | [citation] 6f501629704b: score=0.177 chunk=0.000 ans=0.590 matched=0/1 passed=False
+2026-06-15 22:47:48.404 | DEBUG    | [citation] 42202ed8cae9: score=0.294 chunk=0.000 ans=0.980 matched=0/1 passed=False
+2026-06-15 22:47:48.404 | DEBUG    | [citation] 84cb4a7f58c3: score=0.252 chunk=0.000 ans=0.840 matched=0/1 passed=False
+2026-06-15 22:47:48.404 | DEBUG    | [citation] 1167de89f2b2: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.404 | DEBUG    | [citation] 2ab730ff73f5: score=0.294 chunk=0.000 ans=0.980 matched=0/1 passed=False
+2026-06-15 22:47:48.405 | DEBUG    | [citation] 9e323dd95d91: score=0.216 chunk=0.000 ans=0.720 matched=0/1 passed=False
+2026-06-15 22:47:48.405 | DEBUG    | [citation] 808bcaab6110: score=0.216 chunk=0.000 ans=0.720 matched=0/1 passed=False
+2026-06-15 22:47:48.405 | DEBUG    | [citation] 7f6534730ebd: score=0.247 chunk=0.000 ans=0.825 matched=0/2 passed=False
+2026-06-15 22:47:48.405 | DEBUG    | [citation] 7330aa4a479e: score=0.267 chunk=0.000 ans=0.890 matched=0/1 passed=False
+2026-06-15 22:47:48.406 | DEBUG    | [citation] 2156eb50d51b: score=0.165 chunk=0.000 ans=0.550 matched=0/2 passed=False
+2026-06-15 22:47:48.406 | DEBUG    | [citation] 1d5d96895e5a: score=0.252 chunk=0.000 ans=0.840 matched=0/1 passed=False
+2026-06-15 22:47:48.406 | DEBUG    | [citation] 463e4aa1cb88: score=0.282 chunk=0.000 ans=0.940 matched=0/1 passed=False
+2026-06-15 22:47:48.406 | DEBUG    | [citation] 17c8a47d03fa: score=0.240 chunk=0.000 ans=0.800 matched=0/1 passed=False
+2026-06-15 22:47:48.406 | DEBUG    | [citation] 94a5d65c2bbd: score=0.228 chunk=0.000 ans=0.760 matched=0/1 passed=False
+2026-06-15 22:47:48.407 | DEBUG    | [citation] 8c5fef2d2b29: score=0.189 chunk=0.000 ans=0.630 matched=0/1 passed=False
+2026-06-15 22:47:48.407 | DEBUG    | [citation] ae808082d04e: score=0.267 chunk=0.000 ans=0.890 matched=0/1 passed=False
+2026-06-15 22:47:48.407 | DEBUG    | [citation] 65de0c5d1ee0: score=0.240 chunk=0.000 ans=0.800 matched=0/1 passed=False
+2026-06-15 22:47:48.407 | DEBUG    | [citation] fde48d04b9dc: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.408 | DEBUG    | [citation] 55317f405f8a: score=0.231 chunk=0.000 ans=0.770 matched=0/1 passed=False
+2026-06-15 22:47:48.409 | DEBUG    | [citation] 9486844978fc: score=0.201 chunk=0.000 ans=0.670 matched=0/2 passed=False
+2026-06-15 22:47:48.409 | DEBUG    | [citation] 87565086188a: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.409 | DEBUG    | [citation] cc0ba5b2c90b: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.409 | DEBUG    | [citation] ef0b8334afe7: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.409 | DEBUG    | [citation] f63d03013e72: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.410 | DEBUG    | [citation] da4817f21c34: score=0.219 chunk=0.000 ans=0.730 matched=0/1 passed=False
+2026-06-15 22:47:48.410 | DEBUG    | [citation] a4440b6bc2ba: score=0.291 chunk=0.000 ans=0.970 matched=0/1 passed=False
+2026-06-15 22:47:48.410 | DEBUG    | [citation] e0b254ab2809: score=0.246 chunk=0.000 ans=0.820 matched=0/1 passed=False
+2026-06-15 22:47:48.410 | DEBUG    | [citation] 3d408bdaad60: score=0.258 chunk=0.000 ans=0.860 matched=0/1 passed=False
+2026-06-15 22:47:48.410 | DEBUG    | [citation] 97e2e519168a: score=0.282 chunk=0.000 ans=0.940 matched=0/1 passed=False
+2026-06-15 22:47:48.411 | DEBUG    | [citation] 521a3d3535e8: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.412 | DEBUG    | [citation] 9b0d5aa4a290: score=0.228 chunk=0.000 ans=0.760 matched=0/1 passed=False
+2026-06-15 22:47:48.412 | DEBUG    | [citation] f04f1bd49e30: score=0.207 chunk=0.000 ans=0.690 matched=0/4 passed=False
+2026-06-15 22:47:48.412 | DEBUG    | [citation] e2b11e08525f: score=0.246 chunk=0.000 ans=0.820 matched=0/1 passed=False
+2026-06-15 22:47:48.413 | DEBUG    | [citation] 297a6d74d415: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.414 | DEBUG    | [citation] cf98f4b05cf7: score=0.201 chunk=0.000 ans=0.670 matched=0/1 passed=False
+2026-06-15 22:47:48.415 | DEBUG    | [citation] f0039f927df6: score=0.198 chunk=0.000 ans=0.660 matched=0/1 passed=False
+2026-06-15 22:47:48.416 | DEBUG    | [citation] 3884605dd17d: score=0.231 chunk=0.000 ans=0.770 matched=0/1 passed=False
+2026-06-15 22:47:48.416 | DEBUG    | [citation] f845a8e3ad3d: score=0.288 chunk=0.000 ans=0.960 matched=0/1 passed=False
+2026-06-15 22:47:48.416 | DEBUG    | [citation] 7f4173159084: score=0.240 chunk=0.000 ans=0.800 matched=0/1 passed=False
+2026-06-15 22:47:48.416 | DEBUG    | [citation] 97e3146ea28d: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.417 | DEBUG    | [citation] 6f4e2af1dbb6: score=0.288 chunk=0.000 ans=0.960 matched=0/1 passed=False
+2026-06-15 22:47:48.417 | DEBUG    | [citation] 5193ef2f7780: score=0.240 chunk=0.000 ans=0.800 matched=0/1 passed=False
+2026-06-15 22:47:48.417 | DEBUG    | [citation] d3592136ca4d: score=0.252 chunk=0.000 ans=0.840 matched=0/1 passed=False
+2026-06-15 22:47:48.418 | DEBUG    | [citation] 296dee407c26: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.418 | DEBUG    | [citation] 03ac990ae09b: score=0.270 chunk=0.000 ans=0.900 matched=0/1 passed=False
+2026-06-15 22:47:48.418 | DEBUG    | [citation] 1add15d7ae42: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.418 | DEBUG    | [citation] 666750e9b361: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.418 | DEBUG    | [citation] dad88b3fd40f: score=0.273 chunk=0.000 ans=0.910 matched=0/1 passed=False
+2026-06-15 22:47:48.419 | DEBUG    | [citation] 1cd8d7bc0417: score=0.285 chunk=0.000 ans=0.950 matched=0/1 passed=False
+2026-06-15 22:47:48.419 | DEBUG    | [citation] 177a355b3063: score=0.234 chunk=0.000 ans=0.780 matched=0/1 passed=False
+2026-06-15 22:47:48.419 | DEBUG    | [citation] 48fc19ce3c40: score=0.215 chunk=0.000 ans=0.715 matched=0/2 passed=False
+2026-06-15 22:47:48.420 | DEBUG    | [citation] 741bba955235: score=0.228 chunk=0.000 ans=0.760 matched=0/1 passed=False
+2026-06-15 22:47:48.421 | DEBUG    | [citation] f986e261350d: score=0.297 chunk=0.000 ans=0.990 matched=0/1 passed=False
+2026-06-15 22:47:48.421 | DEBUG    | [citation] 89b77681293e: score=0.270 chunk=0.000 ans=0.900 matched=0/1 passed=False
+2026-06-15 22:47:48.423 | DEBUG    | [citation] ef411f9a7095: score=0.207 chunk=0.000 ans=0.690 matched=0/1 passed=False
+2026-06-15 22:47:48.423 | DEBUG    | [citation] 2b198f6fa06e: score=0.270 chunk=0.000 ans=0.900 matched=0/1 passed=False
+2026-06-15 22:47:48.423 | DEBUG    | [citation] c9f20fc89b44: score=0.210 chunk=0.000 ans=0.700 matched=0/1 passed=False
+2026-06-15 22:47:48.424 | DEBUG    | [citation] 1a3501627f00: score=0.240 chunk=0.000 ans=0.800 matched=0/1 passed=False
+2026-06-15 22:47:48.425 | DEBUG    | [citation] 58e4aa0610d1: score=0.258 chunk=0.000 ans=0.860 matched=0/1 passed=False
+2026-06-15 22:47:48.425 | DEBUG    | [citation] 7ff1466e5d26: score=0.231 chunk=0.000 ans=0.770 matched=0/1 passed=False
+2026-06-15 22:47:48.425 | DEBUG    | [citation] efa05426ad6a: score=0.231 chunk=0.000 ans=0.770 matched=0/1 passed=False
+2026-06-15 22:47:48.425 | DEBUG    | [citation] c09be17561b1: score=0.291 chunk=0.000 ans=0.970 matched=0/1 passed=False
+2026-06-15 22:47:48.426 | DEBUG    | [citation] a8095e487834: score=0.201 chunk=0.000 ans=0.670 matched=0/1 passed=False
+2026-06-15 22:47:48.427 | DEBUG    | [citation] 093124e4fe7a: score=0.201 chunk=0.000 ans=0.670 matched=0/1 passed=False
+2026-06-15 22:47:48.427 | DEBUG    | [citation] 1152d6a3a4db: score=0.294 chunk=0.000 ans=0.980 matched=0/1 passed=False
+2026-06-15 22:47:48.427 | DEBUG    | [citation] 6e33d539d26c: score=0.270 chunk=0.000 ans=0.900 matched=0/1 passed=False
+2026-06-15 22:47:48.429 | DEBUG    | [citation] 2e149f1546d3: score=0.219 chunk=0.000 ans=0.730 matched=0/1 passed=False
+2026-06-15 22:47:48.429 | DEBUG    | [citation] 760687be0f6c: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.429 | DEBUG    | [citation] d2f84392ec8b: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.430 | DEBUG    | [citation] 87af20413a05: score=0.276 chunk=0.000 ans=0.920 matched=0/1 passed=False
+2026-06-15 22:47:48.430 | DEBUG    | [citation] 3ba50db72241: score=0.282 chunk=0.000 ans=0.940 matched=0/1 passed=False
+2026-06-15 22:47:48.430 | DEBUG    | [citation] 2879a0fea72f: score=0.300 chunk=0.000 ans=1.000 matched=0/1 passed=False
+2026-06-15 22:47:48.430 | DEBUG    | [citation] a41d5107df37: score=0.236 chunk=0.000 ans=0.787 matched=0/3 passed=False
+2026-06-15 22:47:48.430 | DEBUG    | [citation] 980b982cd8ef: score=0.159 chunk=0.000 ans=0.530 matched=0/1 passed=False
+2026-06-15 22:47:48.430 | DEBUG    | [citation] aef9e9c42912: score=0.186 chunk=0.000 ans=0.620 matched=0/1 passed=False
+2026-06-15 22:47:48.431 | DEBUG    | [citation] fc5c23c9bb59: score=0.219 chunk=0.000 ans=0.730 matched=0/1 passed=False
+2026-06-15 22:47:48.431 | DEBUG    | [citation] 8982a6ab3458: score=0.288 chunk=0.000 ans=0.960 matched=0/1 passed=False
+2026-06-15 22:47:48.431 | INFO     | Citation validation: 0/107 passed
+2026-06-15 22:47:48.434 | INFO     | Appended 107 records to runs\qa_agent_exp\seed_42\A_direct_qa_20260615_184050\validation\citation_validation.jsonl
+2026-06-15 22:47:48.435 | INFO     | Appended 0 records to runs\qa_agent_exp\seed_42\A_direct_qa_20260615_184050\validation\llm_validation.jsonl
+2026-06-15 22:47:48.439 | INFO     | Appended 107 records to runs\qa_agent_exp\seed_42\A_direct_qa_20260615_184050\validation\validated_questions.jsonl
+2026-06-15 22:47:48.440 | INFO     | Saved JSON to runs\qa_agent_exp\seed_42\A_direct_qa_20260615_184050\validation\weighted_selection.json
+2026-06-15 22:47:48.441 | INFO     | Saved JSON to runs\qa_agent_exp\seed_42\A_direct_qa_20260615_184050\validation\validation_report.json
+2026-06-15 22:47:48.442 | INFO     | [VerifyAgent] done: selected=0 report=runs\qa_agent_exp\seed_42\A_direct_qa_20260615_184050\validation\validation_report.json
+2026-06-15 22:47:48.444 | ERROR    | Failed to verify A_direct_qa_20260615_184050
+Traceback (most recent call last):
+
+  File "d:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 409, in <module>
+    asyncio.run(main())
+    │       │   └ <function main at 0x00000207118AF010>
+    │       └ <function run at 0x0000020701D8C280>
+    └ <module 'asyncio' from 'D:\\Anaconda\\envs\\bench_agent\\lib\\asyncio\\__init__.py'>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object main at 0x0000020703E83990>
+           │    └ <function BaseEventLoop.run_until_complete at 0x0000020703C692D0>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000020703D0D000>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000020703C6AD40>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 1909, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000020703BAE710>
+    └ <Handle <TaskStepMethWrapper object at 0x0000020704351D80>()>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x0000020704351D80>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x0000020704351D80>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x0000020704351D80>()>
+
+> File "d:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 282, in main
+    orig_diff = dict(collect_orig_diff(dir_path))
+                     │                 └ WindowsPath('d:/Download/vscode/code/master/benchforge/runs/qa_agent_exp/seed_42/A_direct_qa_20260615_184050')
+                     └ <function collect_orig_diff at 0x000002070436DE10>
+
+  File "d:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 77, in collect_orig_diff
+    items = json.load(f)
+            │    │    └ <_io.TextIOWrapper name='d:\\Download\\vscode\\code\\master\\benchforge\\runs\\qa_agent_exp\\seed_42\\A_direct_qa_20260615_18...
+            │    └ <function load at 0x0000020703D0ED40>
+            └ <module 'json' from 'D:\\Anaconda\\envs\\bench_agent\\lib\\json\\__init__.py'>
+
+  File "D:\Anaconda\envs\bench_agent\lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+           │     │  └ <method 'read' of '_io.TextIOWrapper' objects>
+           │     └ <_io.TextIOWrapper name='d:\\Download\\vscode\\code\\master\\benchforge\\runs\\qa_agent_exp\\seed_42\\A_direct_qa_20260615_18...
+           └ <function loads at 0x0000020703D0EDD0>
+
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x93 in position 29024: illegal multibyte sequence
+2026-06-15 22:47:48.452 | INFO     | Report saved to d:\Download\vscode\code\master\benchforge\runs\qa_agent_exp\seed_42\verify_all_report.json
+2026-06-15 22:47:48.452 | INFO     | Log saved to d:\Download\vscode\code\master\benchforge\runs\qa_agent_exp\seed_42\verify_all_logs\verify_all_20260615_224748.log

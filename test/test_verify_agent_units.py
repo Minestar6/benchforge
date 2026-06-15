@@ -37,6 +37,7 @@ from benchforge.schemas import SharedState, AgentStatus
 from benchforge.utils.shared_state import save_shared_state
 from benchforge.agents.verify_agent.selector import (
     _compute_bucket_targets,
+    _label_to_int_difficulty,
     _normalize_difficulty,
     run_weighted_selection,
 )
@@ -472,6 +473,28 @@ class TestNormalizeDifficulty:
         assert _normalize_difficulty(None) == "unknown"
 
 
+class TestLabelToIntDifficulty:
+    def test_easy(self):
+        assert _label_to_int_difficulty("easy") == 2
+
+    def test_medium(self):
+        assert _label_to_int_difficulty("medium") == 5
+
+    def test_hard(self):
+        assert _label_to_int_difficulty("hard") == 8
+
+    def test_case_insensitive(self):
+        assert _label_to_int_difficulty("EASY") == 2
+        assert _label_to_int_difficulty("Medium") == 5
+
+    def test_whitespace(self):
+        assert _label_to_int_difficulty("  hard  ") == 8
+
+    def test_unknown_fallback(self):
+        assert _label_to_int_difficulty("expert") == 5
+        assert _label_to_int_difficulty("") == 5
+
+
 class TestRunWeightedSelection:
     def _make_results(self, candidates):
         from benchforge.agents.verify_agent.schema import CitationValidationResult, LLMValidationResult
@@ -587,6 +610,7 @@ class TestLLMValidator:
             "answerability": 4,
             "clarity": 4,
             "difficulty_consistency": 4,
+            "suggested_difficulty": "medium",
             "reason": "Good question.",
         }
         client = self._make_fake_client_with_response(good_response)
@@ -616,6 +640,7 @@ class TestLLMValidator:
             "difficulty_consistency": 0.75,
         }
         assert results["q1"].judge_summary == "Good question."
+        assert results["q1"].suggested_difficulty == "medium"
 
     def test_llm_validation_rejects_below_min_overall_score(self):
         response = {
@@ -623,6 +648,7 @@ class TestLLMValidator:
             "answerability": 2,
             "clarity": 3,
             "difficulty_consistency": 2,
+            "suggested_difficulty": "hard",
             "reason": "Poor quality question.",
         }
         client = self._make_fake_client_with_response(response)
@@ -644,6 +670,7 @@ class TestLLMValidator:
         # raw: 3,2,3,2 → unit: 0.5, 0.25, 0.5, 0.25 → overall = 0.375 < 0.75
         assert results["q1"].passed is False
         assert "overall_score_too_low" in results["q1"].failed_reasons
+        assert results["q1"].suggested_difficulty == "hard"
 
     def test_build_messages_for_multiple_choice_includes_choices_in_question_text(self):
         from benchforge.agents.verify_agent.llm_validator import _build_messages

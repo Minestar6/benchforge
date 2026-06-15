@@ -1,0 +1,1524 @@
+[
+  {
+    "question": "What is a key challenge in knowledge representation for AI?",
+    "options": [
+      "A. The limited scope of commonsense knowledge",
+      "B. The sub-symbolic form of most commonsense knowledge",
+      "C. The ease of obtaining knowledge for AI applications",
+      "D. The overabundance of verbally expressible facts"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 6,
+    "citations": [
+      "the sub-symbolic form of most commonsense knowledge (much of what people know is not represented as \"facts\" or \"statements\" that they could express verbally)."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What does a rational agent in AI do?",
+    "options": [
+      "A. It perceives and takes actions without any goals.",
+      "B. It has goals or preferences and takes actions to make them happen.",
+      "C. It only takes actions in deterministic environments.",
+      "D. It avoids calculating expected utility."
+    ],
+    "answer": "B",
+    "estimated_difficulty": 3,
+    "citations": [
+      "A rational agent has goals or preferences and takes actions to make them happen."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is the purpose of an ontology in AI knowledge representation?",
+    "options": [
+      "A. To store raw data without structure",
+      "B. To define the set of objects, relations, concepts, and properties used by a particular domain of knowledge",
+      "C. To generate intermediate chains-of-thought for reasoning",
+      "D. To calculate the maximum expected utility for decision-making"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 5,
+    "citations": [
+      "An ontology is the set of objects, relations, concepts, and properties used by a particular domain of knowledge."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What problem did many early reasoning algorithms face as problems grew larger?",
+    "options": [
+      "A. They became linearly slower.",
+      "B. They experienced a \"combinatorial explosion\" and became exponentially slower.",
+      "C. They became too fast to handle.",
+      "D. They required no additional computational resources."
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Many of these algorithms are insufficient for solving large reasoning problems because they experience a \"combinatorial explosion\": They become exponentially slower as the problems grow."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "In automated decision-making, what does an agent assign to each situation to measure preference?",
+    "options": [
+      "A. A probability",
+      "B. A utility",
+      "C. A cost",
+      "D. A policy"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The decision-making agent assigns a number to each situation (called its \"utility\") that measures how much the agent prefers it."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What type of machine learning analyzes data streams to find patterns and make predictions without any guidance?",
+    "options": [
+      "A. Supervised learning",
+      "B. Reinforcement learning",
+      "C. Unsupervised learning",
+      "D. Transfer learning"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Unsupervised learning analyzes a stream of data and finds patterns and makes predictions without any other guidance."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which of the following is NOT a specific problem addressed by Natural Language Processing (NLP)?",
+    "options": [
+      "A. Speech recognition",
+      "B. Information retrieval",
+      "C. Computer vision",
+      "D. Machine translation"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Specific problems include speech recognition, speech synthesis, machine translation, information extraction, information retrieval and question answering."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What modern deep learning architecture for NLP uses an attention mechanism?",
+    "options": [
+      "A. Word embedding",
+      "B. Generative pre-trained transformer (GPT)",
+      "C. Transformers",
+      "D. Semantic networks"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Modern deep learning techniques for NLP include word embedding (representing words, typically as vectors encoding their meaning), transformers (a deep learning architecture using an attention mechanism), and others."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which technique searches through a tree of possible moves and countermoves, typically for game-playing programs?",
+    "options": [
+      "A. Local search",
+      "B. Gradient descent",
+      "C. Adversarial search",
+      "D. Evolutionary computation"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Adversarial search is used for game-playing programs, such as chess or Go. It searches through a tree of possible moves and countermoves, looking for a winning position."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is the primary purpose of 'heuristics' in search algorithms?",
+    "options": [
+      "A. To guarantee finding the optimal solution",
+      "B. To eliminate the need for searching",
+      "C. To help prioritize choices more likely to reach a goal",
+      "D. To replace mathematical optimization"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 4,
+    "citations": [
+      "\"Heuristics\" or \"rules of thumb\" can help prioritize choices that are more likely to reach a goal."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which type of local search is commonly used to train neural networks through the backpropagation algorithm?",
+    "options": [
+      "A. Evolutionary computation",
+      "B. Particle swarm optimization",
+      "C. Gradient descent",
+      "D. Ant colony optimization"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 7,
+    "citations": [
+      "Gradient descent is a type of local search that optimizes a set of numerical parameters by incrementally adjusting them to minimize a loss function. Variants of gradient descent are commonly used to train neural networks, through the backpropagation algorithm."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What field comprises systems that recognize, interpret, process, or simulate human feeling, emotion, and mood?",
+    "options": [
+      "A. Natural language processing",
+      "B. Machine perception",
+      "C. Affective computing",
+      "D. Computational learning theory"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Affective computing is a field that comprises systems that recognize, interpret, process, or simulate human feeling, emotion, and mood."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What was Margaret Masterman's key belief about understanding languages?",
+    "options": [
+      "A. Grammar is more important than meaning",
+      "B. Dictionaries should be the basis of computational language structure",
+      "C. Meaning is more important than grammar",
+      "D. Semantic networks are sufficient for language understanding"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Margaret Masterman believed that it was meaning and not grammar that was the key to understanding languages, and that thesauri and not dictionaries should be the basis of computational language structure."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which of the following is a swarm intelligence algorithm inspired by bird flocking?",
+    "options": [
+      "A. Ant colony optimization",
+      "B. Particle swarm optimization",
+      "C. Evolutionary computation",
+      "D. Gradient descent"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Two popular swarm algorithms used in search are particle swarm optimization (inspired by bird flocking) and ant colony optimization (inspired by ant trails)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is the main characteristic of a machine with artificial general intelligence?",
+    "options": [
+      "A. Excellence in a single specialized task",
+      "B. Ability to solve a wide variety of problems with human-like versatility",
+      "C. Superior computational speed compared to humans",
+      "D. Perfect memory retention and recall"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 3,
+    "citations": [
+      "A machine with artificial general intelligence would be able to solve a wide variety of problems with breadth and versatility similar to human intelligence."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What are the two main forms of formal logic used for reasoning and knowledge representation?",
+    "options": [
+      "A. Propositional logic and predicate logic",
+      "B. Deductive logic and inductive logic",
+      "C. Fuzzy logic and non-monotonic logic",
+      "D. Horn clause logic and first-order logic"
+    ],
+    "answer": "A",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Formal logic comes in two main forms: propositional logic (which operates on statements that are true or false and uses logical connectives such as \"and\", \"or\", \"not\" and \"implies\") and predicate logic (which also operates on objects, predicates and relations and uses quantifiers such as \"Every X is a Y\" and \"There are some Xs that are Ys\")."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which logic programming language is underpinned by backward reasoning with Horn clauses?",
+    "options": [
+      "A. Lisp",
+      "B. Prolog",
+      "C. Python",
+      "D. Java"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "backward reasoning with Horn clauses, which underpins computation in the logic programming language Prolog, is Turing complete."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is the simplest and most widely used symbolic machine learning algorithm?",
+    "options": [
+      "A. K-nearest neighbor algorithm",
+      "B. Decision tree",
+      "C. Support vector machine (SVM)",
+      "D. Naive Bayes classifier"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The decision tree is the simplest and most widely used symbolic machine learning algorithm."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which algorithm is reportedly the 'most widely used learner' at Google due to its scalability?",
+    "options": [
+      "A. Decision tree",
+      "B. K-nearest neighbor algorithm",
+      "C. Naive Bayes classifier",
+      "D. Support vector machine (SVM)"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 4,
+    "citations": [
+      "The naive Bayes classifier is reportedly the \"most widely used learner\" at Google, due in part to its scalability."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is the most common training technique for neural networks?",
+    "options": [
+      "A. Expectation–maximization algorithm",
+      "B. Backpropagation algorithm",
+      "C. Bayesian inference algorithm",
+      "D. Markov decision processes"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The most common training technique is the backpropagation algorithm."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is the most common training technique for neural networks?",
+    "options": [
+      "A. Backpropagation algorithm",
+      "B. Reinforcement learning",
+      "C. Genetic algorithms",
+      "D. Simulated annealing"
+    ],
+    "answer": "A",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The most common training technique is the backpropagation algorithm."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which type of neural network feeds the output signal back into the input, allowing short-term memories of previous input events?",
+    "options": [
+      "A. Feedforward neural networks",
+      "B. Convolutional neural networks (CNNs)",
+      "C. Recurrent neural networks (RNNs)",
+      "D. Perceptrons"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Recurrent neural networks (RNNs) feed the output signal back into the input, which allows short-term memories of previous input events."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What are Long Short-Term Memory networks (LSTMs) less sensitive to compared to other recurrent neural networks?",
+    "options": [
+      "A. Overfitting problem",
+      "B. Vanishing gradient problem",
+      "C. Exploding gradient problem",
+      "D. Local minima problem"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Long short-term memory networks (LSTMs) are recurrent neural networks that better preserve longterm dependencies and are less sensitive to the vanishing gradient problem."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "According to the text, what was NOT a reason for the sudden success of deep learning in 2012–2015?",
+    "options": [
+      "A. Increase in computer power (including GPUs)",
+      "B. Availability of vast amounts of training data",
+      "C. New theoretical breakthrough in deep neural networks",
+      "D. Giant curated datasets like ImageNet"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The sudden success of deep learning in 2012–2015 did not occur because of some new discovery or theoretical breakthrough (deep neural networks and backpropagation had been described by many people, as far back as the 1950s) but because of two factors: the increase in computer power (including the hundred-fold increase in speed by switching to GPUs) and the availability of vast amounts of training data, especially the giant curated datasets used for benchmark testing, such as ImageNet."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is the primary task during the pretraining phase of Generative Pre-trained Transformers (GPT)?",
+    "options": [
+      "A. Generating human-like text conversations",
+      "B. Predicting the next token in a sequence",
+      "C. Making models more truthful with RLHF",
+      "D. Processing different data modalities"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The pretraining consists of predicting the next token (a token being usually a word, subword, or punctuation)."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What hardware replaced central processing units (CPUs) as the dominant means for large-scale machine learning model training in the late 2010s?",
+    "options": [
+      "A. Field-programmable gate arrays (FPGAs)",
+      "B. Application-specific integrated circuits (ASICs)",
+      "C. Graphics processing units (GPUs)",
+      "D. Tensor processing units (TPUs)"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In the late 2010s, graphics processing units (GPUs) that were increasingly designed with AI-specific enhancements and used with specialized TensorFlow software had replaced previously used central processing unit (CPUs) as the dominant means for large-scale (commercial and academic) machine learning models' training."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What trend describes the observation that transistor density in integrated circuits roughly doubles every 18 months?",
+    "options": [
+      "A. Huang's law",
+      "B. Moore's law",
+      "C. Amdahl's law",
+      "D. Metcalfe's law"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The transistor density in integrated circuits has been observed to roughly double every 18 months—a trend known as Moore's law, named after the Intel co-founder Gordon Moore, who first identified it."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which of the following is NOT listed as an application of AI in the text?",
+    "options": [
+      "A. Autonomous vehicles",
+      "B. Facial recognition",
+      "C. Quantum computing",
+      "D. Recommendation systems"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 2,
+    "citations": [
+      "search engines (such as Google Search)\ntargeting online advertisements\nrecommendation systems (offered by Netflix, YouTube or Amazon) driving internet traffic\ntargeted advertising (AdSense, Facebook)\nvirtual assistants (such as Siri or Alexa)\nautonomous vehicles (including drones, ADAS and self-driving cars)\nautomatic language translation (Microsoft Translator, Google Translate)\nfacial recognition (Apple's FaceID or Microsoft's DeepFace and Google's FaceNet)\nimage labeling (used by Facebook, Apple's Photos and TikTok)."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What problem are current GPT models particularly prone to, according to the text?",
+    "options": [
+      "A. Overfitting to training data",
+      "B. Generating falsehoods called 'hallucinations'",
+      "C. Being too slow for real-time applications",
+      "D. Inability to process multimodal inputs"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Current GPT models are prone to generating falsehoods called 'hallucinations'."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What technique is typically used to make GPT models more truthful, useful, and harmless after pretraining?",
+    "options": [
+      "A. Supervised fine-tuning",
+      "B. Transfer learning",
+      "C. Reinforcement learning from human feedback (RLHF)",
+      "D. Adversarial training"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Typically, a subsequent training phase makes the model more truthful, useful, and harmless, usually with a technique called reinforcement learning from human feedback (RLHF)."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What was the primary achievement of AlphaFold 2 in 2021?",
+    "options": [
+      "A. It discovered a new class of antibiotics.",
+      "B. It accelerated the search for Parkinson's disease treatments.",
+      "C. It approximated the 3D structure of a protein in hours rather than months.",
+      "D. It identified compounds that block alpha-synuclein aggregation."
+    ],
+    "answer": "C",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What concern was highlighted in the 2024 Nature article regarding AI disease-prediction models?",
+    "options": [
+      "A. They were too expensive to develop.",
+      "B. They were trained on unreliable data.",
+      "C. They were not used on any patients.",
+      "D. They only focused on stroke prediction."
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Published in Nature an article 'Dozens of AI disease-prediction models were trained on dubious data' highlighted the use of unreliable data being used to train AI medical prediction models for stroke and diabetes in 125 research articles."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which AI system was the first to beat a reigning world chess champion?",
+    "options": [
+      "A. Watson",
+      "B. AlphaGo",
+      "C. Deep Blue",
+      "D. Pluribus"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Deep Blue became the first computer chess-playing system to beat a reigning world chess champion, Garry Kasparov, on 11 May 1997."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "In 2016, what achievement did AlphaGo accomplish against Go champion Lee Sedol?",
+    "options": [
+      "A. It lost all 5 games.",
+      "B. It won 4 out of 5 games.",
+      "C. It tied the match.",
+      "D. It won with handicaps."
+    ],
+    "answer": "B",
+    "estimated_difficulty": 3,
+    "citations": [
+      "In March 2016, AlphaGo won 4 out of 5 games of Go in a match with Go champion Lee Sedol, becoming the first computer Go-playing system to beat a professional Go player without handicaps."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What was the accuracy of Qwen2-Math on the MATH dataset of competition mathematics problems?",
+    "options": [
+      "A. 53%",
+      "B. 90%",
+      "C. 84%",
+      "D. 100%"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The Alibaba Group developed a version of its Qwen models called Qwen2-Math, that achieved state-of-the-art performance on several mathematical benchmarks, including 84% accuracy on the MATH dataset of competition mathematics problems."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "According to Nicolas Firzli, what is a likely impact of AI deployment in finance?",
+    "options": [
+      "A. It will create new sophisticated pension innovations.",
+      "B. It will further automate processes and destroy jobs.",
+      "C. It will increase jobs in banking and financial planning.",
+      "D. It will have no significant effect on employment."
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "He argues that 'the deployment of AI tools will simply further automatise things: destroying tens of thousands of jobs in banking, financial planning, and pension advice in the process, but I'm not sure it will unleash a new wave of [e.g., sophisticated] pension innovation.'"
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which of the following is NOT listed as a main application of AI in military contexts?",
+    "options": [
+      "A. Enhancing command and control",
+      "B. Developing new video games",
+      "C. Coordination of sensors and effectors",
+      "D. Threat detection and identification"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The main applications enhance command and control, communications, sensors, integration and interoperability. Research is targeting intelligence collection and analysis, logistics, cyber operations, information operations, and semiautonomous and autonomous vehicles. AI technologies enable coordination of sensors and effectors, threat detection and identification, marking of enemy positions, target acquisition, coordination and deconfliction of distributed Joint Fires between network"
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What did the 2023 report indicate about AI-guided drug discovery?",
+    "options": [
+      "A. It found antibiotics that kill two types of drug-resistant bacteria.",
+      "B. It reduced the cost of protein structure approximation.",
+      "C. It predicted stroke and diabetes with high accuracy.",
+      "D. It accelerated Parkinson's disease treatment screening ten-fold."
+    ],
+    "answer": "A",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In 2023, it was reported that AI-guided drug discovery helped find a class of antibiotics capable of killing two different types of drug-resistant bacteria."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is a primary application of AI technologies in military operations as described in the text?",
+    "options": [
+      "A. Coordination of sensors and effectors",
+      "B. Generating non-consensual deepfake pornography",
+      "C. Creating AI-generated sexual education content",
+      "D. Analyzing historical GPS data for evacuation patterns"
+    ],
+    "answer": "A",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AI technologies enable coordination of sensors and effectors, threat detection and identification, marking of enemy positions, target acquisition, coordination and deconfliction of distributed Joint Fires between networked combat vehicles, both human-operated and autonomous."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What technological advancement made the AI boom in the 2020s possible, according to the text?",
+    "options": [
+      "A. Improvements in deep neural networks, particularly large language models (LLMs)",
+      "B. The development of AI-enabled menstruation trackers",
+      "C. The creation of the transformer architecture for robotics",
+      "D. Widespread use of AI in legal research"
+    ],
+    "answer": "A",
+    "estimated_difficulty": 4,
+    "citations": [
+      "This boom was made possible by improvements in deep neural networks, particularly large language models (LLMs), which are based on the transformer architecture."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which of the following is NOT listed in the text as an example of a generative AI application?",
+    "options": [
+      "A. Chatbots such as ChatGPT and Claude",
+      "B. Text-to-image models such as DALL-E and Midjourney",
+      "C. AI agents for industrial robotics",
+      "D. Text-to-video models such as Veo and Sora"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Generative AI applications include chatbots such as ChatGPT, Claude, Copilot, DeepSeek, Doubao, Google Gemini, Grok and Qwen; text-to-image models such as DALL-E, Firefly, Stable Diffusion, and Midjourney; and text-to-video models such as Veo, LTX and Sora."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is a defining characteristic of AI agents as described in the text?",
+    "options": [
+      "A. They are designed to perceive their environment, make decisions, and take actions autonomously.",
+      "B. They are primarily used for generating text and images based on prompts.",
+      "C. They have unlimited computational resources and memory.",
+      "D. They operate without any constraints from programming or hardware."
+    ],
+    "answer": "A",
+    "estimated_difficulty": 4,
+    "citations": [
+      "AI agents are software entities designed to perceive their environment, make decisions, and take actions autonomously to achieve specific goals."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "According to the text, what was a notable use of AI during the 2024 Indian elections?",
+    "options": [
+      "A. Creating deepfakes of allied politicians to engage voters",
+      "B. Developing AI-integrated sex toys for campaign staff",
+      "C. Using AI to fabricate case law citations for legal briefs",
+      "D. Analyzing social media data to predict election outcomes"
+    ],
+    "answer": "A",
+    "estimated_difficulty": 5,
+    "citations": [
+      "During the 2024 Indian elections, US$50 million was spent on authorized AI-generated content, notably by creating deepfakes of allied (including sometimes deceased) politicians to better engage with voters, and by translating speeches to various local languages."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What major concern is raised in the text regarding AI and privacy?",
+    "options": [
+      "A. AI-powered devices continuously collect personal information, raising concerns about intrusive data gathering.",
+      "B. AI algorithms are inherently unexplainable in deep learning, making ethics difficult to factor in.",
+      "C. AI may lead to a surveillance society where individual activities are constantly monitored.",
+      "D. Both A and C are concerns raised in the text."
+    ],
+    "answer": "D",
+    "estimated_difficulty": 6,
+    "citations": [
+      "AI-powered devices and services, such as virtual assistants and IoT products, continuously collect personal information, raising concerns about intrusive data gathering and unauthorized access by third parties. The loss of privacy is further exacerbated by AI's ability to process and combine vast amounts of data, potentially leading to a surveillance society where individual activities are constantly monitored and analyzed without adequate safeguards or transparency."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What was the consequence of using generative AI for legal research, as mentioned in the text?",
+    "options": [
+      "A. It led to the creation of the global 'AI Hallucination Cases' database.",
+      "B. It resulted in judges issuing sanctions and bar associations issuing warnings.",
+      "C. It caused attorneys to submit fabricated case law citations to courts.",
+      "D. All of the above."
+    ],
+    "answer": "D",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The use of generative AI by law firms for legal research resulted in the creation of the global 'AI Hallucination Cases' database, in April 2025, established by HEC Paris and Sciences Po legal data analysis lecturer Damien Charlotin. By 2026, judges had issued sanctions and bar associations had issued warnings due to attorney submissions to the courts containing fabricated case law citations hallucinated by AI tools."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which sector is NOT explicitly listed in the text as having used generative AI?",
+    "options": [
+      "A. Software development and healthcare",
+      "B. Finance and entertainment",
+      "C. Agriculture and mining",
+      "D. Customer service and sales and marketing"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Companies in a variety of sectors have used generative AI, including those in software development, healthcare, finance, entertainment, customer service, sales and marketing, art, writing, and product design."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "According to the text, what technique have AI developers NOT used to attempt to preserve privacy while obtaining data?",
+    "options": [
+      "A. Data aggregation",
+      "B. De-identification",
+      "C. Differential privacy",
+      "D. Data encryption"
+    ],
+    "answer": "D",
+    "estimated_difficulty": 4,
+    "citations": [
+      "AI developers argue that this is the only way to deliver valuable applications and have developed several techniques that attempt to preserve privacy while still obtaining the data, such as data aggregation, de-identification and differential privacy."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What did the 2025 McKinsey & Company report estimate would be invested into AI infrastructure and data centers in the US by 2030?",
+    "options": [
+      "A. $1.2 trillion",
+      "B. $2.7 trillion",
+      "C. $3.5 trillion",
+      "D. $4.1 trillion"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 3,
+    "citations": [
+      "A 2025 report from the consulting firm McKinsey & Company estimated that by 2030, $2.7 trillion would be invested into AI infrastructure and data centers in the US, surpassing World War II's Manhattan Project every month."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "According to the International Energy Agency report mentioned in the text, what is projected to happen to power demand for data centers, AI, and cryptocurrency by 2026?",
+    "options": [
+      "A. It will decrease by 20%",
+      "B. It will remain stable",
+      "C. It will double",
+      "D. It will triple"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The report states that power demand for these uses might double by 2026, with the additional power consumption equaling that of Japan."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which company purchased a Pennsylvania nuclear-powered data center for US$650 million in 2024?",
+    "options": [
+      "A. Microsoft",
+      "B. Alphabet Inc.",
+      "C. Amazon",
+      "D. Meta Platforms"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 2,
+    "citations": [
+      "In March 2024 Amazon purchased a Pennsylvania nuclear-powered data center for US$650 million."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What was Microsoft's agreement with Constellation Energy regarding the Three Mile Island nuclear power plant?",
+    "options": [
+      "A. To provide Microsoft with 50% of power for 10 years",
+      "B. To provide Microsoft with 100% of power for 20 years",
+      "C. To jointly develop new nuclear technology",
+      "D. To decommission the plant safely"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In September 2024, Microsoft announced an agreement with Constellation Energy to re-open the Three Mile Island nuclear power plant to provide Microsoft with 100% of all electric power produced by the plant for 20 years."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "According to the text, what is the estimated cost for re-opening and upgrading the Three Mile Island nuclear power plant?",
+    "options": [
+      "A. US$650 million",
+      "B. US$1.6 billion",
+      "C. US$2.7 billion",
+      "D. US$2 billion"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "The cost for re-opening and upgrading is estimated at US$1.6 billion and is dependent on tax breaks for nuclear power contained in the 2022 US Inflation Reduction Act."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What do some website owners use to indicate they do not want their content scraped by AI companies?",
+    "options": [
+      "A. Copyright notices",
+      "B. Terms of service agreements",
+      "C. A \"robots.txt\" file",
+      "D. Digital rights management"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Website owners can indicate that they do not want their content scraped via a \"robots.txt\" file."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What did the 2024 Goldman Sachs Research Paper forecast about US data center power consumption by 2030?",
+    "options": [
+      "A. It will decrease to 1% of US power",
+      "B. It will remain at 3% of US power",
+      "C. It will increase to 8% of US power",
+      "D. It will increase to 15% of US power"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 5,
+    "citations": [
+      "A 2024 Goldman Sachs Research Paper, AI Data Centers and the Coming US Power Demand Surge, found \"US power demand (is) likely to experience growth not seen in a generation....\" and forecasts that, by 2030, US data centers will consume 8% of US power, as opposed to 3% in 2022, presaging growth for the electrical power generation industry by a variety of means."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Why did Taiwan suspend approval of large data centers north of Taoyuan in 2024?",
+    "options": [
+      "A. Due to a shortage of available land",
+      "B. Due to power supply shortages",
+      "C. Due to environmental protests",
+      "D. Due to high construction costs"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Taiwan suspended the approval of data centers north of Taoyuan with a capacity of more than 5 MW in 2024, due to power supply shortages."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What was the estimated greenhouse gas emissions from AI energy consumption in 2025 according to an IEA report?",
+    "options": [
+      "A. 100 million tons",
+      "B. 180 million tons",
+      "C. 300 million tons",
+      "D. 500 million tons"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In 2025, a report prepared by the IEA estimated the greenhouse gas emissions from the energy consumption of AI at 180 million tons."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What harmful effect did AI recommender systems on platforms like YouTube and Facebook cause after the 2016 U.S. election?",
+    "options": [
+      "A. They increased subscription costs for users",
+      "B. They undermined trust in institutions, media, and government",
+      "C. They caused widespread internet outages",
+      "D. They deleted user data without consent"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 5,
+    "citations": [
+      "This convinced many users that the misinformation was true, and ultimately undermined trust in institutions, the media and the government."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What problem did Google Photos's image labeling feature exhibit in 2015?",
+    "options": [
+      "A. It labeled all images as 'landscape'",
+      "B. It mistakenly identified black people as 'gorillas'",
+      "C. It failed to label any images of animals",
+      "D. It leaked user photos to third parties"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "On 28 June 2015, Google Photos's new image labeling feature mistakenly identified Jacky Alcine and a friend as \"gorillas\" because they were black."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What was the primary goal given to AI recommender systems on platforms like YouTube and Facebook?",
+    "options": [
+      "A. To minimize data storage costs",
+      "B. To maximize user engagement",
+      "C. To promote educational content",
+      "D. To filter out all misinformation"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 3,
+    "citations": [
+      "These AI programs were given the goal of maximizing user engagement (that is, the only goal was to keep people watching)."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "According to the text, what can biased machine learning algorithms cause in fields like medicine or policing?",
+    "options": [
+      "A. Increased efficiency",
+      "B. Discrimination",
+      "C. Lower costs",
+      "D. Faster processing"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 5,
+    "citations": [
+      "If a biased algorithm is used to make decisions that can seriously harm people (as it can in medicine, finance, recruitment, housing or policing) then the algorithm may cause discrimination."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What did the Federal Energy Regulatory Commission (FERC) reject on 1 November 2024?",
+    "options": [
+      "A. A new nuclear power plant construction",
+      "B. Talen Energy's application to supply electricity from Susquehanna to Amazon's data center",
+      "C. A ban on data centers in the U.S.",
+      "D. Amazon's request for a tax exemption"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "On 1 November 2024, the Federal Energy Regulatory Commission (FERC) rejected an application submitted by Talen Energy for approval to supply some electricity from the nuclear power station Susquehanna to Amazon's data center."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What was the reported reason for Google Photos's mislabeling of black people as gorillas?",
+    "options": [
+      "A. Intentional programmer bias",
+      "B. Sample size disparity in the training data",
+      "C. A software bug in the labeling algorithm",
+      "D. Poor image resolution of the photos"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 6,
+    "citations": [
+      "The system was trained on a dataset that contained very few images of black people, a problem called \"sample size disparity\"."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What potential risk did Geoffrey Hinton associate with AI regarding authoritarian leaders?",
+    "options": [
+      "A. They could use AI to improve public services",
+      "B. They could use AI to manipulate their electorates",
+      "C. They could use AI to reduce military spending",
+      "D. They could use AI to create economic equality"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 5,
+    "citations": [
+      "AI pioneer and Nobel Prize-winning computer scientist Geoffrey Hinton expressed concern about AI enabling \"authoritarian leaders to manipulate their electorates\" on a large scale, among other risks."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What did the COMPAS program, used by U.S. courts, exhibit according to a 2016 ProPublica discovery?",
+    "options": [
+      "A. It was highly accurate for all races",
+      "B. It showed racial bias in its predictions",
+      "C. It reduced sentencing times significantly",
+      "D. It was only used for non-violent crimes"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 6,
+    "citations": [
+      "In 2016, Julia Angwin at ProPublica discovered that COMPAS exhibited racial bias, despite the fact that the program was not told the races of the defendants."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What was a key finding of the COMPAS risk assessment tool regarding racial bias?",
+    "options": [
+      "A. It explicitly used race to make predictions.",
+      "B. It had a higher error rate for white defendants than black defendants.",
+      "C. It consistently overestimated re-offense risk for black defendants and underestimated it for white defendants.",
+      "D. It was calibrated to have a 0% error rate for all races."
+    ],
+    "answer": "C",
+    "estimated_difficulty": 4,
+    "citations": [
+      "the system consistently overestimated the chance that a black person would re-offend and would underestimate the chance that a white person would not re-offend."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "According to Moritz Hardt, what is a robust fact about fairness in AI?",
+    "options": [
+      "A. Fairness through blindness is highly effective.",
+      "B. Fairness through blindness doesn't work.",
+      "C. Fairness can only be achieved with explicit racial data.",
+      "D. Fairness is mathematically guaranteed with balanced datasets."
+    ],
+    "answer": "B",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Moritz Hardt said \"the most robust fact in this research area is that fairness through blindness doesn't work.\""
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Why might bias in AI systems go undetected, according to the text?",
+    "options": [
+      "A. Because the systems are too simple to have bias.",
+      "B. Because the developers are overwhelmingly white and male.",
+      "C. Because bias is always explicitly programmed.",
+      "D. Because all AI systems are inherently fair."
+    ],
+    "answer": "B",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Bias and unfairness may go undetected because the developers are overwhelmingly white and male: among AI engineers, about 4% are black and 20% are women."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What was a problematic correlation learned by a machine learning system designed to allocate medical resources?",
+    "options": [
+      "A. Asthma patients were at high risk of dying from pneumonia.",
+      "B. Asthma patients were at low risk of dying from pneumonia.",
+      "C. Rulers in images indicated healthy skin.",
+      "D. All pneumonia patients required equal care."
+    ],
+    "answer": "B",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Another machine learning system designed to help effectively allocate medical resources was found to classify patients with asthma as being at \"low risk\" of dying from pneumonia."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is a major challenge with deep neural networks regarding transparency?",
+    "options": [
+      "A. They are too simple to need explanation.",
+      "B. Their designers cannot always explain how they reach decisions due to complex non-linear relationships.",
+      "C. They always provide clear, logical reasoning for outputs.",
+      "D. They are only used in non-critical applications."
+    ],
+    "answer": "B",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Many AI systems are so complex that their designers cannot explain how they reach their decisions. Particularly with deep neural networks, in which there are many non-linear relationships between inputs and outputs."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What did researchers recommend regarding a CLIP-based robotic system that reproduced harmful stereotypes?",
+    "options": [
+      "A. Immediately deploy it widely to gather more data.",
+      "B. Pause, rework, or wind down such methods until outcomes are safe and just.",
+      "C. Ignore the findings as they were only from a simulation.",
+      "D. Use it only in non-manipulation tasks."
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "The authors recommended robot‑learning methods which physically manifest such harms be \"paused, reworked, or even wound down when appropriate, until outcomes can be proven safe, effective, and just.\""
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is a key reason machine learning may be poorly suited for decisions where the future should be better than the past?",
+    "options": [
+      "A. It is prescriptive and can design ideal futures.",
+      "B. It is descriptive and predicts based on past data, which may include biases.",
+      "C. It always avoids historical data to prevent bias.",
+      "D. It focuses solely on procedural fairness."
+    ],
+    "answer": "B",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Thus, machine learning is not well suited to help make decisions in areas where there is hope that the future will be better than the past. It is descriptive rather than prescriptive."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What is a conflict mentioned regarding addressing bias in AI systems?",
+    "options": [
+      "A. Using sensitive attributes like race to compensate for bias may conflict with anti-discrimination laws.",
+      "B. All definitions of fairness are universally agreed upon.",
+      "C. Sensitive attributes are never useful for bias correction.",
+      "D. Anti-discrimination laws always require the use of sensitive data."
+    ],
+    "answer": "A",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Having access to sensitive attributes such as race or gender is also considered by many AI ethicists to be necessary in order to compensate for biases, but it may conflict with anti-discrimination laws."
+    ],
+    "chunk_idx": 8,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What technique did Anthropic develop to understand what generative pre-trained transformers have learned?",
+    "options": [
+      "A. A technique based on dictionary learning",
+      "B. A technique based on deconvolution",
+      "C. A technique based on multitask learning",
+      "D. A technique based on LIME"
+    ],
+    "answer": "A",
+    "estimated_difficulty": 4,
+    "citations": [
+      "For generative pre-trained transformers, Anthropic developed a technique based on dictionary learning that associates patterns of neuron activations with human-understandable concepts."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "According to the text, what is a primary concern regarding lethal autonomous weapons?",
+    "options": [
+      "A. They are too expensive for most nations to produce",
+      "B. They can reliably choose targets and avoid civilian casualties",
+      "C. They could potentially kill innocent people",
+      "D. They are only being researched by a handful of countries"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Even when used in conventional warfare, they currently cannot reliably choose targets and could potentially kill an innocent person."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "How does the text state AI tools aid authoritarian governments?",
+    "options": [
+      "A. By decentralizing decision-making systems",
+      "B. By increasing the cost of digital warfare",
+      "C. By using face recognition for mass surveillance",
+      "D. By preventing the classification of state enemies"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AI facial recognition systems are already being used for mass surveillance in China."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What did Michael Osborne and Carl Benedikt Frey estimate regarding U.S. jobs and automation risk in the 2010s?",
+    "options": [
+      "A. 9% of U.S. jobs are at 'high risk'",
+      "B. 47% of U.S. jobs are at 'high risk'",
+      "C. 70% of U.S. jobs are at 'high risk'",
+      "D. Most U.S. jobs are immune to automation risk"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Michael Osborne and Carl Benedikt Frey estimated 47% of U.S. jobs are at 'high risk' of potential automation"
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What did Ford CEO Jim Farley predict about AI and white-collar workers in July 2025?",
+    "options": [
+      "A. AI will create more white-collar jobs than it eliminates",
+      "B. AI will replace literally half of all white-collar workers in the U.S.",
+      "C. AI will have no significant impact on white-collar employment",
+      "D. AI will only affect blue-collar manufacturing jobs"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In July 2025, Ford CEO Jim Farley predicted that 'artificial intelligence is going to replace literally half of all white-collar workers in the U.S.'."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "According to the text, what is a potential societal risk of AI related to human companionship?",
+    "options": [
+      "A. AI completely eliminates human loneliness",
+      "B. AI chatbots may cause harm through emotional confusion or deception",
+      "C. AI ensures people always find social acceptance",
+      "D. AI products are designed to avoid all human-like qualities"
+    ],
+    "answer": "B",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Examples of harm coming to humans from advanced chatbots have been reported in courts in the United States, with AI companies accused of creating products that endanger humans through emotional confusion or deception."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "What does the text state about job demand in care-related professions in the context of AI automation?",
+    "options": [
+      "A. Demand is likely to decrease significantly",
+      "B. Demand is likely to remain unchanged",
+      "C. Demand is likely to increase",
+      "D. These professions are at extreme risk of elimination"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 4,
+    "citations": [
+      "while job demand is likely to increase for care-related professions ranging from personal healthcare to the clergy."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  },
+  {
+    "question": "Which of the following is NOT mentioned as a way AI tools can be used by bad actors?",
+    "options": [
+      "A. Designing toxic molecules rapidly",
+      "B. Creating autonomous weapons",
+      "C. Developing decentralized market systems",
+      "D. Targeting propaganda with recommendation systems"
+    ],
+    "answer": "C",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Machine-learning AI is able to design tens of thousands of toxic molecules in a matter of hours.",
+      "Widely available AI tools can be used by bad actors to develop inexpensive autonomous weapons",
+      "Recommendation systems can precisely target propaganda and misinformation for maximum effect."
+    ],
+    "chunk_idx": 9,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "multiple_choice"
+  }
+]

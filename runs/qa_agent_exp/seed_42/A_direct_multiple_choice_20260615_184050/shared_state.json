@@ -50,9 +50,9 @@
     "chunked_evidence": "runs/qa_agent_exp/seed_42/A_direct_multiple_choice_20260615_184050/evidence/chunked.json",
     "llm_calls": "runs/qa_agent_exp/seed_42/A_direct_multiple_choice_20260615_184050/llm_calls.jsonl",
     "generation_report": "runs/qa_agent_exp/seed_42/A_direct_multiple_choice_20260615_184050/generation_report.json",
-    "validation_report": "runs/qa_agent_exp/seed_42/A_direct_multiple_choice_20260615_184050/validation/validation_report.json",
-    "validated_questions": "runs/qa_agent_exp/seed_42/A_direct_multiple_choice_20260615_184050/validation/validated_questions.jsonl",
-    "weighted_selection": "runs/qa_agent_exp/seed_42/A_direct_multiple_choice_20260615_184050/validation/weighted_selection.json"
+    "validation_report": "runs\\qa_agent_exp\\seed_42\\A_direct_multiple_choice_20260615_184050\\validation\\validation_report.json",
+    "validated_questions": "runs\\qa_agent_exp\\seed_42\\A_direct_multiple_choice_20260615_184050\\validation\\validated_questions.jsonl",
+    "weighted_selection": "runs\\qa_agent_exp\\seed_42\\A_direct_multiple_choice_20260615_184050\\validation\\weighted_selection.json"
   },
   "agent_status": {
     "generation": "completed",

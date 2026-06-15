@@ -13,6 +13,7 @@ from typing import Any
 
 from loguru import logger
 
+from benchforge.utils.artifact_store import ArtifactStore
 from benchforge.utils.run_context import RunContext
 from benchforge.utils.filter import parse_llm_response
 
@@ -167,8 +168,14 @@ async def _generate_from_chunk(
     topic: str,
     system_prompt: str,
     tracker: TokenTracker,
+    *,
+    temperature: float = 0.7,
+    max_tokens: int = 2048,
 ) -> list[dict]:
-    """对单个 chunk 调用 LLM 生成题目。"""
+    """对单个 chunk 调用 LLM 生成题目。
+
+    temperature / max_tokens 由调用方从 YAML 配置传入，避免硬编码。
+    """
     user_msg = _USER_TEMPLATE.format(title=doc_title, chunk=chunk_text)
 
     span = tracer.span(
@@ -184,8 +191,8 @@ async def _generate_from_chunk(
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_msg},
                 ],
-                temperature=0.7,
-                max_tokens=2048,
+                temperature=temperature,
+                max_tokens=max_tokens,
             )
         latency_ms = (time.perf_counter() - t0) * 1000
         tracker.record(response, latency_ms)
@@ -254,6 +261,41 @@ async def run_direct_generation(
 
     topic_evidence = await asyncio.gather(*[_prepare_topic(t) for t in blueprint.topics])
 
+    # ── 保存 chunked.json（与 B/C/D 组 agent.py 逻辑一致，确保证 verify_agent 可用）──
+    chunked_rows_all: list[dict] = []
+    for topic, (chunks, evidence_pool) in topic_evidence:
+        evidence_mgr.evidence_pools[topic] = evidence_pool
+        chunks_by_doc_chunked: dict[str, list] = {}
+        for chunk in chunks:
+            chunks_by_doc_chunked.setdefault(chunk.document_id, []).append(chunk)
+        for doc_id, doc_chunks in chunks_by_doc_chunked.items():
+            doc_chunks_sorted = sorted(doc_chunks, key=lambda c: c.chunk_index)
+            source_doc = evidence_mgr.documents.get(doc_id)
+            chunked_rows_all.append({
+                "document_id": doc_id,
+                "topic": topic,
+                "document_title": source_doc.title if source_doc else "",
+                "document_url": source_doc.url if source_doc else "",
+                "document_text": source_doc.content if source_doc else "",
+                "document_summary": evidence_mgr.document_summaries.get(doc_id, ""),
+                "source": "initial_retrieval",
+                "chunks": [
+                    {"chunk_id": c.chunk_id, "chunk_index": c.chunk_index, "chunk_text": c.text}
+                    for c in doc_chunks_sorted
+                ],
+            })
+
+    if chunked_rows_all:
+        chunked_by_topic_json: dict[str, list] = {}
+        for row in chunked_rows_all:
+            t = row.get("topic", "unknown")
+            chunked_by_topic_json.setdefault(t, []).append(row)
+        evidence_store = ArtifactStore(str(output_dir / "evidence"))
+        evidence_store.save_json("chunked.json", chunked_by_topic_json)
+        total_docs = len(chunked_rows_all)
+        total_chunks = sum(len(row["chunks"]) for row in chunked_rows_all)
+        logger.info(f"[Direct] Saved chunked.json: {total_docs} docs, {total_chunks} chunks")
+
     # ── 按难度分布计算目标 ──
     mode_name, mode_cfg = next(iter(blueprint.modes.items()))
     difficulty_dist = mode_cfg.difficulty_distribution
@@ -318,6 +360,8 @@ async def run_direct_generation(
                     tracer=tracer, topic=topic,
                     system_prompt=system_prompt,
                     tracker=tracker,
+                    temperature=model_ref.temperature,
+                    max_tokens=model_ref.max_tokens,
                 )
                 rounds_processed += 1
 

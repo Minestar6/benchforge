@@ -74,21 +74,43 @@ def _build_chunk_index(chunked_path: str | Path) -> dict[str, str]:
 
 
 def _hydrate_chunks(candidate_raw: dict, chunk_index: dict[str, str]) -> list[str]:
-    """若 chunks 为空，从 chunk_index 中根据 chunk_ids 回查。"""
+    """若 chunks 为空，从 chunk_index 中根据 chunk_ids 或 document_id 回查。
+
+    回退优先级：
+    1. candidate 自带 chunks → 直接使用
+    2. candidate 有 chunk_ids → 逐个从 chunk_index 查找
+    3. candidate 只有 document_id → 从 chunk_index 前缀匹配（doc_id::chunk_*）
+    """
     chunks = candidate_raw.get("chunks", [])
     if chunks:
         return [c if isinstance(c, str) else str(c) for c in chunks]
 
     chunk_ids = candidate_raw.get("chunk_ids", [])
-    if not chunk_ids or not chunk_index:
-        return []
 
-    hydrated = []
-    for cid in chunk_ids:
-        text = chunk_index.get(cid, "")
-        if text:
-            hydrated.append(text)
-    return hydrated
+    # 优先：chunk_ids 精确查找
+    if chunk_ids and chunk_index:
+        hydrated = []
+        for cid in chunk_ids:
+            text = chunk_index.get(cid, "")
+            if text:
+                hydrated.append(text)
+        if hydrated:
+            return hydrated
+
+    # 回退：通过 document_id 前缀匹配查找（兼容 direct_generation 产出的 candidate）
+    document_id = candidate_raw.get("document_id", "")
+    if document_id and chunk_index:
+        prefix = document_id + "::"
+        # 按 chunk_index 排序保证 chunk 顺序
+        matched = sorted(
+            (k for k in chunk_index if k.startswith(prefix)),
+            key=lambda k: k.split("::chunk_")[-1] if "::chunk_" in k else k,
+        )
+        hydrated = [chunk_index[k] for k in matched if chunk_index[k]]
+        if hydrated:
+            return hydrated
+
+    return []
 
 
 def _normalize_one(

@@ -19,6 +19,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 sys.path.insert(0, str(Path(__file__).parent))
 
+from loguru import logger
+
 from benchforge.config.config import load_dotenv
 from benchforge.models.openai_client import OpenAIClient
 
@@ -30,11 +32,30 @@ import group_d_full
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 load_dotenv(PROJECT_ROOT / ".env")
 
+# ── 日志配置：同时输出到 stderr（控制台）和文件 ─────────────────────────────
+LOG_DIR = PROJECT_ROOT / "runs" / "qa_agent_exp" / "run_all_logs"
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+LOG_PATH = LOG_DIR / f"run_all_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+
+logger.remove()
+logger.add(
+    sys.stderr,
+    level="INFO",
+    format="<green>{time:HH:mm:ss}</green> | <level>{level: <8}</level> | <level>{message}</level>",
+)
+logger.add(
+    LOG_PATH,
+    level="DEBUG",
+    format="{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: <8} | {message}",
+    encoding="utf-8",
+)
+logger.info(f"Log file: {LOG_PATH}")
+
 MODEL_API_KEY = os.getenv("CUSTOM_API_KEY", "")
 MODEL_BASE_URL = os.getenv("CUSTOM_API_BASE_URL", "https://ark.cn-beijing.volces.com/api/v3")
 MODEL_NAME = os.getenv("MODEL_NAME", "deepseek-v3-2-251201")
 
-TASK_ID = "qa_agent_exp"
+TASK_ID = "ques_generate"
 LANGUAGE = "en"
 
 TOPICS = [
@@ -57,8 +78,8 @@ SEEDS = [42]
 MODES = ["qa", "multiple_choice"]
 
 GROUPS = [
-    ("A - Direct Generation", group_a_direct.run),
-    # ("B - Multi-round No Feedback", group_b_no_feedback.run),
+    # ("A - Direct Generation", group_a_direct.run),
+    ("B - Multi-round No Feedback", group_b_no_feedback.run),
     # ("C - Feedback No Difficulty", group_c_feedback_no_difficulty.run),
     # ("D - Full Method", group_d_full.run),
 ]
@@ -66,7 +87,7 @@ GROUPS = [
 
 async def main():
     if not MODEL_API_KEY:
-        print(f"[run_all] ERROR: CUSTOM_API_KEY not set. Expected .env at: {PROJECT_ROOT / '.env'}")
+        logger.error(f"CUSTOM_API_KEY not set. Expected .env at: {PROJECT_ROOT / '.env'}")
         sys.exit(1)
 
     model_client = OpenAIClient(
@@ -82,23 +103,23 @@ async def main():
     # 本次运行统一时间戳，防止多次运行互相覆盖
     session_ts = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    print(f"[run_all] Model: {MODEL_NAME}")
-    print(f"[run_all] Modes: {MODES}")
-    print(f"[run_all] Topics: {TOPICS}")
-    print(f"[run_all] Seeds: {SEEDS}")
-    print(f"[run_all] Timestamp: {session_ts}")
+    logger.info(f"Model: {MODEL_NAME}")
+    logger.info(f"Modes: {MODES}")
+    logger.info(f"Topics: {TOPICS}")
+    logger.info(f"Seeds: {SEEDS}")
+    logger.info(f"Timestamp: {session_ts}")
 
     for seed in SEEDS:
         seed_task_id = f"{TASK_ID}/seed_{seed}"
 
         for mode in MODES:
             print(f"\n{'#' * 80}")
-            print(f"[run_all] MODE: {mode}")
+            logger.info(f"MODE: {mode}")
             print(f"{'#' * 80}")
 
             for name, run_fn in GROUPS:
                 print(f"\n{'=' * 80}")
-                print(f"[run_all] Starting {name} [{mode}], seed={seed}")
+                logger.info(f"Starting {name} [{mode}], seed={seed}")
                 print(f"{'=' * 80}")
 
                 try:
@@ -115,15 +136,13 @@ async def main():
                         mode=mode,
                         timestamp=session_ts,
                     )
-                    print(f"[run_all] Finished {name} [{mode}], seed={seed}")
+                    logger.info(f"Finished {name} [{mode}], seed={seed}")
 
                 except Exception as e:
-                    import traceback
-                    print(f"[run_all] FAILED: {name} [{mode}], seed={seed}, error={e}")
-                    traceback.print_exc()
+                    logger.opt(exception=True).error(f"FAILED: {name} [{mode}], seed={seed}, error={e}")
 
     print(f"\n{'=' * 80}")
-    print("[run_all] All experiments completed.")
+    logger.info("All experiments completed.")
     print(f"{'=' * 80}")
 
 

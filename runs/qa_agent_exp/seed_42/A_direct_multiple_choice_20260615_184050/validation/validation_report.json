@@ -6,7 +6,7 @@
   "llm_passed": 0,
   "final_selected": 0,
   "stage_latencies_ms": {
-    "citation_validation": 2,
+    "citation_validation": 0,
     "llm_validation": 0,
     "selection": 0
   },

@@ -1,0 +1,74 @@
+{
+  "timestamp": "2026-06-15T22:49:13.267135",
+  "model": "glm-4-7-251222",
+  "registry_model": "glm-4.7",
+  "target_run_dirs": [
+    "d:\\Download\\vscode\\code\\master\\benchforge\\runs\\qa_agent_exp\\seed_42\\A_direct_multiple_choice_20260615_184050",
+    "d:\\Download\\vscode\\code\\master\\benchforge\\runs\\qa_agent_exp\\seed_42\\A_direct_qa_20260615_184050"
+  ],
+  "config": {
+    "min_citation_score": 0.65,
+    "min_overall_score": 0.75,
+    "max_concurrency": 2,
+    "alpha": 0.7,
+    "beta": 0.3
+  },
+  "results": [
+    {
+      "group": "A_direct_multiple_choice_20260615_184050",
+      "orig_count": 89,
+      "orig_by_diff": {
+        "6": 7,
+        "4": 28,
+        "5": 20,
+        "7": 3,
+        "3": 20,
+        "2": 10,
+        "1": 1
+      },
+      "final_selected": 0,
+      "final_by_diff": {},
+      "failed_by_stage": {
+        "citation": 89,
+        "llm": 0,
+        "validator_error": 0,
+        "duplicate": 0,
+        "overquota": 0
+      },
+      "diff_corrections": {
+        "total_selected": 0,
+        "corrected_count": 0,
+        "correction_ratio": 0.0,
+        "transitions": {}
+      }
+    },
+    {
+      "group": "A_direct_qa_20260615_184050",
+      "orig_count": 107,
+      "orig_by_diff": {
+        "6": 15,
+        "4": 26,
+        "5": 24,
+        "8": 3,
+        "3": 25,
+        "7": 7,
+        "2": 7
+      },
+      "final_selected": 0,
+      "final_by_diff": {},
+      "failed_by_stage": {
+        "citation": 107,
+        "llm": 0,
+        "validator_error": 0,
+        "duplicate": 0,
+        "overquota": 0
+      },
+      "diff_corrections": {
+        "total_selected": 0,
+        "corrected_count": 0,
+        "correction_ratio": 0.0,
+        "transitions": {}
+      }
+    }
+  ]
+}

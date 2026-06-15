@@ -27,6 +27,10 @@ You must score four aspects:
    - medium: requires modest synthesis, comparison, or light reasoning
    - hard: requires multi-step reasoning, nontrivial synthesis, or careful disambiguation
 
+5. Suggested Difficulty:
+   If the labeled difficulty does NOT match the question's actual difficulty (i.e., difficulty_consistency <= 3),
+   output the corrected difficulty label. If the label is already correct, output the same label.
+
 Scoring rules:
 - Score each dimension from 1 to 5
 - 1 = very poor
@@ -51,5 +55,6 @@ Output MUST be a valid JSON object:
   "answerability": 1-5,
   "clarity": 1-5,
   "difficulty_consistency": 1-5,
+  "suggested_difficulty": "easy" | "medium" | "hard",
   "reason": ""
 }

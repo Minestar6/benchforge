@@ -33,9 +33,15 @@ models:
   #   api_key: "${OPENAI_API_KEY}"
 
   # 第三方 OpenAI 兼容 API（如 DeepSeek、火山引擎等）
-  deepseek-v3:
+  deepseek-v3.2:
     provider: "openai"
     model_name: "deepseek-v3-2-251201"
+    base_url: "${CUSTOM_API_BASE_URL}"
+    api_key: "${CUSTOM_API_KEY}"
+  
+  deepseek-v3:
+    provider: "openai"
+    model_name: "deepseek-v3-250324"
     base_url: "${CUSTOM_API_BASE_URL}"
     api_key: "${CUSTOM_API_KEY}"
 

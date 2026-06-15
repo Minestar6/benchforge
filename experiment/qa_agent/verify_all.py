@@ -37,12 +37,18 @@ load_dotenv(PROJECT_ROOT / ".env")
 MODEL_API_KEY = os.getenv("CUSTOM_API_KEY", "")
 MODEL_BASE_URL = os.getenv("CUSTOM_API_BASE_URL", "https://ark.cn-beijing.volces.com/api/v3")
 
-EXPERIMENT_BASE = PROJECT_ROOT / "runs" / "qa_agent_exp" / "seed_42"
+EXPERIMENT_BASE = PROJECT_ROOT / "runs" / "ques_generate" / "seed_42"
 CONFIG_PATH = str(PROJECT_ROOT / "config" / "verify_agent.yaml")
 REGISTRY_PATH = str(PROJECT_ROOT / "config" / "model_registry.yaml")
 TARGET_RUN_PREFIXES = [
     "A_direct_multiple_choice_",
     "A_direct_qa_",
+    "B_no_feedback_multiple_choice_",
+    "B_no_feedback_qa_",
+    "C_feedback_no_diff_multiple_choice_",
+    "C_feedback_no_diff_qa_",
+    "D_full_multiple_choice_",
+    "D_full_qa_",
 ]
 
 
@@ -73,7 +79,7 @@ def collect_orig_diff(run_dir: Path) -> Counter:
     for mode_dir in ["qa", "multiple_choice"]:
         cp = run_dir / mode_dir / "candidate_pool.json"
         if cp.exists():
-            with open(cp) as f:
+            with open(cp, encoding="utf-8") as f:
                 items = json.load(f)
             for item in items:
                 diff = item.get("difficulty", item.get("estimated_difficulty", "unknown"))
@@ -84,7 +90,7 @@ def collect_orig_diff(run_dir: Path) -> Counter:
     # fallback: 旧版 Group A 只有 direct_questions.json
     dq = run_dir / "direct_questions.json"
     if dq.exists():
-        with open(dq) as f:
+        with open(dq, encoding="utf-8") as f:
             items = json.load(f)
         for item in items:
             diff = item.get("estimated_difficulty", item.get("difficulty", "unknown"))
@@ -92,8 +98,107 @@ def collect_orig_diff(run_dir: Path) -> Counter:
     return counter
 
 
+def _int_to_label(diff) -> str:
+    """将难度值映射为 easy / medium / hard 标签。"""
+    if isinstance(diff, (int, float)):
+        if diff <= 3:
+            return "easy"
+        if diff <= 6:
+            return "medium"
+        return "hard"
+    return str(diff).strip().lower()
+
+
+def _load_orig_difficulty_map(run_dir: Path) -> dict[str, str]:
+    """从 candidate_pool.json 加载原始难度映射 {question_id: label}。"""
+    orig_map: dict[str, str] = {}
+    for mode_dir in ["qa", "multiple_choice"]:
+        cp = run_dir / mode_dir / "candidate_pool.json"
+        if not cp.exists():
+            continue
+        with open(cp, encoding="utf-8") as f:
+            items = json.load(f)
+        for item in items:
+            qid = item.get("question_id", "")
+            diff = item.get("difficulty", item.get("estimated_difficulty", "unknown"))
+            orig_map[qid] = _int_to_label(diff)
+    if orig_map:
+        return orig_map
+
+    # fallback: 旧版 Group A
+    dq = run_dir / "direct_questions.json"
+    if dq.exists():
+        with open(dq, encoding="utf-8") as f:
+            items = json.load(f)
+        for item in items:
+            qid = item.get("question_id", "")
+            diff = item.get("estimated_difficulty", item.get("difficulty", "unknown"))
+            orig_map[qid] = _int_to_label(diff)
+    return orig_map
+
+
+def collect_diff_corrections(
+    validation_dir: Path,
+    orig_difficulty_map: dict[str, str],
+) -> dict:
+    """统计 final_status=selected 的题目中难度标签被修正的情况。
+
+    Returns:
+        {
+            "total_selected": int,
+            "corrected_count": int,
+            "correction_ratio": float,
+            "transitions": {"easy→medium": 2, "medium→hard": 1, ...},
+        }
+    """
+    vq_path = validation_dir / "validated_questions.jsonl"
+    if not vq_path.exists():
+        return {"total_selected": 0, "corrected_count": 0, "correction_ratio": 0.0, "transitions": {}}
+
+    total = 0
+    corrected = 0
+    transitions: Counter = Counter()
+
+    with open(vq_path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            rec = json.loads(line)
+            if rec.get("final_status") != "selected":
+                continue
+            total += 1
+
+            cand = rec.get("candidate", {})
+            qid = cand.get("question_id", "")
+            orig_label = orig_difficulty_map.get(qid, "unknown")
+
+            # 当前难度标签：优先用 llm_validation 的建议，回退到 candidate 字段
+            llm_val = rec.get("llm_validation", {}) or {}
+            suggested = llm_val.get("suggested_difficulty")
+            if suggested in ("easy", "medium", "hard"):
+                curr_label = suggested
+            else:
+                curr_label = _int_to_label(cand.get("estimated_difficulty", "unknown"))
+
+            if orig_label != "unknown" and curr_label != orig_label:
+                corrected += 1
+                transitions[f"{orig_label}→{curr_label}"] += 1
+
+    return {
+        "total_selected": total,
+        "corrected_count": corrected,
+        "correction_ratio": corrected / total if total > 0 else 0.0,
+        "transitions": dict(transitions),
+    }
+
+
 def collect_final_diff(validation_dir: Path) -> Counter:
-    """从 validated_questions.jsonl 中统计 final_status=selected 的难度分布。"""
+    """从 validated_questions.jsonl 中统计 final_status=selected 的难度分布。
+
+    优先使用 LLM 验证建议的 suggested_difficulty（当 difficulty_consistency 低分时），
+    否则使用原始 estimated_difficulty。
+    """
     counter: Counter = Counter()
     vq_path = validation_dir / "validated_questions.jsonl"
     if not vq_path.exists():
@@ -105,11 +210,16 @@ def collect_final_diff(validation_dir: Path) -> Counter:
                 continue
             rec = json.loads(line)
             if rec.get("final_status") == "selected":
+                # 优先使用 LLM 建议的难度标签
+                llm_val = rec.get("llm_validation", {}) or {}
+                suggested = llm_val.get("suggested_difficulty")
+                if suggested in ("easy", "medium", "hard"):
+                    counter[suggested] += 1
+                    continue
+
                 cand = rec.get("candidate", {})
                 diff = cand.get("estimated_difficulty", "unknown")
-                if isinstance(diff, (int, float)):
-                    diff = "easy" if diff <= 3 else "medium" if diff <= 6 else "hard"
-                counter[str(diff)] += 1
+                counter[_int_to_label(diff)] += 1
     return counter
 
 
@@ -117,6 +227,18 @@ async def main():
     if not MODEL_API_KEY:
         logger.error("CUSTOM_API_KEY not set in .env at {}", PROJECT_ROOT / ".env")
         sys.exit(1)
+
+    # ── 日志文件 ──────────────────────────────────────────────────────────────────
+    log_dir = EXPERIMENT_BASE / "verify_all_logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_path = log_dir / f"verify_all_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    logger.add(
+        log_path,
+        level="DEBUG",
+        format="{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: <8} | {message}",
+        encoding="utf-8",
+    )
+    logger.info(f"Log file: {log_path}")
 
     config = load_verify_agent_config(CONFIG_PATH)
 
@@ -167,10 +289,14 @@ async def main():
                 validation_dir = dir_path / "validation"
                 final_diff = dict(collect_final_diff(validation_dir))
 
+                # 难度修正统计
+                orig_difficulty_map = _load_orig_difficulty_map(dir_path)
+                correction_stats = collect_diff_corrections(validation_dir, orig_difficulty_map)
+
                 report_path = validation_dir / "validation_report.json"
                 failed_by_stage = {}
                 if report_path.exists():
-                    with open(report_path) as f:
+                    with open(report_path, encoding="utf-8") as f:
                         rp = json.load(f)
                         failed_by_stage = rp.get("failed_by_stage", {})
 
@@ -181,9 +307,14 @@ async def main():
                     "final_selected": len(result.selected_question_ids),
                     "final_by_diff": final_diff,
                     "failed_by_stage": failed_by_stage,
+                    "diff_corrections": correction_stats,
                 }
                 results.append(entry)
                 logger.info(f"  orig={entry['orig_count']} by_diff={orig_diff} → final={entry['final_selected']} by_diff={final_diff}")
+                logger.info(
+                    f"  diff_corrections: {correction_stats['corrected_count']}/{correction_stats['total_selected']} "
+                    f"({correction_stats['correction_ratio']:.1%}) {correction_stats['transitions']}"
+                )
 
             except Exception:
                 logger.exception(f"Failed to verify {dir_path.name}")
@@ -193,7 +324,7 @@ async def main():
 
     print_summary(results)
 
-    report_out = PROJECT_ROOT / "runs" / "qa_agent_exp" / "seed_42" / "verify_all_report.json"
+    report_out = PROJECT_ROOT / "runs" / "ques_generate" / "seed_42" / "verify_all_report.json"
     report_out.parent.mkdir(parents=True, exist_ok=True)
     with open(report_out, "w", encoding="utf-8") as f:
         json.dump({
@@ -211,6 +342,7 @@ async def main():
             "results": results,
         }, f, ensure_ascii=False, indent=2)
     logger.info(f"Report saved to {report_out}")
+    logger.info(f"Log saved to {log_path}")
 
 
 def print_summary(results: list[dict]):
@@ -241,10 +373,18 @@ def print_summary(results: list[dict]):
         print(f"  原始分布:  {r['orig_by_diff']}")
         print(f"  最终分布:  {r['final_by_diff']}")
         print(f"  各阶段剔除: {r.get('failed_by_stage', {})}")
+        corr = r.get("diff_corrections", {})
+        if corr.get("corrected_count", 0) > 0:
+            print(f"  难度修正:    {corr['corrected_count']}/{corr['total_selected']} ({corr['correction_ratio']:.1%})")
+            for trans, cnt in corr.get("transitions", {}).items():
+                print(f"              {trans}: {cnt}")
 
     all_orig_diff: Counter = Counter()
     all_final_diff: Counter = Counter()
     all_failed: Counter = Counter()
+    all_corrections: Counter = Counter()
+    total_corrected = 0
+    total_selected_for_corr = 0
     for r in results:
         for d, c in r["orig_by_diff"].items():
             all_orig_diff[d] += c
@@ -252,6 +392,11 @@ def print_summary(results: list[dict]):
             all_final_diff[d] += c
         for stage, c in r.get("failed_by_stage", {}).items():
             all_failed[stage] += c
+        corr = r.get("diff_corrections", {})
+        total_corrected += corr.get("corrected_count", 0)
+        total_selected_for_corr += corr.get("total_selected", 0)
+        for trans, cnt in corr.get("transitions", {}).items():
+            all_corrections[trans] += cnt
 
     print(f"\n{'='*90}")
     print("  Overall Breakdown")
@@ -259,6 +404,10 @@ def print_summary(results: list[dict]):
     print(f"  原始分布:  {dict(all_orig_diff)}")
     print(f"  最终分布:  {dict(all_final_diff)}")
     print(f"  各阶段剔除: {dict(all_failed)}")
+    corr_rate = (total_corrected / total_selected_for_corr * 100) if total_selected_for_corr > 0 else 0
+    print(f"  难度修正:    {total_corrected}/{total_selected_for_corr} ({corr_rate:.1f}%)")
+    if all_corrections:
+        print(f"  修正分布:    {dict(all_corrections)}")
     print(f"  总原始: {total_orig} → 总最终: {total_final} (通过率: {total_rate:.1f}%)\n")
 
 
