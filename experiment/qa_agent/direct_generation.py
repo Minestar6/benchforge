@@ -40,6 +40,32 @@ Generate questions in the following JSON format:
 Target distribution: {easy} easy, {medium} medium, {hard} hard questions.
 Return ONLY the JSON array. No markdown, no explanation."""
 
+_MCQ_SYSTEM = """\
+You are a multiple-choice question generator. Generate multiple-choice questions from the provided text.
+Each question must have exactly 4 options (A, B, C, D) with one correct answer.
+Each generated question must include the following fields: `question`, `options`, `answer`, `difficulty`, and `citations`.
+`difficulty` must be one of: `easy`, `medium`, or `hard`.
+`citations` must be a list of exact quotes copied from the source text that directly support the correct answer. Each quote should be sufficient to verify the answer and should not be paraphrased.
+`options` must be an array of 4 strings, each prefixed with the letter (e.g. "A. ...", "B. ...").
+`answer` must be the letter of the correct option: "A", "B", "C", or "D".
+Generate questions in the following JSON format:
+
+```json
+[
+  {{
+    "question": "The question text",
+    "options": ["A. Option A text", "B. Option B text", "C. Option C text", "D. Option D text"],
+    "answer": "A",
+    "difficulty": "easy | medium | hard",
+    "citations": ["Exact quote 1 from source text"]
+  }}
+]
+```
+
+Target distribution: {easy} easy, {medium} medium, {hard} hard questions.
+Ensure all distractors (wrong options) are plausible but clearly incorrect based on the source text.
+Return ONLY the JSON array. No markdown, no explanation."""
+
 _USER_TEMPLATE = """\
 <title>{title}</title>
 <text>
@@ -207,11 +233,13 @@ async def run_direct_generation(
     difficulty_dist = mode_cfg.difficulty_distribution
     diff_targets = _difficulty_targets(mode_cfg.count, difficulty_dist)
 
-    # ── 构造 prompt（填入难度目标提示） ──
+    # ── 构造 prompt（根据 mode 选择 QA 或 MCQ 模板） ──
     easy_n = diff_targets.get("easy", 0)
     medium_n = diff_targets.get("medium", 0)
     hard_n = diff_targets.get("hard", 0)
-    system_prompt = _QA_SYSTEM.format(easy=easy_n, medium=medium_n, hard=hard_n)
+    _prompt_template = _MCQ_SYSTEM if mode_name == "multiple_choice" else _QA_SYSTEM
+    system_prompt = _prompt_template.format(easy=easy_n, medium=medium_n, hard=hard_n)
+    logger.info(f"[Direct] mode={mode_name}, using {'MCQ' if mode_name == 'multiple_choice' else 'QA'} prompt")
 
     # ── 初始化追踪 ──
     run_ctx = RunContext(task_id=blueprint.task_id, run_id=blueprint.run_id)

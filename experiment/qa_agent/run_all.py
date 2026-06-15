@@ -12,6 +12,7 @@
 import asyncio
 import os
 import sys
+from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
@@ -53,6 +54,8 @@ DIFFICULTY_DISTRIBUTION = {
 
 SEEDS = [42]
 
+MODES = ["qa", "multiple_choice"]
+
 GROUPS = [
     ("A - Direct Generation", group_a_direct.run),
     # ("B - Multi-round No Feedback", group_b_no_feedback.run),
@@ -76,37 +79,48 @@ async def main():
     import benchforge.agents.qa_agent.agent as agent_mod
     agent_mod._resolve_model_client_fn = lambda name, path: model_client
 
+    # 本次运行统一时间戳，防止多次运行互相覆盖
+    session_ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+
     print(f"[run_all] Model: {MODEL_NAME}")
+    print(f"[run_all] Modes: {MODES}")
     print(f"[run_all] Topics: {TOPICS}")
     print(f"[run_all] Seeds: {SEEDS}")
+    print(f"[run_all] Timestamp: {session_ts}")
 
     for seed in SEEDS:
-        # seed 体现在 task_id 中，使不同 seed 的输出目录隔离
         seed_task_id = f"{TASK_ID}/seed_{seed}"
 
-        for name, run_fn in GROUPS:
-            print(f"\n{'=' * 80}")
-            print(f"[run_all] Starting {name}, seed={seed}")
-            print(f"{'=' * 80}")
+        for mode in MODES:
+            print(f"\n{'#' * 80}")
+            print(f"[run_all] MODE: {mode}")
+            print(f"{'#' * 80}")
 
-            try:
-                await run_fn(
-                    model_client=model_client,
-                    model_name=MODEL_NAME,
-                    seed=seed,
-                    topics=TOPICS,
-                    task_id=seed_task_id,
-                    language=LANGUAGE,
-                    qa_count=QA_COUNT,
-                    max_rounds=MAX_ROUNDS,
-                    difficulty_distribution=DIFFICULTY_DISTRIBUTION,
-                )
-                print(f"[run_all] Finished {name}, seed={seed}")
+            for name, run_fn in GROUPS:
+                print(f"\n{'=' * 80}")
+                print(f"[run_all] Starting {name} [{mode}], seed={seed}")
+                print(f"{'=' * 80}")
 
-            except Exception as e:
-                import traceback
-                print(f"[run_all] FAILED: {name}, seed={seed}, error={e}")
-                traceback.print_exc()
+                try:
+                    await run_fn(
+                        model_client=model_client,
+                        model_name=MODEL_NAME,
+                        seed=seed,
+                        topics=TOPICS,
+                        task_id=seed_task_id,
+                        language=LANGUAGE,
+                        qa_count=QA_COUNT,
+                        max_rounds=MAX_ROUNDS,
+                        difficulty_distribution=DIFFICULTY_DISTRIBUTION,
+                        mode=mode,
+                        timestamp=session_ts,
+                    )
+                    print(f"[run_all] Finished {name} [{mode}], seed={seed}")
+
+                except Exception as e:
+                    import traceback
+                    print(f"[run_all] FAILED: {name} [{mode}], seed={seed}, error={e}")
+                    traceback.print_exc()
 
     print(f"\n{'=' * 80}")
     print("[run_all] All experiments completed.")

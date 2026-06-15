@@ -29,6 +29,8 @@ async def run(
     qa_count: int,
     max_rounds: int,
     difficulty_distribution: dict[str, float],
+    mode: str = "qa",
+    timestamp: str = "",
 ):
     blueprint = build_blueprint(
         group_id=GROUP_ID,
@@ -37,10 +39,11 @@ async def run(
         topics=topics,
         task_id=task_id,
         language=language,
-        mode="qa",
+        mode=mode,
         count=qa_count,
         max_rounds=max_rounds,
         difficulty_distribution=difficulty_distribution,
+        timestamp=timestamp,
     )
 
     output_dir = Path("runs") / blueprint.task_id / blueprint.run_id
@@ -61,7 +64,7 @@ async def run(
         },
     )
 
-    logger.info(f"=== Group A: Direct Generation === run_id={blueprint.run_id}")
+    logger.info(f"=== Group A: Direct Generation [{mode}] === run_id={blueprint.run_id}")
     await run_direct_generation(
         blueprint=blueprint,
         model_client=model_client,

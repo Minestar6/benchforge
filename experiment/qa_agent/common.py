@@ -30,9 +30,12 @@ DIFFICULTY_DISTRIBUTION = {
 }
 
 
-def make_run_id(group_id: str, method: str) -> str:
-    """构造 run_id，只与方案名有关。"""
-    return f"{group_id}_{method}"
+def make_run_id(group_id: str, method: str, mode: str = "qa", timestamp: str = "") -> str:
+    """构造 run_id = 方案名 + 模式 + 时间戳，防止多次运行互相覆盖。"""
+    parts = [group_id, method, mode]
+    if timestamp:
+        parts.append(timestamp)
+    return "_".join(parts)
 
 
 def build_blueprint(
@@ -46,11 +49,12 @@ def build_blueprint(
     count: int = 50,
     max_rounds: int = 10,
     difficulty_distribution: dict[str, float] | None = None,
+    timestamp: str = "",
 ) -> Blueprint:
     if difficulty_distribution is None:
         difficulty_distribution = DIFFICULTY_DISTRIBUTION
 
-    run_id = make_run_id(group_id=group_id, method=method)
+    run_id = make_run_id(group_id=group_id, method=method, mode=mode, timestamp=timestamp)
 
     return Blueprint(
         task_id=task_id,
