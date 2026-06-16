@@ -44,7 +44,6 @@ models:
     model_name: "deepseek-v3-250324"
     base_url: "${CUSTOM_API_BASE_URL}"
     api_key: "${CUSTOM_API_KEY}"
-    thinking: "disabled"
 
   deepseek-v4:
     provider: "openai"
@@ -114,6 +113,4 @@ models:
 # 也可填此处的逻辑名（优先从 registry 解析）
 embeddings:
   all-MiniLM-L6-v2:
-    path: "all-MiniLM-L6-v2"            # HF Hub: 自动下载
-  all-MiniLM-L6-v2-local:
-    path: "D:/models/all-MiniLM-L6-v2"  # 本地路径
+    path: "D:/model/MiniLM-L6-v2"            # 本地路径

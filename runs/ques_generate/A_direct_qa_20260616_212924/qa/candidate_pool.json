@@ -1,0 +1,1051 @@
+[
+  {
+    "question": "What are the main subproblems into which the general problem of simulating intelligence has been broken?",
+    "answer": "The general problem of simulating intelligence has been broken into subproblems consisting of particular traits or capabilities that researchers expect an intelligent system to display, such as reasoning and problem-solving, knowledge representation, planning and decision-making, and learning.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "The general problem of simulating (or creating) intelligence has been broken into subproblems. These consist of particular traits or capabilities that researchers expect an intelligent system to display."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What limitation did early AI algorithms for reasoning and problem-solving face when dealing with large problems?",
+    "answer": "Early AI algorithms for reasoning and problem-solving became exponentially slower as problems grew, a phenomenon known as a \"combinatorial explosion,\" making them insufficient for solving large reasoning problems.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Many of these algorithms are insufficient for solving large reasoning problems because they experience a \"combinatorial explosion\": They become exponentially slower as the problems grow."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are reasoning models, and what improvement did they bring in 2024?",
+    "answer": "Reasoning models are a type of large language model trained to generate intermediate chains-of-thought. They emerged in 2024 and allowed improved performance on complex problems in mathematics and coding.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Reasoning models, a type of large language model trained to generate intermediate chains-of-thought, emerged in 2024 and allowed improved performance on complex problems in mathematics and coding."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is a knowledge base in the context of AI, and what does it need to represent?",
+    "answer": "A knowledge base is a body of knowledge represented in a form that can be used by a program. It needs to represent things such as objects, properties, categories, relations between objects, situations, events, states, time, causes and effects, knowledge about knowledge, default reasoning, and many other aspects and domains of knowledge.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "A knowledge base is a body of knowledge represented in a form that can be used by a program.",
+      "Knowledge bases need to represent things such as objects, properties, categories, and relations between objects; situations, events, states, and time; causes and effects; knowledge about knowledge (what we know about what other people know); default reasoning (things that humans assume are true until they are told differently and will remain true even when other facts are changing); and many other aspects and domains of knowledge."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are some of the most difficult problems in knowledge representation?",
+    "answer": "Among the most difficult problems in knowledge representation are the breadth of commonsense knowledge (the enormous set of atomic facts that the average person knows), the sub-symbolic form of most commonsense knowledge (much of what people know is not expressed verbally as facts or statements), and the difficulty of knowledge acquisition (obtaining knowledge for AI applications).",
+    "estimated_difficulty": 7,
+    "citations": [
+      "Among the most difficult problems in knowledge representation are the breadth of commonsense knowledge (the set of atomic facts that the average person knows is enormous); and the sub-symbolic form of most commonsense knowledge (much of what people know is not represented as \"facts\" or \"statements\" that they could express verbally). There is also the difficulty of knowledge acquisition, the problem of obtaining knowledge for AI applications."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "In automated decision-making, how does a rational agent choose an action?",
+    "answer": "In automated decision-making, a rational agent assigns a utility number to each situation, calculates the expected utility for each possible action (the utility of all possible outcomes weighted by their probability), and then chooses the action with the maximum expected utility.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "The decision-making agent assigns a number to each situation (called its \"utility\") that measures how much the agent prefers it. For each possible action, it can calculate the \"expected utility\": the utility of all possible outcomes of the action, weighted by the probability that the outcome will occur. It can then choose the action with the maximum expected utility."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the difference between classical planning and most real-world planning problems?",
+    "answer": "In classical planning, the agent knows exactly what the effect of any action will be. In most real-world problems, the agent may not be certain about the situation it is in (it is unknown or unobservable) and may not know for certain what will happen after each possible action (it is not deterministic), requiring probabilistic guesses and reassessment.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "In classical planning, the agent knows exactly what the effect of any action will be. In most real-world problems, however, the agent may not be certain about the situation it is in (it is \"unknown\" or \"unobservable\") and it may not know for certain what will happen after each possible action (it is not \"deterministic\"). It must choose an action by making a probabilistic guess and then reassess the situation to see if the action worked."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is a Markov decision process composed of?",
+    "answer": "A Markov decision process has a transition model that describes the probability that a particular action will change the state in a particular way and a reward function that supplies the utility of each state and the cost of each action.",
+    "estimated_difficulty": 8,
+    "citations": [
+      "A Markov decision process has a transition model that describes the probability that a particular action will change the state in a particular way and a reward function that supplies the utility of each state and the cost of each action."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is machine learning, and how has it been related to AI?",
+    "answer": "Machine learning is the study of programs that can improve their performance on a given task automatically. It has been a part of AI from the beginning.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Machine learning is the study of programs that can improve their performance on a given task automatically. It has been a part of AI from the beginning."
+    ],
+    "chunk_idx": 0,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is machine learning and how has it been historically related to AI?",
+    "answer": "Machine learning is the study of programs that can improve their performance on a given task automatically. It has been a part of AI from the beginning.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Machine learning is the study of programs that can improve their performance on a given task automatically. It has been a part of AI from the beginning."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the two main varieties of supervised learning and how do they differ?",
+    "answer": "The two main varieties of supervised learning are classification (where the program must learn to predict what category the input belongs in) and regression (where the program must deduce a numeric function based on numeric input).",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Supervised learning requires labeling the training data with the expected answers, and comes in two main varieties: classification (where the program must learn to predict what category the input belongs in) and regression (where the program must deduce a numeric function based on numeric input)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How does reinforcement learning work?",
+    "answer": "In reinforcement learning, the agent is rewarded for good responses and punished for bad ones. The agent learns to choose responses that are classified as 'good'.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "In reinforcement learning, the agent is rewarded for good responses and punished for bad ones. The agent learns to choose responses that are classified as \"good\"."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is deep learning and how does it relate to other types of machine learning?",
+    "answer": "Deep learning is a type of machine learning that runs inputs through biologically inspired artificial neural networks for all types of learning, including unsupervised, supervised, and reinforcement learning.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Deep learning is a type of machine learning that runs inputs through biologically inspired artificial neural networks for all of these types of learning."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the three ways computational learning theory can assess learners?",
+    "answer": "Computational learning theory can assess learners by computational complexity, by sample complexity (how much data is required), or by other notions of optimization.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Computational learning theory can assess learners by computational complexity, by sample complexity (how much data is required), or by other notions of optimization."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What specific problems does natural language processing (NLP) address?",
+    "answer": "Natural language processing allows programs to read, write and communicate in human languages. Specific problems include speech recognition, speech synthesis, machine translation, information extraction, information retrieval and question answering.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Natural language processing (NLP) allows programs to read, write and communicate in human languages. Specific problems include speech recognition, speech synthesis, machine translation, information extraction, information retrieval and question answering."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was Margaret Masterman's key belief about understanding languages?",
+    "answer": "Margaret Masterman believed that it was meaning and not grammar that was the key to understanding languages, and that thesauri and not dictionaries should be the basis of computational language structure.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Margaret Masterman believed that it was meaning and not grammar that was the key to understanding languages, and that thesauri and not dictionaries should be the basis of computational language structure."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What modern deep learning techniques for NLP are mentioned in the text?",
+    "answer": "Modern deep learning techniques for NLP include word embedding (representing words, typically as vectors encoding their meaning), transformers (a deep learning architecture using an attention mechanism), and others.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Modern deep learning techniques for NLP include word embedding (representing words, typically as vectors encoding their meaning), transformers (a deep learning architecture using an attention mechanism), and others."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is machine perception and what does computer vision specifically refer to?",
+    "answer": "Machine perception is the ability to use input from sensors to deduce aspects of the world. Computer vision is the ability to analyze visual input.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Machine perception is the ability to use input from sensors (such as cameras, microphones, wireless signals, active lidar, sonar, radar, and tactile sensors) to deduce aspects of the world. Computer vision is the ability to analyze visual input."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is affective computing and what is one example of its application mentioned in the text?",
+    "answer": "Affective computing is a field that comprises systems that recognize, interpret, process, or simulate human feeling, emotion, and mood. An example is virtual assistants programmed to speak conversationally or even to banter humorously to make them appear more sensitive to emotional dynamics.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Affective computing is a field that comprises systems that recognize, interpret, process, or simulate human feeling, emotion, and mood. For example, some virtual assistants are programmed to speak conversationally or even to banter humorously; it makes them appear more sensitive to the emotional dynamics of human interaction, or to otherwise facilitate human–computer interaction."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the key characteristic of a machine with artificial general intelligence?",
+    "answer": "A machine with artificial general intelligence would be able to solve a wide variety of problems with breadth and versatility similar to human intelligence.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "A machine with artificial general intelligence would be able to solve a wide variety of problems with breadth and versatility similar to human intelligence."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is state space search and why are simple exhaustive searches often insufficient for real-world problems?",
+    "answer": "State space search searches through a tree of possible states to try to find a goal state. Simple exhaustive searches are rarely sufficient because the search space quickly grows to astronomical numbers, resulting in searches that are too slow or never complete.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "State space search searches through a tree of possible states to try to find a goal state.",
+      "Simple exhaustive searches are rarely sufficient for most real-world problems: the search space (the number of places to search) quickly grows to astronomical numbers. The result is a search that is too slow or never completes."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is adversarial search used for?",
+    "answer": "Adversarial search is used for game-playing programs, such as chess or Go. It searches through a tree of possible moves and countermoves, looking for a winning position.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Adversarial search is used for game-playing programs, such as chess or Go. It searches through a tree of possible moves and countermoves, looking for a winning position."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How does gradient descent work and what is it commonly used for?",
+    "answer": "Gradient descent is a type of local search that optimizes a set of numerical parameters by incrementally adjusting them to minimize a loss function. Variants of gradient descent are commonly used to train neural networks through the backpropagation algorithm.",
+    "estimated_difficulty": 7,
+    "citations": [
+      "Gradient descent is a type of local search that optimizes a set of numerical parameters by incrementally adjusting them to minimize a loss function. Variants of gradient descent are commonly used to train neural networks, through the backpropagation algorithm."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is evolutionary computation and how does it work?",
+    "answer": "Evolutionary computation is a type of local search that aims to iteratively improve a set of candidate solutions by 'mutating' and 'recombining' them, selecting only the fittest to survive each generation.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Another type of local search is evolutionary computation, which aims to iteratively improve a set of candidate solutions by \"mutating\" and \"recombining\" them, selecting only the fittest to survive each generation."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are two popular swarm intelligence algorithms used in search?",
+    "answer": "Two popular swarm algorithms used in search are particle swarm optimization (inspired by bird flocking) and ant colony optimization (inspired by ant trails).",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Two popular swarm algorithms used in search are particle swarm optimization (inspired by bird flocking) and ant colony optimization (inspired by ant trails)."
+    ],
+    "chunk_idx": 1,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the two main forms of formal logic used in AI for reasoning and knowledge representation?",
+    "answer": "The two main forms are propositional logic and predicate logic.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Formal logic comes in two main forms: propositional logic (which operates on statements that are true or false and uses logical connectives such as \"and\", \"or\", \"not\" and \"implies\") and predicate logic (which also operates on objects, predicates and relations and uses quantifiers such as \"Every X is a Y\" and \"There are some Xs that are Ys\")."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is deductive reasoning in logic, and how can proofs be structured?",
+    "answer": "Deductive reasoning is the process of proving a new statement (conclusion) from other statements that are given and assumed to be true (the premises). Proofs can be structured as proof trees, where nodes are labelled by sentences and children nodes are connected to parent nodes by inference rules.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Deductive reasoning in logic is the process of proving a new statement (conclusion) from other statements that are given and assumed to be true (the premises). Proofs can be structured as proof trees, in which nodes are labelled by sentences, and children nodes are connected to parent nodes by inference rules."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "In the context of problem-solving with logic, what does the search aim to find given a problem and a set of premises?",
+    "answer": "The search aims to find a proof tree whose root node is labelled by a solution of the problem and whose leaf nodes are labelled by premises or axioms.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Given a problem and a set of premises, problem-solving reduces to searching for a proof tree whose root node is labelled by a solution of the problem and whose leaf nodes are labelled by premises or axioms."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the key difference between fuzzy logic and traditional propositional logic?",
+    "answer": "Fuzzy logic assigns a \"degree of truth\" between 0 and 1, allowing it to handle propositions that are vague and partially true, whereas traditional propositional logic operates on statements that are strictly true or false.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Fuzzy logic assigns a \"degree of truth\" between 0 and 1. It can therefore handle propositions that are vague and partially true."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are Bayesian networks used for in AI?",
+    "answer": "Bayesian networks are used for reasoning (using Bayesian inference), learning (using the expectation–maximization algorithm), planning (using decision networks), and perception (using dynamic Bayesian networks).",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Bayesian networks are a tool that can be used for reasoning (using the Bayesian inference algorithm), learning (using the expectation–maximization algorithm), planning (using decision networks) and perception (using dynamic Bayesian networks)."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the simplest and most widely used symbolic machine learning algorithm for classifiers?",
+    "answer": "The decision tree is the simplest and most widely used symbolic machine learning algorithm.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "The decision tree is the simplest and most widely used symbolic machine learning algorithm."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What algorithm displaced the k-nearest neighbor algorithm as the most widely used analogical AI in the 1990s?",
+    "answer": "Kernel methods such as the support vector machine (SVM) displaced k-nearest neighbor in the 1990s.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Kernel methods such as the support vector machine (SVM) displaced k-nearest neighbor in the 1990s."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is reportedly the \"most widely used learner\" at Google, and why?",
+    "answer": "The naive Bayes classifier is reportedly the \"most widely used learner\" at Google, due in part to its scalability.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The naive Bayes classifier is reportedly the \"most widely used learner\" at Google, due in part to its scalability."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the most common training technique for neural networks?",
+    "answer": "The most common training technique is the backpropagation algorithm.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "The most common training technique is the backpropagation algorithm."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "When is a neural network typically called a deep neural network?",
+    "answer": "A network is typically called a deep neural network if it has at least 2 hidden layers.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "A network is typically called a deep neural network if it has at least 2 hidden layers."
+    ],
+    "chunk_idx": 2,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the most common training technique for neural networks?",
+    "answer": "The most common training technique is the backpropagation algorithm.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "The most common training technique is the backpropagation algorithm."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the key difference between feedforward neural networks and recurrent neural networks (RNNs)?",
+    "answer": "In feedforward neural networks, the signal passes in only one direction, while recurrent neural networks (RNNs) feed the output signal back into the input, which allows short-term memories of previous input events.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In feedforward neural networks the signal passes in only one direction.",
+      "Recurrent neural networks (RNNs) feed the output signal back into the input, which allows short-term memories of previous input events."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are Long Short-Term Memory networks (LSTMs) designed to address better than standard RNNs?",
+    "answer": "Long Short-Term Memory networks (LSTMs) are recurrent neural networks that better preserve long-term dependencies and are less sensitive to the vanishing gradient problem.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Long short-term memory networks (LSTMs) are recurrent neural networks that better preserve longterm dependencies and are less sensitive to the vanishing gradient problem."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the primary advantage of Convolutional Neural Networks (CNNs) in image processing?",
+    "answer": "Convolutional Neural Networks (CNNs) use layers of kernels to more efficiently process local patterns, which is especially important in image processing where early layers identify simple patterns like edges and curves, with subsequent layers detecting more complex patterns and eventually whole objects.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Convolutional neural networks (CNNs) use layers of kernels to more efficiently process local patterns. This local processing is especially important in image processing, where the early CNN layers typically identify simple local patterns such as edges and curves, with subsequent layers detecting more complex patterns like textures, and eventually whole objects."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "According to the text, what two factors were primarily responsible for the sudden success of deep learning in 2012–2015?",
+    "answer": "The sudden success of deep learning in 2012–2015 occurred because of two factors: the increase in computer power (including the hundred-fold increase in speed by switching to GPUs) and the availability of vast amounts of training data, especially the giant curated datasets used for benchmark testing, such as ImageNet.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The sudden success of deep learning in 2012–2015 did not occur because of some new discovery or theoretical breakthrough (deep neural networks and backpropagation had been described by many people, as far back as the 1950s)[i] but because of two factors: the increase in computer power (including the hundred-fold increase in speed by switching to GPUs) and the availability of vast amounts of training data, especially the giant curated datasets used for benchmark testing, such as ImageNet.[j]."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the two main phases of training for Generative Pre-trained Transformers (GPT) models?",
+    "answer": "GPT models undergo pretraining on a large corpus of text to predict the next token, accumulating knowledge about the world, followed by a subsequent training phase that makes the model more truthful, useful, and harmless, usually with reinforcement learning from human feedback (RLHF).",
+    "estimated_difficulty": 5,
+    "citations": [
+      "The pretraining consists of predicting the next token (a token being usually a word, subword, or punctuation). Throughout this pretraining, GPT models accumulate knowledge about the world and can then generate human-like text by repeatedly predicting the next token. Typically, a subsequent training phase makes the model more truthful, useful, and harmless, usually with a technique called reinforcement learning from human feedback (RLHF)."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What hardware and software combination replaced CPUs as the dominant means for large-scale machine learning model training in the late 2010s?",
+    "answer": "In the late 2010s, graphics processing units (GPUs) that were increasingly designed with AI-specific enhancements and used with specialized TensorFlow software had replaced previously used central processing units (CPUs) as the dominant means for large-scale machine learning models' training.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In the late 2010s, graphics processing units (GPUs) that were increasingly designed with AI-specific enhancements and used with specialized TensorFlow software had replaced previously used central processing unit (CPUs) as the dominant means for large-scale (commercial and academic) machine learning models' training."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the trend of transistor density doubling roughly every 18 months called, and what is the faster trend for GPU improvements called?",
+    "answer": "The transistor density doubling roughly every 18 months is called Moore's law, and the faster trend for GPU improvements is sometimes called Huang's law.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The transistor density in integrated circuits has been observed to roughly double every 18 months—a trend known as Moore's law, named after the Intel co-founder Gordon Moore, who first identified it. Improvements in GPUs have been even faster, a trend sometimes called Huang's law, named after Nvidia co-founder and CEO Jensen Huang."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What significant achievement did AlphaFold 2 demonstrate in 2021?",
+    "answer": "AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein."
+    ],
+    "chunk_idx": 3,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the significance of AlphaFold 2 in 2021 regarding protein structure?",
+    "answer": "AlphaFold 2 demonstrated the ability to approximate the 3D structure of a protein in hours rather than months.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How did AI-guided drug discovery contribute to fighting drug-resistant bacteria in 2023?",
+    "answer": "In 2023, AI-guided drug discovery helped find a class of antibiotics capable of killing two different types of drug-resistant bacteria.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In 2023, it was reported that AI-guided drug discovery helped find a class of antibiotics capable of killing two different types of drug-resistant bacteria."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the aim of the 2024 machine learning research for Parkinson's disease?",
+    "answer": "The aim was to identify compounds that block the clumping, or aggregation, of alpha-synuclein, the protein that characterises Parkinson's disease.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Their aim was to identify compounds that block the clumping, or aggregation, of alpha-synuclein (the protein that characterises Parkinson's disease)."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What issue did a Nature article highlight regarding AI disease-prediction models?",
+    "answer": "The article highlighted the use of unreliable data being used to train AI medical prediction models for stroke and diabetes in 125 research articles.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Published in Nature an article \"Dozens of AI disease-prediction models were trained on dubious data\" highlighted the use of unreliable data being used to train AI medical prediction models for stroke and diabetes in 125 research articles."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "Which AI system first defeated a reigning world chess champion and when?",
+    "answer": "Deep Blue became the first computer chess-playing system to beat a reigning world chess champion, Garry Kasparov, on 11 May 1997.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Deep Blue became the first computer chess-playing system to beat a reigning world chess champion, Garry Kasparov, on 11 May 1997."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did AlphaGo achieve in March 2016?",
+    "answer": "In March 2016, AlphaGo won 4 out of 5 games of Go in a match with Go champion Lee Sedol, becoming the first computer Go-playing system to beat a professional Go player without handicaps.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "In March 2016, AlphaGo won 4 out of 5 games of Go in a match with Go champion Lee Sedol, becoming the first computer Go-playing system to beat a professional Go player without handicaps."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is a key limitation of probabilistic large language models in mathematics?",
+    "answer": "Probabilistic large language models are versatile but can also produce wrong answers in the form of hallucinations.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "In mathematics, probabilistic large language models are versatile, but can also produce wrong answers in the form of hallucinations."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did the Qwen2-Math model achieve on the MATH dataset?",
+    "answer": "The Qwen2-Math model achieved 84% accuracy on the MATH dataset of competition mathematics problems.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "The Alibaba Group developed a version of its Qwen models called Qwen2-Math, that achieved state-of-the-art performance on several mathematical benchmarks, including 84% accuracy on the MATH dataset of competition mathematics problems."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "According to Nicolas Firzli, what is a likely impact of AI tool deployment in finance?",
+    "answer": "He argues that the deployment of AI tools will simply further automatise things, destroying tens of thousands of jobs in banking, financial planning, and pension advice.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "He argues that \"the deployment of AI tools will simply further automatise things: destroying tens of thousands of jobs in banking, financial planning, and pension advice in the process, but I'm not sure it will unleash a new wave of [e.g., sophisticated] pension innovation.\""
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the main applications of AI being deployed in the military according to the text?",
+    "answer": "The main applications enhance command and control, communications, sensors, integration and interoperability.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "The main applications enhance command and control, communications, sensors, integration and interoperability."
+    ],
+    "chunk_idx": 4,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is Generative AI and how does it generate new data?",
+    "answer": "Generative AI is a subfield of artificial intelligence that uses generative models to generate text, images, videos, audio, software code, or other forms of data. These models learn the underlying patterns and structures of their training data and use them to generate new data in response to input, which often takes the form of natural language prompts.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Generative artificial intelligence (GenAI) is a subfield of artificial intelligence (AI) that uses generative models to generate text, images, videos, audio, software code (vibe coding) or other forms of data. These models learn the underlying patterns and structures of their training data, and use them to generate new data in response to input, which often takes the form of natural language prompts."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are AI agents and what are some of their key characteristics?",
+    "answer": "AI agents are software entities designed to perceive their environment, make decisions, and take actions autonomously to achieve specific goals. Key characteristics include: they operate within constraints of programming, computational resources, and hardware; they face time constraints for decision-making; many incorporate learning algorithms to improve performance over time; and they can adapt to new situations using machine learning.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "AI agents are software entities designed to perceive their environment, make decisions, and take actions autonomously to achieve specific goals.",
+      "AI agents operate within the constraints of their programming, available computational resources, and hardware limitations.",
+      "In real-world applications, AI agents often face time constraints for decision-making and action execution.",
+      "Many AI agents incorporate learning algorithms, enabling them to improve their performance over time through experience or training.",
+      "Using machine learning, AI agents can adapt to new situations and optimise their behaviour for their designated tasks."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are some applications of AI in the domain of sexuality mentioned in the text?",
+    "answer": "Applications include AI-enabled menstruation and fertility trackers that analyze user data to offer predictions, AI-integrated sex toys (e.g., teledildonics), AI-generated sexual education content, AI agents that simulate sexual and romantic partners (e.g., Replika), and AI used for the production of non-consensual deepfake pornography.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "Applications of AI in this domain include AI-enabled menstruation and fertility trackers that analyze user data to offer predictions, AI-integrated sex toys (e.g., teledildonics), AI-generated sexual education content, and AI agents that simulate sexual and romantic partners (e.g., Replika). AI is also used for the production of non-consensual deepfake pornography, raising significant ethical and legal concerns."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the consequence of law firms using generative AI for legal research according to the text?",
+    "answer": "The use of generative AI by law firms for legal research resulted in the creation of the global \"AI Hallucination Cases\" database in April 2025, established by Damien Charlotin. By 2026, judges had issued sanctions and bar associations had issued warnings due to attorney submissions to courts containing fabricated case law citations hallucinated by AI tools.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "The use of generative AI by law firms for legal research resulted in the creation of the global \"AI Hallucination Cases\" database, in April 2025, established by HEC Paris and Sciences Po legal data analysis lecturer Damien Charlotin. By 2026, judges had issued sanctions and bar associations had issued warnings due to attorney submissions to the courts containing fabricated case law citations hallucinated by AI tools."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are the main privacy concerns raised by AI-powered devices and services according to the text?",
+    "answer": "AI-powered devices and services continuously collect personal information, raising concerns about intrusive data gathering and unauthorized access by third parties. The loss of privacy is exacerbated by AI's ability to process and combine vast amounts of data, potentially leading to a surveillance society where individual activities are constantly monitored and analyzed without adequate safeguards or transparency.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "AI-powered devices and services, such as virtual assistants and IoT products, continuously collect personal information, raising concerns about intrusive data gathering and unauthorized access by third parties. The loss of privacy is further exacerbated by AI's ability to process and combine vast amounts of data, potentially leading to a surveillance society where individual activities are constantly monitored and analyzed without adequate safeguards or transparency."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What example does the text provide of how companies acquire data for machine learning algorithms, and what concerns does this raise?",
+    "answer": "The text provides the example of Amazon recording millions of private conversations and allowing temporary workers to listen to and transcribe some of them in order to build speech recognition algorithms. This raises concerns about privacy, surveillance, and the ethical implications of widespread data collection without adequate safeguards.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "For example, in order to build speech recognition algorithms, Amazon has recorded millions of private conversations and allowed temporary workers to listen to and transcribe some of them.",
+      "Machine learning algorithms require large amounts of data. The techniques used to acquire this data have raised concerns about privacy, surveillance and copyright."
+    ],
+    "chunk_idx": 5,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What are some techniques AI developers have used to attempt to preserve privacy while obtaining data?",
+    "answer": "AI developers have used techniques such as data aggregation, de-identification, and differential privacy.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AI developers argue that this is the only way to deliver valuable applications and have developed several techniques that attempt to preserve privacy while still obtaining the data, such as data aggregation, de-identification and differential privacy."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "According to Brian Christian, how have privacy experts pivoted their view of privacy?",
+    "answer": "Privacy experts have pivoted from the question of 'what they know' to the question of 'what they're doing with it'.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Brian Christian wrote that experts have pivoted \"from the question of 'what they know' to the question of 'what they're doing with it'.\""
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What legal rationale is often used for training generative AI on unlicensed copyrighted works, and what are two relevant factors that may determine if this holds up in court?",
+    "answer": "The legal rationale is 'fair use'. Two relevant factors that may determine if this holds up in court are 'the purpose and character of the use of the copyrighted work' and 'the effect upon the potential market for the copyrighted work'.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "Generative AI is often trained on unlicensed copyrighted works, including in domains such as images or computer code; the output is then used under the rationale of \"fair use\".",
+      "Experts disagree about how well and under what circumstances this rationale will hold up in courts of law; relevant factors may include \"the purpose and character of the use of the copyrighted work\" and \"the effect upon the potential market for the copyrighted work\"."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "Which major technology companies dominate the commercial AI scene?",
+    "answer": "The commercial AI scene is dominated by Big Tech companies such as Alphabet Inc., Amazon, Apple Inc., Meta Platforms, and Microsoft.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "The commercial AI scene is dominated by Big Tech companies such as Alphabet Inc., Amazon, Apple Inc., Meta Platforms, and Microsoft."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "According to a 2025 McKinsey & Company report, how much is estimated to be invested in AI infrastructure and data centers in the US by 2030, and how does this compare to the Manhattan Project?",
+    "answer": "By 2030, $2.7 trillion is estimated to be invested into AI infrastructure and data centers in the US, surpassing World War II's Manhattan Project every month.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "A 2025 report from the consulting firm McKinsey & Company estimated that by 2030, $2.7 trillion would be invested into AI infrastructure and data centers in the US, surpassing World War II's Manhattan Project every month."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did the International Energy Agency's 2024 report project about power demand for data centers, AI, and cryptocurrency by 2026?",
+    "answer": "The IEA report projected that power demand for data centers, AI, and cryptocurrency might double by 2026, with the additional power consumption equaling that of Japan.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "The report states that power demand for these uses might double by 2026, with the additional power consumption equaling that of Japan."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How does the electrical energy consumption of a ChatGPT search compare to a Google search?",
+    "answer": "A ChatGPT search involves the use of 10 times the electrical energy as a Google search.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "A ChatGPT search involves the use of 10 times the electrical energy as a Google search."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did a 2024 Goldman Sachs Research Paper forecast about US data center power consumption by 2030?",
+    "answer": "The paper forecast that by 2030, US data centers will consume 8% of US power, as opposed to 3% in 2022.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "A 2024 Goldman Sachs Research Paper, AI Data Centers and the Coming US Power Demand Surge, found \"US power demand (is) likely to experience growth not seen in a generation....\" and forecasts that, by 2030, US data centers will consume 8% of US power, as opposed to 3% in 2022, presaging growth for the electrical power generation industry by a variety of means."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What major agreement did Microsoft announce in September 2024 regarding nuclear power, and what specific plant was involved?",
+    "answer": "In September 2024, Microsoft announced an agreement with Constellation Energy to re-open the Three Mile Island nuclear power plant to provide Microsoft with 100% of all electric power produced by the plant for 20 years.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "In September 2024, Microsoft announced an agreement with Constellation Energy to re-open the Three Mile Island nuclear power plant to provide Microsoft with 100% of all electric power produced by the plant for 20 years."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What is the estimated cost to re-open and upgrade the Three Mile Island nuclear power plant, and what legislation is this cost dependent on?",
+    "answer": "The cost for re-opening and upgrading is estimated at US$1.6 billion and is dependent on tax breaks for nuclear power contained in the 2022 US Inflation Reduction Act.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "The cost for re-opening and upgrading is estimated at US$1.6 billion and is dependent on tax breaks for nuclear power contained in the 2022 US Inflation Reduction Act."
+    ],
+    "chunk_idx": 6,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "Why did Taiwan suspend the approval of data centers north of Taoyuan with a capacity of more than 5 MW in 2024?",
+    "answer": "Taiwan suspended the approval due to power supply shortages.",
+    "estimated_difficulty": 2,
+    "citations": [
+      "Taiwan suspended the approval of data centers north of Taoyuan with a capacity of more than 5 MW in 2024, due to power supply shortages."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the reason given by the Federal Energy Regulatory Commission (FERC) Chairman for rejecting Talen Energy's application to supply electricity from the Susquehanna nuclear power station to Amazon's data center?",
+    "answer": "FERC Chairman Willie L. Phillips stated it was a burden on the electricity grid and raised significant cost shifting concerns to households and other business sectors.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "According to the Commission Chairman Willie L. Phillips, it is a burden on the electricity grid as well as a significant cost shifting concern to households and other business sectors."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What did the IEA report estimate for the greenhouse gas emissions from AI's energy consumption in 2025, and what potential range was projected for 2035?",
+    "answer": "The IEA report estimated emissions at 180 million tons in 2025, with a potential rise to 300–500 million tonnes by 2035, depending on measures taken.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "In 2025, a report prepared by the IEA estimated the greenhouse gas emissions from the energy consumption of AI at 180 million tons. By 2035, these emissions could rise to 300–500 million tonnes depending on what measures will be taken."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "How did AI recommender systems on platforms like YouTube and Facebook contribute to the spread of misinformation, according to the text?",
+    "answer": "The AI programs, designed to maximize user engagement, learned that users tended to choose misinformation, conspiracy theories, and extreme partisan content. To keep users watching, the AI recommended more of such content, leading users into filter bubbles where they received multiple versions of the same misinformation, which convinced many it was true.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "These AI programs were given the goal of maximizing user engagement (that is, the only goal was to keep people watching). The AI learned that users tended to choose misinformation, conspiracy theories, and extreme partisan content, and, to keep them watching, the AI recommended more of it. Users also tended to watch more content on the same subject, so the AI led people into filter bubbles where they received multiple versions of the same misinformation. This convinced many users that the misinformation was true, and ultimately undermined trust in institutions, the media and the government."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What specific problem did Google Photos's image labeling feature exhibit in 2015, and what was Google's initial 'fix' for it?",
+    "answer": "In 2015, Google Photos's image labeling feature mistakenly identified Jacky Alcine and a friend as \"gorillas\" because they were black, due to a training dataset with very few images of black people (sample size disparity). Google's initial fix was to prevent the system from labeling anything as a \"gorilla\".",
+    "estimated_difficulty": 4,
+    "citations": [
+      "On 28 June 2015, Google Photos's new image labeling feature mistakenly identified Jacky Alcine and a friend as \"gorillas\" because they were black. The system was trained on a dataset that contained very few images of black people, a problem called \"sample size disparity\". Google \"fixed\" this problem by preventing the system from labelling anything as a \"gorilla\"."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What racial bias issue was discovered in the COMPAS program used by U.S. courts in 2016, and what was notable about the error rates?",
+    "answer": "In 2016, it was discovered that COMPAS exhibited racial bias, overestimating the chance of recidivism for black defendants and underestimating it for white defendants, despite the program not being told the defendants' races. Although the overall error rate was calibrated to be equal at 61% for both whites and blacks, the types of errors differed between races.",
+    "estimated_difficulty": 6,
+    "citations": [
+      "In 2016, Julia Angwin at ProPublica discovered that COMPAS exhibited racial bias, despite the fact that the program was not told the races of the defendants. Although the error rate for both whites and blacks was calibrated equal at exactly 61%, the errors for each race were different—the system consistently overestimated the chance"
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What concern did AI pioneer Geoffrey Hinton express regarding the use of AI by authoritarian leaders?",
+    "answer": "Geoffrey Hinton expressed concern about AI enabling \"authoritarian leaders to manipulate their electorates\" on a large scale.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "AI pioneer and Nobel Prize-winning computer scientist Geoffrey Hinton expressed concern about AI enabling \"authoritarian leaders to manipulate their electorates\" on a large scale, among other risks."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What potential solution have AI researchers from Microsoft, OpenAI, and universities suggested to overcome online deception enabled by AI models?",
+    "answer": "They have suggested using \"personhood credentials\" as a way to overcome online deception enabled by AI models.",
+    "estimated_difficulty": 5,
+    "citations": [
+      "AI researchers at Microsoft, OpenAI, universities and other organisations have suggested using \"personhood credentials\" as a way to overcome online deception enabled by AI models."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "According to the text, what are the two main ways bias can be introduced into a machine learning model?",
+    "answer": "Bias can be introduced by the way training data is selected and by the way a model is deployed.",
+    "estimated_difficulty": 4,
+    "citations": [
+      "Bias can be introduced by the way training data is selected and by the way a model is deployed."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  },
+  {
+    "question": "What was the status of Google Photos's ability to identify a gorilla in 2023, eight years after the initial labeling error?",
+    "answer": "Eight years later, in 2023, Google Photos still could not identify a gorilla, and neither could similar products from Apple, Facebook, Microsoft and Amazon.",
+    "estimated_difficulty": 3,
+    "citations": [
+      "Eight years later, in 2023, Google Photos still could not identify a gorilla, and neither could similar products from Apple, Facebook, Microsoft and Amazon."
+    ],
+    "chunk_idx": 7,
+    "source": "direct",
+    "topic": "Artificial Intelligence",
+    "document_id": "doc_aef977fc2141",
+    "question_mode": "qa"
+  }
+]

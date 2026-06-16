@@ -1,0 +1,53 @@
+{
+  "task_id": "case",
+  "run_id": "d_full_case_20260616_202930",
+  "modes": {
+    "qa": {
+      "candidate_count": 0,
+      "accepted_count": 0,
+      "min_candidate_target": 8,
+      "max_candidate_target": 10,
+      "target_candidate_count": 8,
+      "difficulty_counts": {},
+      "min_difficulty_targets": {
+        "easy": 2,
+        "medium": 3,
+        "hard": 4
+      },
+      "min_target_reached": false,
+      "max_target_reached": false,
+      "stopped_reason": "mode_failure_limit_reached",
+      "terminal_hard_repair": {
+        "executed": false,
+        "rounds": 0,
+        "generated_count": 0,
+        "accepted_count": 0
+      }
+    },
+    "multiple_choice": {
+      "candidate_count": 0,
+      "accepted_count": 0,
+      "min_candidate_target": 8,
+      "max_candidate_target": 10,
+      "target_candidate_count": 8,
+      "difficulty_counts": {},
+      "min_difficulty_targets": {
+        "easy": 2,
+        "medium": 3,
+        "hard": 4
+      },
+      "min_target_reached": false,
+      "max_target_reached": false,
+      "stopped_reason": "mode_failure_limit_reached",
+      "terminal_hard_repair": {
+        "executed": false,
+        "rounds": 0,
+        "generated_count": 0,
+        "accepted_count": 0
+      }
+    }
+  },
+  "total_candidates": 0,
+  "global_used_chunk_combinations": 0,
+  "global_failures": 8
+}

@@ -3,7 +3,7 @@
   "method": "full",
   "seed": 42,
   "task_id": "case",
-  "run_id": "d_full_case_20260616_151157",
+  "run_id": "d_full_case_20260616_202305",
   "language": "en",
   "topics": [
     "Artificial Intelligence",
@@ -29,8 +29,8 @@
       }
     }
   },
-  "qa_config_path": "/Users/zhaoziqing/Desktop/benchforge/experiment/case/configs/qa_agent_case_d_full.yaml",
-  "verify_config_path": "/Users/zhaoziqing/Desktop/benchforge/experiment/case/configs/verify_agent_case.yaml",
-  "blueprint_config_path": "/Users/zhaoziqing/Desktop/benchforge/experiment/case/configs/case_blueprint.yaml",
-  "registry_path": "/Users/zhaoziqing/Desktop/benchforge/config/model_registry.yaml"
+  "qa_config_path": "d:\\Download\\vscode\\code\\master\\benchforge\\experiment\\case\\configs\\qa_agent_case_d_full.yaml",
+  "verify_config_path": "d:\\Download\\vscode\\code\\master\\benchforge\\experiment\\case\\configs\\verify_agent_case.yaml",
+  "blueprint_config_path": "d:\\Download\\vscode\\code\\master\\benchforge\\experiment\\case\\configs\\case_blueprint.yaml",
+  "registry_path": "d:\\Download\\vscode\\code\\master\\benchforge\\config\\model_registry.yaml"
 }

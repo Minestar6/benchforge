@@ -8,7 +8,7 @@ citation_validation:
 
 llm_validation:
   enabled: true
-  model: "deepseek-v4"
+  model: "glm-4.7"
   temperature: 0.0
   max_tokens: 1024
   min_overall_score: 0.75

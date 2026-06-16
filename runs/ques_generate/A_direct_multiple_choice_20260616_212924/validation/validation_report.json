@@ -1,0 +1,25 @@
+{
+  "task_id": "ques_generate",
+  "run_id": "A_direct_multiple_choice_20260616_212924",
+  "total_candidates": 75,
+  "citation_passed": 74,
+  "llm_passed": 74,
+  "final_selected": 74,
+  "stage_latencies_ms": {
+    "citation_validation": 2157,
+    "llm_validation": 694905,
+    "selection": 0
+  },
+  "llm_usage": {
+    "calls": 74,
+    "input_tokens": 42575,
+    "output_tokens": 89601
+  },
+  "failed_by_stage": {
+    "citation": 1,
+    "llm": 0,
+    "validator_error": 0,
+    "duplicate": 0,
+    "overquota": 0
+  }
+}

@@ -89,13 +89,15 @@ async def main() -> None:
         raw_responses = [json.loads(line) for line in f if line.strip()]
 
     # 去重：旧 run 的 model_responses 可能含重复 (question_id, model_name)，
-    # 保留首次出现的记录
-    seen_resp_keys: set[tuple[str, str]] = set()
+    # 保留最后出现的记录（重试成功的条目会覆盖失败的条目）
     model_responses: list[dict] = []
+    seen: dict[tuple[str, str], int] = {}
     for r in raw_responses:
         key = (r["question_id"], r["model_name"])
-        if key not in seen_resp_keys:
-            seen_resp_keys.add(key)
+        if key in seen:
+            model_responses[seen[key]] = r  # 原地替换为最新记录
+        else:
+            seen[key] = len(model_responses)
             model_responses.append(r)
 
     if len(model_responses) < len(raw_responses):
@@ -118,6 +120,18 @@ async def main() -> None:
             judge_client = ModelLoader.load_model(cfg)
         else:
             logger.warning("Judge model '{}' not in registry", judge_model_name)
+
+    # 清理旧的追加型中间产物，避免新旧数据混杂
+    for cleanup_path in [
+        output_root / "dataset_report" / "dataset_scores.jsonl",
+        output_root / "model_report" / "automatic_scores.jsonl",
+        output_root / "model_report" / "llm_judge_scores.jsonl",
+        output_root / "model_report" / "traces" / "llm_judge_traces.jsonl",
+        output_root / "model_report" / "traces" / "llm_judge_prompts.jsonl",
+    ]:
+        if cleanup_path.exists():
+            cleanup_path.unlink()
+            logger.info("Cleaned: {}", cleanup_path)
 
     # Step 1: 数据集指标（轻量，重跑）
     dataset_scores = run_dataset_metrics(

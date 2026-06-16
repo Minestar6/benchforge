@@ -1,0 +1,35 @@
+{
+  "task_id": "ques_generate",
+  "run_id": "B_no_feedback_qa_20260616_212924",
+  "modes": {
+    "qa": {
+      "candidate_count": 101,
+      "accepted_count": 101,
+      "min_candidate_target": 60,
+      "max_candidate_target": 75,
+      "target_candidate_count": 60,
+      "difficulty_counts": {
+        "easy": 22,
+        "medium": 70,
+        "hard": 9
+      },
+      "min_difficulty_targets": {
+        "easy": 12,
+        "medium": 18,
+        "hard": 30
+      },
+      "min_target_reached": false,
+      "max_target_reached": true,
+      "stopped_reason": "max_candidate_pool_reached",
+      "terminal_hard_repair": {
+        "executed": false,
+        "rounds": 0,
+        "generated_count": 0,
+        "accepted_count": 0
+      }
+    }
+  },
+  "total_candidates": 101,
+  "global_used_chunk_combinations": 12,
+  "global_failures": 0
+}

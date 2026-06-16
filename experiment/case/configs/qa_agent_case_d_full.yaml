@@ -1,7 +1,7 @@
 # qa_agent 配置 — case / Group D Full Method
 
 model:
-  name: "deepseek-v4"
+  name: "deepseek-v3.2"
   temperature: 0.2
   max_tokens: 4096
   max_retries: 2

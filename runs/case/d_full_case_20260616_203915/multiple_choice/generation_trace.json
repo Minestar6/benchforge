@@ -1,0 +1,193 @@
+[
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "hard",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 0,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 3,
+        "raw_count": 4,
+        "filtered_count": 3,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 3,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "The text states that inference in first-order logic is undecidable and intractable, but that backward reasoning with Horn clauses (as in Prolog) is Turing complete. Which of the following conclusions is most strongly supported by this juxtaposition?",
+            "reason": "非法问题类型: inference",
+            "raw_item": {
+              "question": "The text states that inference in first-order logic is undecidable and intractable, but that backward reasoning with Horn clauses (as in Prolog) is Turing complete. Which of the following conclusions is most strongly supported by this juxtaposition?",
+              "choices": [
+                "(A) Turing completeness guarantees the tractability of a computational system.",
+                "(B) A system can be capable of universal computation (Turing complete) even if the general logic framework it operates within is intractable.",
+                "(C) Horn clause logic is a decidable subset of first-order logic.",
+                "(D) Prolog's efficiency stems from avoiding the undecidability inherent in first-order logic."
+              ],
+              "answer": "B",
+              "question_mode": "multiple_choice",
+              "thought_process": "This is a high-difficulty question requiring careful logical reasoning about two technical properties: undecidability/intractability vs. Turing completeness. The text presents both facts without explicitly connecting them. The correct answer (B) is the valid inference: Turing completeness (ability to compute any computable function) is a separate property from decidability (always providing a yes/no answer) or tractability (efficiency). Prolog demonstrates a Turing-complete system within an undecidable framework. Distractor A is false and reverses the implication. Distractor C is plausible but not directly supported; the text says inference in Horn clause logic is undecidable, so it is not a decidable subset. Distractor D is a common overgeneralization; efficiency is mentioned but attributed to being 'competitive with other symbolic languages,' not solely to avoiding undecidability.",
+              "question_type": "inference",
+              "required_capability": "Drawing a correct conceptual conclusion from the juxtaposition of two advanced, nuanced technical statements.",
+              "estimated_difficulty": 9,
+              "citations": [
+                "Inference in both Horn clause logic and first-order logic is undecidable, and therefore intractable.",
+                "However, backward reasoning with Horn clauses, which underpins computation in the logic programming language Prolog, is Turing complete."
+              ]
+            },
+            "topic": "Artificial Intelligence",
+            "chunk_ids": [
+              "doc_aef977fc2141::chunk_0002",
+              "doc_aef977fc2141::chunk_0004",
+              "doc_aef977fc2141::chunk_0010",
+              "doc_aef977fc2141::chunk_0013"
+            ],
+            "chunks": [
+              "inspired by bird flocking) and ant colony optimization (inspired by ant trails).\n##Subheading: Logic\nFormal logic is used for reasoning and knowledge representation.\nFormal logic comes in two main forms: propositional logic (which operates on statements that are true or false and uses logical connectives such as \"and\", \"or\", \"not\" and \"implies\") and predicate logic (which also operates on objects, predicates and relations and uses quantifiers such as \"Every X is a Y\" and \"There are some Xs that are Ys\").\nDeductive reasoning in logic is the process of proving a new statement (conclusion) from other statements that are given and assumed to be true (the premises). Proofs can be structured as proof trees, in which nodes are labelled by sentences, and children nodes are connected to parent nodes by inference rules.\nGiven a problem and a set of premises, problem-solving reduces to searching for a proof tree whose root node is labelled by a solution of the problem and whose leaf nodes are labelled by premises or axioms. In the case of Horn clauses, problem-solving search can be performed by reasoning forwards from the premises or backwards from the problem. In the more general case of the clausal form of first-order logic, resolution is a single, axiom-free rule of inference, in which a problem is solved by proving a contradiction from premises that include the negation of the problem to be solved.\nInference in both Horn clause logic and first-order logic is undecidable, and therefore intractable. However, backward reasoning with Horn clauses, which underpins computation in the logic programming language Prolog, is Turing complete. Moreover, its efficiency is competitive with computation in other symbolic programming languages.\nFuzzy logic assigns a \"degree of truth\" between 0 and 1. It can therefore handle propositions that are vague and partially true.\nNon-monotonic logics, including logic programming with negation as failure, are designed to handle default reasoning. Other specialized versions of logic have been developed to describe many complex domains.\n##Subheading: Probabilistic methods for uncertain reasoning\nMany problems in AI (including reasoning, planning, learning, perception, and robotics) require the agent to operate with incomplete or uncertain information. AI researchers have devised a number of tools to solve these problems using methods from probability theory and economics. Precise mathematical tools have been developed that analyze how an agent can make choices and plan, using decision theory, decision analysis, and information value theory. These tools include models such as Markov decision processes, dynamic decision networks, game theory and mechanism design.\nBayesian networks are a tool that can be used for reasoning (using the Bayesian inference algorithm),[g] learning (using the expectation–maximization algorithm),[h] planning (using decision networks) and perception (using dynamic Bayesian networks).\nProbabilistic algorithms can also be used for filtering, prediction, smoothing, and finding explanations for streams of data, thus helping perception systems analyze processes that occur over time (e.g., hidden Markov models or Kalman filters).\n##Subheading: Classifiers and statistical learning methods\nThe simplest AI applications can be divided into two types: classifiers (e.g., \"if shiny then diamond\"), on one hand, and controllers (e.g., \"if diamond then pick up\"), on the other hand. Classifiers are functions that use pattern matching to determine the closest match. They can be fine-tuned based on chosen examples using supervised learning. Each pattern (also called an \"observation\") is labeled with a certain predefined class. All the observations combined with their class labels are known as a data set. When a new observation is received, that observation is classified based on previous experience.\nThere are many kinds of classifiers in use. The decision tree is the simplest and most widely used symbolic machine learning algorithm. K-nearest neighbor algorithm was the most widely used analogical AI until the mid-1990s, and Kernel methods such as the support vector machine (SVM) displaced k-nearest neighbor in the 1990s.\nThe naive Bayes classifier is reportedly the \"most widely used learner\" at Google, due in part to its scalability.\nNeural networks are also used as classifiers.\n##Subheading: Artificial neural networks\nAn artificial neural network is based on a collection of nodes also known as artificial neurons, which loosely model the neurons in a biological brain. It is trained to recognise patterns; once trained, it can recognise those patterns in fresh data. There is an input, at least one hidden layer of nodes and an output. Each node applies a function and once the weight crosses its specified threshold, the data is transmitted to the next layer. A network is typically called a deep neural network if it has at least 2 hidden layers.\nLearning algorithms for neural networks use local search to choose the weights that will get the right output for each input during training. The most common training technique is the backpropagation algorithm. Neural networks learn to model complex relationships between inputs and outputs and find patterns in data",
+              "bots\n##Subheading: Health and medicine\nAlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein. In 2023, it was reported that AI-guided drug discovery helped find a class of antibiotics capable of killing two different types of drug-resistant bacteria. In 2024, researchers used machine learning to accelerate the search for Parkinson's disease drug treatments. Their aim was to identify compounds that block the clumping, or aggregation, of alpha-synuclein (the protein that characterises Parkinson's disease). They were able to speed up the initial screening process ten-fold and reduce the cost by a thousand-fold.\nPublished in Nature an article \"Dozens of AI disease-prediction models were trained on dubious data\" highlighted the use of unreliable data being used to train AI medical prediction models for stroke and diabetes in 125 research articles. Evidence suggested some of the AI tools that were developed on unreliable data had been used on patients, although it was not clear if there were adverse outcomes. This article led to wide spread debate on how AI can be used in health and medical research to develop accurate, safe and validated tools. An Executive Director of Novartis highlighted the need for better clinical data standards in a blog \"Why Clinical Data Standards Matter In An AI-Driven World\".\n##Subheading: Gaming\nGame playing programs have been used since the 1950s to demonstrate and test AI's most advanced techniques. Deep Blue became the first computer chess-playing system to beat a reigning world chess champion, Garry Kasparov, on 11 May 1997. In 2011, in a Jeopardy! quiz show exhibition match, IBM's question answering system, Watson, defeated the two greatest Jeopardy! champions, Brad Rutter and Ken Jennings, by a significant margin. In March 2016, AlphaGo won 4 out of 5 games of Go in a match with Go champion Lee Sedol, becoming the first computer Go-playing system to beat a professional Go player without handicaps. Then, in 2017, it defeated Ke Jie, who was the best Go player in the world. Other programs handle imperfect-information games, such as the poker-playing program Pluribus. DeepMind developed increasingly generalistic reinforcement learning models, such as with MuZero, which could be trained to play chess, Go, or Atari games. In 2019, DeepMind's AlphaStar achieved grandmaster level in StarCraft II, a particularly challenging real-time strategy game that involves incomplete knowledge of what happens on the map. In 2021, an AI agent competed in a PlayStation Gran Turismo competition, winning against four of the world's best Gran Turismo drivers using deep reinforcement learning. In 2024, Google DeepMind introduced SIMA, a type of AI capable of autonomously playing nine previously unseen open-world video games by observing screen output, as well as executing short, specific tasks in response to natural language instructions.\n##Subheading: Mathematics\nIn mathematics, probabilistic large language models are versatile, but can also produce wrong answers in the form of hallucinations. The Alibaba Group developed a version of its Qwen models called Qwen2-Math, that achieved state-of-the-art performance on several mathematical benchmarks, including 84% accuracy on the MATH dataset of competition mathematics problems. In January 2025, Microsoft proposed the technique rStar-Math that leverages Monte Carlo tree search and step-by-step reasoning, enabling a relatively small language model like Qwen-7B to solve 53% of the AIME 2024 and 90% of the MATH benchmark problems. Google DeepMind has developed models for solving mathematical problems: AlphaTensor, AlphaGeometry, AlphaProof, AlphaEvolve, and FunSearch.\nWhen natural language is used to describe mathematical problems, converters can transform such prompts into a formal language such as Lean to define mathematical tasks. The experimental model Gemini Deep Think accepts natural language prompts directly and achieved gold medal results in the International Math Olympiad of 2025.\n##Subheading: Finance\nAccording to Nicolas Firzli, director of the World Pensions & Investments Forum, it may be too early to see the emergence of highly innovative AI-informed financial products and services. He argues that \"the deployment of AI tools will simply further automatise things: destroying tens of thousands of jobs in banking, financial planning, and pension advice in the process, but I'm not sure it will unleash a new wave of [e.g., sophisticated] pension innovation.\".\n##Subheading: Military\nVarious countries are deploying AI military applications. The main applications enhance command and control, communications, sensors, integration and interoperability. Research is targeting intelligence collection and analysis, logistics, cyber operations, information operations, and semiautonomous and autonomous vehicles. AI technologies enable coordination of sensors and effectors, threat detection and identification, marking of enemy positions, target acquisition, coordination and deconfliction of distributed Joint Fires between network",
+              " chatbots have been reported in courts in the United States, with AI companies accused of creating products that endanger humans through emotional confusion or deception.\nRecent public debates in artificial intelligence have increasingly focused on its broader societal and ethical implications. It has been argued AI will become so powerful that humanity may irreversibly lose control of it. This could, as physicist Stephen Hawking stated, \"spell the end of the human race\". This scenario has been common in science fiction, when a computer or robot suddenly develops a human-like \"self-awareness\" (or \"sentience\" or \"consciousness\") and becomes a malevolent character.[q] These sci-fi scenarios are misleading in several ways.\nFirst, AI does not require human-like sentience to be an existential risk. Modern AI programs are given specific goals and use learning and intelligence to achieve them. Philosopher Nick Bostrom argued that if one gives almost any goal to a sufficiently powerful AI, it may choose to destroy humanity to achieve it (he used the example of an automated paperclip factory that destroys the world to get more iron for paperclips). Stuart Russell gives the example of household robot that tries to find a way to kill its owner to prevent it from being unplugged, reasoning that \"you can't fetch the coffee if you're dead.\" In order to be safe for humanity, a superintelligence would have to be genuinely aligned with humanity's morality and values so that it is \"fundamentally on our side\".\nSecond, Yuval Noah Harari argues that AI does not require a robot body or physical control to pose an existential risk. The essential parts of civilization are not physical. Things like ideologies, law, government, money and the economy are built on language; they exist because there are stories that billions of people believe. The current prevalence of misinformation suggests that an AI could use language to convince people to believe anything, even to take actions that are destructive. Geoffrey Hinton said in 2025 that modern AI is particularly \"good at persuasion\" and getting better all the time. He asks, \"Suppose you wanted to invade the capital of the US. Do you have to go there and do it yourself? No. You just have to be good at persuasion.\".\nThe opinions amongst experts and industry insiders are mixed, with sizable fractions both concerned and unconcerned by risk from eventual superintelligent AI. Personalities such as Stephen Hawking, Bill Gates, and Elon Musk, as well as AI pioneers such as Geoffrey Hinton, Yoshua Bengio, Stuart Russell, Demis Hassabis, and Sam Altman, have expressed concerns about existential risk from AI.\nIn May 2023, Geoffrey Hinton announced his resignation from Google in order to be able to \"freely speak out about the risks of AI\" without \"considering how this impacts Google\". He notably mentioned risks of an AI takeover, and stressed that in order to avoid the worst outcomes, establishing safety guidelines will require cooperation among those competing in use of AI.\nIn 2023, many leading AI experts endorsed the joint statement that \"Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war\".\nSome other researchers were more optimistic. AI pioneer Jürgen Schmidhuber did not sign the joint statement, emphasising that in 95% of all cases, AI research is about making \"human lives longer and healthier and easier.\" While the tools that are now being used to improve lives can also be used by bad actors, \"they can also be used against the bad actors.\" Andrew Ng also argued that \"it's a mistake to fall for the doomsday hype on AI—and that regulators who do will only benefit vested interests.\" Yann LeCun, a Turing Award winner, disagreed with the idea that AI will subordinate humans \"simply because they are smarter, let alone destroy [us]\", \"scoff[ing] at his peers' dystopian scenarios of supercharged misinformation and even, eventually, human extinction.\" In contrast, he claimed that \"intelligent machines will usher in a new renaissance for humanity, a new era of enlightenment.\" In the early 2010s, experts argued that the risks are too distant in the future to warrant research or that humans will be valuable from the perspective of a superintelligent machine. However, after 2016, the study of current and future risks and possible solutions became a serious area of research.\n##Subheading: Ethical machines and alignment\nFriendly AI are machines that have been designed from the beginning to minimize risks and to make choices that benefit humans. Eliezer Yudkowsky, who coined the term, argues that developing friendly AI should be a higher research priority: it may require a large investment and it must be completed before AI becomes an existential risk.\nMachines with intelligence have the potential to use their intelligence to make ethical decisions. The field of machine ethics provides machines with ethical principles and procedures for resolving ethical dilemmas.\nThe field of machine ethics is also",
+              "adeh, and others developed methods that handled incomplete and uncertain information by making reasonable guesses rather than precise logic. But the most important development was the revival of \"connectionism\", including neural network research, by Geoffrey Hinton and others. In 1990, Yann LeCun successfully showed that convolutional neural networks can recognize handwritten digits, the first of many successful applications of neural networks.\nAI gradually restored its reputation in the late 1990s and early 21st century by exploiting formal mathematical methods and by finding specific solutions to specific problems. This \"narrow\" and \"formal\" focus allowed researchers to produce verifiable results and collaborate with other fields (such as statistics, economics and mathematics). By 2000, solutions developed by AI researchers were being widely used, although in the 1990s they were rarely described as \"artificial intelligence\" (a tendency known as the AI effect).\nHowever, several academic researchers became concerned that AI was no longer pursuing its original goal of creating versatile, fully intelligent machines. Beginning around 2002, they founded the subfield of artificial general intelligence (or \"AGI\"), which had several well-funded institutions by the 2010s.\nDeep learning began to dominate industry benchmarks in 2012 and was adopted throughout the field.\nFor many specific tasks, other methods were abandoned.[y]\nDeep learning's success was based on both hardware improvements (faster computers, graphics processing units, cloud computing) and access to large amounts of data (including curated datasets, such as ImageNet). Deep learning's success led to an enormous increase in interest and funding in AI.[z] The amount of machine learning research (measured by total publications) increased by 50% in the years 2015–2019.\nIn 2016, issues of fairness and the misuse of technology were catapulted into center stage at machine learning conferences, publications vastly increased, funding became available, and many researchers re-focussed their careers on these issues. The alignment problem became a serious field of academic study.\nIn the late 2010s and early 2020s, AGI companies began to deliver programs that created enormous interest. In 2015, AlphaGo, developed by DeepMind, beat the world champion Go player. The program taught only the game's rules and developed a strategy by itself. GPT-3 is a large language model that was released in 2020 by OpenAI and is capable of generating high-quality human-like text. ChatGPT, launched on 30 November 2022, became the fastest-growing consumer software application in history, gaining over 100 million users in two months. It marked what is widely regarded as AI's breakout year, bringing it into the public consciousness. These programs, and others, inspired an aggressive AI boom, where large companies began investing billions of dollars in AI research. According to AI Impacts, about US$50 billion annually was invested in \"AI\" around 2022 in the U.S. alone and about 20% of the new U.S. computer science PhD graduates have specialized in \"AI\". About 800,000 \"AI\"-related U.S. job openings existed in 2022. According to PitchBook research, 22% of newly funded startups in 2024 claimed to be AI companies.\n#Subheading: Philosophy\nPhilosophical debates have historically sought to determine the nature of intelligence and how to make intelligent machines. Another major focus has been whether machines can be conscious, and the associated ethical implications. Many other topics in philosophy are relevant to AI, such as epistemology and free will. Rapid advancements have intensified public discussions on the philosophy and ethics of AI.\n##Subheading: Defining artificial intelligence\nAlan Turing investigated whether machines can show intelligent behaviour and think. In 1950, he proposed the Turing test, which measures the ability of a machine to simulate human conversation. Since we can only observe the behavior of the machine, it does not matter if it is \"actually\" thinking or literally has a \"mind\". Turing notes that we can not determine these things about other people but \"it is usual to have a polite convention that everyone thinks.\".\nRussell and Norvig agree with Turing that intelligence must be defined in terms of external behavior, not internal structure. However, they are critical that the test requires the machine to imitate humans. \"Aeronautical engineering texts\", they wrote, \"do not define the goal of their field as making 'machines that fly so exactly like pigeons that they can fool other pigeons.'\" AI founder John McCarthy agreed, writing that \"Artificial intelligence is not, by definition, simulation of human intelligence\".\nMcCarthy defines intelligence as \"the computational part of the ability to achieve goals in the world\". Another AI founder, Marvin Minsky, similarly describes it as \"the ability to solve hard problems\". Artificial Intelligence: A Modern Approach defines it as the study of agents that perceive their environment and take actions that maximize their chances of achieving defined goals.\nThe many differing definitions of AI have"
+            ],
+            "llm_call_id": "llm_cd02eed72fd14c8e88a27047db52f716",
+            "trace_call_id": "llm_04e88ad435cd478eaf8154197e97a456",
+            "generation_round": 1
+          }
+        ],
+        "llm_call_id": "llm_cd02eed72fd14c8e88a27047db52f716",
+        "trace_call_id": "llm_04e88ad435cd478eaf8154197e97a456",
+        "chunks": [
+          "doc_aef977fc2141::chunk_0002",
+          "doc_aef977fc2141::chunk_0004",
+          "doc_aef977fc2141::chunk_0010",
+          "doc_aef977fc2141::chunk_0013"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 5,
+        "raw_count": 5,
+        "filtered_count": 5,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_83cbc2fd58e04db48cb7d2af5e315363",
+        "trace_call_id": "llm_71479221ce8b4ceab3e35155c2885357",
+        "chunks": [
+          "doc_cd5a4b0bb607::chunk_0000",
+          "doc_cd5a4b0bb607::chunk_0010"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 2,
+    "strategy": "focus_difficulty",
+    "difficulty": "easy",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 10,
+        "raw_count": 10,
+        "filtered_count": 10,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 5,
+        "multi_generated_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_ef277a44568b48c5a8793d6c59e741d6",
+        "trace_call_id": "llm_a6f23385e39c4797b91c16ef8a518475",
+        "chunks": [
+          "doc_1be62bde08fd::chunk_0000",
+          "doc_1be62bde08fd::chunk_0005",
+          "doc_1be62bde08fd::chunk_0007"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 10,
+        "filtered_count": 9,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 4,
+        "multi_generated_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "What is the primary purpose of a 'security reduction' in cryptography research, as discussed in the context of post-quantum algorithms?",
+            "reason": "答案过短",
+            "raw_item": {
+              "question": "What is the primary purpose of a 'security reduction' in cryptography research, as discussed in the context of post-quantum algorithms?",
+              "choices": [
+                "(A) To reduce the size of cryptographic keys and ciphertexts for more efficient transmission.",
+                "(B) To demonstrate that breaking a cryptographic algorithm is at least as hard as solving a well-known mathematical problem.",
+                "(C) To reduce the processing power required by a quantum computer to execute Shor's algorithm.",
+                "(D) To provide a method for reducing complex multivariate polynomials into a simpler signature form."
+              ],
+              "answer": "B",
+              "thought_process": "This question tests understanding of a fundamental cryptographic concept introduced in the text. It moves beyond listing algorithms to grasping the theoretical foundation of their security. The correct answer directly paraphrases the text: 'the security of a given cryptographic algorithm is reduced to the security of a known hard problem.' Distractors confuse the term 'reduction' with performance optimization, attacking quantum computers, or a specific technical process from another part of the text.",
+              "question_type": "conceptual",
+              "required_capability": "Understanding the abstract concept of a security reduction and its role in provable security for cryptographic algorithms.",
+              "estimated_difficulty": 6,
+              "citations": [
+                "In other words, the security of a given cryptographic algorithm is reduced to the security of a known hard problem."
+              ]
+            },
+            "topic": "Quantum Computing",
+            "chunk_ids": [
+              "doc_7d4efb3cc0af::chunk_0001"
+            ],
+            "chunks": [
+              " or bounded-time signatures. Moni Naor and Moti Yung invented UOWHF hashing in 1989 and designed a signature based on hashing (the Naor-Yung scheme) which can be unlimited-time in use (the first such signature that does not require trapdoor properties).\n##Subheading: Code-based cryptography\nThis includes cryptographic systems which rely on error-correcting codes, such as the McEliece and Niederreiter encryption algorithms and the related Courtois, Finiasz and Sendrier Signature scheme. The original McEliece signature using random Goppa codes has withstood scrutiny for over 40 years. However, many variants of the McEliece scheme, which seek to introduce more structure into the code used in order to reduce the size of the keys, have been shown to be insecure. The Post-Quantum Cryptography Study Group sponsored by the European Commission has recommended the McEliece public key encryption system as a candidate for long term protection against attacks by quantum computers. In 2025, NIST announced plans to standardize the code-based HQC encryption algorithm.\n##Subheading: Isogeny-based cryptography\nThese cryptographic systems rely on the properties of isogeny graphs of elliptic curves (and higher-dimensional abelian varieties) over finite fields, in particular supersingular isogeny graphs, to create cryptographic systems. Among the more well-known representatives of this field are the Diffie–Hellman-like key exchange CSIDH, which can serve as a straightforward quantum-resistant replacement for the Diffie–Hellman and elliptic curve Diffie–Hellman key-exchange methods that are in widespread use today, and the signature scheme SQIsign which is based on the categorical equivalence between supersingular elliptic curves and maximal orders in particular types of quaternion algebras. Another widely noticed construction, SIDH/SIKE, was spectacularly broken in 2022. The attack is however specific to the SIDH/SIKE family of schemes and does not generalize to other isogeny-based constructions.\n##Subheading: Symmetric key quantum resistance\nUsing sufficiently large key sizes, the symmetric key cryptographic systems like AES and SNOW 3G are already resistant to attack by a quantum computer. Further, key management systems and protocols that use symmetric key cryptography instead of public key cryptography, like Kerberos and the 3GPP Mobile Network Authentication Structure, are also inherently secure against attack by a quantum computer. Given its widespread deployment in the world, some researchers recommend expanded use of Kerberos-like symmetric key management as an efficient way to get post-quantum cryptography today.\n#Subheading: Security reductions\nIn cryptography research, it is desirable to prove the equivalence of a cryptographic algorithm and a known hard mathematical problem. These proofs are often called \"security reductions\", and are used to demonstrate the difficulty of cracking the encryption algorithm. In other words, the security of a given cryptographic algorithm is reduced to the security of a known hard problem. Researchers are actively looking for security reductions in the prospects for post-quantum cryptography. Current results are given here:.\n##Subheading: Lattice-based cryptography – Ring-LWE Signature\nIn some versions of Ring-LWE there is a security reduction to the shortest-vector problem (SVP) in a lattice as a lower bound on the security. The SVP is known to be NP-hard. Specific ring-LWE systems that have provable security reductions include a variant of Lyubashevsky's ring-LWE signatures defined in a paper by Güneysu, Lyubashevsky, and Pöppelmann. The GLYPH signature scheme is a variant of the Güneysu, Lyubashevsky, and Pöppelmann (GLP) signature which takes into account research results that have come after the publication of the GLP signature in 2012. Another Ring-LWE signature is Ring-TESLA. There also exists a \"derandomized variant\" of LWE, called Learning with Rounding (LWR), which yields \"improved speedup (by eliminating sampling small errors from a Gaussian-like distribution with deterministic errors) and bandwidth\". While LWE uses the addition of a small error to conceal the lower bits, LWR uses rounding for the same purpose.\n##Subheading: Lattice-based cryptography – NTRU, BLISS\nThe security of the NTRU encryption scheme and the BLISS signature is believed to be related to, but not provably reducible to, the closest vector problem (CVP) in a lattice. The CVP is known to be NP-hard. The Post-Quantum Cryptography Study Group sponsored by the European Commission suggested that the Stehle–Steinfeld variant of NTRU, which does have a security reduction, be studied for long term use instead of the original NTRU algorithm.\n##Subheading: Multivariate cryptography – Unbalanced oil and vinegar\nUnbalanced Oil and Vinegar signature schemes are asymmetric cryptographic primitives based on multivariate polynomials over a finite field ⁠\n\n\n\n\n"
+            ],
+            "llm_call_id": "llm_bf8834f9c59c4b1895c717e33a588617",
+            "trace_call_id": "llm_5ad2222f73b54bc294fb9eaf08e02a3b",
+            "generation_round": 2
+          }
+        ],
+        "llm_call_id": "llm_8c4d541ac4f549388fc4a35374dc70f8",
+        "trace_call_id": "llm_8be17037fe034cf6a95519ed18542fd9",
+        "chunks": [
+          "doc_7d4efb3cc0af::chunk_0001",
+          "doc_7d4efb3cc0af::chunk_0002",
+          "doc_7d4efb3cc0af::chunk_0003",
+          "doc_7d4efb3cc0af::chunk_0005"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "task_id": "ques_generate",
+  "run_id": "D_full_qa_20260616_212924",
+  "total_candidates": 81,
+  "citation_passed": 75,
+  "llm_passed": 75,
+  "final_selected": 75,
+  "stage_latencies_ms": {
+    "citation_validation": 467,
+    "llm_validation": 629468,
+    "selection": 0
+  },
+  "llm_usage": {
+    "calls": 75,
+    "input_tokens": 50465,
+    "output_tokens": 94700
+  },
+  "failed_by_stage": {
+    "citation": 6,
+    "llm": 0,
+    "validator_error": 0,
+    "duplicate": 0,
+    "overquota": 0
+  }
+}

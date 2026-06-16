@@ -1,0 +1,579 @@
+[
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "hard",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "single_k": 0,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 3,
+        "raw_count": 3,
+        "filtered_count": 3,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 3,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_051b8167d4e14c94be081d1356853f88",
+        "trace_call_id": "llm_f45a18fb1d714e418ca7ff19f81fe1b4",
+        "chunks": [
+          "doc_10240d6c8bf0::chunk_0002",
+          "doc_10240d6c8bf0::chunk_0003",
+          "doc_10240d6c8bf0::chunk_0004",
+          "doc_10240d6c8bf0::chunk_0005"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 5,
+        "filtered_count": 4,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "Considering the criticisms of post-quantum cryptography outlined in the text, which scenario, if true, would most undermine the core rationale for a rapid, large-scale migration from classical public-key cryptography?",
+            "reason": "非法问题类型: evaluation",
+            "raw_item": {
+              "question": "Considering the criticisms of post-quantum cryptography outlined in the text, which scenario, if true, would most undermine the core rationale for a rapid, large-scale migration from classical public-key cryptography?",
+              "choices": [
+                "(A) The discovery of a non-quantum, classical algorithm that breaks RSA-2048 with moderate computational resources.",
+                "(B) A proof that Grover's algorithm cannot be parallelized, thus limiting its speedup against symmetric key search.",
+                "(C) A definitive demonstration that Shor's algorithm, when run on a large, fault-tolerant quantum computer, requires runtimes that grow exponentially with the problem size, not polynomially.",
+                "(D) The standardization by NIST of a post-quantum algorithm that is later found to have a subtle classical vulnerability, forcing a second migration."
+              ],
+              "answer": "C",
+              "question_mode": "multiple_choice",
+              "thought_process": "This question requires evaluating the foundational assumptions behind PQC migration against the specific criticisms raised. The text's criticisms focus on doubting the existence of the quantum speed-up mechanism (polynomial-time Shor's algorithm) at scale. The core rationale for PQC is that quantum computers will break RSA/ECC efficiently. If Shor's algorithm's runtime is actually exponential, the quantum threat diminishes or disappears, undermining the need for PQC. Distractor (A) would be catastrophic for classical crypto but is a separate, classical threat, not related to the quantum threat that PQC addresses. (B) concerns symmetric crypto (Grover's) which is already addressed by larger key sizes and is not the primary driver for replacing public-key crypto. (D) is a risk of migrating to new algorithms but doesn't challenge the fundamental need to migrate eventually.",
+              "question_type": "evaluation",
+              "required_capability": "Evaluating which piece of evidence most directly invalidates the central premise (the quantum threat) driving the discussed technological shift.",
+              "estimated_difficulty": 9,
+              "citations": [
+                "Post-quantum cryptography's need is predicated on traditional, established cryptographic problems being quickly solved by a quantum computer.",
+                "Additionally, while Shor's algorithm proposes a polynomial time (i.e. fast) solution... such a speed-up has never been proven to exist at scale.",
+                "Their research lead Stephen to publicly express mild doubts about the proposed quantum speed-up mechanism's existence..."
+              ]
+            },
+            "topic": "Quantum Computing",
+            "chunk_ids": [
+              "doc_7d4efb3cc0af::chunk_0000",
+              "doc_7d4efb3cc0af::chunk_0001",
+              "doc_7d4efb3cc0af::chunk_0003",
+              "doc_7d4efb3cc0af::chunk_0005"
+            ],
+            "chunks": [
+              "#Subheading: Migration\nThe transition from classical public-key cryptography to post-quantum cryptography (PQC) is considered a long-term, multi-phase process due to the widespread deployment of cryptographic infrastructure across digital systems. Migration planning is influenced by factors such as data longevity requirements, regulatory guidance, interoperability constraints, and the operational complexity of replacing embedded cryptographic components.\nOne commonly cited risk model is Mosca’s theorem, which estimates the urgency of migration by comparing three time horizons: the time required to transition systems (X), the time during which data must remain secure (Y), and the estimated arrival of cryptographically relevant quantum computers (Z). If X + Y > Z, migration is considered urgent.\nA major concern motivating early transition is the “harvest now, decrypt later” threat model, in which encrypted data is intercepted and stored with the intention of decrypting it once large-scale quantum computers become available.\nMigration strategies frequently emphasize crypto-agility, the capability of systems to rapidly replace cryptographic primitives without major architectural changes. Hybrid cryptographic deployments where classical and post-quantum algorithms are used simultaneously have been tested in protocols such as Transport Layer Security (TLS) to reduce transitional risk.\nIn 2024, the National Institute of Standards and Technology (NIST) finalized its first post-quantum cryptography standards, including module-lattice-based key encapsulation and digital signature schemes, providing a foundation for structured migration in governmental and commercial systems.\nInternational organizations and national cybersecurity agencies have published coordinated roadmaps outlining phased adoption timelines, risk assessments, and procurement guidelines to facilitate a systematic transition.\n#Subheading: Preparation\nDigital infrastructures require robust cybersecurity. Cryptographic systems are vital to protect the confidentiality and authenticity of data. Quantum computing will be a threat to many of the classical cryptographic algorithms, which are used to achieve these protection goals but are only secure against classical computers. Data that is currently not quantum-safe, whether it is stored or transmitted, and that must remain confidential for a long time, may be compromised in the future by quantum computers (“harvest now, decrypt later” attacks). In addition, authenticity will also be jeopardised by quantum computers. The threat that quantum computing poses to cybersecurity can be countered by a timely, comprehensive and coordinated transition to post-quantum cryptography (PQC).\n#Subheading: Algorithms\n##Subheading: Lattice-based cryptography\nThis approach includes cryptographic systems such as learning with errors, \nring learning with errors (ring-LWE), the ring learning with errors key exchange and \nthe ring learning with errors signature, the older NTRU or GGH encryption schemes, and the newer NTRU \nsignature and BLISS signatures. \nSome of these schemes like NTRU encryption have been studied for many years \nwithout anyone finding a feasible attack. Others like the ring-LWE algorithms \nhave proofs that their security reduces to a worst-case problem. The Post-Quantum Cryptography Study Group sponsored by the European Commission suggested that the Stehle–Steinfeld variant of NTRU be studied for standardization rather than the NTRU algorithm. At that time, NTRU was still patented. Studies have \nindicated that NTRU may have more secure properties than other lattice based algorithms. Two lattice-based \nalgorithms, ML-KEM (commonly known as Kyber) and ML-DSA (commonly known \nas Dilithium) were among the first post-quantum algorithms standardised by \nNIST.\n##Subheading: Multivariate cryptography\nThis includes cryptographic systems such as the Unbalanced Oil and Vinegar signature scheme which is based on the difficulty of solving systems of multivariate equations. Various attempts to build secure multivariate equation encryption schemes have been broken, notably the Rainbow signature.\n##Subheading: Hash-based cryptography\nThis includes cryptographic systems such as Lamport signatures, the Merkle signature scheme, the XMSS, the SPHINCS, the WOTS and the SPHINCS+ schemes. Hash based digital signatures were invented in the late 1970s by Ralph Merkle and have been studied ever since as an interesting alternative to number-theoretic digital signatures like RSA and DSA. Their primary drawback is that for any hash-based public key, there is a limit on the number of signatures that can be signed using the corresponding set of private keys. This fact reduced interest in these signatures until interest was revived due to the desire for cryptography that was resistant to attack by quantum computers. There appear to be no patents on the Merkle signature scheme[citation needed] and there exist many non-patented hash functions that could be used with these schemes. The stateful hash-based signature scheme XMSS developed by a team of researchers under the direction of Johannes Buchmann is described in RFC 8391.\nNote that all the above schemes are one-time or bounded-time signatures. Moni Naor and Moti Yung invented UOWHF hashing in 1989 and designed a signature based on hashing (the Naor-Yung scheme) which can be unlimited-time in use (the first such signature",
+              " or bounded-time signatures. Moni Naor and Moti Yung invented UOWHF hashing in 1989 and designed a signature based on hashing (the Naor-Yung scheme) which can be unlimited-time in use (the first such signature that does not require trapdoor properties).\n##Subheading: Code-based cryptography\nThis includes cryptographic systems which rely on error-correcting codes, such as the McEliece and Niederreiter encryption algorithms and the related Courtois, Finiasz and Sendrier Signature scheme. The original McEliece signature using random Goppa codes has withstood scrutiny for over 40 years. However, many variants of the McEliece scheme, which seek to introduce more structure into the code used in order to reduce the size of the keys, have been shown to be insecure. The Post-Quantum Cryptography Study Group sponsored by the European Commission has recommended the McEliece public key encryption system as a candidate for long term protection against attacks by quantum computers. In 2025, NIST announced plans to standardize the code-based HQC encryption algorithm.\n##Subheading: Isogeny-based cryptography\nThese cryptographic systems rely on the properties of isogeny graphs of elliptic curves (and higher-dimensional abelian varieties) over finite fields, in particular supersingular isogeny graphs, to create cryptographic systems. Among the more well-known representatives of this field are the Diffie–Hellman-like key exchange CSIDH, which can serve as a straightforward quantum-resistant replacement for the Diffie–Hellman and elliptic curve Diffie–Hellman key-exchange methods that are in widespread use today, and the signature scheme SQIsign which is based on the categorical equivalence between supersingular elliptic curves and maximal orders in particular types of quaternion algebras. Another widely noticed construction, SIDH/SIKE, was spectacularly broken in 2022. The attack is however specific to the SIDH/SIKE family of schemes and does not generalize to other isogeny-based constructions.\n##Subheading: Symmetric key quantum resistance\nUsing sufficiently large key sizes, the symmetric key cryptographic systems like AES and SNOW 3G are already resistant to attack by a quantum computer. Further, key management systems and protocols that use symmetric key cryptography instead of public key cryptography, like Kerberos and the 3GPP Mobile Network Authentication Structure, are also inherently secure against attack by a quantum computer. Given its widespread deployment in the world, some researchers recommend expanded use of Kerberos-like symmetric key management as an efficient way to get post-quantum cryptography today.\n#Subheading: Security reductions\nIn cryptography research, it is desirable to prove the equivalence of a cryptographic algorithm and a known hard mathematical problem. These proofs are often called \"security reductions\", and are used to demonstrate the difficulty of cracking the encryption algorithm. In other words, the security of a given cryptographic algorithm is reduced to the security of a known hard problem. Researchers are actively looking for security reductions in the prospects for post-quantum cryptography. Current results are given here:.\n##Subheading: Lattice-based cryptography – Ring-LWE Signature\nIn some versions of Ring-LWE there is a security reduction to the shortest-vector problem (SVP) in a lattice as a lower bound on the security. The SVP is known to be NP-hard. Specific ring-LWE systems that have provable security reductions include a variant of Lyubashevsky's ring-LWE signatures defined in a paper by Güneysu, Lyubashevsky, and Pöppelmann. The GLYPH signature scheme is a variant of the Güneysu, Lyubashevsky, and Pöppelmann (GLP) signature which takes into account research results that have come after the publication of the GLP signature in 2012. Another Ring-LWE signature is Ring-TESLA. There also exists a \"derandomized variant\" of LWE, called Learning with Rounding (LWR), which yields \"improved speedup (by eliminating sampling small errors from a Gaussian-like distribution with deterministic errors) and bandwidth\". While LWE uses the addition of a small error to conceal the lower bits, LWR uses rounding for the same purpose.\n##Subheading: Lattice-based cryptography – NTRU, BLISS\nThe security of the NTRU encryption scheme and the BLISS signature is believed to be related to, but not provably reducible to, the closest vector problem (CVP) in a lattice. The CVP is known to be NP-hard. The Post-Quantum Cryptography Study Group sponsored by the European Commission suggested that the Stehle–Steinfeld variant of NTRU, which does have a security reduction, be studied for long term use instead of the original NTRU algorithm.\n##Subheading: Multivariate cryptography – Unbalanced oil and vinegar\nUnbalanced Oil and Vinegar signature schemes are asymmetric cryptographic primitives based on multivariate polynomials over a finite field ⁠\n\n\n\n\n",
+              " private key of 935 bytes.\n##Subheading: Multivariate cryptography\n##Subheading: Hash-based cryptography – Merkle signature scheme\nIn order to get 128 bits of security for hash based signatures to sign 1 million messages using the fractal Merkle tree method of Naor Shenhav and Wool the public and private key sizes are roughly 36,000 bits in length.\n##Subheading: Code-based cryptography – McEliece\nFor 128 bits of security in a McEliece scheme, The European Commission's Post-Quantum Cryptography Study group recommends using a binary Goppa code of length at least n = 6960 and dimension at least k = 5413, and capable of correcting t = 119 errors. With these parameters the public key for the McEliece system will be a systematic generator matrix whose non-identity part takes k × (n − k) = 8373911 bits. The corresponding private key, which consists of the code support with n = 6960 elements from GF(213) and a generator polynomial of with t = 119 coefficients from GF(213), will be 92,027 bits in length.\nThe group is also investigating the use of Quasi-cyclic MDPC codes of length at least n = 216 + 6 = 65542 and dimension at least k = 215 + 3 = 32771, and capable of correcting t = 264 errors. With these parameters the public key for the McEliece system will be the first row of a systematic generator matrix whose non-identity part takes k = 32771 bits. The private key, a quasi-cyclic parity-check matrix with d = 274 nonzero entries on a column (or twice as much on a row), takes no more than d × 16 = 4384 bits when represented as the coordinates of the nonzero entries on the first row.\nBarreto et al. recommend using a binary Goppa code of length at least n = 3307 and dimension at least k = 2515, and capable of correcting t = 66 errors. With these parameters the public key for the McEliece system will be a systematic generator matrix whose non-identity part takes k × (n − k) = 1991880 bits. The corresponding private key, which consists of the code support with n = 3307 elements from GF(212) and a generator polynomial of t = 66 coefficients from GF(212), will be 40,476 bits in length.\n##Subheading: Supersingular elliptic curve isogeny cryptography\nFor 128 bits of security in the supersingular isogeny Diffie–Hellman (SIDH) method, De Feo, Jao and Plut recommend using a supersingular curve modulo of a 768-bit prime. If one uses elliptic curve point compression, the public key will need to be no more than 8x768 or 6144 bits in length. A March 2016 paper by authors Azarderakhsh, Jao, Kalach, Koziel, and Leonardi showed how to cut the number of bits transmitted in half, which was further improved by authors Costello, Jao, Longa, Naehrig, Renes and Urbanik resulting in a compressed-key version of the SIDH protocol with public keys only 2640 bits in size. This makes the number of bits transmitted roughly equivalent to the non-quantum secure RSA and Diffie–Hellman at the same classical security level.\n##Subheading: Symmetric-key–based cryptography\nAs a general rule, for 128 bits of security in a symmetric-key–based system, one can safely use key sizes of 256 bits. The best quantum attack against arbitrary symmetric-key systems is an application of Grover's algorithm, which requires work proportional to the square root of the size of the key space. To transmit an encrypted key to a device that possesses the symmetric key necessary to decrypt that key requires roughly 256 bits as well. It is clear that symmetric-key systems offer the smallest key sizes for post-quantum cryptography.[citation needed].\n#Subheading: Forward secrecy\nA public-key system demonstrates a property referred to as perfect forward secrecy when it generates random public keys per session for the purposes of key agreement. This means that the compromise of one message cannot lead to the compromise of others, and also that there is not a single secret value which can lead to the compromise of multiple messages. Security experts recommend using cryptographic algorithms that support forward secrecy over those that do not. The reason for this is that forward secrecy can protect against the compromise of long term private keys associated with public/private key pairs. This is viewed as a means of preventing mass surveillance by intelligence agencies.\nBoth the Ring-LWE key exchange and supersingular isogeny Diffie–Hellman (SIDH) key exchange can support forward secrecy in one exchange with the other party. Both the Ring-LWE and SIDH can also be used without forward secrecy",
+              " for data stored at the endpoints.\n##Subheading: Hybrid encryption\nGoogle has maintained the use of \"hybrid encryption\" in its use of post-quantum cryptography: whenever a relatively new post-quantum scheme is used, it is combined with a more proven, non-PQ scheme. This is to ensure that the data are not compromised even if the relatively new PQ algorithm turns out to be vulnerable to non-quantum attacks before Y2Q. This type of scheme is used in its 2016 and 2019 tests for post-quantum TLS, and in its 2023 FIDO2 key. One of the algorithms used in the 2019 test, SIKE, was broken in 2022, but the non-PQ X25519 layer (already used widely in TLS) still protected the data. Apple's PQ3 and Signal's PQXDH are also hybrid.\nThe NSA and GCHQ argue against hybrid encryption, claiming that it adds complexity to implementation and transition. Daniel J. Bernstein, who supports hybrid encryption, argues that the claims are bogus.\n#Subheading: Criticisms\nPost-quantum cryptography's need is predicated on traditional, established cryptographic problems being quickly solved by a quantum computer.  However, quantum computers are still under development, and have yet to demonstrated a large scale test of Shor's algorithm, verifying that a quantum speed-up mechanism is possible, and out-performs a classical computer on such problems.  In 2019, a team using the IBM Q quantum computer could factor the numbers 15 and 21, but not 35.  Other attempts have been made to simulate quantum computers for larger numbers, but the simulations had no quantum advantage (i.e a speed-up over a classical computer).\nWhile the integer factorization, discrete logarithm, and elliptic-curve discrete logarithm problems are potentially broken by the proposed quantum speed-up mechanism, none of the cryptography based on these mathematically difficult problems have been proven unsafe, nor mathematically broken outside of Shor's algorithm, or its derivatives. These cryptograpic systems are used worldwide, and have been extensively tested for vulnerabilities for several decades.  Additionally, while Shor's algorithm proposes a polynomial time (i.e. fast) solution, via a quantum period-finding mechanism (i.e. finding a repeating period where the quantum computer tests all possible periods in parallel, then collapsing on correct a solution, or solutions), such a speed-up has never been proven to exist at scale.\nMathematicians Stephen Wolfram and Christopher Wolfram have created simulated models based on Branchial Graphs to mimic quantum mechanics, and by extension can emulate systems utilized by quantum computers.  Their research lead Stephen to publicly express mild doubts about the proposed quantum speed-up mechanism's existence, related to the systematic collapse/unwinding of the entangle quantum states down to a usable, error-corrected solution.  That is, doubts about the mechanism responsible for the theoretical quantum advantage utilized by future quantum computers, at scale, where a large number of fully entangled qubits are capable of running Shor's Algorithm against a modern classical problem (e.g. RSA-2048, utilizing integer factorization).\nIn 2013, Edward Snowden's NSA leaks confirmed that the largest supercomputers of the time could not break correctly implemented public key crypto systems.  Also, the NSA had not found a mathematical shortcut, despite being the largest employer of mathematicians in the world.  Security analyst and cryptographer, Bruce Schneier, who had access to the Snowden archive, concluded that the math was never broken.  Taken in aggregate, if the above criticisms prove to be true, then the need for post-quantum cryptography is put into question, along with the need to switch modern business infrastructure onto less-proven cryptographic schemes."
+            ],
+            "llm_call_id": "llm_91a53ff557ca4344aac27da7871ea7f4",
+            "trace_call_id": "llm_52c5288df2b84937bb152374ffb9e7ff",
+            "generation_round": 1
+          }
+        ],
+        "llm_call_id": "llm_91a53ff557ca4344aac27da7871ea7f4",
+        "trace_call_id": "llm_52c5288df2b84937bb152374ffb9e7ff",
+        "chunks": [
+          "doc_7d4efb3cc0af::chunk_0000",
+          "doc_7d4efb3cc0af::chunk_0001",
+          "doc_7d4efb3cc0af::chunk_0003",
+          "doc_7d4efb3cc0af::chunk_0005"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 5,
+        "raw_count": 5,
+        "filtered_count": 5,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_c040861b04b24c9c9b312a9558739b20",
+        "trace_call_id": "llm_78c4de726fe9499195d2b99514312f69",
+        "chunks": [
+          "doc_08dcf2be4351::chunk_0000",
+          "doc_08dcf2be4351::chunk_0008",
+          "doc_08dcf2be4351::chunk_0009",
+          "doc_08dcf2be4351::chunk_0010"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 2,
+    "strategy": "normal_generate",
+    "difficulty": "easy",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 11,
+        "raw_count": 11,
+        "filtered_count": 11,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 6,
+        "multi_generated_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_93ecabda64104d40b964d498f1a16903",
+        "trace_call_id": "llm_2acd32950b77449db8a0a035f9b3197c",
+        "chunks": [
+          "doc_1be62bde08fd::chunk_0000",
+          "doc_1be62bde08fd::chunk_0004",
+          "doc_1be62bde08fd::chunk_0006",
+          "doc_aef977fc2141::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 10,
+        "filtered_count": 9,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 4,
+        "multi_generated_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "Which statement accurately distinguishes between the lattice-based and multivariate-based post-quantum cryptography approaches described?",
+            "reason": "答案过短",
+            "raw_item": {
+              "question": "Which statement accurately distinguishes between the lattice-based and multivariate-based post-quantum cryptography approaches described?",
+              "choices": [
+                "(A) Lattice-based schemes are primarily used for digital signatures, while multivariate schemes are used for key exchange",
+                "(B) Lattice-based schemes have security proofs reducing to worst-case problems, whereas multivariate signature schemes have been more widely broken when used for encryption",
+                "(C) Multivariate cryptography is the basis for the first NIST standards (ML-KEM and ML-DSA), while lattice-based cryptography is still under study",
+                "(D) Lattice-based algorithms are considered one-time use, while multivariate algorithms allow for unlimited signatures"
+              ],
+              "answer": "B",
+              "thought_process": "This is a higher-order comparison question requiring synthesis of details across two algorithm family subsections. The correct answer combines a positive attribute of lattice-based (security proofs) with a noted vulnerability of multivariate (broken encryption schemes). Distractors swap properties between the families (primary use, NIST standardization status, usage limits), testing the reader's ability to differentiate and correctly attribute key facts to each category.",
+              "question_type": "analytical",
+              "required_capability": "Comparing and contrasting the characteristics and historical context of lattice-based versus multivariate-based post-quantum cryptography",
+              "estimated_difficulty": 7,
+              "citations": [
+                "Others like the ring-LWE algorithms have proofs that their security reduces to a worst-case problem.",
+                "Various attempts to build secure multivariate equation encryption schemes have been broken, notably the Rainbow signature."
+              ]
+            },
+            "topic": "Quantum Computing",
+            "chunk_ids": [
+              "doc_7d4efb3cc0af::chunk_0000"
+            ],
+            "chunks": [
+              "#Subheading: Migration\nThe transition from classical public-key cryptography to post-quantum cryptography (PQC) is considered a long-term, multi-phase process due to the widespread deployment of cryptographic infrastructure across digital systems. Migration planning is influenced by factors such as data longevity requirements, regulatory guidance, interoperability constraints, and the operational complexity of replacing embedded cryptographic components.\nOne commonly cited risk model is Mosca’s theorem, which estimates the urgency of migration by comparing three time horizons: the time required to transition systems (X), the time during which data must remain secure (Y), and the estimated arrival of cryptographically relevant quantum computers (Z). If X + Y > Z, migration is considered urgent.\nA major concern motivating early transition is the “harvest now, decrypt later” threat model, in which encrypted data is intercepted and stored with the intention of decrypting it once large-scale quantum computers become available.\nMigration strategies frequently emphasize crypto-agility, the capability of systems to rapidly replace cryptographic primitives without major architectural changes. Hybrid cryptographic deployments where classical and post-quantum algorithms are used simultaneously have been tested in protocols such as Transport Layer Security (TLS) to reduce transitional risk.\nIn 2024, the National Institute of Standards and Technology (NIST) finalized its first post-quantum cryptography standards, including module-lattice-based key encapsulation and digital signature schemes, providing a foundation for structured migration in governmental and commercial systems.\nInternational organizations and national cybersecurity agencies have published coordinated roadmaps outlining phased adoption timelines, risk assessments, and procurement guidelines to facilitate a systematic transition.\n#Subheading: Preparation\nDigital infrastructures require robust cybersecurity. Cryptographic systems are vital to protect the confidentiality and authenticity of data. Quantum computing will be a threat to many of the classical cryptographic algorithms, which are used to achieve these protection goals but are only secure against classical computers. Data that is currently not quantum-safe, whether it is stored or transmitted, and that must remain confidential for a long time, may be compromised in the future by quantum computers (“harvest now, decrypt later” attacks). In addition, authenticity will also be jeopardised by quantum computers. The threat that quantum computing poses to cybersecurity can be countered by a timely, comprehensive and coordinated transition to post-quantum cryptography (PQC).\n#Subheading: Algorithms\n##Subheading: Lattice-based cryptography\nThis approach includes cryptographic systems such as learning with errors, \nring learning with errors (ring-LWE), the ring learning with errors key exchange and \nthe ring learning with errors signature, the older NTRU or GGH encryption schemes, and the newer NTRU \nsignature and BLISS signatures. \nSome of these schemes like NTRU encryption have been studied for many years \nwithout anyone finding a feasible attack. Others like the ring-LWE algorithms \nhave proofs that their security reduces to a worst-case problem. The Post-Quantum Cryptography Study Group sponsored by the European Commission suggested that the Stehle–Steinfeld variant of NTRU be studied for standardization rather than the NTRU algorithm. At that time, NTRU was still patented. Studies have \nindicated that NTRU may have more secure properties than other lattice based algorithms. Two lattice-based \nalgorithms, ML-KEM (commonly known as Kyber) and ML-DSA (commonly known \nas Dilithium) were among the first post-quantum algorithms standardised by \nNIST.\n##Subheading: Multivariate cryptography\nThis includes cryptographic systems such as the Unbalanced Oil and Vinegar signature scheme which is based on the difficulty of solving systems of multivariate equations. Various attempts to build secure multivariate equation encryption schemes have been broken, notably the Rainbow signature.\n##Subheading: Hash-based cryptography\nThis includes cryptographic systems such as Lamport signatures, the Merkle signature scheme, the XMSS, the SPHINCS, the WOTS and the SPHINCS+ schemes. Hash based digital signatures were invented in the late 1970s by Ralph Merkle and have been studied ever since as an interesting alternative to number-theoretic digital signatures like RSA and DSA. Their primary drawback is that for any hash-based public key, there is a limit on the number of signatures that can be signed using the corresponding set of private keys. This fact reduced interest in these signatures until interest was revived due to the desire for cryptography that was resistant to attack by quantum computers. There appear to be no patents on the Merkle signature scheme[citation needed] and there exist many non-patented hash functions that could be used with these schemes. The stateful hash-based signature scheme XMSS developed by a team of researchers under the direction of Johannes Buchmann is described in RFC 8391.\nNote that all the above schemes are one-time or bounded-time signatures. Moni Naor and Moti Yung invented UOWHF hashing in 1989 and designed a signature based on hashing (the Naor-Yung scheme) which can be unlimited-time in use (the first such signature"
+            ],
+            "llm_call_id": "llm_e2512c5dacc54fe1a19d7f0b38223d3a",
+            "trace_call_id": "llm_e39448119b504ddda3a527346165e388",
+            "generation_round": 2
+          }
+        ],
+        "llm_call_id": "llm_e4f1730d4b2e4ee6a4e85b60a2ec3f0b",
+        "trace_call_id": "llm_116ff9de98b54be7bac97093d3415d15",
+        "chunks": [
+          "doc_7d4efb3cc0af::chunk_0000",
+          "doc_cd5a4b0bb607::chunk_0000",
+          "doc_cd5a4b0bb607::chunk_0003",
+          "doc_cd5a4b0bb607::chunk_0007"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 11,
+        "raw_count": 12,
+        "filtered_count": 11,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 5,
+        "multi_generated_count": 6,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "The decolonization conflicts in Vietnam and Indonesia after WWII shared which common characteristic?",
+            "reason": "答案过短",
+            "raw_item": {
+              "question": "The decolonization conflicts in Vietnam and Indonesia after WWII shared which common characteristic?",
+              "choices": [
+                "(A) Both were quickly resolved through peaceful negotiations between the nationalist movements and the returning European colonial powers.",
+                "(B) Both saw the colonial powers (France and the Netherlands) successfully re-establish full control for over a decade.",
+                "(C) Both involved complex intersections of anti-colonial nationalism, Cold War tensions, and the aftermath of Japanese occupation.",
+                "(D) Both resulted in the immediate and unified independence of the territories under stable, democratic governments."
+              ],
+              "answer": "C",
+              "thought_process": "This synthesis question requires connecting information from two separate regional subsections to identify a common theme. The text describes how Japanese occupation disrupted colonial rule and how the subsequent struggles were shaped by Cold War dynamics (U.S. backing in Vietnam, Marshall Plan aid used by the Dutch). Distractor A is false for both cases. Distractor B is false (France did not retain control, the Dutch conflict lasted 4.5 years). Distractor D is false for both (Vietnam was partitioned, Indonesia's struggle was violent).",
+              "question_type": "conceptual",
+              "required_capability": "Synthesizing information to identify common patterns in post-war decolonization struggles in Asia.",
+              "estimated_difficulty": 7,
+              "citations": [
+                "From 1945 onward, the Vietnamese were locked in civil conflicts over the destiny of their post-colonial state after the ousting of the French and the surrender of Japan.",
+                "Ngo Dinh Diem, backed by the United States...",
+                "Japan invaded and occupied the Dutch East Indies during the war...",
+                "the Dutch tried to re-establish their rule in colony, using a significant portion of their Marshall Plan aid to this end."
+              ]
+            },
+            "topic": "World War II",
+            "chunk_ids": [
+              "doc_08dcf2be4351::chunk_0000",
+              "doc_08dcf2be4351::chunk_0004",
+              "doc_08dcf2be4351::chunk_0006",
+              "doc_08dcf2be4351::chunk_0008"
+            ],
+            "chunks": [
+              "#Subheading: Immediate effects of World War II\nAt the end of the war in Europe, tens of millions of people had been killed and even more were displaced, European economies had collapsed, and much of Europe's industrial infrastructure had been destroyed. In response, in 1947 US Secretary of State George C. Marshall devised the \"European Recovery Program,\" which became known as the Marshall Plan. Under the plan, from 1948 to 1952 the United States government allocated $13 billion (US$140 billion in 2024 dollars) for the reconstruction of affected countries in Western Europe.\n##Subheading: United Kingdom\nBy the end of the war, the economy of the United Kingdom was one of severe privation, as a significant portion of its national wealth had been consumed by the war effort. Until the introduction in 1941 of Lend-Lease aid from the United States, the UK had been spending its assets to purchase American equipment including aircraft and ships—over £437 million (equivalent to some £29 billion in 2024) on aircraft alone. Lend-Lease came just before its reserves were exhausted. Britain had placed 55% of its total labour force into war production.\nIn the spring of 1945, after the final defeat of Germany, the Labour Party withdrew from the wartime coalition government to oust Winston Churchill, forcing a general election. Following a landslide victory, Labour held more than 60% of the seats in the House of Commons and formed a new government on 26 July 1945 under Clement Attlee, who had been Deputy Prime Minister in the coalition government.\nBritain's war debt was described by some in the U.S. administration as a \"millstone round the neck of the British economy.\" Although there were suggestions for an international conference to tackle the issue, in August 1945 the U.S. announced unexpectedly that the Lend-Lease programme was to end immediately.\nThe abrupt withdrawal of U.S. Lend-Lease support to Britain on 2 September 1945 dealt a severe blow to the plans of the new government. It was only with the completion of the Anglo-American loan by the United States to Great Britain on 15 July 1946 that some measure of economic stability was restored. However, the loan was made primarily to support British overseas expenditure in the immediate post-war years and not to implement the Labour government's policies for domestic welfare reforms and the nationalisation of key industries. Although the loan was agreed on reasonable terms, its conditions included what proved to be damaging fiscal conditions for sterling. From 1946 to 1948, the UK introduced bread rationing, which it had never done during the war.\n##Subheading: Soviet Union\nThe Soviet Union suffered enormous losses in the war against Germany. The Soviet population decreased by about 27 million during the war; of these, 8.7 million were combatant deaths. The 19 million non-combatant deaths had a variety of causes: starvation in the siege of Leningrad; conditions in German prisons and concentration camps; mass shootings of civilians; harsh labour in German industry; famine and disease; conditions in Soviet camps; and service in German or German-controlled military units fighting the Soviet Union.\nSoviet ex-POWs and civilians repatriated from abroad were suspected of having been Nazi collaborators, and 226,127 of them were sent to forced labour camps after scrutiny by Soviet intelligence, NKVD. Many ex-POWs and young civilians were also conscripted to serve in the Red Army. Others worked in labour battalions to rebuild infrastructure destroyed during the war.\nThe economy had been devastated. Roughly a quarter of the Soviet Union's capital resources were destroyed, and industrial and agricultural output in 1945 fell far short of pre-war levels. To help rebuild the country, the Soviet government obtained limited credits from Britain and Sweden; it refused assistance offered by the United States under the Marshall Plan. Instead, the Soviet Union coerced Soviet-occupied Central and Eastern Europe to supply machinery and raw materials. Germany and former Nazi satellites made reparations to the Soviet Union. The reconstruction programme emphasized heavy industry to the detriment of agriculture and consumer goods. By 1953, steel production was twice its 1940 level, but the production of many consumer goods and foodstuffs was lower than it had been in the late 1920s.\nThe immediate post-war period in Europe was dominated by the Soviet Union annexing, or converting into Soviet Socialist Republics, all the countries invaded and annexed by the Red Army driving the Germans out of central and eastern Europe. New satellite states were set up by the Soviets in Poland, Bulgaria, Hungary,[page needed] Czechoslovakia, Romania, Albania, and East Germany; the last of these was created from the Soviet zone of occupation in Germany. Yugoslavia emerged as an independent Communist state allied but not aligned with the Soviet Union, owing to the independent nature of the military victory of the Partisans of",
+              " of the new borders drawn by the victorious nations, large populations suddenly found themselves in hostile territory. The Soviet Union took over areas formerly controlled by Germany, Finland, Poland and Japan. Poland lost the Kresy region (about half of its pre-war territory) and received most of Germany east of the Oder–Neisse line, including the industrial regions of Silesia. The German state of the Saar was temporarily a protectorate of France but later returned to German administration. As set forth at Potsdam, approximately 12 million people were expelled from Germany, including 7 million from Germany proper, and three million from the Sudetenland.\nDuring the war, the United States government interned approximately 110,000 Japanese Americans and Japanese who lived along the Pacific coast of the United States in the wake of Imperial Japan's attack on Pearl Harbor. Canada interned approximately 22,000 Japanese Canadians, 14,000 of whom were born in Canada. After the war, some internees chose to return to Japan, while most remained in North America.\n##Subheading: Poland\nThe Soviet Union expelled at least 2 million Poles from the east of the new border approximating the Curzon Line. This estimate is uncertain as neither the Polish Communist government nor the Soviet government kept track of the number of expelled people. The number of Polish citizens inhabiting Polish borderlands (Kresy region) was about 13 million before World War II broke out according to official Polish statistics. Polish citizens killed in the war that originated from the Polish borderlands territory (killed by either the German Nazi regime or the Soviet regime, or expelled to distant parts of Siberia) were accounted as Russian, Ukrainian, or Belarusian casualties of war in official Soviet historiography. This fact imposes additional difficulties in making the correct estimation of the number of Polish citizens forcibly transferred after the war. The border change also reversed the results of the 1919–1920 Polish–Soviet War. Former Polish cities such as Lwów came under the control of the Ukrainian Soviet Socialist Republic. Additionally, the Soviet Union transferred more than two million people within their borders; these included Germans, Finns, Crimean Tatars and Chechens.\n#Subheading: Rape during occupation and liberation\n##Subheading: In Europe\nAs Soviet troops marched across the Balkans, they committed rapes and robberies in Romania, Hungary, Czechoslovakia, and Yugoslavia. The population of Bulgaria was largely spared of this treatment, possibly due to a sense of ethnic kinship or to the leadership of Marshal Fyodor Tolbukhin. The population of Germany was treated significantly worse. Rape and murder of German civilians was as bad as, and sometimes worse than, Nazi propaganda had anticipated. Political officers encouraged Soviet troops to seek revenge and terrorise the German population. On \"the basis of Hochrechnungen (projections or estimations), [...] 1.9 million German women altogether were raped at the end of the war by Red Army soldiers.\" About one-third of all German women in Berlin were raped by Soviet forces, and a substantial minority were raped multiple times. In Berlin, contemporary hospital records indicate between 95,000 and 130,000 women were raped by Soviet troops. About 10,000 of these women died, mostly by suicide. Over 4.5 million Germans fled towards the West. The Soviets initially had no rules against their troops \"fraternising\" with German women, but by 1947 they started to isolate their troops from the German population in an attempt to stop rape and robbery by the troops. Not all Soviet soldiers participated in these activities.\nForeign reports of Soviet brutality were denounced[by whom?] as false. Rape, robbery, and murder were blamed on German bandits impersonating Soviet soldiers. Some justified Soviet brutality towards German civilians based on previous brutality of German troops toward Russian civilians. Until the reunification of Germany, East German histories virtually ignored the actions of Soviet troops, and Russian histories still tend to do so. Reports of mass rapes by Soviet troops were often dismissed as anti-Communist propaganda or the normal byproduct of war.\nRapes also occurred under other Allied forces in Europe, though the majority were committed by Soviet troops. In a letter to the editor of Time published in September 1945, a U.S. Army sergeant wrote, \"Our own Army and the British Army along with ours have done their share of looting and raping....This offensive attitude among our troops is not at all general, but the percentage is large enough to have given our Army a pretty black name, and we too are considered an army of rapists.\" Robert Lilly's analysis of military records led him to conclude about 14,000 rapes occurred in Britain, France, and Germany at the hands of U.S. soldiers between 1942 and 1945. Lilly assumed that only 5% of rapes by American soldiers were reported, making 17,000 GI rapes a possibility, while analysts estimate that 50%",
+              " heated correspondence over whether the Polish government-in-exile, backed by Roosevelt and Churchill, or the Provisional Government, backed by Stalin, should be recognised. Stalin won.\nMany allied leaders felt that war between the United States and the Soviet Union was likely. On 19 May 1945, the United States Under-Secretary of State Joseph Grew went so far as to say that it was inevitable.\nOn 5 March 1946, in his \"Sinews of Peace\" (Iron Curtain) speech at Westminster College in Fulton, Missouri, Winston Churchill said \"a shadow\" had fallen over Europe. He described Stalin as having dropped an \"Iron Curtain\" between East and West. Stalin responded by charging that co-existence between communist countries and the West was impossible. In mid-1948 the Soviet Union imposed a blockade on the Western zone of occupation in Berlin.\nDue to the rising tension in Europe and concerns over further Soviet expansion, American planners came up with a contingency plan code-named Operation Dropshot in 1949. It considered possible nuclear and conventional war with the Soviet Union and its allies to counter a Soviet takeover of Western Europe, the Near East, and parts of Eastern Asia that they anticipated would begin around 1957. In response, the United States. would saturate the Soviet Union with atomic and high-explosive bombs, and then invade and occupy the country. In later years, to reduce military expenditures while countering Soviet conventional strength, American President Dwight Eisenhower would adopt a strategy of massive retaliation, relying on the threat of a U.S. nuclear strike to prevent non-nuclear incursions by the Soviet Union in Europe and elsewhere. The approach entailed a major buildup of U.S. nuclear forces and a corresponding reduction in America's non-nuclear ground and naval strength. The Soviet Union viewed these developments as \"atomic blackmail.\".\nIn Greece, civil war broke out in 1946 between Anglo-American-supported royalist forces and communist-led forces, with the royalist forces emerging as the victors. The U.S. launched a massive programme of military and economic aid to Greece and to neighbouring Turkey, arising from a fear that the Soviet Union stood on the verge of breaking through the NATO defence line to the oil-rich Middle East. On 12 March 1947, to gain Congressional support for the aid, President Truman described the aid as promoting democracy in defence of the \"Free World,\" a principle that became known as the Truman Doctrine.\nThe United States sought to promote an economically strong and politically united Western Europe to counter the threat posed by the Soviet Union. This was done openly using tools such as the European Recovery Program, which encouraged European economic integration. The International Authority for the Ruhr, designed to keep German industry down and controlled, evolved into the European Coal and Steel Community (ECOSOC), a founding pillar of the European Union. The United States also worked covertly to promote European integration, for example using the American Committee on United Europe to funnel funds to European federalist movements. To ensure that Western Europe could withstand the Soviet military threat, the Western European Union was founded in 1948 and NATO in 1949. The first NATO Secretary General, Lord Ismay, famously stated the organisation's goal was, \"to keep the Russians out, the Americans in, and the Germans down.\" However without the manpower and industrial output of West Germany, no conventional defence of Western Europe had any hope of succeeding. To remedy this, in 1950 the United States sought to promote the European Defence Community, which would have included a rearmed West Germany. The attempt was dashed when the French Parliament rejected it. On 9 May 1955, West Germany was instead admitted to NATO; the immediate result was the creation of the Warsaw Pact five days later.\nThe Cold War also saw the creation of propaganda and espionage organisations such as Radio Free Europe, the Information Research Department, Gehlen Organization, Central Intelligence Agency, Special Activities Division, and the Ministry for State Security, as well as the radicalization and proliferation of numerous far-left and far-right terrorist organizations in Western European countries (Italy, France, West Germany, Belgium, Francoist Spain, and Netherlands), with spillovers in Northern and Southeastern Europe.\n##Subheading: Asia\nIn Asia, the surrender of Japanese forces was complicated by the split between East and West as well as by the movement toward national self-determination in European colonial territories.\nDecisions to decolonize British India led to an agreement to partition the country along religious lines into two independent dominions: India and Pakistan. The partition resulted in communal violence and massive displacements of the population. It is often described as the largest mass human migration and one of the largest refugee crises in history.\nAs agreed to at the Yalta Conference, the Soviet Union declared war on Japan. Soviet forces invaded Manchuria which led to the collapse of the Manchukuo and expulsion of all Japanese settlers from the puppet state. The Soviet Union dismantled the industrial base in Manchuria that the Japanese had built up and it subsequently became",
+              " area belonged to the French.\nFrom 1945 onward, the Vietnamese were locked in civil conflicts over the destiny of their post-colonial state after the ousting of the French and the surrender of Japan. Meanwhile, Nationalist Chinese forces moved in from the north and British from the south (as the French were unable to do so immediately themselves) and then handed power to the French, a process completed by March 1946. Attempts to integrate the Democratic Republic of Vietnam with French rule failed and the Viet Minh launched their rebellion against the French rule starting the First Indochina War that same year (the Viet Minh organized common fronts to fight the French in Laos and Cambodia).\nThe war ended in 1954 with the French withdrawal and the partition of Vietnam, which was intended to be temporary until elections could be held. The Democratic Republic of Vietnam controlled the North, while the State of Vietnam held the South. Ngo Dinh Diem, backed by the United States in his refusal to hold elections, which he claimed would be unfair due to communist rigging, established the Republic of Vietnam. Communist insurgents in the South formed the NLF under the direct guidance of North Vietnam to fight against the South Vietnamese government, a conflict that ultimately ended with North Vietnam conquering the South in April 1975.\nJapan invaded and occupied the Dutch East Indies during the war and replaced the colonial government with a new administration. Although the top positions were held by Japanese officers, the internment of all Dutch citizens meant that Indonesians filled many leadership and administrative positions. Following the Japanese surrender in August 1945, Indonesian nationalist leaders such as Sukarno and Mohammad Hatta declared Indonesia as independent. A four-and-a-half-year struggle followed as the Dutch tried to re-establish their rule in colony, using a significant portion of their Marshall Plan aid to this end. The Dutch were aided by British forces for the first phase of the conflict until the United Kingdom withdrew. The British also initially used 35,000 Japanese Surrendered Personnel to support their military operations in Indonesia. Although Dutch forces re-occupied most of Indonesia, an Indonesian guerrilla campaign supported by the majority of Indonesians ensured, and ultimately international opinion favoured independence. In December 1949, the Netherlands formally recognised Indonesian sovereignty.[citation needed].\n#Subheading: Wartime criminals recruited as Cold War assets\n##Subheading: Covert operations and espionage\nBritish covert operations in the Baltic States, which began in 1944 against the Nazis, escalated following the war. In Operation Jungle, the Secret Intelligence Service (known as MI6) recruited and trained Estonians, Latvians, and Lithuanians for the clandestine work in the Baltic states between 1948 and 1955. Leaders of the operation included Alfons Rebane, Stasys Žymantas, and Rūdolfs Silarājs. The agents were transported under the cover of the \"British Baltic Fishery Protection Service.\" They launched from British-occupied Germany, using a converted World War II E-boat captained and crewed by former members of the wartime German navy. British intelligence also trained and infiltrated anti-communist agents into Soviet Union from across the Finnish border, with orders to assassinate Soviet officials. In the end, counter-intelligence supplied to the KGB by Kim Philby allowed the KGB to penetrate and ultimately gain control of MI6's entire intelligence network in the Baltic states.\nThe KGB believed that the Third World rather than Europe was the arena in which it could win the Cold War. Moscow would in later years fuel an arms buildup in Africa. In later years, African countries used as proxies in the Cold War would often become \"failed states\" of their own.\nIn 2014, the New York Times reported that \"In the decades after World War II, the Central Intelligence Agency (CIA) and other United States agencies employed at least a thousand Nazis as Cold War spies and informants and, as recently as the 1990s, concealed the government's ties to some still living in America, newly disclosed records and interviews show.\" According to Timothy Naftali, \"The CIA's central concern [in recruiting former Nazi collaborators] was not so much the extent of the criminal's guilt as the likelihood that the agent's criminal past could remain a secret.\": 365.\n##Subheading: Recruitment of former enemy scientists\nWhen the divisions of postwar Europe began to emerge, the war crimes programmes and denazification policies of Britain and the United States were relaxed in favour of recruiting German scientists, especially nuclear and long-range rocket scientists. Many of these, prior to their capture, had worked on developing the German V-2 long-range rocket at the Baltic coast German Army Research Center Peenemünde. Western Allied occupation force officers in Germany were ordered to refuse to cooperate with the Soviets in sharing captured wartime secret weapons, the recovery for which, specifically in regards to advanced German aviation technology and personnel, the British had sent the Fedden Mission into Germany to contact its aviation technology centers"
+            ],
+            "llm_call_id": "llm_e794c71438ea46e9aa06a599c5d46495",
+            "trace_call_id": "llm_65bdb548de964f6987fd82e4c856e4df",
+            "generation_round": 2
+          }
+        ],
+        "llm_call_id": "llm_e794c71438ea46e9aa06a599c5d46495",
+        "trace_call_id": "llm_65bdb548de964f6987fd82e4c856e4df",
+        "chunks": [
+          "doc_08dcf2be4351::chunk_0000",
+          "doc_08dcf2be4351::chunk_0004",
+          "doc_08dcf2be4351::chunk_0006",
+          "doc_08dcf2be4351::chunk_0008"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 3,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "Quantum Computing",
+      "Artificial Intelligence",
+      "World War II"
+    ],
+    "single_k": 0,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 5,
+        "filtered_count": 4,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [
+          {
+            "question": "The text notes that superconducting qubits 'still struggle with having short coherence times.' Based on DiVincenzo's criteria for a viable quantum computer, which criterion is most directly challenged by this specific limitation?",
+            "reason": "非法问题类型: inferential",
+            "raw_item": {
+              "question": "The text notes that superconducting qubits 'still struggle with having short coherence times.' Based on DiVincenzo's criteria for a viable quantum computer, which criterion is most directly challenged by this specific limitation?",
+              "choices": [
+                "(A) The ability to initialize the qubit to a known state.",
+                "(B) The availability of a universal set of quantum gates.",
+                "(C) The ability to perform qubit-specific measurements.",
+                "(D) The requirement for sufficiently long decoherence times relative to gate operation times."
+              ],
+              "answer": "D",
+              "question_mode": "multiple_choice",
+              "thought_process": "This question requires inference by connecting a stated problem to the abstract criteria it violates. While the full list of DiVincenzo's criteria isn't enumerated, the text's context implies that 'coherence times' refer to the stability of quantum information. Short coherence times mean quantum states decohere too quickly. Among the typical DiVincenzo criteria, the one directly about preserving quantum information for the duration of a computation is 'sufficiently long decoherence times' (or similar phrasing). The correct answer (D) infers this. Distractor A (initialization) is mentioned as already achieved ('initialized by thermal relaxation'). Distractor B (universal gates) is also stated as achieved. Distractor C (measurement) is a separate criterion; while short coherence can affect measurement fidelity, the text's direct challenge is about *preserving* information long enough to compute, not specifically about the measurement act.",
+              "question_type": "inferential",
+              "required_capability": "Inferring which abstract requirement for quantum computation (from a known set of criteria) is most directly undermined by a concrete, mentioned technical shortcoming (short coherence times).",
+              "estimated_difficulty": 8,
+              "citations": [
+                "However, superconducting qubits still struggle with having short coherence times, making preserving quantum information a challenge."
+              ]
+            },
+            "topic": "Quantum Computing",
+            "chunk_ids": [
+              "doc_1445315a96fe::chunk_0001",
+              "doc_1445315a96fe::chunk_0002",
+              "doc_1445315a96fe::chunk_0006",
+              "doc_1445315a96fe::chunk_0007"
+            ],
+            "chunks": [
+              " like a classical bit, it is a system with two possible states. However, the difference lies in the fact that because a qubit obeys the laws of quantum mechanics, it is capable of occupying a quantum superposition of both states.\nThe primary requirement for physically constructing a qubit is the ability to be able to individually address the first two states, in this case energy levels, of the system. This is difficult, as most systems contain a near-infinite number of energy levels. In superconducting quantum computers, these qubits are constructed using superconducting resonant circuits. Each superconducting qubit is essentially a nonlinear LC circuit with a capacitor and a Josephson junction, a superconducting element with a nonlinear inductance. Because the circuit is non-linear, there is unequal spacing between its energy levels, allowing the first two states to be individually addressable.\nIn theory, due to its nonlinearity, the qubit is affected only by photons with the energy difference required to jump from the ground state to the excited state. In practice, however, noise in the system can still cause it to leave the computational subspace. In many cases, the higher energy levels of a superconducting qubit need to be considered. This is especially true in transmons, which have weak anharmonicity by design.\nBecause the circuit is superconducting, it has zero resistance, and dissipates almost no energy. However, this comes at the price of extremely low operation temperatures.\nA quantum gate is a generalization of a logic gate describing the transformation of qubits from their initial state to a different state, often a superposition.\nIn superconducting qubits, quantum gates are implemented as microscopic pulses applied to the circuit using microwave resonators. Pulses are sent through resonators capacatively coupled to the qubit, which are harmonic oscillators that are detuned from the qubit itself. By applying an external drive to the qubit, the normal unitary evolution of the system implements a single qubit gate after a certain length of time has passed.\nTwo qubit gates, such as the iSWAP gate, can be achieved through coherent exchange or parametric coupling between two qubits. In coherent exchange, the transition frequency of one of the qubits is tuned such that it matches the transition frequency of the second qubit. This method relies on the frequency tunability of the qubit, and does not work in fixed-frequency cases. Parametric coupling on the other hand is done by changing the coupling constant between two qubits at the sum or difference of their two frequencies.\nThere are many possible physical implementations of qubits, with superconducting circuits being one of them. In order for a given implementation to be considered viable for constructing a quantum computer, one set of criterion is the DiVincenzo's criteria, a set of criteria for the physical implementation of superconducting quantum computing. The initial five criteria ensure that the quantum computer is in line with the postulates of quantum mechanics and the remaining two pertaining to the relaying of this information over a network.[citation needed].\nSuperconducting qubits already meet a large number of DiVincenzo's criteria. They are already highly scalable from a fabrication standpoint, they can be initialized by thermal relaxation, and single-qubit gates combined with two-qubit gates form a universal gate set. However, superconducting qubits still struggle with having short coherence times, making preserving quantum information a challenge.\n##Subheading: Superconductors\nSuperconducting qubits are circuits made from superconducting metal material. Superconductivity is a phenomenon that occurs in some metals at low temperatures where electrical current experiences zero resistance in a material, allowing the current to flow without loss of energy, and be nearly dissipation-less.\nThis phenomenon occurs because the basic charge carriers are pairs of electrons (known as Cooper pairs), rather than single electrons as found in typical conductors. While single electrons are fermions (with half-integer spin), Cooper pairs of electrons are bosons (with integer spin), and as such they no longer obey the Pauli exclusion principle, meaning these Cooper pairs can occupy the same states. Under certain conditions, this allows them to form a state of matter known as a Bose–Einstein condensate, where all of the pairs of electrons in the condensate each occupy the same position in space and have equal momentum. In this way, there is nothing distinguishing the pairs from each other, and they occupy the same state. As a result, the electron pairs move coherently as a single wave, bypassing the disturbances in the lattice that usually cause resistance. Thus, superconductors possess near infinite conductivity and near zero resistance.\nSuperconductivity generally only occurs near absolute zero, since that is when it is more energetically favorable for electrons to pair up than repel each other. This is one of the primary reasons why superconducting qubits must be cooled to ultra cold temperatures.\n##Subheading: Superconducting electrical circuits\nSuperconducting electrical",
+              " energetically favorable for electrons to pair up than repel each other. This is one of the primary reasons why superconducting qubits must be cooled to ultra cold temperatures.\n##Subheading: Superconducting electrical circuits\nSuperconducting electrical circuits are networks of electrical elements described by a single condensate wave function, wherein charge flow is well-defined by some complex probability amplitude. Quantization in the circuit results from complex amplitude continuity, since only discrete numbers of magnetic flux quanta can penetrate a superconducting loop. Parameters of superconducting circuits are designed by setting (classical) values to the electrical elements composing them, such as capacitance or inductance.[citation needed].\nOne distinguishing attribute of superconducting quantum circuits is the Josephson junction, an electrical element which does not exist in normal conductors. The junction is a weak connection between two superconductors on either side of a thin layer of insulator material only a few atoms thick. The resulting Josephson junction device exhibits the Josephson effect, whereby the condensate wave function on the two sides of the junction are weakly correlated. Current flows through the junction due to quantum tunneling.\nThe Josephson junction exhibits a nonlinear inductance, which allows for anharmonic oscillators for which energy levels are discretized (or quantized) with nonuniform spacing between energy levels, denoted \n\n\n\nΔ\nE\n\n\n{\\displaystyle \\Delta E}\n\n. In contrast, the quantum harmonic oscillator cannot be used as a qubit as there is no way to address only two of its states, given that the spacing between every energy level and the next is exactly the same.\nFor any qubit implementation, the logical quantum states \n\n\n\n{\n\n|\n\n0\n⟩\n,\n\n|\n\n1\n⟩\n}\n\n\n{\\displaystyle \\{|0\rangle ,|1\rangle \\}}\n\n are mapped to different states of the physical system (typically to discrete energy levels or their quantum superpositions). Different superconducting qubit designs have different ranges of Josephson energy to charging energy ratio. Josephson energy refers to the energy stored in Josephson junctions when current passes through, and charging energy is the energy required for one Cooper pair to charge the junction's total capacitance. Josephson energy can be written as.\nwhere \n\n\n\n\nI\n\n0\n\n\n\n\n{\\displaystyle I_{0}}\n\n is the critical current parameter of the Josephson junction, \n\n\n\n\n\nΦ\n\n0\n\n\n=\n\n\nh\n\n2\ne\n\n\n\n\n\n\n{\\displaystyle \textstyle \\Phi _{0}={\frac {h}{2e}}}\n\n is (superconducting) flux quantum, and \n\n\n\nδ\n\n\n{\\displaystyle \\delta }\n\n is the phase difference across the junction. Notice that the term \n\n\n\nc\no\ns\nδ\n\n\n{\\displaystyle cos\\delta }\n\n indicates nonlinearity of the Josephson junction. Charge energy is written as.\nCircuit quantization is a method of obtaining a quantum mechanical description of an electrical circuit. The end result is a Hamiltonian describing the energy of the system, from which other properties such as the ground and excited state can be derived.\nIn circuit quantization, all electrical elements in the circuit are rewritten in terms of the condensate wave function's amplitude and phase, as opposed to the current and voltage. Then, generalized Kirchhoff's circuit laws are applied at every node of the circuit network to obtain the system's equations of motion. Finally, these equations of motion must be reformulated to Lagrangian mechanics such that a quantum Hamiltonian is derived describing the total energy of the system.[citation needed].\nProperties of superconducting electrical circuits coupled to a resonator are described by the framework of circuit quantum electrodynamics, or cQED. Superconducting qubits generally need to be connected to a resonator in order to protect them from environmental noise, and to allow them to be coupled to each other. The cQED framework is similar to cavity QED and uses largely the same techniques. In physical implementations, the resonator is usually an on-chip coplanar waveguide readout resonator, a superconducting LC resonator, or a high purity cavity.\n#Subheading: Hardware and technology\nSuperconducting quantum computing devices are typically designed in the radio-frequency spectrum, cooled in dilution refrigerators below 15 mK and addressed with conventional electronic instruments, e.g. frequency synthesizers and spectrum analyzers. Typical dimensions fall on the range of micrometers, with sub-micrometer resolution, allowing for the convenient design of a Hamiltonian system with well-established integrated circuit technology.\n##Subheading: Manufacturing\nManufacturing superconducting qubits follows a process involving lithography, depositing of metal, etching, and controlled oxidation. This process is similar, though not the same, as CMOS (Complementary Metal-Oxide-Semiconductor) fabrication used for commercial silicon computer chips. A major difference is the use of electron-beam lithography, as opposed to optical lithographic techniques, which is hard to scale and",
+              "displaystyle X-Y}\n\n decomposition. Setting \n\n\n\n\n∫\n\n0\n\n\n\nt\n\ng\n\n\n\n\n\n\n\nE\n\n\n\nx\n\n\n(\nt\n)\nd\nt\n=\nπ\n\n\n{\\displaystyle \\int _{0}^{t_{g}}{\\mathcal {E}}^{x}(t)dt=\\pi }\n\n results in the transformation.\n##Subheading: Multiple qubits\nThe ability to couple qubits is essential for implementing 2-qubit gates. Coupling two qubits can be achieved by connecting both to an intermediate electrical coupling circuit. The circuit may be either a fixed element (such as a capacitor) or be controllable (like the DC-SQUID). In the first case, decoupling qubits during the time the gate is switched off is achieved by tuning qubits out of resonance one from another, making the energy gaps between their computational states different. This approach is inherently limited to nearest-neighbor coupling since a physical electrical circuit must be laid out between connected qubits. Notably, D-Wave Systems' nearest-neighbor coupling achieves a highly connected unit cell of 8 qubits in Chimera graph configuration. Quantum algorithms typically require coupling between arbitrary qubits. Consequently, multiple swap operations are necessary, limiting the length of quantum computation possible before processor decoherence.\nserves as the basis for analog quantum simulation of spin systems and the primitive for an expressive set of quantum gates, sometimes referred to as fermionic simulation (or fSim) gates. In superconducting circuits, this interaction model has been implemented using flux-tunable qubits with flux-tunable coupling, allowing the demonstration of quantum supremacy. In addition, it can also be realized in fixed-frequency qubits with fixed-coupling using microwave drives. The fSim gate family encompasses arbitrary XY and ZZ two-qubit unitaries, including the iSWAP, the CZ, and the SWAP gates (see Quantum logic gate).\nAnother method of coupling two or more qubits is by way of a quantum bus, by pairing qubits to this intermediate. A quantum bus is often implemented as a microwave cavity modeled by a quantum harmonic oscillator. Coupled qubits may be brought in and out of resonance with the bus and with each other, eliminating the nearest-neighbor limitation. Formalism describing coupling is cavity quantum electrodynamics. In cavity quantum electrodynamics, qubits are analogous to atoms interacting with an optical photon cavity with a difference of GHz (rather than the THz regime of electromagnetic radiation). Resonant excitation exchange among these artificial atoms is potentially useful for direct implementation of multi-qubit gates. Following the dark state manifold, the Khazali-Mølmer scheme performs complex multi-qubit operations in a single step, providing a substantial shortcut to the conventional circuit model.\nOne popular gating mechanism uses two qubits and a bus, each tuned to different energy level separations. Applying microwave excitation to the first qubit, with a frequency resonant with the second qubit, causes a \n\n\n\n\nσ\n\nx\n\n\n\n\n{\\displaystyle \\sigma _{x}}\n\n rotation of the second qubit. Rotation direction depends on the state of the first qubit, allowing a controlled phase gate construction.\nwhere \n\n\n\nA\n(\nt\n)\n\n\n{\\displaystyle A(t)}\n\n is the shape of the microwave pulse in time, \n\n\n\n\n\n\n\nω\n~\n\n\n\n\n2\n\n\n\n\n{\\displaystyle {\tilde {\\omega }}_{2}}\n\n is resonance frequency of the second qubit, \n\n\n\n{\nI\n,\n\nσ\n\nx\n\n\n,\n\nσ\n\ny\n\n\n,\n\nσ\n\nz\n\n\n}\n\n\n{\\displaystyle \\{I,\\sigma _{x},\\sigma _{y},\\sigma _{z}\\}}\n\n are the Pauli matrices, \n\n\n\nJ\n\n\n{\\displaystyle J}\n\n is the coupling coefficient between the two qubits via the resonator, \n\n\n\n\nΔ\n\n12\n\n\n≡\n\nω\n\n1\n\n\n−\n\nω\n\n2\n\n\n\n\n{\\displaystyle \\Delta _{12}\\equiv \\omega _{1}-\\omega _{2}}\n\n is qubit detuning, \n\n\n\n\nm\n\n12\n\n\n\n\n{\\displaystyle m_{12}}\n\n is stray (unwanted) coupling between qubits, and \n\n\n\nℏ\n\n\n{\\displaystyle \\hbar }\n\n is the reduced Planck constant. The time integral over \n\n\n\nA\n(\nt\n)\n\n\n{\\displaystyle A(t)}\n\n determines the angle of rotation. Unwanted rotations from the first and third terms of the Hamiltonian can be compensated for with single qubit operations. The remaining component, combined with single qubit rotations, forms a basis for the su(4) Lie algebra.\nHigher levels (outside of the computational subspace) of a pair of coupled superconducting circuits can be used to induce a geometric phase on one of the computational states of the qubits. This leads to an entangling conditional phase shift of the relevant qubit states. This effect has been implemented by flux-tuning the qubit spectra  and by using selective microwave driving. Off-resonant driving can be used to induce differential ac-Stark shift, allowing the implementation of all-mic",
+              " the relevant qubit states. This effect has been implemented by flux-tuning the qubit spectra  and by using selective microwave driving. Off-resonant driving can be used to induce differential ac-Stark shift, allowing the implementation of all-microwave controlled-phase gates.\n##Subheading: Qubit readout\nArchitecture-specific readout, or measurement, mechanisms exist. Readout of a phase qubit is explained in the qubit archetypes table above. A flux qubit state is often read using an adjustable DC-SQUID magnetometer. States may also be measured using an electrometer. A more general readout scheme includes a coupling to a microwave resonator, where resonance frequency of the resonator is dispersively shifted by the qubit state. Multi-level systems (qudits) can be readout using electron shelving.\n#Subheading: Performance\n##Subheading: Criteria for quantum computation\nDiVincenzo's criteria is a list describing the requirements for a physical system to be capable of implementing a logical qubit. DiVincenzo's criteria is satisfied by superconducting quantum computing implementation. Much of the current development effort in superconducting quantum computing aims to achieve interconnect, control, and readout in the 3rd dimension with additional lithography layers. The list of DiVincenzo's criteria for a physical system to implement a logical qubit is satisfied by the implementation of superconducting qubits. Although DiVincenzo's criteria as originally proposed consists of five criteria required for physically implementing a quantum computer, the more complete list consists of seven criteria as it takes into account communication over a computer network capable of transmitting quantum information between computers, known as the \"quantum internet\". Therefore, the first five criteria ensure successful quantum computing, while the final two criteria allow for quantum communication.\nThe final two criteria have been experimentally proven by research performed by ETH Zurich university with two superconducting qubits connected by a coaxial cable.\n#Subheading: Challenges\nMany current challenges faced by superconducting quantum computing lie in the field of microwave engineering. Some challenges in superconducting qubit design are shaping the potential well and choosing particle mass such that energy separation between two specific energy levels is unique, differing from all other interlevel energy separation in the system, since these two levels are used as logical states of the qubit. Other challenges are mitigating sources of noise in the system. Finally, even more challenges occur a result of scaling to larger and larger device sizes.\n##Subheading: Noise\nSuperconducting quantum computing must mitigate quantum noise (disruptions of the system caused by its interaction with an environment) as well as leakage (information being lost to the surrounding environment). One way to reduce leakage is with parity measurements. Another strategy is to use qubits with large anharmonicity.\nTwo-level system (TLS) effects are a dominant source of noise in superconducting qubits. TLS act as resonant, two-level absorbers which drain energy from the qubit, significantly reducing coherence times. They are thought to be caused by deformities during the fabrication process, and surface amorphous oxides that form on or near Josephson junctions. Additionally, coherent TLS defects fluctuate in time, and at the moment, mitigating them requires full recalibration of quantum processors containing 100 qubits around once per day. As the TLS density increases, it becomes harder to protect a system from TLS effects.\nAttempts to mitigate TLS effects include developing new fabrication techniques, and experimenting with new materials such as niobium and tantalum.\nQuasiparticles are single-electron excitations that occur when Cooper pairs break. They consist of a superposition of an electron and an 'electron hole'. They occur when a Cooper pair is hit by a photon, causing it to break. There are two kinds of particles; thermally-generated equilibrium quasiparticles, and non-equilibrium quasiparticles which get excited due to other effects in the system. While equilibrium quasiparticles can be suppressed exponentially by operating at low temperatures, but non-equilibrium quasiparticles, due to radiation such as gammas and cosmic ray muons, cannot.\nAttempts to mitigate quasiparticle generation include increasing shielding against radiation, quasiparticle trapping, gap engineering, or otherwise removing them from the system.\n##Subheading: Scaling\nAs superconducting quantum computing approaches larger scale devices, researchers face difficulties in qubit coherence, scalable calibration software, efficient determination of fidelity of quantum states across an entire chip, and qubit and gate fidelity. Moreover, superconducting quantum computing devices must be reliably reproducible at increasingly large scales such that they are compatible with these improvements."
+            ],
+            "llm_call_id": "llm_9db095b7290b401bad3d8fc05280b9e1",
+            "trace_call_id": "llm_f0e0a4009bd9487a9a99a98189e4f4bb",
+            "generation_round": 3
+          }
+        ],
+        "llm_call_id": "llm_9db095b7290b401bad3d8fc05280b9e1",
+        "trace_call_id": "llm_f0e0a4009bd9487a9a99a98189e4f4bb",
+        "chunks": [
+          "doc_1445315a96fe::chunk_0001",
+          "doc_1445315a96fe::chunk_0002",
+          "doc_1445315a96fe::chunk_0006",
+          "doc_1445315a96fe::chunk_0007"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_f5e12997f887430b8bfe1f9a01af4e71",
+        "trace_call_id": "llm_f853e249ccc34da7b6caeeb8112f4437",
+        "chunks": [
+          "doc_10240d6c8bf0::chunk_0000",
+          "doc_10240d6c8bf0::chunk_0001",
+          "doc_10240d6c8bf0::chunk_0003",
+          "doc_10240d6c8bf0::chunk_0005"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_1fd65b5ced844433bfe4c054cdd1e6f5",
+        "trace_call_id": "llm_4fef0f51c24743d09d155af4d5baff46",
+        "chunks": [
+          "doc_08dcf2be4351::chunk_0001",
+          "doc_08dcf2be4351::chunk_0003",
+          "doc_08dcf2be4351::chunk_0009",
+          "doc_08dcf2be4351::chunk_0010"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 4,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "Quantum Computing",
+      "Artificial Intelligence",
+      "World War II"
+    ],
+    "single_k": 0,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 5,
+        "raw_count": 5,
+        "filtered_count": 5,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_b02d302b891948b5a55f4e23d953f219",
+        "trace_call_id": "llm_74168497a8744604a5c968d63ff34fc8",
+        "chunks": [
+          "doc_7d4efb3cc0af::chunk_0000",
+          "doc_7d4efb3cc0af::chunk_0003",
+          "doc_7d4efb3cc0af::chunk_0004"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_1693a5c76a60431c8f5e9e8e9b7d005f",
+        "trace_call_id": "llm_848bdf70425445b8a1cab770481a34d8",
+        "chunks": [
+          "doc_80583f4e8964::chunk_0000",
+          "doc_80583f4e8964::chunk_0001",
+          "doc_80583f4e8964::chunk_0004",
+          "doc_80583f4e8964::chunk_0006"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_52e00c3290c442ac9c62a2865687b2f6",
+        "trace_call_id": "llm_5954faba2b104b70880d34451e47c0fb",
+        "chunks": [
+          "doc_08dcf2be4351::chunk_0002",
+          "doc_08dcf2be4351::chunk_0006",
+          "doc_08dcf2be4351::chunk_0007"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 5,
+    "strategy": "normal_generate",
+    "difficulty": "hard",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "single_k": 0,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_588cd7e960b34d4c8c792e9173a6acb9",
+        "trace_call_id": "llm_4e178693f7bf42738fc391924f7e6a4b",
+        "chunks": [
+          "doc_10240d6c8bf0::chunk_0001",
+          "doc_10240d6c8bf0::chunk_0002",
+          "doc_10240d6c8bf0::chunk_0003",
+          "doc_10240d6c8bf0::chunk_0005"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_6fea858b8a2f4eccaa8f2372db5ee0cf",
+        "trace_call_id": "llm_14968af65e23425da923cea678a38001",
+        "chunks": [
+          "doc_cd5a4b0bb607::chunk_0001",
+          "doc_cd5a4b0bb607::chunk_0007",
+          "doc_cd5a4b0bb607::chunk_0008",
+          "doc_cd5a4b0bb607::chunk_0010"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "single_unit_count": 0,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_fee4240ca8cf4a7e9b10669d5e294e45",
+        "trace_call_id": "llm_d00d48aa91a7473d844e065180635870",
+        "chunks": [
+          "doc_08dcf2be4351::chunk_0001",
+          "doc_08dcf2be4351::chunk_0002",
+          "doc_08dcf2be4351::chunk_0007",
+          "doc_08dcf2be4351::chunk_0008"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

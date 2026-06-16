@@ -1,0 +1,33 @@
+{
+  "candidate_count": 84,
+  "accepted_count": 84,
+  "rejected_count": 2,
+  "accept_rate": 0.9767,
+  "topic_distribution": {
+    "Artificial Intelligence": 28,
+    "Quantum Computing": 31,
+    "World War II": 25
+  },
+  "difficulty_distribution": {
+    "hard": 31,
+    "medium": 47,
+    "easy": 6
+  },
+  "hard_gap": 0.131,
+  "stopped_reason": "max_candidate_pool_reached",
+  "min_candidate_target": 60,
+  "max_candidate_target": 75,
+  "min_difficulty_targets": {
+    "easy": 12,
+    "medium": 18,
+    "hard": 30
+  },
+  "min_target_reached": false,
+  "max_target_reached": true,
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

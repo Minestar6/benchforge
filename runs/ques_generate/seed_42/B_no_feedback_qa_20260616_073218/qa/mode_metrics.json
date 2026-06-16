@@ -1,0 +1,26 @@
+{
+  "candidate_count": 106,
+  "accepted_count": 106,
+  "rejected_count": 0,
+  "accept_rate": 1.0,
+  "topic_distribution": {
+    "Artificial Intelligence": 53,
+    "Quantum Computing": 53
+  },
+  "difficulty_distribution": {
+    "easy": 22,
+    "medium": 78,
+    "hard": 6
+  },
+  "hard_gap": 0.4434,
+  "stopped_reason": "max_candidate_pool_reached",
+  "min_candidate_target": 75,
+  "max_candidate_target": 100,
+  "min_difficulty_targets": {
+    "easy": 15,
+    "medium": 23,
+    "hard": 38
+  },
+  "min_target_reached": false,
+  "max_target_reached": true
+}

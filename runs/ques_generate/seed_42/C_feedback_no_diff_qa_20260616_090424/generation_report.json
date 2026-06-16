@@ -1,0 +1,29 @@
+{
+  "task_id": "ques_generate/seed_42",
+  "run_id": "C_feedback_no_diff_qa_20260616_090424",
+  "modes": {
+    "qa": {
+      "candidate_count": 102,
+      "accepted_count": 102,
+      "min_candidate_target": 75,
+      "max_candidate_target": 100,
+      "target_candidate_count": 75,
+      "difficulty_counts": {
+        "easy": 13,
+        "medium": 46,
+        "hard": 43
+      },
+      "min_difficulty_targets": {
+        "easy": 15,
+        "medium": 23,
+        "hard": 38
+      },
+      "min_target_reached": false,
+      "max_target_reached": true,
+      "stopped_reason": "max_candidate_pool_reached"
+    }
+  },
+  "total_candidates": 102,
+  "global_used_chunk_combinations": 18,
+  "global_failures": 0
+}

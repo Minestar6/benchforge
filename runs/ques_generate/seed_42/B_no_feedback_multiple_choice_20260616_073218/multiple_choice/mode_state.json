@@ -1,0 +1,18 @@
+{
+  "mode": "multiple_choice",
+  "candidate_count": 116,
+  "total_record_count": 120,
+  "accepted_count": 116,
+  "rejected_count": 4,
+  "difficulty_counts": {
+    "medium": 90,
+    "easy": 22,
+    "hard": 4
+  },
+  "topic_counts": {
+    "Artificial Intelligence": 39,
+    "Quantum Computing": 45,
+    "World War II": 32
+  },
+  "stopped_reason": "max_candidate_pool_reached"
+}

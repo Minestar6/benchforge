@@ -1,0 +1,32 @@
+[
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 1,
+    "topic": "Artificial Intelligence",
+    "difficulty": "medium",
+    "error": "Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781572939344868b2df7cad200b62b2bc44e6de10221d2191b', 'param': '', 'type': 'Forbidden'}}",
+    "error_type": "PermissionDeniedError",
+    "llm_call_id": null,
+    "trace_call_id": null
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 1,
+    "topic": "Quantum Computing",
+    "difficulty": "medium",
+    "error": "Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781572939302875f22c5dcf98fc2650ac2583e10a839a756b2', 'param': '', 'type': 'Forbidden'}}",
+    "error_type": "PermissionDeniedError",
+    "llm_call_id": null,
+    "trace_call_id": null
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 1,
+    "topic": "World War II",
+    "difficulty": "medium",
+    "error": "Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 0217815729393042970295c18f318e807dda86bfc14847451c98d', 'param': '', 'type': 'Forbidden'}}",
+    "error_type": "PermissionDeniedError",
+    "llm_call_id": null,
+    "trace_call_id": null
+  }
+]

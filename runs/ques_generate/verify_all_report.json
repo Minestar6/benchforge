@@ -1,0 +1,283 @@
+{
+  "timestamp": "2026-06-17T00:43:15.873783",
+  "model": "glm-4-7-251222",
+  "registry_model": "glm-4.7",
+  "target_run_dirs": [
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\A_direct_multiple_choice_20260616_212924",
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\A_direct_qa_20260616_212924",
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\B_no_feedback_multiple_choice_20260616_212924",
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\B_no_feedback_qa_20260616_212924",
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\C_feedback_no_diff_multiple_choice_20260616_212924",
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\C_feedback_no_diff_qa_20260616_212924",
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\D_full_multiple_choice_20260616_212924",
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\D_full_qa_20260616_212924"
+  ],
+  "config": {
+    "min_citation_score": 0.65,
+    "min_overall_score": 0.75,
+    "max_concurrency": 2,
+    "alpha": 0.5,
+    "beta": 0.5
+  },
+  "results": [
+    {
+      "group": "A_direct_multiple_choice_20260616_212924",
+      "orig_count": 75,
+      "orig_by_diff": {
+        "3": 21,
+        "5": 15,
+        "6": 6,
+        "4": 20,
+        "7": 3,
+        "2": 10
+      },
+      "final_selected": 74,
+      "final_by_diff": {
+        "easy": 68,
+        "medium": 5,
+        "hard": 1
+      },
+      "failed_by_stage": {
+        "citation": 1,
+        "llm": 0,
+        "validator_error": 0,
+        "duplicate": 0,
+        "overquota": 0
+      },
+      "diff_corrections": {
+        "total_selected": 74,
+        "corrected_count": 0,
+        "correction_ratio": 0.0,
+        "transitions": {}
+      }
+    },
+    {
+      "group": "A_direct_qa_20260616_212924",
+      "orig_count": 80,
+      "orig_by_diff": {
+        "2": 11,
+        "3": 19,
+        "4": 18,
+        "5": 16,
+        "7": 2,
+        "6": 13,
+        "8": 1
+      },
+      "final_selected": 77,
+      "final_by_diff": {
+        "easy": 71,
+        "medium": 6
+      },
+      "failed_by_stage": {
+        "citation": 0,
+        "llm": 1,
+        "validator_error": 0,
+        "duplicate": 2,
+        "overquota": 0
+      },
+      "diff_corrections": {
+        "total_selected": 77,
+        "corrected_count": 0,
+        "correction_ratio": 0.0,
+        "transitions": {}
+      }
+    },
+    {
+      "group": "B_no_feedback_multiple_choice_20260616_212924",
+      "orig_count": 99,
+      "orig_by_diff": {
+        "easy": 23,
+        "medium": 73,
+        "hard": 3
+      },
+      "final_selected": 82,
+      "final_by_diff": {
+        "easy": 40,
+        "medium": 39,
+        "hard": 3
+      },
+      "failed_by_stage": {
+        "citation": 14,
+        "llm": 3,
+        "validator_error": 0,
+        "duplicate": 0,
+        "overquota": 0
+      },
+      "diff_corrections": {
+        "total_selected": 82,
+        "corrected_count": 28,
+        "correction_ratio": 0.34146341463414637,
+        "transitions": {
+          "easy→medium": 3,
+          "medium→easy": 21,
+          "medium→hard": 3,
+          "hard→medium": 1
+        }
+      }
+    },
+    {
+      "group": "B_no_feedback_qa_20260616_212924",
+      "orig_count": 101,
+      "orig_by_diff": {
+        "easy": 22,
+        "medium": 70,
+        "hard": 9
+      },
+      "final_selected": 91,
+      "final_by_diff": {
+        "easy": 21,
+        "medium": 60,
+        "hard": 10
+      },
+      "failed_by_stage": {
+        "citation": 7,
+        "llm": 1,
+        "validator_error": 0,
+        "duplicate": 2,
+        "overquota": 0
+      },
+      "diff_corrections": {
+        "total_selected": 91,
+        "corrected_count": 13,
+        "correction_ratio": 0.14285714285714285,
+        "transitions": {
+          "easy→medium": 3,
+          "medium→easy": 5,
+          "medium→hard": 3,
+          "hard→medium": 2
+        }
+      }
+    },
+    {
+      "group": "C_feedback_no_diff_multiple_choice_20260616_212924",
+      "orig_count": 80,
+      "orig_by_diff": {
+        "hard": 30,
+        "medium": 44,
+        "easy": 6
+      },
+      "final_selected": 69,
+      "final_by_diff": {
+        "medium": 33,
+        "hard": 21,
+        "easy": 15
+      },
+      "failed_by_stage": {
+        "citation": 7,
+        "llm": 4,
+        "validator_error": 0,
+        "duplicate": 0,
+        "overquota": 0
+      },
+      "diff_corrections": {
+        "total_selected": 69,
+        "corrected_count": 22,
+        "correction_ratio": 0.3188405797101449,
+        "transitions": {
+          "hard→medium": 7,
+          "medium→hard": 6,
+          "medium→easy": 9
+        }
+      }
+    },
+    {
+      "group": "C_feedback_no_diff_qa_20260616_212924",
+      "orig_count": 79,
+      "orig_by_diff": {
+        "hard": 23,
+        "medium": 44,
+        "easy": 12
+      },
+      "final_selected": 68,
+      "final_by_diff": {
+        "hard": 23,
+        "medium": 25,
+        "easy": 20
+      },
+      "failed_by_stage": {
+        "citation": 9,
+        "llm": 2,
+        "validator_error": 0,
+        "duplicate": 0,
+        "overquota": 0
+      },
+      "diff_corrections": {
+        "total_selected": 68,
+        "corrected_count": 24,
+        "correction_ratio": 0.35294117647058826,
+        "transitions": {
+          "medium→hard": 9,
+          "hard→medium": 3,
+          "easy→medium": 1,
+          "medium→easy": 11
+        }
+      }
+    },
+    {
+      "group": "D_full_multiple_choice_20260616_212924",
+      "orig_count": 84,
+      "orig_by_diff": {
+        "hard": 31,
+        "medium": 47,
+        "easy": 6
+      },
+      "final_selected": 70,
+      "final_by_diff": {
+        "hard": 25,
+        "medium": 33,
+        "easy": 12
+      },
+      "failed_by_stage": {
+        "citation": 13,
+        "llm": 1,
+        "validator_error": 0,
+        "duplicate": 0,
+        "overquota": 0
+      },
+      "diff_corrections": {
+        "total_selected": 70,
+        "corrected_count": 18,
+        "correction_ratio": 0.2571428571428571,
+        "transitions": {
+          "medium→hard": 4,
+          "hard→medium": 5,
+          "medium→easy": 8,
+          "easy→medium": 1
+        }
+      }
+    },
+    {
+      "group": "D_full_qa_20260616_212924",
+      "orig_count": 81,
+      "orig_by_diff": {
+        "hard": 23,
+        "medium": 46,
+        "easy": 12
+      },
+      "final_selected": 75,
+      "final_by_diff": {
+        "medium": 31,
+        "hard": 22,
+        "easy": 22
+      },
+      "failed_by_stage": {
+        "citation": 6,
+        "llm": 0,
+        "validator_error": 0,
+        "duplicate": 0,
+        "overquota": 0
+      },
+      "diff_corrections": {
+        "total_selected": 75,
+        "corrected_count": 22,
+        "correction_ratio": 0.29333333333333333,
+        "transitions": {
+          "medium→hard": 4,
+          "hard→medium": 5,
+          "medium→easy": 12,
+          "easy→medium": 1
+        }
+      }
+    }
+  ]
+}

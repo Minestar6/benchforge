@@ -1,0 +1,25 @@
+{
+  "task_id": "case",
+  "run_id": "d_full_case_20260616_203915",
+  "total_candidates": 43,
+  "citation_passed": 38,
+  "llm_passed": 37,
+  "final_selected": 37,
+  "stage_latencies_ms": {
+    "citation_validation": 250,
+    "llm_validation": 509077,
+    "selection": 15
+  },
+  "llm_usage": {
+    "calls": 38,
+    "input_tokens": 26032,
+    "output_tokens": 61935
+  },
+  "failed_by_stage": {
+    "citation": 5,
+    "llm": 1,
+    "validator_error": 0,
+    "duplicate": 0,
+    "overquota": 0
+  }
+}

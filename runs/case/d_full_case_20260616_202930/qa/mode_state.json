@@ -1,0 +1,16 @@
+{
+  "mode": "qa",
+  "candidate_count": 0,
+  "total_record_count": 0,
+  "accepted_count": 0,
+  "rejected_count": 0,
+  "difficulty_counts": {},
+  "topic_counts": {},
+  "stopped_reason": "mode_failure_limit_reached",
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

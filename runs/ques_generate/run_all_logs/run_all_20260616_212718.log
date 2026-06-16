@@ -1,0 +1,72 @@
+2026-06-16 21:27:18.782 | INFO     | Log file: D:\Download\vscode\code\master\benchforge\runs\ques_generate\run_all_logs\run_all_20260616_212718.log
+2026-06-16 21:27:18.782 | INFO     | Modes: ['qa', 'multiple_choice']
+2026-06-16 21:27:18.783 | INFO     | Topics: ['Artificial Intelligence', 'Quantum Computing', 'World War II']
+2026-06-16 21:27:18.783 | INFO     | Seeds: [42]
+2026-06-16 21:27:18.783 | INFO     | Timestamp: 20260616_212718
+2026-06-16 21:27:18.783 | INFO     | Model resolution via model_registry.yaml (model.name in each group config)
+2026-06-16 21:27:18.784 | INFO     | MODE: qa
+2026-06-16 21:27:18.784 | INFO     | Starting A - Direct Generation [qa], seed=42
+2026-06-16 21:27:18.804 | INFO     | === Group A: Direct Generation [qa] === run_id=A_direct_qa_20260616_212718
+2026-06-16 21:27:18.947 | ERROR    | FAILED: A - Direct Generation [qa], seed=42, error='ModelConfig' object has no attribute 'get'
+Traceback (most recent call last):
+
+  File "D:\Download\vscode\code\master\benchforge\experiment\qa_agent\run_all.py", line 132, in <module>
+    asyncio.run(main())
+    │       │   └ <function main at 0x000001F4B31ECC10>
+    │       └ <function run at 0x000001F4A35AFBE0>
+    └ <module 'asyncio' from 'D:\\Anaconda\\envs\\bench_agent\\lib\\asyncio\\__init__.py'>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object main at 0x000001F4B20CFDF0>
+           │    └ <function BaseEventLoop.run_until_complete at 0x000001F4A553D120>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x000001F4A55E4E50>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x000001F4A553EB90>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 1909, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x000001F4A5482560>
+    └ <Handle <TaskStepMethWrapper object at 0x000001F4B31F2800>()>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x000001F4B31F2800>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x000001F4B31F2800>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x000001F4B31F2800>()>
+
+> File "D:\Download\vscode\code\master\benchforge\experiment\qa_agent\run_all.py", line 110, in main
+    await run_fn(
+          └ <function run at 0x000001F4A55E70A0>
+
+  File "D:\Download\vscode\code\master\benchforge\experiment\qa_agent\group_a_direct.py", line 65, in run
+    await run_direct_generation(
+          └ <function run_direct_generation at 0x000001F4B31EC3A0>
+
+  File "D:\Download\vscode\code\master\benchforge\experiment\qa_agent\direct_generation.py", line 253, in run_direct_generation
+    model_name = model_cfg.get("model_name", model_ref.name)
+                 │                           │         └ 'deepseek-v3.2'
+                 │                           └ ModelRef(name='deepseek-v3.2', temperature=0.2, max_tokens=4096, max_retries=2)
+                 └ ModelConfig(model_name='deepseek-v3-2-251201', provider='openai', base_url='https://ark.cn-beijing.volces.com/api/v3', api_ke...
+
+  File "D:\Anaconda\envs\bench_agent\lib\site-packages\pydantic\main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+
+AttributeError: 'ModelConfig' object has no attribute 'get'
+2026-06-16 21:27:18.995 | INFO     | Starting B - Multi-round No Feedback [qa], seed=42
+2026-06-16 21:27:19.019 | INFO     | === Group B: Multi-round No Feedback [qa] === run_id=B_no_feedback_qa_20260616_212718
+2026-06-16 21:27:19.329 | INFO     | Preparing evidence for 3 topics (parallel)

@@ -1,0 +1,69 @@
+2026-06-16 07:32:17.938 | INFO     | Log file: D:\Download\vscode\code\master\benchforge\runs\qa_agent_exp\run_all_logs\run_all_20260616_073217.log
+2026-06-16 07:32:18.071 | INFO     | Model: deepseek-v3-2-251201
+2026-06-16 07:32:18.071 | INFO     | Modes: ['qa', 'multiple_choice']
+2026-06-16 07:32:18.071 | INFO     | Topics: ['Artificial Intelligence', 'Quantum Computing', 'World War II']
+2026-06-16 07:32:18.071 | INFO     | Seeds: [42]
+2026-06-16 07:32:18.071 | INFO     | Timestamp: 20260616_073218
+2026-06-16 07:32:18.071 | INFO     | MODE: qa
+2026-06-16 07:32:18.071 | INFO     | Starting B - Multi-round No Feedback [qa], seed=42
+2026-06-16 07:32:18.071 | INFO     | === Group B: Multi-round No Feedback [qa] === run_id=B_no_feedback_qa_20260616_073218
+2026-06-16 07:32:18.351 | INFO     | Preparing evidence for 3 topics (parallel)
+2026-06-16 07:36:05.359 | INFO     | Saved JSON to runs\ques_generate\seed_42\B_no_feedback_qa_20260616_073218\evidence\chunked.json
+2026-06-16 07:36:05.366 | INFO     | Saved JSON to runs\ques_generate\seed_42\B_no_feedback_qa_20260616_073218\evidence\single_units.json
+2026-06-16 07:36:05.370 | INFO     | Saved JSON to runs\ques_generate\seed_42\B_no_feedback_qa_20260616_073218\evidence\multi_units.json
+2026-06-16 07:36:05.370 | INFO     | Starting mode: qa
+2026-06-16 07:37:32.555 | DEBUG    | Generator: mode=qa difficulty=medium response_len=13105
+2026-06-16 07:37:33.295 | DEBUG    | Generator: mode=qa difficulty=medium response_len=13284
+2026-06-16 07:39:29.769 | DEBUG    | Generator: mode=qa difficulty=medium response_len=17673
+2026-06-16 07:39:31.965 | DEBUG    | Generator: mode=qa difficulty=medium response_len=18187
+2026-06-16 07:39:31.965 | INFO     | Mode=qa round=1 strategy=normal_generate generated=33 accepted=33 total_accepted=33
+2026-06-16 07:41:10.579 | DEBUG    | Generator: mode=qa difficulty=medium response_len=13808
+2026-06-16 07:41:22.470 | DEBUG    | Generator: mode=qa difficulty=medium response_len=15467
+2026-06-16 07:43:17.154 | DEBUG    | Generator: mode=qa difficulty=medium response_len=19110
+2026-06-16 07:43:17.668 | DEBUG    | Generator: mode=qa difficulty=medium response_len=17080
+2026-06-16 07:43:17.668 | INFO     | Mode=qa round=2 strategy=normal_generate generated=40 accepted=40 total_accepted=73
+2026-06-16 07:44:44.793 | DEBUG    | Generator: mode=qa difficulty=medium response_len=12725
+2026-06-16 07:44:53.363 | DEBUG    | Generator: mode=qa difficulty=medium response_len=13695
+2026-06-16 07:46:26.637 | DEBUG    | Generator: mode=qa difficulty=medium response_len=14445
+2026-06-16 07:46:58.330 | DEBUG    | Generator: mode=qa difficulty=medium response_len=18026
+2026-06-16 07:46:58.341 | INFO     | Mode=qa round=3 strategy=normal_generate generated=33 accepted=33 total_accepted=106
+2026-06-16 07:46:58.342 | INFO     | Mode qa stopped: max_candidate_pool_reached
+2026-06-16 07:46:58.454 | INFO     | Mode qa complete: 106 accepted, stopped_reason=max_candidate_pool_reached
+2026-06-16 07:46:58.454 | INFO     | Generation complete. Output: runs/ques_generate/seed_42/B_no_feedback_qa_20260616_073218/
+2026-06-16 07:46:58.454 | INFO     | Group B completed. run_id=B_no_feedback_qa_20260616_073218
+2026-06-16 07:46:58.454 | INFO     | Finished B - Multi-round No Feedback [qa], seed=42
+2026-06-16 07:46:58.454 | INFO     | MODE: multiple_choice
+2026-06-16 07:46:58.454 | INFO     | Starting B - Multi-round No Feedback [multiple_choice], seed=42
+2026-06-16 07:46:58.468 | INFO     | === Group B: Multi-round No Feedback [multiple_choice] === run_id=B_no_feedback_multiple_choice_20260616_073218
+2026-06-16 07:46:58.483 | INFO     | Preparing evidence for 3 topics (parallel)
+2026-06-16 07:50:31.526 | INFO     | Saved JSON to runs\ques_generate\seed_42\B_no_feedback_multiple_choice_20260616_073218\evidence\chunked.json
+2026-06-16 07:50:31.548 | INFO     | Saved JSON to runs\ques_generate\seed_42\B_no_feedback_multiple_choice_20260616_073218\evidence\single_units.json
+2026-06-16 07:50:31.554 | INFO     | Saved JSON to runs\ques_generate\seed_42\B_no_feedback_multiple_choice_20260616_073218\evidence\multi_units.json
+2026-06-16 07:50:31.555 | INFO     | Starting mode: multiple_choice
+2026-06-16 07:51:40.789 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=8661
+2026-06-16 07:51:42.670 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=9735
+2026-06-16 07:51:48.648 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=10217
+2026-06-16 07:53:08.071 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=12521
+2026-06-16 07:53:42.363 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=16064
+2026-06-16 07:54:06.816 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=19578
+2026-06-16 07:54:06.816 | INFO     | Mode=multiple_choice round=1 strategy=normal_generate generated=39 accepted=39 total_accepted=39
+2026-06-16 07:55:13.361 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=9369
+2026-06-16 07:55:13.659 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=9537
+2026-06-16 07:55:16.403 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=9722
+2026-06-16 07:57:03.978 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=15393
+2026-06-16 07:57:23.823 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=18152
+2026-06-16 07:57:25.619 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=20106
+2026-06-16 07:57:25.623 | INFO     | Mode=multiple_choice round=2 strategy=normal_generate generated=43 accepted=43 total_accepted=82
+2026-06-16 07:58:34.680 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=9203
+2026-06-16 07:58:45.763 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=12504
+2026-06-16 07:58:46.850 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=11253
+2026-06-16 07:59:53.470 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=10043
+2026-06-16 08:00:01.321 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=9976
+2026-06-16 08:00:42.546 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=16942
+2026-06-16 08:00:42.553 | INFO     | Mode=multiple_choice round=3 strategy=normal_generate generated=34 accepted=34 total_accepted=116
+2026-06-16 08:00:42.553 | INFO     | Mode multiple_choice stopped: max_candidate_pool_reached
+2026-06-16 08:00:42.661 | INFO     | Mode multiple_choice complete: 116 accepted, stopped_reason=max_candidate_pool_reached
+2026-06-16 08:00:42.679 | INFO     | Generation complete. Output: runs/ques_generate/seed_42/B_no_feedback_multiple_choice_20260616_073218/
+2026-06-16 08:00:42.681 | INFO     | Group B completed. run_id=B_no_feedback_multiple_choice_20260616_073218
+2026-06-16 08:00:42.681 | INFO     | Finished B - Multi-round No Feedback [multiple_choice], seed=42
+2026-06-16 08:00:42.681 | INFO     | All experiments completed.

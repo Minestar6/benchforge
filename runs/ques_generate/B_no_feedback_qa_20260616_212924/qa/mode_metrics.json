@@ -1,0 +1,32 @@
+{
+  "candidate_count": 101,
+  "accepted_count": 101,
+  "rejected_count": 0,
+  "accept_rate": 1.0,
+  "topic_distribution": {
+    "Quantum Computing": 50,
+    "World War II": 51
+  },
+  "difficulty_distribution": {
+    "easy": 22,
+    "medium": 70,
+    "hard": 9
+  },
+  "hard_gap": 0.4109,
+  "stopped_reason": "max_candidate_pool_reached",
+  "min_candidate_target": 60,
+  "max_candidate_target": 75,
+  "min_difficulty_targets": {
+    "easy": 12,
+    "medium": 18,
+    "hard": 30
+  },
+  "min_target_reached": false,
+  "max_target_reached": true,
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

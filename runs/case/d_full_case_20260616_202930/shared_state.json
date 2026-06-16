@@ -1,0 +1,76 @@
+{
+  "task_id": "case",
+  "run_id": "d_full_case_20260616_202930",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "case",
+    "run_id": "d_full_case_20260616_202930",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "modes": {
+      "qa": {
+        "count": 5,
+        "max_rounds": 3,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      },
+      "multiple_choice": {
+        "count": 5,
+        "max_rounds": 3,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "case",
+    "run_id": "d_full_case_20260616_202930",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "modes": {
+      "qa": {
+        "count": 5,
+        "max_rounds": 3,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      },
+      "multiple_choice": {
+        "count": 5,
+        "max_rounds": 3,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs\\case\\d_full_case_20260616_202930\\qa\\candidate_pool.json",
+    "multiple_choice_candidate_pool": "runs\\case\\d_full_case_20260616_202930\\multiple_choice\\candidate_pool.json",
+    "chunked_evidence": "runs\\case\\d_full_case_20260616_202930\\evidence\\chunked.json",
+    "llm_calls": "runs\\case\\d_full_case_20260616_202930\\llm_calls.jsonl",
+    "generation_report": "runs\\case\\d_full_case_20260616_202930\\generation_report.json"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "pending",
+    "evaluation": "pending"
+  }
+}

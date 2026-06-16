@@ -1,0 +1,25 @@
+{
+  "task_id": "ques_generate/seed_42",
+  "run_id": "C_feedback_no_diff_qa_20260616_090424",
+  "total_candidates": 102,
+  "citation_passed": 101,
+  "llm_passed": 99,
+  "final_selected": 47,
+  "stage_latencies_ms": {
+    "citation_validation": 702,
+    "llm_validation": 1724452,
+    "selection": 6515
+  },
+  "llm_usage": {
+    "calls": 101,
+    "input_tokens": 67912,
+    "output_tokens": 212551
+  },
+  "failed_by_stage": {
+    "citation": 1,
+    "llm": 2,
+    "validator_error": 0,
+    "duplicate": 0,
+    "overquota": 52
+  }
+}

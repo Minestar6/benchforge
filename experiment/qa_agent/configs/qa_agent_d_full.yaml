@@ -3,7 +3,7 @@
 
 # ── 模型（引用 model_registry.yaml 中的逻辑名） ────────────────────────────────
 model:
-  name: "deepseek-v3"
+  name: "deepseek-v3.2"
   temperature: 0.2
   max_tokens: 4096
   max_retries: 2

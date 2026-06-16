@@ -250,7 +250,7 @@ async def run_direct_generation(
     model_client = ModelLoader.load_model(model_cfg)
     # API 实际模型名由 ModelLoader 设置，逻辑名仅用于追踪
     setattr(model_client, "model_registry_name", model_ref.name)
-    model_name = model_cfg.get("model_name", model_ref.name)
+    model_name = getattr(model_cfg, "model_name", None) or model_ref.name
 
     # ── 构造 EvidenceManager（与 B/C/D 组相同的证据管道） ──
     class _EvidenceConfig:

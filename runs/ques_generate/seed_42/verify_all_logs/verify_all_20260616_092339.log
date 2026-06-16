@@ -1,0 +1,317 @@
+2026-06-16 09:23:39.206 | INFO     | Log file: D:\Download\vscode\code\master\benchforge\runs\ques_generate\seed_42\verify_all_logs\verify_all_20260616_092339.log
+2026-06-16 09:23:39.316 | INFO     | verify_agent model: registry='glm-4.7' → api='glm-4-7-251222'
+2026-06-16 09:23:39.319 | INFO     | ============================================================
+2026-06-16 09:23:39.320 | INFO     | [1/4] C_feedback_no_diff_multiple_choice_20260616_090424
+2026-06-16 09:23:39.320 | INFO     | ============================================================
+2026-06-16 09:23:39.352 | INFO     | Built chunk index with 200 entries from runs\ques_generate\seed_42\C_feedback_no_diff_multiple_choice_20260616_090424\evidence\chunked.json
+2026-06-16 09:23:39.354 | INFO     | Loaded 0 raw candidates from runs\ques_generate\seed_42\C_feedback_no_diff_multiple_choice_20260616_090424\multiple_choice\candidate_pool.json
+2026-06-16 09:23:39.355 | INFO     | Normalized 0 candidates total
+2026-06-16 09:23:39.355 | ERROR    | Failed to verify C_feedback_no_diff_multiple_choice_20260616_090424
+Traceback (most recent call last):
+
+  File "D:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 415, in <module>
+    asyncio.run(main())
+    │       │   └ <function main at 0x0000024B7F5AF2E0>
+    │       └ <function run at 0x0000024B78A0C1F0>
+    └ <module 'asyncio' from 'D:\\Anaconda\\envs\\bench_agent\\lib\\asyncio\\__init__.py'>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object main at 0x0000024B7F4E6C70>
+           │    └ <function BaseEventLoop.run_until_complete at 0x0000024B7A949240>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000024B7A9ECF70>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000024B7A94ACB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 1909, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000024B7A88E680>
+    └ <Handle <TaskStepMethWrapper object at 0x0000024B7B031780>()>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x0000024B7B031780>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskStepMethWrapper object at 0x0000024B7B031780>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskStepMethWrapper object at 0x0000024B7B031780>()>
+
+> File "D:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 280, in main
+    result = await run_verify_agent_from_shared_state(
+                   └ <function run_verify_agent_from_shared_state at 0x0000024B7F4C7490>
+
+  File "D:\Download\vscode\code\master\benchforge\agents\verify_agent\agent.py", line 333, in run_verify_agent_from_shared_state
+    result = await run_verify_agent(
+                   └ <function run_verify_agent at 0x0000024B7F4C72E0>
+
+  File "D:\Download\vscode\code\master\benchforge\agents\verify_agent\agent.py", line 304, in run_verify_agent
+    raise ValueError(f"No candidates loaded from {input_paths}")
+
+ValueError: No candidates loaded from ['runs\\ques_generate\\seed_42\\C_feedback_no_diff_multiple_choice_20260616_090424\\multiple_choice\\candidate_pool.json']
+2026-06-16 09:23:39.362 | INFO     | ============================================================
+2026-06-16 09:23:39.362 | INFO     | [2/4] C_feedback_no_diff_qa_20260616_090424
+2026-06-16 09:23:39.362 | INFO     | ============================================================
+2026-06-16 09:23:39.430 | INFO     | Built chunk index with 200 entries from runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\evidence\chunked.json
+2026-06-16 09:23:39.472 | INFO     | Loaded 102 raw candidates from runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\qa\candidate_pool.json
+2026-06-16 09:23:39.474 | INFO     | Normalized 102 candidates total
+2026-06-16 09:23:39.474 | INFO     | [VerifyAgent] start task=ques_generate/seed_42 run=C_feedback_no_diff_qa_20260616_090424 candidates=102
+2026-06-16 09:23:39.506 | INFO     | Appended 102 records to runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\validation\normalized_candidates.jsonl
+2026-06-16 09:23:39.511 | DEBUG    | [citation] 013b1fab-33e1-4f87-a3b4-438a5203057d: score=0.868 chunk=1.000 ans=0.560 matched=3/3 passed=True
+2026-06-16 09:23:39.512 | DEBUG    | [citation] 65d168f4-117a-48df-bcab-6924d1ebccf4: score=0.913 chunk=1.000 ans=0.710 matched=1/1 passed=True
+2026-06-16 09:23:39.514 | DEBUG    | [citation] cca2eb81-4871-485c-9606-1e24f4392db8: score=0.949 chunk=1.000 ans=0.830 matched=1/1 passed=True
+2026-06-16 09:23:39.517 | DEBUG    | [citation] 95376fba-70c5-413e-89a5-01ff13ca03aa: score=0.849 chunk=1.000 ans=0.497 matched=3/3 passed=True
+2026-06-16 09:23:39.518 | DEBUG    | [citation] 17af166e-a5b0-47ac-a617-25c48d52bcb5: score=0.909 chunk=0.990 ans=0.720 matched=1/1 passed=True
+2026-06-16 09:23:39.520 | DEBUG    | [citation] a0d646a6-7878-41fa-b5ae-bc63afce2159: score=0.880 chunk=1.000 ans=0.600 matched=1/1 passed=True
+2026-06-16 09:23:39.522 | DEBUG    | [citation] e45c08ef-e806-4b49-9c6e-eb20617b1d04: score=0.698 chunk=0.770 ans=0.530 matched=1/2 passed=True
+2026-06-16 09:23:39.523 | DEBUG    | [citation] 63202764-0c30-4b55-8fb2-3b0b3ae84c73: score=0.845 chunk=1.000 ans=0.485 matched=2/2 passed=True
+2026-06-16 09:23:39.538 | DEBUG    | [citation] 6ce8eb15-2edf-4320-8470-2df9f71b5738: score=0.889 chunk=1.000 ans=0.630 matched=2/2 passed=True
+2026-06-16 09:23:39.549 | DEBUG    | [citation] 62dfc918-7adf-4094-b5e0-38831364332a: score=0.871 chunk=0.995 ans=0.580 matched=2/2 passed=True
+2026-06-16 09:23:39.552 | DEBUG    | [citation] ec7b98b2-abd7-4f38-ae33-15c8e39a7648: score=0.967 chunk=1.000 ans=0.890 matched=1/1 passed=True
+2026-06-16 09:23:39.566 | DEBUG    | [citation] 19eb2cd9-5492-465a-b577-d71eef4cdbe4: score=0.882 chunk=0.990 ans=0.630 matched=1/1 passed=True
+2026-06-16 09:23:39.570 | DEBUG    | [citation] b660e8c2-43a4-4c1e-94c6-f80cac8cb4c0: score=0.891 chunk=0.990 ans=0.660 matched=2/2 passed=True
+2026-06-16 09:23:39.570 | DEBUG    | [citation] fc469dd9-279f-41df-84c8-daa493b8ff11: score=0.906 chunk=0.990 ans=0.710 matched=1/1 passed=True
+2026-06-16 09:23:39.601 | DEBUG    | [citation] 2cb8c8f4-4594-486f-9426-5c634855253f: score=0.903 chunk=0.990 ans=0.700 matched=1/1 passed=True
+2026-06-16 09:23:39.604 | DEBUG    | [citation] fcfd50e2-b7cf-4c5d-b1e5-b75b6bb6928c: score=0.852 chunk=0.990 ans=0.530 matched=2/2 passed=True
+2026-06-16 09:23:39.630 | DEBUG    | [citation] c2e79259-0e81-4c7b-87fc-6d33de24ed52: score=0.891 chunk=0.990 ans=0.660 matched=1/1 passed=True
+2026-06-16 09:23:39.640 | DEBUG    | [citation] 01268fe1-24a3-4026-a8d6-7198b5bf1242: score=0.880 chunk=1.000 ans=0.600 matched=1/1 passed=True
+2026-06-16 09:23:39.643 | DEBUG    | [citation] a92ae07b-401e-42a4-8f20-4bc3f2ab9bb1: score=0.831 chunk=0.885 ans=0.705 matched=1/2 passed=True
+2026-06-16 09:23:39.645 | DEBUG    | [citation] e4fc81d9-2fa9-4823-b07f-15300c0b9fc4: score=0.916 chunk=1.000 ans=0.720 matched=2/2 passed=True
+2026-06-16 09:23:39.647 | DEBUG    | [citation] 66d91bfa-e44f-4bed-be7f-e44524b510fa: score=0.884 chunk=1.000 ans=0.615 matched=2/2 passed=True
+2026-06-16 09:23:39.647 | DEBUG    | [citation] 6a23cd04-bee3-4fd7-93f8-42dd687b1784: score=0.901 chunk=1.000 ans=0.670 matched=1/1 passed=True
+2026-06-16 09:23:39.650 | DEBUG    | [citation] cd53130d-93d0-4a44-be5c-cc3450d57b7e: score=0.665 chunk=0.680 ans=0.630 matched=0/1 passed=True
+2026-06-16 09:23:39.652 | DEBUG    | [citation] 9f47db7a-7b40-4ea5-9048-9f0e1a535087: score=0.874 chunk=1.000 ans=0.580 matched=2/2 passed=True
+2026-06-16 09:23:39.655 | DEBUG    | [citation] bce578ff-15de-485f-8ef3-2740ccb6b689: score=0.888 chunk=0.990 ans=0.650 matched=2/2 passed=True
+2026-06-16 09:23:39.659 | DEBUG    | [citation] b188b85b-05b7-4db2-abcd-12a96a4657f6: score=0.874 chunk=1.000 ans=0.580 matched=1/1 passed=True
+2026-06-16 09:23:39.661 | DEBUG    | [citation] ddaba02a-ca5b-4979-bd3b-40af18c07b70: score=0.563 chunk=0.590 ans=0.500 matched=0/1 passed=False
+2026-06-16 09:23:39.668 | DEBUG    | [citation] 92d5e6a9-f639-4f71-9f16-37d437b936e6: score=0.862 chunk=1.000 ans=0.540 matched=2/2 passed=True
+2026-06-16 09:23:39.672 | DEBUG    | [citation] ce87961c-3c8f-40ba-8ecc-1ae0a2c1840f: score=0.887 chunk=1.000 ans=0.625 matched=2/2 passed=True
+2026-06-16 09:23:39.681 | DEBUG    | [citation] de30dd74-6295-44db-a2b8-407c04f5f669: score=0.700 chunk=0.780 ans=0.515 matched=1/2 passed=True
+2026-06-16 09:23:39.686 | DEBUG    | [citation] 76f34629-1c7e-48b5-83f4-49819cbd4463: score=0.920 chunk=1.000 ans=0.733 matched=3/3 passed=True
+2026-06-16 09:23:39.686 | DEBUG    | [citation] 61efbc48-2a4f-439c-a60c-3e74929156d7: score=0.880 chunk=0.987 ans=0.630 matched=3/3 passed=True
+2026-06-16 09:23:39.686 | DEBUG    | [citation] c91cce03-0448-46bd-accd-a072b1899f94: score=0.997 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 09:23:39.686 | DEBUG    | [citation] 839fd06d-1536-4180-acc0-2205464f257a: score=0.919 chunk=1.000 ans=0.730 matched=3/3 passed=True
+2026-06-16 09:23:39.716 | DEBUG    | [citation] f5ed442d-e346-4de5-9018-dc8f196bc0bc: score=0.937 chunk=1.000 ans=0.790 matched=1/1 passed=True
+2026-06-16 09:23:39.717 | DEBUG    | [citation] 82b9d482-32c3-4ee2-b469-c735a7cc2348: score=0.883 chunk=1.000 ans=0.610 matched=2/2 passed=True
+2026-06-16 09:23:39.718 | DEBUG    | [citation] 54f31c3c-133a-44ca-ad72-f9c96c4aec34: score=0.882 chunk=0.980 ans=0.655 matched=2/2 passed=True
+2026-06-16 09:23:39.719 | DEBUG    | [citation] 975aef22-3def-427c-b984-66ab3b6ddd28: score=0.864 chunk=0.990 ans=0.570 matched=2/2 passed=True
+2026-06-16 09:23:39.720 | DEBUG    | [citation] bb8cb4bb-1a2a-4760-93c2-3a20a1602648: score=0.793 chunk=0.907 ans=0.527 matched=2/3 passed=True
+2026-06-16 09:23:39.720 | DEBUG    | [citation] e20510a0-b736-43dd-baf5-08376bd8496f: score=0.829 chunk=1.000 ans=0.430 matched=1/1 passed=True
+2026-06-16 09:23:39.720 | DEBUG    | [citation] d4952906-18be-49ae-896a-b8df72f1d9af: score=0.922 chunk=1.000 ans=0.740 matched=1/1 passed=True
+2026-06-16 09:23:39.720 | DEBUG    | [citation] 6dbbe18c-aa44-4af1-ba14-84931221089c: score=0.910 chunk=1.000 ans=0.700 matched=1/1 passed=True
+2026-06-16 09:23:39.720 | DEBUG    | [citation] 9993f8f7-a648-496e-9c89-9ff9055d1a73: score=0.878 chunk=1.000 ans=0.595 matched=2/2 passed=True
+2026-06-16 09:23:39.732 | DEBUG    | [citation] 28bd5bea-b568-4a33-af29-b75cc888386b: score=0.772 chunk=0.870 ans=0.545 matched=1/2 passed=True
+2026-06-16 09:23:39.745 | DEBUG    | [citation] 1e3ed46f-ba65-4d93-91c7-3e8851c6f9b0: score=0.873 chunk=0.986 ans=0.608 matched=5/5 passed=True
+2026-06-16 09:23:39.758 | DEBUG    | [citation] b3b908eb-bf41-410a-82b6-5a689f39e6b7: score=0.860 chunk=0.974 ans=0.594 matched=5/5 passed=True
+2026-06-16 09:23:39.758 | DEBUG    | [citation] 98b9d252-2167-4e25-b300-a6f9272e9550: score=0.860 chunk=0.982 ans=0.575 matched=4/4 passed=True
+2026-06-16 09:23:39.773 | DEBUG    | [citation] 22aa17e0-6ffa-4532-9396-3d677d4fa1fc: score=0.846 chunk=0.990 ans=0.510 matched=1/1 passed=True
+2026-06-16 09:23:39.780 | DEBUG    | [citation] d424bd90-1665-43ea-a1a3-fdb88fc0cdfe: score=0.875 chunk=1.000 ans=0.585 matched=2/2 passed=True
+2026-06-16 09:23:39.788 | DEBUG    | [citation] 91217d03-926a-4c15-8a2c-d7b057496f9b: score=0.941 chunk=0.987 ans=0.833 matched=3/3 passed=True
+2026-06-16 09:23:39.804 | DEBUG    | [citation] d4290734-e5d1-401a-a779-f72877fc1339: score=0.874 chunk=1.000 ans=0.580 matched=1/1 passed=True
+2026-06-16 09:23:39.812 | DEBUG    | [citation] 62a51331-94a0-4a82-9dda-5d357ad887ef: score=0.852 chunk=0.950 ans=0.623 matched=3/3 passed=True
+2026-06-16 09:23:39.814 | DEBUG    | [citation] 30399688-0c08-4683-b943-f27ba353e906: score=0.866 chunk=1.000 ans=0.552 matched=5/5 passed=True
+2026-06-16 09:23:39.815 | DEBUG    | [citation] ec61bdc6-be4a-4b5c-85ff-74ad6f7c5976: score=0.911 chunk=1.000 ans=0.705 matched=2/2 passed=True
+2026-06-16 09:23:39.816 | DEBUG    | [citation] 6b7ad2e8-13d1-4baa-8055-b08c14284cfc: score=0.881 chunk=1.000 ans=0.603 matched=4/4 passed=True
+2026-06-16 09:23:39.817 | DEBUG    | [citation] b054c72f-1c2b-4d7c-83df-a52fe60a7a15: score=0.908 chunk=1.000 ans=0.693 matched=3/3 passed=True
+2026-06-16 09:23:39.839 | DEBUG    | [citation] f213c503-d3f1-409b-af95-58fb3a3e8bfe: score=0.842 chunk=0.997 ans=0.480 matched=3/3 passed=True
+2026-06-16 09:23:39.852 | DEBUG    | [citation] 11254da9-5119-4902-93bc-3068a002e52b: score=0.883 chunk=0.997 ans=0.617 matched=3/3 passed=True
+2026-06-16 09:23:39.867 | DEBUG    | [citation] 457803a8-8a84-4167-8a32-91bfef069ee1: score=0.871 chunk=1.000 ans=0.570 matched=5/5 passed=True
+2026-06-16 09:23:39.881 | DEBUG    | [citation] 81789a47-14b1-4de8-b30b-771950762742: score=0.850 chunk=1.000 ans=0.500 matched=3/3 passed=True
+2026-06-16 09:23:39.904 | DEBUG    | [citation] e151174f-0291-40eb-85be-c98cadf1fb6f: score=0.850 chunk=1.000 ans=0.500 matched=2/2 passed=True
+2026-06-16 09:23:39.904 | DEBUG    | [citation] 9e9122c5-2654-416d-b2d7-2357c5c1fc62: score=0.910 chunk=1.000 ans=0.700 matched=2/2 passed=True
+2026-06-16 09:23:39.904 | DEBUG    | [citation] b6393307-1499-4c64-b4d3-2d0e566d411c: score=0.874 chunk=0.990 ans=0.605 matched=2/2 passed=True
+2026-06-16 09:23:39.914 | DEBUG    | [citation] a38cd9f0-e51e-4c4b-8551-981bdcb61972: score=0.782 chunk=0.865 ans=0.590 matched=3/4 passed=True
+2026-06-16 09:23:39.924 | DEBUG    | [citation] 054d13c9-20dd-4d18-b1f5-ef7b655803db: score=0.843 chunk=0.960 ans=0.570 matched=1/1 passed=True
+2026-06-16 09:23:39.966 | DEBUG    | [citation] 1e68b242-94dd-4dcb-8525-6c19d4ce7fb6: score=0.834 chunk=0.953 ans=0.557 matched=3/3 passed=True
+2026-06-16 09:23:39.997 | DEBUG    | [citation] cad79eba-eda2-4c16-8e2b-d9749a6ec6aa: score=0.779 chunk=0.895 ans=0.510 matched=3/4 passed=True
+2026-06-16 09:23:40.007 | DEBUG    | [citation] 14b8f058-7f0d-41db-bf8f-1913a780e8eb: score=0.849 chunk=0.927 ans=0.667 matched=3/4 passed=True
+2026-06-16 09:23:40.020 | DEBUG    | [citation] 42b02771-60f3-46db-a35a-71dfb907d3e7: score=0.880 chunk=1.000 ans=0.600 matched=2/2 passed=True
+2026-06-16 09:23:40.020 | DEBUG    | [citation] 2e8a2342-f03f-4984-9f20-0ce9e813d397: score=0.822 chunk=0.926 ans=0.578 matched=4/5 passed=True
+2026-06-16 09:23:40.020 | DEBUG    | [citation] cf238c03-811b-48d7-8291-648129fee069: score=0.690 chunk=0.762 ans=0.522 matched=1/4 passed=True
+2026-06-16 09:23:40.036 | DEBUG    | [citation] a9518cde-06b5-4b7d-82df-f09c81e6c6e1: score=0.923 chunk=1.000 ans=0.745 matched=2/2 passed=True
+2026-06-16 09:23:40.046 | DEBUG    | [citation] 306bd2e7-2187-43ed-9fe1-bab553f79a59: score=0.923 chunk=0.990 ans=0.767 matched=3/3 passed=True
+2026-06-16 09:23:40.048 | DEBUG    | [citation] a3e15afe-8bac-4390-a77c-002784194af4: score=1.000 chunk=1.000 ans=1.000 matched=2/2 passed=True
+2026-06-16 09:23:40.052 | DEBUG    | [citation] 991e7780-5386-4e8b-9e97-c753f00d4e9f: score=0.840 chunk=0.967 ans=0.543 matched=3/3 passed=True
+2026-06-16 09:23:40.055 | DEBUG    | [citation] 69a4231c-a559-4462-891b-28f3851394c3: score=0.859 chunk=1.000 ans=0.530 matched=3/3 passed=True
+2026-06-16 09:23:40.055 | DEBUG    | [citation] bc15face-bc65-4f71-9f7a-2530d37c6140: score=0.879 chunk=0.980 ans=0.643 matched=3/3 passed=True
+2026-06-16 09:23:40.055 | DEBUG    | [citation] 544a7019-1387-4e92-ab9d-a4e5afd38862: score=0.867 chunk=1.000 ans=0.557 matched=3/3 passed=True
+2026-06-16 09:23:40.055 | DEBUG    | [citation] e1d896dd-e044-478b-b6dc-14efa0d8a368: score=0.849 chunk=1.000 ans=0.497 matched=4/4 passed=True
+2026-06-16 09:23:40.070 | DEBUG    | [citation] 40d618e7-94c4-47ad-8067-efc65a3e16c1: score=0.812 chunk=0.932 ans=0.530 matched=3/4 passed=True
+2026-06-16 09:23:40.073 | DEBUG    | [citation] a87d4344-f14f-40c5-b1c4-cced4ed9fd0e: score=0.873 chunk=1.000 ans=0.577 matched=3/3 passed=True
+2026-06-16 09:23:40.081 | DEBUG    | [citation] 2018a845-930b-4a63-8b78-70c8a9788e04: score=0.778 chunk=0.900 ans=0.495 matched=2/2 passed=True
+2026-06-16 09:23:40.084 | DEBUG    | [citation] a12ed9bd-aa8f-493b-aa93-2aa36245b4be: score=0.845 chunk=1.000 ans=0.485 matched=2/2 passed=True
+2026-06-16 09:23:40.099 | DEBUG    | [citation] 4bd8cf5e-4f0d-42fc-b118-efe769f9f1da: score=0.811 chunk=0.933 ans=0.527 matched=3/3 passed=True
+2026-06-16 09:23:40.107 | DEBUG    | [citation] b8481f0a-7dc4-4593-b2c5-ae9b1946502f: score=0.842 chunk=0.922 ans=0.655 matched=3/4 passed=True
+2026-06-16 09:23:40.111 | DEBUG    | [citation] 32e435ba-b397-4af6-bcc6-1e38832df972: score=0.840 chunk=0.997 ans=0.473 matched=3/3 passed=True
+2026-06-16 09:23:40.112 | DEBUG    | [citation] 6af526b9-f272-47e6-9a4e-3b63255f87ba: score=0.856 chunk=1.000 ans=0.520 matched=2/2 passed=True
+2026-06-16 09:23:40.114 | DEBUG    | [citation] c41ef1e6-c199-47a0-ae05-cc41058fd3d7: score=0.833 chunk=0.995 ans=0.455 matched=2/2 passed=True
+2026-06-16 09:23:40.115 | DEBUG    | [citation] 512bf9f6-16d7-4e06-adae-efe607362ec8: score=0.838 chunk=0.970 ans=0.530 matched=1/1 passed=True
+2026-06-16 09:23:40.126 | DEBUG    | [citation] 01e2a2fe-5777-46f2-8de5-077016745b64: score=0.761 chunk=0.870 ans=0.507 matched=2/3 passed=True
+2026-06-16 09:23:40.130 | DEBUG    | [citation] b7aaa20e-084e-4fdc-bf02-a1f6894d4d41: score=0.835 chunk=1.000 ans=0.450 matched=1/1 passed=True
+2026-06-16 09:23:40.136 | DEBUG    | [citation] e38b60b7-8460-4314-a324-2b64ae32483e: score=0.815 chunk=0.965 ans=0.465 matched=2/2 passed=True
+2026-06-16 09:23:40.136 | DEBUG    | [citation] dbe8e833-bda2-431d-b795-bd3996a5e9cc: score=0.848 chunk=1.000 ans=0.495 matched=2/2 passed=True
+2026-06-16 09:23:40.136 | DEBUG    | [citation] b1b9f62f-9bb4-4094-93ca-e41e6d7a3076: score=0.869 chunk=1.000 ans=0.565 matched=2/2 passed=True
+2026-06-16 09:23:40.136 | DEBUG    | [citation] d4005859-661e-4488-bc07-049fc287dce8: score=0.911 chunk=1.000 ans=0.705 matched=2/2 passed=True
+2026-06-16 09:23:40.136 | DEBUG    | [citation] c7de5a1e-afdd-4f3d-a11f-212cc88ffa54: score=0.844 chunk=1.000 ans=0.480 matched=1/1 passed=True
+2026-06-16 09:23:40.136 | DEBUG    | [citation] 3e06b204-1dfb-46ab-8bdb-f6dd86c3b90e: score=0.850 chunk=1.000 ans=0.500 matched=2/2 passed=True
+2026-06-16 09:23:40.152 | DEBUG    | [citation] 7656c066-70a3-48fd-8569-3e1ee493e382: score=0.852 chunk=0.987 ans=0.537 matched=3/3 passed=True
+2026-06-16 09:23:40.168 | DEBUG    | [citation] e383d907-b6dd-4c47-8612-62c7e7364e6d: score=0.804 chunk=0.927 ans=0.517 matched=3/3 passed=True
+2026-06-16 09:23:40.170 | DEBUG    | [citation] 76055d1b-8cf4-443d-9edb-f42c8a3c8503: score=0.810 chunk=0.927 ans=0.537 matched=2/3 passed=True
+2026-06-16 09:23:40.192 | DEBUG    | [citation] 25d7f4b3-7994-4162-bd8f-ee9f6be18a4c: score=0.816 chunk=0.930 ans=0.550 matched=3/3 passed=True
+2026-06-16 09:23:40.203 | DEBUG    | [citation] 3b5fa985-c6b4-4b42-80ed-e15c46927022: score=0.773 chunk=0.848 ans=0.600 matched=2/4 passed=True
+2026-06-16 09:23:40.203 | INFO     | Citation validation: 101/102 passed
+2026-06-16 09:23:40.214 | INFO     | Appended 102 records to runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\validation\citation_validation.jsonl
+2026-06-16 09:40:38.520 | WARNING  | [llm_validation] a38cd9f0-e51e-4c4b-8551-981bdcb61972 attempt 1 failed: Cannot parse JSON from LLM response: ```json
+{
+  "correctness": 5,
+  "answerability": 5,
+  "clarity": 4,
+  "difficulty_consistency": 1,
+  "suggested_difficulty": "medium",
+  "reason": "The question is well-formed and asks for a comparati
+2026-06-16 09:52:24.658 | INFO     | LLM validation: 99/101 passed, 0 errors, tokens: 67912 in / 212551 out
+2026-06-16 09:52:24.669 | INFO     | Appended 101 records to runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\validation\llm_validation.jsonl
+2026-06-16 09:52:24.684 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 09:52:31.158 | WARNING  | [qa::medium] clustering failed (name 'nn' is not defined), fallback to score sort
+2026-06-16 09:52:31.158 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 09:52:31.187 | WARNING  | [qa::easy] clustering failed (name 'nn' is not defined), fallback to score sort
+2026-06-16 09:52:31.188 | INFO     | Selection: selected=47 duplicate=0 overquota=52
+2026-06-16 09:52:31.223 | INFO     | Appended 102 records to runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\validation\validated_questions.jsonl
+2026-06-16 09:52:31.225 | INFO     | Saved JSON to runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\validation\weighted_selection.json
+2026-06-16 09:52:31.236 | INFO     | Saved JSON to runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\validation\validation_report.json
+2026-06-16 09:52:31.237 | INFO     | [VerifyAgent] done: selected=47 report=runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\validation\validation_report.json
+2026-06-16 09:52:31.348 | INFO     |   orig=102 by_diff={'easy': 13, 'medium': 46, 'hard': 43} → final=47 by_diff={'hard': 22, 'medium': 15, 'easy': 10}
+2026-06-16 09:52:31.348 | INFO     |   diff_corrections: 14/47 (29.8%) {'medium→hard': 6, 'easy→medium': 4, 'medium→easy': 3, 'hard→medium': 1}
+2026-06-16 09:52:31.349 | INFO     | ============================================================
+2026-06-16 09:52:31.349 | INFO     | [3/4] D_full_multiple_choice_20260616_090424
+2026-06-16 09:52:31.349 | INFO     | ============================================================
+2026-06-16 09:52:31.380 | INFO     | Built chunk index with 200 entries from runs\ques_generate\seed_42\D_full_multiple_choice_20260616_090424\evidence\chunked.json
+2026-06-16 09:52:31.381 | INFO     | Loaded 0 raw candidates from runs\ques_generate\seed_42\D_full_multiple_choice_20260616_090424\multiple_choice\candidate_pool.json
+2026-06-16 09:52:31.381 | INFO     | Normalized 0 candidates total
+2026-06-16 09:52:31.381 | ERROR    | Failed to verify D_full_multiple_choice_20260616_090424
+Traceback (most recent call last):
+
+  File "D:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 415, in <module>
+    asyncio.run(main())
+    │       │   └ <function main at 0x0000024B7F5AF2E0>
+    │       └ <function run at 0x0000024B78A0C1F0>
+    └ <module 'asyncio' from 'D:\\Anaconda\\envs\\bench_agent\\lib\\asyncio\\__init__.py'>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object main at 0x0000024B7F4E6C70>
+           │    └ <function BaseEventLoop.run_until_complete at 0x0000024B7A949240>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000024B7A9ECF70>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000024B7A94ACB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 1909, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000024B7A88E680>
+    └ <Handle Task.task_wakeup(<_GatheringFu...r=None), ...]>)>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<_GatheringFu...r=None), ...]>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<_GatheringFu...r=None), ...]>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<_GatheringFu...r=None), ...]>)>
+
+> File "D:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 280, in main
+    result = await run_verify_agent_from_shared_state(
+                   └ <function run_verify_agent_from_shared_state at 0x0000024B7F4C7490>
+
+  File "D:\Download\vscode\code\master\benchforge\agents\verify_agent\agent.py", line 333, in run_verify_agent_from_shared_state
+    result = await run_verify_agent(
+                   └ <function run_verify_agent at 0x0000024B7F4C72E0>
+
+  File "D:\Download\vscode\code\master\benchforge\agents\verify_agent\agent.py", line 304, in run_verify_agent
+    raise ValueError(f"No candidates loaded from {input_paths}")
+
+ValueError: No candidates loaded from ['runs\\ques_generate\\seed_42\\D_full_multiple_choice_20260616_090424\\multiple_choice\\candidate_pool.json']
+2026-06-16 09:52:31.386 | INFO     | ============================================================
+2026-06-16 09:52:31.386 | INFO     | [4/4] D_full_qa_20260616_090424
+2026-06-16 09:52:31.386 | INFO     | ============================================================
+2026-06-16 09:52:31.416 | INFO     | Built chunk index with 201 entries from runs\ques_generate\seed_42\D_full_qa_20260616_090424\evidence\chunked.json
+2026-06-16 09:52:31.418 | INFO     | Loaded 0 raw candidates from runs\ques_generate\seed_42\D_full_qa_20260616_090424\qa\candidate_pool.json
+2026-06-16 09:52:31.418 | INFO     | Normalized 0 candidates total
+2026-06-16 09:52:31.419 | ERROR    | Failed to verify D_full_qa_20260616_090424
+Traceback (most recent call last):
+
+  File "D:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 415, in <module>
+    asyncio.run(main())
+    │       │   └ <function main at 0x0000024B7F5AF2E0>
+    │       └ <function run at 0x0000024B78A0C1F0>
+    └ <module 'asyncio' from 'D:\\Anaconda\\envs\\bench_agent\\lib\\asyncio\\__init__.py'>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object main at 0x0000024B7F4E6C70>
+           │    └ <function BaseEventLoop.run_until_complete at 0x0000024B7A949240>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000024B7A9ECF70>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000024B7A94ACB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\base_events.py", line 1909, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000024B7A88E680>
+    └ <Handle Task.task_wakeup(<_GatheringFu...r=None), ...]>)>
+
+  File "D:\Anaconda\envs\bench_agent\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<_GatheringFu...r=None), ...]>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<_GatheringFu...r=None), ...]>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<_GatheringFu...r=None), ...]>)>
+
+> File "D:\Download\vscode\code\master\benchforge\experiment\qa_agent\verify_all.py", line 280, in main
+    result = await run_verify_agent_from_shared_state(
+                   └ <function run_verify_agent_from_shared_state at 0x0000024B7F4C7490>
+
+  File "D:\Download\vscode\code\master\benchforge\agents\verify_agent\agent.py", line 333, in run_verify_agent_from_shared_state
+    result = await run_verify_agent(
+                   └ <function run_verify_agent at 0x0000024B7F4C72E0>
+
+  File "D:\Download\vscode\code\master\benchforge\agents\verify_agent\agent.py", line 304, in run_verify_agent
+    raise ValueError(f"No candidates loaded from {input_paths}")
+
+ValueError: No candidates loaded from ['runs\\ques_generate\\seed_42\\D_full_qa_20260616_090424\\qa\\candidate_pool.json']
+2026-06-16 09:52:31.426 | INFO     | Report saved to D:\Download\vscode\code\master\benchforge\runs\ques_generate\seed_42\verify_all_report.json
+2026-06-16 09:52:31.427 | INFO     | Log saved to D:\Download\vscode\code\master\benchforge\runs\ques_generate\seed_42\verify_all_logs\verify_all_20260616_092339.log

@@ -1,0 +1,42 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "topic": "Artificial Intelligence",
+    "difficulty": "hard",
+    "error": "Error code: 404 - {'error': {'code': 'InvalidEndpointOrModel.NotFound', 'message': 'The model or endpoint deepseek-v3-250324 does not exist or you do not have access to it. Request id: 02178161302613256e64c7828ecc48447252d659c7ba99075ffa1', 'param': '', 'type': 'Not Found'}}",
+    "error_type": "NotFoundError",
+    "llm_call_id": null,
+    "trace_call_id": null
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "topic": "Quantum Computing",
+    "difficulty": "hard",
+    "error": "Error code: 404 - {'error': {'code': 'InvalidEndpointOrModel.NotFound', 'message': 'The model or endpoint deepseek-v3-250324 does not exist or you do not have access to it. Request id: 0217816130263805b348a82794b5725a30214ab58731f43822464', 'param': '', 'type': 'Not Found'}}",
+    "error_type": "NotFoundError",
+    "llm_call_id": null,
+    "trace_call_id": null
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "topic": "Artificial Intelligence",
+    "difficulty": "hard",
+    "error": "Error code: 404 - {'error': {'code': 'InvalidEndpointOrModel.NotFound', 'message': 'The model or endpoint deepseek-v3-250324 does not exist or you do not have access to it. Request id: 02178161302642456e64c7828ecc48447252d659c7ba990462254', 'param': '', 'type': 'Not Found'}}",
+    "error_type": "NotFoundError",
+    "llm_call_id": null,
+    "trace_call_id": null
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "topic": "Quantum Computing",
+    "difficulty": "hard",
+    "error": "Error code: 404 - {'error': {'code': 'InvalidEndpointOrModel.NotFound', 'message': 'The model or endpoint deepseek-v3-250324 does not exist or you do not have access to it. Request id: 0217816130264255b348a82794b5725a30214ab58731f43ed2176', 'param': '', 'type': 'Not Found'}}",
+    "error_type": "NotFoundError",
+    "llm_call_id": null,
+    "trace_call_id": null
+  }
+]

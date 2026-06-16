@@ -1,10 +1,12 @@
 {
-  "timestamp": "2026-06-16T00:41:31.207926",
+  "timestamp": "2026-06-16T09:52:31.426047",
   "model": "glm-4-7-251222",
   "registry_model": "glm-4.7",
   "target_run_dirs": [
-    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\seed_42\\A_direct_multiple_choice_20260615_234658",
-    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\seed_42\\A_direct_qa_20260615_234658"
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\seed_42\\C_feedback_no_diff_multiple_choice_20260616_090424",
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\seed_42\\C_feedback_no_diff_qa_20260616_090424",
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\seed_42\\D_full_multiple_choice_20260616_090424",
+    "D:\\Download\\vscode\\code\\master\\benchforge\\runs\\ques_generate\\seed_42\\D_full_qa_20260616_090424"
   ],
   "config": {
     "min_citation_score": 0.65,
@@ -15,64 +17,36 @@
   },
   "results": [
     {
-      "group": "A_direct_multiple_choice_20260615_234658",
-      "orig_count": 80,
+      "group": "C_feedback_no_diff_qa_20260616_090424",
+      "orig_count": 102,
       "orig_by_diff": {
-        "6": 11,
-        "3": 21,
-        "5": 19,
-        "4": 24,
-        "7": 1,
-        "2": 4
+        "easy": 13,
+        "medium": 46,
+        "hard": 43
       },
-      "final_selected": 17,
+      "final_selected": 47,
       "final_by_diff": {
-        "medium": 7,
+        "hard": 22,
+        "medium": 15,
         "easy": 10
       },
       "failed_by_stage": {
-        "citation": 0,
-        "llm": 1,
-        "validator_error": 0,
-        "duplicate": 1,
-        "overquota": 61
-      },
-      "diff_corrections": {
-        "total_selected": 17,
-        "corrected_count": 0,
-        "correction_ratio": 0.0,
-        "transitions": {}
-      }
-    },
-    {
-      "group": "A_direct_qa_20260615_234658",
-      "orig_count": 98,
-      "orig_by_diff": {
-        "2": 8,
-        "4": 25,
-        "3": 25,
-        "6": 12,
-        "5": 20,
-        "7": 6,
-        "8": 2
-      },
-      "final_selected": 18,
-      "final_by_diff": {
-        "easy": 10,
-        "medium": 8
-      },
-      "failed_by_stage": {
-        "citation": 0,
-        "llm": 7,
+        "citation": 1,
+        "llm": 2,
         "validator_error": 0,
         "duplicate": 0,
-        "overquota": 73
+        "overquota": 52
       },
       "diff_corrections": {
-        "total_selected": 18,
-        "corrected_count": 0,
-        "correction_ratio": 0.0,
-        "transitions": {}
+        "total_selected": 47,
+        "corrected_count": 14,
+        "correction_ratio": 0.2978723404255319,
+        "transitions": {
+          "medium→hard": 6,
+          "easy→medium": 4,
+          "medium→easy": 3,
+          "hard→medium": 1
+        }
       }
     }
   ]

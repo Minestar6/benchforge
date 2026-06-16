@@ -1,0 +1,29 @@
+{
+  "group_id": "B",
+  "method": "no_feedback",
+  "seed": 42,
+  "run_id": "B_no_feedback_qa_20260616_212718",
+  "task_id": "ques_generate",
+  "language": "en",
+  "topics": [
+    "Artificial Intelligence",
+    "Quantum Computing",
+    "World War II"
+  ],
+  "mode": "qa",
+  "count": 50,
+  "max_rounds": 10,
+  "difficulty_distribution": {
+    "easy": 0.2,
+    "medium": 0.3,
+    "hard": 0.5
+  },
+  "config_path": "D:\\Download\\vscode\\code\\master\\benchforge\\experiment\\qa_agent\\configs\\qa_agent_b_no_feedback.yaml",
+  "model_name": "deepseek-v3.2",
+  "enable_feedback": false,
+  "enable_hard_generate": false,
+  "enable_difficulty_adaptation": false,
+  "fixed_strategy": "normal_generate",
+  "fixed_difficulty": "medium",
+  "disable_initial_breadth": true
+}

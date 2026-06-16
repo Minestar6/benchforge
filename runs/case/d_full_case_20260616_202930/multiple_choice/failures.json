@@ -1,0 +1,42 @@
+[
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 1,
+    "topic": "Artificial Intelligence",
+    "difficulty": "hard",
+    "error": "Error code: 404 - {'error': {'code': 'InvalidEndpointOrModel.NotFound', 'message': 'The model or endpoint deepseek-v3-250324 does not exist or you do not have access to it. Request id: 02178161302649556e64c7828ecc48447252d659c7ba990c69064', 'param': '', 'type': 'Not Found'}}",
+    "error_type": "NotFoundError",
+    "llm_call_id": null,
+    "trace_call_id": null
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 1,
+    "topic": "Quantum Computing",
+    "difficulty": "hard",
+    "error": "Error code: 404 - {'error': {'code': 'InvalidEndpointOrModel.NotFound', 'message': 'The model or endpoint deepseek-v3-250324 does not exist or you do not have access to it. Request id: 0217816130264975b348a82794b5725a30214ab58731f4346d4dd', 'param': '', 'type': 'Not Found'}}",
+    "error_type": "NotFoundError",
+    "llm_call_id": null,
+    "trace_call_id": null
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 2,
+    "topic": "Artificial Intelligence",
+    "difficulty": "hard",
+    "error": "Error code: 404 - {'error': {'code': 'InvalidEndpointOrModel.NotFound', 'message': 'The model or endpoint deepseek-v3-250324 does not exist or you do not have access to it. Request id: 02178161302653756e64c7828ecc48447252d659c7ba990e601e8', 'param': '', 'type': 'Not Found'}}",
+    "error_type": "NotFoundError",
+    "llm_call_id": null,
+    "trace_call_id": null
+  },
+  {
+    "mode": "multiple_choice",
+    "round_in_mode": 2,
+    "topic": "Quantum Computing",
+    "difficulty": "hard",
+    "error": "Error code: 404 - {'error': {'code': 'InvalidEndpointOrModel.NotFound', 'message': 'The model or endpoint deepseek-v3-250324 does not exist or you do not have access to it. Request id: 0217816130265385b348a82794b5725a30214ab58731f433cfae5', 'param': '', 'type': 'Not Found'}}",
+    "error_type": "NotFoundError",
+    "llm_call_id": null,
+    "trace_call_id": null
+  }
+]

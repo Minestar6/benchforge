@@ -1,0 +1,111 @@
+2026-06-16 09:04:24.315 | INFO     | Log file: D:\Download\vscode\code\master\benchforge\runs\qa_agent_exp\run_all_logs\run_all_20260616_090424.log
+2026-06-16 09:04:24.439 | INFO     | Model: deepseek-v3-2-251201
+2026-06-16 09:04:24.439 | INFO     | Modes: ['qa', 'multiple_choice']
+2026-06-16 09:04:24.439 | INFO     | Topics: ['Artificial Intelligence', 'Quantum Computing', 'World War II']
+2026-06-16 09:04:24.439 | INFO     | Seeds: [42]
+2026-06-16 09:04:24.440 | INFO     | Timestamp: 20260616_090424
+2026-06-16 09:04:24.440 | INFO     | MODE: qa
+2026-06-16 09:04:24.441 | INFO     | Starting C - Feedback No Difficulty [qa], seed=42
+2026-06-16 09:04:24.442 | INFO     | === Group C: Feedback No Difficulty Evolution [qa] === run_id=C_feedback_no_diff_qa_20260616_090424
+2026-06-16 09:04:24.695 | INFO     | Preparing evidence for 3 topics (parallel)
+2026-06-16 09:06:51.380 | INFO     | Saved JSON to runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\evidence\chunked.json
+2026-06-16 09:06:51.395 | INFO     | Saved JSON to runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\evidence\single_units.json
+2026-06-16 09:06:51.402 | INFO     | Saved JSON to runs\ques_generate\seed_42\C_feedback_no_diff_qa_20260616_090424\evidence\multi_units.json
+2026-06-16 09:06:51.402 | INFO     | Starting mode: qa
+2026-06-16 09:08:20.991 | DEBUG    | Generator: mode=qa difficulty=medium response_len=11684
+2026-06-16 09:08:23.083 | DEBUG    | Generator: mode=qa difficulty=medium response_len=11741
+2026-06-16 09:08:43.899 | DEBUG    | Generator: mode=qa difficulty=medium response_len=15287
+2026-06-16 09:10:29.524 | DEBUG    | Generator: mode=qa difficulty=medium response_len=18007
+2026-06-16 09:10:30.843 | DEBUG    | Generator: mode=qa difficulty=medium response_len=18090
+2026-06-16 09:10:53.449 | DEBUG    | Generator: mode=qa difficulty=medium response_len=17588
+2026-06-16 09:10:53.452 | INFO     | Mode=qa round=1 strategy=initial_breadth generated=52 accepted=52 total_accepted=52
+2026-06-16 09:12:21.611 | DEBUG    | Generator: mode=qa difficulty=hard response_len=12569
+2026-06-16 09:12:24.832 | DEBUG    | Generator: mode=qa difficulty=hard response_len=13315
+2026-06-16 09:12:26.503 | DEBUG    | Generator: mode=qa difficulty=hard response_len=13012
+2026-06-16 09:13:58.469 | DEBUG    | Generator: mode=qa difficulty=hard response_len=13698
+2026-06-16 09:14:13.665 | DEBUG    | Generator: mode=qa difficulty=hard response_len=14272
+2026-06-16 09:14:33.231 | DEBUG    | Generator: mode=qa difficulty=hard response_len=18576
+2026-06-16 09:14:33.233 | INFO     | Mode=qa round=2 strategy=normal_generate generated=25 accepted=25 total_accepted=77
+2026-06-16 09:15:59.726 | DEBUG    | Generator: mode=qa difficulty=hard response_len=11362
+2026-06-16 09:16:01.376 | DEBUG    | Generator: mode=qa difficulty=hard response_len=13401
+2026-06-16 09:16:09.701 | DEBUG    | Generator: mode=qa difficulty=hard response_len=13252
+2026-06-16 09:17:49.952 | DEBUG    | Generator: mode=qa difficulty=hard response_len=13437
+2026-06-16 09:17:53.287 | DEBUG    | Generator: mode=qa difficulty=hard response_len=15658
+2026-06-16 09:18:09.916 | DEBUG    | Generator: mode=qa difficulty=hard response_len=18629
+2026-06-16 09:18:09.919 | INFO     | Mode=qa round=3 strategy=normal_generate generated=25 accepted=25 total_accepted=102
+2026-06-16 09:18:09.919 | INFO     | Mode qa stopped: max_candidate_pool_reached
+2026-06-16 09:18:10.018 | INFO     | Mode qa complete: 102 accepted, stopped_reason=max_candidate_pool_reached
+2026-06-16 09:18:10.022 | INFO     | Generation complete. Output: runs/ques_generate/seed_42/C_feedback_no_diff_qa_20260616_090424/
+2026-06-16 09:18:10.023 | INFO     | Group C completed. run_id=C_feedback_no_diff_qa_20260616_090424
+2026-06-16 09:18:10.024 | INFO     | Finished C - Feedback No Difficulty [qa], seed=42
+2026-06-16 09:18:10.024 | INFO     | Starting D - Full Method [qa], seed=42
+2026-06-16 09:18:10.025 | INFO     | === Group D: Full Method [qa] === run_id=D_full_qa_20260616_090424
+2026-06-16 09:18:10.042 | INFO     | Preparing evidence for 3 topics (parallel)
+2026-06-16 09:19:41.180 | WARNING  | Failed to summarize chunk doc_53bf4489cf6c::chunk_0000: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157278158509d3ad42231bc9609aa73992c6c59b4ee0782c', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:19:41.215 | WARNING  | Failed to summarize chunk doc_53bf4489cf6c::chunk_0001: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157278164509d3ad42231bc9609aa73992c6c59b4ec11aaf', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:19:41.248 | WARNING  | Failed to summarize chunk doc_53bf4489cf6c::chunk_0002: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157278167809d3ad42231bc9609aa73992c6c59b4ee42672', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:19:41.280 | WARNING  | Failed to combine summaries: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157278171209d3ad42231bc9609aa73992c6c59b4e97563d', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:20:23.865 | INFO     | Saved JSON to runs\ques_generate\seed_42\D_full_qa_20260616_090424\evidence\chunked.json
+2026-06-16 09:20:23.891 | INFO     | Saved JSON to runs\ques_generate\seed_42\D_full_qa_20260616_090424\evidence\single_units.json
+2026-06-16 09:20:23.897 | INFO     | Saved JSON to runs\ques_generate\seed_42\D_full_qa_20260616_090424\evidence\multi_units.json
+2026-06-16 09:20:23.897 | INFO     | Starting mode: qa
+2026-06-16 09:20:24.230 | ERROR    | Generator LLM call failed: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781572824659f29a4d0cd81a043224b6aa94ffec1f6af1a95f', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:20:24.230 | WARNING  | Topic Artificial Intelligence [single] failed in round 1: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781572824659f29a4d0cd81a043224b6aa94ffec1f6af1a95f', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:20:24.230 | ERROR    | Generator LLM call failed: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157282465993d211bc966303c142caabfc8f25a80340bf41', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:20:24.230 | WARNING  | Topic World War II [single] failed in round 1: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157282465993d211bc966303c142caabfc8f25a80340bf41', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:20:24.482 | ERROR    | Generator LLM call failed: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781572824914c9e5891c80703c73b0beb53b0155b0bfb84a39', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:20:24.482 | WARNING  | Topic Quantum Computing [single] failed in round 1: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781572824914c9e5891c80703c73b0beb53b0155b0bfb84a39', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:20:24.482 | INFO     | Mode=qa round=1 strategy=initial_breadth generated=0 accepted=0 total_accepted=0
+2026-06-16 09:20:24.482 | INFO     | Mode qa stopped: mode_failure_limit_reached
+2026-06-16 09:20:24.504 | INFO     | Mode qa complete: 0 accepted, stopped_reason=mode_failure_limit_reached
+2026-06-16 09:20:24.508 | INFO     | Generation complete. Output: runs/ques_generate/seed_42/D_full_qa_20260616_090424/
+2026-06-16 09:20:24.510 | INFO     | Group D completed. run_id=D_full_qa_20260616_090424
+2026-06-16 09:20:24.510 | INFO     | Finished D - Full Method [qa], seed=42
+2026-06-16 09:20:24.512 | INFO     | MODE: multiple_choice
+2026-06-16 09:20:24.512 | INFO     | Starting C - Feedback No Difficulty [multiple_choice], seed=42
+2026-06-16 09:20:24.513 | INFO     | === Group C: Feedback No Difficulty Evolution [multiple_choice] === run_id=C_feedback_no_diff_multiple_choice_20260616_090424
+2026-06-16 09:20:24.528 | INFO     | Preparing evidence for 3 topics (parallel)
+2026-06-16 09:21:34.877 | WARNING  | Failed to summarize chunk doc_53bf4489cf6c::chunk_0000: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157289527687baed5f4f5afe28d98e4b551391fd70d52b9e', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:21:34.928 | WARNING  | Failed to summarize chunk doc_53bf4489cf6c::chunk_0001: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157289534087baed5f4f5afe28d98e4b551391fd708864e5', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:21:34.965 | WARNING  | Failed to summarize chunk doc_53bf4489cf6c::chunk_0002: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157289539287baed5f4f5afe28d98e4b551391fd7042d592', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:21:35.001 | WARNING  | Failed to combine summaries: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157289542887baed5f4f5afe28d98e4b551391fd70e10f0e', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:22:18.550 | INFO     | Saved JSON to runs\ques_generate\seed_42\C_feedback_no_diff_multiple_choice_20260616_090424\evidence\chunked.json
+2026-06-16 09:22:18.567 | INFO     | Saved JSON to runs\ques_generate\seed_42\C_feedback_no_diff_multiple_choice_20260616_090424\evidence\single_units.json
+2026-06-16 09:22:18.572 | INFO     | Saved JSON to runs\ques_generate\seed_42\C_feedback_no_diff_multiple_choice_20260616_090424\evidence\multi_units.json
+2026-06-16 09:22:18.573 | INFO     | Starting mode: multiple_choice
+2026-06-16 09:22:18.872 | ERROR    | Generator LLM call failed: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781572939302875f22c5dcf98fc2650ac2583e10a839a756b2', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:22:18.874 | WARNING  | Topic Quantum Computing [single] failed in round 1: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781572939302875f22c5dcf98fc2650ac2583e10a839a756b2', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:22:18.897 | ERROR    | Generator LLM call failed: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 0217815729393042970295c18f318e807dda86bfc14847451c98d', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:22:18.898 | WARNING  | Topic World War II [single] failed in round 1: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 0217815729393042970295c18f318e807dda86bfc14847451c98d', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:22:19.239 | ERROR    | Generator LLM call failed: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781572939344868b2df7cad200b62b2bc44e6de10221d2191b', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:22:19.241 | WARNING  | Topic Artificial Intelligence [single] failed in round 1: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781572939344868b2df7cad200b62b2bc44e6de10221d2191b', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:22:19.242 | INFO     | Mode=multiple_choice round=1 strategy=initial_breadth generated=0 accepted=0 total_accepted=0
+2026-06-16 09:22:19.243 | INFO     | Mode multiple_choice stopped: mode_failure_limit_reached
+2026-06-16 09:22:19.259 | INFO     | Mode multiple_choice complete: 0 accepted, stopped_reason=mode_failure_limit_reached
+2026-06-16 09:22:19.264 | INFO     | Generation complete. Output: runs/ques_generate/seed_42/C_feedback_no_diff_multiple_choice_20260616_090424/
+2026-06-16 09:22:19.266 | INFO     | Group C completed. run_id=C_feedback_no_diff_multiple_choice_20260616_090424
+2026-06-16 09:22:19.267 | INFO     | Finished C - Feedback No Difficulty [multiple_choice], seed=42
+2026-06-16 09:22:19.267 | INFO     | Starting D - Full Method [multiple_choice], seed=42
+2026-06-16 09:22:19.268 | INFO     | === Group D: Full Method [multiple_choice] === run_id=D_full_multiple_choice_20260616_090424
+2026-06-16 09:22:19.283 | INFO     | Preparing evidence for 3 topics (parallel)
+2026-06-16 09:23:32.415 | WARNING  | Failed to summarize chunk doc_53bf4489cf6c::chunk_0000: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781573012815062a251027a41080f375ac205c9b1b86d4348e', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:23:32.447 | WARNING  | Failed to summarize chunk doc_53bf4489cf6c::chunk_0001: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781573012879062a251027a41080f375ac205c9b1b86388f47', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:23:32.488 | WARNING  | Failed to summarize chunk doc_53bf4489cf6c::chunk_0002: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781573012917062a251027a41080f375ac205c9b1b86ecad9b', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:23:32.527 | WARNING  | Failed to combine summaries: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781573012955062a251027a41080f375ac205c9b1b8631d931', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:23:36.491 | INFO     | Saved JSON to runs\ques_generate\seed_42\D_full_multiple_choice_20260616_090424\evidence\chunked.json
+2026-06-16 09:23:36.505 | INFO     | Saved JSON to runs\ques_generate\seed_42\D_full_multiple_choice_20260616_090424\evidence\single_units.json
+2026-06-16 09:23:36.511 | INFO     | Saved JSON to runs\ques_generate\seed_42\D_full_multiple_choice_20260616_090424\evidence\multi_units.json
+2026-06-16 09:23:36.511 | INFO     | Starting mode: multiple_choice
+2026-06-16 09:23:36.567 | ERROR    | Generator LLM call failed: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781573016983062a251027a41080f375ac205c9b1b865cd0d6', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:23:36.568 | WARNING  | Topic Artificial Intelligence [single] failed in round 1: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781573016983062a251027a41080f375ac205c9b1b865cd0d6', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:23:36.800 | ERROR    | Generator LLM call failed: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781573017227edfe17761d7699bd2e54408390fbabd17cdc75', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:23:36.800 | WARNING  | Topic World War II [single] failed in round 1: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 021781573017227edfe17761d7699bd2e54408390fbabd17cdc75', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:23:36.804 | ERROR    | Generator LLM call failed: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157301722915aaa5b88a002f341961ec0a179b9cfa4259c6', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:23:36.806 | WARNING  | Topic Quantum Computing [single] failed in round 1: Error code: 403 - {'error': {'code': 'AccountOverdueError', 'message': 'The request failed because your account has an overdue balance. Request id: 02178157301722915aaa5b88a002f341961ec0a179b9cfa4259c6', 'param': '', 'type': 'Forbidden'}}
+2026-06-16 09:23:36.807 | INFO     | Mode=multiple_choice round=1 strategy=initial_breadth generated=0 accepted=0 total_accepted=0
+2026-06-16 09:23:36.808 | INFO     | Mode multiple_choice stopped: mode_failure_limit_reached
+2026-06-16 09:23:36.824 | INFO     | Mode multiple_choice complete: 0 accepted, stopped_reason=mode_failure_limit_reached
+2026-06-16 09:23:36.829 | INFO     | Generation complete. Output: runs/ques_generate/seed_42/D_full_multiple_choice_20260616_090424/
+2026-06-16 09:23:36.831 | INFO     | Group D completed. run_id=D_full_multiple_choice_20260616_090424
+2026-06-16 09:23:36.832 | INFO     | Finished D - Full Method [multiple_choice], seed=42
+2026-06-16 09:23:36.832 | INFO     | All experiments completed.

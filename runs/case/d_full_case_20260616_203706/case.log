@@ -1,0 +1,6 @@
+2026-06-16 20:37:06.950 | INFO     | Starting case generation: task=case run=d_full_case_20260616_203706
+2026-06-16 20:37:07.398 | INFO     | Preparing evidence for 2 topics (parallel)
+2026-06-16 20:38:29.556 | INFO     | Saved JSON to runs\case\d_full_case_20260616_203706\evidence\chunked.json
+2026-06-16 20:38:29.561 | INFO     | Saved JSON to runs\case\d_full_case_20260616_203706\evidence\single_units.json
+2026-06-16 20:38:29.565 | INFO     | Saved JSON to runs\case\d_full_case_20260616_203706\evidence\multi_units.json
+2026-06-16 20:38:29.565 | INFO     | Starting mode: qa

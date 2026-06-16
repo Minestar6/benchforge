@@ -1,0 +1,210 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "normal_generate",
+    "difficulty": "medium",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing",
+      "World War II"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 3,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 16,
+        "raw_count": 16,
+        "filtered_count": 16,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_b54c8b0c1f86458aa6ad9839336ce4e6",
+        "trace_call_id": "llm_ef31f0fa65554866abd82da564d5ffb1",
+        "chunks": [
+          "doc_80583f4e8964::chunk_0000",
+          "doc_80583f4e8964::chunk_0001",
+          "doc_80583f4e8964::chunk_0005",
+          "doc_80583f4e8964::chunk_0006",
+          "doc_aef977fc2141::chunk_0004"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 17,
+        "raw_count": 17,
+        "filtered_count": 17,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_debf0217a4584243b7c85d3311e2e6bb",
+        "trace_call_id": "llm_99b2ab7c87f84259a9be87bb8a7cc61a",
+        "chunks": [
+          "doc_1445315a96fe::chunk_0001",
+          "doc_1445315a96fe::chunk_0005",
+          "doc_1445315a96fe::chunk_0006",
+          "doc_1445315a96fe::chunk_0007",
+          "doc_53bf4489cf6c::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 0,
+        "raw_count": 0,
+        "filtered_count": 0,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": null,
+        "trace_call_id": null,
+        "chunks": [],
+        "duplicate_combination": true,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "strategy": "normal_generate",
+    "difficulty": "medium",
+    "topics": [
+      "World War II",
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 0,
+        "raw_count": 0,
+        "filtered_count": 0,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": null,
+        "trace_call_id": null,
+        "chunks": [],
+        "duplicate_combination": true,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 20,
+        "raw_count": 20,
+        "filtered_count": 20,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_5835a9acb97c47829a025a0468ed02c1",
+        "trace_call_id": "llm_98d77a7dc74940fbaca6e740934e812e",
+        "chunks": [
+          "doc_10240d6c8bf0::chunk_0002",
+          "doc_804dae27c43f::chunk_0008",
+          "doc_804dae27c43f::chunk_0011",
+          "doc_804dae27c43f::chunk_0013",
+          "doc_804dae27c43f::chunk_0014"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 20,
+        "raw_count": 20,
+        "filtered_count": 20,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_ae1ff2c74c9b4f3e9d56ec0d5dea03a5",
+        "trace_call_id": "llm_20b6b9cd3ffd4ec49b2df100234183d1",
+        "chunks": [
+          "doc_7d4efb3cc0af::chunk_0000",
+          "doc_7d4efb3cc0af::chunk_0003",
+          "doc_7d4efb3cc0af::chunk_0005",
+          "doc_cd5a4b0bb607::chunk_0006"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 3,
+    "strategy": "normal_generate",
+    "difficulty": "medium",
+    "topics": [
+      "World War II",
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "World War II",
+        "success": true,
+        "generated_count": 0,
+        "raw_count": 0,
+        "filtered_count": 0,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": null,
+        "trace_call_id": null,
+        "chunks": [],
+        "duplicate_combination": true,
+        "error": null
+      },
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 17,
+        "raw_count": 17,
+        "filtered_count": 17,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_584be7c1b52c4f389923fec1d32faa15",
+        "trace_call_id": "llm_50a2b2b3ca27465fb9fc0878b8097bfe",
+        "chunks": [
+          "doc_10240d6c8bf0::chunk_0001",
+          "doc_10240d6c8bf0::chunk_0002",
+          "doc_10240d6c8bf0::chunk_0003",
+          "doc_10240d6c8bf0::chunk_0005",
+          "doc_aef977fc2141::chunk_0010"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 16,
+        "raw_count": 16,
+        "filtered_count": 16,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_5e0b20f673a14fd0815566441a5b4d06",
+        "trace_call_id": "llm_099b6fdf9b8d4aa394b9978be15013f6",
+        "chunks": [
+          "doc_7d4efb3cc0af::chunk_0000",
+          "doc_7d4efb3cc0af::chunk_0002",
+          "doc_7d4efb3cc0af::chunk_0004",
+          "doc_cd5a4b0bb607::chunk_0009"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

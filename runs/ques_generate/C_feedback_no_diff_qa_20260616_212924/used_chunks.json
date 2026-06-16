@@ -1,0 +1,84 @@
+{
+  "used_chunk_combinations": [
+    [
+      "doc_cd5a4b0bb607::chunk_0000",
+      "doc_cd5a4b0bb607::chunk_0004",
+      "doc_cd5a4b0bb607::chunk_0005"
+    ],
+    [
+      "doc_9b6ecb700538::chunk_0000"
+    ],
+    [
+      "doc_aef977fc2141::chunk_0015"
+    ],
+    [
+      "doc_0179a47d7650::chunk_0004"
+    ],
+    [
+      "doc_80583f4e8964::chunk_0001",
+      "doc_80583f4e8964::chunk_0002",
+      "doc_80583f4e8964::chunk_0003",
+      "doc_80583f4e8964::chunk_0006"
+    ],
+    [
+      "doc_cd5a4b0bb607::chunk_0002"
+    ],
+    [
+      "doc_cc093eac10aa::chunk_0008"
+    ],
+    [
+      "doc_1445315a96fe::chunk_0005"
+    ],
+    [
+      "doc_ea11fb2dc7ae::chunk_0009",
+      "doc_ea11fb2dc7ae::chunk_0015",
+      "doc_ea11fb2dc7ae::chunk_0029"
+    ],
+    [
+      "doc_ea11fb2dc7ae::chunk_0006",
+      "doc_ea11fb2dc7ae::chunk_0016",
+      "doc_ea11fb2dc7ae::chunk_0017",
+      "doc_ea11fb2dc7ae::chunk_0038"
+    ],
+    [
+      "doc_cd5a4b0bb607::chunk_0001",
+      "doc_cd5a4b0bb607::chunk_0007",
+      "doc_cd5a4b0bb607::chunk_0008",
+      "doc_cd5a4b0bb607::chunk_0010"
+    ],
+    [
+      "doc_10240d6c8bf0::chunk_0001",
+      "doc_10240d6c8bf0::chunk_0003",
+      "doc_10240d6c8bf0::chunk_0004"
+    ]
+  ],
+  "chunk_usage_counts": {
+    "doc_cc093eac10aa::chunk_0008": 1,
+    "doc_10240d6c8bf0::chunk_0001": 1,
+    "doc_10240d6c8bf0::chunk_0003": 1,
+    "doc_10240d6c8bf0::chunk_0004": 1,
+    "doc_1445315a96fe::chunk_0005": 1,
+    "doc_cd5a4b0bb607::chunk_0001": 1,
+    "doc_cd5a4b0bb607::chunk_0007": 1,
+    "doc_cd5a4b0bb607::chunk_0008": 1,
+    "doc_cd5a4b0bb607::chunk_0010": 1,
+    "doc_0179a47d7650::chunk_0004": 1,
+    "doc_ea11fb2dc7ae::chunk_0006": 1,
+    "doc_ea11fb2dc7ae::chunk_0016": 1,
+    "doc_ea11fb2dc7ae::chunk_0017": 1,
+    "doc_ea11fb2dc7ae::chunk_0038": 1,
+    "doc_9b6ecb700538::chunk_0000": 1,
+    "doc_ea11fb2dc7ae::chunk_0009": 1,
+    "doc_ea11fb2dc7ae::chunk_0015": 1,
+    "doc_ea11fb2dc7ae::chunk_0029": 1,
+    "doc_aef977fc2141::chunk_0015": 1,
+    "doc_80583f4e8964::chunk_0001": 1,
+    "doc_80583f4e8964::chunk_0002": 1,
+    "doc_80583f4e8964::chunk_0003": 1,
+    "doc_80583f4e8964::chunk_0006": 1,
+    "doc_cd5a4b0bb607::chunk_0002": 1,
+    "doc_cd5a4b0bb607::chunk_0000": 1,
+    "doc_cd5a4b0bb607::chunk_0004": 1,
+    "doc_cd5a4b0bb607::chunk_0005": 1
+  }
+}
