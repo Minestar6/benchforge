@@ -9,7 +9,7 @@ from benchforge.models.base import BaseModelClient
 
 
 class OpenAIClient(BaseModelClient):
-    """OpenAI ?? API ????"""
+    """OpenAI 兼容 API 客户端"""
 
     def __init__(
         self,
@@ -19,10 +19,13 @@ class OpenAIClient(BaseModelClient):
         temperature: float = 0.7,
         max_tokens: int = 2000,
         max_retries: int = 3,
+        thinking: str | None = None,
     ):
         self.model_name = model_name
         self.temperature = temperature
         self.max_tokens = max_tokens
+        self.thinking = thinking
+        self.extra_parameters: dict[str, Any] = {}
         self.client = openai.AsyncOpenAI(
             api_key=api_key,
             base_url=base_url,
@@ -61,11 +64,21 @@ class OpenAIClient(BaseModelClient):
             pass
 
         try:
+            extra_body = kwargs.pop("extra_body", None) or {}
+            if self.extra_parameters:
+                extra_body = {**self.extra_parameters, **extra_body}
+            if self.thinking is not None:
+                extra_body = {"thinking": {"type": self.thinking}, **extra_body}
+            call_kwargs: dict[str, Any] = {
+                "model": model,
+                "messages": messages,
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+            }
+            if extra_body:
+                call_kwargs["extra_body"] = extra_body
             response = await self.client.chat.completions.create(
-                model=model,
-                messages=messages,
-                temperature=temperature,
-                max_tokens=max_tokens,
+                **call_kwargs,
                 **kwargs,
             )
         except Exception as exc:

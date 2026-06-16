@@ -117,6 +117,14 @@ class CitationScoreMetric(DatasetMetric):
 # ─── diversity_score ────────────────────────────────────────────
 
 _MIN_GROUP_SIZE = 3
+_embedding_model_cache: dict[str, Any] = {}  # model_name -> SentenceTransformer
+
+
+def _get_or_load_embedding_model(model_name: str = "all-MiniLM-L6-v2"):
+    if model_name not in _embedding_model_cache:
+        from sentence_transformers import SentenceTransformer
+        _embedding_model_cache[model_name] = SentenceTransformer(model_name)
+    return _embedding_model_cache[model_name]
 
 
 def _compute_diversity(texts: list[str]) -> dict[str, Any] | None:
@@ -124,10 +132,9 @@ def _compute_diversity(texts: list[str]) -> dict[str, Any] | None:
         return None
     try:
         import numpy as np
-        from sentence_transformers import SentenceTransformer
         from sklearn.cluster import KMeans
 
-        model = SentenceTransformer("all-MiniLM-L6-v2")
+        model = _get_or_load_embedding_model("all-MiniLM-L6-v2")
         embs = model.encode(texts, convert_to_numpy=True, normalize_embeddings=True)
 
         n = len(embs)

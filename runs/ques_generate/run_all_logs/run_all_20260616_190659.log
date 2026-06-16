@@ -1,0 +1,10 @@
+2026-06-16 19:06:59.505 | INFO     | Log file: /Users/zhaoziqing/Desktop/benchforge/runs/ques_generate/run_all_logs/run_all_20260616_190659.log
+2026-06-16 19:06:59.506 | INFO     | Modes: ['qa']
+2026-06-16 19:06:59.506 | INFO     | Topics: ['Artificial Intelligence', 'Quantum Computing', 'World War II']
+2026-06-16 19:06:59.506 | INFO     | Seeds: [42]
+2026-06-16 19:06:59.507 | INFO     | Timestamp: 20260616_190659
+2026-06-16 19:06:59.507 | INFO     | Model resolution via model_registry.yaml (model.name in each group config)
+2026-06-16 19:06:59.508 | INFO     | MODE: qa
+2026-06-16 19:06:59.508 | INFO     | Starting A [qa], seed=42
+2026-06-16 19:06:59.508 | INFO     | Finished A [qa], seed=42
+2026-06-16 19:06:59.509 | INFO     | All experiments completed.

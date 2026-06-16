@@ -203,16 +203,12 @@ class BertScoreMetric(AutoMetric):
 class SemanticSimilarityMetric(AutoMetric):
     name = "semantic_similarity"
 
-    _model = None
-
     def _get_model(self):
-        if SemanticSimilarityMetric._model is None:
-            try:
-                from sentence_transformers import SentenceTransformer
-                SemanticSimilarityMetric._model = SentenceTransformer("all-MiniLM-L6-v2")
-            except ImportError:
-                return None
-        return SemanticSimilarityMetric._model
+        try:
+            from benchforge.utils.metrics_dataset import _get_or_load_embedding_model
+            return _get_or_load_embedding_model()
+        except ImportError:
+            return None
 
     def compute(self, question: dict, prediction: str, context: dict | None = None) -> float | None:
         model = self._get_model()
@@ -226,14 +222,14 @@ class SemanticSimilarityMetric(AutoMetric):
 
 class SemanticAccuracyMetric(AutoMetric):
     name = "semantic_accuracy"
+    default_threshold = 0.85
 
     def __init__(self, similarity_metric: SemanticSimilarityMetric | None = None):
         self.similarity_metric = similarity_metric or SemanticSimilarityMetric()
 
     def compute(self, question: dict, prediction: str, context: dict | None = None) -> float | None:
-        threshold = None if context is None else context.get("threshold")
-        if threshold is None:
-            return None
+        raw_threshold = self.default_threshold if context is None else context.get("threshold", self.default_threshold)
+        threshold = raw_threshold if raw_threshold is not None else self.default_threshold
         similarity = self.similarity_metric.compute(question, prediction, context)
         if similarity is None:
             return None

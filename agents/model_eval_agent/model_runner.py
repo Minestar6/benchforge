@@ -31,7 +31,7 @@ def _format_multiple_choice_options(choices: Any) -> str:
 
 async def _run_single(
     client: BaseModelClient,
-    model_name: str,
+    model_name: str,  # 仅用于日志/label，不用于 API 调用
     question: dict[str, Any],
     generation_defaults: dict[str, Any],
     llm_trace_path: str,
@@ -40,6 +40,7 @@ async def _run_single(
 ) -> dict[str, Any]:
     prompt = _build_prompt(question)
     messages = [{"role": "user", "content": prompt}]
+    api_model = getattr(client, "model_name", model_name)
 
     async with semaphore:
         t0 = time.monotonic()
@@ -55,14 +56,14 @@ async def _run_single(
                     },
                 ):
                     resp = await client.complete(
-                        model=model_name,
+                        model=api_model,
                         messages=messages,
                         llm_trace_path=llm_trace_path,
                         **generation_defaults,
                     )
             else:
                 resp = await client.complete(
-                    model=model_name,
+                    model=api_model,
                     messages=messages,
                     llm_trace_path=llm_trace_path,
                     **generation_defaults,
@@ -123,13 +124,22 @@ async def run_candidate_models(
     store = ArtifactStore(str(output_dir))
     semaphore = asyncio.Semaphore(max_concurrency)
 
+    # 按 question_id 去重，避免同一问题被多次推理
+    seen_qids: set[str] = set()
+    unique_questions: list[dict[str, Any]] = []
+    for q in questions:
+        qid = q["question_id"]
+        if qid not in seen_qids:
+            seen_qids.add(qid)
+            unique_questions.append(q)
+
     tasks = [
         _run_single(client, model_name, q, generation_defaults, llm_trace_path, tracer, semaphore)
         for model_name, client in models
-        for q in questions
+        for q in unique_questions
     ]
 
-    logger.info(f"[ModelRunner] running {len(tasks)} inferences ({len(models)} models × {len(questions)} questions)")
+    logger.info(f"[ModelRunner] running {len(tasks)} inferences ({len(models)} models × {len(unique_questions)} questions)")
     responses = await asyncio.gather(*tasks)
     store.append_jsonl("model_responses.jsonl", list(responses))
 

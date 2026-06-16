@@ -44,18 +44,28 @@ models:
     model_name: "deepseek-v3-250324"
     base_url: "${CUSTOM_API_BASE_URL}"
     api_key: "${CUSTOM_API_KEY}"
+    thinking: "disabled"
+
+  deepseek-v4:
+    provider: "openai"
+    model_name: "DeepSeek-V4-Flash"
+    base_url: "${CUSTOM_API_BASE_URL}"
+    api_key: "${CUSTOM_API_KEY}"
+    thinking: "disabled"
 
   glm-4.7:
     provider: "openai"
     model_name: "glm-4-7-251222"
     base_url: "${CUSTOM_API_BASE_URL}"
     api_key: "${CUSTOM_API_KEY}"
+    thinking: "disabled"
 
   kimi-k2:
     provider: "openai"
     model_name: "kimi-k2-thinking-251104"
     base_url: "${CUSTOM_API_BASE_URL}"
     api_key: "${CUSTOM_API_KEY}"
+    thinking: "disabled"
   
 
 

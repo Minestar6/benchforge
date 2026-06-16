@@ -1,0 +1,106 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "hard",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "Artificial Intelligence",
+        "success": true,
+        "generated_count": 4,
+        "raw_count": 4,
+        "filtered_count": 4,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 3,
+        "multi_generated_count": 1,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_aaacf41c9f8341bd8de05dc5b478bfed",
+        "trace_call_id": "llm_6387603b1a9244678d2e8d52bed1ef41",
+        "chunks": [
+          "doc_10240d6c8bf0::chunk_0003",
+          "doc_aef977fc2141::chunk_0001",
+          "doc_aef977fc2141::chunk_0004",
+          "doc_aef977fc2141::chunk_0013",
+          "doc_aef977fc2141::chunk_0015"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 0,
+        "raw_count": 0,
+        "filtered_count": 0,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 0,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_0bc3bb943d864e02905cc7a235ae4b23",
+        "trace_call_id": "llm_adc3465299eb47bea3d370d3de30c2e8",
+        "chunks": [
+          "doc_53bf4489cf6c::chunk_0001",
+          "doc_cd5a4b0bb607::chunk_0001",
+          "doc_cd5a4b0bb607::chunk_0003",
+          "doc_cd5a4b0bb607::chunk_0004"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  },
+  {
+    "mode": "qa",
+    "round_in_mode": 2,
+    "strategy": "focus_topic",
+    "difficulty": "medium",
+    "topics": [
+      "Quantum Computing"
+    ],
+    "single_k": 1,
+    "multi_k": 2,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "Quantum Computing",
+        "success": true,
+        "generated_count": 15,
+        "raw_count": 15,
+        "filtered_count": 15,
+        "single_unit_count": 1,
+        "multi_unit_count": 2,
+        "single_generated_count": 9,
+        "multi_generated_count": 6,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_c4de2e6525ef403eb4ba67124bb98f7c",
+        "trace_call_id": "llm_27b68a32589b42f398f0fb9608648561",
+        "chunks": [
+          "doc_53bf4489cf6c::chunk_0008",
+          "doc_7d4efb3cc0af::chunk_0001",
+          "doc_7d4efb3cc0af::chunk_0002",
+          "doc_7d4efb3cc0af::chunk_0004",
+          "doc_7d4efb3cc0af::chunk_0005",
+          "doc_cd5a4b0bb607::chunk_0001",
+          "doc_cd5a4b0bb607::chunk_0007",
+          "doc_cd5a4b0bb607::chunk_0008",
+          "doc_cd5a4b0bb607::chunk_0010"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

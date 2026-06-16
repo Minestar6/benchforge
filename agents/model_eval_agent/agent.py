@@ -30,6 +30,13 @@ from .report_writer import write_reports
 from .schema import ModelEvalAgentConfig
 
 
+def _write_jsonl_overwrite(path: Path, records: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        for record in records:
+            f.write(json.dumps(record, ensure_ascii=False, default=str) + "\n")
+
+
 def _resolve_input_paths_from_shared_state(
     state: SharedState, run_dir: Path
 ) -> list[str]:
@@ -44,7 +51,7 @@ def _resolve_input_paths_from_shared_state(
     if validated_path.exists():
         return [str(validated_path)]
 
-    for key in ("accepted_questions", "accepted_questions_quality"):
+    for key in ("accepted_questions",):
         if val := state.artifact(key):
             paths.append(val)
     if paths:
@@ -57,7 +64,11 @@ def _resolve_input_paths_from_shared_state(
 
 
 def _load_eval_questions(input_paths: list[str]) -> list[dict[str, Any]]:
-    """加载题目，过滤掉非 selected 的记录。"""
+    """加载题目，过滤掉非 selected 的记录。
+
+    评估阶段只依赖“是否入选”的离散结果，不消费 verify_agent 生成的
+    final_weight / sampling_weights 等质量权重字段。
+    """
     records: list[dict] = []
     for path in input_paths:
         p = Path(path)
@@ -71,17 +82,32 @@ def _load_eval_questions(input_paths: list[str]) -> list[dict[str, Any]]:
                     records.append(json.loads(line))
 
     normalized: list[dict] = []
+    seen_ids: set[str] = set()
     for record in records:
         if "final_status" in record:
             if record["final_status"] != "selected":
                 continue
             candidate = dict(record.get("candidate", record))
+            qid = candidate.get("question_id", "")
+            if qid in seen_ids:
+                continue
+            seen_ids.add(qid)
+            candidate.pop("final_weight", None)
+            candidate.pop("sampling_weight", None)
+            candidate.pop("sampling_weights", None)
             candidate["citation_validation"] = record.get("citation_validation")
             candidate["llm_validation"] = record.get("llm_validation")
             candidate["final_status"] = record["final_status"]
             normalized.append(candidate)
         else:
-            normalized.append(record)
+            qid = record.get("question_id", "")
+            if qid not in seen_ids:
+                seen_ids.add(qid)
+                record = dict(record)
+                record.pop("final_weight", None)
+                record.pop("sampling_weight", None)
+                record.pop("sampling_weights", None)
+                normalized.append(record)
 
     if not normalized:
         raise ValueError("No evaluation questions found (no selected records in input)")
@@ -111,6 +137,24 @@ async def _run(
 
     questions = _load_eval_questions(input_paths)
     logger.info(f"[ModelEvalAgent] loaded {len(questions)} evaluation questions")
+    intermediate_store = ArtifactStore(str(output_root / "intermediate"))
+    _write_jsonl_overwrite(output_root / "intermediate" / "evaluation_questions.jsonl", questions)
+    intermediate_store.save_json(
+        "judge_plan.json",
+        {
+            "judge_enabled": config.judge.enabled,
+            "judge_model_name": config.models.judge_model_name,
+            "prompt_system": config.judge.prompt_system,
+            "prompt_user": config.judge.prompt_user,
+            "metrics": {
+                mode: [
+                    {"name": metric.name, "description": metric.description}
+                    for metric in plan.llm_judge_metrics
+                ]
+                for mode, plan in config.metrics.items()
+            },
+        },
+    )
 
     # 模型注册表
     registry = {}

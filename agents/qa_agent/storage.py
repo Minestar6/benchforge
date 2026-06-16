@@ -94,6 +94,12 @@ def save_mode_metrics(
         "min_difficulty_targets": min_diff_targets,
         "min_target_reached": min_target_reached,
         "max_target_reached": mode_state.accepted_count >= max_target if max_target > 0 else False,
+        "terminal_hard_repair": {
+            "executed": mode_state.terminal_hard_repair_executed,
+            "rounds": mode_state.terminal_hard_repair_rounds,
+            "generated_count": mode_state.terminal_hard_repair_generated_count,
+            "accepted_count": mode_state.terminal_hard_repair_accepted_count,
+        },
     }
     _write_json(Path("runs") / task_id / run_id / mode / "mode_metrics.json", metrics)
 
@@ -148,6 +154,12 @@ def save_mode_outputs(task_id: str, run_id: str, mode: str, mode_state: ModeStat
         "difficulty_counts": mode_state.get_difficulty_counts(CandidateStatus.ACCEPTED),
         "topic_counts": mode_state.get_topic_counts(CandidateStatus.ACCEPTED),
         "stopped_reason": mode_state.stopped_reason,
+        "terminal_hard_repair": {
+            "executed": mode_state.terminal_hard_repair_executed,
+            "rounds": mode_state.terminal_hard_repair_rounds,
+            "generated_count": mode_state.terminal_hard_repair_generated_count,
+            "accepted_count": mode_state.terminal_hard_repair_accepted_count,
+        },
     })
 
 
@@ -206,6 +218,12 @@ def save_generation_report(
             ) if min_diff_targets else False,
             "max_target_reached": ms.accepted_count >= max_target,
             "stopped_reason": ms.stopped_reason,
+            "terminal_hard_repair": {
+                "executed": ms.terminal_hard_repair_executed,
+                "rounds": ms.terminal_hard_repair_rounds,
+                "generated_count": ms.terminal_hard_repair_generated_count,
+                "accepted_count": ms.terminal_hard_repair_accepted_count,
+            },
         }
         total_candidates += ms.accepted_count
 

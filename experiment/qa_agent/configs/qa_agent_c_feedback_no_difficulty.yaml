@@ -6,7 +6,7 @@ model:
   name: "deepseek-v3"
   temperature: 0.2
   max_tokens: 4096
-  max_retries: 3
+  max_retries: 2
 
 # ── Wikipedia 检索 ────────────────────────────────────────────────────────────
 retrieval:
@@ -39,14 +39,16 @@ multi_chunk:
 
 # ── 候选池 ────────────────────────────────────────────────────────────────────
 candidate_pool:
-  min_candidate_multiplier: 1.5
-  max_candidate_multiplier: 2.0
+  min_candidate_multiplier: 1.2
+  max_candidate_multiplier: 1.5
 
 # ── 初始广度轮 ────────────────────────────────────────────────────────────────
 initial_breadth:
   enabled: true
   max_topics_per_round: 4
   difficulty: "medium"
+  difficulty_policy: "hard_aware"
+  hard_ratio_threshold: 0.3
 
 # ── 自适应补题规划 ────────────────────────────────────────────────────────────
 planner:
@@ -73,11 +75,11 @@ chunk_mix:
 # ── 每 chunk 平均生成题目数 ───────────────────────────────────────────────────
 generation_yield:
   qa:
-    single_chunk_avg_questions: 2.0
-    multi_chunk_avg_questions: 3.0
+    single_chunk_avg_questions: 3.0
+    multi_chunk_avg_questions: 4.0
   multiple_choice:
-    single_chunk_avg_questions: 1.5
-    multi_chunk_avg_questions: 2.0
+    single_chunk_avg_questions: 3.0
+    multi_chunk_avg_questions: 4.0
 
 # ── single_k / multi_k 上下界 ─────────────────────────────────────────────────
 chunk_limits:
@@ -114,6 +116,7 @@ experiment:
   enable_feedback: true
   enable_hard_generate: false
   enable_difficulty_adaptation: false
+  enable_terminal_hard_repair: false
   fixed_strategy: null
   fixed_difficulty: null
   disable_initial_breadth: false

@@ -1,26 +1,15 @@
-Question:
-{{ question }}
+<Evidence>
+{citations}
+</Evidence>
 
-Reference Answer:
-{{ reference_answer }}
+<Question>
+{question}
+</Question>
 
-Evidence / Citations:
-{{ evidence }}
+<Reference Answer>
+{reference_answer}
+</Reference Answer>
 
-Model Answer:
-{{ model_answer }}
-
-Evaluation dimensions:
-{% for metric in metrics %}
-- {{ metric.name }}: {{ metric.description }}
-{% endfor %}
-
-Return JSON only:
-{
-  "scores": {
-    {% for metric in metrics %}
-    "{{ metric.name }}": <number from 0 to 1>{% if not loop.last %},{% endif %}
-    {% endfor %}
-  },
-  "reason": "<brief explanation>"
-}
+<Model Answer>
+{model_answer}
+</Model Answer>

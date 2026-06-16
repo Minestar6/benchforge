@@ -5,7 +5,6 @@ from typing import Any
 
 from loguru import logger
 
-from benchforge.utils.metrics_dataset import DiversityScoreMetric
 from .metrics_registry import DATASET_METRIC_REGISTRY
 from benchforge.utils.artifact_store import ArtifactStore
 
@@ -32,13 +31,12 @@ def run_dataset_metrics(
         context = {"threshold": spec.threshold}
 
         if spec.name == "diversity_score":
-            dm = DiversityScoreMetric()
             # overall
-            overall = dm.compute(questions, context)
+            overall = metric.compute(questions, context)
             results.append(overall)
             # by group
             for key in _DIVERSITY_GROUP_KEYS:
-                for rec in dm.compute_by_group(questions, key):
+                for rec in metric.compute_by_group(questions, key):
                     results.append(rec)
         elif spec.name == "citation_score" and hasattr(metric, "compute_by_group"):
             result = metric.compute(questions, context)

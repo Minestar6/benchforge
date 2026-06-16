@@ -18,7 +18,7 @@ from benchforge.agents.model_eval_agent.aggregator import (
 )
 from benchforge.agents.model_eval_agent.auto_metric_executor import run_automatic_metrics
 from benchforge.agents.model_eval_agent.dataset_metric_executor import run_dataset_metrics
-from benchforge.agents.model_eval_agent.llm_judge_executor import _judge_single
+from benchforge.agents.model_eval_agent.llm_judge_executor import _judge_single, run_llm_judge
 from benchforge.agents.model_eval_agent.model_runner import _build_prompt
 from benchforge.agents.model_eval_agent.schema import (
     AutoMetricSpec,
@@ -54,6 +54,79 @@ class RecordingJudgeClient(BaseModelClient):
 
     async def batch_complete(self, model: str, messages_list: list[list[dict[str, str]]], **kwargs):
         return [await self.complete(model, messages, **kwargs) for messages in messages_list]
+
+
+def test_write_questions_jsonl_overwrites_existing_file(tmp_path):
+    path = tmp_path / "evaluation_questions.jsonl"
+    path.write_text('{"question_id":"old"}\n', encoding="utf-8")
+
+    agent_module._write_jsonl_overwrite(
+        path,
+        [{"question_id": "q1"}, {"question_id": "q2"}],
+    )
+
+    lines = path.read_text(encoding="utf-8").strip().splitlines()
+    assert lines == ['{"question_id": "q1"}', '{"question_id": "q2"}']
+
+
+def test_load_eval_questions_uses_selected_status_not_final_weight(tmp_path):
+    validated = tmp_path / "validated_questions.jsonl"
+    validated.write_text(
+        "\n".join(
+            [
+                json.dumps(
+                    {
+                        "question_id": "q_selected_low_weight",
+                        "final_status": "selected",
+                        "final_weight": 0.01,
+                        "candidate": {
+                            "question_id": "q_selected_low_weight",
+                            "question_mode": "qa",
+                            "question": "Selected question",
+                            "answer": "answer",
+                            "topic": "AI",
+                        },
+                    }
+                ),
+                json.dumps(
+                    {
+                        "question_id": "q_reserve_high_weight",
+                        "final_status": "reserve",
+                        "final_weight": 0.99,
+                        "candidate": {
+                            "question_id": "q_reserve_high_weight",
+                            "question_mode": "qa",
+                            "question": "Reserve question",
+                            "answer": "answer",
+                            "topic": "AI",
+                        },
+                    }
+                ),
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    questions = agent_module._load_eval_questions([str(validated)])
+
+    assert [question["question_id"] for question in questions] == ["q_selected_low_weight"]
+
+
+def test_resolve_input_paths_does_not_fallback_to_quality_weight_artifact(tmp_path):
+    run_dir = tmp_path / "runs" / "task_x" / "run_y"
+    run_dir.mkdir(parents=True)
+    state = SharedState(
+        task_id="task_x",
+        run_id="run_y",
+        blueprint={"topics": [], "modes": {}},
+        agent_status={"verification": AgentStatus.COMPLETED},
+        artifacts={"accepted_questions_quality": "legacy/accepted_questions_quality.jsonl"},
+    )
+
+    resolved = agent_module._resolve_input_paths_from_shared_state(state, run_dir)
+
+    assert resolved == []
 
 
 def test_build_model_by_dimension_filters_scores_to_dimension_subset():
@@ -136,7 +209,7 @@ def test_run_automatic_metrics_supports_semantic_accuracy(tmp_path):
     ]
     metric_plans = {
         "qa": QuestionModeMetricPlan(
-            automatic_metrics=[AutoMetricSpec(name="semantic_accuracy", threshold=0.8)]
+            automatic_metrics=[AutoMetricSpec(name="semantic_accuracy")]
         )
     }
 
@@ -157,7 +230,7 @@ def test_run_automatic_metrics_supports_semantic_accuracy(tmp_path):
     row = results[0]
     assert row["metric_name"] == "semantic_accuracy"
     assert row["models"]["model_a"]["scores"] == [1.0, 0.0]
-    assert row["models"]["model_a"]["pass_rate"] == 0.5
+    assert row["models"]["model_a"]["pass_rate"] is None
 
 
 def test_run_dataset_metrics_includes_grouped_citation_rows(tmp_path):
@@ -260,6 +333,144 @@ async def test_judge_single_for_multiple_choice_includes_choices():
         semaphore=asyncio.Semaphore(1),
     )
     assert "(B) Right" in trace["prompt"]["user"]
+
+
+@pytest.mark.asyncio
+async def test_judge_single_renders_new_prompt_placeholders():
+    client = RecordingJudgeClient(response_text='{"scores":{"correctness":5},"reason":"ok"}')
+    trace = await _judge_single(
+        client=client,
+        judge_model_name="judge-model",
+        question={
+            "question_id": "q1",
+            "question_mode": "qa",
+            "question": "What is AI?",
+            "answer": "Artificial intelligence",
+            "citations": ["AI is the simulation of human intelligence."],
+        },
+        model_name="candidate-model",
+        prediction="Artificial intelligence",
+        metrics=[JudgeMetricSpec(name="correctness", description="Whether the answer is correct.")],
+        system_prompt="Criteria:\n{metrics}\nFormat:\n{output_format}",
+        user_template="<Evidence>\n{citations}\n</Evidence>\n<Question>\n{question}\n</Question>\n<Reference Answer>\n{reference_answer}\n</Reference Answer>\n<Model Answer>\n{model_answer}\n</Model Answer>",
+        judge_defaults={"temperature": 0.0},
+        llm_trace_path="",
+        tracer=None,
+        semaphore=asyncio.Semaphore(1),
+    )
+    assert "correctness" in trace["prompt"]["system"]
+    assert '"correctness": <score 1-5>' in trace["prompt"]["system"]
+    assert '"scores"' not in trace["prompt"]["system"]
+    assert '"reason"' not in trace["prompt"]["system"]
+    assert "AI is the simulation of human intelligence." in trace["prompt"]["user"]
+    assert "<Reference Answer>" in trace["prompt"]["user"]
+
+
+def test_parse_judge_output_supports_flat_metric_object():
+    from benchforge.agents.model_eval_agent.llm_judge_executor import _parse_judge_output
+
+    parsed, ok, error = _parse_judge_output(
+        '{"correctness": 5, "faithfulness": 4}',
+        [
+            JudgeMetricSpec(name="correctness", description=""),
+            JudgeMetricSpec(name="faithfulness", description=""),
+        ],
+    )
+
+    assert ok is True
+    assert error is None
+    assert parsed["scores"] == {"correctness": 5.0, "faithfulness": 4.0}
+
+
+@pytest.mark.asyncio
+async def test_run_llm_judge_records_rendered_prompts_file(tmp_path):
+    client = RecordingJudgeClient(response_text='{"scores":{"correctness":5},"reason":"ok"}')
+    questions = [
+        {
+            "question_id": "q1",
+            "question_mode": "qa",
+            "question": "What is AI?",
+            "answer": "Artificial intelligence",
+            "citations": ["AI is the simulation of human intelligence."],
+        }
+    ]
+    model_responses = [
+        {
+            "question_id": "q1",
+            "question_mode": "qa",
+            "model_name": "candidate-model",
+            "prediction": "Artificial intelligence",
+        }
+    ]
+    metric_plans = {
+        "qa": QuestionModeMetricPlan(
+            llm_judge_metrics=[JudgeMetricSpec(name="correctness", description="Whether the answer is correct.")]
+        )
+    }
+
+    await run_llm_judge(
+        questions=questions,
+        model_responses=model_responses,
+        metric_plans=metric_plans,
+        judge_client=client,
+        judge_model_name="judge-model",
+        judge_config=JudgeConfig(enabled=True, prompt_system="", prompt_user=""),
+        judge_defaults={"temperature": 0.0},
+        output_dir=tmp_path,
+        llm_trace_path="",
+        tracer=None,
+        max_concurrency=1,
+    )
+
+    prompts_file = tmp_path / "traces" / "llm_judge_prompts.jsonl"
+    assert prompts_file.exists()
+    lines = prompts_file.read_text(encoding="utf-8").strip().splitlines()
+    assert len(lines) == 1
+
+
+@pytest.mark.asyncio
+async def test_run_llm_judge_skips_multiple_choice_even_if_metrics_configured(tmp_path):
+    client = RecordingJudgeClient(response_text='{"scores":{"correctness":5},"reason":"ok"}')
+    questions = [
+        {
+            "question_id": "q1",
+            "question_mode": "multiple_choice",
+            "question": "Which option is correct?",
+            "answer": "B",
+            "choices": ["(A) Wrong", "(B) Right"],
+            "citations": [],
+        }
+    ]
+    model_responses = [
+        {
+            "question_id": "q1",
+            "question_mode": "multiple_choice",
+            "model_name": "candidate-model",
+            "prediction": "B",
+        }
+    ]
+    metric_plans = {
+        "multiple_choice": QuestionModeMetricPlan(
+            llm_judge_metrics=[JudgeMetricSpec(name="correctness", description="Whether the answer is correct.")]
+        )
+    }
+
+    judge_scores = await run_llm_judge(
+        questions=questions,
+        model_responses=model_responses,
+        metric_plans=metric_plans,
+        judge_client=client,
+        judge_model_name="judge-model",
+        judge_config=JudgeConfig(enabled=True, prompt_system="", prompt_user=""),
+        judge_defaults={"temperature": 0.0},
+        output_dir=tmp_path,
+        llm_trace_path="",
+        tracer=None,
+        max_concurrency=1,
+    )
+
+    assert judge_scores == []
+    assert client.calls == []
 
 
 def test_build_model_reports_follow_available_metrics():

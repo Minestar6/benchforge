@@ -31,6 +31,10 @@ You must score four aspects:
    If the labeled difficulty does NOT match the question's actual difficulty (i.e., difficulty_consistency <= 3),
    output the corrected difficulty label. If the label is already correct, output the same label.
 
+6. Reason:
+   A brief explanation of your reasoning for the scores, focusing on specific aspects of the question and answer.
+   Limit to 100 words or less.
+
 Scoring rules:
 - Score each dimension from 1 to 5
 - 1 = very poor

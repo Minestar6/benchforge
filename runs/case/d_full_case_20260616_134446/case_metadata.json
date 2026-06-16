@@ -1,0 +1,36 @@
+{
+  "group_id": "D",
+  "method": "full",
+  "seed": 42,
+  "task_id": "case",
+  "run_id": "d_full_case_20260616_134446",
+  "language": "en",
+  "topics": [
+    "Artificial Intelligence",
+    "Quantum Computing"
+  ],
+  "modes": {
+    "qa": {
+      "count": 5,
+      "max_rounds": 3,
+      "difficulty_distribution": {
+        "easy": 0.2,
+        "medium": 0.3,
+        "hard": 0.5
+      }
+    },
+    "multiple_choice": {
+      "count": 5,
+      "max_rounds": 3,
+      "difficulty_distribution": {
+        "easy": 0.2,
+        "medium": 0.3,
+        "hard": 0.5
+      }
+    }
+  },
+  "qa_config_path": "/Users/zhaoziqing/Desktop/benchforge/experiment/case/configs/qa_agent_case_d_full.yaml",
+  "verify_config_path": "/Users/zhaoziqing/Desktop/benchforge/experiment/case/configs/verify_agent_case.yaml",
+  "blueprint_config_path": "/Users/zhaoziqing/Desktop/benchforge/experiment/case/configs/case_blueprint.yaml",
+  "registry_path": "/Users/zhaoziqing/Desktop/benchforge/config/model_registry.yaml"
+}

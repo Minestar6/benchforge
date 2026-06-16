@@ -221,15 +221,15 @@ async def _generate_from_chunk(
 async def run_direct_generation(
     *,
     blueprint,
-    model_client,
-    model_name: str,
     output_dir: Path,
     config_path: str,
+    registry_path: str | Path | None = None,
 ) -> dict:
     """直接生成基线：复用 EvidenceManager 获取证据，直接 prompt 生成题目。
 
     不经 planner、executor、candidate_pool、反馈循环。
     使用与 B/C/D 组相同的 retrieval/chunking 管道。
+    模型通过 model_registry.yaml 解析，与 agent.py 保持一致。
     """
     from benchforge.agents.qa_agent.config_loader import load_qa_agent_config
     from benchforge.agents.qa_agent.evidence_manager import EvidenceManager
@@ -238,6 +238,19 @@ async def run_direct_generation(
     agent_config, model_ref, retrieval_cfg, chunking_cfg, sum_chunking_cfg, multi_chunk_cfg = (
         load_qa_agent_config(config_path)
     )
+
+    if registry_path is None:
+        from benchforge.utils.paths import get_project_root
+        registry_path = get_project_root() / "config" / "model_registry.yaml"
+
+    from benchforge.models.loader import ModelLoader
+    from benchforge.agents.model_eval_agent.model_registry_loader import load_model_registry
+    registry = load_model_registry(registry_path)
+    model_cfg = registry[model_ref.name]
+    model_client = ModelLoader.load_model(model_cfg)
+    # API 实际模型名由 ModelLoader 设置，逻辑名仅用于追踪
+    setattr(model_client, "model_registry_name", model_ref.name)
+    model_name = model_cfg.get("model_name", model_ref.name)
 
     # ── 构造 EvidenceManager（与 B/C/D 组相同的证据管道） ──
     class _EvidenceConfig:

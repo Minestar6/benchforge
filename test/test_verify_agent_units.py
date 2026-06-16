@@ -222,7 +222,8 @@ class TestConfigLoader:
             """
 citation_validation:
   enabled: true
-  min_citation_score: 0.7
+  min_chunk_citation_score: 0.7
+  min_answer_citation_score: 0.7
 
 llm_validation:
   enabled: true
@@ -230,15 +231,17 @@ llm_validation:
   max_retries: 1
 
 selection:
-  enabled: true
+  mode: "off"
   embedding_model: "all-MiniLM-L6-v2"
 """.strip(),
             encoding="utf-8",
         )
 
         cfg = load_verify_agent_config(cfg_file)
-        assert cfg.citation.min_citation_score == 0.7
+        assert cfg.citation.min_chunk_citation_score == 0.7
+        assert cfg.citation.min_answer_citation_score == 0.7
         assert cfg.llm_validation.max_retries == 1
+        assert cfg.selection.mode == "off"
         assert cfg.selection.embedding_model == "all-MiniLM-L6-v2"
 
 
@@ -566,6 +569,23 @@ class TestRunWeightedSelection:
         targets = _compute_bucket_targets(blueprint)
         assert targets == {"qa": {"easy": 3, "medium": 4, "hard": 3}}
 
+    def test_selection_off_keeps_all_passed_candidates(self):
+        candidates = [make_candidate(f"q{i}", f"Question {i}?", estimated_difficulty=5) for i in range(5)]
+        blueprint = ValidationBlueprintView(
+            topics=["AI"],
+            modes={
+                "qa": ModeCfg(count=3, difficulty_distribution={"easy": 1, "medium": 2, "hard": 0}),
+            },
+        )
+        citation_results, llm_results = self._make_results(candidates)
+
+        cfg = SelectionCfg(mode="off")
+        result, records = run_weighted_selection(candidates, blueprint, citation_results, llm_results, cfg)
+
+        assert len(result.selected_question_ids) == 5
+        assert len(result.dropped_as_overquota) == 0
+        assert all(record.final_status == "selected" for record in records)
+
 
 # ─── llm_validator tests ──────────────────────────────────────────────────────
 
@@ -706,7 +726,7 @@ class TestLLMValidator:
         content = messages[0]["content"]
         assert "Which option best defines AI?" in content
         assert "(B) A field focused on intelligent machines" in content
-        assert "Difficulty:\n5" in content
+        assert "Difficulty:\nmedium" in content
 
     def test_llm_validation_error_marks_validator_error(self):
         class _ErrorClient(FakeModelClient):

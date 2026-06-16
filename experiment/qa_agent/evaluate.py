@@ -33,12 +33,18 @@ from benchforge.agents.model_eval_agent.agent import run_model_eval_agent_from_s
 from benchforge.agents.model_eval_agent.config_loader import load_model_eval_config
 
 
-EXPERIMENT_BASE = PROJECT_ROOT / "runs" / "qa_agent_exp" / "seed_42"
-CONFIG_PATH = str(PROJECT_ROOT / "config" / "model_eval_agent.yaml")
+EXPERIMENT_BASE = PROJECT_ROOT / "runs" / "ques_generate"
+CONFIG_PATH = str(PROJECT_ROOT / "experiment" / "qa_agent" / "configs" / "model_eval_agent.yaml")
 REGISTRY_PATH = str(PROJECT_ROOT / "config" / "model_registry.yaml")
 TARGET_RUN_PREFIXES = [
     "A_direct_multiple_choice_",
     "A_direct_qa_",
+    "B_no_feedback_multiple_choice_",
+    "B_no_feedback_qa_",
+    "C_feedback_no_diff_multiple_choice_",
+    "C_feedback_no_diff_qa_",
+    "D_full_multiple_choice_",
+    "D_full_qa_",
 ]
 
 

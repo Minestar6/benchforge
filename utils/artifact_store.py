@@ -39,6 +39,30 @@ class ArtifactStore:
         logger.info(f"Appended {count} records to {filepath}")
         return count
 
+    def save_jsonl(
+        self,
+        filename: str,
+        records: list[Any],
+    ) -> int:
+        """覆盖写入 JSONL 文件（用于一次性产物）。"""
+        filepath = self.base_path / filename
+        count = 0
+
+        with open(filepath, "w", encoding="utf-8") as f:
+            for record in records:
+                if hasattr(record, "model_dump"):
+                    data = record.model_dump()
+                elif hasattr(record, "dict"):
+                    data = record.dict()
+                else:
+                    data = record
+
+                f.write(json.dumps(data, ensure_ascii=False, default=str) + "\n")
+                count += 1
+
+        logger.info(f"Saved {count} records to {filepath}")
+        return count
+
     def read_jsonl(
         self,
         filename: str,

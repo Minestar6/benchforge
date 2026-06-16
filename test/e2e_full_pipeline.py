@@ -175,11 +175,10 @@ async def stage_evaluation():
         metrics={"qa": QuestionModeMetricPlan(
             automatic_metrics=[AutoMetricSpec(name="exact_match", threshold=1.0),
                 AutoMetricSpec(name="f1", threshold=0.7), AutoMetricSpec(name="bertscore", threshold=0.85)],
-            llm_judge_metrics=[JudgeMetricSpec(name="correctness", description="Answer correctness.",
-                direction="higher_is_better"), JudgeMetricSpec(name="completeness", description="Answer completeness.",
-                direction="higher_is_better"), JudgeMetricSpec(name="faithfulness", description="Evidence support.",
-                direction="higher_is_better"), JudgeMetricSpec(name="hallucination", description="Unsupported claims.",
-                direction="lower_is_better")])},
+            llm_judge_metrics=[JudgeMetricSpec(name="correctness", description="Answer correctness."),
+                JudgeMetricSpec(name="completeness", description="Answer completeness."),
+                JudgeMetricSpec(name="faithfulness", description="Evidence support."),
+                JudgeMetricSpec(name="hallucination", description="Unsupported claims.")])},
         judge=JudgeConfig(enabled=True,
             prompt_system=str(project_root / "prompts/model_eval_agent/judge_system_prompt.md"),
             prompt_user=str(project_root / "prompts/model_eval_agent/judge_user_prompt.md")))

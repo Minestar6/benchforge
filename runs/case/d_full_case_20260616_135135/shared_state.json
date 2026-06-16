@@ -1,0 +1,86 @@
+{
+  "task_id": "case",
+  "run_id": "d_full_case_20260616_135135",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "case",
+    "run_id": "d_full_case_20260616_135135",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "modes": {
+      "qa": {
+        "count": 5,
+        "max_rounds": 3,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      },
+      "multiple_choice": {
+        "count": 5,
+        "max_rounds": 3,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "case",
+    "run_id": "d_full_case_20260616_135135",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "modes": {
+      "qa": {
+        "count": 5,
+        "max_rounds": 3,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      },
+      "multiple_choice": {
+        "count": 5,
+        "max_rounds": 3,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs/case/d_full_case_20260616_135135/qa/candidate_pool.json",
+    "multiple_choice_candidate_pool": "runs/case/d_full_case_20260616_135135/multiple_choice/candidate_pool.json",
+    "chunked_evidence": "runs/case/d_full_case_20260616_135135/evidence/chunked.json",
+    "llm_calls": "/Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/llm_calls.jsonl",
+    "generation_report": "runs/case/d_full_case_20260616_135135/generation_report.json",
+    "validation_report": "runs/case/d_full_case_20260616_135135/validation/validation_report.json",
+    "validated_questions": "runs/case/d_full_case_20260616_135135/validation/validated_questions.jsonl",
+    "weighted_selection": "runs/case/d_full_case_20260616_135135/validation/weighted_selection.json",
+    "evaluation_report": "runs/case/d_full_case_20260616_135135/evaluation/evaluation_report.json",
+    "dataset_quality_summary": "runs/case/d_full_case_20260616_135135/evaluation/dataset_report/dataset_quality_summary.json",
+    "model_overall_report": "runs/case/d_full_case_20260616_135135/evaluation/model_report/model_overall_report.csv",
+    "model_aggregate_report": "runs/case/d_full_case_20260616_135135/evaluation/model_report/model_aggregate_report.json",
+    "model_by_topic": "runs/case/d_full_case_20260616_135135/evaluation/model_report/model_by_topic.csv",
+    "model_by_difficulty": "runs/case/d_full_case_20260616_135135/evaluation/model_report/model_by_difficulty.csv",
+    "model_by_question_mode": "runs/case/d_full_case_20260616_135135/evaluation/model_report/model_by_question_mode.csv"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "completed",
+    "evaluation": "completed"
+  }
+}

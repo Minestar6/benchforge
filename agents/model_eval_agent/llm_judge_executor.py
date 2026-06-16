@@ -19,6 +19,9 @@ from .schema import JudgeConfig, JudgeMetricSpec, QuestionModeMetricPlan
 from .model_runner import _format_multiple_choice_options
 
 
+LLM_JUDGE_ALLOWED_MODES = {"qa"}
+
+
 def _question_text_for_judge(question: dict[str, Any]) -> str:
     question_text = question.get("question", "")
     if question.get("question_mode") != "multiple_choice":
@@ -30,50 +33,78 @@ def _question_text_for_judge(question: dict[str, Any]) -> str:
     return f"{question_text}\n{options_text}"
 
 
+def _evidence_text_for_judge(question: dict[str, Any]) -> str:
+    citations = question.get("citations") or question.get("chunks") or []
+    return "\n".join(
+        c.get("text", c) if isinstance(c, dict) else str(c)
+        for c in citations[:3]
+    ) or "N/A"
+
+
+def _metrics_text(metrics: list[JudgeMetricSpec]) -> str:
+    return "\n".join(f"- {metric.name}: {metric.description}" for metric in metrics)
+
+
+def _output_format_text(metrics: list[JudgeMetricSpec]) -> str:
+    score_lines = []
+    for index, metric in enumerate(metrics):
+        suffix = "," if index < len(metrics) - 1 else ""
+        score_lines.append(f'  "{metric.name}": <score 1-5>{suffix}')
+    return "{\n" + "\n".join(score_lines) + "\n}"
+
+
+def _render_template(template: str, values: dict[str, str]) -> str:
+    rendered = template
+    for key, value in values.items():
+        rendered = rendered.replace(f"{{{key}}}", value)
+    return rendered
+
+
+def _render_system_prompt(
+    template: str,
+    metrics: list[JudgeMetricSpec],
+) -> str:
+    if not template:
+        return ""
+    return _render_template(
+        template,
+        {
+            "metrics": _metrics_text(metrics),
+            "output_format": _output_format_text(metrics),
+        },
+    )
+
+
 def _render_user_prompt(
     template: str,
     question: dict[str, Any],
     prediction: str,
     metrics: list[JudgeMetricSpec],
 ) -> str:
+    question_text = _question_text_for_judge(question)
+    reference_answer = str(question.get("answer", ""))
+    evidence = _evidence_text_for_judge(question)
     if not template:
         # 内置简单模板
-        metrics_text = "\n".join(
-            f"- {m.name}: {m.description}" for m in metrics
-        )
-        scores_template = "\n".join(
-            f'    "{m.name}": <number from 0 to 1>'
-            + ("," if i < len(metrics) - 1 else "")
-            for i, m in enumerate(metrics)
-        )
-        citations = question.get("citations") or question.get("chunks") or []
-        evidence = "\n".join(
-            c.get("text", c) if isinstance(c, dict) else str(c)
-            for c in citations[:3]
-        ) or "N/A"
         return (
-            f"Question:\n{_question_text_for_judge(question)}\n\n"
-            f"Reference Answer:\n{question.get('answer', '')}\n\n"
+            f"Question:\n{question_text}\n\n"
+            f"Reference Answer:\n{reference_answer}\n\n"
             f"Evidence / Citations:\n{evidence}\n\n"
             f"Model Answer:\n{prediction}\n\n"
-            f"Evaluation dimensions:\n{metrics_text}\n\n"
-            f"Return JSON only:\n{{\n  \"scores\": {{\n{scores_template}\n  }},\n  \"reason\": \"<brief explanation>\"\n}}"
+            f"Evaluation dimensions:\n{_metrics_text(metrics)}\n\n"
+            f"Return JSON only:\n{_output_format_text(metrics)}"
         )
-    # Jinja2 渲染
-    try:
-        from jinja2 import Template
-        return Template(template).render(
-            question=_question_text_for_judge(question),
-            reference_answer=question.get("answer", ""),
-            evidence="\n".join(
-                c.get("text", c) if isinstance(c, dict) else str(c)
-                for c in (question.get("citations") or question.get("chunks") or [])[:3]
-            ) or "N/A",
-            model_answer=prediction,
-            metrics=metrics,
-        )
-    except ImportError:
-        return _render_user_prompt("", question, prediction, metrics)
+    return _render_template(
+        template,
+        {
+            "citations": evidence,
+            "question": question_text,
+            "reference_answer": reference_answer,
+            "model_answer": prediction,
+            "metrics": _metrics_text(metrics),
+            "output_format": _output_format_text(metrics),
+        },
+    )
 
 
 def _parse_judge_output(text: str, metrics: list[JudgeMetricSpec]) -> tuple[dict[str, Any] | None, bool, str | None]:
@@ -98,7 +129,9 @@ def _parse_judge_output(text: str, metrics: list[JudgeMetricSpec]) -> tuple[dict
         except json.JSONDecodeError as e:
             return None, False, str(e)
 
-    scores_raw = data.get("scores", {})
+    scores_raw = data.get("scores")
+    if not isinstance(scores_raw, dict):
+        scores_raw = data
     scores: dict[str, float] = {}
     for metric in metrics:
         val = scores_raw.get(metric.name)
@@ -129,10 +162,11 @@ async def _judge_single(
     semaphore: asyncio.Semaphore,
     max_retries: int = 2,
 ) -> dict[str, Any]:
+    rendered_system_prompt = _render_system_prompt(system_prompt, metrics)
     user_prompt = _render_user_prompt(user_template, question, prediction, metrics)
     messages = [{"role": "user", "content": user_prompt}]
-    if system_prompt:
-        messages = [{"role": "system", "content": system_prompt}] + messages
+    if rendered_system_prompt:
+        messages = [{"role": "system", "content": rendered_system_prompt}] + messages
 
     trace_id = f"judge_{question['question_id']}_{model_name}"
     trace: dict[str, Any] = {
@@ -149,7 +183,7 @@ async def _judge_single(
             "citations": question.get("citations", []),
             "metrics": [{"name": m.name, "description": m.description} for m in metrics],
         },
-        "prompt": {"system": system_prompt, "user": user_prompt},
+        "prompt": {"system": rendered_system_prompt, "user": user_prompt},
     }
 
     parsed_output = None
@@ -161,6 +195,7 @@ async def _judge_single(
     latency = 0.0
     input_tokens = 0
     output_tokens = 0
+    api_model = getattr(client, "model_name", judge_model_name)
 
     async with semaphore:
         for attempt in range(max_retries + 1):
@@ -179,14 +214,14 @@ async def _judge_single(
                         },
                     ):
                         resp = await client.complete(
-                            model=judge_model_name,
+                            model=api_model,
                             messages=messages,
                             llm_trace_path=llm_trace_path,
                             **judge_defaults,
                         )
                 else:
                     resp = await client.complete(
-                        model=judge_model_name,
+                        model=api_model,
                         messages=messages,
                         llm_trace_path=llm_trace_path,
                         **judge_defaults,
@@ -244,6 +279,8 @@ async def run_llm_judge(
         if resp.get("error") or not resp.get("prediction"):
             continue
         mode = resp.get("question_mode", "")
+        if mode not in LLM_JUDGE_ALLOWED_MODES:
+            continue
         plan = metric_plans.get(mode)
         if not plan or not plan.llm_judge_metrics:
             continue
@@ -274,11 +311,31 @@ async def run_llm_judge(
     # 落盘 traces
     traces_store = ArtifactStore(str(output_dir / "traces"))
     traces_store.append_jsonl("llm_judge_traces.jsonl", list(traces))
+    prompts_store = ArtifactStore(str(output_dir / "traces"))
+    prompts_store.append_jsonl(
+        "llm_judge_prompts.jsonl",
+        [
+            {
+                "trace_id": trace["trace_id"],
+                "question_id": trace["question_id"],
+                "question_mode": trace["question_mode"],
+                "model_name": trace["model_name"],
+                "judge_model": trace["judge_model"],
+                "prompt": trace.get("rendered_prompt", trace.get("prompt", {})),
+                "metrics": trace["input"]["metrics"],
+            }
+            for trace in traces
+        ],
+    )
 
     # 聚合为 llm_judge_scores.jsonl（metric×mode×models）
     mode_question_ids: dict[str, list[str]] = defaultdict(list)
+    seen_qids: set[str] = set()
     for q in questions:
-        mode_question_ids[q.get("question_mode", "")].append(q["question_id"])
+        qid = q["question_id"]
+        if qid not in seen_qids:
+            seen_qids.add(qid)
+            mode_question_ids[q.get("question_mode", "")].append(qid)
 
     # (mode, metric_name) → {model_name: {qid: score}}
     buckets: dict[tuple[str, str], dict[str, dict[str, float | None]]] = defaultdict(lambda: defaultdict(dict))
@@ -314,7 +371,6 @@ async def run_llm_judge(
             "type": "llm_judge_metric",
             "question_mode": mode,
             "metric_name": metric_name,
-            "direction": metric_spec.direction if metric_spec else "higher_is_better",
             "question_ids": question_ids,
             "models": models_payload,
         })

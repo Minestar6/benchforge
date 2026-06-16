@@ -39,7 +39,6 @@ class AutoMetricSpec:
 class JudgeMetricSpec:
     name: str
     description: str
-    direction: str = "higher_is_better"  # "higher_is_better" | "lower_is_better"
 
 
 @dataclass

@@ -46,12 +46,13 @@ class ModelLoader:
                 temperature=getattr(config, "temperature", 0.7),
                 max_tokens=getattr(config, "max_tokens", 2000),
                 max_retries=getattr(config, "max_retries", 3),
+                thinking=getattr(config, "thinking", None),
             )
 
         client.model_name = getattr(config, "model_name", "unknown")
         client.provider = provider
         client.max_concurrent = getattr(config, "max_concurrent_requests", 4)
-        client.extra_parameters = getattr(config, "extra_parameters", {})
+        client.extra_parameters = getattr(config, "extra_parameters", {}) or {}
 
         return client
 

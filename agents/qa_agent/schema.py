@@ -58,6 +58,8 @@ class InitialBreadthConfig:
     enabled: bool = True
     max_topics_per_round: int = 10
     difficulty: str = "medium"
+    difficulty_policy: str = "fixed"
+    hard_ratio_threshold: float = 0.3
 
 
 @dataclass
@@ -110,6 +112,13 @@ class ExperimentConfig:
 
     # 是否禁用 initial breadth
     disable_initial_breadth: bool = False
+
+    # 是否在 max_target 停止后执行一次终局 hard 修复轮
+    enable_terminal_hard_repair: bool = True
+    terminal_hard_repair_min_missing: int = 2
+    terminal_hard_repair_gap_threshold: float = 0.15
+    terminal_hard_repair_topics: int = 2
+    terminal_hard_repair_multi_k_scale: float = 1.0
 
 
 @dataclass

@@ -1,8 +1,9 @@
 citation_validation:
   enabled: true
-  min_citation_score: 0.65
-  alpha: 0.7
-  beta: 0.3
+  min_chunk_citation_score: 0.85
+  min_answer_citation_score: 0.75
+  alpha: 0.3
+  beta: 0.7
   citation_match_threshold: 0.8
 
 llm_validation:
@@ -16,5 +17,6 @@ llm_validation:
   prompt_path: "benchforge/prompts/verify_agent/quality_prompt.md"
 
 selection:
-  enabled: true
+  mode: "light"
   embedding_model: "all-MiniLM-L6-v2"
+  semantic_similarity_threshold: 0.9

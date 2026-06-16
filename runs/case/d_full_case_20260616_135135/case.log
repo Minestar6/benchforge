@@ -1,0 +1,528 @@
+2026-06-16 13:51:35.517 | INFO     | Starting case generation: task=case run=d_full_case_20260616_135135
+2026-06-16 13:51:35.630 | INFO     | Preparing evidence for 2 topics (parallel)
+2026-06-16 13:52:35.559 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/evidence/chunked.json
+2026-06-16 13:52:35.562 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/evidence/single_units.json
+2026-06-16 13:52:35.564 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/evidence/multi_units.json
+2026-06-16 13:52:35.564 | INFO     | Starting mode: qa
+2026-06-16 13:53:04.893 | DEBUG    | Generator: mode=qa difficulty=hard response_len=8569
+2026-06-16 13:53:14.094 | DEBUG    | Generator: mode=qa difficulty=hard response_len=1593
+2026-06-16 13:53:42.084 | DEBUG    | Generator: mode=qa difficulty=hard response_len=2916
+2026-06-16 13:53:53.698 | DEBUG    | Generator: mode=qa difficulty=hard response_len=0
+2026-06-16 13:53:53.702 | INFO     | Mode=qa round=1 strategy=initial_breadth generated=4 accepted=4 total_accepted=4
+2026-06-16 13:54:30.076 | DEBUG    | Generator: mode=qa difficulty=medium response_len=14015
+2026-06-16 13:55:05.791 | DEBUG    | Generator: mode=qa difficulty=medium response_len=12226
+2026-06-16 13:55:37.694 | DEBUG    | Generator: mode=qa difficulty=medium response_len=1612
+2026-06-16 13:55:37.698 | INFO     | Mode=qa round=2 strategy=focus_topic generated=15 accepted=15 total_accepted=19
+2026-06-16 13:55:37.698 | INFO     | Mode qa stopped: max_candidate_pool_reached
+2026-06-16 13:55:37.717 | INFO     | Mode qa complete: 19 accepted, stopped_reason=max_candidate_pool_reached
+2026-06-16 13:55:37.717 | INFO     | Starting mode: multiple_choice
+2026-06-16 13:56:14.446 | DEBUG    | Generator: mode=multiple_choice difficulty=hard response_len=6906
+2026-06-16 13:56:16.885 | DEBUG    | Generator: mode=multiple_choice difficulty=hard response_len=0
+2026-06-16 13:56:16.888 | INFO     | Mode=multiple_choice round=1 strategy=initial_breadth generated=2 accepted=2 total_accepted=2
+2026-06-16 13:56:42.183 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=7693
+2026-06-16 13:57:30.818 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=4139
+2026-06-16 13:58:04.106 | DEBUG    | Generator: mode=multiple_choice difficulty=medium response_len=11639
+2026-06-16 13:58:04.111 | INFO     | Mode=multiple_choice round=2 strategy=focus_topic generated=15 accepted=15 total_accepted=17
+2026-06-16 13:58:04.111 | INFO     | Mode multiple_choice stopped: max_candidate_pool_reached
+2026-06-16 13:58:04.127 | INFO     | Mode multiple_choice complete: 17 accepted, stopped_reason=max_candidate_pool_reached
+2026-06-16 13:58:04.130 | INFO     | Generation complete. Output: runs/case/d_full_case_20260616_135135/
+2026-06-16 13:58:04.161 | INFO     | Starting verification for /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 13:58:04.164 | INFO     | Built chunk index with 60 entries from runs/case/d_full_case_20260616_135135/evidence/chunked.json
+2026-06-16 13:58:04.166 | INFO     | Loaded 19 raw candidates from runs/case/d_full_case_20260616_135135/qa/candidate_pool.json
+2026-06-16 13:58:04.168 | INFO     | Loaded 17 raw candidates from runs/case/d_full_case_20260616_135135/multiple_choice/candidate_pool.json
+2026-06-16 13:58:04.169 | INFO     | Normalized 36 candidates total
+2026-06-16 13:58:04.169 | INFO     | [VerifyAgent] start task=case run=d_full_case_20260616_135135 candidates=36
+2026-06-16 13:58:04.178 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/normalized_candidates.jsonl
+2026-06-16 13:58:04.184 | DEBUG    | [citation] 44363f38-99cf-4f54-8838-3f4bf4f3308a: score=0.619 chunk=1.000 ans=0.455 matched=2/2 passed=False
+2026-06-16 13:58:04.191 | DEBUG    | [citation] bfb9480d-12ec-4a98-a38e-9dbfd17859f7: score=0.599 chunk=0.995 ans=0.430 matched=2/2 passed=False
+2026-06-16 13:58:04.200 | DEBUG    | [citation] 199e4e90-e55e-4ad0-b42d-563f906e15b8: score=0.598 chunk=0.937 ans=0.453 matched=3/3 passed=False
+2026-06-16 13:58:04.202 | DEBUG    | [citation] e44c1388-ab00-40d3-ae5e-bd7d59b809a6: score=0.833 chunk=0.980 ans=0.770 matched=1/1 passed=True
+2026-06-16 13:58:04.202 | DEBUG    | [citation] 4d49433d-23b3-495c-9fcd-41bb11f43561: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 13:58:04.202 | DEBUG    | [citation] 11f77d38-8b29-488b-8331-a0cbec8079be: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 13:58:04.203 | DEBUG    | [citation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 13:58:04.203 | DEBUG    | [citation] 3e71c4ef-b8e1-4696-837e-40c13a108dfd: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 13:58:04.204 | DEBUG    | [citation] 26c07862-cf1d-4265-ada1-1483e05d7732: score=0.958 chunk=1.000 ans=0.940 matched=1/1 passed=True
+2026-06-16 13:58:04.204 | DEBUG    | [citation] 187425a8-a16e-4e94-b80e-53269028f9dc: score=0.846 chunk=1.000 ans=0.780 matched=1/1 passed=True
+2026-06-16 13:58:04.204 | DEBUG    | [citation] 37832335-7618-4bbb-ad82-f34840fb1dc9: score=0.731 chunk=0.990 ans=0.620 matched=1/1 passed=False
+2026-06-16 13:58:04.205 | DEBUG    | [citation] bf07977f-d909-4ca8-8a26-78a2f9b9ac63: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 13:58:04.205 | DEBUG    | [citation] 4fd78f2e-3b90-4018-8ef2-96b25a2b1c3f: score=0.699 chunk=1.000 ans=0.570 matched=1/1 passed=False
+2026-06-16 13:58:04.209 | DEBUG    | [citation] 86283b30-8b4c-4c86-9f89-80c3350c480c: score=0.923 chunk=1.000 ans=0.890 matched=2/2 passed=True
+2026-06-16 13:58:04.210 | DEBUG    | [citation] 2c870773-c504-4330-8f6f-2caeb158a6de: score=0.909 chunk=1.000 ans=0.870 matched=1/1 passed=True
+2026-06-16 13:58:04.213 | DEBUG    | [citation] bc838ca2-edf2-4a59-9964-d4a5fb48015a: score=0.762 chunk=0.993 ans=0.663 matched=3/3 passed=False
+2026-06-16 13:58:04.218 | DEBUG    | [citation] b2d2f618-4f25-43f4-80e5-0c3a7605b73e: score=0.781 chunk=0.995 ans=0.690 matched=2/2 passed=False
+2026-06-16 13:58:04.222 | DEBUG    | [citation] b9a819f5-b164-43d9-afd1-e70e79577573: score=0.776 chunk=1.000 ans=0.680 matched=3/3 passed=False
+2026-06-16 13:58:04.225 | DEBUG    | [citation] 1bd2ec28-e62d-4c13-93d7-a9503cd982bf: score=0.802 chunk=0.995 ans=0.720 matched=2/2 passed=False
+2026-06-16 13:58:04.227 | DEBUG    | [citation] adceda9a-6a07-4fe4-bc40-ce333c435471: score=0.673 chunk=0.995 ans=0.535 matched=2/2 passed=False
+2026-06-16 13:58:04.228 | DEBUG    | [citation] 5b08ed13-899e-4893-b49e-1cd277fd9ba0: score=0.724 chunk=1.000 ans=0.605 matched=2/2 passed=False
+2026-06-16 13:58:04.228 | DEBUG    | [citation] 9b0b075f-e446-40ab-a03b-21fe9bb6e5c3: score=0.857 chunk=0.990 ans=0.800 matched=1/1 passed=True
+2026-06-16 13:58:04.228 | DEBUG    | [citation] afd4be47-c76f-44fe-ba75-406ca7da66fb: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 13:58:04.229 | DEBUG    | [citation] 9d5e8f35-2e1b-451e-bd31-fc40bb411dea: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 13:58:04.229 | DEBUG    | [citation] c840febc-6f42-43de-878c-577b434f81a9: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 13:58:04.229 | DEBUG    | [citation] ad07c2e5-56f7-4ae2-b304-314640facc9e: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 13:58:04.231 | DEBUG    | [citation] 312ae789-d94d-443d-a03d-6a608f40ef0a: score=0.811 chunk=1.000 ans=0.730 matched=1/1 passed=False
+2026-06-16 13:58:04.233 | DEBUG    | [citation] 6397d0d9-d910-47ba-b2ab-395c68616c38: score=0.688 chunk=1.000 ans=0.555 matched=2/2 passed=False
+2026-06-16 13:58:04.233 | DEBUG    | [citation] 36027eb7-485a-491e-b81e-69fc144f24d5: score=0.734 chunk=1.000 ans=0.620 matched=1/1 passed=False
+2026-06-16 13:58:04.233 | DEBUG    | [citation] a967436c-d6be-4602-a42e-aea445432ccc: score=0.671 chunk=1.000 ans=0.530 matched=2/2 passed=False
+2026-06-16 13:58:04.233 | DEBUG    | [citation] c2d34b70-ba52-4726-b6de-b11ec544215f: score=0.972 chunk=1.000 ans=0.960 matched=1/1 passed=True
+2026-06-16 13:58:04.234 | DEBUG    | [citation] 75a43ea0-7ddf-454e-b739-99dd07e7377f: score=0.650 chunk=0.990 ans=0.505 matched=2/2 passed=False
+2026-06-16 13:58:04.234 | DEBUG    | [citation] 16ef0718-3bca-4fd3-b151-d15784dd974f: score=0.867 chunk=1.000 ans=0.810 matched=1/1 passed=True
+2026-06-16 13:58:04.234 | DEBUG    | [citation] 6f5e0504-ce09-485b-a693-f1b3a906530f: score=0.720 chunk=0.930 ans=0.630 matched=1/1 passed=False
+2026-06-16 13:58:04.235 | DEBUG    | [citation] 65ee690c-d0dc-4680-b005-0206656f91ba: score=0.821 chunk=1.000 ans=0.745 matched=2/2 passed=False
+2026-06-16 13:58:04.235 | DEBUG    | [citation] 79066749-64f4-4086-b717-74a176027b74: score=0.674 chunk=1.000 ans=0.535 matched=2/2 passed=False
+2026-06-16 13:58:04.235 | INFO     | Citation validation: 15/36 passed
+2026-06-16 13:58:04.236 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/citation_validation.jsonl
+2026-06-16 13:58:04.238 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 13:58:08.270 | INFO     | Loading embedding model: all-MiniLM-L6-v2
+2026-06-16 13:58:18.375 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 13:58:18.437 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 13:58:18.660 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 13:58:27.371 | WARNING  | [llm_validation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3 attempt 1 failed: Cannot parse JSON from LLM response: 
+2026-06-16 13:58:37.279 | WARNING  | [llm_validation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3 attempt 2 failed: Cannot parse JSON from LLM response: {
+  "correctness": 5,
+  "answerability": 5,
+  "clarity": 5,
+  "difficulty_consistency": 3
+2026-06-16 13:58:48.250 | WARNING  | [llm_validation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3 attempt 3 failed: Cannot parse JSON from LLM response: 
+2026-06-16 13:58:48.250 | ERROR    | [llm_validation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3 exhausted retries, marking validator_error
+2026-06-16 13:58:54.480 | WARNING  | [llm_validation] 86283b30-8b4c-4c86-9f89-80c3350c480c attempt 1 failed: Cannot parse JSON from LLM response: 
+2026-06-16 13:58:56.216 | WARNING  | [llm_validation] 3e71c4ef-b8e1-4696-837e-40c13a108dfd attempt 1 failed: Cannot parse JSON from LLM response: {
+  "correctness": 5,
+  "answerability": 5,
+  "clarity": 5,
+  "difficulty_consistency": 2,
+  "suggested_difficulty": "easy",
+  "reason": "The question asks for a specific fact (how BMW used a quantum 
+2026-06-16 13:59:04.317 | WARNING  | [llm_validation] 86283b30-8b4c-4c86-9f89-80c3350c480c attempt 2 failed: Cannot parse JSON from LLM response: 
+2026-06-16 13:59:14.937 | WARNING  | [llm_validation] 86283b30-8b4c-4c86-9f89-80c3350c480c attempt 3 failed: Cannot parse JSON from LLM response: 
+2026-06-16 13:59:14.938 | ERROR    | [llm_validation] 86283b30-8b4c-4c86-9f89-80c3350c480c exhausted retries, marking validator_error
+2026-06-16 13:59:24.881 | WARNING  | [llm_validation] c2d34b70-ba52-4726-b6de-b11ec544215f attempt 1 failed: Cannot parse JSON from LLM response: 
+2026-06-16 13:59:29.726 | WARNING  | [llm_validation] c840febc-6f42-43de-878c-577b434f81a9 attempt 1 failed: Cannot parse JSON from LLM response: 
+2026-06-16 13:59:39.492 | WARNING  | [llm_validation] c840febc-6f42-43de-878c-577b434f81a9 attempt 2 failed: Cannot parse JSON from LLM response: {
+  "correctness": 5,
+  "answerability": 5,
+  "clarity": 5,
+  "difficulty_consistency": 2,
+  "suggested_difficulty": "easy",
+  "reason": "The question is a straightforward comprehension item asking fo
+2026-06-16 13:59:50.491 | INFO     | LLM validation: 13/15 passed, 2 errors, tokens: 7453 in / 7232 out
+2026-06-16 13:59:50.492 | INFO     | Appended 15 records to runs/case/d_full_case_20260616_135135/validation/llm_validation.jsonl
+2026-06-16 13:59:50.493 | INFO     | Selection[light]: selected=13 duplicate=0
+2026-06-16 13:59:50.508 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/validated_questions.jsonl
+2026-06-16 13:59:50.509 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/validation/weighted_selection.json
+2026-06-16 13:59:50.510 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/validation/validation_report.json
+2026-06-16 13:59:50.510 | INFO     | [VerifyAgent] done: selected=13 report=runs/case/d_full_case_20260616_135135/validation/validation_report.json
+2026-06-16 14:12:43.221 | INFO     | Verify-only mode: using /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 14:12:43.258 | INFO     | Starting verification for /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 14:12:43.260 | INFO     | Built chunk index with 60 entries from runs/case/d_full_case_20260616_135135/evidence/chunked.json
+2026-06-16 14:12:43.262 | INFO     | Loaded 19 raw candidates from runs/case/d_full_case_20260616_135135/qa/candidate_pool.json
+2026-06-16 14:12:43.263 | INFO     | Loaded 17 raw candidates from runs/case/d_full_case_20260616_135135/multiple_choice/candidate_pool.json
+2026-06-16 14:12:43.264 | INFO     | Normalized 36 candidates total
+2026-06-16 14:12:43.264 | INFO     | [VerifyAgent] start task=case run=d_full_case_20260616_135135 candidates=36
+2026-06-16 14:12:43.270 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/normalized_candidates.jsonl
+2026-06-16 14:12:43.274 | DEBUG    | [citation] 44363f38-99cf-4f54-8838-3f4bf4f3308a: score=0.619 chunk=1.000 ans=0.455 matched=2/2 passed=False
+2026-06-16 14:12:43.280 | DEBUG    | [citation] bfb9480d-12ec-4a98-a38e-9dbfd17859f7: score=0.599 chunk=0.995 ans=0.430 matched=2/2 passed=False
+2026-06-16 14:12:43.287 | DEBUG    | [citation] 199e4e90-e55e-4ad0-b42d-563f906e15b8: score=0.598 chunk=0.937 ans=0.453 matched=3/3 passed=False
+2026-06-16 14:12:43.289 | DEBUG    | [citation] e44c1388-ab00-40d3-ae5e-bd7d59b809a6: score=0.833 chunk=0.980 ans=0.770 matched=1/1 passed=True
+2026-06-16 14:12:43.290 | DEBUG    | [citation] 4d49433d-23b3-495c-9fcd-41bb11f43561: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 14:12:43.290 | DEBUG    | [citation] 11f77d38-8b29-488b-8331-a0cbec8079be: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:12:43.291 | DEBUG    | [citation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 14:12:43.292 | DEBUG    | [citation] 3e71c4ef-b8e1-4696-837e-40c13a108dfd: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 14:12:43.292 | DEBUG    | [citation] 26c07862-cf1d-4265-ada1-1483e05d7732: score=0.958 chunk=1.000 ans=0.940 matched=1/1 passed=True
+2026-06-16 14:12:43.292 | DEBUG    | [citation] 187425a8-a16e-4e94-b80e-53269028f9dc: score=0.846 chunk=1.000 ans=0.780 matched=1/1 passed=True
+2026-06-16 14:12:43.292 | DEBUG    | [citation] 37832335-7618-4bbb-ad82-f34840fb1dc9: score=0.731 chunk=0.990 ans=0.620 matched=1/1 passed=False
+2026-06-16 14:12:43.293 | DEBUG    | [citation] bf07977f-d909-4ca8-8a26-78a2f9b9ac63: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:12:43.293 | DEBUG    | [citation] 4fd78f2e-3b90-4018-8ef2-96b25a2b1c3f: score=0.699 chunk=1.000 ans=0.570 matched=1/1 passed=False
+2026-06-16 14:12:43.296 | DEBUG    | [citation] 86283b30-8b4c-4c86-9f89-80c3350c480c: score=0.923 chunk=1.000 ans=0.890 matched=2/2 passed=True
+2026-06-16 14:12:43.298 | DEBUG    | [citation] 2c870773-c504-4330-8f6f-2caeb158a6de: score=0.909 chunk=1.000 ans=0.870 matched=1/1 passed=True
+2026-06-16 14:12:43.300 | DEBUG    | [citation] bc838ca2-edf2-4a59-9964-d4a5fb48015a: score=0.762 chunk=0.993 ans=0.663 matched=3/3 passed=False
+2026-06-16 14:12:43.305 | DEBUG    | [citation] b2d2f618-4f25-43f4-80e5-0c3a7605b73e: score=0.781 chunk=0.995 ans=0.690 matched=2/2 passed=False
+2026-06-16 14:12:43.309 | DEBUG    | [citation] b9a819f5-b164-43d9-afd1-e70e79577573: score=0.776 chunk=1.000 ans=0.680 matched=3/3 passed=False
+2026-06-16 14:12:43.312 | DEBUG    | [citation] 1bd2ec28-e62d-4c13-93d7-a9503cd982bf: score=0.802 chunk=0.995 ans=0.720 matched=2/2 passed=False
+2026-06-16 14:12:43.314 | DEBUG    | [citation] adceda9a-6a07-4fe4-bc40-ce333c435471: score=0.673 chunk=0.995 ans=0.535 matched=2/2 passed=False
+2026-06-16 14:12:43.315 | DEBUG    | [citation] 5b08ed13-899e-4893-b49e-1cd277fd9ba0: score=0.724 chunk=1.000 ans=0.605 matched=2/2 passed=False
+2026-06-16 14:12:43.315 | DEBUG    | [citation] 9b0b075f-e446-40ab-a03b-21fe9bb6e5c3: score=0.857 chunk=0.990 ans=0.800 matched=1/1 passed=True
+2026-06-16 14:12:43.315 | DEBUG    | [citation] afd4be47-c76f-44fe-ba75-406ca7da66fb: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 14:12:43.315 | DEBUG    | [citation] 9d5e8f35-2e1b-451e-bd31-fc40bb411dea: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 14:12:43.316 | DEBUG    | [citation] c840febc-6f42-43de-878c-577b434f81a9: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 14:12:43.316 | DEBUG    | [citation] ad07c2e5-56f7-4ae2-b304-314640facc9e: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:12:43.317 | DEBUG    | [citation] 312ae789-d94d-443d-a03d-6a608f40ef0a: score=0.811 chunk=1.000 ans=0.730 matched=1/1 passed=False
+2026-06-16 14:12:43.319 | DEBUG    | [citation] 6397d0d9-d910-47ba-b2ab-395c68616c38: score=0.688 chunk=1.000 ans=0.555 matched=2/2 passed=False
+2026-06-16 14:12:43.320 | DEBUG    | [citation] 36027eb7-485a-491e-b81e-69fc144f24d5: score=0.734 chunk=1.000 ans=0.620 matched=1/1 passed=False
+2026-06-16 14:12:43.320 | DEBUG    | [citation] a967436c-d6be-4602-a42e-aea445432ccc: score=0.671 chunk=1.000 ans=0.530 matched=2/2 passed=False
+2026-06-16 14:12:43.320 | DEBUG    | [citation] c2d34b70-ba52-4726-b6de-b11ec544215f: score=0.972 chunk=1.000 ans=0.960 matched=1/1 passed=True
+2026-06-16 14:12:43.321 | DEBUG    | [citation] 75a43ea0-7ddf-454e-b739-99dd07e7377f: score=0.650 chunk=0.990 ans=0.505 matched=2/2 passed=False
+2026-06-16 14:12:43.321 | DEBUG    | [citation] 16ef0718-3bca-4fd3-b151-d15784dd974f: score=0.867 chunk=1.000 ans=0.810 matched=1/1 passed=True
+2026-06-16 14:12:43.321 | DEBUG    | [citation] 6f5e0504-ce09-485b-a693-f1b3a906530f: score=0.720 chunk=0.930 ans=0.630 matched=1/1 passed=False
+2026-06-16 14:12:43.321 | DEBUG    | [citation] 65ee690c-d0dc-4680-b005-0206656f91ba: score=0.821 chunk=1.000 ans=0.745 matched=2/2 passed=False
+2026-06-16 14:12:43.322 | DEBUG    | [citation] 79066749-64f4-4086-b717-74a176027b74: score=0.674 chunk=1.000 ans=0.535 matched=2/2 passed=False
+2026-06-16 14:12:43.322 | INFO     | Citation validation: 15/36 passed
+2026-06-16 14:12:43.323 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/citation_validation.jsonl
+2026-06-16 14:12:43.325 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:12:47.761 | INFO     | Loading embedding model: all-MiniLM-L6-v2
+2026-06-16 14:12:57.607 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:12:57.651 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:12:57.710 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:13:07.998 | WARNING  | [llm_validation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3 attempt 1 failed: Cannot parse JSON from LLM response: {
+  "correctness": 4,
+  "answerability": 5,
+  "clarity": 4,
+  "difficulty_consistency": 5,
+  "suggested_difficulty": "hard",
+  "reason": "The answer correctly defines counterfactual quantum communicat
+2026-06-16 14:20:14.836 | INFO     | Verify-only mode: using /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 14:20:14.873 | INFO     | Starting verification for /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 14:20:14.876 | INFO     | Built chunk index with 60 entries from runs/case/d_full_case_20260616_135135/evidence/chunked.json
+2026-06-16 14:20:14.877 | INFO     | Loaded 19 raw candidates from runs/case/d_full_case_20260616_135135/qa/candidate_pool.json
+2026-06-16 14:20:14.879 | INFO     | Loaded 17 raw candidates from runs/case/d_full_case_20260616_135135/multiple_choice/candidate_pool.json
+2026-06-16 14:20:14.880 | INFO     | Normalized 36 candidates total
+2026-06-16 14:20:14.880 | INFO     | [VerifyAgent] start task=case run=d_full_case_20260616_135135 candidates=36
+2026-06-16 14:20:14.885 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/normalized_candidates.jsonl
+2026-06-16 14:20:14.889 | DEBUG    | [citation] 44363f38-99cf-4f54-8838-3f4bf4f3308a: score=0.619 chunk=1.000 ans=0.455 matched=2/2 passed=False
+2026-06-16 14:20:14.894 | DEBUG    | [citation] bfb9480d-12ec-4a98-a38e-9dbfd17859f7: score=0.599 chunk=0.995 ans=0.430 matched=2/2 passed=False
+2026-06-16 14:20:14.902 | DEBUG    | [citation] 199e4e90-e55e-4ad0-b42d-563f906e15b8: score=0.598 chunk=0.937 ans=0.453 matched=3/3 passed=False
+2026-06-16 14:20:14.904 | DEBUG    | [citation] e44c1388-ab00-40d3-ae5e-bd7d59b809a6: score=0.833 chunk=0.980 ans=0.770 matched=1/1 passed=True
+2026-06-16 14:20:14.904 | DEBUG    | [citation] 4d49433d-23b3-495c-9fcd-41bb11f43561: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 14:20:14.904 | DEBUG    | [citation] 11f77d38-8b29-488b-8331-a0cbec8079be: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:20:14.905 | DEBUG    | [citation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 14:20:14.905 | DEBUG    | [citation] 3e71c4ef-b8e1-4696-837e-40c13a108dfd: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 14:20:14.905 | DEBUG    | [citation] 26c07862-cf1d-4265-ada1-1483e05d7732: score=0.958 chunk=1.000 ans=0.940 matched=1/1 passed=True
+2026-06-16 14:20:14.906 | DEBUG    | [citation] 187425a8-a16e-4e94-b80e-53269028f9dc: score=0.846 chunk=1.000 ans=0.780 matched=1/1 passed=True
+2026-06-16 14:20:14.906 | DEBUG    | [citation] 37832335-7618-4bbb-ad82-f34840fb1dc9: score=0.731 chunk=0.990 ans=0.620 matched=1/1 passed=False
+2026-06-16 14:20:14.906 | DEBUG    | [citation] bf07977f-d909-4ca8-8a26-78a2f9b9ac63: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:20:14.906 | DEBUG    | [citation] 4fd78f2e-3b90-4018-8ef2-96b25a2b1c3f: score=0.699 chunk=1.000 ans=0.570 matched=1/1 passed=False
+2026-06-16 14:20:14.909 | DEBUG    | [citation] 86283b30-8b4c-4c86-9f89-80c3350c480c: score=0.923 chunk=1.000 ans=0.890 matched=2/2 passed=True
+2026-06-16 14:20:14.911 | DEBUG    | [citation] 2c870773-c504-4330-8f6f-2caeb158a6de: score=0.909 chunk=1.000 ans=0.870 matched=1/1 passed=True
+2026-06-16 14:20:14.914 | DEBUG    | [citation] bc838ca2-edf2-4a59-9964-d4a5fb48015a: score=0.762 chunk=0.993 ans=0.663 matched=3/3 passed=False
+2026-06-16 14:20:14.919 | DEBUG    | [citation] b2d2f618-4f25-43f4-80e5-0c3a7605b73e: score=0.781 chunk=0.995 ans=0.690 matched=2/2 passed=False
+2026-06-16 14:20:14.922 | DEBUG    | [citation] b9a819f5-b164-43d9-afd1-e70e79577573: score=0.776 chunk=1.000 ans=0.680 matched=3/3 passed=False
+2026-06-16 14:20:14.925 | DEBUG    | [citation] 1bd2ec28-e62d-4c13-93d7-a9503cd982bf: score=0.802 chunk=0.995 ans=0.720 matched=2/2 passed=False
+2026-06-16 14:20:14.927 | DEBUG    | [citation] adceda9a-6a07-4fe4-bc40-ce333c435471: score=0.673 chunk=0.995 ans=0.535 matched=2/2 passed=False
+2026-06-16 14:20:14.928 | DEBUG    | [citation] 5b08ed13-899e-4893-b49e-1cd277fd9ba0: score=0.724 chunk=1.000 ans=0.605 matched=2/2 passed=False
+2026-06-16 14:20:14.928 | DEBUG    | [citation] 9b0b075f-e446-40ab-a03b-21fe9bb6e5c3: score=0.857 chunk=0.990 ans=0.800 matched=1/1 passed=True
+2026-06-16 14:20:14.928 | DEBUG    | [citation] afd4be47-c76f-44fe-ba75-406ca7da66fb: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 14:20:14.929 | DEBUG    | [citation] 9d5e8f35-2e1b-451e-bd31-fc40bb411dea: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 14:20:14.929 | DEBUG    | [citation] c840febc-6f42-43de-878c-577b434f81a9: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 14:20:14.929 | DEBUG    | [citation] ad07c2e5-56f7-4ae2-b304-314640facc9e: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:20:14.931 | DEBUG    | [citation] 312ae789-d94d-443d-a03d-6a608f40ef0a: score=0.811 chunk=1.000 ans=0.730 matched=1/1 passed=False
+2026-06-16 14:20:14.933 | DEBUG    | [citation] 6397d0d9-d910-47ba-b2ab-395c68616c38: score=0.688 chunk=1.000 ans=0.555 matched=2/2 passed=False
+2026-06-16 14:20:14.933 | DEBUG    | [citation] 36027eb7-485a-491e-b81e-69fc144f24d5: score=0.734 chunk=1.000 ans=0.620 matched=1/1 passed=False
+2026-06-16 14:20:14.933 | DEBUG    | [citation] a967436c-d6be-4602-a42e-aea445432ccc: score=0.671 chunk=1.000 ans=0.530 matched=2/2 passed=False
+2026-06-16 14:20:14.933 | DEBUG    | [citation] c2d34b70-ba52-4726-b6de-b11ec544215f: score=0.972 chunk=1.000 ans=0.960 matched=1/1 passed=True
+2026-06-16 14:20:14.934 | DEBUG    | [citation] 75a43ea0-7ddf-454e-b739-99dd07e7377f: score=0.650 chunk=0.990 ans=0.505 matched=2/2 passed=False
+2026-06-16 14:20:14.934 | DEBUG    | [citation] 16ef0718-3bca-4fd3-b151-d15784dd974f: score=0.867 chunk=1.000 ans=0.810 matched=1/1 passed=True
+2026-06-16 14:20:14.934 | DEBUG    | [citation] 6f5e0504-ce09-485b-a693-f1b3a906530f: score=0.720 chunk=0.930 ans=0.630 matched=1/1 passed=False
+2026-06-16 14:20:14.935 | DEBUG    | [citation] 65ee690c-d0dc-4680-b005-0206656f91ba: score=0.821 chunk=1.000 ans=0.745 matched=2/2 passed=False
+2026-06-16 14:20:14.935 | DEBUG    | [citation] 79066749-64f4-4086-b717-74a176027b74: score=0.674 chunk=1.000 ans=0.535 matched=2/2 passed=False
+2026-06-16 14:20:14.935 | INFO     | Citation validation: 15/36 passed
+2026-06-16 14:20:14.936 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/citation_validation.jsonl
+2026-06-16 14:20:14.938 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:20:18.913 | INFO     | Loading embedding model: all-MiniLM-L6-v2
+2026-06-16 14:20:28.621 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:20:28.669 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:20:28.718 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:20:39.680 | WARNING  | [llm_validation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3 attempt 1 failed: Cannot parse JSON from LLM response: {
+  "correctness": 4,
+  "answerability": 4,
+  "clarity": 5,
+  "difficulty_consistency": 5,
+  "suggested_difficulty": "hard",
+  "reason": "The item is logically consistent and clearly written. The answ
+2026-06-16 14:20:40.864 | WARNING  | [llm_validation] 187425a8-a16e-4e94-b80e-53269028f9dc attempt 1 failed: Cannot parse JSON from LLM response: {
+  "correctness": 5,
+2026-06-16 14:20:53.409 | WARNING  | [llm_validation] 187425a8-a16e-4e94-b80e-53269028f9dc attempt 2 failed: Cannot parse JSON from LLM response: {
+  "correctness": 5,
+  "answerability": 5,
+2026-06-16 14:21:16.547 | WARNING  | [llm_validation] 86283b30-8b4c-4c86-9f89-80c3350c480c attempt 1 failed: Cannot parse JSON from LLM response: 
+2026-06-16 14:21:30.049 | INFO     | Verify-only mode: using /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 14:21:30.080 | INFO     | Starting verification for /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 14:21:30.083 | INFO     | Built chunk index with 60 entries from runs/case/d_full_case_20260616_135135/evidence/chunked.json
+2026-06-16 14:21:30.084 | INFO     | Loaded 19 raw candidates from runs/case/d_full_case_20260616_135135/qa/candidate_pool.json
+2026-06-16 14:21:30.086 | INFO     | Loaded 17 raw candidates from runs/case/d_full_case_20260616_135135/multiple_choice/candidate_pool.json
+2026-06-16 14:21:30.086 | INFO     | Normalized 36 candidates total
+2026-06-16 14:21:30.086 | INFO     | [VerifyAgent] start task=case run=d_full_case_20260616_135135 candidates=36
+2026-06-16 14:21:30.092 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/normalized_candidates.jsonl
+2026-06-16 14:21:30.096 | DEBUG    | [citation] 44363f38-99cf-4f54-8838-3f4bf4f3308a: score=0.619 chunk=1.000 ans=0.455 matched=2/2 passed=False
+2026-06-16 14:21:30.101 | DEBUG    | [citation] bfb9480d-12ec-4a98-a38e-9dbfd17859f7: score=0.599 chunk=0.995 ans=0.430 matched=2/2 passed=False
+2026-06-16 14:21:30.108 | DEBUG    | [citation] 199e4e90-e55e-4ad0-b42d-563f906e15b8: score=0.598 chunk=0.937 ans=0.453 matched=3/3 passed=False
+2026-06-16 14:21:30.111 | DEBUG    | [citation] e44c1388-ab00-40d3-ae5e-bd7d59b809a6: score=0.833 chunk=0.980 ans=0.770 matched=1/1 passed=True
+2026-06-16 14:21:30.111 | DEBUG    | [citation] 4d49433d-23b3-495c-9fcd-41bb11f43561: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 14:21:30.111 | DEBUG    | [citation] 11f77d38-8b29-488b-8331-a0cbec8079be: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:21:30.112 | DEBUG    | [citation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 14:21:30.112 | DEBUG    | [citation] 3e71c4ef-b8e1-4696-837e-40c13a108dfd: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 14:21:30.113 | DEBUG    | [citation] 26c07862-cf1d-4265-ada1-1483e05d7732: score=0.958 chunk=1.000 ans=0.940 matched=1/1 passed=True
+2026-06-16 14:21:30.113 | DEBUG    | [citation] 187425a8-a16e-4e94-b80e-53269028f9dc: score=0.846 chunk=1.000 ans=0.780 matched=1/1 passed=True
+2026-06-16 14:21:30.113 | DEBUG    | [citation] 37832335-7618-4bbb-ad82-f34840fb1dc9: score=0.731 chunk=0.990 ans=0.620 matched=1/1 passed=False
+2026-06-16 14:21:30.113 | DEBUG    | [citation] bf07977f-d909-4ca8-8a26-78a2f9b9ac63: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:21:30.113 | DEBUG    | [citation] 4fd78f2e-3b90-4018-8ef2-96b25a2b1c3f: score=0.699 chunk=1.000 ans=0.570 matched=1/1 passed=False
+2026-06-16 14:21:30.117 | DEBUG    | [citation] 86283b30-8b4c-4c86-9f89-80c3350c480c: score=0.923 chunk=1.000 ans=0.890 matched=2/2 passed=True
+2026-06-16 14:21:30.118 | DEBUG    | [citation] 2c870773-c504-4330-8f6f-2caeb158a6de: score=0.909 chunk=1.000 ans=0.870 matched=1/1 passed=True
+2026-06-16 14:21:30.121 | DEBUG    | [citation] bc838ca2-edf2-4a59-9964-d4a5fb48015a: score=0.762 chunk=0.993 ans=0.663 matched=3/3 passed=False
+2026-06-16 14:21:30.126 | DEBUG    | [citation] b2d2f618-4f25-43f4-80e5-0c3a7605b73e: score=0.781 chunk=0.995 ans=0.690 matched=2/2 passed=False
+2026-06-16 14:21:30.130 | DEBUG    | [citation] b9a819f5-b164-43d9-afd1-e70e79577573: score=0.776 chunk=1.000 ans=0.680 matched=3/3 passed=False
+2026-06-16 14:21:30.132 | DEBUG    | [citation] 1bd2ec28-e62d-4c13-93d7-a9503cd982bf: score=0.802 chunk=0.995 ans=0.720 matched=2/2 passed=False
+2026-06-16 14:21:30.134 | DEBUG    | [citation] adceda9a-6a07-4fe4-bc40-ce333c435471: score=0.673 chunk=0.995 ans=0.535 matched=2/2 passed=False
+2026-06-16 14:21:30.135 | DEBUG    | [citation] 5b08ed13-899e-4893-b49e-1cd277fd9ba0: score=0.724 chunk=1.000 ans=0.605 matched=2/2 passed=False
+2026-06-16 14:21:30.135 | DEBUG    | [citation] 9b0b075f-e446-40ab-a03b-21fe9bb6e5c3: score=0.857 chunk=0.990 ans=0.800 matched=1/1 passed=True
+2026-06-16 14:21:30.136 | DEBUG    | [citation] afd4be47-c76f-44fe-ba75-406ca7da66fb: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 14:21:30.136 | DEBUG    | [citation] 9d5e8f35-2e1b-451e-bd31-fc40bb411dea: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 14:21:30.136 | DEBUG    | [citation] c840febc-6f42-43de-878c-577b434f81a9: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 14:21:30.136 | DEBUG    | [citation] ad07c2e5-56f7-4ae2-b304-314640facc9e: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:21:30.138 | DEBUG    | [citation] 312ae789-d94d-443d-a03d-6a608f40ef0a: score=0.811 chunk=1.000 ans=0.730 matched=1/1 passed=False
+2026-06-16 14:21:30.140 | DEBUG    | [citation] 6397d0d9-d910-47ba-b2ab-395c68616c38: score=0.688 chunk=1.000 ans=0.555 matched=2/2 passed=False
+2026-06-16 14:21:30.140 | DEBUG    | [citation] 36027eb7-485a-491e-b81e-69fc144f24d5: score=0.734 chunk=1.000 ans=0.620 matched=1/1 passed=False
+2026-06-16 14:21:30.140 | DEBUG    | [citation] a967436c-d6be-4602-a42e-aea445432ccc: score=0.671 chunk=1.000 ans=0.530 matched=2/2 passed=False
+2026-06-16 14:21:30.141 | DEBUG    | [citation] c2d34b70-ba52-4726-b6de-b11ec544215f: score=0.972 chunk=1.000 ans=0.960 matched=1/1 passed=True
+2026-06-16 14:21:30.141 | DEBUG    | [citation] 75a43ea0-7ddf-454e-b739-99dd07e7377f: score=0.650 chunk=0.990 ans=0.505 matched=2/2 passed=False
+2026-06-16 14:21:30.141 | DEBUG    | [citation] 16ef0718-3bca-4fd3-b151-d15784dd974f: score=0.867 chunk=1.000 ans=0.810 matched=1/1 passed=True
+2026-06-16 14:21:30.142 | DEBUG    | [citation] 6f5e0504-ce09-485b-a693-f1b3a906530f: score=0.720 chunk=0.930 ans=0.630 matched=1/1 passed=False
+2026-06-16 14:21:30.142 | DEBUG    | [citation] 65ee690c-d0dc-4680-b005-0206656f91ba: score=0.821 chunk=1.000 ans=0.745 matched=2/2 passed=False
+2026-06-16 14:21:30.142 | DEBUG    | [citation] 79066749-64f4-4086-b717-74a176027b74: score=0.674 chunk=1.000 ans=0.535 matched=2/2 passed=False
+2026-06-16 14:21:30.142 | INFO     | Citation validation: 15/36 passed
+2026-06-16 14:21:30.143 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/citation_validation.jsonl
+2026-06-16 14:21:30.145 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:21:34.089 | INFO     | Loading embedding model: all-MiniLM-L6-v2
+2026-06-16 14:21:43.568 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:21:43.616 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:21:43.668 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:22:16.430 | WARNING  | [llm_validation] 86283b30-8b4c-4c86-9f89-80c3350c480c attempt 1 failed: Cannot parse JSON from LLM response: {
+  "correctness": 5,
+  "answerability": 5,
+  "clarity": 5,
+  "difficulty_consistency": 3,
+  "suggested_dif
+2026-06-16 14:28:03.812 | INFO     | Verify-only mode: using /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 14:28:03.846 | INFO     | Starting verification for /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 14:28:03.848 | INFO     | Built chunk index with 60 entries from runs/case/d_full_case_20260616_135135/evidence/chunked.json
+2026-06-16 14:28:03.850 | INFO     | Loaded 19 raw candidates from runs/case/d_full_case_20260616_135135/qa/candidate_pool.json
+2026-06-16 14:28:03.852 | INFO     | Loaded 17 raw candidates from runs/case/d_full_case_20260616_135135/multiple_choice/candidate_pool.json
+2026-06-16 14:28:03.852 | INFO     | Normalized 36 candidates total
+2026-06-16 14:28:03.852 | INFO     | [VerifyAgent] start task=case run=d_full_case_20260616_135135 candidates=36
+2026-06-16 14:28:03.857 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/normalized_candidates.jsonl
+2026-06-16 14:28:03.861 | DEBUG    | [citation] 44363f38-99cf-4f54-8838-3f4bf4f3308a: score=0.619 chunk=1.000 ans=0.455 matched=2/2 passed=False
+2026-06-16 14:28:03.866 | DEBUG    | [citation] bfb9480d-12ec-4a98-a38e-9dbfd17859f7: score=0.599 chunk=0.995 ans=0.430 matched=2/2 passed=False
+2026-06-16 14:28:03.873 | DEBUG    | [citation] 199e4e90-e55e-4ad0-b42d-563f906e15b8: score=0.598 chunk=0.937 ans=0.453 matched=3/3 passed=False
+2026-06-16 14:28:03.875 | DEBUG    | [citation] e44c1388-ab00-40d3-ae5e-bd7d59b809a6: score=0.833 chunk=0.980 ans=0.770 matched=1/1 passed=True
+2026-06-16 14:28:03.875 | DEBUG    | [citation] 4d49433d-23b3-495c-9fcd-41bb11f43561: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 14:28:03.876 | DEBUG    | [citation] 11f77d38-8b29-488b-8331-a0cbec8079be: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:28:03.876 | DEBUG    | [citation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 14:28:03.876 | DEBUG    | [citation] 3e71c4ef-b8e1-4696-837e-40c13a108dfd: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 14:28:03.877 | DEBUG    | [citation] 26c07862-cf1d-4265-ada1-1483e05d7732: score=0.958 chunk=1.000 ans=0.940 matched=1/1 passed=True
+2026-06-16 14:28:03.877 | DEBUG    | [citation] 187425a8-a16e-4e94-b80e-53269028f9dc: score=0.846 chunk=1.000 ans=0.780 matched=1/1 passed=True
+2026-06-16 14:28:03.877 | DEBUG    | [citation] 37832335-7618-4bbb-ad82-f34840fb1dc9: score=0.731 chunk=0.990 ans=0.620 matched=1/1 passed=False
+2026-06-16 14:28:03.877 | DEBUG    | [citation] bf07977f-d909-4ca8-8a26-78a2f9b9ac63: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:28:03.878 | DEBUG    | [citation] 4fd78f2e-3b90-4018-8ef2-96b25a2b1c3f: score=0.699 chunk=1.000 ans=0.570 matched=1/1 passed=False
+2026-06-16 14:28:03.881 | DEBUG    | [citation] 86283b30-8b4c-4c86-9f89-80c3350c480c: score=0.923 chunk=1.000 ans=0.890 matched=2/2 passed=True
+2026-06-16 14:28:03.882 | DEBUG    | [citation] 2c870773-c504-4330-8f6f-2caeb158a6de: score=0.909 chunk=1.000 ans=0.870 matched=1/1 passed=True
+2026-06-16 14:28:03.885 | DEBUG    | [citation] bc838ca2-edf2-4a59-9964-d4a5fb48015a: score=0.762 chunk=0.993 ans=0.663 matched=3/3 passed=False
+2026-06-16 14:28:03.890 | DEBUG    | [citation] b2d2f618-4f25-43f4-80e5-0c3a7605b73e: score=0.781 chunk=0.995 ans=0.690 matched=2/2 passed=False
+2026-06-16 14:28:03.893 | DEBUG    | [citation] b9a819f5-b164-43d9-afd1-e70e79577573: score=0.776 chunk=1.000 ans=0.680 matched=3/3 passed=False
+2026-06-16 14:28:03.895 | DEBUG    | [citation] 1bd2ec28-e62d-4c13-93d7-a9503cd982bf: score=0.802 chunk=0.995 ans=0.720 matched=2/2 passed=False
+2026-06-16 14:28:03.897 | DEBUG    | [citation] adceda9a-6a07-4fe4-bc40-ce333c435471: score=0.673 chunk=0.995 ans=0.535 matched=2/2 passed=False
+2026-06-16 14:28:03.898 | DEBUG    | [citation] 5b08ed13-899e-4893-b49e-1cd277fd9ba0: score=0.724 chunk=1.000 ans=0.605 matched=2/2 passed=False
+2026-06-16 14:28:03.899 | DEBUG    | [citation] 9b0b075f-e446-40ab-a03b-21fe9bb6e5c3: score=0.857 chunk=0.990 ans=0.800 matched=1/1 passed=True
+2026-06-16 14:28:03.899 | DEBUG    | [citation] afd4be47-c76f-44fe-ba75-406ca7da66fb: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 14:28:03.899 | DEBUG    | [citation] 9d5e8f35-2e1b-451e-bd31-fc40bb411dea: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 14:28:03.899 | DEBUG    | [citation] c840febc-6f42-43de-878c-577b434f81a9: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 14:28:03.899 | DEBUG    | [citation] ad07c2e5-56f7-4ae2-b304-314640facc9e: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:28:03.901 | DEBUG    | [citation] 312ae789-d94d-443d-a03d-6a608f40ef0a: score=0.811 chunk=1.000 ans=0.730 matched=1/1 passed=False
+2026-06-16 14:28:03.903 | DEBUG    | [citation] 6397d0d9-d910-47ba-b2ab-395c68616c38: score=0.688 chunk=1.000 ans=0.555 matched=2/2 passed=False
+2026-06-16 14:28:03.903 | DEBUG    | [citation] 36027eb7-485a-491e-b81e-69fc144f24d5: score=0.734 chunk=1.000 ans=0.620 matched=1/1 passed=False
+2026-06-16 14:28:03.903 | DEBUG    | [citation] a967436c-d6be-4602-a42e-aea445432ccc: score=0.671 chunk=1.000 ans=0.530 matched=2/2 passed=False
+2026-06-16 14:28:03.904 | DEBUG    | [citation] c2d34b70-ba52-4726-b6de-b11ec544215f: score=0.972 chunk=1.000 ans=0.960 matched=1/1 passed=True
+2026-06-16 14:28:03.904 | DEBUG    | [citation] 75a43ea0-7ddf-454e-b739-99dd07e7377f: score=0.650 chunk=0.990 ans=0.505 matched=2/2 passed=False
+2026-06-16 14:28:03.904 | DEBUG    | [citation] 16ef0718-3bca-4fd3-b151-d15784dd974f: score=0.867 chunk=1.000 ans=0.810 matched=1/1 passed=True
+2026-06-16 14:28:03.905 | DEBUG    | [citation] 6f5e0504-ce09-485b-a693-f1b3a906530f: score=0.720 chunk=0.930 ans=0.630 matched=1/1 passed=False
+2026-06-16 14:28:03.905 | DEBUG    | [citation] 65ee690c-d0dc-4680-b005-0206656f91ba: score=0.821 chunk=1.000 ans=0.745 matched=2/2 passed=False
+2026-06-16 14:28:03.905 | DEBUG    | [citation] 79066749-64f4-4086-b717-74a176027b74: score=0.674 chunk=1.000 ans=0.535 matched=2/2 passed=False
+2026-06-16 14:28:03.905 | INFO     | Citation validation: 15/36 passed
+2026-06-16 14:28:03.906 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/citation_validation.jsonl
+2026-06-16 14:28:03.908 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:28:07.623 | INFO     | Loading embedding model: all-MiniLM-L6-v2
+2026-06-16 14:28:17.489 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:28:17.532 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:28:17.574 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:28:39.680 | INFO     | LLM validation: 14/15 passed, 0 errors, tokens: 9143 in / 1715 out
+2026-06-16 14:28:39.683 | INFO     | Appended 15 records to runs/case/d_full_case_20260616_135135/validation/llm_validation.jsonl
+2026-06-16 14:28:39.684 | INFO     | Selection[light]: selected=14 duplicate=0
+2026-06-16 14:28:39.699 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/validated_questions.jsonl
+2026-06-16 14:28:39.700 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/validation/weighted_selection.json
+2026-06-16 14:28:39.700 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/validation/validation_report.json
+2026-06-16 14:28:39.701 | INFO     | [VerifyAgent] done: selected=14 report=runs/case/d_full_case_20260616_135135/validation/validation_report.json
+2026-06-16 14:31:34.001 | INFO     | Verify-only mode: using /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 14:31:34.039 | INFO     | Starting verification for /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 14:31:34.042 | INFO     | Built chunk index with 60 entries from runs/case/d_full_case_20260616_135135/evidence/chunked.json
+2026-06-16 14:31:34.043 | INFO     | Loaded 19 raw candidates from runs/case/d_full_case_20260616_135135/qa/candidate_pool.json
+2026-06-16 14:31:34.045 | INFO     | Loaded 17 raw candidates from runs/case/d_full_case_20260616_135135/multiple_choice/candidate_pool.json
+2026-06-16 14:31:34.045 | INFO     | Normalized 36 candidates total
+2026-06-16 14:31:34.045 | INFO     | [VerifyAgent] start task=case run=d_full_case_20260616_135135 candidates=36
+2026-06-16 14:31:34.052 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/normalized_candidates.jsonl
+2026-06-16 14:31:34.056 | DEBUG    | [citation] 44363f38-99cf-4f54-8838-3f4bf4f3308a: score=0.619 chunk=1.000 ans=0.455 matched=2/2 passed=False
+2026-06-16 14:31:34.061 | DEBUG    | [citation] bfb9480d-12ec-4a98-a38e-9dbfd17859f7: score=0.599 chunk=0.995 ans=0.430 matched=2/2 passed=False
+2026-06-16 14:31:34.069 | DEBUG    | [citation] 199e4e90-e55e-4ad0-b42d-563f906e15b8: score=0.598 chunk=0.937 ans=0.453 matched=3/3 passed=False
+2026-06-16 14:31:34.071 | DEBUG    | [citation] e44c1388-ab00-40d3-ae5e-bd7d59b809a6: score=0.833 chunk=0.980 ans=0.770 matched=1/1 passed=True
+2026-06-16 14:31:34.072 | DEBUG    | [citation] 4d49433d-23b3-495c-9fcd-41bb11f43561: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 14:31:34.072 | DEBUG    | [citation] 11f77d38-8b29-488b-8331-a0cbec8079be: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:31:34.073 | DEBUG    | [citation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 14:31:34.073 | DEBUG    | [citation] 3e71c4ef-b8e1-4696-837e-40c13a108dfd: score=0.993 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 14:31:34.073 | DEBUG    | [citation] 26c07862-cf1d-4265-ada1-1483e05d7732: score=0.958 chunk=1.000 ans=0.940 matched=1/1 passed=True
+2026-06-16 14:31:34.074 | DEBUG    | [citation] 187425a8-a16e-4e94-b80e-53269028f9dc: score=0.846 chunk=1.000 ans=0.780 matched=1/1 passed=True
+2026-06-16 14:31:34.074 | DEBUG    | [citation] 37832335-7618-4bbb-ad82-f34840fb1dc9: score=0.731 chunk=0.990 ans=0.620 matched=1/1 passed=False
+2026-06-16 14:31:34.074 | DEBUG    | [citation] bf07977f-d909-4ca8-8a26-78a2f9b9ac63: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:31:34.074 | DEBUG    | [citation] 4fd78f2e-3b90-4018-8ef2-96b25a2b1c3f: score=0.699 chunk=1.000 ans=0.570 matched=1/1 passed=False
+2026-06-16 14:31:34.077 | DEBUG    | [citation] 86283b30-8b4c-4c86-9f89-80c3350c480c: score=0.923 chunk=1.000 ans=0.890 matched=2/2 passed=True
+2026-06-16 14:31:34.079 | DEBUG    | [citation] 2c870773-c504-4330-8f6f-2caeb158a6de: score=0.909 chunk=1.000 ans=0.870 matched=1/1 passed=True
+2026-06-16 14:31:34.082 | DEBUG    | [citation] bc838ca2-edf2-4a59-9964-d4a5fb48015a: score=0.762 chunk=0.993 ans=0.663 matched=3/3 passed=False
+2026-06-16 14:31:34.087 | DEBUG    | [citation] b2d2f618-4f25-43f4-80e5-0c3a7605b73e: score=0.781 chunk=0.995 ans=0.690 matched=2/2 passed=False
+2026-06-16 14:31:34.090 | DEBUG    | [citation] b9a819f5-b164-43d9-afd1-e70e79577573: score=0.776 chunk=1.000 ans=0.680 matched=3/3 passed=False
+2026-06-16 14:31:34.093 | DEBUG    | [citation] 1bd2ec28-e62d-4c13-93d7-a9503cd982bf: score=0.802 chunk=0.995 ans=0.720 matched=2/2 passed=False
+2026-06-16 14:31:34.095 | DEBUG    | [citation] adceda9a-6a07-4fe4-bc40-ce333c435471: score=0.673 chunk=0.995 ans=0.535 matched=2/2 passed=False
+2026-06-16 14:31:34.096 | DEBUG    | [citation] 5b08ed13-899e-4893-b49e-1cd277fd9ba0: score=0.724 chunk=1.000 ans=0.605 matched=2/2 passed=False
+2026-06-16 14:31:34.096 | DEBUG    | [citation] 9b0b075f-e446-40ab-a03b-21fe9bb6e5c3: score=0.857 chunk=0.990 ans=0.800 matched=1/1 passed=True
+2026-06-16 14:31:34.096 | DEBUG    | [citation] afd4be47-c76f-44fe-ba75-406ca7da66fb: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 14:31:34.096 | DEBUG    | [citation] 9d5e8f35-2e1b-451e-bd31-fc40bb411dea: score=0.703 chunk=0.990 ans=0.580 matched=1/1 passed=False
+2026-06-16 14:31:34.097 | DEBUG    | [citation] c840febc-6f42-43de-878c-577b434f81a9: score=0.916 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 14:31:34.097 | DEBUG    | [citation] ad07c2e5-56f7-4ae2-b304-314640facc9e: score=0.979 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 14:31:34.098 | DEBUG    | [citation] 312ae789-d94d-443d-a03d-6a608f40ef0a: score=0.811 chunk=1.000 ans=0.730 matched=1/1 passed=False
+2026-06-16 14:31:34.100 | DEBUG    | [citation] 6397d0d9-d910-47ba-b2ab-395c68616c38: score=0.688 chunk=1.000 ans=0.555 matched=2/2 passed=False
+2026-06-16 14:31:34.101 | DEBUG    | [citation] 36027eb7-485a-491e-b81e-69fc144f24d5: score=0.734 chunk=1.000 ans=0.620 matched=1/1 passed=False
+2026-06-16 14:31:34.101 | DEBUG    | [citation] a967436c-d6be-4602-a42e-aea445432ccc: score=0.671 chunk=1.000 ans=0.530 matched=2/2 passed=False
+2026-06-16 14:31:34.101 | DEBUG    | [citation] c2d34b70-ba52-4726-b6de-b11ec544215f: score=0.972 chunk=1.000 ans=0.960 matched=1/1 passed=True
+2026-06-16 14:31:34.102 | DEBUG    | [citation] 75a43ea0-7ddf-454e-b739-99dd07e7377f: score=0.650 chunk=0.990 ans=0.505 matched=2/2 passed=False
+2026-06-16 14:31:34.102 | DEBUG    | [citation] 16ef0718-3bca-4fd3-b151-d15784dd974f: score=0.867 chunk=1.000 ans=0.810 matched=1/1 passed=True
+2026-06-16 14:31:34.102 | DEBUG    | [citation] 6f5e0504-ce09-485b-a693-f1b3a906530f: score=0.720 chunk=0.930 ans=0.630 matched=1/1 passed=False
+2026-06-16 14:31:34.102 | DEBUG    | [citation] 65ee690c-d0dc-4680-b005-0206656f91ba: score=0.821 chunk=1.000 ans=0.745 matched=2/2 passed=False
+2026-06-16 14:31:34.103 | DEBUG    | [citation] 79066749-64f4-4086-b717-74a176027b74: score=0.674 chunk=1.000 ans=0.535 matched=2/2 passed=False
+2026-06-16 14:31:34.103 | INFO     | Citation validation: 15/36 passed
+2026-06-16 14:31:34.104 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/citation_validation.jsonl
+2026-06-16 14:31:34.106 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:31:38.637 | INFO     | Loading embedding model: all-MiniLM-L6-v2
+2026-06-16 14:31:48.431 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:31:48.473 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:31:48.518 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 14:32:10.756 | INFO     | LLM validation: 15/15 passed, 0 errors, tokens: 9143 in / 1671 out
+2026-06-16 14:32:10.758 | INFO     | Appended 15 records to runs/case/d_full_case_20260616_135135/validation/llm_validation.jsonl
+2026-06-16 14:32:10.759 | INFO     | Selection[light]: selected=15 duplicate=0
+2026-06-16 14:32:10.779 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/validated_questions.jsonl
+2026-06-16 14:32:10.779 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/validation/weighted_selection.json
+2026-06-16 14:32:10.780 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/validation/validation_report.json
+2026-06-16 14:32:10.780 | INFO     | [VerifyAgent] done: selected=15 report=runs/case/d_full_case_20260616_135135/validation/validation_report.json
+2026-06-16 15:06:43.199 | INFO     | Verify-only mode: using /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 15:06:43.237 | INFO     | Starting verification for /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 15:06:43.240 | INFO     | Built chunk index with 60 entries from runs/case/d_full_case_20260616_135135/evidence/chunked.json
+2026-06-16 15:06:43.242 | INFO     | Loaded 19 raw candidates from runs/case/d_full_case_20260616_135135/qa/candidate_pool.json
+2026-06-16 15:06:43.245 | INFO     | Loaded 17 raw candidates from runs/case/d_full_case_20260616_135135/multiple_choice/candidate_pool.json
+2026-06-16 15:06:43.245 | INFO     | Normalized 36 candidates total
+2026-06-16 15:06:43.245 | INFO     | [VerifyAgent] start task=case run=d_full_case_20260616_135135 candidates=36
+2026-06-16 15:06:43.251 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/normalized_candidates.jsonl
+2026-06-16 15:06:43.255 | DEBUG    | [citation] 44363f38-99cf-4f54-8838-3f4bf4f3308a: score=0.728 chunk=1.000 ans=0.455 matched=2/2 passed=False
+2026-06-16 15:06:43.260 | DEBUG    | [citation] bfb9480d-12ec-4a98-a38e-9dbfd17859f7: score=0.713 chunk=0.995 ans=0.430 matched=2/2 passed=False
+2026-06-16 15:06:43.268 | DEBUG    | [citation] 199e4e90-e55e-4ad0-b42d-563f906e15b8: score=0.695 chunk=0.937 ans=0.453 matched=3/3 passed=False
+2026-06-16 15:06:43.270 | DEBUG    | [citation] e44c1388-ab00-40d3-ae5e-bd7d59b809a6: score=0.875 chunk=0.980 ans=0.770 matched=1/1 passed=True
+2026-06-16 15:06:43.270 | DEBUG    | [citation] 4d49433d-23b3-495c-9fcd-41bb11f43561: score=0.995 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 15:06:43.271 | DEBUG    | [citation] 11f77d38-8b29-488b-8331-a0cbec8079be: score=0.985 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 15:06:43.271 | DEBUG    | [citation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3: score=0.940 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 15:06:43.272 | DEBUG    | [citation] 3e71c4ef-b8e1-4696-837e-40c13a108dfd: score=0.995 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 15:06:43.272 | DEBUG    | [citation] 26c07862-cf1d-4265-ada1-1483e05d7732: score=0.970 chunk=1.000 ans=0.940 matched=1/1 passed=True
+2026-06-16 15:06:43.272 | DEBUG    | [citation] 187425a8-a16e-4e94-b80e-53269028f9dc: score=0.890 chunk=1.000 ans=0.780 matched=1/1 passed=True
+2026-06-16 15:06:43.272 | DEBUG    | [citation] 37832335-7618-4bbb-ad82-f34840fb1dc9: score=0.805 chunk=0.990 ans=0.620 matched=1/1 passed=True
+2026-06-16 15:06:43.273 | DEBUG    | [citation] bf07977f-d909-4ca8-8a26-78a2f9b9ac63: score=0.985 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 15:06:43.273 | DEBUG    | [citation] 4fd78f2e-3b90-4018-8ef2-96b25a2b1c3f: score=0.785 chunk=1.000 ans=0.570 matched=1/1 passed=True
+2026-06-16 15:06:43.276 | DEBUG    | [citation] 86283b30-8b4c-4c86-9f89-80c3350c480c: score=0.945 chunk=1.000 ans=0.890 matched=2/2 passed=True
+2026-06-16 15:06:43.278 | DEBUG    | [citation] 2c870773-c504-4330-8f6f-2caeb158a6de: score=0.935 chunk=1.000 ans=0.870 matched=1/1 passed=True
+2026-06-16 15:06:43.281 | DEBUG    | [citation] bc838ca2-edf2-4a59-9964-d4a5fb48015a: score=0.828 chunk=0.993 ans=0.663 matched=3/3 passed=True
+2026-06-16 15:06:43.285 | DEBUG    | [citation] b2d2f618-4f25-43f4-80e5-0c3a7605b73e: score=0.843 chunk=0.995 ans=0.690 matched=2/2 passed=True
+2026-06-16 15:06:43.289 | DEBUG    | [citation] b9a819f5-b164-43d9-afd1-e70e79577573: score=0.840 chunk=1.000 ans=0.680 matched=3/3 passed=True
+2026-06-16 15:06:43.291 | DEBUG    | [citation] 1bd2ec28-e62d-4c13-93d7-a9503cd982bf: score=0.857 chunk=0.995 ans=0.720 matched=2/2 passed=True
+2026-06-16 15:06:43.294 | DEBUG    | [citation] adceda9a-6a07-4fe4-bc40-ce333c435471: score=0.765 chunk=0.995 ans=0.535 matched=2/2 passed=False
+2026-06-16 15:06:43.295 | DEBUG    | [citation] 5b08ed13-899e-4893-b49e-1cd277fd9ba0: score=0.802 chunk=1.000 ans=0.605 matched=2/2 passed=True
+2026-06-16 15:06:43.295 | DEBUG    | [citation] 9b0b075f-e446-40ab-a03b-21fe9bb6e5c3: score=0.895 chunk=0.990 ans=0.800 matched=1/1 passed=True
+2026-06-16 15:06:43.296 | DEBUG    | [citation] afd4be47-c76f-44fe-ba75-406ca7da66fb: score=0.785 chunk=0.990 ans=0.580 matched=1/1 passed=True
+2026-06-16 15:06:43.296 | DEBUG    | [citation] 9d5e8f35-2e1b-451e-bd31-fc40bb411dea: score=0.785 chunk=0.990 ans=0.580 matched=1/1 passed=True
+2026-06-16 15:06:43.296 | DEBUG    | [citation] c840febc-6f42-43de-878c-577b434f81a9: score=0.940 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 15:06:43.296 | DEBUG    | [citation] ad07c2e5-56f7-4ae2-b304-314640facc9e: score=0.985 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 15:06:43.298 | DEBUG    | [citation] 312ae789-d94d-443d-a03d-6a608f40ef0a: score=0.865 chunk=1.000 ans=0.730 matched=1/1 passed=True
+2026-06-16 15:06:43.300 | DEBUG    | [citation] 6397d0d9-d910-47ba-b2ab-395c68616c38: score=0.777 chunk=1.000 ans=0.555 matched=2/2 passed=True
+2026-06-16 15:06:43.301 | DEBUG    | [citation] 36027eb7-485a-491e-b81e-69fc144f24d5: score=0.810 chunk=1.000 ans=0.620 matched=1/1 passed=True
+2026-06-16 15:06:43.301 | DEBUG    | [citation] a967436c-d6be-4602-a42e-aea445432ccc: score=0.765 chunk=1.000 ans=0.530 matched=2/2 passed=False
+2026-06-16 15:06:43.301 | DEBUG    | [citation] c2d34b70-ba52-4726-b6de-b11ec544215f: score=0.980 chunk=1.000 ans=0.960 matched=1/1 passed=True
+2026-06-16 15:06:43.302 | DEBUG    | [citation] 75a43ea0-7ddf-454e-b739-99dd07e7377f: score=0.748 chunk=0.990 ans=0.505 matched=2/2 passed=False
+2026-06-16 15:06:43.302 | DEBUG    | [citation] 16ef0718-3bca-4fd3-b151-d15784dd974f: score=0.905 chunk=1.000 ans=0.810 matched=1/1 passed=True
+2026-06-16 15:06:43.302 | DEBUG    | [citation] 6f5e0504-ce09-485b-a693-f1b3a906530f: score=0.780 chunk=0.930 ans=0.630 matched=1/1 passed=True
+2026-06-16 15:06:43.303 | DEBUG    | [citation] 65ee690c-d0dc-4680-b005-0206656f91ba: score=0.873 chunk=1.000 ans=0.745 matched=2/2 passed=True
+2026-06-16 15:06:43.303 | DEBUG    | [citation] 79066749-64f4-4086-b717-74a176027b74: score=0.768 chunk=1.000 ans=0.535 matched=2/2 passed=False
+2026-06-16 15:06:43.303 | INFO     | Citation validation: 29/36 passed
+2026-06-16 15:06:43.304 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/citation_validation.jsonl
+2026-06-16 15:06:43.306 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:06:47.908 | INFO     | Loading embedding model: all-MiniLM-L6-v2
+2026-06-16 15:06:57.985 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:06:58.059 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:06:58.264 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:06:58.496 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:06:58.764 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:07:38.626 | INFO     | LLM validation: 27/29 passed, 0 errors, tokens: 17807 in / 3268 out
+2026-06-16 15:07:38.628 | INFO     | Appended 29 records to runs/case/d_full_case_20260616_135135/validation/llm_validation.jsonl
+2026-06-16 15:07:38.629 | INFO     | Selection[light]: selected=27 duplicate=0
+2026-06-16 15:07:38.639 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/validated_questions.jsonl
+2026-06-16 15:07:38.640 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/validation/weighted_selection.json
+2026-06-16 15:07:38.640 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/validation/validation_report.json
+2026-06-16 15:07:38.640 | INFO     | [VerifyAgent] done: selected=27 report=runs/case/d_full_case_20260616_135135/validation/validation_report.json
+2026-06-16 15:11:57.504 | INFO     | Verify-only mode: using /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 15:11:57.540 | INFO     | Starting verification for /Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json
+2026-06-16 15:11:57.543 | INFO     | Built chunk index with 60 entries from runs/case/d_full_case_20260616_135135/evidence/chunked.json
+2026-06-16 15:11:57.544 | INFO     | Loaded 19 raw candidates from runs/case/d_full_case_20260616_135135/qa/candidate_pool.json
+2026-06-16 15:11:57.546 | INFO     | Loaded 17 raw candidates from runs/case/d_full_case_20260616_135135/multiple_choice/candidate_pool.json
+2026-06-16 15:11:57.547 | INFO     | Normalized 36 candidates total
+2026-06-16 15:11:57.547 | INFO     | [VerifyAgent] start task=case run=d_full_case_20260616_135135 candidates=36
+2026-06-16 15:11:57.553 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/normalized_candidates.jsonl
+2026-06-16 15:11:57.556 | DEBUG    | [citation] 44363f38-99cf-4f54-8838-3f4bf4f3308a: score=0.728 chunk=1.000 ans=0.455 matched=2/2 passed=True
+2026-06-16 15:11:57.561 | DEBUG    | [citation] bfb9480d-12ec-4a98-a38e-9dbfd17859f7: score=0.713 chunk=0.995 ans=0.430 matched=2/2 passed=True
+2026-06-16 15:11:57.570 | DEBUG    | [citation] 199e4e90-e55e-4ad0-b42d-563f906e15b8: score=0.695 chunk=0.937 ans=0.453 matched=3/3 passed=True
+2026-06-16 15:11:57.572 | DEBUG    | [citation] e44c1388-ab00-40d3-ae5e-bd7d59b809a6: score=0.875 chunk=0.980 ans=0.770 matched=1/1 passed=True
+2026-06-16 15:11:57.572 | DEBUG    | [citation] 4d49433d-23b3-495c-9fcd-41bb11f43561: score=0.995 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 15:11:57.572 | DEBUG    | [citation] 11f77d38-8b29-488b-8331-a0cbec8079be: score=0.985 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 15:11:57.573 | DEBUG    | [citation] 5f41bea0-6bd0-4479-ac01-ce4174ab39c3: score=0.940 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 15:11:57.573 | DEBUG    | [citation] 3e71c4ef-b8e1-4696-837e-40c13a108dfd: score=0.995 chunk=1.000 ans=0.990 matched=1/1 passed=True
+2026-06-16 15:11:57.573 | DEBUG    | [citation] 26c07862-cf1d-4265-ada1-1483e05d7732: score=0.970 chunk=1.000 ans=0.940 matched=1/1 passed=True
+2026-06-16 15:11:57.574 | DEBUG    | [citation] 187425a8-a16e-4e94-b80e-53269028f9dc: score=0.890 chunk=1.000 ans=0.780 matched=1/1 passed=True
+2026-06-16 15:11:57.574 | DEBUG    | [citation] 37832335-7618-4bbb-ad82-f34840fb1dc9: score=0.805 chunk=0.990 ans=0.620 matched=1/1 passed=True
+2026-06-16 15:11:57.574 | DEBUG    | [citation] bf07977f-d909-4ca8-8a26-78a2f9b9ac63: score=0.985 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 15:11:57.574 | DEBUG    | [citation] 4fd78f2e-3b90-4018-8ef2-96b25a2b1c3f: score=0.785 chunk=1.000 ans=0.570 matched=1/1 passed=True
+2026-06-16 15:11:57.577 | DEBUG    | [citation] 86283b30-8b4c-4c86-9f89-80c3350c480c: score=0.945 chunk=1.000 ans=0.890 matched=2/2 passed=True
+2026-06-16 15:11:57.579 | DEBUG    | [citation] 2c870773-c504-4330-8f6f-2caeb158a6de: score=0.935 chunk=1.000 ans=0.870 matched=1/1 passed=True
+2026-06-16 15:11:57.582 | DEBUG    | [citation] bc838ca2-edf2-4a59-9964-d4a5fb48015a: score=0.828 chunk=0.993 ans=0.663 matched=3/3 passed=True
+2026-06-16 15:11:57.587 | DEBUG    | [citation] b2d2f618-4f25-43f4-80e5-0c3a7605b73e: score=0.843 chunk=0.995 ans=0.690 matched=2/2 passed=True
+2026-06-16 15:11:57.590 | DEBUG    | [citation] b9a819f5-b164-43d9-afd1-e70e79577573: score=0.840 chunk=1.000 ans=0.680 matched=3/3 passed=True
+2026-06-16 15:11:57.593 | DEBUG    | [citation] 1bd2ec28-e62d-4c13-93d7-a9503cd982bf: score=0.857 chunk=0.995 ans=0.720 matched=2/2 passed=True
+2026-06-16 15:11:57.594 | DEBUG    | [citation] adceda9a-6a07-4fe4-bc40-ce333c435471: score=0.765 chunk=0.995 ans=0.535 matched=2/2 passed=True
+2026-06-16 15:11:57.596 | DEBUG    | [citation] 5b08ed13-899e-4893-b49e-1cd277fd9ba0: score=0.802 chunk=1.000 ans=0.605 matched=2/2 passed=True
+2026-06-16 15:11:57.596 | DEBUG    | [citation] 9b0b075f-e446-40ab-a03b-21fe9bb6e5c3: score=0.895 chunk=0.990 ans=0.800 matched=1/1 passed=True
+2026-06-16 15:11:57.596 | DEBUG    | [citation] afd4be47-c76f-44fe-ba75-406ca7da66fb: score=0.785 chunk=0.990 ans=0.580 matched=1/1 passed=True
+2026-06-16 15:11:57.597 | DEBUG    | [citation] 9d5e8f35-2e1b-451e-bd31-fc40bb411dea: score=0.785 chunk=0.990 ans=0.580 matched=1/1 passed=True
+2026-06-16 15:11:57.597 | DEBUG    | [citation] c840febc-6f42-43de-878c-577b434f81a9: score=0.940 chunk=1.000 ans=0.880 matched=1/1 passed=True
+2026-06-16 15:11:57.597 | DEBUG    | [citation] ad07c2e5-56f7-4ae2-b304-314640facc9e: score=0.985 chunk=1.000 ans=0.970 matched=1/1 passed=True
+2026-06-16 15:11:57.599 | DEBUG    | [citation] 312ae789-d94d-443d-a03d-6a608f40ef0a: score=0.865 chunk=1.000 ans=0.730 matched=1/1 passed=True
+2026-06-16 15:11:57.601 | DEBUG    | [citation] 6397d0d9-d910-47ba-b2ab-395c68616c38: score=0.777 chunk=1.000 ans=0.555 matched=2/2 passed=True
+2026-06-16 15:11:57.601 | DEBUG    | [citation] 36027eb7-485a-491e-b81e-69fc144f24d5: score=0.810 chunk=1.000 ans=0.620 matched=1/1 passed=True
+2026-06-16 15:11:57.601 | DEBUG    | [citation] a967436c-d6be-4602-a42e-aea445432ccc: score=0.765 chunk=1.000 ans=0.530 matched=2/2 passed=True
+2026-06-16 15:11:57.601 | DEBUG    | [citation] c2d34b70-ba52-4726-b6de-b11ec544215f: score=0.980 chunk=1.000 ans=0.960 matched=1/1 passed=True
+2026-06-16 15:11:57.602 | DEBUG    | [citation] 75a43ea0-7ddf-454e-b739-99dd07e7377f: score=0.748 chunk=0.990 ans=0.505 matched=2/2 passed=True
+2026-06-16 15:11:57.602 | DEBUG    | [citation] 16ef0718-3bca-4fd3-b151-d15784dd974f: score=0.905 chunk=1.000 ans=0.810 matched=1/1 passed=True
+2026-06-16 15:11:57.602 | DEBUG    | [citation] 6f5e0504-ce09-485b-a693-f1b3a906530f: score=0.780 chunk=0.930 ans=0.630 matched=1/1 passed=True
+2026-06-16 15:11:57.603 | DEBUG    | [citation] 65ee690c-d0dc-4680-b005-0206656f91ba: score=0.873 chunk=1.000 ans=0.745 matched=2/2 passed=True
+2026-06-16 15:11:57.603 | DEBUG    | [citation] 79066749-64f4-4086-b717-74a176027b74: score=0.768 chunk=1.000 ans=0.535 matched=2/2 passed=True
+2026-06-16 15:11:57.603 | INFO     | Citation validation: 36/36 passed
+2026-06-16 15:11:57.604 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/citation_validation.jsonl
+2026-06-16 15:11:57.608 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:12:01.891 | INFO     | Loading embedding model: all-MiniLM-L6-v2
+2026-06-16 15:12:11.768 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:12:11.826 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:12:11.870 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:12:11.936 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:12:12.077 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'all-MiniLM-L6-v2'
+2026-06-16 15:13:03.911 | INFO     | LLM validation: 34/36 passed, 0 errors, tokens: 22616 in / 4108 out
+2026-06-16 15:13:03.914 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/llm_validation.jsonl
+2026-06-16 15:13:03.917 | INFO     | Selection[light]: selected=34 duplicate=0
+2026-06-16 15:13:03.931 | INFO     | Appended 36 records to runs/case/d_full_case_20260616_135135/validation/validated_questions.jsonl
+2026-06-16 15:13:03.933 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/validation/weighted_selection.json
+2026-06-16 15:13:03.933 | INFO     | Saved JSON to runs/case/d_full_case_20260616_135135/validation/validation_report.json
+2026-06-16 15:13:03.933 | INFO     | [VerifyAgent] done: selected=34 report=runs/case/d_full_case_20260616_135135/validation/validation_report.json

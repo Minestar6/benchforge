@@ -63,7 +63,6 @@ def load_model_eval_config(path: str | Path) -> ModelEvalAgentConfig:
                 JudgeMetricSpec(
                     name=m["name"],
                     description=m.get("description", ""),
-                    direction=m.get("direction", "higher_is_better"),
                 )
                 for m in plan_raw.get("llm_judge_metrics", [])
             ],

@@ -19,8 +19,6 @@ CONFIG_PATH = str(Path(__file__).parent / "configs" / "qa_agent_b_no_feedback.ya
 
 async def run(
     *,
-    model_client,
-    model_name: str,
     seed: int,
     topics: list[str],
     task_id: str,
@@ -54,7 +52,6 @@ async def run(
         seed=seed,
         blueprint=blueprint,
         config_path=CONFIG_PATH,
-        model_name=model_name,
         extra={
             "enable_feedback": False,
             "enable_hard_generate": False,
@@ -74,12 +71,7 @@ async def run(
 
 
 if __name__ == "__main__":
-    from benchforge.models.fake import FakeModelClient
-    import benchforge.agents.qa_agent.agent as agent_mod
-    agent_mod._resolve_model_client_fn = lambda name, path: FakeModelClient(delay=0.0)
     asyncio.run(run(
-        model_client=FakeModelClient(delay=0.0),
-        model_name="fake",
         seed=42,
         topics=["Climate Change", "Artificial Intelligence"],
         task_id="qa_ablation",

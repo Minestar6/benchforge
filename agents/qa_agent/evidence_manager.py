@@ -254,11 +254,11 @@ class EvidenceManager:
             try:
                 prompt = self._get_summarization_prompt(chunk.text)
 
-                summarization_max_tokens = getattr(self.model_client, 'summarization_max_tokens', 0) or 500
+                summarization_max_tokens = getattr(self.model_client, 'summarization_max_tokens', 0) or 1024
                 response = await self.model_client.complete(
                     model=getattr(self.model_client, 'model_name', 'gpt-4o'),
                     messages=[{"role": "user", "content": prompt}],
-                    temperature=0.3,
+                    temperature=0.2,
                     max_tokens=summarization_max_tokens,
                     llm_trace_path=self._llm_trace_path(),
                 )
@@ -286,11 +286,11 @@ class EvidenceManager:
                 bullet_list = "\n".join(f"- {s}" for s in chunk_summaries if s)
                 combine_prompt = self._get_combine_summaries_prompt(bullet_list)
 
-                combine_max_tokens = getattr(self.model_client, 'summarization_combine_max_tokens', 0) or 800
+                combine_max_tokens = getattr(self.model_client, 'summarization_combine_max_tokens', 0) or 1024
                 response = await self.model_client.complete(
                     model=getattr(self.model_client, 'model_name', 'gpt-4o'),
                     messages=[{"role": "user", "content": combine_prompt}],
-                    temperature=0.3,
+                    temperature=0.2,
                     max_tokens=combine_max_tokens,
                     llm_trace_path=self._llm_trace_path(),
                 )

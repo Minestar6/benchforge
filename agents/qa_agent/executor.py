@@ -218,6 +218,36 @@ def update_mode_trace(
     })
 
 
+def update_generation_yield_estimates(mode_state: ModeState, round_results: list[dict]) -> None:
+    """用本轮真实产出更新后续轮次的 single/multi 产题率估计。"""
+    total_single_units = sum(int(r.get("single_unit_count", 0)) for r in round_results if r.get("success"))
+    total_multi_units = sum(int(r.get("multi_unit_count", 0)) for r in round_results if r.get("success"))
+    total_single_generated = sum(int(r.get("single_generated_count", 0)) for r in round_results if r.get("success"))
+    total_multi_generated = sum(int(r.get("multi_generated_count", 0)) for r in round_results if r.get("success"))
+
+    if total_single_units > 0:
+        observed_single = total_single_generated / total_single_units
+        prev_total = mode_state.single_yield_samples
+        prev_est = mode_state.single_yield_estimate or 0.0
+        mode_state.single_yield_estimate = (
+            observed_single
+            if prev_total <= 0
+            else ((prev_est * prev_total) + total_single_generated) / (prev_total + total_single_units)
+        )
+        mode_state.single_yield_samples = prev_total + total_single_units
+
+    if total_multi_units > 0:
+        observed_multi = total_multi_generated / total_multi_units
+        prev_total = mode_state.multi_yield_samples
+        prev_est = mode_state.multi_yield_estimate or 0.0
+        mode_state.multi_yield_estimate = (
+            observed_multi
+            if prev_total <= 0
+            else ((prev_est * prev_total) + total_multi_generated) / (prev_total + total_multi_units)
+        )
+        mode_state.multi_yield_samples = prev_total + total_multi_units
+
+
 def _per_difficulty_targets(mode_cfg: Any, config: Any) -> dict[str, int]:
     """计算每个难度级别的候选池目标数量。"""
     total = mode_candidate_target(mode_cfg, config)
@@ -484,6 +514,10 @@ async def _generate_for_topic(
     all_chunks: list[Any] = []
     total_raw = 0
     total_filtered = 0
+    single_unit_count = 0
+    multi_unit_count = 0
+    single_generated_count = 0
+    multi_generated_count = 0
     any_dup = False
     last_llm_id = None
     last_trace_id = None
@@ -527,6 +561,13 @@ async def _generate_for_topic(
         all_chunks.extend(result.get("chunks", []))
         total_raw += result.get("raw_count", 0)
         total_filtered += result.get("filtered_count", 0)
+        generated_count = len(result.get("parsed_questions", []))
+        if _unit_type == "single":
+            single_unit_count += 1
+            single_generated_count += generated_count
+        else:
+            multi_unit_count += 1
+            multi_generated_count += generated_count
         if result.get("duplicate_combination"):
             any_dup = True
         if result.get("llm_call_id"):
@@ -540,6 +581,10 @@ async def _generate_for_topic(
         "parsed_questions": all_parsed,
         "raw_count": total_raw,
         "filtered_count": total_filtered,
+        "single_unit_count": single_unit_count,
+        "multi_unit_count": multi_unit_count,
+        "single_generated_count": single_generated_count,
+        "multi_generated_count": multi_generated_count,
         "filter_failures": all_failures,
         "llm_call_id": last_llm_id,
         "trace_call_id": last_trace_id,
@@ -629,6 +674,10 @@ async def execute_mode_round_plan(
                 "generated_count": len(parsed_questions),
                 "raw_count": res.get("raw_count", len(parsed_questions)),
                 "filtered_count": res.get("filtered_count", len(parsed_questions)),
+                "single_unit_count": res.get("single_unit_count", 0),
+                "multi_unit_count": res.get("multi_unit_count", 0),
+                "single_generated_count": res.get("single_generated_count", 0),
+                "multi_generated_count": res.get("multi_generated_count", 0),
                 "filter_rejected": (
                     res.get("raw_count", len(parsed_questions)) > 0
                     and res.get("filtered_count", len(parsed_questions)) == 0
@@ -667,6 +716,8 @@ async def execute_mode_round_plan(
 
         if round_plan.strategy == RoundStrategy.INITIAL_BREADTH:
             mode_state.initial_coverage.add(topic)
+
+    update_generation_yield_estimates(mode_state, round_results)
 
     feedback = build_round_feedback(
         mode=round_plan.mode,

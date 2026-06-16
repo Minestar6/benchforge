@@ -1,0 +1,3 @@
+model_name,question_mode,num_questions,semantic_accuracy,exact_match,f1,precision,recall,rouge_l,bleu,bertscore,semantic_similarity
+deepseek-v4,qa,18,,,,,,,,,
+deepseek-v4,multiple_choice,17,,,,,,,,,

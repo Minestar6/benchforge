@@ -18,6 +18,7 @@ class RoundStrategy(str, Enum):
     FOCUS_DIFFICULTY = "focus_difficulty"
     EXPAND_EVIDENCE = "expand_evidence"
     HARD_GENERATE = "hard_generate"
+    TERMINAL_HARD_REPAIR = "terminal_hard_repair"
 
 @dataclass(frozen=True)
 class ModeRoundPlan:
@@ -58,6 +59,24 @@ def resolve_chunk_mix(mode: str, difficulty: str, config: Any) -> tuple[float, f
     return single_ratio, 1.0 - single_ratio
 
 
+def resolve_generation_yield(mode: str, mode_state: ModeState, config: Any) -> tuple[float, float]:
+    base = config.generation_yield[mode]
+    single_est = mode_state.single_yield_estimate or base.single_chunk_avg_questions
+    multi_est = mode_state.multi_yield_estimate or base.multi_chunk_avg_questions
+    return max(0.1, single_est), max(0.1, multi_est)
+
+
+def resolve_initial_breadth_difficulty(mode_cfg: Any, config: Any) -> str:
+    initial_cfg = config.initial_breadth
+    policy = getattr(initial_cfg, "difficulty_policy", "fixed")
+    if policy == "hard_aware":
+        hard_ratio = float(mode_cfg.difficulty_distribution.get("hard", 0.0))
+        threshold = float(getattr(initial_cfg, "hard_ratio_threshold", 0.3))
+        if hard_ratio >= threshold:
+            return "hard"
+    return initial_cfg.difficulty
+
+
 def compute_dynamic_chunk_k(
     mode: str,
     mode_cfg: Any,
@@ -76,13 +95,13 @@ def compute_dynamic_chunk_k(
     target_per_topic = max(1, math.ceil(target_this_round / selected_topic_count))
 
     single_ratio, multi_ratio = resolve_chunk_mix(mode, difficulty, config)
-    yield_cfg = config.generation_yield[mode]
+    single_yield, multi_yield = resolve_generation_yield(mode, mode_state, config)
 
     single_k = math.ceil(
-        (target_per_topic * single_ratio) / max(0.1, yield_cfg.single_chunk_avg_questions)
+        (target_per_topic * single_ratio) / single_yield
     )
     multi_k = math.ceil(
-        (target_per_topic * multi_ratio) / max(0.1, yield_cfg.multi_chunk_avg_questions)
+        (target_per_topic * multi_ratio) / multi_yield
     )
 
     limits = config.chunk_limits[mode]
@@ -207,7 +226,7 @@ def build_initial_breadth_plan(
     topics = tuple(
         t for t in blueprint.topics if t not in mode_state.initial_coverage
     )[: config.initial_breadth.max_topics_per_round]
-    difficulty = config.initial_breadth.difficulty
+    difficulty = resolve_initial_breadth_difficulty(mode_cfg, config)
     single_k, multi_k, tgt = compute_dynamic_chunk_k(
         mode=mode, mode_cfg=mode_cfg, difficulty=difficulty,
         selected_topic_count=max(1, len(topics)),

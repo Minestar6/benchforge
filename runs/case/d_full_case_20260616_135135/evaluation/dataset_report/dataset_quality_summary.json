@@ -1,0 +1,15 @@
+{
+  "num_questions": 35,
+  "citation_score": {
+    "mean": 0.8487857142857143,
+    "threshold": null,
+    "pass_rate": null,
+    "num_scored": 35,
+    "num_missing": 0
+  },
+  "diversity_score": {
+    "score": 0.8552,
+    "embedding_dispersion": 0.8285,
+    "cluster_entropy": 0.8819
+  }
+}

@@ -12,6 +12,8 @@ from benchforge.config.config import load_dotenv, expand_env_recursive
 class CitationCfg:
     enabled: bool = True
     min_citation_score: float = 0.65
+    min_chunk_citation_score: float = 0.85
+    min_answer_citation_score: float = 0.75
     alpha: float = 0.7
     beta: float = 0.3
     citation_match_threshold: float = 0.8
@@ -32,8 +34,9 @@ class LLMValidationCfg:
 
 @dataclass
 class SelectionCfg:
-    enabled: bool = True
+    mode: str = "light"
     embedding_model: str = "all-MiniLM-L6-v2"
+    semantic_similarity_threshold: float = 0.9
     """sentence-transformers 模型。支持三种形式：
     - model_registry.yaml embeddings 段中的逻辑名（优先解析）
     - HuggingFace Hub ID（如 "all-MiniLM-L6-v2"，自动下载）
@@ -51,6 +54,16 @@ class VerifyAgentConfig:
     citation: CitationCfg = field(default_factory=CitationCfg)
     llm_validation: LLMValidationCfg = field(default_factory=LLMValidationCfg)
     selection: SelectionCfg = field(default_factory=SelectionCfg)
+
+
+def _resolve_selection_mode(selection_raw: dict) -> str:
+    mode = selection_raw.get("mode")
+    if mode is None:
+        mode = "light" if selection_raw.get("enabled", True) else "off"
+    mode = str(mode).strip().lower()
+    if mode not in {"off", "light", "strict"}:
+        mode = "light"
+    return mode
 
 
 def load_verify_agent_config(path: str | Path) -> VerifyAgentConfig:
@@ -73,6 +86,8 @@ def load_verify_agent_config(path: str | Path) -> VerifyAgentConfig:
     citation_cfg = CitationCfg(
         enabled=citation_raw.get("enabled", True),
         min_citation_score=citation_raw.get("min_citation_score", 0.65),
+        min_chunk_citation_score=citation_raw.get("min_chunk_citation_score", 0.85),
+        min_answer_citation_score=citation_raw.get("min_answer_citation_score", 0.75),
         alpha=citation_raw.get("alpha", 0.7),
         beta=citation_raw.get("beta", 0.3),
         citation_match_threshold=citation_raw.get("citation_match_threshold", 0.8),
@@ -91,8 +106,9 @@ def load_verify_agent_config(path: str | Path) -> VerifyAgentConfig:
     )
 
     selection_cfg = SelectionCfg(
-        enabled=selection_raw.get("enabled", True),
+        mode=_resolve_selection_mode(selection_raw),
         embedding_model=selection_raw.get("embedding_model", "all-MiniLM-L6-v2"),
+        semantic_similarity_threshold=float(selection_raw.get("semantic_similarity_threshold", 0.9)),
     )
 
     return VerifyAgentConfig(

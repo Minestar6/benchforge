@@ -1,0 +1,7 @@
+{
+  "task_id": "case",
+  "run_id": "d_full_case_20260616_135135",
+  "num_questions": 35,
+  "num_responses": 35,
+  "output_root": "runs/case/d_full_case_20260616_135135/evaluation"
+}

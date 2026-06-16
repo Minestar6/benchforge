@@ -323,8 +323,7 @@ async def stage_evaluate(run_dir: Path) -> dict:
                 automatic_metrics=[AutoMetricSpec(name="exact_match", threshold=1.0)],
                 llm_judge_metrics=[
                     JudgeMetricSpec(name="correctness",
-                                    description="Judge correctness of the answer",
-                                    direction="higher_is_better"),
+                                    description="Judge correctness of the answer"),
                 ],
             ),
             "multiple_choice": QuestionModeMetricPlan(

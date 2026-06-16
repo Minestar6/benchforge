@@ -37,8 +37,8 @@ load_dotenv(PROJECT_ROOT / ".env")
 MODEL_API_KEY = os.getenv("CUSTOM_API_KEY", "")
 MODEL_BASE_URL = os.getenv("CUSTOM_API_BASE_URL", "https://ark.cn-beijing.volces.com/api/v3")
 
-EXPERIMENT_BASE = PROJECT_ROOT / "runs" / "ques_generate" / "seed_42"
-CONFIG_PATH = str(PROJECT_ROOT / "config" / "verify_agent.yaml")
+EXPERIMENT_BASE = PROJECT_ROOT / "runs" / "ques_generate"
+CONFIG_PATH = str(PROJECT_ROOT / "experiment" / "qa_agent" / "configs" / "verify_agent.yaml")
 REGISTRY_PATH = str(PROJECT_ROOT / "config" / "model_registry.yaml")
 TARGET_RUN_PREFIXES = [
     "A_direct_multiple_choice_",
@@ -324,7 +324,7 @@ async def main():
 
     print_summary(results)
 
-    report_out = PROJECT_ROOT / "runs" / "ques_generate" / "seed_42" / "verify_all_report.json"
+    report_out = EXPERIMENT_BASE / "verify_all_report.json"
     report_out.parent.mkdir(parents=True, exist_ok=True)
     with open(report_out, "w", encoding="utf-8") as f:
         json.dump({

@@ -24,7 +24,14 @@ from .schema import (
     ValidationTaskResult,
     ValidatedQuestionRecord,
 )
-from .selector import _label_to_int_difficulty, _normalize_difficulty, run_weighted_selection
+from .selector import (
+    _compute_embeddings,
+    _label_to_int_difficulty,
+    _normalize_difficulty,
+    _normalize_question_text,
+    _question_text_for_dedup,
+    run_weighted_selection,
+)
 
 
 def _blueprint_from_shared_state(state: SharedState) -> ValidationBlueprintView:
@@ -72,6 +79,93 @@ def _chunk_index_path_from_shared_state(state: SharedState, run_dir: Path) -> st
     return ""
 
 
+def _early_exact_dedup_candidates(
+    candidates: list[QuestionCandidate],
+) -> tuple[list[QuestionCandidate], dict[str, str]]:
+    def _difficulty_rank(candidate: QuestionCandidate) -> tuple[int, float]:
+        normalized = _normalize_difficulty(candidate.estimated_difficulty)
+        label_rank = {"unknown": 0, "easy": 1, "medium": 2, "hard": 3}.get(normalized, 0)
+        raw_score = candidate.estimated_difficulty
+        if isinstance(raw_score, (int, float)):
+            numeric = float(raw_score)
+        else:
+            try:
+                numeric = float(str(raw_score).strip())
+            except (TypeError, ValueError):
+                numeric = float(label_rank)
+        return label_rank, numeric
+
+    best_by_question: dict[str, QuestionCandidate] = {}
+    for candidate in candidates:
+        normalized = _normalize_question_text(_question_text_for_dedup(candidate))
+        existing = best_by_question.get(normalized)
+        if existing is None or _difficulty_rank(candidate) > _difficulty_rank(existing):
+            best_by_question[normalized] = candidate
+
+    kept = list(best_by_question.values())
+    kept_ids = {candidate.question_id for candidate in kept}
+    duplicate_of: dict[str, str] = {}
+    for candidate in candidates:
+        if candidate.question_id in kept_ids:
+            continue
+        normalized = _normalize_question_text(_question_text_for_dedup(candidate))
+        duplicate_of[candidate.question_id] = best_by_question[normalized].question_id
+    return kept, duplicate_of
+
+
+def _semantic_near_dedup_candidates(
+    candidates: list[QuestionCandidate],
+    citation_results: dict[str, object],
+    embedding_model: str,
+    similarity_threshold: float = 0.9,
+) -> tuple[list[QuestionCandidate], dict[str, str]]:
+    if len(candidates) <= 1:
+        return candidates, {}
+
+    buckets: dict[str, list[QuestionCandidate]] = {}
+    for candidate in candidates:
+        difficulty = _normalize_difficulty(candidate.estimated_difficulty)
+        key = f"{candidate.question_mode}::{difficulty}"
+        buckets.setdefault(key, []).append(candidate)
+
+    kept: list[QuestionCandidate] = []
+    duplicate_of: dict[str, str] = {}
+    threshold = max(-1.0, min(1.0, similarity_threshold))
+
+    for bucket_candidates in buckets.values():
+        if len(bucket_candidates) <= 1:
+            kept.extend(bucket_candidates)
+            continue
+
+        texts = [_question_text_for_dedup(candidate) for candidate in bucket_candidates]
+        embeddings = _compute_embeddings(texts, embedding_model)
+        sim = embeddings @ embeddings.T
+        ordered = sorted(
+            bucket_candidates,
+            key=lambda candidate: citation_results[candidate.question_id].citation_score,
+            reverse=True,
+        )
+        index_by_id = {candidate.question_id: idx for idx, candidate in enumerate(bucket_candidates)}
+        kept_in_bucket: list[QuestionCandidate] = []
+
+        for candidate in ordered:
+            idx = index_by_id[candidate.question_id]
+            parent = None
+            for chosen in kept_in_bucket:
+                chosen_idx = index_by_id[chosen.question_id]
+                if float(sim[idx, chosen_idx]) >= threshold:
+                    parent = chosen.question_id
+                    break
+            if parent is None:
+                kept_in_bucket.append(candidate)
+            else:
+                duplicate_of[candidate.question_id] = parent
+
+        kept.extend(kept_in_bucket)
+
+    return kept, duplicate_of
+
+
 class VerifyAgent:
     """三阶段题目质量验证智能体。"""
 
@@ -113,14 +207,29 @@ class VerifyAgent:
         )
 
         # 落盘归一化候选题
-        store.append_jsonl("normalized_candidates.jsonl", [c.model_dump() for c in candidates])
+        store.save_jsonl("normalized_candidates.jsonl", [c.model_dump() for c in candidates])
+        deduped_candidates, early_duplicate_of = _early_exact_dedup_candidates(candidates)
+        early_duplicate_records: list[ValidatedQuestionRecord] = [
+            ValidatedQuestionRecord(
+                question_id=c.question_id,
+                candidate=c,
+                duplicate_of=early_duplicate_of[c.question_id],
+                final_status=FinalStatus.duplicate.value,
+            )
+            for c in candidates if c.question_id in early_duplicate_of
+        ]
+        if early_duplicate_of:
+            logger.info(
+                f"[VerifyAgent] early exact dedup removed {len(early_duplicate_of)} duplicates before validation"
+            )
+        candidates = deduped_candidates
 
         # Stage 1: 引用验证
         t1 = time.monotonic()
         citation_results = run_citation_validation(candidates, self.config.citation)
         citation_latency_ms = int((time.monotonic() - t1) * 1000)
 
-        store.append_jsonl("citation_validation.jsonl", list(citation_results.values()))
+        store.save_jsonl("citation_validation.jsonl", list(citation_results.values()))
         citation_passed = [c for c in candidates if citation_results[c.question_id].passed]
         state.citation_passed = len(citation_passed)
 
@@ -134,17 +243,37 @@ class VerifyAgent:
             )
             for c in candidates if not citation_results[c.question_id].passed
         ]
+        llm_candidates, semantic_duplicate_of = _semantic_near_dedup_candidates(
+            citation_passed,
+            citation_results,
+            embedding_model=self.config.selection.embedding_model,
+            similarity_threshold=self.config.selection.semantic_similarity_threshold,
+        )
+        semantic_duplicate_records: list[ValidatedQuestionRecord] = [
+            ValidatedQuestionRecord(
+                question_id=c.question_id,
+                candidate=c,
+                citation_validation=citation_results[c.question_id],
+                duplicate_of=semantic_duplicate_of[c.question_id],
+                final_status=FinalStatus.duplicate.value,
+            )
+            for c in citation_passed if c.question_id in semantic_duplicate_of
+        ]
+        if semantic_duplicate_of:
+            logger.info(
+                f"[VerifyAgent] semantic near-dedup removed {len(semantic_duplicate_of)} candidates before llm validation"
+            )
 
         # Stage 2: LLM 验证
         t2 = time.monotonic()
         should_run_llm = (
             self.model_client is not None
             and self.config.llm_validation.enabled
-            and bool(citation_passed)
+            and bool(llm_candidates)
         )
         if should_run_llm:
             llm_results = await run_llm_validation(
-                candidates=citation_passed,
+                candidates=llm_candidates,
                 blueprint=blueprint,
                 cfg=self.config.llm_validation,
                 model_client=self.model_client,
@@ -152,9 +281,9 @@ class VerifyAgent:
                 tracer=validation_tracer,
             )
         else:
-            if citation_passed and self.model_client is not None and not self.config.llm_validation.enabled:
+            if llm_candidates and self.model_client is not None and not self.config.llm_validation.enabled:
                 logger.info("LLM validation disabled by config, skipping")
-            elif citation_passed and self.model_client is None and self.config.llm_validation.enabled:
+            elif llm_candidates and self.model_client is None and self.config.llm_validation.enabled:
                 logger.info("LLM validation enabled but no model_client provided, skipping")
             from .schema import LLMValidationResult
             llm_results = {
@@ -166,17 +295,17 @@ class VerifyAgent:
                     failed_reasons=[],
                     judge_summary="llm_validation_disabled",
                 )
-                for c in citation_passed
+                for c in llm_candidates
             }
         llm_latency_ms = int((time.monotonic() - t2) * 1000)
 
-        store.append_jsonl("llm_validation.jsonl", list(llm_results.values()))
-        llm_passed = [c for c in citation_passed if llm_results[c.question_id].passed]
+        store.save_jsonl("llm_validation.jsonl", list(llm_results.values()))
+        llm_passed = [c for c in llm_candidates if llm_results[c.question_id].passed]
         state.llm_passed = len(llm_passed)
 
         # 被 LLM 拒绝或 validator_error 的题
         llm_rejected_records: list[ValidatedQuestionRecord] = []
-        for c in citation_passed:
+        for c in llm_candidates:
             r = llm_results[c.question_id]
             if not r.passed:
                 fs = FinalStatus.validator_error.value if r.error else FinalStatus.rejected_llm.value
@@ -214,7 +343,7 @@ class VerifyAgent:
 
         # 合并所有逐题记录
         all_records: list[ValidatedQuestionRecord] = (
-            citation_rejected_records + llm_rejected_records + validated_records
+            early_duplicate_records + citation_rejected_records + semantic_duplicate_records + llm_rejected_records + validated_records
         )
 
         # 回写 suggested_difficulty → candidate.estimated_difficulty，仅在难度区间改变时
@@ -225,7 +354,7 @@ class VerifyAgent:
                 if llm_val.suggested_difficulty != original_label:
                     rec.candidate.estimated_difficulty = _label_to_int_difficulty(llm_val.suggested_difficulty)
 
-        store.append_jsonl("validated_questions.jsonl", all_records)
+        store.save_jsonl("validated_questions.jsonl", all_records)
         store.save_json("weighted_selection.json", selection_result.model_dump())
 
         # 统计 failed_by_stage
@@ -233,7 +362,7 @@ class VerifyAgent:
             "citation": len(citation_rejected_records),
             "llm": sum(1 for r in llm_rejected_records if r.final_status == FinalStatus.rejected_llm.value),
             "validator_error": sum(1 for r in llm_rejected_records if r.final_status == FinalStatus.validator_error.value),
-            "duplicate": len(selection_result.dropped_as_duplicate),
+            "duplicate": len(early_duplicate_records) + len(semantic_duplicate_records) + len(selection_result.dropped_as_duplicate),
             "overquota": len(selection_result.dropped_as_overquota),
         }
         state.failed_by_stage = failed_by_stage

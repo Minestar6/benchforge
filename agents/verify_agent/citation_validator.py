@@ -95,8 +95,10 @@ def validate_citation(
     citation_score = min(1.0, max(0.0, citation_score))
 
     failed_reasons: list[str] = []
-    if citation_score < cfg.min_citation_score:
-        failed_reasons.append("citation_score_too_low")
+    if chunk_citation_score < cfg.min_chunk_citation_score:
+        failed_reasons.append("chunk_citation_score_too_low")
+    if answer_citation_score < cfg.min_answer_citation_score:
+        failed_reasons.append("answer_citation_score_too_low")
 
     passed = len(failed_reasons) == 0
 

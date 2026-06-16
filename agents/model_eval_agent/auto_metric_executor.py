@@ -21,8 +21,12 @@ def run_automatic_metrics(
     # question_id → question dict
     q_index = {q["question_id"]: q for q in questions}
     mode_question_ids: dict[str, list[str]] = defaultdict(list)
+    seen_ids: set[str] = set()
     for q in questions:
-        mode_question_ids[q.get("question_mode", "")].append(q["question_id"])
+        qid = q["question_id"]
+        if qid not in seen_ids:
+            seen_ids.add(qid)
+            mode_question_ids[q.get("question_mode", "")].append(qid)
 
     # (question_mode, metric_name) → {model_name: {question_id: score}}
     Bucket = dict[str, dict[str, float | None]]

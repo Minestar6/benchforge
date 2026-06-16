@@ -20,8 +20,6 @@ CONFIG_PATH = str(Path(__file__).parent / "configs" / "qa_agent_a_direct.yaml")
 
 async def run(
     *,
-    model_client,
-    model_name: str,
     seed: int,
     topics: list[str],
     task_id: str,
@@ -55,7 +53,6 @@ async def run(
         seed=seed,
         blueprint=blueprint,
         config_path=CONFIG_PATH,
-        model_name=model_name,
         extra={
             "enable_feedback": False,
             "enable_hard_generate": False,
@@ -67,8 +64,6 @@ async def run(
     logger.info(f"=== Group A: Direct Generation [{mode}] === run_id={blueprint.run_id}")
     await run_direct_generation(
         blueprint=blueprint,
-        model_client=model_client,
-        model_name=model_name,
         output_dir=output_dir,
         config_path=CONFIG_PATH,
     )
@@ -76,10 +71,7 @@ async def run(
 
 
 if __name__ == "__main__":
-    from benchforge.models.fake import FakeModelClient
     asyncio.run(run(
-        model_client=FakeModelClient(delay=0.0),
-        model_name="fake",
         seed=42,
         topics=["Climate Change", "Artificial Intelligence"],
         task_id="qa_ablation",

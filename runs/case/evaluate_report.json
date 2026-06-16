@@ -1,0 +1,14 @@
+{
+  "config_path": "/Users/zhaoziqing/Desktop/benchforge/experiment/case/configs/model_eval_case.yaml",
+  "registry_path": "/Users/zhaoziqing/Desktop/benchforge/config/model_registry.yaml",
+  "run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135",
+  "shared_state_path": "/Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json",
+  "selected_questions": 103,
+  "evaluation": {
+    "task_id": "case",
+    "run_id": "d_full_case_20260616_135135",
+    "num_questions": 103,
+    "num_models": 1,
+    "output_root": "runs/case/d_full_case_20260616_135135/evaluation"
+  }
+}

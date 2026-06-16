@@ -75,3 +75,9 @@ async def test_evaluate_main_runs_all_experiments_and_writes_report(tmp_path, mo
     assert report["results"][0]["group"] == "A_direct_qa_20260615_200000"
     assert report["results"][0]["num_questions"] == 1
     assert report["results"][0]["selected_questions"] == 1
+
+
+def test_evaluate_uses_case_model_eval_config_by_default():
+    import experiment.qa_agent.evaluate as evaluate_module
+
+    assert evaluate_module.CONFIG_PATH.endswith("experiment/qa_agent/configs/model_eval_agent.yaml")

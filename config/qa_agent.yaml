@@ -57,6 +57,8 @@ initial_breadth:
   enabled: true
   max_topics_per_round: 4     # 单轮最多覆盖的主题数
   difficulty: "medium"         # 初始广度轮固定使用 medium 难度
+  difficulty_policy: "hard_aware"
+  hard_ratio_threshold: 0.3
 
 # ── 自适应补题规划 ────────────────────────────────────────────────────────────
 planner:
@@ -86,11 +88,11 @@ chunk_mix:
 # ── 每 chunk 平均生成题目数（用于反推 single_k / multi_k） ─────────────────────
 generation_yield:
   qa:
+    single_chunk_avg_questions: 3.0
+    multi_chunk_avg_questions: 4.0
+  multiple_choice:
     single_chunk_avg_questions: 2.0
     multi_chunk_avg_questions: 3.0
-  multiple_choice:
-    single_chunk_avg_questions: 1.5
-    multi_chunk_avg_questions: 2.0
 
 # ── single_k / multi_k 上下界（防止单轮采样过多或过少） ───────────────────────
 chunk_limits:
@@ -122,3 +124,17 @@ logging:
   level: "INFO"
   # log_file 未被 config_loader 读取，run_id 在运行时动态生成，此处仅供参考
   # log_file: "./logs/run_{YYYYMMDD}_{HHMMSS}_{4hex}.log"
+
+experiment:
+  name: full
+  enable_feedback: true
+  enable_hard_generate: true
+  enable_difficulty_adaptation: true
+  enable_terminal_hard_repair: true
+  terminal_hard_repair_min_missing: 2
+  terminal_hard_repair_gap_threshold: 0.15
+  terminal_hard_repair_topics: 2
+  terminal_hard_repair_multi_k_scale: 1.0
+  fixed_strategy: null
+  fixed_difficulty: null
+  disable_initial_breadth: false

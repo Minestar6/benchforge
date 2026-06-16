@@ -1,0 +1,5 @@
+model_name,num_questions,topic,question_mode,semantic_accuracy,exact_match,f1,precision,recall,rouge_l,bleu,bertscore,semantic_similarity,accuracy,invalid_rate
+deepseek-v4,14,Quantum Computing,qa,,,,,,,,,,,
+deepseek-v4,4,Artificial Intelligence,qa,,,,,,,,,,,
+deepseek-v4,15,Artificial Intelligence,multiple_choice,,,,,,,,,,,
+deepseek-v4,2,Quantum Computing,multiple_choice,,,,,,,,,,,

@@ -1,0 +1,21 @@
+{
+  "deepseek-v4": {
+    "qa": {
+      "num_questions": 18,
+      "semantic_accuracy": null,
+      "exact_match": null,
+      "f1": null,
+      "precision": null,
+      "recall": null,
+      "rouge_l": null,
+      "bleu": null,
+      "bertscore": null,
+      "semantic_similarity": null
+    },
+    "multiple_choice": {
+      "num_questions": 17,
+      "accuracy": null,
+      "invalid_rate": null
+    }
+  }
+}

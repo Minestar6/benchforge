@@ -68,6 +68,14 @@ class ModeState:
     failures_count: int = 0
     stopped_reason: str | None = None
     trace: list[dict] = field(default_factory=list)
+    single_yield_estimate: float | None = None
+    multi_yield_estimate: float | None = None
+    single_yield_samples: int = 0
+    multi_yield_samples: int = 0
+    terminal_hard_repair_executed: bool = False
+    terminal_hard_repair_rounds: int = 0
+    terminal_hard_repair_generated_count: int = 0
+    terminal_hard_repair_accepted_count: int = 0
 
     # 鈹€鈹€ Derived statistics 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
@@ -127,4 +135,3 @@ class ModeState:
             return target_hard_ratio
         current = self.get_difficulty_counts(CandidateStatus.ACCEPTED).get("hard", 0) / acc
         return max(0.0, target_hard_ratio - current)
-

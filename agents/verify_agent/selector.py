@@ -1,4 +1,4 @@
-"""Stage 3：分组 + exact 去重 + 聚类选题（k = target_count）。"""
+"""Stage 3：最终选题，可配置为 off / light / strict。"""
 
 from __future__ import annotations
 
@@ -139,6 +139,22 @@ def _quality_score(
 
 # ─── Exact 去重 ───────────────────────────────────────────────────────────────
 
+def _question_text_for_dedup(candidate: QuestionCandidate) -> str:
+    text = candidate.question or ""
+    if candidate.question_mode != "multiple_choice":
+        return text
+
+    choices = candidate.choices or candidate.generation_metadata.get("choices") or candidate.generation_metadata.get("options")
+    if not choices:
+        return text
+
+    if isinstance(choices, dict):
+        choices_text = " ".join(f"{key} {value}" for key, value in choices.items())
+    else:
+        choices_text = " ".join(str(choice) for choice in choices)
+    return f"{text}\n{choices_text}"
+
+
 def _normalize_question_text(text: str) -> str:
     text = text.lower().strip()
     text = re.sub(r'\s+', ' ', text)
@@ -154,7 +170,7 @@ def _exact_dedup(
     best: dict[str, tuple[QuestionCandidate, float]] = {}  # norm_text -> (q, score)
 
     for q in questions:
-        norm = _normalize_question_text(q.question)
+        norm = _normalize_question_text(_question_text_for_dedup(q))
         score = quality_scores[q.question_id]
         if norm not in best or score > best[norm][1]:
             best[norm] = (q, score)
@@ -165,7 +181,7 @@ def _exact_dedup(
 
     for q in questions:
         if q.question_id not in kept_ids:
-            norm = _normalize_question_text(q.question)
+            norm = _normalize_question_text(_question_text_for_dedup(q))
             duplicate_of[q.question_id] = best[norm][0].question_id
 
     return kept, duplicate_of
@@ -246,6 +262,21 @@ def _compute_bucket_targets(blueprint: ValidationBlueprintView) -> dict[str, dic
     return result
 
 
+def _build_group_assignments(
+    questions: list[QuestionCandidate],
+    llm_results: dict[str, LLMValidationResult],
+) -> dict[str, str]:
+    assignments: dict[str, str] = {}
+    for q in questions:
+        llm_r = llm_results.get(q.question_id)
+        if llm_r and llm_r.suggested_difficulty in ("easy", "medium", "hard"):
+            diff = llm_r.suggested_difficulty
+        else:
+            diff = _normalize_difficulty(q.estimated_difficulty)
+        assignments[q.question_id] = f"{q.question_mode}::{diff}"
+    return assignments
+
+
 # ─── 主函数 ───────────────────────────────────────────────────────────────────
 
 def run_weighted_selection(
@@ -255,39 +286,91 @@ def run_weighted_selection(
     llm_results: dict[str, LLMValidationResult],
     cfg: SelectionCfg,
 ) -> tuple[FinalSelectionResult, list[ValidatedQuestionRecord]]:
-    """
-    Stage 3 主流程：
-    1. Exact 去重
-    2. 分桶（mode + difficulty）
-    3. 桶内聚类选题，k = target_count（不超配额时保留全部）
-    """
-    bucket_targets = _compute_bucket_targets(blueprint)
+    """最终选题。
 
-    # ── 计算全局质量分 ─────────────────────────────────────────────────────────
+    - off: 不做末尾选题，全部已通过验证的题直接保留
+    - light: 仅做 exact dedup，不做配额裁剪
+    - strict: exact dedup + 按 bucket 配额裁剪（现有完整逻辑）
+    """
     quality_scores = {
         q.question_id: _quality_score(q.question_id, citation_results, llm_results)
         for q in questions
     }
+    group_assignments = _build_group_assignments(questions, llm_results)
+    selection_mode = cfg.mode.strip().lower()
+
+    if selection_mode == "off":
+        all_records = [
+            ValidatedQuestionRecord(
+                question_id=q.question_id,
+                candidate=q,
+                citation_validation=citation_results.get(q.question_id),
+                llm_validation=llm_results.get(q.question_id),
+                group_id=group_assignments.get(q.question_id),
+                duplicate_of=None,
+                final_weight=quality_scores.get(q.question_id),
+                final_status=FinalStatus.selected.value,
+            )
+            for q in questions
+        ]
+        result = FinalSelectionResult(
+            selected_question_ids=[q.question_id for q in questions],
+            dropped_as_duplicate=[],
+            dropped_as_overquota=[],
+            group_assignments=group_assignments,
+            sampling_weights=quality_scores,
+        )
+        logger.info(f"Selection[{selection_mode}]: selected={len(result.selected_question_ids)}")
+        return result, all_records
 
     # ── Step 1: Exact 去重 ────────────────────────────────────────────────────
     all_duplicate_of: dict[str, str] = {}
     unique_questions, dup_map = _exact_dedup(questions, quality_scores)
     all_duplicate_of.update(dup_map)
+    unique_group_assignments = _build_group_assignments(unique_questions, llm_results)
+
+    if selection_mode == "light":
+        selected_ids = [q.question_id for q in unique_questions]
+        selected_set = set(selected_ids)
+        all_records: list[ValidatedQuestionRecord] = []
+        for q in questions:
+            qid = q.question_id
+            if qid in all_duplicate_of:
+                status = FinalStatus.duplicate.value
+                dup_of = all_duplicate_of[qid]
+            else:
+                status = FinalStatus.selected.value if qid in selected_set else FinalStatus.reserve.value
+                dup_of = None
+            all_records.append(ValidatedQuestionRecord(
+                question_id=qid,
+                candidate=q,
+                citation_validation=citation_results.get(qid),
+                llm_validation=llm_results.get(qid),
+                group_id=group_assignments.get(qid),
+                duplicate_of=dup_of,
+                final_weight=quality_scores.get(qid),
+                final_status=status,
+            ))
+        result = FinalSelectionResult(
+            selected_question_ids=selected_ids,
+            dropped_as_duplicate=list(all_duplicate_of.keys()),
+            dropped_as_overquota=[],
+            group_assignments=group_assignments,
+            sampling_weights=quality_scores,
+        )
+        logger.info(
+            f"Selection[{selection_mode}]: selected={len(selected_ids)} duplicate={len(all_duplicate_of)}"
+        )
+        return result, all_records
+
+    bucket_targets = _compute_bucket_targets(blueprint)
 
     # ── Step 2: 分桶 ──────────────────────────────────────────────────────────
     buckets: dict[str, list[QuestionCandidate]] = {}
-    group_assignments: dict[str, str] = {}
 
     for q in unique_questions:
-        # 优先使用 LLM 验证建议的难度标签，回退到原始标签
-        llm_r = llm_results.get(q.question_id)
-        if llm_r and llm_r.suggested_difficulty in ("easy", "medium", "hard"):
-            diff = llm_r.suggested_difficulty
-        else:
-            diff = _normalize_difficulty(q.estimated_difficulty)
-        key = f"{q.question_mode}::{diff}"
+        key = unique_group_assignments[q.question_id]
         buckets.setdefault(key, []).append(q)
-        group_assignments[q.question_id] = key
 
     # ── Step 3: 桶内聚类选题 ──────────────────────────────────────────────────
     selected_ids: list[str] = []

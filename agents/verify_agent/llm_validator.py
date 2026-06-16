@@ -28,6 +28,26 @@ _PROMPT_KEYS = {
 }
 
 
+def _normalize_difficulty_label(difficulty: str | int | None) -> str:
+    if difficulty is None:
+        return "unknown"
+    if isinstance(difficulty, int):
+        if difficulty <= 3:
+            return "easy"
+        if difficulty <= 6:
+            return "medium"
+        if difficulty <= 10:
+            return "hard"
+        return "unknown"
+    value = str(difficulty).strip().lower()
+    if value in ("easy", "medium", "hard"):
+        return value
+    try:
+        return _normalize_difficulty_label(int(value))
+    except ValueError:
+        return "unknown"
+
+
 def _render_prompt_template(template: str, values: dict[str, object]) -> str:
     if not template:
         return ""
@@ -122,7 +142,7 @@ def _build_messages(
         "answer": candidate.answer,
         "required_capability": candidate.required_capability,
         "estimated_difficulty": candidate.estimated_difficulty,
-        "difficulty": candidate.estimated_difficulty,
+        "difficulty": _normalize_difficulty_label(candidate.estimated_difficulty),
         "citations": citations_text,
         "chunks": chunks_text,
         "blueprint_constraints": blueprint_constraints,

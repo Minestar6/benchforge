@@ -147,6 +147,13 @@ class ModelConfig(BaseModel):
     max_retries: int = 3
     """HTTP 传输层重试次数（仅 openai/vllm，传给 AsyncOpenAI）。"""
 
+    # ── 推理控制 ──
+    thinking: str | None = None
+    """推理模式控制，仅 OpenAI 兼容 provider。
+    - "disabled": 关闭推理 thinking，API 发送 extra_body={"thinking": {"type": "disabled"}}
+    - None: 不发送额外参数，使用模型默认行为
+    """
+
     # ── 扩展 ──
     extra_parameters: dict[str, Any] = Field(
         default_factory=dict,

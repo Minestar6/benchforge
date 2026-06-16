@@ -1,7 +1,8 @@
 """共用工具：run_id 构造、blueprint 构造、metadata 保存。"""
 
-from pathlib import Path
 import json
+import yaml
+from pathlib import Path
 
 from benchforge.agents.qa_agent.schema import Blueprint, ModeCfg
 
@@ -79,12 +80,15 @@ def save_metadata(
     seed: int,
     blueprint: Blueprint,
     config_path: str,
-    model_name: str,
     extra: dict | None = None,
 ) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     mode_name, mode_cfg = next(iter(blueprint.modes.items()))
+
+    with open(config_path, "r", encoding="utf-8") as f:
+        config = yaml.safe_load(f)
+    model_name = config.get("model", {}).get("name", "unknown")
 
     metadata = {
         "group_id": group_id,

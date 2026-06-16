@@ -9,7 +9,7 @@ from loguru import logger
 from benchforge.utils.artifact_store import ArtifactStore
 from benchforge.utils.llm_tracer import LLMTracer
 from .state import GlobalState, ModeState
-from .planner import build_mode_round_plan, mode_candidate_target, RoundStrategy
+from .planner import build_mode_round_plan, mode_candidate_target, ModeRoundPlan, RoundStrategy
 from .executor import execute_mode_round_plan, mode_should_stop, update_mode_trace
 from .storage import (
     save_mode_outputs, save_global_outputs, save_generation_report, save_shared_state,
@@ -84,11 +84,6 @@ async def run_generation_agent(
     setattr(model_client, "temperature", model_ref.temperature)
     setattr(model_client, "max_tokens", max(model_ref.max_tokens, 1))  # 确保 > 0
     setattr(model_client, "max_retries", model_ref.max_retries)
-    # 摘要类调用的 max_tokens（独立于生成 max_tokens，可由 yaml 单独配置）
-    setattr(model_client, "summarization_max_tokens",
-            getattr(model_ref, "summarization_max_tokens", None) or model_ref.max_tokens)
-    setattr(model_client, "summarization_combine_max_tokens",
-            getattr(model_ref, "summarization_combine_max_tokens", None) or model_ref.max_tokens)
 
     # Thin config wrapper matching the interface EvidenceManager expects
     class _EvidenceConfig:
@@ -245,6 +240,63 @@ async def _run_generation_agent_impl(
     return report
 
 
+def _build_terminal_hard_repair_plan(
+    mode: str,
+    mode_cfg: Any,
+    blueprint: Any,
+    config: Any,
+    mode_state: ModeState,
+) -> ModeRoundPlan | None:
+    exp_cfg = getattr(config, "experiment", None)
+    if exp_cfg is None or not getattr(exp_cfg, "enable_terminal_hard_repair", True):
+        return None
+
+    target_hard = mode_cfg.difficulty_distribution.get("hard", 0.0)
+    if target_hard <= 0:
+        return None
+
+    if target_hard <= 1.0:
+        target_hard_count = int(round(mode_cfg.count * float(target_hard)))
+    else:
+        target_hard_count = int(round(float(target_hard)))
+
+    accepted_hard = sum(1 for record in mode_state.accepted if record.difficulty == "hard")
+    missing_hard = max(0, target_hard_count - accepted_hard)
+    hard_gap_ratio = mode_state.hard_gap(float(target_hard) if target_hard <= 1.0 else target_hard_count / max(1, mode_cfg.count))
+
+    if missing_hard < int(getattr(exp_cfg, "terminal_hard_repair_min_missing", 2)):
+        return None
+    if hard_gap_ratio < float(getattr(exp_cfg, "terminal_hard_repair_gap_threshold", 0.15)):
+        return None
+
+    hard_topic_counts: dict[str, int] = {topic: 0 for topic in blueprint.topics}
+    for record in mode_state.accepted:
+        if record.difficulty == "hard":
+            hard_topic_counts[record.topic] = hard_topic_counts.get(record.topic, 0) + 1
+
+    topic_limit = max(1, int(getattr(exp_cfg, "terminal_hard_repair_topics", 2)))
+    topics = tuple(sorted(blueprint.topics, key=lambda topic: hard_topic_counts.get(topic, 0))[:topic_limit])
+    if not topics:
+        return None
+
+    limits = config.chunk_limits[mode]
+    multi_k = max(1, limits.multi_k.max)
+    scale = float(getattr(exp_cfg, "terminal_hard_repair_multi_k_scale", 1.0))
+    multi_k = max(1, min(limits.multi_k.max, int(round(multi_k * scale))))
+
+    return ModeRoundPlan(
+        mode=mode,
+        round_in_mode=mode_state.round_in_mode,
+        strategy=RoundStrategy.TERMINAL_HARD_REPAIR,
+        difficulty="hard",
+        topics=topics,
+        single_k=0,
+        multi_k=multi_k,
+        target_candidates_per_topic=max(1, missing_hard),
+        reason=f"terminal hard repair: missing_hard={missing_hard}, hard_gap={hard_gap_ratio:.2f}",
+    )
+
+
 # ============================================================================
 # Per-mode generation loop
 # ============================================================================
@@ -261,6 +313,7 @@ async def run_mode_generation(
     tracer: LLMTracer | None = None,
 ) -> None:
     last_feedback = None
+    terminal_repair_executed = False
 
     while True:
         should_stop, reason = mode_should_stop(
@@ -268,6 +321,44 @@ async def run_mode_generation(
             global_state=global_state, blueprint=blueprint, config=config,
         )
         if should_stop:
+            if (
+                reason == "max_candidate_pool_reached"
+                and not terminal_repair_executed
+            ):
+                repair_plan = _build_terminal_hard_repair_plan(
+                    mode=mode,
+                    mode_cfg=mode_cfg,
+                    blueprint=blueprint,
+                    config=config,
+                    mode_state=mode_state,
+                )
+                if repair_plan is not None:
+                    append_round_plan(blueprint.task_id, blueprint.run_id, mode, repair_plan)
+                    round_results, feedback = await execute_mode_round_plan(
+                        round_plan=repair_plan, blueprint=blueprint, config=config,
+                        global_state=global_state, mode_state=mode_state,
+                        evidence_manager=evidence_manager, generator=generator,
+                        mode_cfg=mode_cfg, tracer=tracer,
+                    )
+                    last_feedback = feedback
+                    append_round_feedback(blueprint.task_id, blueprint.run_id, mode, feedback)
+                    if feedback.empty_round:
+                        mode_state.consecutive_empty_rounds += 1
+                    else:
+                        mode_state.consecutive_empty_rounds = 0
+                    mode_state.terminal_hard_repair_executed = True
+                    mode_state.terminal_hard_repair_rounds += 1
+                    mode_state.terminal_hard_repair_generated_count += int(feedback.generated_count)
+                    mode_state.terminal_hard_repair_accepted_count += int(feedback.accepted_count)
+                    update_mode_trace(mode_state, repair_plan, round_results)
+                    mode_state.round_in_mode += 1
+                    terminal_repair_executed = True
+                    logger.info(
+                        f"Mode={mode} terminal repair executed "
+                        f"generated={feedback.generated_count} accepted={feedback.accepted_count} "
+                        f"total_accepted={mode_state.accepted_count}"
+                    )
+                    continue
             mode_state.stopped_reason = reason
             logger.info(f"Mode {mode} stopped: {reason}")
             break

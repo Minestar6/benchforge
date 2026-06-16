@@ -1,0 +1,23 @@
+{
+  "mode": "multiple_choice",
+  "candidate_count": 17,
+  "total_record_count": 17,
+  "accepted_count": 17,
+  "rejected_count": 0,
+  "difficulty_counts": {
+    "hard": 3,
+    "medium": 11,
+    "easy": 3
+  },
+  "topic_counts": {
+    "Quantum Computing": 2,
+    "Artificial Intelligence": 15
+  },
+  "stopped_reason": "max_candidate_pool_reached",
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}
