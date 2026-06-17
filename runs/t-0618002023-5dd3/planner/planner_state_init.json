@@ -1,0 +1,31 @@
+{
+  "task_id": "t-0618002023-5dd3",
+  "blueprint_id": "t-0618002023-5dd3-bp",
+  "current_round": 0,
+  "completed_targets": {
+    "qa": 0,
+    "multiple_choice": 0
+  },
+  "resource_usage": {
+    "total_input_tokens": 0,
+    "total_output_tokens": 0,
+    "total_tokens": 0,
+    "by_agent": {}
+  },
+  "topic_backlog": {
+    "active": [
+      "physics conceptual understanding",
+      "physics problem solving",
+      "physics reasoning with real-world scenarios"
+    ],
+    "deferred": []
+  },
+  "model_pool": {
+    "active": [
+      "deepseek-v3.2"
+    ],
+    "removed": []
+  },
+  "run_history": [],
+  "last_question_plan": null
+}

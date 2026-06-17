@@ -21,8 +21,7 @@ from benchforge.cli import main as cli_main
 
 
 DEFAULT_USER_GOAL = (
-    "Build a Chinese benchmark to evaluate model capabilities in citation "
-    "grounding, evidence-based reasoning, and retrieval robustness."
+    "Build a  benchmark to evaluate physics. "
 )
 
 
@@ -30,12 +29,14 @@ def build_default_argv() -> list[str]:
     return [
         "--user-goal",
         DEFAULT_USER_GOAL,
+        "--language",
+        "en",
         "--candidate-model",
-        "deepseek-v3",
+        "deepseek-v3.2",
         "--judge-model",
-        "deepseek-v3",
+        "deepseek-v3.2",
         "--planner-model",
-        "deepseek-v3",
+        "deepseek-v3.2",
         "--qa-target",
         "2",
         "--mc-target",

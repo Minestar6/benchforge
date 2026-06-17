@@ -4,6 +4,7 @@ import json
 import sys
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
@@ -18,14 +19,13 @@ from benchforge.agents.planner_agent.feedback import (
 from benchforge.agents.planner_agent.orchestrator import _load_verify_model_client
 from benchforge.agents.planner_agent.planner import (
     diagnose_last_round,
-    adjust_next_round_plan,
     question_difficulty_evolver,
     control_parameter_tuner,
     round_spec_builder,
     topic_adaptive_retriever,
-    _build_next_round_spec,
-    _propose_topics_with_llm,
     _update_planner_state,
+    _llm_question_difficulty_evolver,
+    _difficulty_distribution_of_selected,
 )
 from benchforge.agents.planner_agent.topic_search import summarize_topic_feedback
 from benchforge.agents.planner_agent.utils import translate_eval_profile
@@ -310,17 +310,17 @@ def test_build_next_round_spec_clamps_targets_to_remaining_demand():
         topic_backlog=TopicBacklog(active=["AI", "ML"], deferred=[]),
         model_pool=ModelPool(active=["model-a"], removed=[]),
     )
+    diagnosis = SimpleNamespace(label="cold_start", evidence={}, problems=[])
 
-    round_spec = _build_next_round_spec(
+    question_plan = question_difficulty_evolver(state, blueprint, diagnosis)
+    control_plan = control_parameter_tuner(state, blueprint, diagnosis)
+    round_spec = round_spec_builder(
         state=state,
         blueprint=blueprint,
-        proposed_topics=["AI"],
+        target_topics=["AI"],
         run_id="run_002",
-        control_plan=adjust_next_round_plan(
-            state,
-            blueprint,
-            SimpleNamespace(label="cold_start", evidence={}, problems=[]),
-        ),
+        question_plan=question_plan,
+        control_plan=control_plan,
     )
 
     assert round_spec.blueprint["modes"]["qa"]["count"] == 1
@@ -338,11 +338,11 @@ async def test_propose_topics_rehydrates_deferred_backlog():
         model_pool=ModelPool(active=["model-a"], removed=[]),
     )
 
-    topics = await _propose_topics_with_llm(
+    topics = await topic_adaptive_retriever(
         state=state,
         blueprint=blueprint,
         model_client=SimpleNamespace(),
-        topics_budget=2,
+        topic_budget=2,
     )
 
     assert topics
@@ -577,11 +577,12 @@ def test_adjust_next_round_plan_increases_hard_ratio_for_low_separation():
         problems=["low separation"],
     )
 
-    plan = adjust_next_round_plan(state, blueprint, diagnosis)
+    question_plan = question_difficulty_evolver(state, blueprint, diagnosis)
+    control_plan = control_parameter_tuner(state, blueprint, diagnosis)
 
-    assert plan.qa_difficulty_distribution["hard"] > blueprint.default_modes["qa"].difficulty_distribution["hard"]
-    assert plan.qa_difficulty_distribution["easy"] < blueprint.default_modes["qa"].difficulty_distribution["easy"]
-    assert plan.eval_profile == "full"
+    assert question_plan.qa_difficulty_distribution["hard"] > blueprint.default_modes["qa"].difficulty_distribution["hard"]
+    assert question_plan.qa_difficulty_distribution["easy"] < blueprint.default_modes["qa"].difficulty_distribution["easy"]
+    assert control_plan.eval_profile == "full"
 
 
 def test_question_difficulty_evolver_only_returns_question_plan_fields():
@@ -887,21 +888,20 @@ def test_build_next_round_spec_preserves_topic_budget_as_single_source_of_truth(
         topic_backlog=TopicBacklog(active=["AI", "ML"], deferred=[]),
         model_pool=ModelPool(active=["model-a"], removed=[]),
     )
-    control_plan = adjust_next_round_plan(
-        state,
-        blueprint,
-        SimpleNamespace(label="high_quality_low_separation", evidence={}, problems=[]),
-    )
+    diagnosis = SimpleNamespace(label="high_quality_low_separation", evidence={}, problems=[])
+    question_plan = question_difficulty_evolver(state, blueprint, diagnosis)
+    control_plan = control_parameter_tuner(state, blueprint, diagnosis)
 
-    round_spec = _build_next_round_spec(
+    round_spec = round_spec_builder(
         state=state,
         blueprint=blueprint,
-        proposed_topics=["AI"],
+        target_topics=["AI"],
         run_id="run_002",
+        question_plan=question_plan,
         control_plan=control_plan,
     )
 
-    assert round_spec.qa_agent_patch["planner"]["topics_per_round"] == control_plan.topics_per_round
+    assert round_spec.qa_agent_patch["planner"]["topics_per_round"] == question_plan.topic_budget
     assert "metrics" not in round_spec.model_eval_agent_patch
 
 
@@ -965,3 +965,243 @@ def test_summarize_topic_feedback_uses_generator_coverage_and_fallback_fail_rati
     assert "ML" in summary.low_yield_topics
     assert "ML" in summary.weak_topics
     assert summary.topic_stats["ML"]["all_models_fail_ratio"] == 1.0
+
+
+# ═══════════════════════════════════════════════════════════════
+# _difficulty_distribution_of_selected 测试
+# ═══════════════════════════════════════════════════════════════
+
+def test_difficulty_distribution_of_selected_normal():
+    val_fb = ValidatorFeedback(
+        task_id="t", run_id="r", round_id=1, status="success",
+        summary=ValidatorFeedbackSummary(
+            total_candidates=10, citation_passed=8, llm_passed=6, final_selected=6,
+            citation_pass_rate=0.8, llm_pass_rate_after_citation=0.75,
+            final_selection_rate=0.6, llm_calls=10, llm_input_tokens=100, llm_output_tokens=50,
+        ),
+        quality_signals=ValidatorQualitySignals(),
+        by_difficulty={
+            "easy": {"selected": 4, "reserve": 0, "rejected": 0},
+            "medium": {"selected": 2, "reserve": 0, "rejected": 0},
+            "hard": {"selected": 0, "reserve": 0, "rejected": 0},
+        },
+    )
+    dist = _difficulty_distribution_of_selected(val_fb, "qa")
+    assert dist == {"easy": 4/6, "medium": 2/6, "hard": 0.0}
+
+
+def test_difficulty_distribution_of_selected_empty():
+    val_fb = ValidatorFeedback(
+        task_id="t", run_id="r", round_id=1, status="success",
+        summary=ValidatorFeedbackSummary(
+            total_candidates=0, citation_passed=0, llm_passed=0, final_selected=0,
+            citation_pass_rate=0.0, llm_pass_rate_after_citation=0.0,
+            final_selection_rate=0.0, llm_calls=0, llm_input_tokens=0, llm_output_tokens=0,
+        ),
+        quality_signals=ValidatorQualitySignals(),
+        by_difficulty={},
+    )
+    dist = _difficulty_distribution_of_selected(val_fb, "qa")
+    assert dist == {"easy": 1/3, "medium": 1/3, "hard": 1/3}
+
+
+# ═══════════════════════════════════════════════════════════════
+# _llm_question_difficulty_evolver 测试
+# ═══════════════════════════════════════════════════════════════
+
+def _make_llm_evolver_args(blueprint=None, state=None, diagnosis=None):
+    """构造 LLM evolver 的通用参数。"""
+    if blueprint is None:
+        blueprint = _make_global_blueprint()
+    if state is None:
+        state = PlannerState(
+            task_id="t", blueprint_id="bp",
+            completed_targets={"qa": 3, "multiple_choice": 2},
+            topic_backlog=TopicBacklog(active=["AI"], deferred=[]),
+            model_pool=ModelPool(active=["m"], removed=[]),
+        )
+    if diagnosis is None:
+        diagnosis = SimpleNamespace(label="cold_start", confidence=0.5, problems=[], evidence={})
+    return blueprint, state, diagnosis
+
+
+@pytest.mark.asyncio
+async def test_llm_evolver_happy_path():
+    """LLM 返回合法 JSON → 正确解析。"""
+    blueprint, state, diagnosis = _make_llm_evolver_args()
+    mock_client = MagicMock()
+    mock_client.model_name = "test-model"
+    mock_client.complete = AsyncMock(return_value={
+        "text": '{"qa_count":5,"mc_count":3,"qa_difficulty_distribution":{"easy":0.1,"medium":0.6,"hard":0.3},"mc_difficulty_distribution":{"easy":0.2,"medium":0.5,"hard":0.3},"topic_budget":2,"min_candidate_multiplier":1.6,"max_candidate_multiplier":2.2}'
+    })
+
+    plan = await _llm_question_difficulty_evolver(
+        state=state, blueprint=blueprint, diagnosis=diagnosis,
+        previous_question_plan=None, latest_gen_fb=None, latest_val_fb=None,
+        latest_eval_fb=None, model_client=mock_client,
+    )
+    assert plan.qa_count == 5
+    assert plan.mc_count == 3
+    assert plan.qa_difficulty_distribution["hard"] == 0.3
+    assert plan.topic_budget == 2
+    assert plan.min_candidate_multiplier == 1.6
+    assert plan.max_candidate_multiplier == 2.2
+
+
+@pytest.mark.asyncio
+async def test_llm_evolver_clamps_to_remaining():
+    """LLM 返回的 count 超过 remaining → 被裁剪。"""
+    bp = GlobalBlueprint(
+        task_id="t", blueprint_id="bp", user_goal="test", language="zh",
+        seed_topics=["AI"], final_targets=FinalTargets(qa=20, multiple_choice=15),
+        default_modes={
+            "qa": QuestionModeDefaults(max_rounds=3, difficulty_distribution={"easy": 0.3, "medium": 0.5, "hard": 0.2}),
+            "multiple_choice": QuestionModeDefaults(max_rounds=3, difficulty_distribution={"easy": 0.3, "medium": 0.5, "hard": 0.2}),
+        },
+        evaluator_defaults=EvaluatorDefaults(candidate_model_names=["m"]),
+        evaluation_requirements=EvaluationRequirements(),
+        stop_conditions=StopConditions(max_rounds=3, min_selected_per_round=3),
+    )
+    state = PlannerState(
+        task_id="t", blueprint_id="bp",
+        completed_targets={"qa": 18, "multiple_choice": 14},  # remaining: qa=2, mc=1
+        topic_backlog=TopicBacklog(active=["AI"], deferred=[]),
+        model_pool=ModelPool(active=["m"], removed=[]),
+    )
+    diagnosis = SimpleNamespace(label="cold_start", confidence=0.5, problems=[], evidence={})
+    mock_client = MagicMock()
+    mock_client.model_name = "test-model"
+    mock_client.complete = AsyncMock(return_value={
+        "text": '{"qa_count":100,"mc_count":100,"qa_difficulty_distribution":{"easy":0.3,"medium":0.4,"hard":0.3},"mc_difficulty_distribution":{"easy":0.3,"medium":0.4,"hard":0.3},"topic_budget":2,"min_candidate_multiplier":1.5,"max_candidate_multiplier":2.0}'
+    })
+
+    plan = await _llm_question_difficulty_evolver(
+        state=state, blueprint=bp, diagnosis=diagnosis,
+        previous_question_plan=None, latest_gen_fb=None, latest_val_fb=None,
+        latest_eval_fb=None, model_client=mock_client,
+    )
+    assert plan.qa_count == 2
+    assert plan.mc_count == 1
+
+
+@pytest.mark.asyncio
+async def test_llm_evolver_falls_back_on_llm_error():
+    """LLM 调用异常 → 回退规则引擎。"""
+    blueprint, state, diagnosis = _make_llm_evolver_args()
+    mock_client = MagicMock()
+    mock_client.model_name = "test-model"
+    mock_client.complete = AsyncMock(side_effect=RuntimeError("API down"))
+
+    plan = await _llm_question_difficulty_evolver(
+        state=state, blueprint=blueprint, diagnosis=diagnosis,
+        previous_question_plan=None, latest_gen_fb=None, latest_val_fb=None,
+        latest_eval_fb=None, model_client=mock_client,
+    )
+    # 规则引擎 cold_start 首轮: count_multiplier=1.8, topic_budget=2
+    assert plan.topic_budget == 2
+    assert plan.qa_count > 0
+
+
+@pytest.mark.asyncio
+async def test_llm_evolver_falls_back_on_bad_json():
+    """LLM 返回非法 JSON → 回退规则引擎。"""
+    blueprint, state, diagnosis = _make_llm_evolver_args()
+    mock_client = MagicMock()
+    mock_client.model_name = "test-model"
+    mock_client.complete = AsyncMock(return_value={"text": "not valid json at all"})
+
+    plan = await _llm_question_difficulty_evolver(
+        state=state, blueprint=blueprint, diagnosis=diagnosis,
+        previous_question_plan=None, latest_gen_fb=None, latest_val_fb=None,
+        latest_eval_fb=None, model_client=mock_client,
+    )
+    assert plan.qa_count > 0
+
+
+@pytest.mark.asyncio
+async def test_llm_evolver_round1_null_stats():
+    """首轮所有 feedback 为 null → 正常输出默认值。"""
+    blueprint, state, diagnosis = _make_llm_evolver_args()
+    mock_client = MagicMock()
+    mock_client.model_name = "test-model"
+    mock_client.complete = AsyncMock(return_value={
+        "text": '{"qa_count":10,"mc_count":8,"qa_difficulty_distribution":{"easy":0.2,"medium":0.5,"hard":0.3},"mc_difficulty_distribution":{"easy":0.3,"medium":0.5,"hard":0.2},"topic_budget":2,"min_candidate_multiplier":1.5,"max_candidate_multiplier":2.0}'
+    })
+
+    plan = await _llm_question_difficulty_evolver(
+        state=state, blueprint=blueprint, diagnosis=diagnosis,
+        previous_question_plan=None, latest_gen_fb=None, latest_val_fb=None,
+        latest_eval_fb=None, model_client=mock_client,
+    )
+    assert plan.qa_count == 7   # remaining = 10-3 = 7
+    assert plan.mc_count == 6   # remaining = 8-2 = 6
+
+
+@pytest.mark.asyncio
+async def test_llm_evolver_with_all_stats():
+    """所有 feedback 都存在 → prompt 包含完整数据。"""
+    blueprint, state, diagnosis = _make_llm_evolver_args()
+    prev_plan = QuestionPlan(
+        qa_count=8, mc_count=6,
+        qa_difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
+        mc_difficulty_distribution={"easy": 0.3, "medium": 0.5, "hard": 0.2},
+        topic_budget=2, min_candidate_multiplier=1.5, max_candidate_multiplier=2.0,
+    )
+    gen_fb = GeneratorFeedback(
+        task_id="t", run_id="r", round_id=1, status="success",
+        artifacts=GeneratorFeedbackArtifacts(shared_state_path="", generation_report=""),
+        summary=GeneratorFeedbackSummary(total_candidates=25, global_used_chunk_combinations=10, global_failures=1),
+        by_mode={
+            "qa": ModeGeneratorFeedback(candidate_count=15, target_candidate_count=20, fulfillment_rate=0.75),
+            "multiple_choice": ModeGeneratorFeedback(candidate_count=10, target_candidate_count=15, fulfillment_rate=0.67),
+        },
+    )
+    val_fb = ValidatorFeedback(
+        task_id="t", run_id="r", round_id=1, status="success",
+        summary=ValidatorFeedbackSummary(
+            total_candidates=25, citation_passed=20, llm_passed=15, final_selected=12,
+            citation_pass_rate=0.8, llm_pass_rate_after_citation=0.75,
+            final_selection_rate=0.48, llm_calls=25, llm_input_tokens=1000, llm_output_tokens=500,
+        ),
+        quality_signals=ValidatorQualitySignals(),
+        by_mode={"qa": {"selected": 7}, "multiple_choice": {"selected": 5}},
+        by_difficulty={
+            "easy": {"selected": 6}, "medium": {"selected": 4}, "hard": {"selected": 2},
+        },
+    )
+    eval_fb = EvaluatorFeedback(
+        task_id="t", run_id="r", round_id=1, status="success",
+        summary=EvaluatorFeedbackSummary(num_questions=12, num_models=3),
+        derived_performance_signals={
+            "overall_model_gap": 0.15,
+            "by_difficulty": {
+                "easy": {"avg_score": 0.9}, "medium": {"avg_score": 0.7}, "hard": {"avg_score": 0.5},
+            },
+        },
+    )
+    mock_client = MagicMock()
+    mock_client.model_name = "test-model"
+    captured_prompt = []
+    async def capture_complete(**kwargs):
+        captured_prompt.append(kwargs["messages"][0]["content"])
+        return {"text": '{"qa_count":6,"mc_count":4,"qa_difficulty_distribution":{"easy":0.1,"medium":0.5,"hard":0.4},"mc_difficulty_distribution":{"easy":0.2,"medium":0.5,"hard":0.3},"topic_budget":1,"min_candidate_multiplier":1.8,"max_candidate_multiplier":2.4}'}
+    mock_client.complete = capture_complete
+
+    plan = await _llm_question_difficulty_evolver(
+        state=state, blueprint=blueprint, diagnosis=SimpleNamespace(label="high_quality_low_separation", problems=[], evidence={}),
+        previous_question_plan=prev_plan, latest_gen_fb=gen_fb,
+        latest_val_fb=val_fb, latest_eval_fb=eval_fb, model_client=mock_client,
+    )
+    assert plan.qa_count == 6
+    assert plan.mc_count == 4
+    assert plan.qa_difficulty_distribution["hard"] == 0.4
+    assert plan.topic_budget == 1
+
+    prompt = captured_prompt[0]
+    assert "qa_candidates" in prompt
+    assert "mc_candidates" in prompt
+    assert "qa_difficulty_distribution" in prompt
+    assert "mc_difficulty_distribution" in prompt
+    assert "qa_difficulty_scores" in prompt
+    assert "mc_difficulty_scores" in prompt
+    assert "high_quality_low_separation" not in prompt  # diagnosis 不再注入 prompt

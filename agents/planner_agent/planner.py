@@ -24,10 +24,9 @@ from .schema import (
     QuestionPlan,
     RoundDiagnosis,
     NextRoundControlPlan,
-    NextRoundIntegratedPlan,
     NextRoundQuestionPlan,
 )
-from .config_loader import initialize_planner_state, save_planner_state
+from .config_loader import initialize_planner_state, save_planner_state, load_planner_agent_config
 from .orchestrator import execute_round
 from .topic_search import (
     summarize_topic_feedback,
@@ -38,6 +37,7 @@ from .topic_search import (
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 _TOPIC_ADAPTIVE_RETRIEVER_PROMPT_PATH = _PROJECT_ROOT / "prompts" / "planner_agent" / "topic_adaptive_retriever_prompt.md"
+_DIFFICULTY_COUNT_PLANNER_PROMPT_PATH = _PROJECT_ROOT / "prompts" / "planner_agent" / "difficulty_count_planner_prompt.md"
 
 
 async def run_planner(
@@ -45,13 +45,23 @@ async def run_planner(
     base_config_dir: str | Path,
     registry_path: str | Path,
     state_dir: str | Path,
+    resume_state: PlannerState | None = None,
 ) -> PlannerState:
-    """执行多轮规划与编排。"""
+    """执行多轮规划与编排。
+
+    Args:
+        resume_state: 从已有快照恢复的 PlannerState，跳过初始化直接从该状态继续。
+    """
     state_dir = Path(state_dir)
     state_dir.mkdir(parents=True, exist_ok=True)
 
-    state = initialize_planner_state(global_blueprint)
-    save_planner_state(state, state_dir / "planner_state_init.json")
+    if resume_state is not None:
+        state = resume_state
+        logger.info(f"[Planner] Resumed from round {state.current_round}, "
+                     f"completed=qa:{state.completed_targets['qa']}/mc:{state.completed_targets['multiple_choice']}")
+    else:
+        state = initialize_planner_state(global_blueprint)
+        save_planner_state(state, state_dir / "planner_state_init.json")
 
     registry = load_model_registry(registry_path)
     planner_model_name = global_blueprint.evaluator_defaults.judge_model_name or list(registry.keys())[0]
@@ -60,9 +70,14 @@ async def run_planner(
         raise ValueError(f"Planner model '{planner_model_name}' not found in registry")
     planner_model_client = ModelLoader.load_model(planner_model_cfg)
 
+    # 加载 planner 配置，决定 evolver 模式
+    planner_config = load_planner_agent_config(base_config_dir)
+    use_llm_evolver = planner_config.question_difficulty_evolver.enabled
+
     logger.info(
         f"[Planner] Start planning: task_id={state.task_id}, "
-        f"targets=qa:{global_blueprint.final_targets.qa}/mc:{global_blueprint.final_targets.multiple_choice}"
+        f"targets=qa:{global_blueprint.final_targets.qa}/mc:{global_blueprint.final_targets.multiple_choice}, "
+        f"evolver={'llm' if use_llm_evolver else 'rule'}"
     )
 
     latest_gen_fb = None
@@ -79,14 +94,26 @@ async def run_planner(
         logger.info(f"[Planner] === Round {state.current_round} start ===")
 
         diagnosis = diagnose_last_round(latest_gen_fb, latest_val_fb, latest_eval_fb)
-        question_plan = question_difficulty_evolver(
-            state=state,
-            blueprint=global_blueprint,
-            diagnosis=diagnosis,
-            previous_question_plan=state.last_question_plan,
-            latest_gen_fb=latest_gen_fb,
-            latest_val_fb=latest_val_fb,
-        )
+        if use_llm_evolver:
+            question_plan = await _llm_question_difficulty_evolver(
+                state=state,
+                blueprint=global_blueprint,
+                diagnosis=diagnosis,
+                previous_question_plan=state.last_question_plan,
+                latest_gen_fb=latest_gen_fb,
+                latest_val_fb=latest_val_fb,
+                latest_eval_fb=latest_eval_fb,
+                model_client=planner_model_client,
+            )
+        else:
+            question_plan = question_difficulty_evolver(
+                state=state,
+                blueprint=global_blueprint,
+                diagnosis=diagnosis,
+                previous_question_plan=state.last_question_plan,
+                latest_gen_fb=latest_gen_fb,
+                latest_val_fb=latest_val_fb,
+            )
         control_plan = control_parameter_tuner(
             state=state,
             blueprint=global_blueprint,
@@ -105,6 +132,15 @@ async def run_planner(
             latest_val_fb=latest_val_fb,
             latest_eval_fb=latest_eval_fb,
         )
+
+        # 校验：有生成目标但无 topic 时跳过本轮，避免空转
+        if not proposed_topics and (question_plan.qa_count > 0 or question_plan.mc_count > 0):
+            logger.warning(
+                f"[Planner] No topics proposed but generation targets exist "
+                f"(qa={question_plan.qa_count}, mc={question_plan.mc_count}), skipping round"
+            )
+            state.current_round -= 1  # 回退轮次计数，避免空转消耗 max_rounds 预算
+            continue
 
         round_spec = round_spec_builder(
             state=state,
@@ -174,16 +210,18 @@ def _ordered_unique_topics(items: list[Any]) -> list[str]:
 
 
 def _topic_score_list(summary) -> list[dict[str, float | str]]:
+    """为 LLM prompt 准备 topic 评分列表，权重与 rank_topics 核心因子对齐。"""
     scores = []
     for topic, stats in summary.topic_stats.items():
         value = 0.0
         value += float(stats.get("model_gap") or 0.0) * 4.0
-        value += float(stats.get("selected") or 0.0) * 0.3
-        value += float(stats.get("avg_citation_score") or 0.0) * 0.2
-        value += float(stats.get("avg_llm_overall_score") or 0.0) * 0.2
-        value -= float(stats.get("too_easy_ratio") or 0.0) * 1.5
-        value -= float(stats.get("all_models_fail_ratio") or 0.0) * 2.0
-        value -= float(stats.get("reuse_count") or 0.0) * 0.5
+        value += float(stats.get("selected") or 0.0) * 0.6
+        value += float(stats.get("candidate_count") or 0.0) * 0.1
+        value += float(stats.get("avg_citation_score") or 0.0) * 0.5
+        value += float(stats.get("avg_llm_overall_score") or 0.0) * 0.5
+        value -= float(stats.get("too_easy_ratio") or 0.0) * 2.0
+        value -= float(stats.get("all_models_fail_ratio") or 0.0) * 3.0
+        value -= float(stats.get("reuse_count") or 0.0) * 1.25
         scores.append({"topic": topic, "score": round(value, 4)})
     return scores
 
@@ -272,8 +310,14 @@ async def topic_adaptive_retriever(
 
     active_topics = state.topic_backlog.active
     if not active_topics and not state.run_history:
-        logger.warning("[Planner] No available topics for proposal")
-        return []
+        # 首轮且 seed_topics 为空：尝试从 blueprint 回填
+        if blueprint.seed_topics:
+            logger.info("[Planner] Backlog empty, reinitializing from blueprint seed_topics")
+            state.topic_backlog.active = list(blueprint.seed_topics)
+            active_topics = state.topic_backlog.active
+        else:
+            logger.warning("[Planner] No available topics for proposal")
+            return []
 
     summary = summarize_topic_feedback(
         state=state,
@@ -288,6 +332,12 @@ async def topic_adaptive_retriever(
         summary=summary,
         budget=topic_budget,
     )
+
+    # 将 LLM 扩展的新 topic 写回 backlog，避免 topic 池过早耗尽
+    existing_topics = set(state.topic_backlog.active) | set(state.topic_backlog.deferred)
+    for topic in candidate_topics:
+        if topic not in existing_topics:
+            state.topic_backlog.deferred.append(topic)
 
     selected_topics: list[str] = []
     try:
@@ -314,47 +364,69 @@ async def topic_adaptive_retriever(
     return selected_topics
 
 
-async def _propose_topics_with_llm(
-    state: PlannerState,
-    blueprint: GlobalBlueprint,
-    model_client,
-    topic_budget: int | None = None,
-    topics_budget: int | None = None,
-    latest_gen_fb=None,
-    latest_val_fb=None,
-    latest_eval_fb=None,
-) -> list[str]:
-    """兼容旧调用：委托给 topic_adaptive_retriever。"""
-    resolved_budget = topic_budget if topic_budget is not None else topics_budget
-    return await topic_adaptive_retriever(
-        state=state,
-        blueprint=blueprint,
-        model_client=model_client,
-        topic_budget=resolved_budget or 1,
-        latest_gen_fb=latest_gen_fb,
-        latest_val_fb=latest_val_fb,
-        latest_eval_fb=latest_eval_fb,
-    )
-
-
 def diagnose_last_round(
     latest_gen_fb=None,
     latest_val_fb=None,
     latest_eval_fb=None,
 ) -> RoundDiagnosis:
+    """分阶段诊断：gen → val-only → val+eval → 兜底，各阶段信号合并而非屏蔽。"""
+    # ── Phase 1: 检查生成侧问题（收集证据，不立即返回） ──
+    gen_insufficient = False
+    gen_evidence: dict[str, Any] = {}
     if latest_gen_fb and latest_gen_fb.by_mode:
         min_fulfillment = min(mode_fb.fulfillment_rate for mode_fb in latest_gen_fb.by_mode.values())
-        if min_fulfillment < 0.5 or latest_gen_fb.summary.global_failures > 0:
+        total_candidates = max(latest_gen_fb.summary.total_candidates, 1)
+        failure_rate = latest_gen_fb.summary.global_failures / total_candidates
+        if min_fulfillment < 0.5 or failure_rate > 0.3:
+            gen_insufficient = True
+            gen_evidence = {
+                "min_fulfillment_rate": min_fulfillment,
+                "global_failures": latest_gen_fb.summary.global_failures,
+                "failure_rate": failure_rate,
+            }
+
+    # ── Phase 2: 有验证结果但无评估结果 ──
+    # 场景：candidates 全部在验证阶段被拒，或评估被跳过
+    if latest_val_fb and not latest_eval_fb:
+        if latest_val_fb.summary.final_selected == 0:
+            problems = ["all_candidates_rejected"]
+            evidence = {
+                "total_candidates": latest_val_fb.summary.total_candidates,
+                "citation_pass_rate": latest_val_fb.summary.citation_pass_rate,
+                "llm_pass_rate_after_citation": latest_val_fb.summary.llm_pass_rate_after_citation,
+                "duplicate_rate": latest_val_fb.quality_signals.duplicate_rate,
+            }
+            if gen_insufficient:
+                problems.append("generation_capacity_insufficient")
+                evidence.update(gen_evidence)
+            return RoundDiagnosis(
+                label="verification_rejected_all",
+                confidence=0.85,
+                problems=problems,
+                evidence=evidence,
+            )
+        # val 存在但无 eval（例如 selected > 0 但 eval 因其他原因被跳过）
+        # 注：正常流程中 final_selected > 0 时 eval 总会执行，此分支为防御性代码
+        if gen_insufficient:
             return RoundDiagnosis(
                 label="generation_capacity_insufficient",
-                confidence=0.8,
+                confidence=0.75,
                 problems=["generation_capacity_insufficient"],
                 evidence={
-                    "min_fulfillment_rate": min_fulfillment,
-                    "global_failures": latest_gen_fb.summary.global_failures,
+                    **gen_evidence,
+                    "citation_pass_rate": latest_val_fb.summary.citation_pass_rate,
+                    "final_selected": latest_val_fb.summary.final_selected,
                 },
             )
+        # 无 gen 问题、无 eval，但 val 数据存在 → 信息不足
+        return RoundDiagnosis(
+            label="insufficient_eval_data",
+            confidence=0.5,
+            problems=["eval_skipped"],
+            evidence={"final_selected": latest_val_fb.summary.final_selected},
+        )
 
+    # ── Phase 3: 同时有验证和评估结果 ──
     if latest_val_fb and latest_eval_fb:
         gap = float(latest_eval_fb.derived_performance_signals.get("overall_model_gap") or 0.0)
         too_easy = float(latest_eval_fb.derived_performance_signals.get("easy_questions_too_easy_ratio") or 0.0)
@@ -380,34 +452,51 @@ def diagnose_last_round(
             "strong_topics": strong_topics,
             "weak_topics": weak_topics,
         }
+
+        # 合并 gen 侧信号
+        problems: list[str] = []
+        if gen_insufficient:
+            problems.append("generation_capacity_insufficient")
+            evidence.update(gen_evidence)
+
         if gap < 0.15 and citation_pass >= 0.75:
             return RoundDiagnosis(
                 label="high_quality_low_separation",
-                confidence=0.9,
-                problems=["low separation"],
+                confidence=0.9 if not gen_insufficient else 0.7,
+                problems=problems + ["low separation"],
                 evidence=evidence,
             )
         if gap < 0.15:
             return RoundDiagnosis(
                 label="low_quality_low_separation",
-                confidence=0.8,
-                problems=["low separation", "low quality"],
+                confidence=0.8 if not gen_insufficient else 0.65,
+                problems=problems + ["low separation", "low quality"],
                 evidence=evidence,
             )
         if selected_quality < 0.75 or citation_pass < 0.65:
             return RoundDiagnosis(
                 label="high_separation_low_quality",
-                confidence=0.75,
-                problems=["high separation", "low quality"],
+                confidence=0.75 if not gen_insufficient else 0.6,
+                problems=problems + ["high separation", "low quality"],
                 evidence=evidence,
             )
         return RoundDiagnosis(
             label="high_separation_imbalanced_distribution",
-            confidence=0.7,
-            problems=["imbalanced separation"],
+            confidence=0.7 if not gen_insufficient else 0.6,
+            problems=problems + ["imbalanced separation"],
             evidence=evidence,
         )
 
+    # ── Phase 4: 仅有 gen 问题，无 val/eval ──
+    if gen_insufficient:
+        return RoundDiagnosis(
+            label="generation_capacity_insufficient",
+            confidence=0.8,
+            problems=["generation_capacity_insufficient"],
+            evidence=gen_evidence,
+        )
+
+    # ── Phase 5: 无任何反馈 ──
     return RoundDiagnosis(label="cold_start", confidence=0.5, problems=["no_feedback"], evidence={})
 
 
@@ -442,6 +531,184 @@ def _difficulty_selected_rate(latest_val_fb, difficulty: str) -> float | None:
     return float(int(stats.get("selected", 0) or 0) / total)
 
 
+def _difficulty_distribution_of_selected(latest_val_fb, mode: str) -> dict[str, float]:
+    """从 ValidatorFeedback 中提取某 mode 的 selected 题目难度分布。"""
+    by_diff = latest_val_fb.by_difficulty or {}
+    counts = {diff: by_diff.get(diff, {}).get("selected", 0) for diff in ("easy", "medium", "hard")}
+    total = sum(counts.values())
+    if total <= 0:
+        return {"easy": 1/3, "medium": 1/3, "hard": 1/3}
+    return {diff: counts[diff] / total for diff in ("easy", "medium", "hard")}
+
+
+def _extract_json_object(text: str) -> dict[str, Any]:
+    """从 LLM 响应中提取 JSON 对象。"""
+    stripped = text.strip()
+    start = stripped.find("{")
+    end = stripped.rfind("}")
+    if start >= 0 and end > start:
+        return json.loads(stripped[start:end + 1])
+    raise ValueError("No JSON object found in LLM response")
+
+
+async def _llm_question_difficulty_evolver(
+    state: PlannerState,
+    blueprint: GlobalBlueprint,
+    diagnosis: RoundDiagnosis,
+    previous_question_plan: QuestionPlan | None,
+    latest_gen_fb,
+    latest_val_fb,
+    latest_eval_fb,
+    model_client,
+) -> NextRoundQuestionPlan:
+    """LLM-based 题目难度演化器。
+
+    将诊断结论和反馈数据注入 prompt，由 LLM 决策下一轮题目计划。
+    解析失败或 LLM 不可用时回退到规则引擎。
+    """
+    # ── 构建 prompt 输入 ──
+    remaining = {
+        "qa": max(0, blueprint.final_targets.qa - state.completed_targets["qa"]),
+        "mc": max(0, blueprint.final_targets.multiple_choice - state.completed_targets["multiple_choice"]),
+    }
+    if previous_question_plan:
+        prev_plan_dict = {
+            "qa_count": previous_question_plan.qa_count,
+            "mc_count": previous_question_plan.mc_count,
+            "qa_difficulty_distribution": previous_question_plan.qa_difficulty_distribution,
+            "mc_difficulty_distribution": previous_question_plan.mc_difficulty_distribution,
+            "topic_budget": previous_question_plan.topic_budget,
+            "min_candidate_multiplier": previous_question_plan.min_candidate_multiplier,
+            "max_candidate_multiplier": previous_question_plan.max_candidate_multiplier,
+        }
+    else:
+        prev_plan_dict = None
+
+    gen_stats = None
+    if latest_gen_fb:
+        by_mode = latest_gen_fb.by_mode or {}
+        gen_stats = {
+            "qa_candidates": getattr(by_mode.get("qa", None), "candidate_count", 0),
+            "mc_candidates": getattr(by_mode.get("multiple_choice", None), "candidate_count", 0),
+            "global_failures": latest_gen_fb.summary.global_failures,
+        }
+
+    val_stats = None
+    if latest_val_fb:
+        gen_by_mode = (latest_gen_fb.by_mode or {}) if latest_gen_fb else {}
+        val_stats = {
+            "qa_generated": getattr(gen_by_mode.get("qa", None), "candidate_count", 0),
+            "qa_selected": latest_val_fb.by_mode.get("qa", {}).get("selected", 0),
+            "qa_difficulty_distribution": _difficulty_distribution_of_selected(latest_val_fb, "qa"),
+            "mc_generated": getattr(gen_by_mode.get("multiple_choice", None), "candidate_count", 0),
+            "mc_selected": latest_val_fb.by_mode.get("multiple_choice", {}).get("selected", 0),
+            "mc_difficulty_distribution": _difficulty_distribution_of_selected(latest_val_fb, "multiple_choice"),
+        }
+    eval_stats = None
+    if latest_eval_fb:
+        by_diff = latest_eval_fb.derived_performance_signals.get("by_difficulty", {}) or {}
+        eval_stats = {
+            "qa_difficulty_scores": {
+                diff: by_diff.get(diff, {}).get("avg_score", 0.0)
+                for diff in ("easy", "medium", "hard")
+            },
+            "mc_difficulty_scores": {
+                diff: by_diff.get(diff, {}).get("avg_score", 0.0)
+                for diff in ("easy", "medium", "hard")
+            },
+        }
+
+    prompt_template = load_prompt(_DIFFICULTY_COUNT_PLANNER_PROMPT_PATH)
+    replacements = {
+        "{current_round}": str(state.current_round),
+        "{max_rounds}": str(blueprint.stop_conditions.max_rounds),
+        "{remaining_targets}": json.dumps(remaining, ensure_ascii=False),
+        "{previous_round_plan}": json.dumps(prev_plan_dict, ensure_ascii=False),
+        "{generation_stats}": json.dumps(gen_stats, ensure_ascii=False),
+        "{validation_stats}": json.dumps(val_stats, ensure_ascii=False),
+        "{evaluation_stats}": json.dumps(eval_stats, ensure_ascii=False),
+    }
+    prompt = prompt_template
+    for key, value in replacements.items():
+        prompt = prompt.replace(key, value)
+
+    # ── 调用 LLM ──
+    try:
+        response = await model_client.complete(
+            model=getattr(model_client, "model_name", "planner"),
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.2,
+            max_tokens=512,
+        )
+        payload = _extract_json_object(response.get("text", ""))
+    except Exception as exc:
+        logger.warning(f"[Planner] LLM evolver failed: {exc}, falling back to rule-based")
+        return question_difficulty_evolver(
+            state=state, blueprint=blueprint, diagnosis=diagnosis,
+            previous_question_plan=previous_question_plan,
+            latest_gen_fb=latest_gen_fb, latest_val_fb=latest_val_fb,
+        )
+
+    # ── 解析并校验输出 ──
+    try:
+        # 提取必需字段，缺失时回退到规则引擎
+        qa_count = int(payload.get("qa_count", 0))
+        mc_count = int(payload.get("mc_count", 0))
+
+        qa_dist_raw = payload.get("qa_difficulty_distribution", {})
+        mc_dist_raw = payload.get("mc_difficulty_distribution", {})
+        qa_dist = {
+            "easy": float(qa_dist_raw.get("easy", 0.2)),
+            "medium": float(qa_dist_raw.get("medium", 0.5)),
+            "hard": float(qa_dist_raw.get("hard", 0.3)),
+        }
+        mc_dist = {
+            "easy": float(mc_dist_raw.get("easy", 0.3)),
+            "medium": float(mc_dist_raw.get("medium", 0.5)),
+            "hard": float(mc_dist_raw.get("hard", 0.2)),
+        }
+
+        qa_count = max(0, min(qa_count, remaining["qa"]))
+        mc_count = max(0, min(mc_count, remaining["mc"]))
+        qa_dist = _normalize_distribution(qa_dist)
+        mc_dist = _normalize_distribution(mc_dist)
+
+        min_mult = max(1.0, float(payload.get("min_candidate_multiplier", 1.5)))
+        max_mult = max(min_mult, float(payload.get("max_candidate_multiplier", 2.0)))
+
+        return NextRoundQuestionPlan(
+            qa_count=qa_count,
+            mc_count=mc_count,
+            qa_difficulty_distribution=qa_dist,
+            mc_difficulty_distribution=mc_dist,
+            topic_budget=max(1, int(payload.get("topic_budget", 2))),
+            min_candidate_multiplier=min_mult,
+            max_candidate_multiplier=max_mult,
+            min_selected_per_round=(
+                previous_question_plan.min_selected_per_round
+                if previous_question_plan and previous_question_plan.min_selected_per_round is not None
+                else blueprint.stop_conditions.min_selected_per_round
+            ),
+            qa_max_rounds=(
+                previous_question_plan.qa_max_rounds
+                if previous_question_plan and previous_question_plan.qa_max_rounds is not None
+                else blueprint.default_modes["qa"].max_rounds
+            ),
+            mc_max_rounds=(
+                previous_question_plan.mc_max_rounds
+                if previous_question_plan and previous_question_plan.mc_max_rounds is not None
+                else blueprint.default_modes["multiple_choice"].max_rounds
+            ),
+        )
+    except (KeyError, TypeError, ValueError) as exc:
+        logger.warning(f"[Planner] LLM evolver output invalid: {exc}, falling back to rule-based")
+        return question_difficulty_evolver(
+            state=state, blueprint=blueprint, diagnosis=diagnosis,
+            previous_question_plan=previous_question_plan,
+            latest_gen_fb=latest_gen_fb, latest_val_fb=latest_val_fb,
+        )
+
+
 def question_difficulty_evolver(
     state: PlannerState,
     blueprint: GlobalBlueprint,
@@ -472,9 +739,32 @@ def question_difficulty_evolver(
     topic_budget = previous_question_plan.topic_budget if previous_question_plan else 2
 
     label = diagnosis.label
-    if label == "high_quality_low_separation":
+    if label == "cold_start":
+        # 无反馈数据：保持上一轮参数，仅对首轮设置合理的默认值
+        if state.current_round == 1:
+            count_multiplier = 1.8
+            topic_budget = 2
+    elif label == "verification_rejected_all":
+        # 全部候选被验证拒绝：扩大候选池、严格筛选、降低 hard 比例避免浪费
+        count_multiplier = 2.6
+        min_candidate_multiplier = 2.0
+        max_candidate_multiplier = 2.6
+        topic_budget = 1
+        qa_dist["hard"] = max(0.0, qa_dist.get("hard", 0.0) - 0.1)
+        qa_dist["medium"] = min(1.0, qa_dist.get("medium", 0.0) + 0.1)
+        mc_dist["hard"] = max(0.0, mc_dist.get("hard", 0.0) - 0.1)
+        mc_dist["medium"] = min(1.0, mc_dist.get("medium", 0.0) + 0.1)
+    elif label == "insufficient_eval_data":
+        # 评估数据不足：适度增加候选量以获取更多评估信号
+        count_multiplier = 2.0
+        min_candidate_multiplier = max(min_candidate_multiplier, 1.8)
+        max_candidate_multiplier = max(max_candidate_multiplier, 2.2)
+        topic_budget = max(topic_budget, 2)
+    elif label == "high_quality_low_separation":
         qa_dist["hard"] = min(1.0, qa_dist.get("hard", 0.0) + 0.1)
         qa_dist["easy"] = max(0.0, qa_dist.get("easy", 0.0) - 0.1)
+        mc_dist["hard"] = min(1.0, mc_dist.get("hard", 0.0) + 0.1)
+        mc_dist["easy"] = max(0.0, mc_dist.get("easy", 0.0) - 0.1)
         topic_budget = 1
     elif label == "low_quality_low_separation":
         count_multiplier = 2.4
@@ -483,6 +773,8 @@ def question_difficulty_evolver(
         topic_budget = 1
         qa_dist["hard"] = max(0.0, qa_dist.get("hard", 0.0) - 0.05)
         qa_dist["medium"] = min(1.0, qa_dist.get("medium", 0.0) + 0.05)
+        mc_dist["hard"] = max(0.0, mc_dist.get("hard", 0.0) - 0.05)
+        mc_dist["medium"] = min(1.0, mc_dist.get("medium", 0.0) + 0.05)
     elif label == "generation_capacity_insufficient":
         count_multiplier = 1.8
         min_candidate_multiplier = 1.3
@@ -490,9 +782,13 @@ def question_difficulty_evolver(
         topic_budget = 1
         qa_dist["hard"] = max(0.0, qa_dist.get("hard", 0.0) - 0.05)
         qa_dist["medium"] = min(1.0, qa_dist.get("medium", 0.0) + 0.05)
+        mc_dist["hard"] = max(0.0, mc_dist.get("hard", 0.0) - 0.05)
+        mc_dist["medium"] = min(1.0, mc_dist.get("medium", 0.0) + 0.05)
     elif label == "high_separation_imbalanced_distribution":
         qa_dist["medium"] = min(1.0, qa_dist.get("medium", 0.0) + 0.05)
         qa_dist["hard"] = max(0.0, qa_dist.get("hard", 0.0) - 0.05)
+        mc_dist["medium"] = min(1.0, mc_dist.get("medium", 0.0) + 0.05)
+        mc_dist["hard"] = max(0.0, mc_dist.get("hard", 0.0) - 0.05)
 
     if state.current_round == 1 and blueprint.initial_generation_strategy == "balanced_exploration":
         topic_budget = max(topic_budget, 2)
@@ -500,34 +796,64 @@ def question_difficulty_evolver(
         mc_dist = _normalize_distribution(mc_dist)
 
     qa_mode_fb = (latest_gen_fb.by_mode or {}).get("qa") if latest_gen_fb else None
-    if qa_mode_fb and qa_mode_fb.fulfillment_rate < 0.8:
-        count_multiplier = min(count_multiplier, 1.8)
-        min_candidate_multiplier = max(min_candidate_multiplier, 1.7)
-        max_candidate_multiplier = max(max_candidate_multiplier, 2.2)
-        topic_budget = min(topic_budget, 1)
+    mc_mode_fb = (latest_gen_fb.by_mode or {}).get("multiple_choice") if latest_gen_fb else None
+    # verification_rejected_all 场景下跳过 fulfillment 检查：
+    # 全拒必然导致 fulfillment 低，不应反向削减 count_multiplier
+    if label != "verification_rejected_all":
+        if (qa_mode_fb and qa_mode_fb.fulfillment_rate < 0.8) or (mc_mode_fb and mc_mode_fb.fulfillment_rate < 0.8):
+            count_multiplier = min(count_multiplier, 1.8)
+            min_candidate_multiplier = max(min_candidate_multiplier, 1.7)
+            max_candidate_multiplier = max(max_candidate_multiplier, 2.2)
+            topic_budget = min(topic_budget, 1)
 
     hard_gen_count = 0
     if qa_mode_fb:
-        hard_gen_count = int((qa_mode_fb.difficulty_counts or {}).get("hard", 0) or 0)
+        hard_gen_count += int((qa_mode_fb.difficulty_counts or {}).get("hard", 0) or 0)
+    if mc_mode_fb:
+        hard_gen_count += int((mc_mode_fb.difficulty_counts or {}).get("hard", 0) or 0)
     hard_selected_rate = _difficulty_selected_rate(latest_val_fb, "hard")
     medium_selected_rate = _difficulty_selected_rate(latest_val_fb, "medium")
 
     if hard_gen_count >= 3 and hard_selected_rate is not None and hard_selected_rate < 0.2:
         qa_dist = _rebalance_distribution(qa_dist, increase="medium", decrease="hard", amount=0.08)
+        mc_dist = _rebalance_distribution(mc_dist, increase="medium", decrease="hard", amount=0.08)
     elif (
         hard_selected_rate is not None
         and medium_selected_rate is not None
         and hard_selected_rate > medium_selected_rate + 0.2
     ):
         qa_dist = _rebalance_distribution(qa_dist, increase="hard", decrease="easy", amount=0.06)
+        mc_dist = _rebalance_distribution(mc_dist, increase="hard", decrease="easy", amount=0.06)
 
-    if latest_val_fb and latest_val_fb.summary.final_selected < blueprint.stop_conditions.min_selected_per_round:
+    # verification_rejected_all 场景下 final_selected=0 是预期行为，不应再削减
+    if label != "verification_rejected_all" and latest_val_fb and latest_val_fb.summary.final_selected < blueprint.stop_conditions.min_selected_per_round:
         min_candidate_multiplier = max(min_candidate_multiplier, 1.8)
         max_candidate_multiplier = max(max_candidate_multiplier, 2.3)
         count_multiplier = min(count_multiplier, 1.9)
 
     qa_count = max(0, min(remaining_qa, int(base_qa * count_multiplier)))
     mc_count = max(0, min(remaining_mc, int(base_mc * count_multiplier)))
+
+    # 单类达标：如果某一题型已达到目标，下一轮集中资源生成另一题型
+    if remaining_qa <= 0 and qa_count > 0:
+        qa_count = 0
+        logger.info("[Planner] QA target reached, skipping QA generation this round")
+    if remaining_mc <= 0 and mc_count > 0:
+        mc_count = 0
+        logger.info("[Planner] MC target reached, skipping MC generation this round")
+
+    # 动态调整 mode 内 max_rounds：生成能力不足时收紧，质量恢复时放宽
+    default_qa_max = blueprint.default_modes["qa"].max_rounds
+    default_mc_max = blueprint.default_modes["multiple_choice"].max_rounds
+    qa_max_rounds = previous_question_plan.qa_max_rounds if previous_question_plan and previous_question_plan.qa_max_rounds is not None else default_qa_max
+    mc_max_rounds = previous_question_plan.mc_max_rounds if previous_question_plan and previous_question_plan.mc_max_rounds is not None else default_mc_max
+    if label in ("generation_capacity_insufficient", "verification_rejected_all"):
+        qa_max_rounds = max(1, qa_max_rounds - 1)
+        mc_max_rounds = max(1, mc_max_rounds - 1)
+    elif label in ("high_quality_low_separation", "high_separation_imbalanced_distribution"):
+        # 质量良好时逐步恢复到默认值
+        qa_max_rounds = min(default_qa_max, qa_max_rounds + 1)
+        mc_max_rounds = min(default_mc_max, mc_max_rounds + 1)
 
     return NextRoundQuestionPlan(
         qa_count=qa_count,
@@ -542,6 +868,8 @@ def question_difficulty_evolver(
             if previous_question_plan and previous_question_plan.min_selected_per_round is not None
             else blueprint.stop_conditions.min_selected_per_round
         ),
+        qa_max_rounds=qa_max_rounds,
+        mc_max_rounds=mc_max_rounds,
     )
 
 
@@ -554,21 +882,40 @@ def control_parameter_tuner(
     latest_eval_fb=None,
 ) -> NextRoundControlPlan:
     """调优验证、选择、评估强度等运行控制参数。"""
-    min_citation_score = 0.65
-    min_chunk_citation_score = 0.85
-    min_answer_citation_score = 0.75
-    min_overall_score = 0.75
+    min_citation_score = 0.55
+    min_chunk_citation_score = 0.60
+    min_answer_citation_score = 0.55
+    min_overall_score = 0.70
     selection_mode = "light"
     semantic_similarity_threshold = 0.9
     eval_profile = "standard"
     initial_breadth_enabled = state.current_round == 1
 
     label = diagnosis.label
-    if label == "high_quality_low_separation":
+    if label == "cold_start":
+        pass  # 保持默认值，不做调整
+    elif label == "verification_rejected_all":
+        # 全部被拒：严格筛选 + 提高 citation 阈值 + 全面评估
+        selection_mode = "strict"
+        semantic_similarity_threshold = 0.92
+        min_citation_score = max(min_citation_score, 0.72)
+        min_chunk_citation_score = max(min_chunk_citation_score, 0.88)
+        min_answer_citation_score = max(min_answer_citation_score, 0.80)
+        min_overall_score = max(min_overall_score, 0.78)
         eval_profile = "full"
+    elif label == "insufficient_eval_data":
+        # 评估数据不足：标准评估获取更多信号
+        eval_profile = "standard"
+    elif label == "high_quality_low_separation":
+        eval_profile = "full"
+        selection_mode = "strict"
+        semantic_similarity_threshold = 0.92
     elif label == "low_quality_low_separation":
         selection_mode = "strict"
         semantic_similarity_threshold = 0.92
+        min_citation_score = max(min_citation_score, 0.68)
+        min_chunk_citation_score = max(min_chunk_citation_score, 0.87)
+        min_answer_citation_score = max(min_answer_citation_score, 0.77)
     elif label == "high_separation_low_quality":
         min_citation_score = 0.7
         min_chunk_citation_score = 0.88
@@ -576,8 +923,18 @@ def control_parameter_tuner(
         min_overall_score = 0.78
         selection_mode = "strict"
         semantic_similarity_threshold = 0.92
+    elif label == "generation_capacity_insufficient":
+        # 生成能力不足：收紧筛选以防低质量题目通过
+        selection_mode = "strict"
+        semantic_similarity_threshold = 0.92
+        min_citation_score = max(min_citation_score, 0.68)
+        min_chunk_citation_score = max(min_chunk_citation_score, 0.87)
+        min_answer_citation_score = max(min_answer_citation_score, 0.77)
+        min_overall_score = max(min_overall_score, 0.78)
     elif label == "high_separation_imbalanced_distribution":
         eval_profile = "full"
+        min_chunk_citation_score = max(min_chunk_citation_score, 0.87)
+        min_answer_citation_score = max(min_answer_citation_score, 0.77)
 
     if latest_val_fb:
         if latest_val_fb.quality_signals.duplicate_rate >= 0.25:
@@ -592,7 +949,8 @@ def control_parameter_tuner(
 
     if latest_gen_fb:
         qa_mode_fb = (latest_gen_fb.by_mode or {}).get("qa")
-        if qa_mode_fb and qa_mode_fb.fulfillment_rate < 0.7:
+        mc_mode_fb = (latest_gen_fb.by_mode or {}).get("multiple_choice")
+        if (qa_mode_fb and qa_mode_fb.fulfillment_rate < 0.7) or (mc_mode_fb and mc_mode_fb.fulfillment_rate < 0.7):
             initial_breadth_enabled = True
 
     if latest_eval_fb:
@@ -602,6 +960,8 @@ def control_parameter_tuner(
         if gap < 0.1 and too_easy >= 0.4:
             eval_profile = "full"
         if all_fail >= 0.4:
+            # 用 min 而非 max：题目难度过高导致所有模型失败时，降低门槛
+            # 让高难度题目通过筛选（它们有区分价值，而非低质量）
             min_overall_score = min(min_overall_score, 0.75)
 
     return NextRoundControlPlan(
@@ -618,20 +978,6 @@ def control_parameter_tuner(
         candidate_model_names=list(state.model_pool.active),
         judge_model_name=blueprint.evaluator_defaults.judge_model_name,
         initial_breadth_enabled=initial_breadth_enabled,
-    )
-
-
-def adjust_next_round_plan(
-    state: PlannerState,
-    blueprint: GlobalBlueprint,
-    diagnosis: RoundDiagnosis,
-) -> NextRoundIntegratedPlan:
-    """兼容旧调用：聚合题目计划和控制参数计划。"""
-    question_plan = question_difficulty_evolver(state, blueprint, diagnosis)
-    control_plan = control_parameter_tuner(state, blueprint, diagnosis)
-    return NextRoundIntegratedPlan(
-        **question_plan.model_dump(),
-        **control_plan.model_dump(),
     )
 
 
@@ -652,12 +998,20 @@ def round_spec_builder(
         "modes": {
             "qa": {
                 "count": question_plan.qa_count,
-                "max_rounds": blueprint.default_modes["qa"].max_rounds,
+                "max_rounds": (
+                    question_plan.qa_max_rounds
+                    if question_plan.qa_max_rounds is not None
+                    else blueprint.default_modes["qa"].max_rounds
+                ),
                 "difficulty_distribution": question_plan.qa_difficulty_distribution,
             },
             "multiple_choice": {
                 "count": question_plan.mc_count,
-                "max_rounds": blueprint.default_modes["multiple_choice"].max_rounds,
+                "max_rounds": (
+                    question_plan.mc_max_rounds
+                    if question_plan.mc_max_rounds is not None
+                    else blueprint.default_modes["multiple_choice"].max_rounds
+                ),
                 "difficulty_distribution": question_plan.mc_difficulty_distribution,
             },
         },
@@ -712,49 +1066,6 @@ def round_spec_builder(
     )
 
 
-def _build_next_round_spec(
-    state: PlannerState,
-    blueprint: GlobalBlueprint,
-    proposed_topics: list[str],
-    run_id: str,
-    control_plan: NextRoundIntegratedPlan,
-) -> RoundSpec:
-    """兼容旧调用：从聚合计划构建 RoundSpec。"""
-    question_plan = NextRoundQuestionPlan(
-        qa_count=control_plan.qa_count,
-        mc_count=control_plan.mc_count,
-        qa_difficulty_distribution=control_plan.qa_difficulty_distribution,
-        mc_difficulty_distribution=control_plan.mc_difficulty_distribution,
-        min_candidate_multiplier=control_plan.min_candidate_multiplier,
-        max_candidate_multiplier=control_plan.max_candidate_multiplier,
-        topic_budget=control_plan.topic_budget,
-        min_selected_per_round=control_plan.min_selected_per_round,
-    )
-    runtime_plan = NextRoundControlPlan(
-        citation_enabled=control_plan.citation_enabled,
-        min_citation_score=control_plan.min_citation_score,
-        min_chunk_citation_score=control_plan.min_chunk_citation_score,
-        min_answer_citation_score=control_plan.min_answer_citation_score,
-        llm_validation_enabled=control_plan.llm_validation_enabled,
-        min_overall_score=control_plan.min_overall_score,
-        selection_mode=control_plan.selection_mode,
-        semantic_similarity_threshold=control_plan.semantic_similarity_threshold,
-        eval_profile=control_plan.eval_profile,
-        judge_enabled=control_plan.judge_enabled,
-        candidate_model_names=control_plan.candidate_model_names,
-        judge_model_name=control_plan.judge_model_name,
-        initial_breadth_enabled=control_plan.initial_breadth_enabled,
-    )
-    return round_spec_builder(
-        state=state,
-        blueprint=blueprint,
-        target_topics=proposed_topics,
-        run_id=run_id,
-        question_plan=question_plan,
-        control_plan=runtime_plan,
-    )
-
-
 def _update_planner_state(
     state: PlannerState,
     round_spec: RoundSpec,
@@ -775,8 +1086,9 @@ def _update_planner_state(
         state.completed_targets["qa"] += val_fb.by_mode.get("qa", {}).get("selected", 0)
         state.completed_targets["multiple_choice"] += val_fb.by_mode.get("multiple_choice", {}).get("selected", 0)
 
-    state.resource_usage.total_input_tokens += gen_fb.summary.llm_input_tokens
-    state.resource_usage.total_output_tokens += gen_fb.summary.llm_output_tokens
+    if gen_fb:
+        state.resource_usage.total_input_tokens += gen_fb.summary.llm_input_tokens
+        state.resource_usage.total_output_tokens += gen_fb.summary.llm_output_tokens
     if val_fb:
         state.resource_usage.total_input_tokens += val_fb.summary.llm_input_tokens
         state.resource_usage.total_output_tokens += val_fb.summary.llm_output_tokens
@@ -785,7 +1097,7 @@ def _update_planner_state(
         state.resource_usage.total_output_tokens += eval_fb.summary.llm_output_tokens
 
     for agent_name, input_tokens, output_tokens in (
-        ("qa_agent", gen_fb.summary.llm_input_tokens, gen_fb.summary.llm_output_tokens),
+        ("qa_agent", gen_fb.summary.llm_input_tokens if gen_fb else 0, gen_fb.summary.llm_output_tokens if gen_fb else 0),
         ("verify_agent", val_fb.summary.llm_input_tokens if val_fb else 0, val_fb.summary.llm_output_tokens if val_fb else 0),
         ("model_eval_agent", eval_fb.summary.llm_input_tokens if eval_fb else 0, eval_fb.summary.llm_output_tokens if eval_fb else 0),
     ):

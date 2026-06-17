@@ -86,7 +86,7 @@ async def _run_user_goal_analyzer(
     prompt_template = load_prompt(_GOAL_ANALYZER_PROMPT_PATH)
     prompt = _prompt_with_user_goal(prompt_template, intent.user_goal)
     response = await model_client.complete(
-        model=selected_planner_model,
+        model=model_client.model_name,
         messages=[{"role": "user", "content": prompt}],
         temperature=0.2,
         max_tokens=800,
@@ -216,7 +216,7 @@ async def synthesize_global_blueprint(
         )
 
         response = await model_client.complete(
-            model=selected_planner_model,
+            model=model_client.model_name,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.2,
             max_tokens=1200,

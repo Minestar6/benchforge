@@ -1,0 +1,98 @@
+{
+  "task_id": "t-0618002023-5dd3",
+  "blueprint_id": "t-0618002023-5dd3-bp",
+  "current_round": 1,
+  "completed_targets": {
+    "qa": 0,
+    "multiple_choice": 0
+  },
+  "resource_usage": {
+    "total_input_tokens": 0,
+    "total_output_tokens": 0,
+    "total_tokens": 0,
+    "by_agent": {
+      "qa_agent": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "verify_agent": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "model_eval_agent": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      }
+    }
+  },
+  "topic_backlog": {
+    "active": [
+      "physics conceptual understanding",
+      "physics reasoning with real-world scenarios"
+    ],
+    "deferred": [
+      "physics computational modeling and simulation",
+      "physics problem solving"
+    ]
+  },
+  "model_pool": {
+    "active": [
+      "deepseek-v3.2"
+    ],
+    "removed": []
+  },
+  "run_history": [
+    {
+      "round_id": 1,
+      "run_id": "run_001",
+      "topics": [
+        "physics computational modeling and simulation",
+        "physics problem solving"
+      ],
+      "qa_target": 2,
+      "multiple_choice_target": 1,
+      "selected_count": 0,
+      "evaluated": false,
+      "question_plan": {
+        "qa_count": 2,
+        "mc_count": 1,
+        "qa_difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.5,
+          "hard": 0.3
+        },
+        "mc_difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.5,
+          "hard": 0.2
+        },
+        "min_candidate_multiplier": 1.5,
+        "max_candidate_multiplier": 2.0,
+        "topic_budget": 2,
+        "min_selected_per_round": 1,
+        "qa_max_rounds": 1,
+        "mc_max_rounds": 1
+      }
+    }
+  ],
+  "last_question_plan": {
+    "qa_count": 2,
+    "mc_count": 1,
+    "qa_difficulty_distribution": {
+      "easy": 0.2,
+      "medium": 0.5,
+      "hard": 0.3
+    },
+    "mc_difficulty_distribution": {
+      "easy": 0.3,
+      "medium": 0.5,
+      "hard": 0.2
+    },
+    "min_candidate_multiplier": 1.5,
+    "max_candidate_multiplier": 2.0,
+    "topic_budget": 2,
+    "min_selected_per_round": 1,
+    "qa_max_rounds": 1,
+    "mc_max_rounds": 1
+  }
+}

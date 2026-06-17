@@ -1,0 +1,22 @@
+{
+  "mode": "qa",
+  "candidate_count": 18,
+  "total_record_count": 18,
+  "accepted_count": 18,
+  "rejected_count": 0,
+  "difficulty_counts": {
+    "hard": 14,
+    "medium": 4
+  },
+  "topic_counts": {
+    "physics conceptual understanding": 9,
+    "applied physics in real-world scenarios": 9
+  },
+  "stopped_reason": "max_candidate_pool_reached",
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

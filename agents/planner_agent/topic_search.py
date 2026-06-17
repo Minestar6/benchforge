@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import inspect
 from dataclasses import dataclass, field
 from typing import Any
+
+from loguru import logger
 
 from .schema import PlannerState
 
@@ -84,7 +87,7 @@ def summarize_topic_feedback(
 
     summary = TopicFeedbackSummary(reuse_counts=reuse_counts)
     strong_threshold = max(overall_gap, 0.15)
-    weak_threshold = strong_threshold * 0.5 if strong_threshold > 0 else 0.08
+    weak_threshold = strong_threshold * 0.5
 
     for topic in all_topics:
         gen_stats = (latest_gen_fb.topic_coverage or {}).get(topic, {}) if latest_gen_fb else {}
@@ -176,25 +179,52 @@ async def expand_topic_candidates(
             f"Return up to {max(budget * 2, 3)} topic candidates as strict JSON only: "
             '{"topics": ["topic1", "topic2"]}'
         )
-        try:
-            response = await complete(
-                model=getattr(model_client, "model_name", "planner"),
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.2,
-                max_tokens=384,
-            )
-            text = response.get("text", "").strip()
-            start = text.find("{")
-            end = text.rfind("}")
-            if start >= 0 and end > start:
-                payload = json.loads(text[start:end + 1])
-                expanded_candidates = [
-                    str(topic).strip()
-                    for topic in payload.get("topics", [])
-                    if str(topic).strip()
-                ]
-        except Exception:
-            expanded_candidates = []
+        max_retries = 2
+        for attempt in range(max_retries + 1):
+            try:
+                response = await complete(
+                    model=getattr(model_client, "model_name", "planner"),
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.2,
+                    max_tokens=384,
+                )
+                text = response.get("text", "").strip()
+                start = text.find("{")
+                end = text.rfind("}")
+                if start >= 0 and end > start:
+                    try:
+                        payload = json.loads(text[start:end + 1])
+                    except json.JSONDecodeError:
+                        # JSON 解析失败：LLM 格式错误，重试无意义
+                        logger.warning("[TopicSearch] LLM returned malformed JSON, using base candidates only")
+                        break
+                    expanded_candidates = [
+                        str(topic).strip()
+                        for topic in payload.get("topics", [])
+                        if str(topic).strip()
+                    ]
+                if expanded_candidates:
+                    break
+                if attempt < max_retries:
+                    logger.warning(
+                        f"[TopicSearch] LLM returned empty candidates, retrying "
+                        f"(attempt {attempt + 1}/{max_retries})"
+                    )
+                    await asyncio.sleep(0.5 * (attempt + 1))
+            except json.JSONDecodeError:
+                # JSON 解析异常：不重试
+                logger.warning("[TopicSearch] LLM response is not valid JSON, using base candidates only")
+                break
+            except Exception as exc:
+                if attempt < max_retries:
+                    logger.warning(
+                        f"[TopicSearch] LLM call failed: {exc}, retrying "
+                        f"(attempt {attempt + 1}/{max_retries})"
+                    )
+                    await asyncio.sleep(0.5 * (attempt + 1))
+                else:
+                    logger.error(f"[TopicSearch] LLM call failed after {max_retries + 1} attempts: {exc}")
+                    expanded_candidates = []
 
     return _ordered_unique(base_candidates + expanded_candidates)
 

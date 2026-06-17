@@ -1,0 +1,64 @@
+{
+  "task_id": "t-0618002115-2fb7",
+  "blueprint_id": "t-0618002115-2fb7-bp",
+  "user_goal": "Build a  benchmark to evaluate physics. ",
+  "language": "en",
+  "seed_topics": [
+    "physics conceptual understanding",
+    "physics problem solving"
+  ],
+  "initial_generation_strategy": "balanced_exploration",
+  "final_targets": {
+    "qa": 2,
+    "multiple_choice": 1
+  },
+  "default_modes": {
+    "qa": {
+      "max_rounds": 1,
+      "difficulty_distribution": {
+        "easy": 0.2,
+        "medium": 0.5,
+        "hard": 0.3
+      }
+    },
+    "multiple_choice": {
+      "max_rounds": 1,
+      "difficulty_distribution": {
+        "easy": 0.3,
+        "medium": 0.5,
+        "hard": 0.2
+      }
+    }
+  },
+  "evaluator_defaults": {
+    "candidate_model_names": [
+      "deepseek-v3.2"
+    ],
+    "judge_model_name": "deepseek-v3.2"
+  },
+  "evaluation_requirements": {
+    "automatic_metrics": {
+      "qa": [
+        "exact_match",
+        "semantic_accuracy"
+      ],
+      "multiple_choice": [
+        "accuracy"
+      ]
+    },
+    "llm_judge_metrics": {
+      "qa": [
+        {
+          "name": "correctness",
+          "description": "Judge whether the answer is factually correct."
+        }
+      ],
+      "multiple_choice": []
+    }
+  },
+  "stop_conditions": {
+    "max_rounds": 1,
+    "min_selected_per_round": 1,
+    "max_total_tokens": null
+  }
+}

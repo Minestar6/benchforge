@@ -1,0 +1,53 @@
+{
+  "task_id": "t-0618002023-5dd3",
+  "run_id": "run_001",
+  "modes": {
+    "qa": {
+      "candidate_count": 0,
+      "accepted_count": 0,
+      "min_candidate_target": 3,
+      "max_candidate_target": 4,
+      "target_candidate_count": 3,
+      "difficulty_counts": {},
+      "min_difficulty_targets": {
+        "easy": 1,
+        "medium": 2,
+        "hard": 1
+      },
+      "min_target_reached": false,
+      "max_target_reached": false,
+      "stopped_reason": "max_rounds_reached",
+      "terminal_hard_repair": {
+        "executed": false,
+        "rounds": 0,
+        "generated_count": 0,
+        "accepted_count": 0
+      }
+    },
+    "multiple_choice": {
+      "candidate_count": 0,
+      "accepted_count": 0,
+      "min_candidate_target": 2,
+      "max_candidate_target": 2,
+      "target_candidate_count": 2,
+      "difficulty_counts": {},
+      "min_difficulty_targets": {
+        "easy": 1,
+        "medium": 1,
+        "hard": 1
+      },
+      "min_target_reached": false,
+      "max_target_reached": false,
+      "stopped_reason": "max_rounds_reached",
+      "terminal_hard_repair": {
+        "executed": false,
+        "rounds": 0,
+        "generated_count": 0,
+        "accepted_count": 0
+      }
+    }
+  },
+  "total_candidates": 0,
+  "global_used_chunk_combinations": 0,
+  "global_failures": 0
+}

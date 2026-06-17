@@ -1,0 +1,78 @@
+{
+  "task_id": "t-0618002115-2fb7",
+  "run_id": "run_001",
+  "round_id": 1,
+  "round_spec_ref": "runs\\t-0618002115-2fb7\\run_001\\planner\\round_spec.json",
+  "blueprint": {
+    "task_id": "t-0618002115-2fb7",
+    "run_id": "run_001",
+    "language": "en",
+    "topics": [
+      "physics mathematical modeling",
+      "physics experimental design"
+    ],
+    "modes": {
+      "qa": {
+        "count": 2,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.5,
+          "hard": 0.3
+        }
+      },
+      "multiple_choice": {
+        "count": 1,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.5,
+          "hard": 0.2
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "t-0618002115-2fb7",
+    "run_id": "run_001",
+    "language": "en",
+    "topics": [
+      "physics mathematical modeling",
+      "physics experimental design"
+    ],
+    "modes": {
+      "qa": {
+        "count": 2,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.5,
+          "hard": 0.3
+        }
+      },
+      "multiple_choice": {
+        "count": 1,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.5,
+          "hard": 0.2
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs/t-0618002115-2fb7/run_001/qa/candidate_pool.json",
+    "multiple_choice_candidate_pool": "runs/t-0618002115-2fb7/run_001/multiple_choice/candidate_pool.json",
+    "chunked_evidence": "runs/t-0618002115-2fb7/run_001/evidence/chunked.json",
+    "llm_calls": "runs/t-0618002115-2fb7/run_001/llm_calls.jsonl",
+    "generation_report": "runs/t-0618002115-2fb7/run_001/generation_report.json",
+    "qa_mode_state": "runs\\t-0618002115-2fb7\\run_001\\qa\\mode_state.json",
+    "multiple_choice_mode_state": "runs\\t-0618002115-2fb7\\run_001\\multiple_choice\\mode_state.json"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "pending",
+    "evaluation": "pending"
+  }
+}

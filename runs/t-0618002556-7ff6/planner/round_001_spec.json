@@ -1,0 +1,78 @@
+{
+  "task_id": "t-0618002556-7ff6",
+  "blueprint_id": "t-0618002556-7ff6-bp",
+  "round_id": 1,
+  "run_id": "run_001",
+  "objective": "Round 1: generate 2 QA + 1 MC on topics ['physics conceptual understanding', 'applied physics in real-world scenarios']",
+  "blueprint": {
+    "task_id": "t-0618002556-7ff6",
+    "run_id": "run_001",
+    "language": "en",
+    "topics": [
+      "physics conceptual understanding",
+      "applied physics in real-world scenarios"
+    ],
+    "modes": {
+      "qa": {
+        "count": 2,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.5,
+          "hard": 0.3
+        }
+      },
+      "multiple_choice": {
+        "count": 1,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.3,
+          "medium": 0.5,
+          "hard": 0.2
+        }
+      }
+    }
+  },
+  "qa_agent_patch": {
+    "candidate_pool": {
+      "min_candidate_multiplier": 1.5,
+      "max_candidate_multiplier": 2.0
+    },
+    "initial_breadth": {
+      "enabled": true
+    },
+    "planner": {
+      "topics_per_round": 2
+    }
+  },
+  "verify_agent_patch": {
+    "citation_validation": {
+      "enabled": true,
+      "min_citation_score": 0.55,
+      "min_chunk_citation_score": 0.6,
+      "min_answer_citation_score": 0.55
+    },
+    "llm_validation": {
+      "enabled": true,
+      "min_overall_score": 0.7
+    },
+    "selection": {
+      "mode": "light",
+      "semantic_similarity_threshold": 0.9
+    }
+  },
+  "model_eval_agent_patch": {
+    "models": {
+      "candidate_model_names": [
+        "deepseek-v3.2"
+      ],
+      "judge_model_name": "deepseek-v3.2"
+    },
+    "judge": {
+      "enabled": true
+    }
+  },
+  "planner_hints": {
+    "eval_profile": "standard"
+  }
+}

@@ -1,5 +1,5 @@
 model:
-  name: deepseek-v4
+  name: deepseek-v3.2
   temperature: 0.2
   max_tokens: 1200
   max_retries: 3
@@ -28,5 +28,5 @@ initial_planning:
   max_rounds_per_mode: 3
 
 question_difficulty_evolver:
-  enabled: false
+  enabled: true
   fallback: rule_based

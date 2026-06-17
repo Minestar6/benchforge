@@ -33,13 +33,15 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--config-dir", default="config", help="Base config directory.")
     parser.add_argument("--registry-path", default="config/model_registry.yaml", help="Model registry path.")
     parser.add_argument("--planner-state-dir", help="Planner state output directory.")
+    parser.add_argument("--resume-from", help="Resume from a previous planner state directory.")
+    parser.add_argument("--resume-latest", action="store_true", help="Auto-resume from the latest run under runs/.")
     return parser
 
 
 def build_user_intent(args: argparse.Namespace) -> UserIntent:
-    user_goal = args.user_goal or args.goal
-    if not user_goal:
-        raise ValueError("user goal is required")
+    user_goal = args.user_goal or args.goal or ""
+    if not user_goal and not args.resume_from and not args.resume_latest:
+        raise ValueError("user goal is required (unless --resume-from or --resume-latest is used)")
     return UserIntent(
         user_goal=user_goal,
         task_id=args.task_id,
@@ -56,14 +58,37 @@ def build_user_intent(args: argparse.Namespace) -> UserIntent:
     )
 
 
+def _find_latest_run() -> Path | None:
+    """在 runs/ 下找最新的包含 global_blueprint.json 的 planner 子目录。"""
+    runs_dir = Path("runs")
+    if not runs_dir.is_dir():
+        return None
+    blueprints = sorted(
+        runs_dir.glob("*/planner/global_blueprint.json"),
+        key=lambda p: p.stat().st_mtime,
+        reverse=True,
+    )
+    return blueprints[0].parent if blueprints else None
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     load_dotenv(Path(__file__).resolve().parent / ".env")
+
+    resume_from: Path | None = None
+    if args.resume_latest:
+        resume_from = _find_latest_run()
+        if resume_from is None:
+            parser.error("--resume-latest: no previous runs found under runs/")
+    elif args.resume_from:
+        resume_from = Path(args.resume_from)
+
     try:
         intent = build_user_intent(args)
     except ValueError as exc:
         parser.error(str(exc))
+
     result = asyncio.run(
         run_benchforge(
             intent=intent,
@@ -71,6 +96,7 @@ def main(argv: list[str] | None = None) -> int:
             registry_path=Path(args.registry_path),
             planner_state_dir=Path(args.planner_state_dir) if args.planner_state_dir else None,
             planner_model_name=args.planner_model,
+            resume_from=resume_from,
         )
     )
     print(f"GlobalBlueprint: {result['global_blueprint_path']}")

@@ -167,12 +167,13 @@ async def test_run_benchforge_saves_blueprint_and_invokes_planner(tmp_path, monk
         called["intent"] = kwargs["intent"]
         return blueprint
 
-    async def fake_run_planner(global_blueprint, base_config_dir, registry_path, state_dir):
+    async def fake_run_planner(global_blueprint, base_config_dir, registry_path, state_dir, resume_state=None):
         called["planner"] = {
             "global_blueprint": global_blueprint,
             "base_config_dir": Path(base_config_dir),
             "registry_path": Path(registry_path),
             "state_dir": Path(state_dir),
+            "resume_state": resume_state,
         }
         return final_state
 
@@ -272,7 +273,7 @@ def test_run_minimal_case_uses_english_goal_and_runnable_defaults(monkeypatch):
     goal = called["argv"][called["argv"].index("--user-goal") + 1]
     assert goal == run_minimal_case.DEFAULT_USER_GOAL
     assert "--planner-model" in called["argv"]
-    assert called["argv"][called["argv"].index("--planner-model") + 1] == "deepseek-v3"
+    assert called["argv"][called["argv"].index("--planner-model") + 1] == "deepseek-v3.2"
 
 
 def test_run_minimal_case_forwards_explicit_argv(monkeypatch):

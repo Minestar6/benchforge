@@ -1,0 +1,32 @@
+{
+  "candidate_count": 26,
+  "accepted_count": 26,
+  "rejected_count": 1,
+  "accept_rate": 0.963,
+  "topic_distribution": {
+    "physics conceptual understanding": 15,
+    "applied physics in real-world scenarios": 11
+  },
+  "difficulty_distribution": {
+    "medium": 18,
+    "easy": 7,
+    "hard": 1
+  },
+  "hard_gap": 0.1615,
+  "stopped_reason": "max_candidate_pool_reached",
+  "min_candidate_target": 2,
+  "max_candidate_target": 2,
+  "min_difficulty_targets": {
+    "easy": 1,
+    "medium": 1,
+    "hard": 1
+  },
+  "min_target_reached": true,
+  "max_target_reached": true,
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

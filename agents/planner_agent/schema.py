@@ -1,6 +1,8 @@
 """PlannerAgent 核心数据结构（基于 docs/plan-runtime-aligned.md §4）。"""
 
 import re
+import uuid
+from datetime import datetime
 from typing import Any
 from pydantic import BaseModel, Field
 
@@ -29,8 +31,9 @@ class UserIntent(BaseModel):
     def resolved_task_id(self) -> str:
         if self.task_id:
             return self.task_id
-        slug = _TASK_ID_PATTERN.sub("-", self.user_goal.strip().lower()).strip("-")
-        return slug[:48] or "benchforge-task"
+        ts = datetime.now().strftime("%m%d%H%M%S")
+        suffix = uuid.uuid4().hex[:4]
+        return f"t-{ts}-{suffix}"
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -112,6 +115,8 @@ class QuestionPlan(BaseModel):
     max_candidate_multiplier: float = 2.0
     topic_budget: int = 2
     min_selected_per_round: int | None = None
+    qa_max_rounds: int | None = None
+    mc_max_rounds: int | None = None
 
 
 class RunHistoryEntry(BaseModel):

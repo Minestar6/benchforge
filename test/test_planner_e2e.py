@@ -43,9 +43,17 @@ def test_blueprint():
 
 @pytest.fixture
 def mock_model_client():
-    """Mock 模型客户端。"""
+    """Mock 模型客户端，返回合法 JSON 以走通 LLM evolver happy path。"""
     client = MagicMock()
-    client.generate = AsyncMock(return_value="Mock response")
+    client.model_name = "test-model"
+    client.complete = AsyncMock(return_value={
+        "text": (
+            '{"qa_count":5,"mc_count":3,'
+            '"qa_difficulty_distribution":{"easy":0.2,"medium":0.5,"hard":0.3},'
+            '"mc_difficulty_distribution":{"easy":0.3,"medium":0.5,"hard":0.2},'
+            '"topic_budget":2,"min_candidate_multiplier":1.5,"max_candidate_multiplier":2.0}'
+        )
+    })
     return client
 
 

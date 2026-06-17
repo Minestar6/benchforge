@@ -1,0 +1,96 @@
+candidate_pool:
+  max_candidate_multiplier: 2.0
+  min_candidate_multiplier: 1.5
+chunk_limits:
+  multiple_choice:
+    multi_k:
+      max: 4
+      min: 1
+    single_k:
+      max: 3
+      min: 0
+  qa:
+    multi_k:
+      max: 3
+      min: 0
+    single_k:
+      max: 4
+      min: 1
+chunk_mix:
+  by_difficulty:
+    easy:
+      multi_ratio: 0.3
+      single_ratio: 0.7
+    hard:
+      multi_ratio: 0.9
+      single_ratio: 0.1
+    medium:
+      multi_ratio: 0.5
+      single_ratio: 0.5
+  mode_adjustment:
+    multiple_choice:
+      single_delta: -0.1
+    qa:
+      single_delta: 0.1
+chunking:
+  chunk_size: 1024
+  encoding: cl100k_base
+  overlap: 50
+experiment:
+  disable_initial_breadth: false
+  enable_difficulty_adaptation: true
+  enable_feedback: true
+  enable_hard_generate: true
+  enable_terminal_hard_repair: true
+  fixed_difficulty: null
+  fixed_strategy: null
+  name: full
+  terminal_hard_repair_gap_threshold: 0.15
+  terminal_hard_repair_min_missing: 2
+  terminal_hard_repair_multi_k_scale: 1.0
+  terminal_hard_repair_topics: 2
+generation_yield:
+  multiple_choice:
+    multi_chunk_avg_questions: 3.0
+    single_chunk_avg_questions: 2.0
+  qa:
+    multi_chunk_avg_questions: 4.0
+    single_chunk_avg_questions: 3.0
+initial_breadth:
+  difficulty: medium
+  difficulty_policy: hard_aware
+  enabled: true
+  hard_ratio_threshold: 0.3
+  max_topics_per_round: 4
+logging:
+  level: INFO
+model:
+  max_retries: 2
+  max_tokens: 4096
+  name: deepseek-v3.2
+  temperature: 0.2
+multi_chunk:
+  h_max: 4
+  h_min: 2
+  max_units_per_expansion: 300
+  max_units_per_topic: 300
+  multi_ratio: 1.0
+planner:
+  topics_per_round: 2
+retrieval:
+  min_paragraph_tokens: 20
+  request_timeout: 10
+  saliency_end_date: '2025010100'
+  saliency_rerank: true
+  saliency_start_date: '2022010100'
+  saliency_top_k: 5
+runtime:
+  llm_timeout_seconds: 60
+  max_consecutive_empty_rounds_per_mode: 3
+  max_failures_per_mode: 3
+  max_used_chunk_combinations: 10000
+  retrieval_timeout_seconds: 30
+summarization_chunking:
+  chunk_size: 4096
+  encoding: cl100k_base
+  overlap: 125

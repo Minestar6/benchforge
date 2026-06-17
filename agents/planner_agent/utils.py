@@ -8,7 +8,10 @@ from .schema import GlobalBlueprint
 def deep_merge(base: dict[str, Any], *patches: dict[str, Any]) -> dict[str, Any]:
     """递归深度合并多个 dict，后续 patch 覆盖前面的值。
 
-    None 值跳过（不覆盖），用于表示"不修改此字段"。
+    - None 值跳过（不覆盖），用于表示"不修改此字段"。
+    - dict 类型递归合并。
+    - list 类型扩展合并（patch list 追加到 base list 后面）。
+    - 其他类型直接覆盖。
     """
     result = dict(base)
 
@@ -19,6 +22,8 @@ def deep_merge(base: dict[str, Any], *patches: dict[str, Any]) -> dict[str, Any]
 
             if key in result and isinstance(result[key], dict) and isinstance(value, dict):
                 result[key] = deep_merge(result[key], value)
+            elif key in result and isinstance(result[key], list) and isinstance(value, list):
+                result[key] = result[key] + value
             else:
                 result[key] = value
 

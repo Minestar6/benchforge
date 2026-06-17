@@ -9,9 +9,9 @@ dataset_evaluation:
 
 models:
   candidate_model_names:
-    - "deepseek-v4"
+    - "deepseek-v3.2"
 
-  judge_model_name: "deepseek-v4"
+  judge_model_name: "kimi-k2"
 
   generation_defaults:
     temperature: 0.0

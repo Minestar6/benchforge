@@ -1,0 +1,6 @@
+judge:
+  enabled: true
+models:
+  candidate_model_names:
+  - deepseek-v3.2
+  judge_model_name: deepseek-v3.2

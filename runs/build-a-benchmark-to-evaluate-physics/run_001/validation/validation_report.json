@@ -1,0 +1,25 @@
+{
+  "task_id": "build-a-benchmark-to-evaluate-physics",
+  "run_id": "run_001",
+  "total_candidates": 36,
+  "citation_passed": 4,
+  "llm_passed": 0,
+  "final_selected": 0,
+  "stage_latencies_ms": {
+    "citation_validation": 202,
+    "llm_validation": 6515,
+    "selection": 0
+  },
+  "llm_usage": {
+    "calls": 4,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "failed_by_stage": {
+    "citation": 32,
+    "llm": 0,
+    "validator_error": 4,
+    "duplicate": 0,
+    "overquota": 0
+  }
+}

@@ -1,0 +1,64 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "hard",
+    "topics": [
+      "physics conceptual understanding",
+      "applied physics in real-world scenarios"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "physics conceptual understanding",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 9,
+        "filtered_count": 9,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 4,
+        "multi_generated_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_7ff6b9d84e784ba9ae52b9f9b23b3091",
+        "trace_call_id": "llm_3b8fa5443f6845829f32513874aae476",
+        "chunks": [
+          "doc_3d494c6c6461::chunk_0000",
+          "doc_df5d2651247c::chunk_0001",
+          "doc_df5d2651247c::chunk_0002",
+          "doc_df5d2651247c::chunk_0005",
+          "doc_df5d2651247c::chunk_0006"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "applied physics in real-world scenarios",
+        "success": true,
+        "generated_count": 9,
+        "raw_count": 9,
+        "filtered_count": 9,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 4,
+        "multi_generated_count": 5,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_1d0f0a258ff649a1a7ee10e9e790c7f3",
+        "trace_call_id": "llm_90fa044d641a4f1b9aa34e06182cab03",
+        "chunks": [
+          "doc_2abe1cffada1::chunk_0001",
+          "doc_8d66fa8c7a42::chunk_0000",
+          "doc_8d66fa8c7a42::chunk_0001",
+          "doc_8d66fa8c7a42::chunk_0002"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]
