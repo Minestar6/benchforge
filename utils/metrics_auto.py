@@ -187,14 +187,25 @@ class BleuMetric(AutoMetric):
             return None
 
 
+_bertscorer_cache = None
+
+
+def _get_bertscorer():
+    global _bertscorer_cache
+    if _bertscorer_cache is None:
+        from bert_score import BERTScorer
+        _bertscorer_cache = BERTScorer(lang="en", model_type="roberta-large")
+    return _bertscorer_cache
+
+
 class BertScoreMetric(AutoMetric):
     name = "bertscore"
 
     def compute(self, question: dict, prediction: str, context: dict | None = None) -> float | None:
         try:
-            from bert_score import score as bert_score
+            scorer = _get_bertscorer()
             ref = str(question.get("answer", ""))
-            P, R, F1 = bert_score([prediction], [ref], lang="en", verbose=False)
+            P, R, F1 = scorer.score([prediction], [ref])
             return float(F1[0])
         except ImportError:
             return None

@@ -17,7 +17,7 @@ from benchforge.agents.qa_agent.schema import (
     ChunkMixConfig, ChunkMixDifficulty, ModeAdjustment,
     GenerationYield, ChunkLimitsForMode, ChunkKLimit, RuntimeConfig,
 )
-from benchforge.agents.qa_agent.state import GlobalState, ModeState
+from benchforge.agents.qa_agent.state import GlobalState, ModeState, CandidateRecord, CandidateStatus
 from benchforge.agents.qa_agent.planner import (
     resolve_chunk_mix, compute_dynamic_chunk_k,
     choose_difficulty_for_mode, build_mode_round_plan,
@@ -26,7 +26,7 @@ from benchforge.agents.qa_agent.planner import (
 from benchforge.agents.qa_agent.executor import (
     normalize_difficulty, parse_questions, mode_should_stop, execute_mode_round_plan,
 )
-from benchforge.agents.qa_agent.planner import ModeRoundPlan
+from benchforge.agents.qa_agent.planner import ModeRoundPlan, RoundStrategy
 from benchforge.agents.qa_agent.sampling import raw_chunk_ids, record_global_chunk_usage
 
 
@@ -47,7 +47,7 @@ def _blueprint(topics=None, qa_count=10, mcq_count=8):
 
 def _config():
     return AgentConfig(
-        candidate_pool=CandidatePoolConfig(target_multiplier=2.0),
+        candidate_pool=CandidatePoolConfig(min_candidate_multiplier=1.5, max_candidate_multiplier=2.0),
         initial_breadth=InitialBreadthConfig(enabled=True, max_topics_per_round=10, difficulty="medium"),
         planner=PlannerConfig(topics_per_round=2),
         chunk_mix=ChunkMixConfig(
@@ -74,6 +74,25 @@ def _config():
             max_failures_per_mode=5,
             max_used_chunk_combinations=100,
         ),
+    )
+
+
+def _candidate(
+    question_id: str,
+    difficulty: str = "medium",
+    topic: str = "Topic A",
+    status: CandidateStatus = CandidateStatus.ACCEPTED,
+) -> CandidateRecord:
+    return CandidateRecord(
+        question_id=question_id,
+        question=f"Question {question_id}",
+        answer="Answer",
+        topic=topic,
+        difficulty=difficulty,
+        status=status,
+        source_round=1,
+        source_strategy=RoundStrategy.NORMAL_GENERATE.value,
+        chunk_ids=[f"{question_id}::chunk"],
     )
 
 
@@ -136,7 +155,7 @@ def test_mode_candidate_target():
     bp = _blueprint(qa_count=10)
     cfg = _config()
     target = mode_candidate_target(bp.modes["qa"], cfg)
-    assert target == 20  # ceil(10 * 2.0)
+    assert target == 15  # ceil(10 * 1.5)
     print("PASS test_mode_candidate_target")
 
 
@@ -161,8 +180,10 @@ def test_choose_difficulty_targets_deficit():
     diff = choose_difficulty_for_mode(bp.modes["qa"], ms)
     assert diff in ("easy", "medium", "hard")
     # Fill up easy and medium, hard should be chosen
-    ms.candidate_questions = [{}] * 10
-    ms.difficulty_counts = {"easy": 4, "medium": 5, "hard": 0}
+    ms.candidate_questions = [
+        *[_candidate(f"easy_{i}", difficulty="easy") for i in range(4)],
+        *[_candidate(f"medium_{i}", difficulty="medium") for i in range(5)],
+    ]
     diff = choose_difficulty_for_mode(bp.modes["qa"], ms)
     assert diff == "hard"
     print("PASS test_choose_difficulty_targets_deficit")
@@ -191,9 +212,9 @@ def test_stop_candidate_pool_sufficient():
     cfg = _config()
     ms = ModeState(mode="qa")
     ms.initial_coverage = set(bp.topics)
-    ms.candidate_questions = [{}] * 10  # >= target=10
+    ms.candidate_questions = [_candidate(f"q_{i}") for i in range(10)]  # >= target=10
     stop, reason = mode_should_stop(bp.modes["qa"], ms, GlobalState(), bp, cfg)
-    assert stop and reason == "candidate_pool_sufficient"
+    assert stop and reason == "max_candidate_pool_reached"
     print("PASS test_stop_candidate_pool_sufficient")
 
 
@@ -233,7 +254,7 @@ def test_no_stop_initial_breadth_incomplete():
     cfg = _config()
     ms = ModeState(mode="qa")
     # candidate_questions >= target but initial breadth not done
-    ms.candidate_questions = [{}] * 10
+    ms.candidate_questions = [_candidate(f"q_{i}") for i in range(10)]
     stop, _ = mode_should_stop(bp.modes["qa"], ms, GlobalState(), bp, cfg)
     assert not stop
     print("PASS test_no_stop_initial_breadth_incomplete")
@@ -298,7 +319,7 @@ def test_build_adaptive_plan_after_breadth():
     ms = ModeState(mode="qa")
     ms.initial_coverage = set(bp.topics)
     plan = build_mode_round_plan("qa", bp.modes["qa"], bp, cfg, ms)
-    assert plan.strategy == "adaptive"
+    assert plan.strategy in {RoundStrategy.NORMAL_GENERATE, RoundStrategy.FOCUS_TOPIC, RoundStrategy.FOCUS_DIFFICULTY, RoundStrategy.HARD_GENERATE}
     assert len(plan.topics) <= cfg.planner.topics_per_round
     print("PASS test_build_adaptive_plan_after_breadth")
 
@@ -307,10 +328,11 @@ def test_build_adaptive_plan_after_breadth():
 
 def test_load_qa_agent_config():
     from benchforge.agents.qa_agent.config_loader import load_qa_agent_config
-    agent_config, model_ref, _, _, _ = load_qa_agent_config(
+    agent_config, model_ref, _, _, _, _ = load_qa_agent_config(
         project_root / "benchforge/config/qa_agent.yaml"
     )
-    assert agent_config.candidate_pool.target_multiplier > 0
+    assert agent_config.candidate_pool.min_candidate_multiplier > 0
+    assert agent_config.candidate_pool.max_candidate_multiplier >= agent_config.candidate_pool.min_candidate_multiplier
     assert model_ref.name
     assert model_ref.temperature > 0
     print("PASS test_load_qa_agent_config")
@@ -356,6 +378,7 @@ class _FakeEvidenceManager:
         prefer_multi_chunk=False,
         round_num=1,
         remaining=1,
+        force_unit_type=None,
     ):
         return SimpleNamespace(
             single_chunk_ids=["doc_a::chunk_0"],
@@ -375,7 +398,7 @@ async def test_execute_mode_round_plan_records_generation_diagnostics_for_filter
     round_plan = ModeRoundPlan(
         mode="qa",
         round_in_mode=1,
-        strategy="initial_breadth",
+        strategy=RoundStrategy.INITIAL_BREADTH,
         difficulty="medium",
         topics=("Topic A",),
         single_k=1,
@@ -401,9 +424,10 @@ async def test_execute_mode_round_plan_records_generation_diagnostics_for_filter
                 [{"question": "Why?", "answer": "Because."}],
                 1,
                 "call_filtered",
+                {},
             )
 
-    round_results = await execute_mode_round_plan(
+    round_results, _ = await execute_mode_round_plan(
         round_plan=round_plan,
         blueprint=bp,
         config=cfg,
@@ -421,7 +445,7 @@ async def test_execute_mode_round_plan_records_generation_diagnostics_for_filter
     assert result["filtered_count"] == 0
     assert result["filter_rejected"] is True
     assert result["llm_call_id"] == "call_filtered"
-    assert result["filter_failures"][0]["reason"] == "寮曠敤涓虹┖"
+    assert result["filter_failures"][0]["reason"] == "引用为空"
 
 
 @pytest.mark.asyncio
@@ -433,7 +457,7 @@ async def test_execute_mode_round_plan_records_generation_diagnostics_for_accept
     round_plan = ModeRoundPlan(
         mode="qa",
         round_in_mode=1,
-        strategy="initial_breadth",
+        strategy=RoundStrategy.INITIAL_BREADTH,
         difficulty="medium",
         topics=("Topic A",),
         single_k=1,
@@ -466,9 +490,10 @@ async def test_execute_mode_round_plan_records_generation_diagnostics_for_accept
                 ],
                 1,
                 "call_accepted",
+                {},
             )
 
-    round_results = await execute_mode_round_plan(
+    round_results, _ = await execute_mode_round_plan(
         round_plan=round_plan,
         blueprint=bp,
         config=cfg,
@@ -498,7 +523,7 @@ async def test_execute_mode_round_plan_avoids_duplicate_chunk_combinations_withi
     round_plan = ModeRoundPlan(
         mode="qa",
         round_in_mode=1,
-        strategy="initial_breadth",
+        strategy=RoundStrategy.INITIAL_BREADTH,
         difficulty="medium",
         topics=("Topic A", "Topic B"),
         single_k=1,
@@ -544,12 +569,13 @@ async def test_execute_mode_round_plan_avoids_duplicate_chunk_combinations_withi
                 ],
                 1,
                 f"call_{self.calls}",
+                {},
             )
 
     evidence_manager = SharedPoolEvidenceManager()
     generator = CountingGenerator()
 
-    round_results = await execute_mode_round_plan(
+    round_results, _ = await execute_mode_round_plan(
         round_plan=round_plan,
         blueprint=bp,
         config=cfg,

@@ -1,14 +1,88 @@
 {
   "config_path": "/Users/zhaoziqing/Desktop/benchforge/experiment/case/configs/model_eval_case.yaml",
   "registry_path": "/Users/zhaoziqing/Desktop/benchforge/config/model_registry.yaml",
-  "run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135",
-  "shared_state_path": "/Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135/shared_state.json",
-  "selected_questions": 103,
+  "run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_203915",
+  "shared_state_path": "/Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_203915/shared_state.json",
+  "selected_questions": 37,
   "evaluation": {
     "task_id": "case",
-    "run_id": "d_full_case_20260616_135135",
-    "num_questions": 103,
+    "run_id": "d_full_case_20260616_203915",
+    "num_questions": 37,
     "num_models": 1,
-    "output_root": "runs/case/d_full_case_20260616_135135/evaluation"
+    "qa": {
+      "Mode": {
+        "hard": 0.397926,
+        "medium": 0.501629
+      },
+      "Topic": {
+        "Quantum Computing": 0.527514,
+        "Artificial Intelligence": 0.406591
+      },
+      "model": {
+        "deepseek-v4": 0.449778
+      }
+    },
+    "multiple_choice": {
+      "Mode": {
+        "medium": 0.5,
+        "hard": 0.6,
+        "easy": 0.5
+      },
+      "Topic": {
+        "Quantum Computing": 0.5,
+        "Artificial Intelligence": 0.52381
+      },
+      "model": {
+        "deepseek-v4": 0.511111
+      }
+    },
+    "dataset_metrics": {
+      "citation_score": {
+        "overall": {
+          "mean": 0.768351,
+          "num_scored": 37
+        },
+        "by_question_mode": {
+          "qa": 0.769988,
+          "multiple_choice": 0.767355
+        },
+        "by_topic": {
+          "Quantum Computing": 0.765686,
+          "Artificial Intelligence": 0.770617
+        },
+        "by_estimated_difficulty": {
+          "8": 0.784133,
+          "5": 0.774389,
+          "7": 0.752708,
+          "9": 0.737833,
+          "4": 0.776667,
+          "2": 0.7625,
+          "6": 0.7875
+        }
+      },
+      "diversity_score": {
+        "overall": {
+          "score": 0.8722,
+          "num_questions": 37
+        },
+        "by_question_mode": {
+          "qa": 0.865,
+          "multiple_choice": 0.8867
+        },
+        "by_topic": {
+          "Quantum Computing": 0.8567,
+          "Artificial Intelligence": 0.8108
+        },
+        "by_estimated_difficulty": {
+          "8": 0.8695,
+          "5": 0.8674,
+          "7": 0.8042,
+          "9": 0.7821,
+          "4": 0.8846,
+          "2": 0.8321,
+          "6": null
+        }
+      }
+    }
   }
 }

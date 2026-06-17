@@ -17,9 +17,7 @@ from benchforge.utils.llm_tracer import LLMTracer
 
 from .schema import JudgeConfig, JudgeMetricSpec, QuestionModeMetricPlan
 from .model_runner import _format_multiple_choice_options
-
-
-LLM_JUDGE_ALLOWED_MODES = {"qa"}
+from .aggregation import build_mode_question_ids, compute_scores_and_mean
 
 
 def _question_text_for_judge(question: dict[str, Any]) -> str:
@@ -237,7 +235,9 @@ async def _judge_single(
             except Exception as e:
                 error = str(e)
                 latency = time.monotonic() - t0
-                break
+                if attempt >= max_retries:
+                    break
+                continue
 
     trace.update({
         "llm_call_id": llm_call_id,
@@ -279,8 +279,6 @@ async def run_llm_judge(
         if resp.get("error") or not resp.get("prediction"):
             continue
         mode = resp.get("question_mode", "")
-        if mode not in LLM_JUDGE_ALLOWED_MODES:
-            continue
         plan = metric_plans.get(mode)
         if not plan or not plan.llm_judge_metrics:
             continue
@@ -329,13 +327,7 @@ async def run_llm_judge(
     )
 
     # 聚合为 llm_judge_scores.jsonl（metric×mode×models）
-    mode_question_ids: dict[str, list[str]] = defaultdict(list)
-    seen_qids: set[str] = set()
-    for q in questions:
-        qid = q["question_id"]
-        if qid not in seen_qids:
-            seen_qids.add(qid)
-            mode_question_ids[q.get("question_mode", "")].append(qid)
+    mode_question_ids = build_mode_question_ids(questions)
 
     # (mode, metric_name) → {model_name: {qid: score}}
     buckets: dict[tuple[str, str], dict[str, dict[str, float | None]]] = defaultdict(lambda: defaultdict(dict))
@@ -360,11 +352,10 @@ async def run_llm_judge(
 
         models_payload: dict[str, Any] = {}
         for model_name, qid_scores in model_data.items():
-            scores = [qid_scores.get(qid) for qid in question_ids]
-            valid = [s for s in scores if s is not None]
+            _, mean = compute_scores_and_mean(qid_scores, question_ids)
             models_payload[model_name] = {
-                "scores": scores,
-                "mean": sum(valid) / len(valid) if valid else None,
+                "scores": [qid_scores.get(qid) for qid in question_ids],
+                "mean": mean,
             }
 
         judge_scores.append({

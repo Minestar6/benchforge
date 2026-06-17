@@ -1,3 +1,3 @@
-model_name,num_questions,topic,semantic_accuracy,exact_match,f1,precision,recall,rouge_l,bleu,bertscore,semantic_similarity,accuracy,invalid_rate
-deepseek-v4,16,Quantum Computing,,,,,,,,,,,
-deepseek-v4,19,Artificial Intelligence,,,,,,,,,,,
+model_name,num_questions,topic,semantic_accuracy,exact_match,f1,precision,recall,rouge_l,bleu,bertscore,semantic_similarity,accuracy,invalid_rate,judge_answer_relevance,judge_faithfulness,judge_factual_accuracy,judge_logical_coherence,judge_completeness
+deepseek-v4,16,Quantum Computing,0.21428571428571427,0.0,0.3959499333106235,0.3439331176701403,0.6336479347317224,0.24501974714561917,0.08508312509355882,0.8814456292561123,0.7916935341698783,1.0,0.0,5.0,4.428571428571429,4.714285714285714,4.857142857142857,4.857142857142857
+deepseek-v4,19,Artificial Intelligence,0.0,0.0,0.34783255911015704,0.3145061802784327,0.4936986620313061,0.141955098108649,0.02020860990648879,0.8539129793643951,0.6998869627714157,1.0,0.0,5.0,5.0,5.0,5.0,4.666666666666667

@@ -5,9 +5,14 @@ from __future__ import annotations
 import argparse
 import asyncio
 from pathlib import Path
+import sys
+
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from benchforge.agents.planner_agent.schema import UserIntent
 from benchforge.app import run_benchforge
+from benchforge.config.config import load_dotenv
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -20,8 +25,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--qa-target", type=int, default=20, help="Target number of QA questions.")
     parser.add_argument("--mc-target", type=int, default=10, help="Target number of multiple-choice questions.")
     parser.add_argument("--candidate-model", action="append", default=[], help="Candidate model registry key. Repeatable.")
-    parser.add_argument("--judge-model", help="Judge model registry key.")
-    parser.add_argument("--planner-model", help="Planner synthesis model registry key.")
+    parser.add_argument("--judge-model", default="deepseek-v4", help="Judge model registry key.")
+    parser.add_argument("--planner-model", default="deepseek-v4", help="Planner synthesis model registry key.")
     parser.add_argument("--max-rounds", type=int, default=3, help="Maximum planner rounds.")
     parser.add_argument("--min-selected-per-round", type=int, default=5, help="Minimum selected questions per round.")
     parser.add_argument("--max-total-tokens", type=int, help="Global token budget.")
@@ -54,6 +59,7 @@ def build_user_intent(args: argparse.Namespace) -> UserIntent:
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    load_dotenv(Path(__file__).resolve().parent / ".env")
     try:
         intent = build_user_intent(args)
     except ValueError as exc:

@@ -98,7 +98,10 @@ def load_prompt(path: str | Path) -> str:
         project_root = get_project_root()
         candidates.append(project_root / p)
         if p.parts and p.parts[0] == "benchforge":
-            candidates.append(project_root / Path(*p.parts[1:]))
+            stripped = Path(*p.parts[1:])
+            candidates.append(project_root / stripped)
+            if stripped.as_posix() == "prompts/verify_agent/quality_system_prompt.md":
+                candidates.append(project_root / "prompts" / "verify_agent" / "quality_prompt.md")
     except Exception:
         pass
 

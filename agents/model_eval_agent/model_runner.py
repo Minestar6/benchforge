@@ -25,7 +25,8 @@ def _format_multiple_choice_options(choices: Any) -> str:
         if stripped.startswith(("A.", "B.", "C.", "D.", "(A)", "(B)", "(C)", "(D)")):
             formatted.append(text)
         else:
-            formatted.append(f"{chr(65 + idx)}. {text}")
+            label = chr(65 + idx) if idx < 26 else str(idx + 1)
+            formatted.append(f"{label}. {text}")
     return "\n".join(formatted)
 
 

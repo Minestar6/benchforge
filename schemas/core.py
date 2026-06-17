@@ -21,6 +21,22 @@ class Difficulty(str, Enum):
     HARD = "hard"
 
 
+def difficulty_label(value: Any) -> str:
+    """将 1-10 数字难度或字符串映射为 easy/medium/hard 标签。"""
+    if isinstance(value, int):
+        if value <= 3:
+            return Difficulty.EASY.value
+        elif value <= 7:
+            return Difficulty.MEDIUM.value
+        else:
+            return Difficulty.HARD.value
+    if isinstance(value, str):
+        lowered = value.strip().lower()
+        if lowered in ("easy", "medium", "hard"):
+            return lowered
+    return str(value)
+
+
 class DocumentStatus(str, Enum):
     """文档状态枚举。"""
     FETCHED = "fetched"

@@ -3,5 +3,32 @@
   "run_id": "d_full_case_20260616_135135",
   "num_questions": 35,
   "num_responses": 35,
-  "output_root": "runs/case/d_full_case_20260616_135135/evaluation"
+  "qa": {
+    "Mode": {
+      "medium": 0.413367,
+      "hard": 0.319399,
+      "easy": 0.377291
+    },
+    "Topic": {
+      "Quantum Computing": 0.399007,
+      "Artificial Intelligence": 0.319111
+    },
+    "model": {
+      "deepseek-v4": 0.381252
+    }
+  },
+  "multiple_choice": {
+    "Mode": {
+      "easy": 0.5,
+      "medium": 0.5,
+      "hard": 0.5
+    },
+    "Topic": {
+      "Artificial Intelligence": 0.5,
+      "Quantum Computing": 0.5
+    },
+    "model": {
+      "deepseek-v4": 0.5
+    }
+  }
 }

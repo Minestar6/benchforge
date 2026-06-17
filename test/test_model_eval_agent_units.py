@@ -12,14 +12,11 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 from benchforge.agents.model_eval_agent import agent as agent_module
-from benchforge.agents.model_eval_agent.aggregator import (
-    build_model_by_dimension,
-    build_model_overall_report,
-)
 from benchforge.agents.model_eval_agent.auto_metric_executor import run_automatic_metrics
 from benchforge.agents.model_eval_agent.dataset_metric_executor import run_dataset_metrics
 from benchforge.agents.model_eval_agent.llm_judge_executor import _judge_single, run_llm_judge
 from benchforge.agents.model_eval_agent.model_runner import _build_prompt
+from benchforge.agents.model_eval_agent.report_writer import build_comprehensive_eval_report
 from benchforge.agents.model_eval_agent.schema import (
     AutoMetricSpec,
     DatasetMetricSpec,
@@ -127,50 +124,6 @@ def test_resolve_input_paths_does_not_fallback_to_quality_weight_artifact(tmp_pa
     resolved = agent_module._resolve_input_paths_from_shared_state(state, run_dir)
 
     assert resolved == []
-
-
-def test_build_model_by_dimension_filters_scores_to_dimension_subset():
-    questions = [
-        {"question_id": "q1", "question_mode": "qa", "topic": "AI", "answer": "A1"},
-        {"question_id": "q2", "question_mode": "qa", "topic": "ML", "answer": "A2"},
-    ]
-    automatic_scores = [
-        {
-            "metric_name": "exact_match",
-            "question_mode": "qa",
-            "question_ids": ["q1", "q2"],
-            "models": {
-                "model_a": {
-                    "scores": [1.0, 0.0],
-                    "passed": [True, False],
-                    "mean": 0.5,
-                    "pass_rate": 0.5,
-                }
-            },
-        }
-    ]
-    judge_scores = [
-        {
-            "metric_name": "correctness",
-            "question_mode": "qa",
-            "question_ids": ["q1", "q2"],
-            "models": {"model_a": {"scores": [0.2, 0.8], "mean": 0.5}},
-        },
-        {
-            "metric_name": "faithfulness",
-            "question_mode": "qa",
-            "question_ids": ["q1", "q2"],
-            "models": {"model_a": {"scores": [0.9, 0.1], "mean": 0.5}},
-        },
-    ]
-
-    rows = build_model_by_dimension(questions, automatic_scores, judge_scores, "topic")
-    row_by_topic = {row["topic"]: row for row in rows}
-
-    assert row_by_topic["AI"]["exact_match"] == 1.0
-    assert row_by_topic["AI"]["judge_correctness"] == 0.2
-    assert row_by_topic["ML"]["exact_match"] == 0.0
-    assert row_by_topic["ML"]["judge_faithfulness"] == 0.1
 
 
 def test_run_automatic_metrics_aligns_missing_scores_to_shared_question_ids(tmp_path):
@@ -305,7 +258,45 @@ def test_build_prompt_multiple_choice_does_not_double_label_choices():
         }
     )
     assert "A. (A) Wrong" not in prompt
-    assert "(B) Right" in prompt
+
+
+def test_build_comprehensive_eval_report_includes_discriminative_signals():
+    questions = [
+        {"question_id": "q1", "question_mode": "qa", "topic": "AI", "estimated_difficulty": "easy"},
+        {"question_id": "q2", "question_mode": "qa", "topic": "AI", "estimated_difficulty": "hard"},
+        {"question_id": "q3", "question_mode": "multiple_choice", "topic": "ML", "estimated_difficulty": "medium"},
+    ]
+    automatic_scores = [
+        {
+            "metric_name": "exact_match",
+            "question_mode": "qa",
+            "question_ids": ["q1", "q2"],
+            "models": {
+                "model_a": {"scores": [1.0, 1.0], "passed": [True, True], "mean": 1.0, "pass_rate": 1.0},
+                "model_b": {"scores": [1.0, 0.0], "passed": [True, False], "mean": 0.5, "pass_rate": 0.5},
+            },
+        },
+        {
+            "metric_name": "accuracy",
+            "question_mode": "multiple_choice",
+            "question_ids": ["q3"],
+            "models": {
+                "model_a": {"scores": [1.0], "passed": [True], "mean": 1.0, "pass_rate": 1.0},
+                "model_b": {"scores": [0.0], "passed": [False], "mean": 0.0, "pass_rate": 0.0},
+            },
+        },
+    ]
+
+    report = build_comprehensive_eval_report(questions, automatic_scores)
+
+    assert report["discriminative_signals"]["overall_model_gap"] is not None
+    assert report["discriminative_signals"]["discriminative_question_ratio"] is not None
+    assert report["discriminative_signals"]["easy_questions_too_easy_ratio"] is not None
+    assert report["discriminative_signals"]["all_models_fail_ratio"] is not None
+    assert report["by_topic"]["AI"]["model_gap"] is not None
+    assert report["by_topic"]["AI"]["all_models_fail_ratio"] is not None
+    assert report["by_difficulty"]["hard"]["model_gap"] is not None
+    assert report["by_mode"]["qa"]["model_gap"] is not None
 
 
 @pytest.mark.asyncio
@@ -429,7 +420,7 @@ async def test_run_llm_judge_records_rendered_prompts_file(tmp_path):
 
 
 @pytest.mark.asyncio
-async def test_run_llm_judge_skips_multiple_choice_even_if_metrics_configured(tmp_path):
+async def test_run_llm_judge_now_includes_multiple_choice_when_metrics_configured(tmp_path):
     client = RecordingJudgeClient(response_text='{"scores":{"correctness":5},"reason":"ok"}')
     questions = [
         {
@@ -469,11 +460,13 @@ async def test_run_llm_judge_skips_multiple_choice_even_if_metrics_configured(tm
         max_concurrency=1,
     )
 
-    assert judge_scores == []
-    assert client.calls == []
+    assert judge_scores != []
+    assert len(judge_scores) == 1
+    assert judge_scores[0]["question_mode"] == "multiple_choice"
+    assert client.calls != []
 
 
-def test_build_model_reports_follow_available_metrics():
+def test_build_comprehensive_eval_report_structure():
     questions = [
         {"question_id": "q1", "question_mode": "qa", "topic": "AI", "estimated_difficulty": "easy", "answer": "A1"},
     ]
@@ -485,28 +478,16 @@ def test_build_model_reports_follow_available_metrics():
             "models": {"model_a": {"scores": [1.0], "passed": [True], "mean": 1.0, "pass_rate": 1.0}},
         }
     ]
-    judge_scores = [
-        {
-            "metric_name": "correctness",
-            "question_mode": "qa",
-            "question_ids": ["q1"],
-            "models": {"model_a": {"scores": [0.8], "mean": 0.8}},
-        },
-        {
-            "metric_name": "completeness",
-            "question_mode": "qa",
-            "question_ids": ["q1"],
-            "models": {"model_a": {"scores": [0.7], "mean": 0.7}},
-        },
-    ]
 
-    overall_rows = build_model_overall_report(questions, automatic_scores, judge_scores)
-    assert overall_rows[0]["semantic_accuracy"] == 1.0
-    assert overall_rows[0]["judge_completeness"] == 0.7
+    report = build_comprehensive_eval_report(questions, automatic_scores)
 
-    by_topic = build_model_by_dimension(questions, automatic_scores, judge_scores, "topic")
-    assert by_topic[0]["semantic_accuracy"] == 1.0
-    assert by_topic[0]["judge_completeness"] == 0.7
+    assert "qa" in report
+    assert "Mode" in report["qa"]
+    assert "Topic" in report["qa"]
+    assert "model" in report["qa"]
+    assert report["qa"]["Mode"]["easy"] == 1.0
+    assert report["qa"]["Topic"]["AI"] == 1.0
+    assert report["qa"]["model"]["model_a"] == 1.0
 
 
 @pytest.mark.asyncio
@@ -531,6 +512,7 @@ async def test__run_passes_judge_defaults_and_composite_dimension_keys(tmp_path,
 
     recorded_dimension_keys = []
     recorded_judge_defaults = {}
+    recorded_comprehensive = {}
 
     monkeypatch.setattr(agent_module, "load_model_registry", lambda _: {"candidate": object(), "judge": object()})
     monkeypatch.setattr(
@@ -568,16 +550,7 @@ async def test__run_passes_judge_defaults_and_composite_dimension_keys(tmp_path,
         return []
 
     monkeypatch.setattr(agent_module, "run_llm_judge", fake_run_llm_judge)
-    monkeypatch.setattr(agent_module, "build_dataset_quality_summary", lambda *args, **kwargs: {})
-    monkeypatch.setattr(agent_module, "build_dataset_quality_by_group", lambda *args, **kwargs: [])
-    monkeypatch.setattr(agent_module, "build_model_overall_report", lambda *args, **kwargs: [])
-
-    def fake_build_model_by_dimension(questions, automatic_scores, judge_scores, dimension_key):
-        recorded_dimension_keys.append(dimension_key)
-        return []
-
-    monkeypatch.setattr(agent_module, "build_model_by_dimension", fake_build_model_by_dimension)
-    monkeypatch.setattr(agent_module, "write_reports", lambda *args, **kwargs: None)
+    monkeypatch.setattr(agent_module, "build_comprehensive_eval_report", lambda *args, **kwargs: {})
 
     config = ModelEvalAgentConfig(
         run=RunConfig(
@@ -604,13 +577,6 @@ async def test__run_passes_judge_defaults_and_composite_dimension_keys(tmp_path,
     await agent_module._run(config, registry_path="dummy_registry.yaml")
 
     assert recorded_judge_defaults["value"] == {"temperature": 0.0, "max_tokens": 321}
-    assert recorded_dimension_keys == [
-        "question_mode",
-        "topic",
-        "estimated_difficulty",
-        "question_mode_and_difficulty",
-        "topic_and_question_mode",
-    ]
 
 
 @pytest.mark.asyncio
@@ -667,11 +633,7 @@ async def test__run_uses_run_root_llm_trace_path(tmp_path, monkeypatch):
     monkeypatch.setattr(agent_module, "run_candidate_models", fake_run_candidate_models)
     monkeypatch.setattr(agent_module, "run_automatic_metrics", lambda *args, **kwargs: [])
     monkeypatch.setattr(agent_module, "run_llm_judge", fake_run_llm_judge)
-    monkeypatch.setattr(agent_module, "build_dataset_quality_summary", lambda *args, **kwargs: {})
-    monkeypatch.setattr(agent_module, "build_dataset_quality_by_group", lambda *args, **kwargs: [])
-    monkeypatch.setattr(agent_module, "build_model_overall_report", lambda *args, **kwargs: [])
-    monkeypatch.setattr(agent_module, "build_model_by_dimension", lambda *args, **kwargs: [])
-    monkeypatch.setattr(agent_module, "write_reports", lambda *args, **kwargs: None)
+    monkeypatch.setattr(agent_module, "build_comprehensive_eval_report", lambda *args, **kwargs: {})
 
     config = ModelEvalAgentConfig(
         run=RunConfig(
@@ -765,7 +727,7 @@ async def test_run_model_eval_agent_from_shared_state_updates_llm_calls_artifact
     )
     shared_state_path = save_shared_state(state, run_dir)
 
-    async def fake_run(config, registry_path=None):
+    async def fake_run(config, registry_path=None, mode_list=None):
         evaluation_dir = Path("runs") / "task_x" / "run_y" / "evaluation"
         evaluation_dir.mkdir(parents=True, exist_ok=True)
         (evaluation_dir / "evaluation_report.json").write_text("{}", encoding="utf-8")

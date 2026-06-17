@@ -14,19 +14,13 @@ from benchforge.utils.artifact_store import ArtifactStore
 from benchforge.utils.shared_state import load_shared_state, update_and_save
 from benchforge.schemas import SharedState
 
-from .aggregator import (
-    build_dataset_quality_by_group,
-    build_dataset_quality_summary,
-    build_model_by_dimension,
-    build_model_overall_report,
-)
 from .auto_metric_executor import run_automatic_metrics
 from .config_loader import load_model_eval_config
 from .dataset_metric_executor import run_dataset_metrics
 from .llm_judge_executor import run_llm_judge
 from .model_registry_loader import load_model_registry, resolve_model_config
 from .model_runner import run_candidate_models
-from .report_writer import write_reports
+from .report_writer import build_comprehensive_eval_report
 from .schema import ModelEvalAgentConfig
 
 
@@ -37,13 +31,18 @@ def _write_jsonl_overwrite(path: Path, records: list[dict[str, Any]]) -> None:
             f.write(json.dumps(record, ensure_ascii=False, default=str) + "\n")
 
 
+def _normalize_path(artifact_path: str) -> str:
+    """跨平台路径归一化：将反斜杠转为正斜杠。"""
+    return artifact_path.replace("\\", "/")
+
+
 def _resolve_input_paths_from_shared_state(
     state: SharedState, run_dir: Path
 ) -> list[str]:
     paths: list[str] = []
 
     if val := state.artifact("validated_questions"):
-        paths.append(val)
+        paths.append(_normalize_path(val))
     if paths:
         return paths
 
@@ -53,7 +52,7 @@ def _resolve_input_paths_from_shared_state(
 
     for key in ("accepted_questions",):
         if val := state.artifact(key):
-            paths.append(val)
+            paths.append(_normalize_path(val))
     if paths:
         return paths
 
@@ -117,6 +116,7 @@ def _load_eval_questions(input_paths: list[str]) -> list[dict[str, Any]]:
 async def _run(
     config: ModelEvalAgentConfig,
     registry_path: str | None = None,
+    mode_list: list[str] | None = None,
 ) -> dict[str, Any]:
     run = config.run
     task_id = run.task_id
@@ -233,40 +233,15 @@ async def _run(
             tracer=judge_tracer,
         )
 
-    # Step 5: 聚合报告
-    summary = build_dataset_quality_summary(questions, dataset_scores)
-    by_group = build_dataset_quality_by_group(dataset_scores)
-    overall = build_model_overall_report(questions, automatic_scores, judge_scores)
-    by_dims = {
-        "question_mode": build_model_by_dimension(questions, automatic_scores, judge_scores, "question_mode"),
-        "topic": build_model_by_dimension(questions, automatic_scores, judge_scores, "topic"),
-        "difficulty": build_model_by_dimension(questions, automatic_scores, judge_scores, "estimated_difficulty"),
-        "question_mode_and_difficulty": build_model_by_dimension(
-            questions, automatic_scores, judge_scores, "question_mode_and_difficulty"
-        ),
-        "topic_and_question_mode": build_model_by_dimension(
-            questions, automatic_scores, judge_scores, "topic_and_question_mode"
-        ),
-    }
-
-    write_reports(
-        questions=questions,
-        dataset_scores=dataset_scores,
-        automatic_scores=automatic_scores,
-        judge_scores=judge_scores,
-        output_root=output_root,
-        dataset_quality_summary=summary,
-        dataset_quality_by_group=by_group,
-        model_overall_report=overall,
-        model_by_dimension=by_dims,
-    )
+    # Step 5: 综合评估报告（一个 JSON，按 question_mode 分组，含 Mode/Topic/model 维度）
+    comprehensive_report = build_comprehensive_eval_report(questions, automatic_scores, mode_list, dataset_scores)
 
     result = {
         "task_id": task_id,
         "run_id": run_id,
         "num_questions": len(questions),
         "num_models": len(candidate_clients),
-        "output_root": str(output_root),
+        **comprehensive_report,
     }
     ArtifactStore(str(output_root)).save_json("evaluation_report.json", result)
     logger.info(f"[ModelEvalAgent] done: {output_root}")
@@ -290,7 +265,8 @@ async def run_model_eval_agent_from_shared_state(
 
     effective_run = replace(config.run, task_id=task_id, run_id=run_id, input_paths=input_paths)
     effective_config = replace(config, run=effective_run)
-    result = await _run(effective_config, registry_path=registry_path)
+    mode_list = list(state.blueprint.get("modes", {}).keys()) if state.blueprint else None
+    result = await _run(effective_config, registry_path=registry_path, mode_list=mode_list)
 
     # 回写 shared_state：标记 evaluation 完成
     update_and_save(
@@ -299,12 +275,6 @@ async def run_model_eval_agent_from_shared_state(
         artifacts={
             "llm_calls": str(run_dir / "llm_calls.jsonl"),
             "evaluation_report": str(run_dir / "evaluation" / "evaluation_report.json"),
-            "dataset_quality_summary": str(run_dir / "evaluation" / "dataset_report" / "dataset_quality_summary.json"),
-            "model_overall_report": str(run_dir / "evaluation" / "model_report" / "model_overall_report.csv"),
-            "model_aggregate_report": str(run_dir / "evaluation" / "model_report" / "model_aggregate_report.json"),
-            "model_by_topic": str(run_dir / "evaluation" / "model_report" / "model_by_topic.csv"),
-            "model_by_difficulty": str(run_dir / "evaluation" / "model_report" / "model_by_difficulty.csv"),
-            "model_by_question_mode": str(run_dir / "evaluation" / "model_report" / "model_by_question_mode.csv"),
         },
     )
 

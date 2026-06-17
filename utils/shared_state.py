@@ -56,12 +56,12 @@ def build_shared_state(
 
     artifacts: dict[str, str] = {}
     for mode in getattr(blueprint, "modes", []):
-        artifacts[f"{mode}_candidate_pool"] = str(base / mode / "candidate_pool.json")
+        artifacts[f"{mode}_candidate_pool"] = str(base / mode / "candidate_pool.json").replace("\\", "/")
 
     artifacts.update({
-        "chunked_evidence": str(base / "evidence" / "chunked.json"),
-        "llm_calls": str(base / "llm_calls.jsonl"),
-        "generation_report": str(base / "generation_report.json"),
+        "chunked_evidence": str(base / "evidence" / "chunked.json").replace("\\", "/"),
+        "llm_calls": str(base / "llm_calls.jsonl").replace("\\", "/"),
+        "generation_report": str(base / "generation_report.json").replace("\\", "/"),
     })
 
     return SharedState(

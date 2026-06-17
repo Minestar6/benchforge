@@ -2,20 +2,25 @@
   "deepseek-v4": {
     "qa": {
       "num_questions": 18,
-      "semantic_accuracy": null,
-      "exact_match": null,
-      "f1": null,
-      "precision": null,
-      "recall": null,
-      "rouge_l": null,
-      "bleu": null,
-      "bertscore": null,
-      "semantic_similarity": null
+      "semantic_accuracy": 0.16666666666666666,
+      "exact_match": 0.0,
+      "f1": 0.3852571834882977,
+      "precision": 0.33739379824976085,
+      "recall": 0.6025480963538521,
+      "rouge_l": 0.22211649180407023,
+      "bleu": 0.07066656616309881,
+      "bertscore": 0.8753272626135085,
+      "semantic_similarity": 0.7712920738591088,
+      "judge_answer_relevance": 5.0,
+      "judge_faithfulness": 4.6,
+      "judge_factual_accuracy": 4.8,
+      "judge_logical_coherence": 4.9,
+      "judge_completeness": 4.8
     },
     "multiple_choice": {
       "num_questions": 17,
-      "accuracy": null,
-      "invalid_rate": null
+      "accuracy": 1.0,
+      "invalid_rate": 0.0
     }
   }
 }

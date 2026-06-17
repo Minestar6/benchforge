@@ -1,0 +1,32 @@
+model:
+  name: deepseek-v4
+  temperature: 0.2
+  max_tokens: 1200
+  max_retries: 3
+
+prompts:
+  blueprint_synthesizer: prompts/planner_agent/blueprint_synthesizer_prompt.md
+  user_goal_analyzer: prompts/planner_agent/goal_analyzer_prompt.md
+  topic_adaptive_retriever: prompts/planner_agent/topic_adaptive_retriever_prompt.md
+  question_difficulty_evolver: prompts/planner_agent/difficulty_count_planner_prompt.md
+  control_parameter_tuner: prompts/planner_agent/control_parameter_tuner_prompt.md
+
+initial_planning:
+  question_type_allocation:
+    qa: 0.5
+    multiple_choice: 0.5
+    rounding: largest_remainder
+  difficulty_distribution:
+    qa:
+      easy: 0.2
+      medium: 0.5
+      hard: 0.3
+    multiple_choice:
+      easy: 0.3
+      medium: 0.5
+      hard: 0.2
+  max_rounds_per_mode: 3
+
+question_difficulty_evolver:
+  enabled: false
+  fallback: rule_based

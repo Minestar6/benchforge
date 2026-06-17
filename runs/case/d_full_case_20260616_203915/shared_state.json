@@ -62,18 +62,19 @@
     }
   },
   "artifacts": {
-    "qa_candidate_pool": "runs\\case\\d_full_case_20260616_203915\\qa\\candidate_pool.json",
-    "multiple_choice_candidate_pool": "runs\\case\\d_full_case_20260616_203915\\multiple_choice\\candidate_pool.json",
-    "chunked_evidence": "runs\\case\\d_full_case_20260616_203915\\evidence\\chunked.json",
-    "llm_calls": "runs\\case\\d_full_case_20260616_203915\\llm_calls.jsonl",
-    "generation_report": "runs\\case\\d_full_case_20260616_203915\\generation_report.json",
-    "validation_report": "runs\\case\\d_full_case_20260616_203915\\validation\\validation_report.json",
-    "validated_questions": "runs\\case\\d_full_case_20260616_203915\\validation\\validated_questions.jsonl",
-    "weighted_selection": "runs\\case\\d_full_case_20260616_203915\\validation\\weighted_selection.json"
+    "qa_candidate_pool": "runs/case/d_full_case_20260616_203915/qa/candidate_pool.json",
+    "multiple_choice_candidate_pool": "runs/case/d_full_case_20260616_203915/multiple_choice/candidate_pool.json",
+    "chunked_evidence": "runs/case/d_full_case_20260616_203915/evidence/chunked.json",
+    "llm_calls": "runs/case/d_full_case_20260616_203915/llm_calls.jsonl",
+    "generation_report": "runs/case/d_full_case_20260616_203915/generation_report.json",
+    "validation_report": "runs/case/d_full_case_20260616_203915/validation/validation_report.json",
+    "validated_questions": "runs/case/d_full_case_20260616_203915/validation/validated_questions.jsonl",
+    "weighted_selection": "runs/case/d_full_case_20260616_203915/validation/weighted_selection.json",
+    "evaluation_report": "runs/case/d_full_case_20260616_203915/evaluation/evaluation_report.json"
   },
   "agent_status": {
     "generation": "completed",
     "verification": "completed",
-    "evaluation": "pending"
+    "evaluation": "completed"
   }
 }

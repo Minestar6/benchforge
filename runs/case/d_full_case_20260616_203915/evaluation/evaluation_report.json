@@ -1,0 +1,45 @@
+{
+  "task_id": "case",
+  "run_id": "d_full_case_20260616_203915",
+  "num_questions": 37,
+  "num_models": 1,
+  "qa": {
+    "Mode": {
+      "hard": 0.397926,
+      "medium": 0.501629
+    },
+    "Topic": {
+      "Quantum Computing": 0.527514,
+      "Artificial Intelligence": 0.406591
+    },
+    "model": {
+      "deepseek-v4": 0.449778
+    }
+  },
+  "multiple_choice": {
+    "Mode": {
+      "medium": 0.5,
+      "hard": 0.6,
+      "easy": 0.5
+    },
+    "Topic": {
+      "Quantum Computing": 0.5,
+      "Artificial Intelligence": 0.52381
+    },
+    "model": {
+      "deepseek-v4": 0.511111
+    }
+  },
+  "dataset_metrics": {
+    "citation_score": {
+      "mean": 0.768351,
+      "num_scored": 37,
+      "num_missing": 0
+    },
+    "diversity_score": {
+      "score": 0.8722,
+      "embedding_dispersion": 0.7852,
+      "cluster_entropy": 0.9591
+    }
+  }
+}

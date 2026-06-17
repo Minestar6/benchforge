@@ -1,10 +1,12 @@
 """断点续跑：跳过模型推理，从已有 model_responses.jsonl 继续执行评估。
 Usage:
   cd /Users/zhaoziqing/Desktop/benchforge
-  python experiment/case/resume_eval.py
+  python experiment/case/resume_eval.py                              # 自动找最新
+  python experiment/case/resume_eval.py --run-dir runs/case/d_full_case_20260616_135135  # 手动指定
 """
 from __future__ import annotations
 
+import argparse
 import asyncio
 import json
 import sys
@@ -18,18 +20,12 @@ sys.path.insert(0, str(PROJECT_ROOT.parent))
 from loguru import logger
 
 from benchforge.agents.model_eval_agent.agent import _load_eval_questions, _write_jsonl_overwrite
-from benchforge.agents.model_eval_agent.aggregator import (
-    build_dataset_quality_by_group,
-    build_dataset_quality_summary,
-    build_model_by_dimension,
-    build_model_overall_report,
-)
 from benchforge.agents.model_eval_agent.auto_metric_executor import run_automatic_metrics
 from benchforge.agents.model_eval_agent.config_loader import load_model_eval_config
 from benchforge.agents.model_eval_agent.dataset_metric_executor import run_dataset_metrics
 from benchforge.agents.model_eval_agent.llm_judge_executor import run_llm_judge
 from benchforge.agents.model_eval_agent.model_registry_loader import load_model_registry, resolve_model_config
-from benchforge.agents.model_eval_agent.report_writer import write_reports
+from benchforge.agents.model_eval_agent.report_writer import build_comprehensive_eval_report
 from benchforge.models.loader import ModelLoader
 from benchforge.utils.artifact_store import ArtifactStore
 from benchforge.utils.run_context import RunContext
@@ -55,12 +51,20 @@ def _latest_case_run(case_base: Path) -> Path:
     return run_dir
 
 
-async def main() -> None:
+async def main(run_dir: Path | None = None) -> None:
     logger.remove()
     logger.add(sys.stderr, level="INFO",
                format="<green>{time:HH:mm:ss}</green> | <level>{level: <8}</level> | <level>{message}</level>")
 
-    run_dir = _latest_case_run(CASE_BASE)
+    if run_dir is not None:
+        run_dir = Path(run_dir)
+        if not run_dir.is_dir():
+            raise FileNotFoundError(f"Run dir not found: {run_dir}")
+        shared = run_dir / "shared_state.json"
+        if not shared.exists():
+            raise FileNotFoundError(f"shared_state.json not found: {shared}")
+    else:
+        run_dir = _latest_case_run(CASE_BASE)
     logger.info("Resuming from: {}", run_dir.name)
 
     config = load_model_eval_config(CONFIG_PATH)
@@ -166,40 +170,16 @@ async def main() -> None:
         )
     logger.info("LLM Judge: {} rows", len(judge_scores))
 
-    # Step 5: 聚合报告
-    summary = build_dataset_quality_summary(questions, dataset_scores)
-    by_group = build_dataset_quality_by_group(dataset_scores)
-    overall = build_model_overall_report(questions, automatic_scores, judge_scores)
-    by_dims = {
-        "question_mode": build_model_by_dimension(questions, automatic_scores, judge_scores, "question_mode"),
-        "topic": build_model_by_dimension(questions, automatic_scores, judge_scores, "topic"),
-        "difficulty": build_model_by_dimension(questions, automatic_scores, judge_scores, "estimated_difficulty"),
-        "question_mode_and_difficulty": build_model_by_dimension(
-            questions, automatic_scores, judge_scores, "question_mode_and_difficulty"
-        ),
-        "topic_and_question_mode": build_model_by_dimension(
-            questions, automatic_scores, judge_scores, "topic_and_question_mode"
-        ),
-    }
-
-    write_reports(
-        questions=questions,
-        dataset_scores=dataset_scores,
-        automatic_scores=automatic_scores,
-        judge_scores=judge_scores,
-        output_root=output_root,
-        dataset_quality_summary=summary,
-        dataset_quality_by_group=by_group,
-        model_overall_report=overall,
-        model_by_dimension=by_dims,
-    )
+    # Step 5: 综合评估报告（一个 JSON，按 question_mode 分组，含 Mode/Topic/model 维度）
+    mode_list = list(state.blueprint.get("modes", {}).keys()) if state.blueprint else None
+    comprehensive_report = build_comprehensive_eval_report(questions, automatic_scores, mode_list)
 
     result = {
         "task_id": task_id,
         "run_id": run_id,
         "num_questions": len(questions),
         "num_responses": len(model_responses),
-        "output_root": str(output_root),
+        **comprehensive_report,
     }
     ArtifactStore(str(output_root)).save_json("evaluation_report.json", result)
 
@@ -211,12 +191,6 @@ async def main() -> None:
         artifacts={
             "llm_calls": str(run_dir / "llm_calls.jsonl"),
             "evaluation_report": str(output_root / "evaluation_report.json"),
-            "dataset_quality_summary": str(output_root / "dataset_report" / "dataset_quality_summary.json"),
-            "model_overall_report": str(output_root / "model_report" / "model_overall_report.csv"),
-            "model_aggregate_report": str(output_root / "model_report" / "model_aggregate_report.json"),
-            "model_by_topic": str(output_root / "model_report" / "model_by_topic.csv"),
-            "model_by_difficulty": str(output_root / "model_report" / "model_by_difficulty.csv"),
-            "model_by_question_mode": str(output_root / "model_report" / "model_by_question_mode.csv"),
         },
     )
 
@@ -230,4 +204,5 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    run_dir = "/Users/zhaoziqing/Desktop/benchforge/runs/case/d_full_case_20260616_135135"
+    asyncio.run(main(run_dir))

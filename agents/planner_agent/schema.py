@@ -74,6 +74,7 @@ class GlobalBlueprint(BaseModel):
     user_goal: str
     language: str
     seed_topics: list[str]
+    initial_generation_strategy: str = "balanced_exploration"
     final_targets: FinalTargets
     default_modes: dict[str, QuestionModeDefaults]
     evaluator_defaults: EvaluatorDefaults
@@ -102,6 +103,17 @@ class ModelPool(BaseModel):
     removed: list[str] = Field(default_factory=list)
 
 
+class QuestionPlan(BaseModel):
+    qa_count: int
+    mc_count: int
+    qa_difficulty_distribution: dict[str, float]
+    mc_difficulty_distribution: dict[str, float]
+    min_candidate_multiplier: float = 1.5
+    max_candidate_multiplier: float = 2.0
+    topic_budget: int = 2
+    min_selected_per_round: int | None = None
+
+
 class RunHistoryEntry(BaseModel):
     round_id: int
     run_id: str
@@ -110,6 +122,7 @@ class RunHistoryEntry(BaseModel):
     multiple_choice_target: int
     selected_count: int
     evaluated: bool
+    question_plan: QuestionPlan | None = None
 
 
 class PlannerState(BaseModel):
@@ -121,6 +134,7 @@ class PlannerState(BaseModel):
     topic_backlog: TopicBacklog = Field(default_factory=TopicBacklog)
     model_pool: ModelPool = Field(default_factory=ModelPool)
     run_history: list[RunHistoryEntry] = Field(default_factory=list)
+    last_question_plan: QuestionPlan | None = None
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -142,6 +156,39 @@ class RoundSpec(BaseModel):
     verify_agent_patch: dict[str, Any] = Field(default_factory=dict)
     model_eval_agent_patch: dict[str, Any] = Field(default_factory=dict)
     planner_hints: RoundPlannerHints = Field(default_factory=RoundPlannerHints)
+
+
+class RoundDiagnosis(BaseModel):
+    label: str
+    confidence: float = 0.0
+    problems: list[str] = Field(default_factory=list)
+    evidence: dict[str, Any] = Field(default_factory=dict)
+
+
+class NextRoundQuestionPlan(QuestionPlan):
+    pass
+
+
+class NextRoundControlPlan(BaseModel):
+    citation_enabled: bool = True
+    min_citation_score: float = 0.65
+    min_chunk_citation_score: float = 0.85
+    min_answer_citation_score: float = 0.75
+    llm_validation_enabled: bool = True
+    min_overall_score: float = 0.75
+    selection_mode: str = "light"
+    semantic_similarity_threshold: float = 0.9
+    eval_profile: str = "standard"
+    judge_enabled: bool = True
+    candidate_model_names: list[str] = Field(default_factory=list)
+    judge_model_name: str | None = None
+    initial_breadth_enabled: bool = False
+
+
+class NextRoundIntegratedPlan(NextRoundQuestionPlan, NextRoundControlPlan):
+    @property
+    def topics_per_round(self) -> int:
+        return self.topic_budget
 
 
 # ═══════════════════════════════════════════════════════════════

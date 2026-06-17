@@ -29,20 +29,22 @@ from benchforge.agents.planner_agent.schema import (
 )
 from benchforge.agents.planner_agent.blueprint_synthesizer import synthesize_global_blueprint
 from benchforge.app import run_benchforge
-from benchforge.cli import main
+from benchforge.cli import main, build_parser, build_user_intent
 from benchforge.config.config import load_prompt
+import run_minimal_case
 
 
 class _BlueprintClient:
-    def __init__(self, response_text: str):
-        self.response_text = response_text
+    def __init__(self, response_text: str | list[str]):
+        self.response_texts = response_text if isinstance(response_text, list) else [response_text]
         self.calls = []
         self.model_name = "planner-model"
 
     async def complete(self, model: str, messages: list[dict[str, str]], **kwargs):
         self.calls.append({"model": model, "messages": messages, "kwargs": kwargs})
+        index = min(len(self.calls) - 1, len(self.response_texts) - 1)
         return {
-            "text": self.response_text,
+            "text": self.response_texts[index],
             "input_tokens": 123,
             "output_tokens": 45,
             "latency": 0.01,
@@ -98,6 +100,44 @@ async def test_synthesize_global_blueprint_uses_user_overrides_and_llm_topics():
     assert blueprint.stop_conditions.min_selected_per_round == 4
     assert abs(sum(blueprint.default_modes["qa"].difficulty_distribution.values()) - 1.0) < 1e-9
     assert blueprint.evaluation_requirements.llm_judge_metrics["qa"][0].name == "correctness"
+
+
+@pytest.mark.asyncio
+async def test_synthesize_global_blueprint_uses_goal_analyzer_payload():
+    client = _BlueprintClient(
+        """
+        {
+          "initial_topics": ["grounded factuality", "citation faithfulness"],
+          "initial_generation_strategy": "balanced_exploration",
+          "automatic_metrics_by_type": {
+            "qa": ["exact_match", "f1"],
+            "multiple_choice": ["accuracy"]
+          },
+          "llm_eval_enabled": true,
+          "qa_llm_eval_metrics": [
+            {"name": "faithfulness", "description": "Judge whether the answer is supported by the provided evidence."}
+          ]
+        }
+        """
+    )
+    intent = UserIntent(
+        user_goal="生成 grounding benchmark",
+        candidate_model_names=["fake"],
+        judge_model_name="fake",
+    )
+
+    blueprint = await synthesize_global_blueprint(
+        intent=intent,
+        registry_path=project_root / "benchforge/config/model_registry.yaml",
+        model_client=client,
+        planner_model_name="fake",
+    )
+
+    assert blueprint.seed_topics == ["grounded factuality", "citation faithfulness"]
+    assert blueprint.initial_generation_strategy == "balanced_exploration"
+    assert blueprint.evaluation_requirements.automatic_metrics["qa"] == ["exact_match", "f1"]
+    assert blueprint.evaluation_requirements.llm_judge_metrics["qa"][0].name == "faithfulness"
+    assert len(client.calls) == 1
 
 
 @pytest.mark.asyncio
@@ -204,6 +244,50 @@ def test_cli_main_accepts_positional_goal(monkeypatch):
 
     assert rc == 0
     assert called["kwargs"]["intent"].user_goal == "build a benchmark for grounded QA"
+
+
+def test_build_user_intent_uses_deepseek_v4_defaults_for_judge_and_planner():
+    parser = build_parser()
+    args = parser.parse_args(["build benchmark"])
+
+    intent = build_user_intent(args)
+
+    assert intent.judge_model_name == "deepseek-v4"
+    assert intent.planner_model_name == "deepseek-v4"
+
+
+def test_run_minimal_case_uses_english_goal_and_runnable_defaults(monkeypatch):
+    called = {}
+
+    def fake_cli_main(argv=None):
+        called["argv"] = list(argv or [])
+        return 0
+
+    monkeypatch.setattr(run_minimal_case, "cli_main", fake_cli_main)
+
+    rc = run_minimal_case.main()
+
+    assert rc == 0
+    assert "--user-goal" in called["argv"]
+    goal = called["argv"][called["argv"].index("--user-goal") + 1]
+    assert goal == run_minimal_case.DEFAULT_USER_GOAL
+    assert "--planner-model" in called["argv"]
+    assert called["argv"][called["argv"].index("--planner-model") + 1] == "deepseek-v3"
+
+
+def test_run_minimal_case_forwards_explicit_argv(monkeypatch):
+    called = {}
+
+    def fake_cli_main(argv=None):
+        called["argv"] = list(argv or [])
+        return 0
+
+    monkeypatch.setattr(run_minimal_case, "cli_main", fake_cli_main)
+
+    rc = run_minimal_case.main(["--help"])
+
+    assert rc == 0
+    assert called["argv"] == ["--help"]
 
 
 def test_load_prompt_resolves_repo_relative_benchforge_prefix():

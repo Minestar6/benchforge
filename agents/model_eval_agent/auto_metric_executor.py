@@ -10,6 +10,7 @@ from .metrics_registry import AUTO_METRIC_REGISTRY
 from benchforge.utils.artifact_store import ArtifactStore
 
 from .schema import AutoMetricSpec, QuestionModeMetricPlan
+from .aggregation import build_mode_question_ids, compute_scores_and_mean
 
 
 def run_automatic_metrics(
@@ -18,15 +19,8 @@ def run_automatic_metrics(
     metric_plans: dict[str, QuestionModeMetricPlan],
     output_dir: Path,
 ) -> list[dict[str, Any]]:
-    # question_id → question dict
     q_index = {q["question_id"]: q for q in questions}
-    mode_question_ids: dict[str, list[str]] = defaultdict(list)
-    seen_ids: set[str] = set()
-    for q in questions:
-        qid = q["question_id"]
-        if qid not in seen_ids:
-            seen_ids.add(qid)
-            mode_question_ids[q.get("question_mode", "")].append(qid)
+    mode_question_ids = build_mode_question_ids(questions)
 
     # (question_mode, metric_name) → {model_name: {question_id: score}}
     Bucket = dict[str, dict[str, float | None]]
@@ -63,9 +57,8 @@ def run_automatic_metrics(
 
         models_payload: dict[str, Any] = {}
         for model_name, qid_scores in model_data.items():
-            scores = [qid_scores.get(qid) for qid in question_ids]
+            scores, mean = compute_scores_and_mean(qid_scores, question_ids)
             valid_scores = [s for s in scores if s is not None]
-            mean = sum(valid_scores) / len(valid_scores) if valid_scores else None
             if threshold is not None and valid_scores:
                 passed = [s >= threshold if s is not None else None for s in scores]
                 pass_rate = sum(1 for s in valid_scores if s >= threshold) / len(valid_scores)

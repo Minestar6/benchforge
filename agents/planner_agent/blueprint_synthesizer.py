@@ -25,6 +25,7 @@ from .schema import (
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 _PROMPT_PATH = _PROJECT_ROOT / "prompts" / "planner_agent" / "blueprint_synthesizer_prompt.md"
+_GOAL_ANALYZER_PROMPT_PATH = _PROJECT_ROOT / "prompts" / "planner_agent" / "goal_analyzer_prompt.md"
 _DEFAULT_DIFFICULTY = {
     "qa": {"easy": 0.2, "medium": 0.5, "hard": 0.3},
     "multiple_choice": {"easy": 0.3, "medium": 0.5, "hard": 0.2},
@@ -48,6 +49,50 @@ def _extract_json_object(text: str) -> dict[str, Any]:
     if start < 0 or end <= start:
         raise ValueError("Planner synthesis response did not contain a JSON object")
     return json.loads(text[start : end + 1])
+
+
+def _looks_like_goal_analysis(payload: dict[str, Any]) -> bool:
+    return "initial_topics" in payload or "automatic_metrics_by_type" in payload or "llm_eval_enabled" in payload
+
+
+def _prompt_with_user_goal(prompt_template: str, user_goal: str) -> str:
+    return prompt_template.replace("{user_goal}", json.dumps(user_goal, ensure_ascii=False))
+
+
+def _eval_requirements_from_goal_analysis(payload: dict[str, Any]) -> EvaluationRequirements:
+    automatic_metrics = payload.get("automatic_metrics_by_type")
+    if not isinstance(automatic_metrics, dict):
+        automatic_metrics = {}
+
+    llm_judge_metrics: dict[str, list[dict[str, str]]] = {"qa": [], "multiple_choice": []}
+    if bool(payload.get("llm_eval_enabled")):
+        raw_metrics = payload.get("qa_llm_eval_metrics")
+        if isinstance(raw_metrics, list):
+            llm_judge_metrics["qa"] = [item for item in raw_metrics if isinstance(item, dict)]
+
+    return _normalize_eval_requirements(
+        {
+            "automatic_metrics": automatic_metrics,
+            "llm_judge_metrics": llm_judge_metrics,
+        }
+    )
+
+
+async def _run_user_goal_analyzer(
+    intent: UserIntent,
+    selected_planner_model: str,
+    model_client: BaseModelClient,
+) -> dict[str, Any] | None:
+    prompt_template = load_prompt(_GOAL_ANALYZER_PROMPT_PATH)
+    prompt = _prompt_with_user_goal(prompt_template, intent.user_goal)
+    response = await model_client.complete(
+        model=selected_planner_model,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.2,
+        max_tokens=800,
+    )
+    payload = _extract_json_object(response.get("text", ""))
+    return payload if _looks_like_goal_analysis(payload) else None
 
 
 def _normalize_difficulty_distribution(raw: Any, mode: str) -> dict[str, float]:
@@ -97,11 +142,11 @@ def _normalize_eval_requirements(raw: Any) -> EvaluationRequirements:
 
     normalized_judge: dict[str, list[JudgeMetricDef]] = {}
     for mode in ("qa", "multiple_choice"):
-        raw_items = llm_judge_metrics.get(mode)
-        if not raw_items:
+        if mode not in llm_judge_metrics:
             normalized_judge[mode] = list(_DEFAULT_JUDGE_METRICS[mode])
             continue
 
+        raw_items = llm_judge_metrics.get(mode) or []
         items: list[JudgeMetricDef] = []
         for item in raw_items:
             if not isinstance(item, dict):
@@ -110,7 +155,7 @@ def _normalize_eval_requirements(raw: Any) -> EvaluationRequirements:
             description = str(item.get("description", "")).strip()
             if name and description:
                 items.append(JudgeMetricDef(name=name, description=description))
-        normalized_judge[mode] = items or list(_DEFAULT_JUDGE_METRICS[mode])
+        normalized_judge[mode] = items
 
     return EvaluationRequirements(
         automatic_metrics=normalized_auto,
@@ -156,23 +201,33 @@ async def synthesize_global_blueprint(
     else:
         selected_planner_model = planner_model_name or intent.planner_model_name or getattr(model_client, "model_name", "planner")
 
-    prompt_template = load_prompt(_PROMPT_PATH)
-    prompt = (
-        f"{prompt_template}\n\n"
-        f"User intent:\n{json.dumps(intent.model_dump(), ensure_ascii=False, indent=2)}\n\n"
-        f"Available model registry keys:\n{json.dumps(list(registry.keys()), ensure_ascii=False)}\n"
-    )
+    goal_analysis = None
+    try:
+        goal_analysis = await _run_user_goal_analyzer(intent, selected_planner_model, model_client)
+    except Exception:
+        goal_analysis = None
 
-    response = await model_client.complete(
-        model=selected_planner_model,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.2,
-        max_tokens=1200,
-    )
-    payload = _extract_json_object(response.get("text", ""))
+    if goal_analysis is None:
+        prompt_template = load_prompt(_PROMPT_PATH)
+        prompt = (
+            f"{prompt_template}\n\n"
+            f"User intent:\n{json.dumps(intent.model_dump(), ensure_ascii=False, indent=2)}\n\n"
+            f"Available model registry keys:\n{json.dumps(list(registry.keys()), ensure_ascii=False)}\n"
+        )
+
+        response = await model_client.complete(
+            model=selected_planner_model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.2,
+            max_tokens=1200,
+        )
+        payload = _extract_json_object(response.get("text", ""))
+    else:
+        payload = goal_analysis
 
     task_id = intent.resolved_task_id()
-    seed_topics = intent.seed_topics or [str(topic).strip() for topic in payload.get("seed_topics", []) if str(topic).strip()]
+    topic_key = "initial_topics" if goal_analysis is not None else "seed_topics"
+    seed_topics = intent.seed_topics or [str(topic).strip() for topic in payload.get(topic_key, []) if str(topic).strip()]
     if not seed_topics:
         raise ValueError("Synthesized blueprint did not produce any seed topics")
 
@@ -182,13 +237,20 @@ async def synthesize_global_blueprint(
         user_goal=intent.user_goal,
         language=intent.language,
         seed_topics=seed_topics,
+        initial_generation_strategy=str(
+            payload.get("initial_generation_strategy") or "balanced_exploration"
+        ),
         final_targets=FinalTargets(
             qa=max(0, int(intent.qa_target)),
             multiple_choice=max(0, int(intent.multiple_choice_target)),
         ),
         default_modes=_normalize_mode_defaults(payload.get("default_modes"), intent),
         evaluator_defaults=_resolve_default_models(intent, registry_path),
-        evaluation_requirements=_normalize_eval_requirements(payload.get("evaluation_requirements")),
+        evaluation_requirements=(
+            _eval_requirements_from_goal_analysis(payload)
+            if goal_analysis is not None
+            else _normalize_eval_requirements(payload.get("evaluation_requirements"))
+        ),
         stop_conditions=StopConditions(
             max_rounds=max(1, int(intent.max_rounds)),
             min_selected_per_round=max(1, int(intent.min_selected_per_round)),

@@ -337,7 +337,14 @@ def build_evaluator_feedback(
         llm_output_tokens=llm_output_tokens,
     )
 
-    # 简化版：不深度解析 CSV，只记录路径
+    derived_signals = dict(report.get("discriminative_signals", {}) or {})
+    if "by_topic" in report:
+        derived_signals["by_topic"] = report.get("by_topic", {})
+    if "by_difficulty" in report:
+        derived_signals["by_difficulty"] = report.get("by_difficulty", {})
+    if "by_mode" in report:
+        derived_signals["by_mode"] = report.get("by_mode", {})
+
     return EvaluatorFeedback(
         task_id=state.task_id,
         run_id=state.run_id,
@@ -354,7 +361,7 @@ def build_evaluator_feedback(
         },
         summary=summary,
         dataset_signals=dataset_signals,
-        derived_performance_signals={},  # 后续可扩展
+        derived_performance_signals=derived_signals,
         dataset_metrics_ref={"summary_json": ds_summary_path},
         model_metrics_ref={
             "overall_csv": state.artifact("model_overall_report") or str(eval_dir / "model_report" / "model_overall_report.csv"),

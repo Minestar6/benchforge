@@ -1,6 +1,7 @@
 """PlannerAgent 工具函数。"""
 
 from typing import Any
+
 from .schema import GlobalBlueprint
 
 
@@ -8,13 +9,6 @@ def deep_merge(base: dict[str, Any], *patches: dict[str, Any]) -> dict[str, Any]
     """递归深度合并多个 dict，后续 patch 覆盖前面的值。
 
     None 值跳过（不覆盖），用于表示"不修改此字段"。
-
-    Args:
-        base: 基础配置字典
-        *patches: 一个或多个 patch 字典
-
-    Returns:
-        合并后的新字典
     """
     result = dict(base)
 
@@ -31,28 +25,59 @@ def deep_merge(base: dict[str, Any], *patches: dict[str, Any]) -> dict[str, Any]
     return result
 
 
+def build_frozen_metrics_patch(global_blueprint: GlobalBlueprint) -> dict[str, Any]:
+    """从 GlobalBlueprint 构建冻结后的 metrics patch。
+
+    GlobalBlueprint.evaluation_requirements 是 planner 后续轮次唯一允许读取的评估指标真源。
+    如果蓝图中没有显式 metrics，则返回空 patch，保留基础配置。
+    """
+    requirements = global_blueprint.evaluation_requirements
+    automatic_metrics = requirements.automatic_metrics or {}
+    llm_judge_metrics = requirements.llm_judge_metrics or {}
+
+    mode_names = sorted(set(automatic_metrics) | set(llm_judge_metrics))
+    if not mode_names:
+        return {}
+
+    metrics_patch: dict[str, Any] = {"metrics": {}}
+    for mode in mode_names:
+        mode_patch: dict[str, Any] = {}
+
+        auto_metrics = automatic_metrics.get(mode)
+        if auto_metrics is not None:
+            mode_patch["automatic_metrics"] = [
+                {"name": metric_name}
+                for metric_name in auto_metrics
+                if str(metric_name).strip()
+            ]
+
+        judge_metrics = llm_judge_metrics.get(mode)
+        if judge_metrics is not None:
+            mode_patch["llm_judge_metrics"] = [
+                {"name": metric.name, "description": metric.description}
+                for metric in judge_metrics
+                if metric.name and metric.description
+            ]
+
+        metrics_patch["metrics"][mode] = mode_patch
+
+    return metrics_patch
+
+
 def translate_eval_profile(
     eval_profile: str | None,
     global_blueprint: GlobalBlueprint,
 ) -> dict[str, Any]:
     """将 eval_profile hint 翻译成 model_eval_agent patch。
 
-    根据 docs/plan-runtime-aligned.md § 9.3：
-    - light: dataset_evaluation=true, judge=false, max_tokens=512
-    - standard: dataset_evaluation=true, judge=true
-    - full: dataset_evaluation=true, judge=true, max_tokens=1024 (gen), 1200 (judge)
-
-    同时注入 GlobalBlueprint.evaluation_requirements.llm_judge_metrics。
-
-    Args:
-        eval_profile: "light" | "standard" | "full" | None
-        global_blueprint: 全局蓝图（用于读取 llm_judge_metrics）
-
-    Returns:
-        model_eval_agent patch dict
+    职责边界：
+    - 只负责评估强度翻译（dataset_evaluation / token defaults）
+    - 始终从 GlobalBlueprint 注入冻结后的 metrics 真源
+    - 不再在这里改写 judge.enabled，由 RoundSpec.model_eval_agent_patch 控制
     """
+    metrics_patch = build_frozen_metrics_patch(global_blueprint)
     if eval_profile is None:
-        return {}
+        return metrics_patch
 
     patch: dict[str, Any] = {}
 
@@ -60,33 +85,18 @@ def translate_eval_profile(
         patch = {
             "dataset_evaluation": {"enabled": True},
             "models": {"generation_defaults": {"max_tokens": 512}},
-            "judge": {"enabled": False},
         }
     elif eval_profile == "standard":
         patch = {
             "dataset_evaluation": {"enabled": True},
-            "judge": {"enabled": True},
         }
     elif eval_profile == "full":
         patch = {
             "dataset_evaluation": {"enabled": True},
-            "judge": {"enabled": True},
             "models": {
                 "generation_defaults": {"max_tokens": 1024},
                 "judge_defaults": {"max_tokens": 1200},
             },
         }
 
-    # 注入 llm_judge_metrics（来自全局需求）
-    if eval_profile in ("standard", "full"):
-        judge_metrics_raw = global_blueprint.evaluation_requirements.llm_judge_metrics
-        patch["metrics"] = {}
-        for mode, metrics in judge_metrics_raw.items():
-            patch["metrics"][mode] = {
-                "llm_judge_metrics": [
-                    {"name": m.name, "description": m.description}
-                    for m in metrics
-                ]
-            }
-
-    return patch
+    return deep_merge(patch, metrics_patch)
