@@ -1,0 +1,6 @@
+﻿metric,deepseek-v4,deepseek-v4-pro,minimax
+answer_relevance,5.0,5.0,3.375
+faithfulness,5.0,5.0,3.625
+factual_accuracy,5.0,5.0,3.625
+logical_coherence,5.0,5.0,3.25
+completeness,5.0,5.0,3.0

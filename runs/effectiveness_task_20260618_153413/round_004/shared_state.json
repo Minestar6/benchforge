@@ -1,0 +1,79 @@
+{
+  "task_id": "effectiveness_task_20260618_153413",
+  "run_id": "round_004",
+  "round_id": null,
+  "round_spec_ref": null,
+  "blueprint": {
+    "task_id": "effectiveness_task_20260618_153413",
+    "run_id": "round_004",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "modes": {
+      "qa": {
+        "count": 4,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      },
+      "multiple_choice": {
+        "count": 2,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "blueprint_cache": {
+    "task_id": "effectiveness_task_20260618_153413",
+    "run_id": "round_004",
+    "language": "en",
+    "topics": [
+      "Artificial Intelligence",
+      "Quantum Computing"
+    ],
+    "modes": {
+      "qa": {
+        "count": 4,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      },
+      "multiple_choice": {
+        "count": 2,
+        "max_rounds": 1,
+        "difficulty_distribution": {
+          "easy": 0.2,
+          "medium": 0.3,
+          "hard": 0.5
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "qa_candidate_pool": "runs/effectiveness_task_20260618_153413/round_004/qa/candidate_pool.json",
+    "multiple_choice_candidate_pool": "runs/effectiveness_task_20260618_153413/round_004/multiple_choice/candidate_pool.json",
+    "chunked_evidence": "runs/effectiveness_task_20260618_153413/round_004/evidence/chunked.json",
+    "llm_calls": "runs/effectiveness_task_20260618_153413/round_004/llm_calls.jsonl",
+    "generation_report": "runs/effectiveness_task_20260618_153413/round_004/generation_report.json",
+    "validation_report": "runs/effectiveness_task_20260618_153413/round_004/validation/validation_report.json",
+    "validated_questions": "runs/effectiveness_task_20260618_153413/round_004/validation/validated_questions.jsonl",
+    "weighted_selection": "runs/effectiveness_task_20260618_153413/round_004/validation/weighted_selection.json"
+  },
+  "agent_status": {
+    "generation": "completed",
+    "verification": "completed",
+    "evaluation": "pending"
+  }
+}

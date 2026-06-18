@@ -1,0 +1,52 @@
+{
+  "selected_question_ids": [
+    "65721d26-614c-4b04-b9fe-4c257c0e1e29",
+    "d06b0374-58a7-44d2-863c-ce85a4581ea6",
+    "342939f5-ad58-42ae-81c2-dbaf252f2cf6",
+    "ac3a14e3-90d0-49fc-ae60-b98d275e3d52",
+    "ee041505-b0fd-4211-b678-94af75615301",
+    "54d76c43-db63-48f8-a9f6-7ce267063e9f",
+    "48c53ed3-7a4b-4903-951e-461790512661",
+    "83e02f55-457e-4fea-b757-7a965334cd1e",
+    "455957cf-3299-490f-9cd4-86f07528a809",
+    "f5381cac-87d2-4cdd-b7bc-196957471cfc",
+    "3f4c8c9c-17bc-4efe-b8dd-a82c22b5d0f0",
+    "77eae9b3-4fbf-4c65-876e-85674280177b",
+    "a8286d14-7ec6-4ecd-95cc-da0821176364",
+    "292bb8fb-fc13-4229-ba4b-583c4e25d099"
+  ],
+  "dropped_as_duplicate": [],
+  "dropped_as_overquota": [],
+  "group_assignments": {
+    "65721d26-614c-4b04-b9fe-4c257c0e1e29": "qa::hard",
+    "d06b0374-58a7-44d2-863c-ce85a4581ea6": "qa::hard",
+    "342939f5-ad58-42ae-81c2-dbaf252f2cf6": "qa::hard",
+    "ac3a14e3-90d0-49fc-ae60-b98d275e3d52": "qa::hard",
+    "ee041505-b0fd-4211-b678-94af75615301": "qa::hard",
+    "54d76c43-db63-48f8-a9f6-7ce267063e9f": "qa::hard",
+    "48c53ed3-7a4b-4903-951e-461790512661": "qa::hard",
+    "83e02f55-457e-4fea-b757-7a965334cd1e": "qa::hard",
+    "455957cf-3299-490f-9cd4-86f07528a809": "qa::hard",
+    "f5381cac-87d2-4cdd-b7bc-196957471cfc": "qa::hard",
+    "3f4c8c9c-17bc-4efe-b8dd-a82c22b5d0f0": "multiple_choice::medium",
+    "77eae9b3-4fbf-4c65-876e-85674280177b": "multiple_choice::medium",
+    "a8286d14-7ec6-4ecd-95cc-da0821176364": "multiple_choice::hard",
+    "292bb8fb-fc13-4229-ba4b-583c4e25d099": "multiple_choice::hard"
+  },
+  "sampling_weights": {
+    "65721d26-614c-4b04-b9fe-4c257c0e1e29": 0.9692500000000001,
+    "d06b0374-58a7-44d2-863c-ce85a4581ea6": 0.953875,
+    "342939f5-ad58-42ae-81c2-dbaf252f2cf6": 0.9471250000000001,
+    "ac3a14e3-90d0-49fc-ae60-b98d275e3d52": 0.9298000000000001,
+    "ee041505-b0fd-4211-b678-94af75615301": 0.9235000000000001,
+    "54d76c43-db63-48f8-a9f6-7ce267063e9f": 0.91225,
+    "48c53ed3-7a4b-4903-951e-461790512661": 0.9025000000000001,
+    "83e02f55-457e-4fea-b757-7a965334cd1e": 0.8965000000000001,
+    "455957cf-3299-490f-9cd4-86f07528a809": 0.888625,
+    "f5381cac-87d2-4cdd-b7bc-196957471cfc": 0.8852500000000001,
+    "3f4c8c9c-17bc-4efe-b8dd-a82c22b5d0f0": 0.8502500000000002,
+    "77eae9b3-4fbf-4c65-876e-85674280177b": 0.8480000000000001,
+    "a8286d14-7ec6-4ecd-95cc-da0821176364": 0.884125,
+    "292bb8fb-fc13-4229-ba4b-583c4e25d099": 0.8665
+  }
+}

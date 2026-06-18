@@ -1,0 +1,25 @@
+{
+  "task_id": "effectiveness_task_20260618_153413",
+  "run_id": "round_003",
+  "total_candidates": 8,
+  "citation_passed": 8,
+  "llm_passed": 8,
+  "final_selected": 8,
+  "stage_latencies_ms": {
+    "citation_validation": 17,
+    "llm_validation": 65135,
+    "selection": 1
+  },
+  "llm_usage": {
+    "calls": 8,
+    "input_tokens": 5250,
+    "output_tokens": 5311
+  },
+  "failed_by_stage": {
+    "citation": 0,
+    "llm": 0,
+    "validator_error": 0,
+    "duplicate": 0,
+    "overquota": 0
+  }
+}

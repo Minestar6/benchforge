@@ -1,0 +1,5 @@
+﻿subset,difficulty,question_count,model_gap,too_easy_ratio,all_models_fail_ratio
+B1,hard,8,0.236833,0.0,0.0
+B1,medium,3,0.265976,0.0,0.0
+Bfull,hard,16,0.235531,0.0,0.0
+Bfull,medium,8,0.211626,0.0,0.0

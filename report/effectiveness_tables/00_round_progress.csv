@@ -1,0 +1,6 @@
+﻿round,selected_this_round,selected_cumulative,qa_generated,qa_selected,qa_too_easy_ratio,mc_generated,mc_selected,mc_too_easy_ratio
+round_001,11,11,9,8,0.111111,4,3,0.0
+round_002,13,24,10,10,0.3,3,3,0.333333
+round_003,8,32,4,4,0.25,4,4,0.5
+round_004,11,43,10,10,0.2,1,1,0.0
+round_005,14,57,10,10,0.1,4,4,0.0

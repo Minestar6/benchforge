@@ -1,0 +1,7 @@
+﻿subset,model,qa_score
+B1,deepseek-v4,0.453556
+B1,deepseek-v4-pro,0.420497
+B1,minimax,0.363935
+Bfull,deepseek-v4,0.441836
+Bfull,deepseek-v4-pro,0.393136
+Bfull,minimax,0.344419

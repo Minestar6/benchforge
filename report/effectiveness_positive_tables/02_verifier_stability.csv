@@ -1,0 +1,6 @@
+﻿round,total_candidates,citation_passed,llm_passed,final_selected,failed_citation,failed_llm
+round_001,13,12,11,11,1,1
+round_002,13,13,13,13,0,0
+round_003,8,8,8,8,0,0
+round_004,11,11,11,11,0,0
+round_005,14,14,14,14,0,0

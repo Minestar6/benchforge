@@ -1,0 +1,3 @@
+﻿subset,overall_model_gap,best_vs_second_gap,per_question_variance_mean,discriminative_question_ratio,easy_questions_too_easy_ratio,all_models_fail_ratio
+B1,0.244781,0.155693,0.019811,0.454545,0.0,0.0
+Bfull,0.227563,0.123411,0.018156,0.458333,0.0,0.0

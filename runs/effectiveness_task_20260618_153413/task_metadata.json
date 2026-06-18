@@ -1,6 +1,6 @@
 {
   "task_id": "effectiveness_task_20260618_153413",
-  "total_rounds": 2,
+  "total_rounds": 5,
   "generator_model": "deepseek-v4",
   "verify_model": "deepseek-v4",
   "eval_candidate_models": [

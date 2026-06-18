@@ -1,0 +1,3 @@
+﻿subset,question_count,citation_score_mean,diversity_score,embedding_dispersion,cluster_entropy,top_bottom_gap,score_variance,adjacent_gap_mean,per_question_gap_mean,discriminative_question_ratio,best_vs_second_gap
+B1,11,0.789356,0.8232,0.801,0.8454,0.095227,0.001635,0.047613,0.244781,0.454545,0.155693
+Bfull,57,0.80658,0.8912,0.8026,0.9799,0.067629,0.000764,0.033815,0.227563,0.458333,0.123411

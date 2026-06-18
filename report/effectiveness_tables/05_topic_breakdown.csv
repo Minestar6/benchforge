@@ -1,0 +1,5 @@
+﻿subset,topic,question_count,model_gap,too_easy_ratio,all_models_fail_ratio
+B1,Artificial Intelligence,8,0.195016,0.0,0.0
+B1,Quantum Computing,3,0.377489,0.0,0.0
+Bfull,Artificial Intelligence,10,0.166743,0.0,0.0
+Bfull,Quantum Computing,14,0.271005,0.0,0.0

@@ -1,0 +1,5 @@
+﻿subset,mode,question_count,model_gap,too_easy_ratio,all_models_fail_ratio
+B1,qa,8,0.149074,0.0,0.0
+B1,multiple_choice,3,0.5,0.0,0.0
+Bfull,qa,18,0.13675,0.0,0.0
+Bfull,multiple_choice,6,0.5,0.0,0.0

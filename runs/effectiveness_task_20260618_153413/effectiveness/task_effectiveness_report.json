@@ -1,8 +1,8 @@
 {
   "task_id": "effectiveness_task_20260618_153413",
   "task_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413",
-  "total_rounds": 2,
-  "next_round_index": 3,
+  "total_rounds": 5,
+  "next_round_index": 6,
   "round_summaries": [
     {
       "run_id": "round_001",
@@ -111,11 +111,173 @@
           }
         }
       }
+    },
+    {
+      "run_id": "round_003",
+      "run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/round_003",
+      "validated_path": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/round_003/validation/validated_questions.jsonl",
+      "selected_count": 8,
+      "mode_round_summaries": {
+        "qa": {
+          "round_1": {
+            "round_count": 1,
+            "generated_count": 4,
+            "selected_count": 8,
+            "selected_rate": 2.0,
+            "too_easy_ratio": 0.25,
+            "selected_hard_ratio": 0.0
+          },
+          "round_2_plus": {
+            "round_count": 0,
+            "generated_count": 0,
+            "selected_count": 0,
+            "selected_rate": 0.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "delta": {
+            "selected_rate": -2.0,
+            "too_easy_ratio": -0.25,
+            "selected_hard_ratio": 0.0
+          }
+        },
+        "multiple_choice": {
+          "round_1": {
+            "round_count": 1,
+            "generated_count": 4,
+            "selected_count": 8,
+            "selected_rate": 2.0,
+            "too_easy_ratio": 0.5,
+            "selected_hard_ratio": 0.0
+          },
+          "round_2_plus": {
+            "round_count": 0,
+            "generated_count": 0,
+            "selected_count": 0,
+            "selected_rate": 0.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "delta": {
+            "selected_rate": -2.0,
+            "too_easy_ratio": -0.5,
+            "selected_hard_ratio": 0.0
+          }
+        }
+      }
+    },
+    {
+      "run_id": "round_004",
+      "run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/round_004",
+      "validated_path": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/round_004/validation/validated_questions.jsonl",
+      "selected_count": 11,
+      "mode_round_summaries": {
+        "qa": {
+          "round_1": {
+            "round_count": 1,
+            "generated_count": 10,
+            "selected_count": 11,
+            "selected_rate": 1.1,
+            "too_easy_ratio": 0.2,
+            "selected_hard_ratio": 0.0
+          },
+          "round_2_plus": {
+            "round_count": 0,
+            "generated_count": 0,
+            "selected_count": 0,
+            "selected_rate": 0.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "delta": {
+            "selected_rate": -1.1,
+            "too_easy_ratio": -0.2,
+            "selected_hard_ratio": 0.0
+          }
+        },
+        "multiple_choice": {
+          "round_1": {
+            "round_count": 1,
+            "generated_count": 1,
+            "selected_count": 11,
+            "selected_rate": 11.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "round_2_plus": {
+            "round_count": 0,
+            "generated_count": 0,
+            "selected_count": 0,
+            "selected_rate": 0.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "delta": {
+            "selected_rate": -11.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          }
+        }
+      }
+    },
+    {
+      "run_id": "round_005",
+      "run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/round_005",
+      "validated_path": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/round_005/validation/validated_questions.jsonl",
+      "selected_count": 14,
+      "mode_round_summaries": {
+        "qa": {
+          "round_1": {
+            "round_count": 1,
+            "generated_count": 10,
+            "selected_count": 14,
+            "selected_rate": 1.4,
+            "too_easy_ratio": 0.1,
+            "selected_hard_ratio": 0.0
+          },
+          "round_2_plus": {
+            "round_count": 0,
+            "generated_count": 0,
+            "selected_count": 0,
+            "selected_rate": 0.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "delta": {
+            "selected_rate": -1.4,
+            "too_easy_ratio": -0.1,
+            "selected_hard_ratio": 0.0
+          }
+        },
+        "multiple_choice": {
+          "round_1": {
+            "round_count": 1,
+            "generated_count": 4,
+            "selected_count": 14,
+            "selected_rate": 3.5,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "round_2_plus": {
+            "round_count": 0,
+            "generated_count": 0,
+            "selected_count": 0,
+            "selected_rate": 0.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "delta": {
+            "selected_rate": -3.5,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          }
+        }
+      }
     }
   ],
   "round_1_selected_count": 11,
-  "all_rounds_selected_count": 24,
-  "later_round_selected_count": 13,
+  "all_rounds_selected_count": 57,
+  "later_round_selected_count": 46,
   "b1": {
     "subset_name": "b1_eval",
     "question_count": 11,
@@ -236,7 +398,7 @@
   },
   "bfull": {
     "subset_name": "bfull_eval",
-    "question_count": 24,
+    "question_count": 57,
     "input_path": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/effectiveness/bfull_eval/selected_questions.jsonl",
     "evaluation_run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/bfull_eval",
     "evaluation_result": {

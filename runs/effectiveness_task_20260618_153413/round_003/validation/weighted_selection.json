@@ -1,0 +1,34 @@
+{
+  "selected_question_ids": [
+    "1ab2b4c0-bf09-4d52-8c9e-96e33c59b5af",
+    "be002aa2-8ba6-44fe-91ab-e3b5a8ddbdb4",
+    "1bdb4ffb-3dc3-4eb0-a40e-5995a0a26e20",
+    "93d86be5-8db7-4d53-9434-34bbec8dbc54",
+    "2f64c378-ade7-495b-9333-96d19a8e42ba",
+    "6aee94c7-d256-4877-84da-05ed8dc5a2b9",
+    "545dd828-8bab-4094-9357-3534c5ea56f3",
+    "7a3ec4bc-211d-449c-ad3e-d9e41ad2233a"
+  ],
+  "dropped_as_duplicate": [],
+  "dropped_as_overquota": [],
+  "group_assignments": {
+    "1ab2b4c0-bf09-4d52-8c9e-96e33c59b5af": "qa::hard",
+    "be002aa2-8ba6-44fe-91ab-e3b5a8ddbdb4": "qa::easy",
+    "1bdb4ffb-3dc3-4eb0-a40e-5995a0a26e20": "qa::hard",
+    "93d86be5-8db7-4d53-9434-34bbec8dbc54": "qa::hard",
+    "2f64c378-ade7-495b-9333-96d19a8e42ba": "multiple_choice::medium",
+    "6aee94c7-d256-4877-84da-05ed8dc5a2b9": "multiple_choice::easy",
+    "545dd828-8bab-4094-9357-3534c5ea56f3": "multiple_choice::hard",
+    "7a3ec4bc-211d-449c-ad3e-d9e41ad2233a": "multiple_choice::medium"
+  },
+  "sampling_weights": {
+    "1ab2b4c0-bf09-4d52-8c9e-96e33c59b5af": 0.9205000000000001,
+    "be002aa2-8ba6-44fe-91ab-e3b5a8ddbdb4": 0.809125,
+    "1bdb4ffb-3dc3-4eb0-a40e-5995a0a26e20": 0.9043750000000002,
+    "93d86be5-8db7-4d53-9434-34bbec8dbc54": 0.901,
+    "2f64c378-ade7-495b-9333-96d19a8e42ba": 0.911,
+    "6aee94c7-d256-4877-84da-05ed8dc5a2b9": 0.840625,
+    "545dd828-8bab-4094-9357-3534c5ea56f3": 0.868875,
+    "7a3ec4bc-211d-449c-ad3e-d9e41ad2233a": 0.7910000000000001
+  }
+}

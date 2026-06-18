@@ -1,0 +1,21 @@
+{
+  "mode": "multiple_choice",
+  "candidate_count": 4,
+  "total_record_count": 4,
+  "accepted_count": 4,
+  "rejected_count": 0,
+  "difficulty_counts": {
+    "hard": 2,
+    "medium": 2
+  },
+  "topic_counts": {
+    "Artificial Intelligence": 4
+  },
+  "stopped_reason": "max_rounds_reached",
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

@@ -61,7 +61,7 @@ REGISTRY_PATH = PROJECT_ROOT / "config" / "model_registry.yaml"
 RUNS_BASE = PROJECT_ROOT / "runs"
 
 TASK_PREFIX = "effectiveness_task_"
-DEFAULT_TOTAL_ROUNDS = 2
+DEFAULT_TOTAL_ROUNDS = 5
 GENERATOR_MODEL = "deepseek-v4"
 VERIFY_MODEL = "deepseek-v4"
 EVAL_CANDIDATE_MODELS = ["deepseek-v4", "deepseek-v4-pro", "minimax"]
@@ -215,7 +215,8 @@ def _initialize_task(task_id: str, total_rounds: int) -> tuple[dict[str, Any], P
     metadata_path = _task_metadata_path(task_id)
     if metadata_path.exists():
         metadata = _read_json(metadata_path)
-        metadata["total_rounds"] = int(metadata.get("total_rounds", total_rounds))
+        metadata["total_rounds"] = max(int(metadata.get("total_rounds", total_rounds)), int(total_rounds))
+        _write_json(metadata_path, metadata)
     else:
         metadata = {
             "task_id": task_id,

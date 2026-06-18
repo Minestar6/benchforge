@@ -225,6 +225,33 @@ def test_next_round_index_counts_completed_round_directories(tmp_path: Path) -> 
     assert next_round_index(task_dir) == 5
 
 
+def test_initialize_task_upgrades_existing_total_rounds(tmp_path: Path, monkeypatch) -> None:
+    import experiment.case.run_effectiveness_experiment as module
+
+    task_id = "effectiveness_task_demo"
+    monkeypatch.setattr(module, "RUNS_BASE", tmp_path / "runs")
+
+    task_dir = module.RUNS_BASE / task_id
+    inputs_dir = task_dir / "experiment_inputs"
+    inputs_dir.mkdir(parents=True)
+    (inputs_dir / "case_blueprint_effectiveness.yaml").write_text(
+        "language: en\ntopics: [A, B]\nmodes:\n  qa:\n    count: 4\n    max_rounds: 1\n    difficulty_distribution: {medium: 0.5, hard: 0.5}\n  multiple_choice:\n    count: 2\n    max_rounds: 1\n    difficulty_distribution: {medium: 0.5, hard: 0.5}\n",
+        encoding="utf-8",
+    )
+    (inputs_dir / "qa_agent_effectiveness.yaml").write_text("model:\n  name: deepseek-v4\n", encoding="utf-8")
+    (inputs_dir / "verify_agent_effectiveness.yaml").write_text("llm_validation:\n  model: deepseek-v4\n", encoding="utf-8")
+    (inputs_dir / "model_eval_effectiveness.yaml").write_text("run:\n  shared_state_path: ''\n", encoding="utf-8")
+    (task_dir / "task_metadata.json").write_text(
+        json.dumps({"task_id": task_id, "total_rounds": 2}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    _, _, _, _, _ = module._initialize_task(task_id, total_rounds=5)
+
+    metadata = json.loads((task_dir / "task_metadata.json").read_text(encoding="utf-8"))
+    assert metadata["total_rounds"] == 5
+
+
 @pytest.mark.asyncio
 async def test_run_eval_subset_uses_config_object_runner(tmp_path: Path, monkeypatch) -> None:
     import experiment.case.run_effectiveness_experiment as module

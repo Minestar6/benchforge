@@ -1,0 +1,6 @@
+﻿round,total_candidates,citation_passed,llm_passed,final_selected,failed_citation,failed_llm,llm_calls,llm_input_tokens,llm_output_tokens,llm_stage_latency_ms
+round_001,13,12,11,11,1,1,12,8519,6357,60807
+round_002,13,13,13,13,0,0,13,9573,6074,64423
+round_003,8,8,8,8,0,0,8,5250,5311,65135
+round_004,11,11,11,11,0,0,11,7744,5875,66463
+round_005,14,14,14,14,0,0,14,10063,6735,49517
