@@ -6,6 +6,8 @@ from pathlib import Path
 from benchforge.utils.shared_state import load_shared_state
 from benchforge.utils.llm_tracer import TraceReader
 
+from ..verify_agent.selector import _normalize_difficulty
+
 from .schema import (
     GeneratorFeedback,
     GeneratorFeedbackArtifacts,
@@ -168,6 +170,7 @@ def build_validator_feedback(
     by_final_status: dict[str, int] = {}
     by_mode: dict[str, dict[str, int]] = {}
     by_difficulty: dict[str, dict[str, int]] = {}
+    by_mode_difficulty: dict[str, dict[str, dict[str, int]]] = {}
     by_topic: dict[str, dict[str, any]] = {}
     citation_scores_all = []
     citation_scores_selected = []
@@ -183,7 +186,7 @@ def build_validator_feedback(
 
                 candidate = q.get("candidate", {})
                 mode = candidate.get("question_mode", "unknown")
-                difficulty = candidate.get("estimated_difficulty", "unknown")
+                difficulty = _normalize_difficulty(candidate.get("estimated_difficulty", "unknown"))
                 topic = candidate.get("topic", "unknown")
 
                 # by_mode
@@ -206,6 +209,18 @@ def build_validator_feedback(
                 else:
                     by_difficulty[difficulty]["rejected"] += 1
 
+                # by_mode_difficulty
+                if mode not in by_mode_difficulty:
+                    by_mode_difficulty[mode] = {}
+                if difficulty not in by_mode_difficulty[mode]:
+                    by_mode_difficulty[mode][difficulty] = {"selected": 0, "reserve": 0, "rejected": 0}
+                if final_status == "selected":
+                    by_mode_difficulty[mode][difficulty]["selected"] += 1
+                elif final_status == "reserve":
+                    by_mode_difficulty[mode][difficulty]["reserve"] += 1
+                else:
+                    by_mode_difficulty[mode][difficulty]["rejected"] += 1
+
                 # by_topic
                 if topic not in by_topic:
                     by_topic[topic] = {
@@ -223,14 +238,14 @@ def build_validator_feedback(
                     by_topic[topic]["rejected"] += 1
 
                 # citation / llm scores
-                citation_val = q.get("citation_validation", {})
+                citation_val = q.get("citation_validation", {}) or {}
                 if citation_score := citation_val.get("citation_score"):
                     citation_scores_all.append(citation_score)
                     by_topic[topic]["citation_scores"].append(citation_score)
                     if final_status == "selected":
                         citation_scores_selected.append(citation_score)
 
-                llm_val = q.get("llm_validation", {})
+                llm_val = q.get("llm_validation", {}) or {}
                 if overall_score := llm_val.get("overall_score"):
                     llm_scores_all.append(overall_score)
                     by_topic[topic]["llm_scores"].append(overall_score)
@@ -279,6 +294,7 @@ def build_validator_feedback(
         by_final_status=by_final_status,
         by_mode=by_mode,
         by_difficulty=by_difficulty,
+        by_mode_difficulty=by_mode_difficulty,
         by_topic=by_topic,
         selection_summary={
             "dropped_as_duplicate": dropped_dup,

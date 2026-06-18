@@ -20,10 +20,10 @@ from benchforge.agents.verify_agent.config_loader import load_verify_agent_confi
 from benchforge.agents.verify_agent.agent import run_verify_agent_from_shared_state
 from benchforge.agents.model_eval_agent.config_loader import load_model_eval_config
 from benchforge.agents.model_eval_agent.agent import run_model_eval_agent_from_shared_state
-from benchforge.utils.shared_state import build_shared_state, save_shared_state
+from benchforge.utils.shared_state import build_shared_state, save_shared_state, load_shared_state
 
 from .schema import RoundSpec, GlobalBlueprint, GeneratorFeedback, ValidatorFeedback, EvaluatorFeedback
-from .utils import deep_merge, translate_eval_profile
+from .utils import deep_merge, translate_eval_profile, merge_model_eval_config
 from .feedback import build_generator_feedback, build_validator_feedback, build_evaluator_feedback
 
 
@@ -40,7 +40,14 @@ def _load_verify_model_client(registry: dict, verify_config):
     model_name = verify_config.llm_validation.model
     if not model_name:
         return None
-    return _load_model_client_from_registry(registry, model_name)
+    try:
+        return _load_model_client_from_registry(registry, model_name)
+    except ValueError:
+        logger.warning(
+            f"[Orchestrator] Verify LLM model '{model_name}' not found in registry, "
+            "falling back to citation-only verification"
+        )
+        return None
 
 
 async def execute_round(
@@ -89,7 +96,7 @@ async def execute_round(
 
     effective_qa = deep_merge(qa_base, round_spec.qa_agent_patch)
     effective_verify = deep_merge(verify_base, round_spec.verify_agent_patch)
-    effective_eval = deep_merge(eval_base, round_spec.model_eval_agent_patch, eval_profile_patch)
+    effective_eval = merge_model_eval_config(eval_base, round_spec.model_eval_agent_patch, eval_profile_patch)
 
     # 落盘
     with open(planner_dir / "qa_agent.patch.yaml", "w", encoding="utf-8") as f:
@@ -138,14 +145,20 @@ async def execute_round(
 
     # 5. 更新 shared_state（兼容 verify_agent 读 state.blueprint）
     shared_state_path = run_dir / "shared_state.json"
-    state = build_shared_state(
-        blueprint.task_id,
-        blueprint.run_id,
-        blueprint,
-        run_dir,
-        round_id=round_spec.round_id,
-        round_spec_ref=str(round_spec_path),
-    )
+    if shared_state_path.exists():
+        state = load_shared_state(shared_state_path)
+    else:
+        state = build_shared_state(
+            blueprint.task_id,
+            blueprint.run_id,
+            blueprint,
+            run_dir,
+        )
+
+    state.round_id = round_spec.round_id
+    state.round_spec_ref = str(round_spec_path)
+    state.blueprint = round_spec.blueprint
+    state.blueprint_cache = round_spec.blueprint
 
     # 写入 mode_state artifact keys
     for mode in blueprint.modes:

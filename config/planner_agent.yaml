@@ -1,8 +1,8 @@
 model:
-  name: deepseek-v3.2
+  name: deepseek-v4
   temperature: 0.2
   max_tokens: 1200
-  max_retries: 3
+  max_retries: 2
 
 prompts:
   blueprint_synthesizer: prompts/planner_agent/blueprint_synthesizer_prompt.md

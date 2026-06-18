@@ -1,0 +1,26 @@
+2026-06-18 14:48:05.780 | INFO     | Starting generation run effectiveness_case_20260618_144805
+2026-06-18 14:48:05.896 | INFO     | Preparing evidence for 2 topics (parallel)
+2026-06-18 14:48:05.905 | INFO     | Saved JSON to runs/case/effectiveness_case_20260618_144805/evidence/single_units.json
+2026-06-18 14:48:05.906 | INFO     | Saved JSON to runs/case/effectiveness_case_20260618_144805/evidence/multi_units.json
+2026-06-18 14:48:05.906 | INFO     | Starting mode: qa
+2026-06-18 14:48:05.907 | INFO     | Mode=qa round=1 strategy=initial_breadth generated=0 accepted=0 total_accepted=0
+2026-06-18 14:48:05.907 | INFO     | Mode=qa round=2 strategy=hard_generate generated=0 accepted=0 total_accepted=0
+2026-06-18 14:48:05.908 | INFO     | Mode=qa round=3 strategy=hard_generate generated=0 accepted=0 total_accepted=0
+2026-06-18 14:48:05.910 | INFO     | Mode=qa round=4 strategy=expand_evidence generated=0 accepted=0 total_accepted=0
+2026-06-18 14:48:05.911 | INFO     | Mode=qa round=5 strategy=hard_generate generated=0 accepted=0 total_accepted=0
+2026-06-18 14:48:05.911 | INFO     | Mode qa stopped: max_rounds_reached
+2026-06-18 14:48:05.913 | INFO     | Mode qa complete: 0 accepted, stopped_reason=max_rounds_reached
+2026-06-18 14:48:05.913 | INFO     | Starting mode: multiple_choice
+2026-06-18 14:48:05.914 | INFO     | Mode=multiple_choice round=1 strategy=initial_breadth generated=0 accepted=0 total_accepted=0
+2026-06-18 14:48:05.915 | INFO     | Mode=multiple_choice round=2 strategy=hard_generate generated=0 accepted=0 total_accepted=0
+2026-06-18 14:48:05.915 | INFO     | Mode=multiple_choice round=3 strategy=hard_generate generated=0 accepted=0 total_accepted=0
+2026-06-18 14:48:05.917 | INFO     | Mode=multiple_choice round=4 strategy=expand_evidence generated=0 accepted=0 total_accepted=0
+2026-06-18 14:48:05.918 | INFO     | Mode multiple_choice stopped: max_rounds_reached
+2026-06-18 14:48:05.919 | INFO     | Mode multiple_choice complete: 0 accepted, stopped_reason=max_rounds_reached
+2026-06-18 14:48:05.921 | INFO     | Generation complete. Output: runs/case/effectiveness_case_20260618_144805/
+2026-06-18 14:48:05.921 | INFO     | Generation complete: 0 candidates
+2026-06-18 14:48:05.930 | INFO     | Starting verification for /Users/zhaoziqing/Desktop/benchforge/runs/case/effectiveness_case_20260618_144805/shared_state.json
+2026-06-18 14:48:05.930 | WARNING  | chunked evidence not found at runs/case/effectiveness_case_20260618_144805/evidence/chunked.json, chunk hydrate disabled
+2026-06-18 14:48:05.931 | INFO     | Loaded 0 raw candidates from runs/case/effectiveness_case_20260618_144805/qa/candidate_pool.json
+2026-06-18 14:48:05.931 | INFO     | Loaded 0 raw candidates from runs/case/effectiveness_case_20260618_144805/multiple_choice/candidate_pool.json
+2026-06-18 14:48:05.932 | INFO     | Normalized 0 candidates total

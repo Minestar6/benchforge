@@ -352,7 +352,7 @@ class VerifyAgent:
             if llm_val and llm_val.suggested_difficulty in ("easy", "medium", "hard"):
                 original_label = _normalize_difficulty(rec.candidate.estimated_difficulty)
                 if llm_val.suggested_difficulty != original_label:
-                    rec.candidate.estimated_difficulty = _label_to_int_difficulty(llm_val.suggested_difficulty)
+                    rec.candidate.estimated_difficulty = llm_val.suggested_difficulty
 
         store.save_jsonl("validated_questions.jsonl", all_records)
         store.save_json("weighted_selection.json", selection_result.model_dump())

@@ -1,0 +1,32 @@
+{
+  "candidate_count": 20,
+  "accepted_count": 20,
+  "rejected_count": 1,
+  "accept_rate": 0.9524,
+  "topic_distribution": {
+    "physics qualitative reasoning and estimation": 9,
+    "physics real-world problem solving": 11
+  },
+  "difficulty_distribution": {
+    "medium": 13,
+    "easy": 6,
+    "hard": 1
+  },
+  "hard_gap": 0.15,
+  "stopped_reason": "max_candidate_pool_reached",
+  "min_candidate_target": 2,
+  "max_candidate_target": 2,
+  "min_difficulty_targets": {
+    "easy": 1,
+    "medium": 1,
+    "hard": 1
+  },
+  "min_target_reached": true,
+  "max_target_reached": true,
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

@@ -28,6 +28,11 @@ from .schema import (
 )
 from .config_loader import initialize_planner_state, save_planner_state, load_planner_agent_config
 from .orchestrator import execute_round
+from .feedback import (
+    build_generator_feedback,
+    build_validator_feedback,
+    build_evaluator_feedback,
+)
 from .topic_search import (
     summarize_topic_feedback,
     expand_topic_candidates,
@@ -38,6 +43,46 @@ from .topic_search import (
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 _TOPIC_ADAPTIVE_RETRIEVER_PROMPT_PATH = _PROJECT_ROOT / "prompts" / "planner_agent" / "topic_adaptive_retriever_prompt.md"
 _DIFFICULTY_COUNT_PLANNER_PROMPT_PATH = _PROJECT_ROOT / "prompts" / "planner_agent" / "difficulty_count_planner_prompt.md"
+
+
+def _planner_temperature(model_client, default: float = 0.2) -> float:
+    value = getattr(model_client, "temperature", default)
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _planner_max_tokens(model_client) -> int:
+    value = getattr(model_client, "max_tokens", 1200)
+    try:
+        resolved = int(value)
+    except (TypeError, ValueError):
+        resolved = 1200
+    return max(1, resolved)
+
+
+def _load_resume_feedback(state: PlannerState, state_dir: Path):
+    try:
+        if not state.run_history:
+            return None, None, None
+
+        last_entry = state.run_history[-1]
+        shared_state_path = Path("runs") / state.task_id / last_entry.run_id / "shared_state.json"
+        round_spec_path = state_dir / f"round_{last_entry.round_id:03d}_spec.json"
+        if not shared_state_path.exists() or not round_spec_path.exists():
+            return None, None, None
+
+        with open(round_spec_path, encoding="utf-8") as f:
+            round_spec = RoundSpec(**json.load(f))
+
+        gen_fb = build_generator_feedback(shared_state_path, round_spec)
+        val_fb = build_validator_feedback(shared_state_path, last_entry.round_id)
+        eval_fb = build_evaluator_feedback(shared_state_path, last_entry.round_id)
+        return gen_fb, val_fb, eval_fb
+    except Exception as exc:
+        logger.warning(f"[Planner] Failed to restore resume feedback, falling back to cold start: {exc}")
+        return None, None, None
 
 
 async def run_planner(
@@ -55,6 +100,8 @@ async def run_planner(
     state_dir = Path(state_dir)
     state_dir.mkdir(parents=True, exist_ok=True)
 
+    planner_config = load_planner_agent_config(base_config_dir)
+
     if resume_state is not None:
         state = resume_state
         logger.info(f"[Planner] Resumed from round {state.current_round}, "
@@ -64,14 +111,22 @@ async def run_planner(
         save_planner_state(state, state_dir / "planner_state_init.json")
 
     registry = load_model_registry(registry_path)
-    planner_model_name = global_blueprint.evaluator_defaults.judge_model_name or list(registry.keys())[0]
+    preferred_planner_models = [
+        planner_config.model.name,
+        global_blueprint.evaluator_defaults.judge_model_name,
+        list(registry.keys())[0] if registry else None,
+    ]
+    planner_model_name = next(
+        (name for name in preferred_planner_models if name and name in registry),
+        None,
+    )
     planner_model_cfg = registry.get(planner_model_name)
     if not planner_model_cfg:
         raise ValueError(f"Planner model '{planner_model_name}' not found in registry")
     planner_model_client = ModelLoader.load_model(planner_model_cfg)
-
-    # 加载 planner 配置，决定 evolver 模式
-    planner_config = load_planner_agent_config(base_config_dir)
+    setattr(planner_model_client, "temperature", planner_config.model.temperature)
+    setattr(planner_model_client, "max_tokens", max(planner_config.model.max_tokens, 1))
+    setattr(planner_model_client, "max_retries", planner_config.model.max_retries)
     use_llm_evolver = planner_config.question_difficulty_evolver.enabled
 
     logger.info(
@@ -83,6 +138,8 @@ async def run_planner(
     latest_gen_fb = None
     latest_val_fb = None
     latest_eval_fb = None
+    if resume_state is not None:
+        latest_gen_fb, latest_val_fb, latest_eval_fb = _load_resume_feedback(state, state_dir)
 
     while True:
         if _should_stop(state, global_blueprint):
@@ -123,6 +180,11 @@ async def run_planner(
             latest_eval_fb=latest_eval_fb,
         )
 
+        if question_plan.qa_count <= 0 and question_plan.mc_count <= 0:
+            logger.info("[Planner] No generation targets remain for this round, stopping planner")
+            state.current_round -= 1
+            break
+
         proposed_topics = await topic_adaptive_retriever(
             state=state,
             blueprint=global_blueprint,
@@ -137,10 +199,10 @@ async def run_planner(
         if not proposed_topics and (question_plan.qa_count > 0 or question_plan.mc_count > 0):
             logger.warning(
                 f"[Planner] No topics proposed but generation targets exist "
-                f"(qa={question_plan.qa_count}, mc={question_plan.mc_count}), skipping round"
+                f"(qa={question_plan.qa_count}, mc={question_plan.mc_count}), stopping planner early"
             )
-            state.current_round -= 1  # 回退轮次计数，避免空转消耗 max_rounds 预算
-            continue
+            state.current_round -= 1
+            break
 
         round_spec = round_spec_builder(
             state=state,
@@ -285,8 +347,8 @@ async def _select_topics_with_adaptive_prompt(
     response = await complete(
         model=getattr(model_client, "model_name", "planner"),
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.2,
-        max_tokens=512,
+        temperature=_planner_temperature(model_client),
+        max_tokens=_planner_max_tokens(model_client),
     )
     selected = _extract_topic_selection(response.get("text", ""), topic_budget)
     allowed = set(candidate_topics)
@@ -519,10 +581,15 @@ def _rebalance_distribution(
     return _normalize_distribution(updated)
 
 
-def _difficulty_selected_rate(latest_val_fb, difficulty: str) -> float | None:
+def _difficulty_selected_rate(latest_val_fb, mode: str, difficulty: str) -> float | None:
     if not latest_val_fb:
         return None
-    stats = (latest_val_fb.by_difficulty or {}).get(difficulty)
+    by_mode_difficulty = getattr(latest_val_fb, "by_mode_difficulty", None) or {}
+    by_diff = by_mode_difficulty.get(mode)
+    if by_diff:
+        stats = by_diff.get(difficulty)
+    else:
+        stats = (latest_val_fb.by_difficulty or {}).get(difficulty)
     if not stats:
         return None
     total = int(stats.get("selected", 0) or 0) + int(stats.get("reserve", 0) or 0) + int(stats.get("rejected", 0) or 0)
@@ -533,7 +600,10 @@ def _difficulty_selected_rate(latest_val_fb, difficulty: str) -> float | None:
 
 def _difficulty_distribution_of_selected(latest_val_fb, mode: str) -> dict[str, float]:
     """从 ValidatorFeedback 中提取某 mode 的 selected 题目难度分布。"""
-    by_diff = latest_val_fb.by_difficulty or {}
+    by_mode_difficulty = getattr(latest_val_fb, "by_mode_difficulty", None) or {}
+    by_diff = by_mode_difficulty.get(mode)
+    if not by_diff:
+        by_diff = latest_val_fb.by_difficulty or {}
     counts = {diff: by_diff.get(diff, {}).get("selected", 0) for diff in ("easy", "medium", "hard")}
     total = sum(counts.values())
     if total <= 0:
@@ -542,13 +612,22 @@ def _difficulty_distribution_of_selected(latest_val_fb, mode: str) -> dict[str, 
 
 
 def _extract_json_object(text: str) -> dict[str, Any]:
-    """从 LLM 响应中提取 JSON 对象。"""
+    """从 LLM 响应中提取 JSON 对象，含常见格式错误修复。"""
     stripped = text.strip()
     start = stripped.find("{")
     end = stripped.rfind("}")
-    if start >= 0 and end > start:
-        return json.loads(stripped[start:end + 1])
-    raise ValueError("No JSON object found in LLM response")
+    if start < 0 or end <= start:
+        raise ValueError("No JSON object found in LLM response")
+    raw = stripped[start:end + 1]
+    import re
+    raw = re.sub(r",\s*([}\]])", r"\1", raw)
+    raw = re.sub(
+        r"([{,]\s*)(\w[\w\d_]*)\s*(?=:)",
+        lambda m: m.group(1) + '"' + m.group(2) + '"',
+        raw,
+    )
+    raw = raw.replace("\\x", "\\\\x")
+    return json.loads(raw)
 
 
 async def _llm_question_difficulty_evolver(
@@ -637,8 +716,8 @@ async def _llm_question_difficulty_evolver(
         response = await model_client.complete(
             model=getattr(model_client, "model_name", "planner"),
             messages=[{"role": "user", "content": prompt}],
-            temperature=0.2,
-            max_tokens=512,
+            temperature=_planner_temperature(model_client),
+            max_tokens=_planner_max_tokens(model_client),
         )
         payload = _extract_json_object(response.get("text", ""))
     except Exception as exc:
@@ -806,23 +885,29 @@ def question_difficulty_evolver(
             max_candidate_multiplier = max(max_candidate_multiplier, 2.2)
             topic_budget = min(topic_budget, 1)
 
-    hard_gen_count = 0
-    if qa_mode_fb:
-        hard_gen_count += int((qa_mode_fb.difficulty_counts or {}).get("hard", 0) or 0)
-    if mc_mode_fb:
-        hard_gen_count += int((mc_mode_fb.difficulty_counts or {}).get("hard", 0) or 0)
-    hard_selected_rate = _difficulty_selected_rate(latest_val_fb, "hard")
-    medium_selected_rate = _difficulty_selected_rate(latest_val_fb, "medium")
+    qa_hard_gen_count = int((qa_mode_fb.difficulty_counts or {}).get("hard", 0) or 0) if qa_mode_fb else 0
+    mc_hard_gen_count = int((mc_mode_fb.difficulty_counts or {}).get("hard", 0) or 0) if mc_mode_fb else 0
+    qa_hard_selected_rate = _difficulty_selected_rate(latest_val_fb, "qa", "hard")
+    qa_medium_selected_rate = _difficulty_selected_rate(latest_val_fb, "qa", "medium")
+    mc_hard_selected_rate = _difficulty_selected_rate(latest_val_fb, "multiple_choice", "hard")
+    mc_medium_selected_rate = _difficulty_selected_rate(latest_val_fb, "multiple_choice", "medium")
 
-    if hard_gen_count >= 3 and hard_selected_rate is not None and hard_selected_rate < 0.2:
+    if qa_hard_gen_count >= 3 and qa_hard_selected_rate is not None and qa_hard_selected_rate < 0.2:
         qa_dist = _rebalance_distribution(qa_dist, increase="medium", decrease="hard", amount=0.08)
-        mc_dist = _rebalance_distribution(mc_dist, increase="medium", decrease="hard", amount=0.08)
     elif (
-        hard_selected_rate is not None
-        and medium_selected_rate is not None
-        and hard_selected_rate > medium_selected_rate + 0.2
+        qa_hard_selected_rate is not None
+        and qa_medium_selected_rate is not None
+        and qa_hard_selected_rate > qa_medium_selected_rate + 0.2
     ):
         qa_dist = _rebalance_distribution(qa_dist, increase="hard", decrease="easy", amount=0.06)
+
+    if mc_hard_gen_count >= 3 and mc_hard_selected_rate is not None and mc_hard_selected_rate < 0.2:
+        mc_dist = _rebalance_distribution(mc_dist, increase="medium", decrease="hard", amount=0.08)
+    elif (
+        mc_hard_selected_rate is not None
+        and mc_medium_selected_rate is not None
+        and mc_hard_selected_rate > mc_medium_selected_rate + 0.2
+    ):
         mc_dist = _rebalance_distribution(mc_dist, increase="hard", decrease="easy", amount=0.06)
 
     # verification_rejected_all 场景下 final_selected=0 是预期行为，不应再削减
@@ -974,7 +1059,10 @@ def control_parameter_tuner(
         selection_mode=selection_mode,
         semantic_similarity_threshold=semantic_similarity_threshold,
         eval_profile=eval_profile,
-        judge_enabled=bool(blueprint.evaluation_requirements.llm_judge_metrics.get("qa")),
+        judge_enabled=any(
+            bool(metrics)
+            for metrics in (blueprint.evaluation_requirements.llm_judge_metrics or {}).values()
+        ),
         candidate_model_names=list(state.model_pool.active),
         judge_model_name=blueprint.evaluator_defaults.judge_model_name,
         initial_breadth_enabled=initial_breadth_enabled,

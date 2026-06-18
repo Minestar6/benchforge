@@ -1,0 +1,101 @@
+{
+  "task_id": "t-0618140409-4fef",
+  "run_id": "run_001",
+  "num_questions": 24,
+  "num_models": 2,
+  "discriminative_signals": {
+    "overall_model_gap": null,
+    "best_vs_second_gap": null,
+    "top_vs_bottom_gap": null,
+    "per_question_variance_mean": null,
+    "discriminative_question_ratio": null,
+    "easy_questions_too_easy_ratio": null,
+    "all_models_fail_ratio": null
+  },
+  "by_topic": {
+    "physics qualitative reasoning and estimation": {
+      "question_count": 11,
+      "model_gap": null,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    },
+    "physics real-world problem solving": {
+      "question_count": 13,
+      "model_gap": null,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    }
+  },
+  "by_difficulty": {
+    "hard": {
+      "question_count": 8,
+      "model_gap": null,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    },
+    "medium": {
+      "question_count": 5,
+      "model_gap": null,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    },
+    "easy": {
+      "question_count": 11,
+      "model_gap": null,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    }
+  },
+  "by_mode": {
+    "qa": {
+      "question_count": 9,
+      "model_gap": null,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    },
+    "multiple_choice": {
+      "question_count": 15,
+      "model_gap": null,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    }
+  },
+  "qa": {
+    "Mode": {
+      "hard": 0.206743,
+      "medium": 0.245283
+    },
+    "Topic": {
+      "physics qualitative reasoning and estimation": 0.235377,
+      "physics real-world problem solving": 0.162323
+    },
+    "model": {
+      "deepseek-v4": 0.211026
+    }
+  },
+  "multiple_choice": {
+    "Mode": {
+      "easy": 1.0,
+      "medium": 1.0
+    },
+    "Topic": {
+      "physics real-world problem solving": 1.0,
+      "physics qualitative reasoning and estimation": 1.0
+    },
+    "model": {
+      "deepseek-v4": 1.0
+    }
+  },
+  "dataset_metrics": {
+    "citation_score": {
+      "mean": 0.827611,
+      "num_scored": 24,
+      "num_missing": 0
+    },
+    "diversity_score": {
+      "score": 0.8899,
+      "embedding_dispersion": 0.8254,
+      "cluster_entropy": 0.9544
+    }
+  }
+}

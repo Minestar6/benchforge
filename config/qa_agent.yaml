@@ -6,7 +6,7 @@
 
 # ── 模型（引用 model_registry.yaml 中的逻辑名） ────────────────────────────────
 model:
-  name: "deepseek-v3.2"              # model_registry.yaml 中的 key
+  name: deepseek-v4             # model_registry.yaml 中的 key
   # 调用参数在 agent 级别指定，不在 registry 中
   temperature: 0.2
   max_tokens: 4096

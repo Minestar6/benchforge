@@ -1,0 +1,65 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "hard",
+    "topics": [
+      "physics qualitative reasoning and estimation",
+      "physics real-world problem solving"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 1,
+    "results": [
+      {
+        "topic": "physics qualitative reasoning and estimation",
+        "success": true,
+        "generated_count": 6,
+        "raw_count": 6,
+        "filtered_count": 6,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 3,
+        "multi_generated_count": 3,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_db25cae4cd974536b8b219a15fa35c11",
+        "trace_call_id": "llm_616d299223c840feaba54340760fdc55",
+        "chunks": [
+          "doc_436fd17789fe::chunk_0001",
+          "doc_436fd17789fe::chunk_0003",
+          "doc_436fd17789fe::chunk_0005",
+          "doc_436fd17789fe::chunk_0007",
+          "doc_82dab7e6e73c::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "physics real-world problem solving",
+        "success": true,
+        "generated_count": 3,
+        "raw_count": 3,
+        "filtered_count": 3,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 3,
+        "multi_generated_count": 0,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_fdbc07f0270944358213d8d95a35b8b2",
+        "trace_call_id": "llm_c8297f0e39d647f78746a9362c58a961",
+        "chunks": [
+          "doc_1f4c082fb219::chunk_0000",
+          "doc_1f4c082fb219::chunk_0005",
+          "doc_1f4c082fb219::chunk_0006",
+          "doc_1f4c082fb219::chunk_0007",
+          "doc_bdf882904c75::chunk_0004"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

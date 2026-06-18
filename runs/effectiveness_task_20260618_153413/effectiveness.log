@@ -1,0 +1,160 @@
+2026-06-18 15:34:13.705 | INFO     | Using task effectiveness_task_20260618_153413
+2026-06-18 15:34:13.705 | INFO     | Round round_001 generation start
+2026-06-18 15:34:13.832 | INFO     | Preparing evidence for 2 topics (parallel)
+2026-06-18 15:34:59.821 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/round_001/evidence/chunked.json
+2026-06-18 15:34:59.824 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/round_001/evidence/single_units.json
+2026-06-18 15:34:59.826 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/round_001/evidence/multi_units.json
+2026-06-18 15:34:59.826 | INFO     | Starting mode: qa
+2026-06-18 15:35:42.079 | DEBUG    | Generator: mode=qa difficulty=hard response_len=3747
+2026-06-18 15:35:42.590 | DEBUG    | Generator: mode=qa difficulty=hard response_len=8432
+2026-06-18 15:36:18.495 | DEBUG    | Generator: mode=qa difficulty=hard response_len=13009
+2026-06-18 15:36:26.313 | DEBUG    | Generator: mode=qa difficulty=hard response_len=4011
+2026-06-18 15:36:26.317 | INFO     | Mode=qa round=1 strategy=initial_breadth generated=9 accepted=9 total_accepted=9
+2026-06-18 15:36:26.318 | INFO     | Mode qa stopped: max_candidate_pool_reached
+2026-06-18 15:36:26.325 | INFO     | Mode qa complete: 9 accepted, stopped_reason=max_candidate_pool_reached
+2026-06-18 15:36:26.325 | INFO     | Starting mode: multiple_choice
+2026-06-18 15:37:05.037 | DEBUG    | Generator: mode=multiple_choice difficulty=hard response_len=9193
+2026-06-18 15:37:13.631 | DEBUG    | Generator: mode=multiple_choice difficulty=hard response_len=5758
+2026-06-18 15:37:13.634 | INFO     | Mode=multiple_choice round=1 strategy=initial_breadth generated=4 accepted=4 total_accepted=4
+2026-06-18 15:37:13.634 | INFO     | Mode multiple_choice stopped: max_rounds_reached
+2026-06-18 15:37:13.640 | INFO     | Mode multiple_choice complete: 4 accepted, stopped_reason=max_rounds_reached
+2026-06-18 15:37:13.643 | INFO     | Generation complete. Output: runs/effectiveness_task_20260618_153413/round_001/
+2026-06-18 15:37:13.647 | INFO     | Round round_001 generation complete: 13 candidates
+2026-06-18 15:37:13.666 | INFO     | Round round_001 verification start
+2026-06-18 15:37:13.673 | INFO     | Built chunk index with 60 entries from runs/effectiveness_task_20260618_153413/round_001/evidence/chunked.json
+2026-06-18 15:37:13.678 | INFO     | Loaded 9 raw candidates from runs/effectiveness_task_20260618_153413/round_001/qa/candidate_pool.json
+2026-06-18 15:37:13.682 | INFO     | Loaded 4 raw candidates from runs/effectiveness_task_20260618_153413/round_001/multiple_choice/candidate_pool.json
+2026-06-18 15:37:13.683 | INFO     | Normalized 13 candidates total
+2026-06-18 15:37:13.685 | INFO     | [VerifyAgent] start task=effectiveness_task_20260618_153413 run=round_001 candidates=13
+2026-06-18 15:37:13.701 | INFO     | Saved 13 records to runs/effectiveness_task_20260618_153413/round_001/validation/normalized_candidates.jsonl
+2026-06-18 15:37:13.707 | DEBUG    | [citation] 3e5795b1-317f-4767-8968-3a7e4453df9c: score=0.782 chunk=0.987 ans=0.577 matched=3/3 passed=True
+2026-06-18 15:37:13.709 | DEBUG    | [citation] e951ed19-fdde-4c74-9da7-1f2cac35125e: score=0.788 chunk=0.990 ans=0.587 matched=3/3 passed=True
+2026-06-18 15:37:13.710 | DEBUG    | [citation] 66654ff2-8c5d-4480-9f18-84d7b3dc7048: score=0.797 chunk=1.000 ans=0.595 matched=4/4 passed=True
+2026-06-18 15:37:13.718 | DEBUG    | [citation] c091f404-c49d-42a3-8ae7-528f2e4cc8d8: score=0.795 chunk=0.985 ans=0.605 matched=2/2 passed=True
+2026-06-18 15:37:13.724 | DEBUG    | [citation] 6e9fbbda-11db-4327-8594-061b27283fc9: score=0.765 chunk=1.000 ans=0.530 matched=1/1 passed=True
+2026-06-18 15:37:13.727 | DEBUG    | [citation] b79b986b-e1fe-42ac-b905-7d88d509ad42: score=0.745 chunk=1.000 ans=0.490 matched=1/1 passed=True
+2026-06-18 15:37:13.733 | DEBUG    | [citation] e9eae30d-1b2c-478d-8832-7289ba71a9b1: score=0.840 chunk=1.000 ans=0.680 matched=1/1 passed=True
+2026-06-18 15:37:13.741 | DEBUG    | [citation] f8d4dbf4-729f-4e68-8994-dfafad595ee8: score=0.823 chunk=0.973 ans=0.672 matched=4/4 passed=True
+2026-06-18 15:37:13.742 | DEBUG    | [citation] 17c6cb5e-89be-4bcc-957d-4d5c2a1fbb26: score=0.819 chunk=1.000 ans=0.637 matched=4/4 passed=True
+2026-06-18 15:37:13.744 | DEBUG    | [citation] 8e77f1b7-ebfa-4543-b080-ee18d4972074: score=0.698 chunk=0.855 ans=0.540 matched=2/2 passed=True
+2026-06-18 15:37:13.748 | DEBUG    | [citation] 52cf5aa4-4822-4b4e-bf3f-17276df57d33: score=0.787 chunk=0.995 ans=0.580 matched=2/2 passed=True
+2026-06-18 15:37:13.749 | DEBUG    | [citation] 567d3b16-ed4a-41b1-ae6a-86739a65c9a9: score=0.833 chunk=1.000 ans=0.665 matched=2/2 passed=True
+2026-06-18 15:37:13.752 | DEBUG    | [citation] 38016201-c10f-4585-817e-58e6203b3260: score=0.675 chunk=0.835 ans=0.515 matched=2/2 passed=False
+2026-06-18 15:37:13.752 | INFO     | Citation validation: 12/13 passed
+2026-06-18 15:37:13.752 | INFO     | Saved 13 records to runs/effectiveness_task_20260618_153413/round_001/validation/citation_validation.jsonl
+2026-06-18 15:37:13.754 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'sentence-transformers/all-MiniLM-L6-v2'
+2026-06-18 15:37:17.591 | INFO     | Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+2026-06-18 15:37:27.349 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'sentence-transformers/all-MiniLM-L6-v2'
+2026-06-18 15:38:06.769 | WARNING  | [llm_validation] 567d3b16-ed4a-41b1-ae6a-86739a65c9a9 attempt 1 failed: Cannot parse JSON from LLM response: {
+  "correctness": 5,
+  "answerability": 5,
+  "clarity": 5,
+  "difficulty_consistency": 4,
+  "suggested_difficulty": "hard",
+  "reason": "The question is well-formed with a clear multiple-choice forma
+2026-06-18 15:38:20.694 | WARNING  | [llm_validation] 567d3b16-ed4a-41b1-ae6a-86739a65c9a9 attempt 2 failed: Cannot parse JSON from LLM response: 
+2026-06-18 15:38:28.214 | INFO     | LLM validation: 11/12 passed, 0 errors, tokens: 8519 in / 6357 out
+2026-06-18 15:38:28.216 | INFO     | Saved 12 records to runs/effectiveness_task_20260618_153413/round_001/validation/llm_validation.jsonl
+2026-06-18 15:38:28.218 | INFO     | Selection[light]: selected=11 duplicate=0
+2026-06-18 15:38:28.229 | INFO     | Saved 13 records to runs/effectiveness_task_20260618_153413/round_001/validation/validated_questions.jsonl
+2026-06-18 15:38:28.230 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/round_001/validation/weighted_selection.json
+2026-06-18 15:38:28.231 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/round_001/validation/validation_report.json
+2026-06-18 15:38:28.232 | INFO     | [VerifyAgent] done: selected=11 report=runs/effectiveness_task_20260618_153413/round_001/validation/validation_report.json
+2026-06-18 15:38:28.237 | INFO     | Round round_001 verification complete: 11 selected
+2026-06-18 15:38:28.248 | INFO     | Round round_002 generation start
+2026-06-18 15:38:28.275 | INFO     | Preparing evidence for 2 topics (parallel)
+2026-06-18 15:39:11.770 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/round_002/evidence/chunked.json
+2026-06-18 15:39:11.773 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/round_002/evidence/single_units.json
+2026-06-18 15:39:11.773 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/round_002/evidence/multi_units.json
+2026-06-18 15:39:11.773 | INFO     | Starting mode: qa
+2026-06-18 15:39:56.161 | DEBUG    | Generator: mode=qa difficulty=hard response_len=8354
+2026-06-18 15:39:57.471 | DEBUG    | Generator: mode=qa difficulty=hard response_len=6424
+2026-06-18 15:40:45.095 | DEBUG    | Generator: mode=qa difficulty=hard response_len=16209
+2026-06-18 15:40:46.647 | DEBUG    | Generator: mode=qa difficulty=hard response_len=3350
+2026-06-18 15:40:46.650 | INFO     | Mode=qa round=1 strategy=initial_breadth generated=10 accepted=10 total_accepted=10
+2026-06-18 15:40:46.650 | INFO     | Mode qa stopped: max_candidate_pool_reached
+2026-06-18 15:40:46.657 | INFO     | Mode qa complete: 10 accepted, stopped_reason=max_candidate_pool_reached
+2026-06-18 15:40:46.657 | INFO     | Starting mode: multiple_choice
+2026-06-18 15:41:37.488 | DEBUG    | Generator: mode=multiple_choice difficulty=hard response_len=11072
+2026-06-18 15:41:40.664 | DEBUG    | Generator: mode=multiple_choice difficulty=hard response_len=5134
+2026-06-18 15:41:40.668 | INFO     | Mode=multiple_choice round=1 strategy=initial_breadth generated=3 accepted=3 total_accepted=3
+2026-06-18 15:41:40.668 | INFO     | Mode multiple_choice stopped: max_rounds_reached
+2026-06-18 15:41:40.672 | INFO     | Mode multiple_choice complete: 3 accepted, stopped_reason=max_rounds_reached
+2026-06-18 15:41:40.675 | INFO     | Generation complete. Output: runs/effectiveness_task_20260618_153413/round_002/
+2026-06-18 15:41:40.678 | INFO     | Round round_002 generation complete: 13 candidates
+2026-06-18 15:41:40.702 | INFO     | Round round_002 verification start
+2026-06-18 15:41:40.705 | INFO     | Built chunk index with 60 entries from runs/effectiveness_task_20260618_153413/round_002/evidence/chunked.json
+2026-06-18 15:41:40.707 | INFO     | Loaded 10 raw candidates from runs/effectiveness_task_20260618_153413/round_002/qa/candidate_pool.json
+2026-06-18 15:41:40.709 | INFO     | Loaded 3 raw candidates from runs/effectiveness_task_20260618_153413/round_002/multiple_choice/candidate_pool.json
+2026-06-18 15:41:40.709 | INFO     | Normalized 13 candidates total
+2026-06-18 15:41:40.710 | INFO     | [VerifyAgent] start task=effectiveness_task_20260618_153413 run=round_002 candidates=13
+2026-06-18 15:41:40.717 | INFO     | Saved 13 records to runs/effectiveness_task_20260618_153413/round_002/validation/normalized_candidates.jsonl
+2026-06-18 15:41:40.720 | DEBUG    | [citation] ada9f3cd-8641-4b4d-80d8-1daae8c2f05f: score=0.930 chunk=1.000 ans=0.860 matched=3/3 passed=True
+2026-06-18 15:41:40.720 | DEBUG    | [citation] cb83f61a-e2e4-4e74-a0dd-3e6f37037003: score=0.893 chunk=1.000 ans=0.785 matched=2/2 passed=True
+2026-06-18 15:41:40.721 | DEBUG    | [citation] a535d541-f5c7-4cd9-b6ba-a4878000f1ce: score=0.715 chunk=1.000 ans=0.430 matched=1/1 passed=True
+2026-06-18 15:41:40.721 | DEBUG    | [citation] 26678ec3-4c62-4bc8-bbd6-2f26831f9aa9: score=0.715 chunk=1.000 ans=0.430 matched=1/1 passed=True
+2026-06-18 15:41:40.722 | DEBUG    | [citation] 2be54d22-edc1-421a-8487-b7061dd16c95: score=0.750 chunk=0.990 ans=0.510 matched=1/1 passed=True
+2026-06-18 15:41:40.724 | DEBUG    | [citation] dd5aef57-d792-4980-9804-1902584f4ad2: score=0.750 chunk=1.000 ans=0.500 matched=1/1 passed=True
+2026-06-18 15:41:40.725 | DEBUG    | [citation] 54d323a9-5358-4f78-840d-a65831025e90: score=0.952 chunk=0.995 ans=0.910 matched=2/2 passed=True
+2026-06-18 15:41:40.727 | DEBUG    | [citation] 951a2cf6-3b21-40b5-aaa1-63625339ba15: score=0.852 chunk=0.997 ans=0.707 matched=3/3 passed=True
+2026-06-18 15:41:40.730 | DEBUG    | [citation] 4736e848-3878-48da-b467-001ad7e8f758: score=0.927 chunk=1.000 ans=0.855 matched=2/2 passed=True
+2026-06-18 15:41:40.732 | DEBUG    | [citation] 4c551e68-5262-4070-8141-e80b467336b7: score=0.943 chunk=0.995 ans=0.890 matched=4/4 passed=True
+2026-06-18 15:41:40.734 | DEBUG    | [citation] 46cebdbb-4d03-49d2-bcd8-ce348231208a: score=0.788 chunk=1.000 ans=0.577 matched=3/3 passed=True
+2026-06-18 15:41:40.735 | DEBUG    | [citation] 3892532a-71d5-4cfc-a6ec-4ab92084d3df: score=0.660 chunk=0.865 ans=0.455 matched=2/2 passed=True
+2026-06-18 15:41:40.737 | DEBUG    | [citation] 2d0b017f-7d48-486a-b00b-7bcaf222012f: score=0.800 chunk=1.000 ans=0.600 matched=2/2 passed=True
+2026-06-18 15:41:40.737 | INFO     | Citation validation: 13/13 passed
+2026-06-18 15:41:40.738 | INFO     | Saved 13 records to runs/effectiveness_task_20260618_153413/round_002/validation/citation_validation.jsonl
+2026-06-18 15:41:40.740 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'sentence-transformers/all-MiniLM-L6-v2'
+2026-06-18 15:41:41.262 | INFO     | Resolved embedding 'all-MiniLM-L6-v2' -> 'sentence-transformers/all-MiniLM-L6-v2'
+2026-06-18 15:42:31.220 | WARNING  | [llm_validation] 3892532a-71d5-4cfc-a6ec-4ab92084d3df attempt 1 failed: Cannot parse JSON from LLM response: 
+2026-06-18 15:42:45.741 | INFO     | LLM validation: 13/13 passed, 0 errors, tokens: 9573 in / 6074 out
+2026-06-18 15:42:45.743 | INFO     | Saved 13 records to runs/effectiveness_task_20260618_153413/round_002/validation/llm_validation.jsonl
+2026-06-18 15:42:45.744 | INFO     | Selection[light]: selected=13 duplicate=0
+2026-06-18 15:42:45.755 | INFO     | Saved 13 records to runs/effectiveness_task_20260618_153413/round_002/validation/validated_questions.jsonl
+2026-06-18 15:42:45.756 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/round_002/validation/weighted_selection.json
+2026-06-18 15:42:45.756 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/round_002/validation/validation_report.json
+2026-06-18 15:42:45.757 | INFO     | [VerifyAgent] done: selected=13 report=runs/effectiveness_task_20260618_153413/round_002/validation/validation_report.json
+2026-06-18 15:42:45.761 | INFO     | Round round_002 verification complete: 13 selected
+2026-06-18 15:45:19.689 | INFO     | Using task effectiveness_task_20260618_153413
+2026-06-18 15:45:19.689 | INFO     | Round round_001 generation skipped
+2026-06-18 15:45:19.690 | INFO     | Round round_001 verification skipped
+2026-06-18 15:45:19.695 | INFO     | Round round_002 generation skipped
+2026-06-18 15:45:19.695 | INFO     | Round round_002 verification skipped
+2026-06-18 15:45:19.709 | INFO     | [ModelEvalAgent] start task=effectiveness_task_20260618_153413 run=b1_eval
+2026-06-18 15:45:19.710 | INFO     | [ModelEvalAgent] loaded 11 evaluation questions
+2026-06-18 15:45:19.713 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/b1_eval/evaluation/intermediate/judge_plan.json
+2026-06-18 15:45:19.765 | INFO     | [DatasetMetricExecutor] computed citation_score
+2026-06-18 15:45:36.176 | INFO     | [DatasetMetricExecutor] computed diversity_score
+2026-06-18 15:45:36.178 | INFO     | Appended 16 records to runs/effectiveness_task_20260618_153413/b1_eval/evaluation/dataset_report/dataset_scores.jsonl
+2026-06-18 15:45:36.179 | INFO     | [ModelRunner] running 33 inferences (3 models × 11 questions)
+2026-06-18 15:46:44.625 | INFO     | Appended 33 records to runs/effectiveness_task_20260618_153413/b1_eval/evaluation/model_report/model_responses.jsonl
+2026-06-18 15:46:44.626 | INFO     | [ModelRunner] done, 33 responses, llm_usage={'calls': 33, 'input_tokens': 6012, 'output_tokens': 19029, 'errors': 0}
+2026-06-18 15:46:44.627 | INFO     | [ModelRunner] done, saved 33 responses
+2026-06-18 15:47:44.209 | INFO     | Appended 11 records to runs/effectiveness_task_20260618_153413/b1_eval/evaluation/model_report/automatic_scores.jsonl
+2026-06-18 15:47:44.210 | INFO     | [AutoMetricExecutor] computed 11 metric×mode rows
+2026-06-18 15:47:44.213 | INFO     | [LLMJudgeExecutor] running 23 judge calls
+2026-06-18 15:49:11.866 | INFO     | Appended 23 records to runs/effectiveness_task_20260618_153413/b1_eval/evaluation/model_report/traces/llm_judge_traces.jsonl
+2026-06-18 15:49:11.873 | INFO     | Appended 23 records to runs/effectiveness_task_20260618_153413/b1_eval/evaluation/model_report/traces/llm_judge_prompts.jsonl
+2026-06-18 15:49:11.875 | INFO     | Appended 5 records to runs/effectiveness_task_20260618_153413/b1_eval/evaluation/model_report/llm_judge_scores.jsonl
+2026-06-18 15:49:11.875 | INFO     | [LLMJudgeExecutor] done, 5 metric rows, 23 traces
+2026-06-18 15:49:11.880 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/b1_eval/evaluation/evaluation_report.json
+2026-06-18 15:49:11.880 | INFO     | [ModelEvalAgent] done: runs/effectiveness_task_20260618_153413/b1_eval/evaluation
+2026-06-18 15:49:11.919 | INFO     | [ModelEvalAgent] start task=effectiveness_task_20260618_153413 run=bfull_eval
+2026-06-18 15:49:11.928 | INFO     | [ModelEvalAgent] loaded 24 evaluation questions
+2026-06-18 15:49:11.939 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/bfull_eval/evaluation/intermediate/judge_plan.json
+2026-06-18 15:49:11.985 | INFO     | [DatasetMetricExecutor] computed citation_score
+2026-06-18 15:49:13.199 | INFO     | [DatasetMetricExecutor] computed diversity_score
+2026-06-18 15:49:13.212 | INFO     | Appended 18 records to runs/effectiveness_task_20260618_153413/bfull_eval/evaluation/dataset_report/dataset_scores.jsonl
+2026-06-18 15:49:13.212 | INFO     | [ModelRunner] running 72 inferences (3 models × 24 questions)
+2026-06-18 15:52:47.042 | INFO     | Appended 72 records to runs/effectiveness_task_20260618_153413/bfull_eval/evaluation/model_report/model_responses.jsonl
+2026-06-18 15:52:47.043 | INFO     | [ModelRunner] done, 72 responses, llm_usage={'calls': 72, 'input_tokens': 12165, 'output_tokens': 45592, 'errors': 0}
+2026-06-18 15:52:47.043 | INFO     | [ModelRunner] done, saved 72 responses
+2026-06-18 15:54:31.786 | INFO     | Appended 11 records to runs/effectiveness_task_20260618_153413/bfull_eval/evaluation/model_report/automatic_scores.jsonl
+2026-06-18 15:54:31.788 | INFO     | [AutoMetricExecutor] computed 11 metric×mode rows
+2026-06-18 15:54:31.791 | INFO     | [LLMJudgeExecutor] running 53 judge calls
+2026-06-18 15:58:18.643 | INFO     | Appended 53 records to runs/effectiveness_task_20260618_153413/bfull_eval/evaluation/model_report/traces/llm_judge_traces.jsonl
+2026-06-18 15:58:18.648 | INFO     | Appended 53 records to runs/effectiveness_task_20260618_153413/bfull_eval/evaluation/model_report/traces/llm_judge_prompts.jsonl
+2026-06-18 15:58:18.650 | INFO     | Appended 5 records to runs/effectiveness_task_20260618_153413/bfull_eval/evaluation/model_report/llm_judge_scores.jsonl
+2026-06-18 15:58:18.650 | INFO     | [LLMJudgeExecutor] done, 5 metric rows, 53 traces
+2026-06-18 15:58:18.652 | INFO     | Saved JSON to runs/effectiveness_task_20260618_153413/bfull_eval/evaluation/evaluation_report.json
+2026-06-18 15:58:18.653 | INFO     | [ModelEvalAgent] done: runs/effectiveness_task_20260618_153413/bfull_eval/evaluation

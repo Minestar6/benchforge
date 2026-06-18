@@ -1,0 +1,30 @@
+{
+  "candidate_count": 3,
+  "accepted_count": 3,
+  "rejected_count": 0,
+  "accept_rate": 1.0,
+  "topic_distribution": {
+    "Quantum Computing": 3
+  },
+  "difficulty_distribution": {
+    "hard": 2,
+    "medium": 1
+  },
+  "hard_gap": 0.0,
+  "stopped_reason": "max_rounds_reached",
+  "min_candidate_target": 4,
+  "max_candidate_target": 5,
+  "min_difficulty_targets": {
+    "easy": 1,
+    "medium": 2,
+    "hard": 2
+  },
+  "min_target_reached": false,
+  "max_target_reached": false,
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

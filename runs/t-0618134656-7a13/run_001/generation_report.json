@@ -1,0 +1,59 @@
+{
+  "task_id": "t-0618134656-7a13",
+  "run_id": "run_001",
+  "modes": {
+    "qa": {
+      "candidate_count": 7,
+      "accepted_count": 7,
+      "min_candidate_target": 3,
+      "max_candidate_target": 4,
+      "target_candidate_count": 3,
+      "difficulty_counts": {
+        "hard": 7
+      },
+      "min_difficulty_targets": {
+        "easy": 1,
+        "medium": 2,
+        "hard": 1
+      },
+      "min_target_reached": false,
+      "max_target_reached": true,
+      "stopped_reason": "max_candidate_pool_reached",
+      "terminal_hard_repair": {
+        "executed": false,
+        "rounds": 0,
+        "generated_count": 0,
+        "accepted_count": 0
+      }
+    },
+    "multiple_choice": {
+      "candidate_count": 19,
+      "accepted_count": 19,
+      "min_candidate_target": 2,
+      "max_candidate_target": 2,
+      "target_candidate_count": 2,
+      "difficulty_counts": {
+        "easy": 7,
+        "medium": 11,
+        "hard": 1
+      },
+      "min_difficulty_targets": {
+        "easy": 1,
+        "medium": 1,
+        "hard": 1
+      },
+      "min_target_reached": true,
+      "max_target_reached": true,
+      "stopped_reason": "max_candidate_pool_reached",
+      "terminal_hard_repair": {
+        "executed": false,
+        "rounds": 0,
+        "generated_count": 0,
+        "accepted_count": 0
+      }
+    }
+  },
+  "total_candidates": 26,
+  "global_used_chunk_combinations": 8,
+  "global_failures": 0
+}

@@ -1,0 +1,13 @@
+{
+  "task_id": "effectiveness_task_20260618_153413",
+  "total_rounds": 2,
+  "generator_model": "deepseek-v4",
+  "verify_model": "deepseek-v4",
+  "eval_candidate_models": [
+    "deepseek-v4",
+    "deepseek-v4-pro",
+    "minimax"
+  ],
+  "eval_judge_model": "deepseek-v4",
+  "registry_path": "/Users/zhaoziqing/Desktop/benchforge/config/model_registry.yaml"
+}

@@ -1,0 +1,25 @@
+task_id: case
+run_id_prefix: effectiveness_case
+language: en
+topics:
+- Artificial Intelligence
+- Quantum Computing
+modes:
+  qa:
+    count: 8
+    max_rounds: 5
+    difficulty_distribution:
+      easy: 0.2
+      medium: 0.3
+      hard: 0.5
+  multiple_choice:
+    count: 4
+    max_rounds: 4
+    difficulty_distribution:
+      easy: 0.2
+      medium: 0.3
+      hard: 0.5
+metadata:
+  group_id: D
+  method: full
+  seed: 42

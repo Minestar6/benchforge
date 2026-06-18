@@ -1,0 +1,21 @@
+{
+  "mode": "qa",
+  "candidate_count": 7,
+  "total_record_count": 7,
+  "accepted_count": 7,
+  "rejected_count": 0,
+  "difficulty_counts": {
+    "hard": 7
+  },
+  "topic_counts": {
+    "physics experimental design & interpretation": 6,
+    "physics multi-representational reasoning": 1
+  },
+  "stopped_reason": "max_candidate_pool_reached",
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

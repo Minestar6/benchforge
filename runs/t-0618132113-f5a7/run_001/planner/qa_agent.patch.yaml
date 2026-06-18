@@ -1,0 +1,7 @@
+candidate_pool:
+  max_candidate_multiplier: 2.0
+  min_candidate_multiplier: 1.5
+initial_breadth:
+  enabled: true
+planner:
+  topics_per_round: 2

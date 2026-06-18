@@ -13,6 +13,23 @@ from loguru import logger
 from .schema import PlannerState
 
 
+def _planner_temperature(model_client, default: float = 0.2) -> float:
+    value = getattr(model_client, "temperature", default)
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _planner_max_tokens(model_client, cap: int) -> int:
+    value = getattr(model_client, "max_tokens", cap)
+    try:
+        resolved = int(value)
+    except (TypeError, ValueError):
+        resolved = cap
+    return max(1, min(resolved, cap))
+
+
 @dataclass
 class TopicFeedbackSummary:
     strong_topics: list[str] = field(default_factory=list)
@@ -185,8 +202,8 @@ async def expand_topic_candidates(
                 response = await complete(
                     model=getattr(model_client, "model_name", "planner"),
                     messages=[{"role": "user", "content": prompt}],
-                    temperature=0.2,
-                    max_tokens=384,
+                    temperature=_planner_temperature(model_client),
+                    max_tokens=_planner_max_tokens(model_client, 384),
                 )
                 text = response.get("text", "").strip()
                 start = text.find("{")

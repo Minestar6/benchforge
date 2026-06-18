@@ -1,0 +1,361 @@
+{
+  "task_id": "effectiveness_task_20260618_153413",
+  "task_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413",
+  "total_rounds": 2,
+  "next_round_index": 3,
+  "round_summaries": [
+    {
+      "run_id": "round_001",
+      "run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/round_001",
+      "validated_path": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/round_001/validation/validated_questions.jsonl",
+      "selected_count": 11,
+      "mode_round_summaries": {
+        "qa": {
+          "round_1": {
+            "round_count": 1,
+            "generated_count": 9,
+            "selected_count": 11,
+            "selected_rate": 1.222222,
+            "too_easy_ratio": 0.111111,
+            "selected_hard_ratio": 0.0
+          },
+          "round_2_plus": {
+            "round_count": 0,
+            "generated_count": 0,
+            "selected_count": 0,
+            "selected_rate": 0.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "delta": {
+            "selected_rate": -1.222222,
+            "too_easy_ratio": -0.111111,
+            "selected_hard_ratio": 0.0
+          }
+        },
+        "multiple_choice": {
+          "round_1": {
+            "round_count": 1,
+            "generated_count": 4,
+            "selected_count": 11,
+            "selected_rate": 2.75,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "round_2_plus": {
+            "round_count": 0,
+            "generated_count": 0,
+            "selected_count": 0,
+            "selected_rate": 0.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "delta": {
+            "selected_rate": -2.75,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          }
+        }
+      }
+    },
+    {
+      "run_id": "round_002",
+      "run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/round_002",
+      "validated_path": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/round_002/validation/validated_questions.jsonl",
+      "selected_count": 13,
+      "mode_round_summaries": {
+        "qa": {
+          "round_1": {
+            "round_count": 1,
+            "generated_count": 10,
+            "selected_count": 13,
+            "selected_rate": 1.3,
+            "too_easy_ratio": 0.3,
+            "selected_hard_ratio": 0.0
+          },
+          "round_2_plus": {
+            "round_count": 0,
+            "generated_count": 0,
+            "selected_count": 0,
+            "selected_rate": 0.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "delta": {
+            "selected_rate": -1.3,
+            "too_easy_ratio": -0.3,
+            "selected_hard_ratio": 0.0
+          }
+        },
+        "multiple_choice": {
+          "round_1": {
+            "round_count": 1,
+            "generated_count": 3,
+            "selected_count": 13,
+            "selected_rate": 4.333333,
+            "too_easy_ratio": 0.333333,
+            "selected_hard_ratio": 0.0
+          },
+          "round_2_plus": {
+            "round_count": 0,
+            "generated_count": 0,
+            "selected_count": 0,
+            "selected_rate": 0.0,
+            "too_easy_ratio": 0.0,
+            "selected_hard_ratio": 0.0
+          },
+          "delta": {
+            "selected_rate": -4.333333,
+            "too_easy_ratio": -0.333333,
+            "selected_hard_ratio": 0.0
+          }
+        }
+      }
+    }
+  ],
+  "round_1_selected_count": 11,
+  "all_rounds_selected_count": 24,
+  "later_round_selected_count": 13,
+  "b1": {
+    "subset_name": "b1_eval",
+    "question_count": 11,
+    "input_path": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/effectiveness/b1_eval/selected_questions.jsonl",
+    "evaluation_run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/b1_eval",
+    "evaluation_result": {
+      "task_id": "effectiveness_task_20260618_153413",
+      "run_id": "b1_eval",
+      "num_questions": 11,
+      "num_models": 3,
+      "discriminative_signals": {
+        "overall_model_gap": 0.244781,
+        "best_vs_second_gap": 0.155693,
+        "top_vs_bottom_gap": 0.244781,
+        "per_question_variance_mean": 0.019811,
+        "discriminative_question_ratio": 0.454545,
+        "easy_questions_too_easy_ratio": 0.0,
+        "all_models_fail_ratio": 0.0
+      },
+      "by_topic": {
+        "Artificial Intelligence": {
+          "question_count": 8,
+          "model_gap": 0.195016,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        },
+        "Quantum Computing": {
+          "question_count": 3,
+          "model_gap": 0.377489,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        }
+      },
+      "by_difficulty": {
+        "hard": {
+          "question_count": 8,
+          "model_gap": 0.236833,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        },
+        "medium": {
+          "question_count": 3,
+          "model_gap": 0.265976,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        }
+      },
+      "by_mode": {
+        "qa": {
+          "question_count": 8,
+          "model_gap": 0.149074,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        },
+        "multiple_choice": {
+          "question_count": 3,
+          "model_gap": 0.5,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        }
+      },
+      "multiple_choice": {
+        "Mode": {
+          "hard": 0.6,
+          "medium": 0.6
+        },
+        "Topic": {
+          "Quantum Computing": 0.6,
+          "Artificial Intelligence": 0.6
+        },
+        "model": {
+          "deepseek-v4": 0.5,
+          "deepseek-v4-pro": 0.5,
+          "minimax": 1.0
+        }
+      },
+      "qa": {
+        "Mode": {
+          "hard": 0.403616,
+          "medium": 0.439802
+        },
+        "Topic": {
+          "Artificial Intelligence": 0.417344,
+          "Quantum Computing": 0.379891
+        },
+        "model": {
+          "deepseek-v4": 0.453556,
+          "deepseek-v4-pro": 0.420497,
+          "minimax": 0.363935
+        }
+      },
+      "dataset_metrics": {
+        "citation_score": {
+          "mean": 0.789356,
+          "num_scored": 11,
+          "num_missing": 0
+        },
+        "diversity_score": {
+          "score": 0.8232,
+          "embedding_dispersion": 0.801,
+          "cluster_entropy": 0.8454
+        }
+      }
+    },
+    "benchmark_metrics": {
+      "num_questions": 11,
+      "num_models": 3,
+      "model_scores": {
+        "deepseek-v4": 0.466223,
+        "deepseek-v4-pro": 0.44218,
+        "minimax": 0.537407
+      },
+      "score_variance": 0.001635,
+      "top_bottom_gap": 0.095227,
+      "adjacent_gap_mean": 0.047613,
+      "per_question_gap_mean": 0.244781
+    }
+  },
+  "bfull": {
+    "subset_name": "bfull_eval",
+    "question_count": 24,
+    "input_path": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/effectiveness/bfull_eval/selected_questions.jsonl",
+    "evaluation_run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/bfull_eval",
+    "evaluation_result": {
+      "task_id": "effectiveness_task_20260618_153413",
+      "run_id": "bfull_eval",
+      "num_questions": 24,
+      "num_models": 3,
+      "discriminative_signals": {
+        "overall_model_gap": 0.227563,
+        "best_vs_second_gap": 0.123411,
+        "top_vs_bottom_gap": 0.227563,
+        "per_question_variance_mean": 0.018156,
+        "discriminative_question_ratio": 0.458333,
+        "easy_questions_too_easy_ratio": 0.0,
+        "all_models_fail_ratio": 0.0
+      },
+      "by_topic": {
+        "Artificial Intelligence": {
+          "question_count": 10,
+          "model_gap": 0.166743,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        },
+        "Quantum Computing": {
+          "question_count": 14,
+          "model_gap": 0.271005,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        }
+      },
+      "by_difficulty": {
+        "hard": {
+          "question_count": 16,
+          "model_gap": 0.235531,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        },
+        "medium": {
+          "question_count": 8,
+          "model_gap": 0.211626,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        }
+      },
+      "by_mode": {
+        "qa": {
+          "question_count": 18,
+          "model_gap": 0.13675,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        },
+        "multiple_choice": {
+          "question_count": 6,
+          "model_gap": 0.5,
+          "too_easy_ratio": 0.0,
+          "all_models_fail_ratio": 0.0
+        }
+      },
+      "multiple_choice": {
+        "Mode": {
+          "hard": 0.666667,
+          "medium": 0.6
+        },
+        "Topic": {
+          "Quantum Computing": 0.625,
+          "Artificial Intelligence": 0.75
+        },
+        "model": {
+          "deepseek-v4": 0.545455,
+          "deepseek-v4-pro": 0.545455,
+          "minimax": 1.0
+        }
+      },
+      "qa": {
+        "Mode": {
+          "hard": 0.391142,
+          "medium": 0.397108
+        },
+        "Topic": {
+          "Artificial Intelligence": 0.417632,
+          "Quantum Computing": 0.368629
+        },
+        "model": {
+          "deepseek-v4": 0.441836,
+          "deepseek-v4-pro": 0.393136,
+          "minimax": 0.344419
+        }
+      },
+      "dataset_metrics": {
+        "citation_score": {
+          "mean": 0.80658,
+          "num_scored": 24,
+          "num_missing": 0
+        },
+        "diversity_score": {
+          "score": 0.8912,
+          "embedding_dispersion": 0.8026,
+          "cluster_entropy": 0.9799
+        }
+      }
+    },
+    "benchmark_metrics": {
+      "num_questions": 24,
+      "num_models": 3,
+      "model_scores": {
+        "deepseek-v4": 0.477211,
+        "deepseek-v4-pro": 0.440685,
+        "minimax": 0.508314
+      },
+      "score_variance": 0.000764,
+      "top_bottom_gap": 0.067629,
+      "adjacent_gap_mean": 0.033815,
+      "per_question_gap_mean": 0.227563
+    }
+  },
+  "benchmark_delta": {
+    "score_variance": -0.000871,
+    "top_bottom_gap": -0.027598,
+    "adjacent_gap_mean": -0.013798,
+    "per_question_gap_mean": -0.017218
+  }
+}

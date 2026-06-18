@@ -30,6 +30,25 @@ def deep_merge(base: dict[str, Any], *patches: dict[str, Any]) -> dict[str, Any]
     return result
 
 
+def merge_model_eval_config(base: dict[str, Any], *patches: dict[str, Any]) -> dict[str, Any]:
+    """合并 model_eval_agent 配置。
+
+    `metrics` 是评估协议真源，必须整体覆盖，不能按 list 追加。
+    其他字段继续沿用通用 deep_merge 行为。
+    """
+    result = dict(base)
+
+    for patch in patches:
+        if not patch:
+            continue
+        patch_without_metrics = {key: value for key, value in patch.items() if key != "metrics"}
+        result = deep_merge(result, patch_without_metrics)
+        if "metrics" in patch and patch["metrics"] is not None:
+            result["metrics"] = patch["metrics"]
+
+    return result
+
+
 def build_frozen_metrics_patch(global_blueprint: GlobalBlueprint) -> dict[str, Any]:
     """从 GlobalBlueprint 构建冻结后的 metrics patch。
 

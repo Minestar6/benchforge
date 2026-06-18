@@ -1,0 +1,99 @@
+{
+  "task_id": "effectiveness_task_20260618_153413",
+  "run_id": "b1_eval",
+  "num_questions": 11,
+  "num_models": 3,
+  "discriminative_signals": {
+    "overall_model_gap": 0.244781,
+    "best_vs_second_gap": 0.155693,
+    "top_vs_bottom_gap": 0.244781,
+    "per_question_variance_mean": 0.019811,
+    "discriminative_question_ratio": 0.454545,
+    "easy_questions_too_easy_ratio": 0.0,
+    "all_models_fail_ratio": 0.0
+  },
+  "by_topic": {
+    "Artificial Intelligence": {
+      "question_count": 8,
+      "model_gap": 0.195016,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    },
+    "Quantum Computing": {
+      "question_count": 3,
+      "model_gap": 0.377489,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    }
+  },
+  "by_difficulty": {
+    "hard": {
+      "question_count": 8,
+      "model_gap": 0.236833,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    },
+    "medium": {
+      "question_count": 3,
+      "model_gap": 0.265976,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    }
+  },
+  "by_mode": {
+    "qa": {
+      "question_count": 8,
+      "model_gap": 0.149074,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    },
+    "multiple_choice": {
+      "question_count": 3,
+      "model_gap": 0.5,
+      "too_easy_ratio": 0.0,
+      "all_models_fail_ratio": 0.0
+    }
+  },
+  "multiple_choice": {
+    "Mode": {
+      "hard": 0.6,
+      "medium": 0.6
+    },
+    "Topic": {
+      "Quantum Computing": 0.6,
+      "Artificial Intelligence": 0.6
+    },
+    "model": {
+      "deepseek-v4": 0.5,
+      "deepseek-v4-pro": 0.5,
+      "minimax": 1.0
+    }
+  },
+  "qa": {
+    "Mode": {
+      "hard": 0.403616,
+      "medium": 0.439802
+    },
+    "Topic": {
+      "Artificial Intelligence": 0.417344,
+      "Quantum Computing": 0.379891
+    },
+    "model": {
+      "deepseek-v4": 0.453556,
+      "deepseek-v4-pro": 0.420497,
+      "minimax": 0.363935
+    }
+  },
+  "dataset_metrics": {
+    "citation_score": {
+      "mean": 0.789356,
+      "num_scored": 11,
+      "num_missing": 0
+    },
+    "diversity_score": {
+      "score": 0.8232,
+      "embedding_dispersion": 0.801,
+      "cluster_entropy": 0.8454
+    }
+  }
+}

@@ -17,6 +17,7 @@ from benchforge.agents.planner_agent.feedback import (
     build_validator_feedback,
 )
 from benchforge.agents.planner_agent.orchestrator import _load_verify_model_client
+from benchforge.agents.planner_agent import orchestrator as planner_orchestrator
 from benchforge.agents.planner_agent.planner import (
     diagnose_last_round,
     question_difficulty_evolver,
@@ -28,7 +29,7 @@ from benchforge.agents.planner_agent.planner import (
     _difficulty_distribution_of_selected,
 )
 from benchforge.agents.planner_agent.topic_search import summarize_topic_feedback
-from benchforge.agents.planner_agent.utils import translate_eval_profile
+from benchforge.agents.planner_agent.utils import translate_eval_profile, deep_merge, merge_model_eval_config
 from benchforge.agents.planner_agent.schema import (
     GlobalBlueprint,
     FinalTargets,
@@ -56,7 +57,7 @@ from benchforge.agents.planner_agent.schema import (
 )
 from benchforge.agents.verify_agent.config_loader import VerifyAgentConfig, LLMValidationCfg
 from benchforge.schemas import SharedState, AgentStatus
-from benchforge.utils.shared_state import save_shared_state
+from benchforge.utils.shared_state import save_shared_state, load_shared_state
 
 
 def _write_json(path: Path, data) -> None:
@@ -153,6 +154,42 @@ def test_build_generator_feedback_aggregates_trace_tokens(tmp_path, monkeypatch)
     assert fb.by_mode["qa"].topic_counts["AI"] == 4
 
 
+def test_translate_eval_profile_overrides_metrics_instead_of_appending():
+    blueprint = GlobalBlueprint(
+        task_id="task_x",
+        blueprint_id="bp_x",
+        user_goal="goal",
+        language="zh",
+        seed_topics=["AI"],
+        final_targets=FinalTargets(qa=2, multiple_choice=1),
+        default_modes={
+            "qa": QuestionModeDefaults(max_rounds=3, difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3}),
+            "multiple_choice": QuestionModeDefaults(max_rounds=3, difficulty_distribution={"easy": 0.3, "medium": 0.5, "hard": 0.2}),
+        },
+        evaluator_defaults=EvaluatorDefaults(candidate_model_names=["deepseek-v3"]),
+        evaluation_requirements=EvaluationRequirements(
+            automatic_metrics={"qa": ["f1"]},
+            llm_judge_metrics={"qa": [JudgeMetricDef(name="faithfulness", description="supported by evidence")]},
+        ),
+        stop_conditions=StopConditions(max_rounds=2, min_selected_per_round=1),
+    )
+    eval_base = {
+        "metrics": {
+            "qa": {
+                "automatic_metrics": [{"name": "semantic_accuracy"}],
+                "llm_judge_metrics": [{"name": "legacy", "description": "legacy judge metric"}],
+            }
+        }
+    }
+
+    effective = merge_model_eval_config(eval_base, translate_eval_profile("standard", blueprint))
+
+    assert effective["metrics"]["qa"]["automatic_metrics"] == [{"name": "f1"}]
+    assert effective["metrics"]["qa"]["llm_judge_metrics"] == [
+        {"name": "faithfulness", "description": "supported by evidence"}
+    ]
+
+
 def test_build_validator_feedback_uses_trace_tokens_and_round_id(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     run_dir = tmp_path / "runs" / "task_x" / "run_y"
@@ -187,6 +224,57 @@ def test_build_validator_feedback_uses_trace_tokens_and_round_id(tmp_path, monke
     assert fb.round_id == 3
     assert fb.summary.llm_input_tokens == 33
     assert fb.summary.llm_output_tokens == 7
+
+
+def test_selected_difficulty_distribution_is_mode_specific(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    run_dir = tmp_path / "runs" / "task_x" / "run_y"
+    shared_state_path = _make_shared_state(run_dir)
+
+    _write_json(run_dir / "validation" / "validation_report.json", {
+        "total_candidates": 4,
+        "citation_passed": 4,
+        "llm_passed": 4,
+        "final_selected": 4,
+        "failed_by_stage": {},
+        "llm_usage": {"calls": 0, "input_tokens": 0, "output_tokens": 0},
+    })
+    _write_json(run_dir / "validation" / "weighted_selection.json", {
+        "dropped_as_duplicate": [],
+        "dropped_as_overquota": [],
+    })
+    _write_jsonl(run_dir / "validation" / "validated_questions.jsonl", [
+        {
+            "final_status": "selected",
+            "candidate": {"question_mode": "qa", "estimated_difficulty": "easy", "topic": "AI"},
+            "citation_validation": {"citation_score": 0.8},
+            "llm_validation": {"overall_score": 0.9},
+        },
+        {
+            "final_status": "selected",
+            "candidate": {"question_mode": "qa", "estimated_difficulty": "easy", "topic": "AI"},
+            "citation_validation": {"citation_score": 0.8},
+            "llm_validation": {"overall_score": 0.9},
+        },
+        {
+            "final_status": "selected",
+            "candidate": {"question_mode": "multiple_choice", "estimated_difficulty": "hard", "topic": "AI"},
+            "citation_validation": {"citation_score": 0.8},
+            "llm_validation": {"overall_score": 0.9},
+        },
+        {
+            "final_status": "selected",
+            "candidate": {"question_mode": "multiple_choice", "estimated_difficulty": "hard", "topic": "AI"},
+            "citation_validation": {"citation_score": 0.8},
+            "llm_validation": {"overall_score": 0.9},
+        },
+    ])
+
+    fb = build_validator_feedback(shared_state_path, round_id=3)
+
+    assert fb is not None
+    assert _difficulty_distribution_of_selected(fb, "qa") == {"easy": 1.0, "medium": 0.0, "hard": 0.0}
+    assert _difficulty_distribution_of_selected(fb, "multiple_choice") == {"easy": 0.0, "medium": 0.0, "hard": 1.0}
 
 
 def test_build_evaluator_feedback_uses_artifact_paths_and_trace_tokens(tmp_path, monkeypatch):
@@ -274,6 +362,94 @@ def test_load_verify_model_client_uses_verify_config_model(monkeypatch):
     client = _load_verify_model_client(registry, verify_config)
     assert client == "verify-client"
     assert loaded["model_name"] == "verify-model"
+
+
+def test_load_verify_model_client_returns_none_when_registry_missing_model():
+    verify_config = VerifyAgentConfig(llm_validation=LLMValidationCfg(enabled=True, model="missing-model"))
+    client = _load_verify_model_client({}, verify_config)
+    assert client is None
+
+
+@pytest.mark.asyncio
+async def test_execute_round_reuses_generation_shared_state(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    run_dir = tmp_path / "runs" / "task_x" / "run_y"
+    planner_dir = run_dir / "planner"
+    planner_dir.mkdir(parents=True, exist_ok=True)
+
+    base_config_dir = tmp_path / "config"
+    base_config_dir.mkdir()
+    for name in ("qa_agent.yaml", "verify_agent.yaml", "model_eval_agent.yaml"):
+        (base_config_dir / name).write_text("{}\n", encoding="utf-8")
+
+    round_spec = _make_round_spec()
+    blueprint = GlobalBlueprint(
+        task_id="task_x",
+        blueprint_id="bp_x",
+        user_goal="goal",
+        language="zh",
+        seed_topics=["AI"],
+        final_targets=FinalTargets(qa=2, multiple_choice=1),
+        default_modes={
+            "qa": QuestionModeDefaults(max_rounds=3, difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3}),
+            "multiple_choice": QuestionModeDefaults(max_rounds=3, difficulty_distribution={"easy": 0.3, "medium": 0.5, "hard": 0.2}),
+        },
+        evaluator_defaults=EvaluatorDefaults(candidate_model_names=["deepseek-v3"]),
+        evaluation_requirements=EvaluationRequirements(),
+        stop_conditions=StopConditions(max_rounds=2, min_selected_per_round=1),
+    )
+    qa_shared_state = SharedState(
+        task_id="task_x",
+        run_id="run_y",
+        blueprint=round_spec.blueprint,
+        artifacts={"custom_from_generation": "runs/task_x/run_y/custom.json"},
+        agent_status={
+            "generation": AgentStatus.COMPLETED,
+            "verification": AgentStatus.PENDING,
+            "evaluation": AgentStatus.PENDING,
+        },
+    )
+
+    async def _fake_generation_agent(*args, **kwargs):
+        save_shared_state(qa_shared_state, run_dir)
+        _write_json(run_dir / "generation_report.json", {
+            "total_candidates": 1,
+            "global_used_chunk_combinations": 0,
+            "global_failures": 0,
+            "modes": {
+                "qa": {"candidate_count": 1, "target_candidate_count": 1, "stopped_reason": None},
+            },
+        })
+        _write_json(run_dir / "qa" / "mode_state.json", {
+            "difficulty_counts": {"easy": 1},
+            "topic_counts": {"AI": 1},
+        })
+        _write_json(run_dir / "qa" / "candidate_pool.json", [])
+
+    monkeypatch.setattr(planner_orchestrator, "run_generation_agent", _fake_generation_agent)
+    monkeypatch.setattr(planner_orchestrator, "load_model_registry", lambda path: {})
+    monkeypatch.setattr(planner_orchestrator, "_load_verify_model_client", lambda registry, verify_config: None)
+
+    async def _fake_verify(*args, **kwargs):
+        return None
+
+    monkeypatch.setattr(planner_orchestrator, "run_verify_agent_from_shared_state", _fake_verify)
+    monkeypatch.setattr(planner_orchestrator, "build_validator_feedback", lambda *args, **kwargs: None)
+
+    gen_fb, val_fb, eval_fb = await planner_orchestrator.execute_round(
+        round_spec=round_spec,
+        global_blueprint=blueprint,
+        base_config_dir=base_config_dir,
+        registry_path=tmp_path / "model_registry.yaml",
+    )
+
+    state = load_shared_state(run_dir / "shared_state.json")
+    assert gen_fb.summary.total_candidates == 1
+    assert val_fb is None
+    assert eval_fb is None
+    assert state.artifact("custom_from_generation") == "runs/task_x/run_y/custom.json"
+    assert state.round_id == round_spec.round_id
+    assert state.round_spec_ref.endswith("planner/round_spec.json")
 
 
 def _make_global_blueprint() -> GlobalBlueprint:
@@ -707,6 +883,88 @@ def test_question_difficulty_evolver_uses_generation_and_validation_difficulty_f
     assert plan.qa_difficulty_distribution["medium"] > blueprint.default_modes["qa"].difficulty_distribution["medium"]
 
 
+def test_question_difficulty_evolver_uses_mode_specific_selected_rates():
+    blueprint = _make_global_blueprint()
+    state = PlannerState(
+        task_id="task_x",
+        blueprint_id="bp_x",
+        current_round=2,
+        completed_targets={"qa": 0, "multiple_choice": 0},
+        topic_backlog=TopicBacklog(active=["AI", "ML"], deferred=[]),
+        model_pool=ModelPool(active=["model-a"], removed=[]),
+    )
+    gen_fb = GeneratorFeedback(
+        task_id="task_x",
+        run_id="run_002",
+        round_id=2,
+        status="success",
+        artifacts=GeneratorFeedbackArtifacts(shared_state_path="", generation_report=""),
+        summary=GeneratorFeedbackSummary(total_candidates=20, global_used_chunk_combinations=3, global_failures=0),
+        by_mode={
+            "qa": ModeGeneratorFeedback(
+                candidate_count=10,
+                target_candidate_count=10,
+                fulfillment_rate=1.0,
+                difficulty_counts={"hard": 6},
+            ),
+            "multiple_choice": ModeGeneratorFeedback(
+                candidate_count=10,
+                target_candidate_count=10,
+                fulfillment_rate=1.0,
+                difficulty_counts={"hard": 6},
+            ),
+        },
+    )
+    val_fb = ValidatorFeedback(
+        task_id="task_x",
+        run_id="run_002",
+        round_id=2,
+        status="success",
+        summary=ValidatorFeedbackSummary(
+            total_candidates=20,
+            citation_passed=10,
+            llm_passed=8,
+            final_selected=6,
+            citation_pass_rate=0.5,
+            llm_pass_rate_after_citation=0.8,
+            final_selection_rate=0.3,
+            llm_calls=1,
+            llm_input_tokens=1,
+            llm_output_tokens=1,
+        ),
+        quality_signals=ValidatorQualitySignals(),
+        by_mode={"qa": {"selected": 3}, "multiple_choice": {"selected": 3}},
+        by_difficulty={
+            "easy": {"selected": 3, "reserve": 0, "rejected": 0},
+            "medium": {"selected": 3, "reserve": 0, "rejected": 0},
+            "hard": {"selected": 0, "reserve": 0, "rejected": 12},
+        },
+        by_mode_difficulty={
+            "qa": {
+                "easy": {"selected": 1, "reserve": 0, "rejected": 0},
+                "medium": {"selected": 2, "reserve": 0, "rejected": 0},
+                "hard": {"selected": 0, "reserve": 0, "rejected": 6},
+            },
+            "multiple_choice": {
+                "easy": {"selected": 0, "reserve": 0, "rejected": 0},
+                "medium": {"selected": 0, "reserve": 0, "rejected": 0},
+                "hard": {"selected": 3, "reserve": 0, "rejected": 0},
+            },
+        },
+    )
+
+    plan = question_difficulty_evolver(
+        state,
+        blueprint,
+        SimpleNamespace(label="cold_start", evidence={}, problems=[]),
+        latest_gen_fb=gen_fb,
+        latest_val_fb=val_fb,
+    )
+
+    assert plan.qa_difficulty_distribution["hard"] < blueprint.default_modes["qa"].difficulty_distribution["hard"]
+    assert plan.mc_difficulty_distribution["hard"] >= blueprint.default_modes["multiple_choice"].difficulty_distribution["hard"]
+
+
 def test_control_parameter_tuner_only_returns_runtime_controls():
     blueprint = _make_global_blueprint()
     state = PlannerState(
@@ -783,6 +1041,29 @@ def test_control_parameter_tuner_uses_feedback_signals_not_only_label():
     assert plan.selection_mode == "strict"
     assert plan.semantic_similarity_threshold >= 0.92
     assert plan.eval_profile == "full"
+
+
+def test_control_parameter_tuner_enables_judge_when_any_mode_has_judge_metrics():
+    blueprint = _make_global_blueprint()
+    blueprint.evaluation_requirements = EvaluationRequirements(
+        automatic_metrics={},
+        llm_judge_metrics={"qa": [], "multiple_choice": [JudgeMetricDef(name="reasoning", description="score reasoning")]},
+    )
+    state = PlannerState(
+        task_id="task_x",
+        blueprint_id="bp_x",
+        current_round=1,
+        topic_backlog=TopicBacklog(active=["AI"], deferred=[]),
+        model_pool=ModelPool(active=["model-a"], removed=[]),
+    )
+
+    plan = control_parameter_tuner(
+        state,
+        blueprint,
+        SimpleNamespace(label="cold_start", evidence={}, problems=[]),
+    )
+
+    assert plan.judge_enabled is True
 
 
 def test_round_spec_builder_uses_tool_outputs_without_recomputing():

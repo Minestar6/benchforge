@@ -1,0 +1,23 @@
+{
+  "mode": "multiple_choice",
+  "candidate_count": 22,
+  "total_record_count": 22,
+  "accepted_count": 22,
+  "rejected_count": 0,
+  "difficulty_counts": {
+    "easy": 5,
+    "medium": 15,
+    "hard": 2
+  },
+  "topic_counts": {
+    "physics qualitative reasoning": 11,
+    "physics experimental design and analysis": 11
+  },
+  "stopped_reason": "max_candidate_pool_reached",
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

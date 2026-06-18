@@ -3,6 +3,7 @@
 import sys
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import AsyncMock
 
 import pytest
 
@@ -141,6 +142,24 @@ async def test_synthesize_global_blueprint_uses_goal_analyzer_payload():
 
 
 @pytest.mark.asyncio
+async def test_synthesize_global_blueprint_rejects_unknown_models():
+    client = _BlueprintClient('{"seed_topics":["x"]}')
+    intent = UserIntent(
+        user_goal="goal",
+        candidate_model_names=["missing-candidate"],
+        judge_model_name="missing-judge",
+    )
+
+    with pytest.raises(ValueError, match="Unknown candidate models"):
+        await synthesize_global_blueprint(
+            intent=intent,
+            registry_path=project_root / "benchforge/config/model_registry.yaml",
+            model_client=client,
+            planner_model_name="fake",
+        )
+
+
+@pytest.mark.asyncio
 async def test_run_benchforge_saves_blueprint_and_invokes_planner(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
 
@@ -191,6 +210,60 @@ async def test_run_benchforge_saves_blueprint_and_invokes_planner(tmp_path, monk
     assert called["planner"]["global_blueprint"] is blueprint
     assert called["planner"]["state_dir"] == Path("runs") / "task_demo" / "planner"
     assert (Path("runs") / "task_demo" / "planner" / "global_blueprint.json").exists()
+
+
+@pytest.mark.asyncio
+async def test_run_benchforge_uses_planner_config_for_blueprint_synthesis(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    config_dir = tmp_path / "config"
+    config_dir.mkdir()
+    (config_dir / "planner_agent.yaml").write_text(
+        "model:\n"
+        "  name: planner-from-config\n"
+        "  temperature: 0.35\n"
+        "  max_tokens: 900\n",
+        encoding="utf-8",
+    )
+
+    blueprint = GlobalBlueprint(
+        task_id="task_demo",
+        blueprint_id="bp_demo",
+        user_goal="demo",
+        language="zh",
+        seed_topics=["AI"],
+        final_targets=FinalTargets(qa=6, multiple_choice=2),
+        default_modes={
+            "qa": QuestionModeDefaults(max_rounds=3, difficulty_distribution={"easy": 0.3, "medium": 0.4, "hard": 0.3}),
+            "multiple_choice": QuestionModeDefaults(max_rounds=3, difficulty_distribution={"easy": 0.4, "medium": 0.4, "hard": 0.2}),
+        },
+        evaluator_defaults=EvaluatorDefaults(candidate_model_names=["fake"], judge_model_name="fake"),
+        evaluation_requirements=EvaluationRequirements(),
+        stop_conditions=StopConditions(max_rounds=2, min_selected_per_round=2),
+    )
+    captured = {}
+
+    async def fake_synthesize(**kwargs):
+        captured["kwargs"] = kwargs
+        return blueprint
+
+    async def fake_run_planner(global_blueprint, base_config_dir, registry_path, state_dir, resume_state=None):
+        return SimpleNamespace(task_id="task_demo", current_round=1)
+
+    monkeypatch.setattr("benchforge.app.synthesize_global_blueprint", fake_synthesize)
+    monkeypatch.setattr("benchforge.app.run_planner", fake_run_planner)
+
+    await run_benchforge(
+        intent=UserIntent(user_goal="demo goal"),
+        base_config_dir=config_dir,
+        registry_path=project_root / "benchforge/config/model_registry.yaml",
+    )
+
+    assert captured["kwargs"]["planner_model_name"] == "planner-from-config"
+    assert captured["kwargs"]["planner_model_settings"] == {
+        "temperature": 0.35,
+        "max_tokens": 900,
+        "max_retries": 3,
+    }
 
 
 def test_cli_main_builds_user_intent_and_invokes_run_benchforge(monkeypatch):
@@ -414,6 +487,35 @@ async def test_run_benchforge_from_natural_language_generates_topics_and_execute
     monkeypatch.setattr(
         "benchforge.agents.planner_agent.planner.execute_round",
         fake_execute_round,
+    )
+    monkeypatch.setattr(
+        "benchforge.agents.planner_agent.planner._llm_question_difficulty_evolver",
+        AsyncMock(
+            return_value=SimpleNamespace(
+                qa_count=4,
+                mc_count=2,
+                qa_difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
+                mc_difficulty_distribution={"easy": 0.3, "medium": 0.4, "hard": 0.3},
+                topic_budget=2,
+                min_candidate_multiplier=1.5,
+                max_candidate_multiplier=2.0,
+                min_selected_per_round=2,
+                qa_max_rounds=2,
+                mc_max_rounds=2,
+                model_dump=lambda: {
+                    "qa_count": 4,
+                    "mc_count": 2,
+                    "qa_difficulty_distribution": {"easy": 0.2, "medium": 0.5, "hard": 0.3},
+                    "mc_difficulty_distribution": {"easy": 0.3, "medium": 0.4, "hard": 0.3},
+                    "topic_budget": 2,
+                    "min_candidate_multiplier": 1.5,
+                    "max_candidate_multiplier": 2.0,
+                    "min_selected_per_round": 2,
+                    "qa_max_rounds": 2,
+                    "mc_max_rounds": 2,
+                },
+            )
+        ),
     )
 
     result = await run_benchforge(

@@ -16,9 +16,14 @@ from benchforge.agents.planner_agent.schema import (
     EvaluatorDefaults,
     EvaluationRequirements,
     StopConditions,
+    RunHistoryEntry,
+    PlannerState,
+    QuestionPlan,
+    TopicBacklog,
+    ModelPool,
 )
 from benchforge.agents.planner_agent.planner import run_planner
-from benchforge.agents.planner_agent.config_loader import load_planner_state
+from benchforge.agents.planner_agent.config_loader import load_planner_state, save_planner_state
 
 
 @pytest.fixture
@@ -236,3 +241,339 @@ async def test_stop_condition_targets_satisfied(test_blueprint, mock_model_clien
     assert final_state.current_round == 1
     assert final_state.completed_targets["qa"] >= 5
     assert final_state.completed_targets["multiple_choice"] >= 3
+
+
+@pytest.mark.asyncio
+async def test_run_planner_uses_planner_config_model_not_judge_model(test_blueprint, tmp_path):
+    state_dir = tmp_path / "planner_state"
+    config_dir = tmp_path / "config"
+    config_dir.mkdir()
+    (config_dir / "planner_agent.yaml").write_text(
+        "model:\n"
+        "  name: planner-model\n"
+        "question_difficulty_evolver:\n"
+        "  enabled: false\n",
+        encoding="utf-8",
+    )
+
+    loaded_models = []
+
+    async def _fake_execute_round(*args, **kwargs):
+        from benchforge.agents.planner_agent.schema import (
+            GeneratorFeedback,
+            GeneratorFeedbackSummary,
+            GeneratorFeedbackArtifacts,
+            ValidatorFeedback,
+            ValidatorFeedbackSummary,
+            ValidatorQualitySignals,
+        )
+        return (
+            GeneratorFeedback(
+                task_id="test_task",
+                run_id="run_001",
+                round_id=1,
+                status="success",
+                artifacts=GeneratorFeedbackArtifacts(shared_state_path="", generation_report=""),
+                summary=GeneratorFeedbackSummary(total_candidates=10, global_used_chunk_combinations=5, global_failures=0),
+            ),
+            ValidatorFeedback(
+                task_id="test_task",
+                run_id="run_001",
+                round_id=1,
+                status="success",
+                summary=ValidatorFeedbackSummary(
+                    total_candidates=10,
+                    citation_passed=10,
+                    llm_passed=10,
+                    final_selected=10,
+                    citation_pass_rate=1.0,
+                    llm_pass_rate_after_citation=1.0,
+                    final_selection_rate=1.0,
+                    llm_calls=0,
+                    llm_input_tokens=0,
+                    llm_output_tokens=0,
+                ),
+                quality_signals=ValidatorQualitySignals(),
+                by_mode={"qa": {"selected": 10}, "multiple_choice": {"selected": 10}},
+            ),
+            None,
+        )
+
+    with patch("benchforge.agents.planner_agent.planner.execute_round", new=_fake_execute_round):
+        with patch("benchforge.agents.planner_agent.planner.ModelLoader.load_model") as mock_load:
+            mock_load.side_effect = lambda cfg: loaded_models.append(cfg.model_name) or mock_model_client
+            with patch(
+                "benchforge.agents.planner_agent.planner.load_model_registry",
+                return_value={"planner-model": MagicMock(model_name="planner-model"), "judge-model": MagicMock(model_name="judge-model")},
+            ):
+                test_blueprint.evaluator_defaults.judge_model_name = "judge-model"
+                await run_planner(test_blueprint, config_dir, Path("config/model_registry.yaml"), state_dir)
+
+    assert loaded_models[0] == "planner-model"
+
+
+@pytest.mark.asyncio
+async def test_run_planner_stops_when_topics_cannot_be_proposed(test_blueprint, mock_model_client, tmp_path):
+    state_dir = tmp_path / "planner_state"
+
+    with patch("benchforge.agents.planner_agent.planner.execute_round") as mock_exec:
+        with patch("benchforge.agents.planner_agent.planner.topic_adaptive_retriever", new=AsyncMock(return_value=[])):
+            with patch("benchforge.agents.planner_agent.planner.ModelLoader.load_model", return_value=mock_model_client):
+                with patch("benchforge.agents.planner_agent.planner.load_model_registry", return_value={"deepseek-v3": MagicMock(model_name="deepseek-v3"), "deepseek-v3.2": MagicMock(model_name="deepseek-v3.2")}):
+                    final_state = await run_planner(
+                        test_blueprint,
+                        Path("config"),
+                        Path("config/model_registry.yaml"),
+                        state_dir,
+                    )
+
+    mock_exec.assert_not_called()
+    assert final_state.current_round == 0
+    assert final_state.run_history == []
+    assert not (state_dir / "round_001_spec.json").exists()
+
+
+@pytest.mark.asyncio
+async def test_run_planner_resume_uses_previous_feedback_for_diagnosis(test_blueprint, mock_model_client, tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    state_dir = tmp_path / "planner_state"
+    state_dir.mkdir()
+
+    resume_state = PlannerState(
+        task_id="test_task",
+        blueprint_id="test_bp",
+        current_round=1,
+        completed_targets={"qa": 4, "multiple_choice": 3},
+        topic_backlog=TopicBacklog(active=["算法"], deferred=["数据结构"]),
+        model_pool=ModelPool(active=["deepseek-v3"], removed=[]),
+        run_history=[
+            RunHistoryEntry(
+                round_id=1,
+                run_id="run_001",
+                topics=["算法"],
+                qa_target=5,
+                multiple_choice_target=3,
+                selected_count=8,
+                evaluated=True,
+                question_plan=QuestionPlan(
+                    qa_count=5,
+                    mc_count=3,
+                    qa_difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
+                    mc_difficulty_distribution={"easy": 0.3, "medium": 0.5, "hard": 0.2},
+                ),
+            )
+        ],
+    )
+    save_planner_state(resume_state, state_dir / "planner_state_after_round_001.json")
+    with open(state_dir / "round_001_spec.json", "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "task_id": "test_task",
+                "blueprint_id": "test_bp",
+                "round_id": 1,
+                "run_id": "run_001",
+                "objective": "test",
+                "blueprint": {
+                    "task_id": "test_task",
+                    "run_id": "run_001",
+                    "language": "zh",
+                    "topics": ["算法"],
+                    "modes": {
+                        "qa": {"count": 5, "max_rounds": 5, "difficulty_distribution": {"easy": 0.2, "medium": 0.5, "hard": 0.3}},
+                        "multiple_choice": {"count": 3, "max_rounds": 5, "difficulty_distribution": {"easy": 0.3, "medium": 0.5, "hard": 0.2}},
+                    },
+                },
+                "qa_agent_patch": {},
+                "verify_agent_patch": {},
+                "model_eval_agent_patch": {},
+                "planner_hints": {"eval_profile": "standard"},
+            },
+            f,
+            ensure_ascii=False,
+            indent=2,
+        )
+
+    run_dir = tmp_path / "runs" / "test_task" / "run_001"
+    (run_dir / "validation").mkdir(parents=True)
+    (run_dir / "evaluation" / "dataset_report").mkdir(parents=True)
+    with open(run_dir / "shared_state.json", "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "task_id": "test_task",
+                "run_id": "run_001",
+                "blueprint": {
+                    "topics": ["算法"],
+                    "modes": {
+                        "qa": {"count": 5, "difficulty_distribution": {"easy": 0.2, "medium": 0.5, "hard": 0.3}},
+                        "multiple_choice": {"count": 3, "difficulty_distribution": {"easy": 0.3, "medium": 0.5, "hard": 0.2}},
+                    },
+                },
+                "artifacts": {
+                    "generation_report": "runs/test_task/run_001/generation_report.json",
+                    "validation_report": "runs/test_task/run_001/validation/validation_report.json",
+                    "validated_questions": "runs/test_task/run_001/validation/validated_questions.jsonl",
+                    "weighted_selection": "runs/test_task/run_001/validation/weighted_selection.json",
+                    "evaluation_report": "runs/test_task/run_001/evaluation/evaluation_report.json",
+                    "dataset_quality_summary": "runs/test_task/run_001/evaluation/dataset_report/dataset_quality_summary.json",
+                },
+                "agent_status": {"generation": "completed", "verification": "completed", "evaluation": "completed"},
+            },
+            f,
+            ensure_ascii=False,
+            indent=2,
+        )
+    with open(run_dir / "generation_report.json", "w", encoding="utf-8") as f:
+        json.dump({"total_candidates": 10, "global_used_chunk_combinations": 5, "global_failures": 0, "modes": {}}, f)
+    with open(run_dir / "validation" / "validation_report.json", "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "total_candidates": 10,
+                "citation_passed": 9,
+                "llm_passed": 8,
+                "final_selected": 8,
+                "failed_by_stage": {},
+                "llm_usage": {"calls": 0, "input_tokens": 0, "output_tokens": 0},
+            },
+            f,
+        )
+    with open(run_dir / "validation" / "validated_questions.jsonl", "w", encoding="utf-8") as f:
+        f.write(json.dumps({"final_status": "selected", "candidate": {"question_mode": "qa", "estimated_difficulty": "easy", "topic": "算法"}}) + "\n")
+    with open(run_dir / "validation" / "weighted_selection.json", "w", encoding="utf-8") as f:
+        json.dump({"dropped_as_duplicate": [], "dropped_as_overquota": []}, f)
+    with open(run_dir / "evaluation" / "evaluation_report.json", "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "num_questions": 8,
+                "num_models": 1,
+                "discriminative_signals": {
+                    "overall_model_gap": 0.05,
+                    "discriminative_question_ratio": 0.1,
+                    "easy_questions_too_easy_ratio": 0.5,
+                    "all_models_fail_ratio": 0.0,
+                },
+                "by_topic": {"算法": {"question_count": 8, "model_gap": 0.05, "too_easy_ratio": 0.5, "all_models_fail_ratio": 0.0}},
+                "by_difficulty": {},
+                "by_mode": {},
+            },
+            f,
+        )
+    with open(run_dir / "evaluation" / "dataset_report" / "dataset_quality_summary.json", "w", encoding="utf-8") as f:
+        json.dump({}, f)
+
+    captured = {}
+
+    def _capture_question_plan(state, blueprint, diagnosis, **kwargs):
+        captured["diagnosis_label"] = diagnosis.label
+        return QuestionPlan(
+            qa_count=1,
+            mc_count=0,
+            qa_difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
+            mc_difficulty_distribution={"easy": 0.3, "medium": 0.5, "hard": 0.2},
+            topic_budget=1,
+        )
+
+    with patch("benchforge.agents.planner_agent.planner.question_difficulty_evolver", side_effect=_capture_question_plan):
+        with patch("benchforge.agents.planner_agent.planner.topic_adaptive_retriever", new=AsyncMock(return_value=[])):
+            with patch("benchforge.agents.planner_agent.planner.execute_round") as mock_exec:
+                with patch("benchforge.agents.planner_agent.planner.ModelLoader.load_model", return_value=mock_model_client):
+                    with patch("benchforge.agents.planner_agent.planner.load_model_registry", return_value={"deepseek-v3": MagicMock(), "deepseek-v3.2": MagicMock()}):
+                        await run_planner(
+                            test_blueprint,
+                            Path("config"),
+                            Path("config/model_registry.yaml"),
+                            state_dir,
+                            resume_state=resume_state,
+                        )
+
+    mock_exec.assert_not_called()
+    assert captured["diagnosis_label"] == "high_quality_low_separation"
+
+
+@pytest.mark.asyncio
+async def test_run_planner_resume_missing_artifacts_falls_back_to_cold_start(test_blueprint, mock_model_client, tmp_path):
+    state_dir = tmp_path / "planner_state"
+    state_dir.mkdir()
+    resume_state = PlannerState(
+        task_id="test_task",
+        blueprint_id="test_bp",
+        current_round=1,
+        completed_targets={"qa": 4, "multiple_choice": 3},
+        topic_backlog=TopicBacklog(active=["算法"], deferred=[]),
+        model_pool=ModelPool(active=["deepseek-v3"], removed=[]),
+        run_history=[
+            RunHistoryEntry(
+                round_id=1,
+                run_id="run_001",
+                topics=["算法"],
+                qa_target=5,
+                multiple_choice_target=3,
+                selected_count=8,
+                evaluated=True,
+            )
+        ],
+    )
+    captured = {}
+
+    def _capture_question_plan(state, blueprint, diagnosis, **kwargs):
+        captured["diagnosis_label"] = diagnosis.label
+        return QuestionPlan(
+            qa_count=0,
+            mc_count=0,
+            qa_difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
+            mc_difficulty_distribution={"easy": 0.3, "medium": 0.5, "hard": 0.2},
+            topic_budget=1,
+        )
+
+    async def _capture_llm_plan(**kwargs):
+        captured["diagnosis_label"] = kwargs["diagnosis"].label
+        return QuestionPlan(
+            qa_count=0,
+            mc_count=0,
+            qa_difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
+            mc_difficulty_distribution={"easy": 0.3, "medium": 0.5, "hard": 0.2},
+            topic_budget=1,
+        )
+
+    with patch("benchforge.agents.planner_agent.planner._llm_question_difficulty_evolver", side_effect=_capture_llm_plan):
+        with patch("benchforge.agents.planner_agent.planner.execute_round") as mock_exec:
+            with patch("benchforge.agents.planner_agent.planner.ModelLoader.load_model", return_value=mock_model_client):
+                with patch("benchforge.agents.planner_agent.planner.load_model_registry", return_value={"deepseek-v3": MagicMock(), "deepseek-v3.2": MagicMock()}):
+                    await run_planner(
+                        test_blueprint,
+                        Path("config"),
+                        Path("config/model_registry.yaml"),
+                        state_dir,
+                        resume_state=resume_state,
+                    )
+
+    mock_exec.assert_not_called()
+    assert captured["diagnosis_label"] == "cold_start"
+
+
+@pytest.mark.asyncio
+async def test_run_planner_skips_zero_work_round(test_blueprint, mock_model_client, tmp_path):
+    state_dir = tmp_path / "planner_state"
+
+    zero_plan = QuestionPlan(
+        qa_count=0,
+        mc_count=0,
+        qa_difficulty_distribution={"easy": 0.2, "medium": 0.5, "hard": 0.3},
+        mc_difficulty_distribution={"easy": 0.3, "medium": 0.5, "hard": 0.2},
+        topic_budget=1,
+    )
+
+    with patch("benchforge.agents.planner_agent.planner._llm_question_difficulty_evolver", new=AsyncMock(return_value=zero_plan)):
+        with patch("benchforge.agents.planner_agent.planner.execute_round") as mock_exec:
+            with patch("benchforge.agents.planner_agent.planner.topic_adaptive_retriever", new=AsyncMock(return_value=["算法"])):
+                with patch("benchforge.agents.planner_agent.planner.ModelLoader.load_model", return_value=mock_model_client):
+                    with patch("benchforge.agents.planner_agent.planner.load_model_registry", return_value={"deepseek-v3": MagicMock(), "deepseek-v3.2": MagicMock()}):
+                        final_state = await run_planner(
+                            test_blueprint,
+                            Path("config"),
+                            Path("config/model_registry.yaml"),
+                            state_dir,
+                        )
+
+    mock_exec.assert_not_called()
+    assert final_state.current_round == 0
+    assert final_state.run_history == []

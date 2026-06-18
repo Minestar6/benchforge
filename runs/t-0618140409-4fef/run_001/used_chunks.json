@@ -1,0 +1,56 @@
+{
+  "used_chunk_combinations": [
+    [
+      "doc_1f4c082fb219::chunk_0000",
+      "doc_1f4c082fb219::chunk_0005",
+      "doc_1f4c082fb219::chunk_0006",
+      "doc_1f4c082fb219::chunk_0007"
+    ],
+    [
+      "doc_436fd17789fe::chunk_0001",
+      "doc_436fd17789fe::chunk_0003",
+      "doc_436fd17789fe::chunk_0005",
+      "doc_436fd17789fe::chunk_0007"
+    ],
+    [
+      "doc_436fd17789fe::chunk_0005",
+      "doc_436fd17789fe::chunk_0006",
+      "doc_436fd17789fe::chunk_0007",
+      "doc_436fd17789fe::chunk_0008"
+    ],
+    [
+      "doc_bdf882904c75::chunk_0004"
+    ],
+    [
+      "doc_82dab7e6e73c::chunk_0003"
+    ],
+    [
+      "doc_d8c2983fd6f3::chunk_0000"
+    ],
+    [
+      "doc_f221515900a3::chunk_0006"
+    ],
+    [
+      "doc_df5d2651247c::chunk_0002",
+      "doc_df5d2651247c::chunk_0003"
+    ]
+  ],
+  "chunk_usage_counts": {
+    "doc_82dab7e6e73c::chunk_0003": 1,
+    "doc_436fd17789fe::chunk_0001": 1,
+    "doc_436fd17789fe::chunk_0003": 1,
+    "doc_436fd17789fe::chunk_0005": 2,
+    "doc_436fd17789fe::chunk_0007": 2,
+    "doc_bdf882904c75::chunk_0004": 1,
+    "doc_1f4c082fb219::chunk_0000": 1,
+    "doc_1f4c082fb219::chunk_0005": 1,
+    "doc_1f4c082fb219::chunk_0006": 1,
+    "doc_1f4c082fb219::chunk_0007": 1,
+    "doc_f221515900a3::chunk_0006": 1,
+    "doc_436fd17789fe::chunk_0006": 1,
+    "doc_436fd17789fe::chunk_0008": 1,
+    "doc_d8c2983fd6f3::chunk_0000": 1,
+    "doc_df5d2651247c::chunk_0002": 1,
+    "doc_df5d2651247c::chunk_0003": 1
+  }
+}

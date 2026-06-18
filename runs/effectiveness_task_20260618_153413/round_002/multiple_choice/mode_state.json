@@ -1,0 +1,21 @@
+{
+  "mode": "multiple_choice",
+  "candidate_count": 3,
+  "total_record_count": 3,
+  "accepted_count": 3,
+  "rejected_count": 0,
+  "difficulty_counts": {
+    "hard": 2,
+    "medium": 1
+  },
+  "topic_counts": {
+    "Quantum Computing": 3
+  },
+  "stopped_reason": "max_rounds_reached",
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

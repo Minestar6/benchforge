@@ -1,0 +1,62 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "hard",
+    "topics": [
+      "physics qualitative reasoning and estimation",
+      "physics experimental design and analysis"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "physics qualitative reasoning and estimation",
+        "success": true,
+        "generated_count": 7,
+        "raw_count": 7,
+        "filtered_count": 7,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 3,
+        "multi_generated_count": 4,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_67e82f543c60421f83934f7ec3f5c607",
+        "trace_call_id": "llm_2a507130c9b84a2b83e9d3e0cff88d9f",
+        "chunks": [
+          "doc_436fd17789fe::chunk_0002",
+          "doc_436fd17789fe::chunk_0004",
+          "doc_436fd17789fe::chunk_0005",
+          "doc_436fd17789fe::chunk_0008",
+          "doc_ae4d62967d25::chunk_0006"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "physics experimental design and analysis",
+        "success": true,
+        "generated_count": 0,
+        "raw_count": 0,
+        "filtered_count": 0,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 0,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_9585f08893574d01aa8643be5d1f8057",
+        "trace_call_id": "llm_2faa76b1d6584219a917764c456ec0dc",
+        "chunks": [
+          "doc_dee72cd3953e::chunk_0000",
+          "doc_dee72cd3953e::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+citation_validation:
+  enabled: true
+  min_answer_citation_score: 0.55
+  min_chunk_citation_score: 0.6
+  min_citation_score: 0.55
+llm_validation:
+  enabled: true
+  min_overall_score: 0.7
+selection:
+  mode: light
+  semantic_similarity_threshold: 0.9

@@ -1,0 +1,51 @@
+{
+  "used_chunk_combinations": [
+    [
+      "doc_df5d2651247c::chunk_0000",
+      "doc_df5d2651247c::chunk_0003",
+      "doc_df5d2651247c::chunk_0004",
+      "doc_df5d2651247c::chunk_0005"
+    ],
+    [
+      "doc_ae4d62967d25::chunk_0006"
+    ],
+    [
+      "doc_436fd17789fe::chunk_0001",
+      "doc_436fd17789fe::chunk_0002",
+      "doc_436fd17789fe::chunk_0004"
+    ],
+    [
+      "doc_dee72cd3953e::chunk_0000"
+    ],
+    [
+      "doc_436fd17789fe::chunk_0002",
+      "doc_436fd17789fe::chunk_0004",
+      "doc_436fd17789fe::chunk_0005",
+      "doc_436fd17789fe::chunk_0008"
+    ],
+    [
+      "doc_436fd17789fe::chunk_0001"
+    ],
+    [
+      "doc_dee72cd3953e::chunk_0000",
+      "doc_dee72cd3953e::chunk_0003"
+    ],
+    [
+      "doc_df5d2651247c::chunk_0004"
+    ]
+  ],
+  "chunk_usage_counts": {
+    "doc_ae4d62967d25::chunk_0006": 1,
+    "doc_436fd17789fe::chunk_0002": 2,
+    "doc_436fd17789fe::chunk_0004": 2,
+    "doc_436fd17789fe::chunk_0005": 1,
+    "doc_436fd17789fe::chunk_0008": 1,
+    "doc_dee72cd3953e::chunk_0000": 2,
+    "doc_dee72cd3953e::chunk_0003": 1,
+    "doc_436fd17789fe::chunk_0001": 2,
+    "doc_df5d2651247c::chunk_0004": 2,
+    "doc_df5d2651247c::chunk_0000": 1,
+    "doc_df5d2651247c::chunk_0003": 1,
+    "doc_df5d2651247c::chunk_0005": 1
+  }
+}

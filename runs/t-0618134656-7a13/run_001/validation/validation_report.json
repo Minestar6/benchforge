@@ -1,0 +1,25 @@
+{
+  "task_id": "t-0618134656-7a13",
+  "run_id": "run_001",
+  "total_candidates": 26,
+  "citation_passed": 24,
+  "llm_passed": 23,
+  "final_selected": 23,
+  "stage_latencies_ms": {
+    "citation_validation": 50,
+    "llm_validation": 113926,
+    "selection": 2
+  },
+  "llm_usage": {
+    "calls": 24,
+    "input_tokens": 14984,
+    "output_tokens": 12153
+  },
+  "failed_by_stage": {
+    "citation": 2,
+    "llm": 0,
+    "validator_error": 1,
+    "duplicate": 0,
+    "overquota": 0
+  }
+}

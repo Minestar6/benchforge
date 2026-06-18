@@ -1,0 +1,31 @@
+{
+  "task_id": "t-0618130621-f1e6",
+  "blueprint_id": "t-0618130621-f1e6-bp",
+  "current_round": 0,
+  "completed_targets": {
+    "qa": 0,
+    "multiple_choice": 0
+  },
+  "resource_usage": {
+    "total_input_tokens": 0,
+    "total_output_tokens": 0,
+    "total_tokens": 0,
+    "by_agent": {}
+  },
+  "topic_backlog": {
+    "active": [
+      "physics conceptual understanding",
+      "physics quantitative problem solving",
+      "physics experimental reasoning"
+    ],
+    "deferred": []
+  },
+  "model_pool": {
+    "active": [
+      "deepseek-v4"
+    ],
+    "removed": []
+  },
+  "run_history": [],
+  "last_question_plan": null
+}

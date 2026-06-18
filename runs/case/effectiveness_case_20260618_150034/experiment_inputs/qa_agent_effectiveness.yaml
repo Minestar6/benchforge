@@ -1,0 +1,96 @@
+model:
+  name: deepseek-v4
+  temperature: 0.2
+  max_tokens: 4096
+  max_retries: 2
+retrieval:
+  request_timeout: 10
+  saliency_rerank: true
+  saliency_top_k: 3
+  saliency_start_date: '2022010100'
+  saliency_end_date: '2025010100'
+  min_paragraph_tokens: 20
+chunking:
+  chunk_size: 1024
+  overlap: 50
+  encoding: cl100k_base
+summarization_chunking:
+  chunk_size: 4096
+  overlap: 125
+  encoding: cl100k_base
+multi_chunk:
+  h_min: 2
+  h_max: 4
+  multi_ratio: 1.0
+  max_units_per_topic: 300
+  max_units_per_expansion: 300
+candidate_pool:
+  min_candidate_multiplier: 1.8
+  max_candidate_multiplier: 2.2
+initial_breadth:
+  enabled: true
+  max_topics_per_round: 4
+  difficulty: medium
+  difficulty_policy: hard_aware
+  hard_ratio_threshold: 0.3
+planner:
+  topics_per_round: 3
+chunk_mix:
+  by_difficulty:
+    easy:
+      single_ratio: 0.7
+      multi_ratio: 0.3
+    medium:
+      single_ratio: 0.5
+      multi_ratio: 0.5
+    hard:
+      single_ratio: 0.1
+      multi_ratio: 0.9
+  mode_adjustment:
+    qa:
+      single_delta: 0.1
+    multiple_choice:
+      single_delta: -0.1
+generation_yield:
+  qa:
+    single_chunk_avg_questions: 3.0
+    multi_chunk_avg_questions: 4.0
+  multiple_choice:
+    single_chunk_avg_questions: 3.0
+    multi_chunk_avg_questions: 4.0
+chunk_limits:
+  qa:
+    single_k:
+      min: 1
+      max: 4
+    multi_k:
+      min: 0
+      max: 3
+  multiple_choice:
+    single_k:
+      min: 0
+      max: 3
+    multi_k:
+      min: 1
+      max: 4
+runtime:
+  max_consecutive_empty_rounds_per_mode: 4
+  max_failures_per_mode: 3
+  max_used_chunk_combinations: 10000
+  llm_timeout_seconds: 60
+  retrieval_timeout_seconds: 30
+logging:
+  level: INFO
+experiment:
+  name: full
+  enable_feedback: true
+  enable_hard_generate: true
+  enable_difficulty_adaptation: true
+  enable_terminal_hard_repair: true
+  terminal_hard_repair_min_missing: 2
+  terminal_hard_repair_gap_threshold: 0.15
+  terminal_hard_repair_topics: 2
+  terminal_hard_repair_multi_k_scale: 1.0
+  fixed_strategy: null
+  fixed_difficulty: null
+  disable_initial_breadth: false

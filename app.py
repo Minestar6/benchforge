@@ -12,6 +12,7 @@ from benchforge.agents.planner_agent.config_loader import (
     save_global_blueprint,
     load_global_blueprint,
     load_planner_state,
+    load_planner_agent_config,
 )
 from benchforge.agents.planner_agent.planner import run_planner
 from benchforge.agents.planner_agent.schema import UserIntent, PlannerState
@@ -47,10 +48,16 @@ async def run_benchforge(
         global_blueprint_path = state_dir / "global_blueprint.json"
         print(f"[resume] state_dir={state_dir}")
     else:
+        planner_config = load_planner_agent_config(base_config_dir)
         blueprint = await synthesize_global_blueprint(
             intent=intent,
             registry_path=registry_path,
-            planner_model_name=planner_model_name,
+            planner_model_name=planner_model_name or planner_config.model.name,
+            planner_model_settings={
+                "temperature": planner_config.model.temperature,
+                "max_tokens": planner_config.model.max_tokens,
+                "max_retries": planner_config.model.max_retries,
+            },
             model_client=planner_model_client,
         )
 

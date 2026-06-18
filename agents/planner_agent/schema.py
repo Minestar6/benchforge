@@ -272,6 +272,7 @@ class ValidatorFeedback(BaseModel):
     by_final_status: dict[str, int] = Field(default_factory=dict)
     by_mode: dict[str, dict[str, int]] = Field(default_factory=dict)
     by_difficulty: dict[str, dict[str, int]] = Field(default_factory=dict)
+    by_mode_difficulty: dict[str, dict[str, dict[str, int]]] = Field(default_factory=dict)
     by_topic: dict[str, dict[str, Any]] = Field(default_factory=dict)
     selection_summary: dict[str, int] = Field(default_factory=dict)
 

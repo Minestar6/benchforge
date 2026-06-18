@@ -9,9 +9,9 @@ dataset_evaluation:
 
 models:
   candidate_model_names:
-    - "deepseek-v3.2"
+    - deepseek-v4
 
-  judge_model_name: "kimi-k2"
+  judge_model_name: deepseek-v4
 
   generation_defaults:
     temperature: 0.0
@@ -56,6 +56,6 @@ metrics:
         description: "The extent to which the response covers all important information required to fully answer the question."
      
 judge:
-  enabled: true
+  enabled: false
   prompt_system: "benchforge/prompts/model_eval_agent/judge_system_prompt.md"
   prompt_user: "benchforge/prompts/model_eval_agent/judge_user_prompt.md"

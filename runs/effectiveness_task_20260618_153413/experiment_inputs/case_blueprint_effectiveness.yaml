@@ -1,0 +1,25 @@
+task_id: case
+run_id_prefix: d_full_case
+language: en
+topics:
+- Artificial Intelligence
+- Quantum Computing
+modes:
+  qa:
+    count: 4
+    max_rounds: 1
+    difficulty_distribution:
+      easy: 0.2
+      medium: 0.3
+      hard: 0.5
+  multiple_choice:
+    count: 2
+    max_rounds: 1
+    difficulty_distribution:
+      easy: 0.2
+      medium: 0.3
+      hard: 0.5
+metadata:
+  group_id: D
+  method: full
+  seed: 42

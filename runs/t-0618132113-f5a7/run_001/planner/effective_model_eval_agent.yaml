@@ -1,0 +1,36 @@
+dataset_evaluation:
+  enabled: true
+  metrics:
+  - name: citation_score
+  - name: diversity_score
+judge:
+  enabled: true
+  prompt_system: benchforge/prompts/model_eval_agent/judge_system_prompt.md
+  prompt_user: benchforge/prompts/model_eval_agent/judge_user_prompt.md
+metrics:
+  multiple_choice:
+    automatic_metrics:
+    - name: accuracy
+    llm_judge_metrics: []
+  qa:
+    automatic_metrics:
+    - name: exact_match
+    - name: f1
+    llm_judge_metrics:
+    - description: Judge whether the answer is factually correct.
+      name: correctness
+    - description: Judge whether the answer is supported by the provided evidence.
+      name: faithfulness
+models:
+  candidate_model_names:
+  - deepseek-v4
+  - deepseek-v4
+  generation_defaults:
+    max_tokens: 1024
+    temperature: 0.0
+    top_p: 1.0
+  judge_defaults:
+    max_tokens: 512
+    temperature: 0.0
+    top_p: 1.0
+  judge_model_name: deepseek-v4

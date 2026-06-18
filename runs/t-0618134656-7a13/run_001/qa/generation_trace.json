@@ -1,0 +1,62 @@
+[
+  {
+    "mode": "qa",
+    "round_in_mode": 1,
+    "strategy": "initial_breadth",
+    "difficulty": "hard",
+    "topics": [
+      "physics experimental design & interpretation",
+      "physics multi-representational reasoning"
+    ],
+    "single_k": 1,
+    "multi_k": 1,
+    "target_candidates_per_topic": 2,
+    "results": [
+      {
+        "topic": "physics experimental design & interpretation",
+        "success": true,
+        "generated_count": 6,
+        "raw_count": 6,
+        "filtered_count": 6,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 0,
+        "multi_generated_count": 6,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_a503da6147a14c5d840db89c7cd45150",
+        "trace_call_id": "llm_ff99a8f4e3274a63862440579b09225f",
+        "chunks": [
+          "doc_59c60678dbc1::chunk_0000",
+          "doc_df5d2651247c::chunk_0002",
+          "doc_df5d2651247c::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      },
+      {
+        "topic": "physics multi-representational reasoning",
+        "success": true,
+        "generated_count": 1,
+        "raw_count": 1,
+        "filtered_count": 1,
+        "single_unit_count": 1,
+        "multi_unit_count": 1,
+        "single_generated_count": 1,
+        "multi_generated_count": 0,
+        "filter_rejected": false,
+        "filter_failures": [],
+        "llm_call_id": "llm_4107b824c9424463ad7f8ac4bca6cca1",
+        "trace_call_id": "llm_4bfa12848e704358884b150f53a0ec65",
+        "chunks": [
+          "doc_86770deed0bb::chunk_0002",
+          "doc_f2465b07b9bd::chunk_0000",
+          "doc_f2465b07b9bd::chunk_0001",
+          "doc_f2465b07b9bd::chunk_0003"
+        ],
+        "duplicate_combination": false,
+        "error": null
+      }
+    ]
+  }
+]

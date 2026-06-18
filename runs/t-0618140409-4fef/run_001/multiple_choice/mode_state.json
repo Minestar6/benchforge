@@ -1,0 +1,23 @@
+{
+  "mode": "multiple_choice",
+  "candidate_count": 20,
+  "total_record_count": 21,
+  "accepted_count": 20,
+  "rejected_count": 1,
+  "difficulty_counts": {
+    "medium": 13,
+    "easy": 6,
+    "hard": 1
+  },
+  "topic_counts": {
+    "physics qualitative reasoning and estimation": 9,
+    "physics real-world problem solving": 11
+  },
+  "stopped_reason": "max_candidate_pool_reached",
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

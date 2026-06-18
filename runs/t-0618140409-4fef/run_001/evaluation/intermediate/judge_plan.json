@@ -1,0 +1,19 @@
+{
+  "judge_enabled": true,
+  "judge_model_name": "deepseek-v4",
+  "prompt_system": "benchforge/prompts/model_eval_agent/judge_system_prompt.md",
+  "prompt_user": "benchforge/prompts/model_eval_agent/judge_user_prompt.md",
+  "metrics": {
+    "multiple_choice": [],
+    "qa": [
+      {
+        "name": "correctness",
+        "description": "Judge whether the answer is factually correct."
+      },
+      {
+        "name": "faithfulness",
+        "description": "Judge whether the answer is supported by the provided evidence."
+      }
+    ]
+  }
+}

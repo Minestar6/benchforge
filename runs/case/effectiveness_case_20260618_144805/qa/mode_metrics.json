@@ -1,0 +1,25 @@
+{
+  "candidate_count": 0,
+  "accepted_count": 0,
+  "rejected_count": 0,
+  "accept_rate": 0.0,
+  "topic_distribution": {},
+  "difficulty_distribution": {},
+  "hard_gap": 0.5,
+  "stopped_reason": "max_rounds_reached",
+  "min_candidate_target": 15,
+  "max_candidate_target": 18,
+  "min_difficulty_targets": {
+    "easy": 3,
+    "medium": 5,
+    "hard": 8
+  },
+  "min_target_reached": false,
+  "max_target_reached": false,
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

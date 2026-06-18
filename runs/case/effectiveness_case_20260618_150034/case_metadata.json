@@ -1,0 +1,38 @@
+{
+  "generator_model": "deepseek-v4",
+  "verify_model": "deepseek-v4",
+  "eval_candidate_models": [
+    "deepseek-v4",
+    "deepseek-v4-pro",
+    "minimax"
+  ],
+  "eval_judge_model": "deepseek-v4",
+  "registry_path": "/Users/zhaoziqing/Desktop/benchforge/config/model_registry.yaml",
+  "task_id": "case",
+  "run_id": "effectiveness_case_20260618_150034",
+  "topics": [
+    "Artificial Intelligence",
+    "Quantum Computing"
+  ],
+  "language": "en",
+  "modes": {
+    "qa": {
+      "count": 8,
+      "max_rounds": 5,
+      "difficulty_distribution": {
+        "easy": 0.2,
+        "medium": 0.3,
+        "hard": 0.5
+      }
+    },
+    "multiple_choice": {
+      "count": 4,
+      "max_rounds": 4,
+      "difficulty_distribution": {
+        "easy": 0.2,
+        "medium": 0.3,
+        "hard": 0.5
+      }
+    }
+  }
+}

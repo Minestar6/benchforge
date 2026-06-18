@@ -1,0 +1,31 @@
+{
+  "candidate_count": 10,
+  "accepted_count": 10,
+  "rejected_count": 0,
+  "accept_rate": 1.0,
+  "topic_distribution": {
+    "physics qualitative reasoning": 7,
+    "physics experimental design and analysis": 3
+  },
+  "difficulty_distribution": {
+    "hard": 6,
+    "medium": 4
+  },
+  "hard_gap": 0.0,
+  "stopped_reason": "max_candidate_pool_reached",
+  "min_candidate_target": 3,
+  "max_candidate_target": 4,
+  "min_difficulty_targets": {
+    "easy": 1,
+    "medium": 2,
+    "hard": 1
+  },
+  "min_target_reached": false,
+  "max_target_reached": true,
+  "terminal_hard_repair": {
+    "executed": false,
+    "rounds": 0,
+    "generated_count": 0,
+    "accepted_count": 0
+  }
+}

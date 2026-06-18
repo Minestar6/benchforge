@@ -8,9 +8,9 @@ citation_validation:
 
 llm_validation:
   enabled: false
-  model: "deepseek-v3.2"       # model_registry.yaml 中的 key（逻辑名）
+  model: deepseek-v4       # model_registry.yaml 中的 key（逻辑名）
   temperature: 0.0                # 调用参数（不在 registry 中）
-  max_tokens: 800
+  max_tokens: 1500
   min_overall_score: 0.75
   max_concurrency: 2
   max_retries: 2

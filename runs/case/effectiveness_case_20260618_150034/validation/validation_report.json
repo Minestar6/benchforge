@@ -1,0 +1,25 @@
+{
+  "task_id": "case",
+  "run_id": "effectiveness_case_20260618_150034",
+  "total_candidates": 45,
+  "citation_passed": 41,
+  "llm_passed": 41,
+  "final_selected": 41,
+  "stage_latencies_ms": {
+    "citation_validation": 120,
+    "llm_validation": 199347,
+    "selection": 3
+  },
+  "llm_usage": {
+    "calls": 41,
+    "input_tokens": 26748,
+    "output_tokens": 23458
+  },
+  "failed_by_stage": {
+    "citation": 4,
+    "llm": 0,
+    "validator_error": 0,
+    "duplicate": 0,
+    "overquota": 0
+  }
+}
