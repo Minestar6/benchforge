@@ -8,7 +8,7 @@ citation_validation:
 
 llm_validation:
   enabled: false
-  model: deepseek-v4       # model_registry.yaml 中的 key（逻辑名）
+  model: deepseek-v3   # model_registry.yaml 中的 key（逻辑名）
   temperature: 0.0                # 调用参数（不在 registry 中）
   max_tokens: 1500
   min_overall_score: 0.75
@@ -20,3 +20,4 @@ selection:
   mode: "light"
   embedding_model: "all-MiniLM-L6-v2"
   semantic_similarity_threshold: 0.9
+  

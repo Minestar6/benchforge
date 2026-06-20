@@ -33,46 +33,55 @@ models:
   #   api_key: "${OPENAI_API_KEY}"
 
   # 第三方 OpenAI 兼容 API（如 DeepSeek、火山引擎等）
-  # deepseek-v3.2:
-  #   provider: "openai"
-  #   model_name: "deepseek-v3-2-251201"
-  #   base_url: "${CUSTOM_API_BASE_URL}"
-  #   api_key: "${CUSTOM_API_KEY}"
+  deepseek-v3:
+    provider: "openai"
+    model_name: "deepseek-v3-2-251201"
+    base_url: "${CUSTOM_API_BASE_URL}"
+    api_key: "${CUSTOM_API_KEY}"
   
 
-  # glm-4.7:
+  glm-4.7:
+    provider: "openai"
+    model_name: "glm-4-7-251222"
+    base_url: "${CUSTOM_API_BASE_URL}"
+    api_key: "${CUSTOM_API_KEY}"
+    thinking: "disabled"
+
+  kimi-k2:
+    provider: "openai"
+    model_name: "kimi-k2-thinking-251104"
+    base_url: "${CUSTOM_API_BASE_URL}"
+    api_key: "${CUSTOM_API_KEY}"
+    thinking: "disabled"
+  
+  doubao:
+    provider: "openai"
+    model_name: "doubao-1-5-lite-32k-250115"
+    base_url: "${CUSTOM_API_BASE_URL}"
+    api_key: "${CUSTOM_API_KEY}"
+    thinking: "disabled"
+
+    
+  # deepseek-v4:
   #   provider: "openai"
-  #   model_name: "glm-4-7-251222"
+  #   model_name: "DeepSeek-V4-Flash"
   #   base_url: "${CUSTOM_API_BASE_URL}"
   #   api_key: "${CUSTOM_API_KEY}"
   #   thinking: "disabled"
-
-  # kimi-k2:
+  
+  # deepseek-v4-pro:
   #   provider: "openai"
-  #   model_name: "kimi-k2-thinking-251104"
+  #   model_name: "DeepSeek-V4-Pro"
   #   base_url: "${CUSTOM_API_BASE_URL}"
   #   api_key: "${CUSTOM_API_KEY}"
   #   thinking: "disabled"
-  deepseek-v4:
-    provider: "openai"
-    model_name: "DeepSeek-V4-Flash"
-    base_url: "${CUSTOM_API_BASE_URL}"
-    api_key: "${CUSTOM_API_KEY}"
-    thinking: "disabled"
   
-  deepseek-v4-pro:
-    provider: "openai"
-    model_name: "DeepSeek-V4-Pro"
-    base_url: "${CUSTOM_API_BASE_URL}"
-    api_key: "${CUSTOM_API_KEY}"
-    thinking: "disabled"
-  
-  minimax:
-    provider: "openai"
-    model_name: "MiniMax-M2.7"
-    base_url: "${CUSTOM_API_BASE_URL}"
-    api_key: "${CUSTOM_API_KEY}"
-    thinking: "disabled"
+  # minimax:
+  #   provider: "openai"
+  #   model_name: "MiniMax-M2.7"
+  #   base_url: "${CUSTOM_API_BASE_URL}"
+  #   api_key: "${CUSTOM_API_KEY}"
+  #   thinking: "disabled"
   
 
 
@@ -121,4 +130,5 @@ models:
 # 也可填此处的逻辑名（优先从 registry 解析）
 embeddings:
   all-MiniLM-L6-v2:
-    path: "sentence-transformers/all-MiniLM-L6-v2"   # HF Hub ID（自动从 cache 加载）
+    # path: "sentence-transformers/all-MiniLM-L6-v2"   # HF Hub ID（自动从 cache 加载）
+    path: "D:/model/MiniLM-L6-v2"

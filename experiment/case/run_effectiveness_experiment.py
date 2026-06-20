@@ -377,11 +377,12 @@ async def _run_eval_subset(
         result = _read_json(evaluation_report_path)
 
     benchmark_metrics = compute_benchmark_metrics(_load_automatic_scores(automatic_scores_path))
+    # 使用 PROJECT_ROOT 相对路径，确保报告可跨平台移植
     return {
         "subset_name": subset_name,
         "question_count": len(subset_records),
-        "input_path": str(input_path),
-        "evaluation_run_dir": str(RUNS_BASE / task_id / eval_run_id),
+        "input_path": str(input_path.relative_to(PROJECT_ROOT)),
+        "evaluation_run_dir": str((RUNS_BASE / task_id / eval_run_id).relative_to(PROJECT_ROOT)),
         "evaluation_result": result,
         "benchmark_metrics": benchmark_metrics,
     }

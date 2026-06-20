@@ -48,6 +48,39 @@ DEFAULT_MODEL_EVAL_CONFIG_PATH = CONFIG_DIR / "model_eval_case.yaml"
 REGISTRY_PATH = PROJECT_ROOT / "config" / "model_registry.yaml"
 
 
+def _resolve_portable_path(path_str: str) -> Path:
+    """将 task_report 中的路径转换为当前机器可用的路径。
+
+    处理三种情况：
+    1. 路径直接存在 → 原样返回
+    2. 绝对路径（另一台机器生成）→ 提取 runs/ 之后部分，基于 RUNS_BASE 重定位
+    3. PROJECT_ROOT 相对路径（如 runs/xxx/...）→ 基于 PROJECT_ROOT 解析
+    """
+    p = Path(path_str)
+    if p.exists():
+        return p
+
+    # 尝试作为 PROJECT_ROOT 相对路径解析
+    resolved = PROJECT_ROOT / path_str
+    if resolved.exists():
+        logger.info(f"Resolved relative path: {path_str} -> {resolved}")
+        return resolved
+
+    # 绝对路径：提取 runs/ 之后的相对部分，基于 RUNS_BASE 重定位
+    parts = p.parts
+    for i, part in enumerate(parts):
+        if part.lower() == "runs":
+            relative = Path(*parts[i + 1:])
+            resolved = RUNS_BASE / relative
+            if resolved.exists():
+                logger.info(f"Rebased portable path: {path_str} -> {resolved}")
+                return resolved
+            break
+
+    logger.warning(f"Path not found and cannot resolve: {path_str}")
+    return p
+
+
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run supplemental evaluation for an effectiveness task.")
     parser.add_argument("--task-id", help="Existing effectiveness task id.")
@@ -126,7 +159,8 @@ def _load_dataset_inputs(eval_run_dir: Path) -> tuple[list[dict[str, Any]], list
     questions = read_jsonl(evaluation_dir / "intermediate" / "evaluation_questions.jsonl")
     dataset_scores = read_jsonl(evaluation_dir / "dataset_report" / "dataset_scores.jsonl")
     automatic_scores = read_jsonl(evaluation_dir / "model_report" / "automatic_scores.jsonl")
-    judge_scores = read_jsonl(evaluation_dir / "model_report" / "llm_judge_scores.jsonl")
+    judge_scores_path = evaluation_dir / "model_report" / "llm_judge_scores.jsonl"
+    judge_scores = read_jsonl(judge_scores_path) if judge_scores_path.exists() else []
     return questions, dataset_scores, automatic_scores, judge_scores
 
 
@@ -266,8 +300,8 @@ async def main(args: argparse.Namespace) -> None:
     _write_yaml(output_dir / "model_eval_effectiveness_supplemental.yaml", config_copy)
 
     subset_specs = [
-        ("b1_eval", Path(task_report["b1"]["input_path"]), Path(task_report["b1"]["evaluation_run_dir"])),
-        ("bfull_eval", Path(task_report["bfull"]["input_path"]), Path(task_report["bfull"]["evaluation_run_dir"])),
+        ("b1_eval", _resolve_portable_path(task_report["b1"]["input_path"]), _resolve_portable_path(task_report["b1"]["evaluation_run_dir"])),
+        ("bfull_eval", _resolve_portable_path(task_report["bfull"]["input_path"]), _resolve_portable_path(task_report["bfull"]["evaluation_run_dir"])),
     ]
 
     subset_reports: list[dict[str, Any]] = []

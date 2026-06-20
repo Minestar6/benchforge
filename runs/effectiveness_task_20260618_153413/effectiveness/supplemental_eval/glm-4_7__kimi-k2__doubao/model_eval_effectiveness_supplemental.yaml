@@ -1,0 +1,58 @@
+run:
+  shared_state_path: ''
+dataset_evaluation:
+  enabled: true
+  metrics:
+  - name: citation_score
+  - name: diversity_score
+models:
+  candidate_model_names:
+  - glm-4.7
+  - kimi-k2
+  - doubao
+  judge_model_name: deepseek-v4
+  generation_defaults:
+    temperature: 0.0
+    top_p: 1.0
+    max_tokens: 1024
+  judge_defaults:
+    temperature: 0.0
+    top_p: 1.0
+    max_tokens: 512
+metrics:
+  multiple_choice:
+    automatic_metrics:
+    - name: accuracy
+    - name: invalid_rate
+    llm_judge_metrics: []
+  qa:
+    automatic_metrics:
+    - name: semantic_accuracy
+    - name: exact_match
+    - name: f1
+    - name: precision
+    - name: recall
+    - name: rouge_l
+    - name: bleu
+    - name: bertscore
+    - name: semantic_similarity
+    llm_judge_metrics:
+    - name: answer_relevance
+      description: The degree to which the response directly addresses the question
+        and remains focused on the requested topic.
+    - name: faithfulness
+      description: The extent to which the response is supported by the provided evidence
+        and avoids unsupported claims.
+    - name: factual_accuracy
+      description: The correctness and reliability of the factual information contained
+        in the response.
+    - name: logical_coherence
+      description: The consistency, clarity, and soundness of the reasoning presented
+        in the response.
+    - name: completeness
+      description: The extent to which the response covers all important information
+        required to fully answer the question.
+judge:
+  enabled: true
+  prompt_system: benchforge/prompts/model_eval_agent/judge_system_prompt.md
+  prompt_user: benchforge/prompts/model_eval_agent/judge_user_prompt.md

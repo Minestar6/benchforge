@@ -1,5 +1,5 @@
 model:
-  name: deepseek-v4
+  name: deepseek-v3
   temperature: 0.2
   max_tokens: 1200
   max_retries: 2

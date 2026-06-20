@@ -281,8 +281,8 @@
   "b1": {
     "subset_name": "b1_eval",
     "question_count": 11,
-    "input_path": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/effectiveness/b1_eval/selected_questions.jsonl",
-    "evaluation_run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/b1_eval",
+    "input_path": "runs/effectiveness_task_20260618_153413/effectiveness/b1_eval/selected_questions.jsonl",
+    "evaluation_run_dir": "runs/effectiveness_task_20260618_153413/b1_eval",
     "evaluation_result": {
       "task_id": "effectiveness_task_20260618_153413",
       "run_id": "b1_eval",
@@ -399,8 +399,8 @@
   "bfull": {
     "subset_name": "bfull_eval",
     "question_count": 57,
-    "input_path": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/effectiveness/bfull_eval/selected_questions.jsonl",
-    "evaluation_run_dir": "/Users/zhaoziqing/Desktop/benchforge/runs/effectiveness_task_20260618_153413/bfull_eval",
+    "input_path": "runs/effectiveness_task_20260618_153413/effectiveness/bfull_eval/selected_questions.jsonl",
+    "evaluation_run_dir": "runs/effectiveness_task_20260618_153413/bfull_eval",
     "evaluation_result": {
       "task_id": "effectiveness_task_20260618_153413",
       "run_id": "bfull_eval",
